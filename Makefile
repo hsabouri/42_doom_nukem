@@ -23,11 +23,12 @@ CFLAGS += -g
 #CFLAGS += -Werror
 LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(SDL2_DIR) -lft -lvec -lSDL2 -lSDL2main -lpthread -ldl -lm
 
-all: libft libvec $(NAME)
+all: libft installSDL libvec $(NAME)
 
-#installSDL:
-#	@brew install sdl2
-#	@cp ../
+installSDL:
+	@brew install sdl2
+	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/lib .
+	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/include/SDL2 includes
 
 libft:
 	@$(MAKE) -C $(LIBFT_DIR)
