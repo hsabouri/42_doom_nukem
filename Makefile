@@ -25,6 +25,10 @@ LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(SDL2_DIR) -lft -lvec -lSDL2 -lSDL2m
 
 all: libft libvec $(NAME)
 
+#installSDL:
+#	@brew install sdl2
+#	@cp ../
+
 libft:
 	@$(MAKE) -C $(LIBFT_DIR)
 
