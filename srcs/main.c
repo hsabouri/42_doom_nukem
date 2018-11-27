@@ -1,6 +1,7 @@
 #include "../includes/SDL2/SDL.h"
 #include <libft.h>
 #include <stdio.h>
+#include "../includes/test.h"
 
 int main(void)
 {

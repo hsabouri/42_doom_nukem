@@ -32,6 +32,9 @@ installSDL:
 	@brew install sdl2_ttf
 	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/lib .
 	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/include/SDL2 includes
+	@cp -rf /Users/*/.brew/Cellar/sdl2_image/*/include/SDL2 includes/SDL2
+	@cp -rf /Users/*/.brew/Cellar/sdl2_mixer/*/include/SDL2 includes/SDL2
+	@cp -rf /Users/*/.brew/Cellar/sdl2_ttf/*/include/SDL2 includes/SDL2
 
 libft:
 	@$(MAKE) -C $(LIBFT_DIR)
