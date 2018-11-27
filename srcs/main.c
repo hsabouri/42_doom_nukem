@@ -1,4 +1,4 @@
-#include <SDL2/SDL.h>
+#include "../includes/SDL2/SDL.h"
 #include <libft.h>
 #include <stdio.h>
 
