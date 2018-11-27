@@ -27,6 +27,9 @@ all: libft installSDL libvec $(NAME)
 
 installSDL:
 	@brew install sdl2
+	@brew install sdl2_image
+	@brew install sdl2_mixer
+	@brew install sdl2_ttf
 	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/lib .
 	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/include/SDL2 includes
 
