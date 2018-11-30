@@ -57,9 +57,9 @@ size_t test_lnext(size_t *number_of_tests)
     }
 
     test1_truth = test1;
-    test1_truth.current = NULL;
+    test1_truth.current = (t_elem *)&test_elem_to_insert1;
     res = test1.next(&test1);
-    res_truth = NULL;
+    res_truth = (t_elem *)&test_elem_to_insert1;
 
     *number_of_tests += 1;
     if (res_truth != res || memcmp(&test1, &test1_truth, sizeof(t_list)))

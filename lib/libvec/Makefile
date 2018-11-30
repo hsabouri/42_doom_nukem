@@ -5,40 +5,48 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/09 16:41:02 by hugo              #+#    #+#              #
-#    Updated: 2018/11/27 15:47:41 by hugo             ###   ########.fr        #
+#    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
+#    Updated: 2018/11/29 20:12:15 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = tests
-INCS = tests.h
-SRCS = $(wildcard *.c)
+NAME = libvec.a
+INCLUDES = ./includes
+CFLAGS = -Wall -Wextra
+#CFLAGS += -Werror
+CFLAGS += -g -O3 -fPIC
+CC = clang
 
-OTHER_INCDIR = ../includes/
-OTHER_INCS = ../includes/libft.h ../includes/get_next_line.h
-LIB_PATH = ../
-LIB = ../libft.a
+SRCDIR = sources
+OBJDIR = objs
+INCDIR = includes
+SRCNAM = float_math.c\
+		float_vec_new.c\
+		float_vec_op.c\
+		float_vec_prod.c\
+		float_vec_mult.c\
+		float_vec_rot.c
+INCNAM = float_math.h float_vec.h vec.h
 
-OBJS = $(SRCS:%.c=%.o)
+SRC=$(SRCNAM:%=$(SRCDIR)/%)
+INC=$(INCNAM:%=$(INCDIR)/%)
+OBJ=$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-CFLAGS = -Wall -Wextra -Werror -g
+all: $(NAME)
 
-all: $(LIB) $(NAME)
+$(NAME): $(OBJ) $(INC)
+	ar rcs $@ $^
+	ranlib $@
 
-$(LIB):
-	$(MAKE) -C ${LIB_PATH}
-
-$(NAME): $(OBJS)
-	$(CC) -o $@ $(OBJS) -lft -L.. -I$(OTHER_INCDIR) $(CFLAGS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -I$(OTHER_INCDIR) -c -o $@ $< $(LDFLAGS)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+	mkdir -p $(OBJDIR)
+	$(CC) -c -o $@ $< -I$(INCLUDES) $(CFLAGS)
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -rf $(NAME)
 
 re: fclean
-	$(MAKE) all
+	@$(MAKE) all

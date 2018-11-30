@@ -6,7 +6,7 @@
 #    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 16:41:02 by hugo              #+#    #+#              #
-#    Updated: 2018/11/27 15:47:41 by hugo             ###   ########.fr        #
+#    Updated: 2018/11/29 13:47:33 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ INCS = tests.h
 SRCS = $(wildcard *.c)
 
 OTHER_INCDIR = ../includes/
-OTHER_INCS = ../includes/libft.h ../includes/get_next_line.h
+OTHER_INCS = ../includes/fixed_math.h ../includes/float_math.h
 LIB_PATH = ../
-LIB = ../libft.a
+LIB = ../libvec.a
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -29,7 +29,7 @@ $(LIB):
 	$(MAKE) -C ${LIB_PATH}
 
 $(NAME): $(OBJS)
-	$(CC) -o $@ $(OBJS) -lft -L.. -I$(OTHER_INCDIR) $(CFLAGS)
+	$(CC) -o $@ $(OBJS) -lvec -lm -L.. -I$(OTHER_INCDIR) $(CFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I$(OTHER_INCDIR) -c -o $@ $< $(LDFLAGS)
