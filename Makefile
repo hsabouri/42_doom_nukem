@@ -1,6 +1,7 @@
 NAME = doom-nukem
 
 LIBFT_DIR = lib/libft
+LIBVEC_DIR = lib/libvec
 SDL2_DIR = lib/sdl2_build
 SDL2_SRCS_DIR = lib/sdl2_srcs
 
@@ -19,12 +20,15 @@ CC = clang
 CFLAGS = -Wall -Wextra -Iincludes -I$(SDL2_SRCS_DIR)/include -I$(LIBFT_DIR)/includes
 CFLAGS += -g
 #CFLAGS += -Werror
-LDFLAGS = -L$(LIBFT_DIR) -L$(SDL2_DIR) -lft -lSDL2 -lSDL2main -lpthread -ldl -lm
+LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(SDL2_DIR) -lft -lvec -lSDL2 -lSDL2main -lpthread -ldl -lm
 
-all: libft $(NAME)
+all: libft libvec $(NAME)
 
 libft:
 	@$(MAKE) -C $(LIBFT_DIR)
+
+libvec:
+	@$(MAKE) -C $(LIBVEC_DIR)
 
 sdl2:
 	#$(SDL2_SRCS_DIR)/configure
