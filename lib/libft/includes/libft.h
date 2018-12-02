@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/11/12 11:37:21 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/01 18:25:25 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ typedef struct	s_plist
 	t_pelem			*(*next)(struct s_plist *);
 	t_pelem			*(*previous)(struct s_plist *);
 }				t_plist;
+
+typedef struct	s_array
+{
+	size_t			len;
+	size_t			allocated;
+	size_t			elem_size;
+	void			*mem;
+	void			*first;
+}				t_array;
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -165,5 +174,13 @@ t_plist			lpmap(const t_plist *list, t_pelem *(*f)(const t_pelem *elem));
 t_plist			lpmapi(const t_plist *list, t_pelem *(*f)(const t_pelem *elem, size_t i));
 t_pelem 		*lpshift(t_plist *list);
 t_pelem			*lppop(t_plist *list);
+
+t_array			anew(void *first, size_t len, size_t elem_size);
+void			*apop(t_array *array);
+void			*ashift(t_array *array);
+t_array			*apush(t_array *array, void *element);
+t_array			*ainsert(t_array *array, void *element);
+t_array			*aforeach(t_array *array, void (*f)(void *));
+t_array			*aforeachi(t_array *array, void (*f)(void *, size_t i));
 
 #endif
