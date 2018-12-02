@@ -64,6 +64,8 @@ int main(void)
     total += number_of_tests;
     success_count += test_apush(&number_of_tests);
     total += number_of_tests;
+    success_count += test_ashift(&number_of_tests);
+    total += number_of_tests;
     
     printf("\n%zu / %zu unit tests succeeded\n", success_count, total);
 

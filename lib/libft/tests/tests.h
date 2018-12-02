@@ -24,6 +24,7 @@ size_t test_lpnext(size_t *number_of_tests);
 
 size_t test_anew(size_t *number_of_tests);
 size_t test_apop(size_t *number_of_tests);
+size_t test_ashift(size_t *number_of_tests);
 size_t test_apush(size_t *number_of_tests);
 
 void show_list(t_list list);
