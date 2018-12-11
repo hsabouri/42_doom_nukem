@@ -7,8 +7,8 @@ ifeq ($(shell uname -s), Darwin)
 	SDL2_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/lib/
 	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/includes/
 else
-	SDL2_DIR 
-	SDL2_INC_DIR = 
+	SDL2_DIR =.
+	SDL2_INC_DIR =.
 endif
 
 SRCS_FILES = main.c
