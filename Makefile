@@ -3,8 +3,13 @@ NAME = doom-nukem
 LIBFT_DIR = lib/libft
 
 LIBVEC_DIR = lib/libvec
-SDL2_DIR = lib/sdl2_build
-SDL2_SRCS_DIR = lib/sdl2_srcs
+ifeq ($(shell uname -s), Darwin)
+	SDL2_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/lib/
+	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/includes/
+else
+	SDL2_DIR 
+	SDL2_INC_DIR = 
+endif
 
 SRCS_FILES = main.c
 SRCS_DIR = srcs
@@ -25,16 +30,14 @@ LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(SDL2_DIR) -lft -lvec -lSDL2 -lSDL2m
 
 all: libft installSDL libvec $(NAME)
 
+ifeq ($(shell uname -s), Darwin)
 installSDL:
+	@brew update
 	@brew install sdl2
-	@brew install sdl2_image
-	@brew install sdl2_mixer
-	@brew install sdl2_ttf
-	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/lib .
-	@cp -rf /Users/*/.brew/Cellar/sdl2/2.0.8/include/SDL2 includes
-	@cp -rf /Users/*/.brew/Cellar/sdl2_image/*/include/SDL2 includes/SDL2
-	@cp -rf /Users/*/.brew/Cellar/sdl2_mixer/*/include/SDL2 includes/SDL2
-	@cp -rf /Users/*/.brew/Cellar/sdl2_ttf/*/include/SDL2 includes/SDL2
+else
+installSDL:
+	@echo "Can't install SDL on Linux"
+endif
 
 libft:
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -42,15 +45,10 @@ libft:
 libvec:
 	@$(MAKE) -C $(LIBVEC_DIR)
 
-sdl2:
-	#$(SDL2_SRCS_DIR)/configure
-	@mkdir -p $(SDL2_SRCS_DIR)
-	@cmake -B$(SDL2_DIR) -H$(SDL2_SRCS_DIR)
-
 $(NAME): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c #$(INCS_FILES)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c #$(INCS)
 	mkdir -p $(OBJS_DIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
