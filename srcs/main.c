@@ -1,7 +1,10 @@
-#include "../includes/SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #include <libft.h>
+#include <doom.h>
 #include <stdio.h>
-#include "../includes/test.h"
+
+#define WIDTH 640
+#define HEIGHT 480
 
 int main(void)
 {
@@ -9,7 +12,9 @@ int main(void)
 	SDL_Event		event;
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
-	int         quit;
+	t_color			*content = NULL;
+	int				pitch;
+	int				quit;
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
@@ -18,9 +23,18 @@ int main(void)
 	}
 
 	win = NULL;
-	win = SDL_CreateWindow("ft_doom_nukem", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN);
+	win = SDL_CreateWindow("ft_doom_nukem", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, 640, 480);
+	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
+
+	SDL_LockTexture(texture, NULL, (void **)&content, &pitch);
+	for (int i = 0; i < HEIGHT; i++) {
+		content[i * WIDTH + 100] = (t_color){ 142, 77, 226, 0 };
+	}
+	SDL_UnlockTexture(texture);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+
 	quit = 0;
 	while (win && !quit)
 	{

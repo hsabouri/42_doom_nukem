@@ -11,13 +11,25 @@ else
 	SDL2_INC_DIR =.
 endif
 
+# -----------------
+# SOURCE FILES (.c)
+# -----------------
+
 SRCS_FILES = main.c
+
+# -----------------
+
 SRCS_DIR = srcs
 SRCS = $(SRCS_FILES:%=$(SRCS_DIR)/%)
 
-INCS_FILES = doom.h
+# -----------------
+# HEADER FILES (.h)
+# -----------------
+
 INCS_DIR = incs
 INCS = $(INCS_FILES:%=$(INCS_DIR)/%)
+
+# -----------------
 
 OBJS_DIR = objs
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
@@ -28,7 +40,7 @@ CFLAGS += -g
 #CFLAGS += -Werror
 LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(SDL2_DIR) -lft -lvec -lSDL2 -lSDL2main -lpthread -ldl -lm
 
-all: libft installSDL libvec $(NAME)
+all: libft libvec installSDL $(NAME)
 
 ifeq ($(shell uname -s), Darwin)
 installSDL:
