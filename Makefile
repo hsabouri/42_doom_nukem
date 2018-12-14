@@ -1,5 +1,4 @@
-NAME = doom-nukem
-
+NAME = doom-nukem 
 LIBFT_DIR = lib/libft
 
 LIBVEC_DIR = lib/libvec
@@ -15,7 +14,7 @@ endif
 # SOURCE FILES (.c)
 # -----------------
 
-SRCS_FILES = main.c event.c console.c
+SRCS_FILES = main.c event.c console.c test_map.c
 
 # -----------------
 
@@ -35,7 +34,7 @@ OBJS_DIR = objs
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 CC = clang
-CFLAGS = -Wall -Wextra -Iincludes -I$(LIBFT_DIR)/includes -I$(SDL2_INC_DIR) -I$(LIBVEC_DIR)/includes
+CFLAGS = -Wall -Wextra -Iincludes -I$(LIBFT_DIR)/includes -I$(LIBVEC_DIR)/includes -I$(SDL2_INC_DIR)
 CFLAGS += -g
 #CFLAGS += -Werror
 LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(SDL2_DIR) -lft -lvec -lSDL2 -lSDL2main -lpthread -ldl -lm
@@ -67,12 +66,15 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c #$(INCS)
 clean:
 	rm -rf $(OBJS_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(LIBVEC_DIR) clean
 
 fclean:
-	rm -rf $(SDL2_SRCS_DIR)/CMakeCache.txt
 	rm -rf $(OBJS_DIR)
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIBVEC_DIR) fclean
 	rm -rf $(NAME)
 
 re: fclean
 	$(MAKE) all
+
+.PHONY: clean fclean libft libvec re all

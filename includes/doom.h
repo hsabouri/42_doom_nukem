@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/14 18:17:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/14 18:59:44 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ typedef struct			s_texture
 
 typedef struct			s_ph
 {
-	t_vec3		pos;
-	t_vec2		look;
-	t_vec3		speed;
-	t_vec2		look_max;
-	t_vec3		speed_max;
 	float		gravity;
 	float		height;
+	t_vec3		pos;
+	t_vec3		speed;
+	t_vec3		speed_max;
+	t_vec2		look;
+	t_vec2		look_max;
 }						t_ph;
 
 /*
