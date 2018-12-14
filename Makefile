@@ -15,7 +15,7 @@ endif
 # SOURCE FILES (.c)
 # -----------------
 
-SRCS_FILES = main.c
+SRCS_FILES = main.c event.c console.c
 
 # -----------------
 

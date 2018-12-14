@@ -3,21 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/13 16:16:54 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/14 18:17:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_H
 # define DOOM_H
+
+# include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
 # include <SDL2/SDL.h>
-
-# include <fixed_math.h>
+# include <vec.h>
 # include <libft.h>
+# include <stdio.h>
+
+# define WIDTH 640
+# define HEIGHT 480
+
+# define RED     "\x1b[31m"
+# define GREEN   "\x1b[32m"
+# define YELLOW  "\x1b[33m"
+# define BLUE    "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN    "\x1b[36m"
+# define RESET   "\x1b[0m"
 
 typedef struct			s_color
 {
@@ -27,6 +40,7 @@ typedef struct			s_color
 	u_char		a;
 }						t_color;
 
+/*
 typedef struct			s_texture
 {
 	t_color		*data;
@@ -34,18 +48,20 @@ typedef struct			s_texture
 	uint16_t	height;
 	int			transparent;
 }						t_texture;
+*/
 
 typedef struct			s_ph
 {
-	t_vec4		pos;
+	t_vec3		pos;
 	t_vec2		look;
-	t_vec4		speed;
+	t_vec3		speed;
 	t_vec2		look_max;
-	t_vec4		speed_max;
+	t_vec3		speed_max;
 	float		gravity;
 	float		height;
 }						t_ph;
 
+/*
 typedef enum			u_wtype
 {
 	GUN,
@@ -62,6 +78,7 @@ typedef struct			s_weapon
 	uint16_t	cooldown;
 	uint16_t	munitions;
 }						t_weapon;
+*/
 
 typedef struct			s_player
 {
@@ -101,6 +118,18 @@ typedef struct			s_sector
 	//float		luminosity;
 }						t_sector;
 
+typedef struct			s_event
+{
+	u_int8_t	keys[284];
+}						t_event;
+
+typedef struct			s_sdl
+{
+	SDL_Window		*win;
+	SDL_Texture		*buf;
+	SDL_Renderer	*renderer;
+}						t_sdl;
+
 typedef struct			s_game
 {
 	t_player	player;
@@ -109,7 +138,11 @@ typedef struct			s_game
 	t_array		walls;
 	t_array		portals;
 	t_array		points;
+	t_sdl		sdl;
 	//t_array		textures;
+	t_event		events; //must be last
 }						t_game;
+
+void					exit_error(const char *error);
 
 #endif
