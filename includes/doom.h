@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/13 16:16:54 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/13 16:31:38 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/types.h>
 # include <SDL2/SDL.h>
 
-# include <fixed_math.h>
+# include <vec.h>
 # include <libft.h>
 
 typedef struct			s_color
@@ -37,13 +37,13 @@ typedef struct			s_texture
 
 typedef struct			s_ph
 {
-	t_vec4		pos;
-	t_vec2		look;
-	t_vec4		speed;
-	t_vec2		look_max;
-	t_vec4		speed_max;
 	float		gravity;
 	float		height;
+	t_vec3		pos;
+	t_vec3		speed;
+	t_vec3		speed_max;
+	t_vec2		look;
+	t_vec2		look_max;
 }						t_ph;
 
 typedef enum			u_wtype
