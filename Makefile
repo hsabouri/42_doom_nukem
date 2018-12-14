@@ -5,7 +5,7 @@ LIBFT_DIR = lib/libft
 LIBVEC_DIR = lib/libvec
 ifeq ($(shell uname -s), Darwin)
 	SDL2_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/lib/
-	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/includes/
+	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/include/
 else
 	SDL2_DIR =.
 	SDL2_INC_DIR =.
@@ -35,7 +35,7 @@ OBJS_DIR = objs
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 CC = clang
-CFLAGS = -Wall -Wextra -Iincludes -I$(SDL2_SRCS_DIR)/includes -I$(LIBFT_DIR)/includes
+CFLAGS = -Wall -Wextra -Iincludes -I$(LIBFT_DIR)/includes -I$(SDL2_INC_DIR) -I$(LIBVEC_DIR)/includes
 CFLAGS += -g
 #CFLAGS += -Werror
 LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(SDL2_DIR) -lft -lvec -lSDL2 -lSDL2main -lpthread -ldl -lm
