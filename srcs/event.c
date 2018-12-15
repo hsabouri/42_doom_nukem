@@ -6,23 +6,39 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/14 16:01:33 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/15 15:21:04 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-t_event		capture_events()
+t_event			init_events(void)
+{
+	t_event res;
+	size_t	key;
+
+	key = 0;
+	while (key < N_KEY)
+	{
+		res.keys[key] = 0;
+		key++;
+	}
+	res.quit = 0;
+	return (res);
+}
+
+t_event			capture_events(t_event events)
 {
 	SDL_Event	polled_event;
-	t_event		new_table;
 
 	while (SDL_PollEvent(&polled_event))
 	{
 		if (polled_event.type == SDL_KEYDOWN)
-			new_table.keys[polled_event.key.keysym.scancode] = 1;
+			events.keys[polled_event.key.keysym.scancode] = 1;
 		else if (polled_event.type == SDL_KEYUP)
-			new_table.keys[polled_event.key.keysym.scancode] = 0;
+			events.keys[polled_event.key.keysym.scancode] = 0;
+		else if (polled_event.type == SDL_QUIT)
+			events.quit = 1;
 	}
-	return (new_table);
+	return (events);
 }

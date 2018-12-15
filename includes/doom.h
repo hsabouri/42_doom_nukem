@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/15 14:16:09 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/15 15:02:35 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define WIDTH 640
 # define HEIGHT 480
+# define N_KEY 284
 
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
@@ -120,7 +121,8 @@ typedef struct			s_sector
 
 typedef struct			s_event
 {
-	u_int8_t	keys[284];
+	u_int8_t	keys[N_KEY];
+	u_int8_t	quit;
 }						t_event;
 
 typedef struct			s_sdl
@@ -144,5 +146,7 @@ typedef struct			s_game
 }						t_game;
 
 void					exit_error(const char *error);
+t_event					capture_events(t_event events);
+t_event					init_events(void);
 
 #endif
