@@ -4,7 +4,7 @@ LIBFT_DIR = lib/libft
 LIBVEC_DIR = lib/libvec
 ifeq ($(shell uname -s), Darwin)
 	SDL2_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/lib/
-	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/includes/
+	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/include/
 else
 	SDL2_DIR =.
 	SDL2_INC_DIR =.
@@ -14,7 +14,7 @@ endif
 # SOURCE FILES (.c)
 # -----------------
 
-SRCS_FILES = main.c test_map.c
+SRCS_FILES = main.c event.c console.c test_map.c
 
 # -----------------
 
