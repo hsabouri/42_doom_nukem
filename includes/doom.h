@@ -35,10 +35,10 @@
 
 typedef struct			s_color
 {
-	u_char		b;
-	u_char		g;
-	u_char		r;
-	u_char		a;
+	u_int8_t	b;
+	u_int8_t	g;
+	u_int8_t	r;
+	u_int8_t	a;
 }						t_color;
 
 /*
