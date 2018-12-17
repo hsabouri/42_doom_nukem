@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/15 15:02:35 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/16 18:32:22 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 # include <SDL2/SDL.h>
 # include <vec.h>
 # include <libft.h>
-# include <stdio.h>
+# include <math.h>
+
+# ifndef M_PI
+#  define M_PI 3.141592653
+# endif
 
 # define WIDTH 640
 # define HEIGHT 480
@@ -40,6 +44,12 @@ typedef struct			s_color
 	u_int8_t	r;
 	u_int8_t	a;
 }						t_color;
+
+typedef struct			s_pix
+{
+	u_int32_t	x;
+	u_int32_t	y;
+}						t_pix;
 
 /*
 typedef struct			s_texture
@@ -146,7 +156,10 @@ typedef struct			s_game
 }						t_game;
 
 void					exit_error(const char *error);
+
 t_event					capture_events(t_event events);
 t_event					init_events(void);
+
+void					line(t_color *buf, t_vec2 a, t_vec2 b, t_color color);
 
 #endif
