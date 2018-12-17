@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo </var/spool/mail/hugo>                +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/13 17:27:53 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/16 16:00:41 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-t_game	generate_map(void)
+t_game	generate_map(t_game game)
 {
-	t_game res;
 	t_player player = (t_player) {
 		(t_ph) {
 			9.81,
 			1.80,
-			vec3_new(0, 0, 0),
-			vec3_new(0, 0, 0),
-			vec3_new(8, 8, 53),
-			vec2_new(0, 0),
-			vec2_new(2 * M_PI, M_PI / 2)
+			(t_vec3){0, 0, 0, 1},
+			(t_vec3){0, 0, 0, 1},
+			(t_vec3){8, 8, 53, 1},
+			(t_vec2){0, 0, 1},
+			(t_vec2){2 * M_PI, M_PI / 2, 1}
 		}
 	};
 
@@ -92,10 +91,10 @@ t_game	generate_map(void)
 	apush(&sectors, &((t_sector){18, 4, 0.6, 3.1}));
 	apush(&sectors, &((t_sector){22, 6, -30, 4.0}));
 
-	res.player = player;
-	res.sectors = sectors;
-	res.walls = walls;
-	res.portals = portals;
-	res.points = points;
-	return (res);
+	game.player = player;
+	game.sectors = sectors;
+	game.walls = walls;
+	game.portals = portals;
+	game.points = points;
+	return (game);
 }
