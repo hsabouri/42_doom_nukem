@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fixed_vec.h                                        :+:      :+:    :+:   */
+/*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 17:26:03 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/29 14:18:02 by hugo             ###   ########.fr       */
+/*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
+/*   Updated: 2018/12/19 18:23:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_VEC_H
-# define FIXED_VEC_H
+#include <doom.h>
 
-# include <fixed_math.h>
-
-/*
-typedef struct		s_vec4
+inline t_pix_fixed	from_pix(t_pix pixel)
 {
-	t_fixed	x;
-	t_fixed	y;
-	t_fixed	z;
-	t_fixed	s;
-}					t_vec4;
-
-typedef struct		s_vec2
-{
-	t_fixed	u;
-	t_fixed	v;
-}					t_vec2;
-*/
-
-#endif
+	return ((t_pix_fixed) {f_from_int(pixel.x), f_from_int(pixel.y)});
+}

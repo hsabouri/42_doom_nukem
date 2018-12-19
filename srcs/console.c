@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   float_math.h                                       :+:      :+:    :+:   */
+/*   console.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 13:22:02 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/19 18:22:57 by hsabouri         ###   ########.fr       */
+/*   Created: 2018/12/14 17:58:43 by hsabouri          #+#    #+#             */
+/*   Updated: 2018/12/14 18:05:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FLOAT_MATH_H
-# define FLOAT_MATH_H
+#include <doom.h>
 
-# include <sys/types.h>
-# include <float.h>
-
-# ifndef M_PI
-#  define M_PI 3.141592653
-# endif
-
-typedef union	u_sqrt
+void	exit_error(const char *error)
 {
-	int32_t	i;
-	float	x;
-}				t_sqrt;
-
-typedef union	u_inv_sqrt
-{
-	float	x;
-	int32_t	i;
-}				t_inv_sqrt;
-
-float			fast_inv_sqrt(float x);
-float			fast_sqrt(float x);
-
-#endif
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd(error, STDERR_FILENO);
+	ft_putendl_fd(RESET, STDERR_FILENO);
+	exit(EXIT_FAILURE);
+}
