@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fixed_math.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 13:10:36 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/28 18:51:21 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/19 15:51:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ inline t_fixed		f_mul(t_fixed a, t_fixed b)
 
 inline t_fixed		f_div(t_fixed a, t_fixed b)
 {
-	const int64_t d_a = (int64_t)a << SUB_BITS;
+	const int64_t d_a = ((int64_t)a) << SUB_BITS;
 	const int64_t d_b = (int64_t)b;
 
 	return ((t_fixed)(d_a / d_b));

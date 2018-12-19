@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fixed_convert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:08:10 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/28 11:10:48 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/19 16:42:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 inline int32_t		f_to_int(t_fixed num)
 {
-	return (num >> SUB_BITS);
+	if ((num << (32 - SUB_BITS)) >> (32 - SUB_BITS) >= 1 << (SUB_BITS - 1))
+		return ((num >> SUB_BITS) + 1);
+	else
+		return (num >> SUB_BITS);
 }
 
 inline t_fixed		f_from_int(int32_t num)
