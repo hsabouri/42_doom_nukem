@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/16 18:32:22 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/19 16:04:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 # define CYAN    "\x1b[36m"
 # define RESET   "\x1b[0m"
 
+# define MIN(a, b) ((a < b) ? a : b)
+# define MAX(a, b) ((a > b) ? a : b)
+
 typedef struct			s_color
 {
 	u_int8_t	b;
@@ -47,9 +50,15 @@ typedef struct			s_color
 
 typedef struct			s_pix
 {
-	u_int32_t	x;
-	u_int32_t	y;
+	int32_t	x;
+	int32_t	y;
 }						t_pix;
+
+typedef struct			s_pix_fixed
+{
+	t_fixed	x;
+	t_fixed	y;
+}						t_pix_fixed;
 
 /*
 typedef struct			s_texture
@@ -131,8 +140,8 @@ typedef struct			s_sector
 
 typedef struct			s_event
 {
-	u_int8_t	keys[N_KEY];
 	u_int8_t	quit;
+	u_int8_t	keys[N_KEY];
 }						t_event;
 
 typedef struct			s_sdl
@@ -160,6 +169,6 @@ void					exit_error(const char *error);
 t_event					capture_events(t_event events);
 t_event					init_events(void);
 
-void					line(t_color *buf, t_vec2 a, t_vec2 b, t_color color);
+void					quad(t_color *buf, t_pix points[4], t_color color);
 
 #endif

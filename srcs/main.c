@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/15 15:23:47 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/19 16:49:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,18 @@ static void		game_loop(t_game game, size_t frame)
 {
 	t_color			*content;
 	int				pitch;
+	t_pix			points[4] = {
+		(t_pix) {30, 120},
+		(t_pix) {100, 50},
+		(t_pix) {100, 80},
+		(t_pix) {30, 150}
+	};
 
 	content = NULL;
 	SDL_LockTexture(game.sdl.buf, NULL, (void **)&content, &pitch);
-	for (int i = 0; i < HEIGHT; i++) {
-		content[i * WIDTH + frame % WIDTH] = (t_color){ frame + 36 + 2 * i, frame * 3 - i, frame * -2, 0 };
-	}
+
+	quad(content, points, (t_color) {.r= 255, .b= 255, .g= 255, .a= 255});
+
 	SDL_UnlockTexture(game.sdl.buf);
 	SDL_RenderCopy(game.sdl.renderer, game.sdl.buf, NULL, NULL);
 	SDL_RenderPresent(game.sdl.renderer);
@@ -53,7 +59,6 @@ int main(void)
 	t_game			game;
 	size_t			frame;
 
-	
 	game.sdl = init_sdl();
 	game.events = init_events();
 	frame = 0;
