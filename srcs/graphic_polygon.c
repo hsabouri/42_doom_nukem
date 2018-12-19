@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/19 18:24:40 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:48:12 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ void				quad(t_color *buf, t_pix pixes[4], t_color color)
 	order[0].right[0] = A;
 	order[0].right[1] = B;
 	quad_order(highest, order, points);
-	i = -1;
-	while (++i < 3)
+	if (points[order[0].left[0]].y == points[order[0].right[1]].y)
+		i = 0;
+	else
+		i = -1;
+	while (++i < 3 &&\
+	!(i == 2 && points[order[2].left[0]].y == points[order[2].right[1]].y))
 		part_fill(buf, order[i], points, color);
 }

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/19 18:25:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:53:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static void		game_loop(t_game game, size_t frame)
 	t_color			*content;
 	int				pitch;
 	t_pix			points[4] = {
-		(t_pix) {30, 120},
-		(t_pix) {100, 50},
-		(t_pix) {100, 80},
-		(t_pix) {30, 150}
+		(t_pix) {100, 100},
+		(t_pix) {200, 100},
+		(t_pix) {200, 200},
+		(t_pix) {100, 200}
 	};
 
 	content = NULL;
