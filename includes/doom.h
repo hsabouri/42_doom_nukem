@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/19 16:04:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:24:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
-# include <SDL2/SDL.h>
-# include <vec.h>
-# include <libft.h>
 # include <math.h>
+# include <SDL2/SDL.h>
 
-# ifndef M_PI
-#  define M_PI 3.141592653
-# endif
+# include <libft.h>
+# include <vec.h>
+# include <graphic.h>
 
 # define WIDTH 640
 # define HEIGHT 480
@@ -39,26 +37,6 @@
 
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
-
-typedef struct			s_color
-{
-	u_int8_t	b;
-	u_int8_t	g;
-	u_int8_t	r;
-	u_int8_t	a;
-}						t_color;
-
-typedef struct			s_pix
-{
-	int32_t	x;
-	int32_t	y;
-}						t_pix;
-
-typedef struct			s_pix_fixed
-{
-	t_fixed	x;
-	t_fixed	y;
-}						t_pix_fixed;
 
 /*
 typedef struct			s_texture

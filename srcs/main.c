@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/19 16:49:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:25:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void		game_loop(t_game game, size_t frame)
 	SDL_RenderPresent(game.sdl.renderer);
 }
 
-int main(void)
+int				main(void)
 {
 	t_game			game;
 	size_t			frame;

@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   float_math.h                                       :+:      :+:    :+:   */
+/*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 13:22:02 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/19 18:22:57 by hsabouri         ###   ########.fr       */
+/*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
+/*   Updated: 2018/12/19 18:23:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FLOAT_MATH_H
-# define FLOAT_MATH_H
+#include <doom.h>
 
-# include <sys/types.h>
-# include <float.h>
-
-# ifndef M_PI
-#  define M_PI 3.141592653
-# endif
-
-typedef union	u_sqrt
+inline t_pix_fixed	from_pix(t_pix pixel)
 {
-	int32_t	i;
-	float	x;
-}				t_sqrt;
-
-typedef union	u_inv_sqrt
-{
-	float	x;
-	int32_t	i;
-}				t_inv_sqrt;
-
-float			fast_inv_sqrt(float x);
-float			fast_sqrt(float x);
-
-#endif
+	return ((t_pix_fixed) {f_from_int(pixel.x), f_from_int(pixel.y)});
+}
