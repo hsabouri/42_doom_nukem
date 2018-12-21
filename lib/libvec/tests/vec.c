@@ -7,7 +7,7 @@ size_t	test_vec(size_t *number_of_tests)
 	*number_of_tests = 0;
 
 	t_vec3	vec = vec3_new(100, 100, 100);
-	t_vec3	truth = (t_vec3) {0.5774, 0.5774, 173.2, 0.5774};
+	t_vec3	truth = (t_vec3) {100, 100, 1, 100};
 
 	*number_of_tests += 1;
 	if (fc(vec.x, truth.x) && fc(vec.y, truth.y) && fc(vec.z, truth.z) && fc(vec.s, truth.s))
@@ -19,7 +19,7 @@ size_t	test_vec(size_t *number_of_tests)
 		failed("vec_new(100, 100, 100)\n");
 
 	vec = vec3_new(235.928385, -0.134, 23.98385);
-	truth = (t_vec3) {0.9949, -0.0005651, 237.14, 0.10114};
+	truth = (t_vec3) {235.928385, -0.134, 1, 23.98385};
 
 	*number_of_tests += 1;
 	if (fc(vec.x, truth.x) && fc(vec.y, truth.y) && fc(vec.z, truth.z) && fc(vec.s, truth.s))
@@ -35,7 +35,7 @@ size_t	test_vec(size_t *number_of_tests)
 	}
 
 	vec = vec3_new(0, 0, 0);
-	truth = (t_vec3) {0, 0, 0, 0};
+	truth = (t_vec3) {0, 0, 1, 0};
 
 	*number_of_tests += 1;
 	if (fc(vec.x, truth.x) && fc(vec.y, truth.y) && fc(vec.z, truth.z) && fc(vec.s, truth.s))
@@ -83,7 +83,7 @@ size_t	test_vec(size_t *number_of_tests)
 	}
 
 	vec = vec3_cross(vec3_new(2, 2, 2), vec3_new(2, 2, 2));
-	truth = (t_vec3){ 0, 0, 0, 0 };
+	truth = (t_vec3){ 0, 0, 1, 0 };
 
 	*number_of_tests += 1;
 	if (fc(vec.x, truth.x) && fc(vec.y, truth.y) && fc(vec.z, truth.z) && fc(vec.s, truth.s))

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2018/12/01 18:26:19 by hugo             ###   ########.fr        #
+#    Updated: 2018/12/20 13:44:18 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ SRCNAM	= ft_atoi.c\
 		  ft_listpush.c\
 		  ft_listmap.c\
 		  ft_anew.c\
+		  ft_anth.c\
 		  ft_apop.c\
 		  ft_ashift.c\
 		  ft_ainsert.c\

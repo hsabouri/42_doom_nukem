@@ -19,7 +19,7 @@ size_t test_anew(size_t *number_of_tests)
     }
 
 	test = anew(NULL, 10, sizeof(int));
-	truth = (t_array) {10, sizeof(int) * 10, sizeof(int), test.mem, test.mem};
+	truth = (t_array) {0, sizeof(int) * 10, sizeof(int), test.mem, test.mem};
 
 	*number_of_tests += 1;
     if (memcmp(&test, &truth, sizeof(t_array)) && test.mem != NULL)

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/19 18:48:12 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/21 14:03:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_pix_fixed *pts, t_color color)
 	t_fixed			coef;
 
 	start = MAX(pts[order.left[0]].y, pts[order.right[0]].y);
-	while (start <= end)
+	while (start <= end && f_to_int(start) < HEIGHT)
 	{
 		coef = f_div(start - pts[order.left[0]].y,
 		pts[order.left[1]].y - pts[order.left[0]].y);
@@ -75,18 +75,14 @@ static void			quad_order(int highest, t_order *ord, t_pix_fixed pts[4])
 	}
 }
 
-void				quad(t_color *buf, t_pix pixes[4], t_color color)
+void				quad(t_color *buf, t_pix_fixed points[4], t_color color)
 {
 	t_order		order[3];
-	t_pix_fixed	points[4];
 	int			highest;
 	int			i;
 
-	i = -1;
-	highest = 0;
-	while (++i < 4)
-		points[i] = from_pix(pixes[i]);
 	i = 0;
+	highest = 0;
 	while (++i < 4)
 		if (points[i].y < points[highest].y)
 			highest = i;

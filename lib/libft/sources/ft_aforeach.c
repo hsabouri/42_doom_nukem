@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aforeach.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 17:47:56 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/01 18:09:59 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/21 12:55:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_array		*aforeach(t_array *array, void (*f)(void *elem))
+t_array		*aforeach(t_array *array, void (*f)(void *))
 {
 	size_t	current;
 
@@ -27,7 +27,7 @@ t_array		*aforeach(t_array *array, void (*f)(void *elem))
 	return (array);
 }
 
-t_array		*aforeachi(t_array *array, void (*f)(void *elem, size_t i))
+t_array		*aforeachi(t_array *array, void (*f)(void *, size_t))
 {
 	size_t	current;
 
@@ -37,6 +37,22 @@ t_array		*aforeachi(t_array *array, void (*f)(void *elem, size_t i))
 	while (current < array->len)
 	{
 		(*f)(array->first + current * array->elem_size, current);
+		current += 1;
+	}
+	return (array);
+}
+
+t_array		*aforeach_state(t_array *array, void (*f)(void *, void *),
+void *state)
+{
+	size_t	current;
+
+	if (!array)
+		return (NULL);
+	current = 0;
+	while (current < array->len)
+	{
+		(*f)(array->first + current * array->elem_size, state);
 		current += 1;
 	}
 	return (array);

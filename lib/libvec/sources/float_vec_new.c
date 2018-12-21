@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   float_vec_new.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:31:19 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/29 19:12:39 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/20 13:46:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,19 @@ inline float	vec2_size(t_vec2 a)
 
 inline t_vec3	vec3_new(float x, float y, float z)
 {
-	const float	inv_sqrt = fast_inv_sqrt(x * x + y * y + z * z);
-
 	return ((t_vec3) {\
-		x * inv_sqrt,\
-		y * inv_sqrt,\
-		1 / inv_sqrt,\
-		z * inv_sqrt\
+		x,\
+		y,\
+		1,\
+		z\
 	});
 }
 
 inline t_vec2	vec2_new(float u, float v)
 {
-	const float	inv_sqrt = fast_inv_sqrt(u * u + v * v);
-
 	return ((t_vec2) {\
-		u * inv_sqrt,\
-		v * inv_sqrt,\
-		1 / inv_sqrt\
+		u,\
+		v,\
+		1\
 	});
 }

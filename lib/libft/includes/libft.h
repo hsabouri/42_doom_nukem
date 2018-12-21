@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/01 18:25:25 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/21 15:01:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,11 +176,13 @@ t_pelem 		*lpshift(t_plist *list);
 t_pelem			*lppop(t_plist *list);
 
 t_array			anew(void *first, size_t len, size_t elem_size);
+void			*anth(const t_array *array, size_t index);
 void			*apop(t_array *array);
 void			*ashift(t_array *array);
 t_array			*apush(t_array *array, void *element);
 t_array			*ainsert(t_array *array, void *element);
 t_array			*aforeach(t_array *array, void (*f)(void *));
+t_array			*aforeach_state(t_array *array, void (*f)(void *, void *), void *state);
 t_array			*aforeachi(t_array *array, void (*f)(void *, size_t i));
 
 #endif
