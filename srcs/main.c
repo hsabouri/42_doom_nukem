@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/19 18:53:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:10:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,12 @@ static void		game_loop(t_game game, size_t frame)
 {
 	t_color			*content;
 	int				pitch;
-	t_pix			points[4] = {
-		(t_pix) {100, 100},
-		(t_pix) {200, 100},
-		(t_pix) {200, 200},
-		(t_pix) {100, 200}
-	};
 
 	content = NULL;
 	SDL_LockTexture(game.sdl.buf, NULL, (void **)&content, &pitch);
 
-	quad(content, points, (t_color) {.r= 255, .b= 255, .g= 255, .a= 255});
+	game.current_buffer = content;
+	aforeach_state(&game.walls, &display_wall, (void *)&game);
 
 	SDL_UnlockTexture(game.sdl.buf);
 	SDL_RenderCopy(game.sdl.renderer, game.sdl.buf, NULL, NULL);
@@ -61,12 +56,13 @@ int				main(void)
 
 	game.sdl = init_sdl();
 	game.events = init_events();
+	game = generate_map(game);
 	frame = 0;
 	while (game.sdl.win)
 	{
 		game.events = capture_events(game.events);
 		if (game.events.quit || game.events.keys[SDL_SCANCODE_ESCAPE])
-			break;
+			break ;
 		game_loop(game, frame);
 		frame++;
 	}

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/19 18:24:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/21 14:59:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 # define HEIGHT 480
 # define N_KEY 284
 
-# define RED     "\x1b[31m"
-# define GREEN   "\x1b[32m"
-# define YELLOW  "\x1b[33m"
-# define BLUE    "\x1b[34m"
-# define MAGENTA "\x1b[35m"
-# define CYAN    "\x1b[36m"
-# define RESET   "\x1b[0m"
+# define C_RED     "\x1b[31m"
+# define C_GREEN   "\x1b[32m"
+# define C_YELLOW  "\x1b[33m"
+# define C_BLUE    "\x1b[34m"
+# define C_MAGENTA "\x1b[35m"
+# define C_CYAN    "\x1b[36m"
+# define C_RESET   "\x1b[0m"
 
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
@@ -137,6 +137,7 @@ typedef struct			s_game
 	t_array		walls;
 	t_array		portals;
 	t_array		points;
+	t_color		*current_buffer;
 	t_sdl		sdl;
 	//t_array		textures;
 	t_event		events; //must be last
@@ -147,6 +148,8 @@ void					exit_error(const char *error);
 t_event					capture_events(t_event events);
 t_event					init_events(void);
 
-void					quad(t_color *buf, t_pix points[4], t_color color);
+void					display_wall(void *wall, void *game);
+
+t_game					generate_map(t_game game);
 
 #endif

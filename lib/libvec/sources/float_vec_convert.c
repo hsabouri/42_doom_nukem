@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_anew.c                                          :+:      :+:    :+:   */
+/*   float_vec_convert.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/30 15:57:59 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/21 13:05:27 by hsabouri         ###   ########.fr       */
+/*   Created: 2018/12/20 12:22:53 by hsabouri          #+#    #+#             */
+/*   Updated: 2018/12/20 12:24:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <vec.h>
 
-t_array		anew(void *first, size_t len, size_t elem_size)
+inline t_vec2	vec3_to_vec2(t_vec3 vec)
 {
-	t_array res;
+	return ((t_vec2){vec.x, vec.y, vec.s});
+}
 
-	if (first == NULL && len != 0)
-		res.mem = (void *)malloc(len * elem_size);
-	else
-		res.mem = first;
-	res.first = res.mem;
-	if (first == NULL)
-		res.len = 0;
-	else
-		res.len = len;
-	res.elem_size = elem_size;
-	res.allocated = len * elem_size;
-	return (res);
+inline t_vec3	vec2_to_vec3(t_vec2 vec)
+{
+	return ((t_vec3){vec.u, vec.v, vec.s, 0});
 }

@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_anth.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 09:36:24 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/03 10:03:55 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/21 15:01:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*anth(t_array *array, size_t index)
+void	*anth(const t_array *array, size_t index)
 {
 	if (array == NULL)
 		return (NULL);
 	if (array->first && index < array->len)
-		return (array->first + array->len * array->elem_size);
+		return (array->first + index * array->elem_size);
+	else
+		return (NULL);
 }
