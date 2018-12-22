@@ -46,7 +46,6 @@ all: libft libvec installSDL $(NAME)
 
 ifeq ($(shell uname -s), Darwin)
 installSDL:
-	@brew update
 	@brew install sdl2
 else
 installSDL:
@@ -54,10 +53,10 @@ installSDL:
 endif
 
 libft:
-	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -j -C $(LIBFT_DIR)
 
 libvec:
-	@$(MAKE) -C $(LIBVEC_DIR)
+	@$(MAKE) -j -C $(LIBVEC_DIR)
 
 $(NAME): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
