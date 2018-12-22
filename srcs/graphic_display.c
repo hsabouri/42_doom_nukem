@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/22 14:53:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/22 14:54:05 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,33 @@
 static void	screen_space(t_vec2 a, t_vec2 b, t_color *buf)
 {
 	t_pix_fixed		pixes[4];
+	float			coef;
 
-	if (a.v > 0.000001 || b.v > 0.000001)
+	if (a.v > FLT_EPSILON || b.v > FLT_EPSILON)
 	{
-		if (a.v < 0.000001)
-			a = (t_vec2) {(-b.v) / (a.v - b.v) * (a.u - b.u) + b.u, 0.001, 1};
-		else if (b.v < 0.000001)
-			b = (t_vec2) {(-a.v) / (b.v - a.v) * (b.u - a.u) + a.u, 0.001, 1};
-		pixes[0] = (t_pix_fixed) { f_from_float(a.u * (180 / a.v) + WIDTH / 2),
+		// printf("	-> a: {%f,	%f}		b: {%f,	%f}\n", a.u, a.v, b.u, b.v);
+		if (a.v < FLT_EPSILON)
+		{
+			coef = (-b.v) / (a.v - b.v);
+			a = (t_vec2) {coef * (a.u - b.u) + b.u, 0.001, 1};
+		}
+		else if (b.v < FLT_EPSILON)
+		{
+			coef = (-a.v) / (b.v - a.v);
+			b = (t_vec2) {coef * (b.u - a.u) + a.u, 0.001, 1};
+		}
+		// printf("	   a: {%f,	%f}		b: {%f,	%f}\n", a.u, a.v, b.u, b.v);
+		pixes[0] = (t_pix_fixed) {
+			f_from_float(a.u * (180 / a.v) + WIDTH / 2),
 			f_from_float(HEIGHT / 2 + 180 / a.v)};
-		pixes[1] = (t_pix_fixed) { f_from_float(b.u * (180 / b.v) + WIDTH / 2),
+		pixes[1] = (t_pix_fixed) {
+			f_from_float(b.u * (180 / b.v) + WIDTH / 2),
 			f_from_float(HEIGHT / 2 + 180 / b.v)};
-		pixes[2] = (t_pix_fixed) { f_from_float(b.u * (180 / b.v) + WIDTH / 2),
+		pixes[2] = (t_pix_fixed) {
+			f_from_float(b.u * (180 / b.v) + WIDTH / 2),
 			f_from_float(HEIGHT / 2 - 180 / b.v)};
-		pixes[3] = (t_pix_fixed) { f_from_float(a.u * (180 / a.v) + WIDTH / 2),
+		pixes[3] = (t_pix_fixed) {
+			f_from_float(a.u * (180 / a.v) + WIDTH / 2),
 			f_from_float(HEIGHT / 2 - 180 / a.v)};
 		quad(buf, pixes, RED);
 	}
