@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:08:10 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/22 13:38:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/22 12:57:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ inline t_fixed		f_from_int(int32_t num)
 	return (num << SUB_BITS);
 }
 
-static float   power_of(float to_convert, const int power, int neg)
+static float		power_of(float to_convert, const int power, int neg)
 {
 	int i;
 
@@ -49,7 +49,7 @@ inline float		f_to_float(t_fixed num)
 {
 	const int32_t	int_part = f_to_int(num);
 	const int32_t	mantis = num << (sizeof(t_fixed) * 8 - SUB_BITS)\
-								>> (sizeof(t_fixed) * 8 - SUB_BITS);
+	>> (sizeof(t_fixed) * 8 - SUB_BITS);
 	const float		decimal = power_of((float)mantis, SUB_BITS, 1);
 
 	return ((float)int_part + decimal);

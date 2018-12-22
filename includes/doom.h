@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/21 14:59:54 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/22 14:53:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/types.h>
 # include <math.h>
 # include <SDL2/SDL.h>
+# include <float.h>
 
 # include <libft.h>
 # include <vec.h>
