@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:31:19 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/20 13:46:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/22 13:32:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,10 @@ inline float	vec2_size(t_vec2 a)
 
 inline t_vec3	vec3_new(float x, float y, float z)
 {
-	return ((t_vec3) {\
-		x,\
-		y,\
-		1,\
-		z\
-	});
+	return ((t_vec3) {x, y, z});
 }
 
 inline t_vec2	vec2_new(float u, float v)
 {
-	return ((t_vec2) {\
-		u,\
-		v,\
-		1\
-	});
+	return ((t_vec2) {u, v});
 }

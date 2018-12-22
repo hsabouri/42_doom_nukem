@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/21 13:39:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/22 13:43:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,35 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			9.81,
 			1.80,
-			(t_vec3){10, 10, 0, 1},
-			(t_vec3){0, 0, 0, 1},
-			(t_vec3){8, 8, 53, 1},
-			(t_vec2){0, 0, 1},
-			(t_vec2){2 * M_PI, M_PI / 2, 1}
+			(t_vec3){10, 10, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){8, 8, 53},
+			(t_vec2){0, 0},
+			(t_vec2){2 * M_PI, M_PI / 2}
 		}
 	};
 
 	t_array points = anew(NULL, 19, sizeof(t_vec2));
-	apush(&points, &((t_vec2){7, 6, 1}));
-	apush(&points, &((t_vec2){8, 7, 1}));
-	apush(&points, &((t_vec2){8, 11, 1}));
-	apush(&points, &((t_vec2){5, 12, 1}));
-	apush(&points, &((t_vec2){4, 12, 1}));
-	apush(&points, &((t_vec2){1, 11, 1}));
-	apush(&points, &((t_vec2){1, 7, 1}));
-	apush(&points, &((t_vec2){2, 6, 1}));
-	apush(&points, &((t_vec2){4, 6, 1}));
-	apush(&points, &((t_vec2){5, 6, 1}));
-	apush(&points, &((t_vec2){5, 4.5, 1}));
-	apush(&points, &((t_vec2){4, 4, 1}));
-	apush(&points, &((t_vec2){6, 2, 1}));
-	apush(&points, &((t_vec2){6.5, 3, 1}));
-	apush(&points, &((t_vec2){7, 3, 1}));
-	apush(&points, &((t_vec2){7, 2, 1}));
-	apush(&points, &((t_vec2){8, 0, 1}));
-	apush(&points, &((t_vec2){9, 0, 1}));
-	apush(&points, &((t_vec2){9, 5, 1}));
-	apush(&points, &((t_vec2){8, 5, 1}));
+	apush(&points, &((t_vec2){7, 6}));
+	apush(&points, &((t_vec2){8, 7}));
+	apush(&points, &((t_vec2){8, 11}));
+	apush(&points, &((t_vec2){5, 12}));
+	apush(&points, &((t_vec2){4, 12}));
+	apush(&points, &((t_vec2){1, 11}));
+	apush(&points, &((t_vec2){1, 7}));
+	apush(&points, &((t_vec2){2, 6}));
+	apush(&points, &((t_vec2){4, 6}));
+	apush(&points, &((t_vec2){5, 6}));
+	apush(&points, &((t_vec2){5, 4.5}));
+	apush(&points, &((t_vec2){4, 4}));
+	apush(&points, &((t_vec2){6, 2}));
+	apush(&points, &((t_vec2){6.5, 3}));
+	apush(&points, &((t_vec2){7, 3}));
+	apush(&points, &((t_vec2){7, 2}));
+	apush(&points, &((t_vec2){8, 0}));
+	apush(&points, &((t_vec2){9, 0}));
+	apush(&points, &((t_vec2){9, 5}));
+	apush(&points, &((t_vec2){8, 5}));
 
 	t_array walls = anew(NULL, 38, sizeof(t_wall));
 	apush(&walls, &((t_wall){-1, 9, 0}));

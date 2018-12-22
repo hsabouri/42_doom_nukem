@@ -33,7 +33,7 @@ int		fc(float a, float b)
 
 void    print_vec(t_vec3 vec)
 {
-	printf("vec {\n	x: %f,\n	y: %f,\n	z: %f,\n	s: %f\n}\n\n", vec.x, vec.y, vec.z, vec.s);
+	printf("vec {\n	x: %f,\n	y: %f,\n	z: %f\n}\n\n", vec.x, vec.y, vec.z);
 }
 
 int main(void)

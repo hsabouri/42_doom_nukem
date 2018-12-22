@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec.h                                              :+:      :+:    :+:   */
+/*   fixed_vec_new.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 14:16:10 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/21 17:49:25 by hsabouri         ###   ########.fr       */
+/*   Created: 2018/12/21 17:37:55 by hsabouri          #+#    #+#             */
+/*   Updated: 2018/12/21 17:52:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC_H
-# define VEC_H
+#include <vec.h>
 
-# include <float_math.h>
-# include <float_vec.h>
-# include <fixed_math.h>
-# include <fixed_vec.h>
+inline t_fvec3		fvec3_new(t_fixed x, t_fixed y, t_fixed z)
+{
+	return ((t_fvec3) {x, y, z});
+}
 
-#endif
+inline t_fvec2		fvec2_new(t_fixed u, t_fixed v)
+{
+	return ((t_fvec2) {u, v});
+}

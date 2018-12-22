@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:08:10 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/21 14:05:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/22 13:38:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ inline float		f_to_float(t_fixed num)
 t_fixed				f_from_float(float val)
 {
 	const int64_t	contains = (int64_t)power_of(val, SUB_BITS, 0);
-	printf("%f\n", val);
 	const t_fixed	res = (int32_t)contains;
 
 	return (res);
