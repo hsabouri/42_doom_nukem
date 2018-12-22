@@ -1,33 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   float_vec_op.c                                     :+:      :+:    :+:   */
+/*   fixed_vec_op.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 15:34:29 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/22 13:33:17 by hsabouri         ###   ########.fr       */
+/*   Created: 2018/12/21 17:54:19 by hsabouri          #+#    #+#             */
+/*   Updated: 2018/12/21 18:06:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vec.h>
 
-inline t_vec3	vec3_sub(t_vec3 a, t_vec3 b)
+inline t_fvec3		fvec3_add(t_fvec3 a, t_fvec3 b)
 {
-	return (vec3_new(a.x - b.x, a.y - b.y, a.z - b.z));
+	return ((t_fvec3) {
+		a.x + b.x,
+		a.y + b.y,
+		a.z + b.z
+	});
 }
 
-inline t_vec2	vec2_sub(t_vec2 a, t_vec2 b)
+inline t_fvec3		fvec3_sub(t_fvec3 a, t_fvec3 b)
 {
-	return (vec2_new(a.u - b.u, a.v - b.v));
+	return ((t_fvec3) {
+		a.x - b.x,
+		a.y - b.y,
+		a.z - b.z
+	});
 }
 
-inline t_vec3	vec3_add(t_vec3 a, t_vec3 b)
+inline t_fvec2		fvec2_add(t_fvec2 a, t_fvec2 b)
 {
-	return (vec3_new(a.x + b.x, a.y + b.y, a.z + b.z));
+	return ((t_fvec2) {
+		a.u + b.u,
+		a.v + b.v,
+	});
 }
 
-inline t_vec2	vec2_add(t_vec2 a, t_vec2 b)
+inline t_fvec2		fvec2_sub(t_fvec2 a, t_fvec2 b)
 {
-	return (vec2_new(a.u + b.u, a.v + b.v));
+	return ((t_fvec2) {
+		a.u - b.u,
+		a.v - b.v,
+	});
 }

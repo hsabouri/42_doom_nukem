@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:16:54 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/20 12:22:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/22 13:21:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct	s_vec3
 {
 	float	x;
 	float	y;
-	float	s;
 	float	z;
 }				t_vec3;
 
@@ -27,7 +26,6 @@ typedef struct	s_vec2
 {
 	float	u;
 	float	v;
-	float	s;
 }				t_vec2;
 
 t_vec3			vec3_new(float x, float y, float z);
