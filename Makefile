@@ -14,7 +14,7 @@ endif
 # SOURCE FILES (.c)
 # -----------------
 
-SRCS_FILES = main.c event.c console.c test_map.c\
+SRCS_FILES = main.c event.c test_map.c\
 			graphic_polygon.c\
 			graphic_utils.c\
 			graphic_display.c\

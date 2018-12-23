@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/22 14:53:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/23 18:25:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@
 # define WIDTH 640
 # define HEIGHT 480
 # define N_KEY 284
-
-# define C_RED     "\x1b[31m"
-# define C_GREEN   "\x1b[32m"
-# define C_YELLOW  "\x1b[33m"
-# define C_BLUE    "\x1b[34m"
-# define C_MAGENTA "\x1b[35m"
-# define C_CYAN    "\x1b[36m"
-# define C_RESET   "\x1b[0m"
 
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
@@ -57,7 +49,6 @@ typedef struct			s_ph
 	t_vec3		speed;
 	t_vec3		speed_max;
 	t_vec2		look;
-	t_vec2		look_max;
 }						t_ph;
 
 /*

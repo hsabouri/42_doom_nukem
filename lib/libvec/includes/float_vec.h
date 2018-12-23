@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:16:54 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/22 13:21:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/23 17:12:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_vec3			vec3_rot_z(t_vec3 a, float t);
 
 t_vec2			vec3_to_vec2(t_vec3 vec);
 t_vec3			vec2_to_vec3(t_vec2 vec);
+t_vec3			fvec3_to_vec3(t_fvec3 fvec);
+t_vec2			fvec2_to_vec2(t_fvec2 fvec);
 
 t_vec2			vec2_new(float u, float v);
 t_vec2			vec2_scale(t_vec2 a, float s);
