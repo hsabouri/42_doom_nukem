@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/22 14:54:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/26 11:12:43 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	screen_space(t_vec2 a, t_vec2 b, t_color *buf)
 		if (a.v < FLT_EPSILON)
 		{
 			coef = (-b.v) / (a.v - b.v);
-			a = (t_vec2) {coef * (a.u - b.u) + b.u, 0.001, 1};
+			a = (t_vec2) {coef * (a.u - b.u) + b.u, 0.001};
 		}
 		else if (b.v < FLT_EPSILON)
 		{
 			coef = (-a.v) / (b.v - a.v);
-			b = (t_vec2) {coef * (b.u - a.u) + a.u, 0.001, 1};
+			b = (t_vec2) {coef * (b.u - a.u) + a.u, 0.001};
 		}
 		// printf("	   a: {%f,	%f}		b: {%f,	%f}\n", a.u, a.v, b.u, b.v);
 		pixes[0] = (t_pix_fixed) {
