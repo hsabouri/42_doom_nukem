@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2018/12/21 18:16:52 by hsabouri         ###   ########.fr        #
+#    Updated: 2018/12/26 11:51:19 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRCNAM = float_math.c\
 		fixed_vec_new.c\
 		fixed_vec_op.c\
 		fixed_vec_prod.c\
+		fixed_vec_convert.c\
 		fixed_vec_mult.c
+
 INCNAM = fixed_math.h fixed_vec.h float_math.h float_vec.h vec.h
 
 SRC=$(SRCNAM:%=$(SRCDIR)/%)
