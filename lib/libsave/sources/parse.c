@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/23 18:02:47 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/26 12:51:01 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	*dump_struct(void *buf, size_t start, size_t size, size_t max)
 		exit_error("FileLoader3030: File corrupted"\
 		C_RESET\
 		" (error no. 0xbalkaNES)");
+	return (NULL);
 }
 
 static void	verify_magic(void *t_c_struct, size_t magic, size_t index)
@@ -56,7 +57,7 @@ t_player	parse_player(t_c_player player)
 	return (res);
 }
 
-t_game		parse(const char *filename)
+t_game		load(const char *filename)
 {
 	void		*buf;
 	size_t		max;

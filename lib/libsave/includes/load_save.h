@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   default.c                                          :+:      :+:    :+:   */
+/*   load_save.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 11:30:16 by hugo             ###   ########.fr       */
+/*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
+/*   Updated: 2018/12/26 12:45:00 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../../../includes/doom.h>
+#ifndef LOAD_SAVE_H
+# define LOAD_SAVE_H
 
-t_player	player_default(void)
-{
-	return ((t_player) {
-		(t_ph) {
-			9.81,
-			2,
-			(t_vec3) {0, 0, 0},
-			(t_vec3) {0, 0, 0},
-			(t_vec3) {8, 8, 54},
-			(t_vec2) {0, 0},
-	}});
-}
+# include <structure_clone.h>
+# include "../../includes/doom.h"
+
+void		save(t_game game, int fd);
+void		load(const char *filename);
+
+#endif

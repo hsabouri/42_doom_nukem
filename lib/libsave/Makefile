@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2018/12/23 17:31:59 by hsabouri         ###   ########.fr        #
+#    Updated: 2018/12/26 12:49:45 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libsave.a
-INCLUDES = ./includes
+INCLUDES = -I./includes -I../libvec/includes -I../libft/includes -I../../includes
 CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
 CFLAGS += -g -O3 -fPIC
@@ -35,7 +35,7 @@ $(NAME): $(OBJ) $(INC)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
 	mkdir -p $(OBJDIR)
-	$(CC) -c -o $@ $< -I$(INCLUDES) $(CFLAGS)
+	$(CC) -c -o $@ $< $(INCLUDES) $(CFLAGS)
 
 clean:
 	rm -rf $(OBJDIR)
