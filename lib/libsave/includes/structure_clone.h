@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure_clone.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/23 18:25:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/26 12:50:36 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <vec.h>
 # include <libft.h>
+# include <doom.h>
 
 typedef struct		s_c_ph
 {
@@ -56,7 +57,7 @@ typedef struct		s_c_portal
 	u_int32_t	to_wall;
 	u_int32_t	a;
 	u_int32_t	b;
-}					t_portal;
+}					t_c_portal;
 
 typedef struct		s_c_wall
 {
@@ -66,7 +67,7 @@ typedef struct		s_c_wall
 	u_int32_t	b;
 	//u_char		texture;
 	//u_char		transparent;
-}					t_wall;
+}					t_c_wall;
 
 typedef struct		s_c_sector
 {
@@ -76,7 +77,7 @@ typedef struct		s_c_sector
 	t_fixed		floor;
 	t_fixed		ceiling;
 	//t_fixed		luminosity;
-}					t_sector;
+}					t_c_sector;
 
 typedef struct		s_c_game
 {
