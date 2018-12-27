@@ -6,11 +6,11 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:09:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 11:32:25 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/26 19:03:53 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structure_clone.h>
+#include <load_save.h>
 
 static void	perror_quit(void)
 {
@@ -24,14 +24,21 @@ int			open_file(const char *file, int edit_mode, size_t *filesize)
 	struct stat	st;
 
 	if (edit_mode)
+	{
 		fd = open(file, O_CREAT, S_IWUSR | S_IRUSR);
+		console_log("UniverseSaver3030", "creating file...");
+	}
 	else
+	{
 		fd = open(file, O_RDONLY);
+		console_log("UniverseSaver3030", "opening file...");
+	}
 	if (fd == -1)
 		perror_quit();
 	stat(file, &st);
-	*filesize = st.st_size;
-	return (1);
+	if (filesize)
+		*filesize = st.st_size;
+	return (fd);
 }
 
 void		*dump_file(const char *file, int edit_mode, size_t *size)
@@ -43,5 +50,6 @@ void		*dump_file(const char *file, int edit_mode, size_t *size)
 		perror_quit();
 	if (read(fd, dump, *size) == -1)
 		perror_quit();
+	close(fd);
 	return (dump);
 }

@@ -6,7 +6,7 @@
 #    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2018/12/26 12:49:45 by hugo             ###   ########.fr        #
+#    Updated: 2018/12/26 17:36:46 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ CC = clang
 SRCDIR = sources
 OBJDIR = objs
 INCDIR = includes
-SRCNAM = open_file.c parse.c default.c
-INCNAM = structure_clone.h
+SRCNAM = open_file.c parse.c default.c write.c
+INCNAM = structure_clone.h load_save.h
 
 SRC=$(SRCNAM:%=$(SRCDIR)/%)
 INC=$(INCNAM:%=$(INCDIR)/%)

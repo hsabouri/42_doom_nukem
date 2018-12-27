@@ -6,12 +6,11 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/26 13:06:15 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/26 18:58:12 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structure_clone.h>
-#include <../../../includes/doom.h>
+#include <load_save.h>
 
 t_c_player	translate_player(t_player player)
 {
@@ -25,12 +24,13 @@ t_c_player	translate_player(t_player player)
 	return (res);
 }
 
-void		save(t_game game, int fd)
+void		save(const char *filename, t_game game)
 {
 	t_c_game	to_save;
+	int			fd;
 
 	to_save.magic = GAME_MAGIC;
-	to_save.player = save_player(game.player);
+	to_save.player = translate_player(game.player);
 	to_save.sectors = 0;
 	to_save.nsectors = 0;
 	to_save.walls = 0;
@@ -39,5 +39,7 @@ void		save(t_game game, int fd)
 	to_save.nportals = 0;
 	to_save.points = 0;
 	to_save.npoints = 0;
+	fd = open_file(filename, 1, NULL);
 	write(fd, &to_save, sizeof(t_c_game));
+	close(fd);
 }

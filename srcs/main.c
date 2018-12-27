@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/29 00:58:52 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/29 16:12:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
+#include <load_save.h>
 
 static t_sdl	init_sdl(void)
 {
@@ -57,6 +58,7 @@ int				main(void)
 	game.sdl = init_sdl();
 	game.events = init_events();
 	game = generate_map(game);
+	save("test.doom", game);
 	frame = 0;
 	while (game.sdl.win)
 	{
