@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/23 18:25:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/27 18:09:22 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <unistd.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <errno.h>
 
 # define LPUSH(list, elem) push(list, (t_elem *)elem)
 # define LPPUSH(list, elem) push(list, (t_pelem *)elem)
@@ -193,7 +195,8 @@ t_array			*aforeach(t_array *array, void (*f)(void *));
 t_array			*aforeach_state(t_array *array, void (*f)(void *, void *), void *state);
 t_array			*aforeachi(t_array *array, void (*f)(void *, size_t i));
 
-void			exit_error(const char *error);
+void			console_error(const char *service, const char *error);
 void			console_log(const char *service, const char *log);
+void			perror_quit(void);
 
 #endif
