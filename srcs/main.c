@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 19:03:02 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/27 18:27:39 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static t_sdl	init_sdl(void)
 	SDL_Renderer	*renderer;
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-		exit_error("Could not initialize SDL.");
+	{
+		console_error("doom_nukem", "Could not initialize SDL.");
+		exit(EXIT_FAILURE);
+	}
 	win = NULL;
 	win = SDL_CreateWindow("doom_nukem", SDL_WINDOWPOS_UNDEFINED,\
 		SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
@@ -69,6 +72,9 @@ int				main(void)
 		frame++;
 	}
 	if (!game.sdl.win)
-		exit_error(SDL_GetError());
+	{
+		console_error("doom_nukem", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
 	return (0);
 }

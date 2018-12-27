@@ -6,17 +6,11 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:09:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 19:03:53 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/27 18:22:27 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <load_save.h>
-
-static void	perror_quit(void)
-{
-	perror(C_RED "FileLoader3030" C_RESET);
-	exit(EXIT_FAILURE);
-}
 
 int			open_file(const char *file, int edit_mode, size_t *filesize)
 {
@@ -25,15 +19,15 @@ int			open_file(const char *file, int edit_mode, size_t *filesize)
 
 	if (edit_mode)
 	{
-		fd = open(file, O_CREAT, S_IWUSR | S_IRUSR);
-		console_log("UniverseSaver3030", "creating file...");
+		fd = open(file, O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
+		console_log("FileLoader3030", "creating file...");
 	}
 	else
 	{
 		fd = open(file, O_RDONLY);
-		console_log("UniverseSaver3030", "opening file...");
+		console_log("FileLoader3030", "opening file...");
 	}
-	if (fd == -1)
+	if (fd <= 0)
 		perror_quit();
 	stat(file, &st);
 	if (filesize)

@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/26 16:12:30 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/27 17:55:08 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,18 +124,14 @@ typedef struct			s_sdl
 typedef struct			s_game
 {
 	t_player	player;
-	//t_array		entities;
 	t_array		sectors;
 	t_array		walls;
 	t_array		portals;
 	t_array		points;
 	t_color		*current_buffer;
 	t_sdl		sdl;
-	//t_array		textures;
 	t_event		events; //must be last
 }						t_game;
-
-void					exit_error(const char *error);
 
 t_event					capture_events(t_event events);
 t_event					init_events(void);

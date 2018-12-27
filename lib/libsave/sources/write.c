@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/26 18:58:12 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/27 18:26:37 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ void		save(const char *filename, t_game game)
 	to_save.points = 0;
 	to_save.npoints = 0;
 	fd = open_file(filename, 1, NULL);
-	write(fd, &to_save, sizeof(t_c_game));
+	if ((write(fd, &to_save, sizeof(t_c_game))) >= 0)
+		console_log("FileLoader3030", "Successfully saved file.");
+	else
+	{
+		close(fd);
+		console_error("FileLoader3030", "File saving failed.");
+		perror_quit();
+	}
 	close(fd);
 }

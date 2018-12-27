@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 16:15:50 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/27 18:26:53 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 static void	*dump_struct(void *buf, size_t start, size_t size, size_t max)
 {
-	if (start + size < max)
+	if (start + size <= max)
 		return (buf + start);
 	else
-		exit_error("FileLoader3030: File corrupted"\
-		C_RESET\
-		" (error no. 0xbalkaNES)");
+	{
+		console_error("FileLoader3030", "File corrupted (error no. 0xbalkaNES)");
+		exit(EXIT_FAILURE);
+	}
 	return (NULL);
 }
 
 static void	verify_magic(void *t_c_struct, size_t magic, size_t index)
 {
 	if (*(size_t *)t_c_struct != magic + index)
-		exit_error("FileLoader3030: File corrupted"\
-		C_RESET\
-		" (error no. 0xbalkaMNI)");
+	{
+		console_error("FileLoader3030", "File corrupted (error no. 0xbalkaMNI)");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void		debug(t_game game)
