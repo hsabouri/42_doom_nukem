@@ -6,11 +6,11 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 11:30:16 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/26 16:10:28 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../../../includes/doom.h>
+#include <load_save.h>
 
 t_player	player_default(void)
 {

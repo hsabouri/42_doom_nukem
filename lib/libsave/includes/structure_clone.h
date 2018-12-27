@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 12:50:36 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/26 16:16:50 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <fcntl.h>
 # include <vec.h>
 # include <libft.h>
-# include <doom.h>
 
 typedef struct		s_c_ph
 {
@@ -93,7 +92,7 @@ typedef struct		s_c_game
 	size_t		npoints;
 }					t_c_game;
 
+int					open_file(const char *file, int edit_mode, size_t *filesize);
 void				*dump_file(const char *file, int edit_mode, size_t *size);
-t_player			player_default(void);
 
 #endif

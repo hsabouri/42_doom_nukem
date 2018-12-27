@@ -6,12 +6,11 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 12:51:01 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/26 16:15:50 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structure_clone.h>
-#include <../../../includes/doom.h>
+#include <load_save.h>
 
 static void	*dump_struct(void *buf, size_t start, size_t size, size_t max)
 {
