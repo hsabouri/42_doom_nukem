@@ -13,7 +13,8 @@
 #include <doom.h>
 
 
-static void		draw_horizon(float *coord, int *diff, int *inc, t_color *buff)
+static void		draw_horizon(float *coord, int *diff, int *inc, t_color *buff, \
+								t_color color)
 {
 	int		i;
 	int		cumul;
@@ -31,11 +32,12 @@ static void		draw_horizon(float *coord, int *diff, int *inc, t_color *buff)
 		}
 		if ((coord[1] > 0 && coord[1] < HEIGHT) && (coord[0] > 0 && coord[0] < \
 					WIDTH))
-			buff[(int)coord[0] + (int)coord[1] * WIDTH] = (t_color){255, 255, 255, 255};
+			buff[(int)coord[0] + (int)coord[1] * WIDTH] = color;
 	}
 }
 
-static void		draw_vertical(float *coord, int *diff, int *inc, t_color *buff)
+static void		draw_vertical(float *coord, int *diff, int *inc, t_color *buff,\
+								t_color color)
 {
 	int i;
 	int cumul;
@@ -53,15 +55,21 @@ static void		draw_vertical(float *coord, int *diff, int *inc, t_color *buff)
 		}
 		if ((coord[1] > 0 && coord[1] < HEIGHT) && (coord[0] > 0 && coord[0] < \
 					WIDTH))
-			buff[(int)coord[0] + (int)coord[1] * WIDTH] = (t_color){255, 255, 255, 255};
+			buff[(int)coord[0] + (int)coord[1] * WIDTH] = color;
 	}
 }
 
-void			bresenham(float *coord_src, float *coord_dst, t_color *buff)
+void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
 {
-	int diff[2];
-	int inc[2];
+	int		diff[2];
+	int 	inc[2];
+	float	coord_src[2];
+	float	coord_dst[2];
 
+	coord_src[0] = (float)a.x;
+	coord_src[1] = (float)a.y;
+	coord_dst[0] = (float)b.x;
+	coord_dst[1] = (float)b.y;
 	diff[0] = coord_dst[0] - coord_src[0];
 	diff[1] = coord_dst[1] - coord_src[1];
 	inc[0] = (diff[0] > 0) ? 1 : -1;
@@ -70,9 +78,9 @@ void			bresenham(float *coord_src, float *coord_dst, t_color *buff)
 	diff[1] = abs(diff[1]);
 	if ((coord_src[1] > 0 && coord_src[1] < WIDTH) && (coord_src[0] > 0 && \
 				coord_src[0] < HEIGHT))
-		buff[(int)coord_src[1] + (int)coord_src[0] * WIDTH] = (t_color){255, 255, 255, 255};
+		buff[(int)coord_src[1] + (int)coord_src[0] * WIDTH] = color;
 	if (diff[1] > diff[0])
-		draw_horizon(coord_src, diff, inc, buff);
+		draw_horizon(coord_src, diff, inc, buff, color);
 	else
-		draw_vertical(coord_src, diff, inc, buff);
+		draw_vertical(coord_src, diff, inc, buff, color);
 }
