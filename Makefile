@@ -1,4 +1,4 @@
-NAME = doom-nukem 
+NAME = doom-nukem
 LIBFT_DIR = lib/libft
 
 LIBVEC_DIR = lib/libvec
@@ -17,7 +17,8 @@ endif
 SRCS_FILES = main.c event.c console.c test_map.c\
 			graphic_polygon.c\
 			graphic_utils.c\
-			graphic_display.c
+			graphic_display.c\
+			bresenham.c
 
 # -----------------
 

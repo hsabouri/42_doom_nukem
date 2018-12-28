@@ -153,4 +153,5 @@ void					display_wall(void *wall, void *game);
 
 t_game					generate_map(t_game game);
 
+void					bresenham(float *coord_src, float *coord_dst, t_color *buff);
 #endif
