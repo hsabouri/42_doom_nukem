@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/29 16:36:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/29 16:40:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int				main(void)
 	game.sdl = init_sdl();
 	game.events = init_events();
 	game = generate_map(game);
+	save("test.doom", game);
 	frame = 0;
 	while (game.sdl.win)
 	{
