@@ -62,7 +62,7 @@ typedef struct			s_weapon
 
 typedef struct			s_player
 {
-	t_ph		ph_enabled;
+	t_ph		physic;
 	//float		life;
 	//float		armor;
 	//t_array		inventory;

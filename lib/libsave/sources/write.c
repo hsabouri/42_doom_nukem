@@ -16,11 +16,11 @@ t_c_player	translate_player(t_player player)
 {
 	t_c_player	res;
 
-	res.physic.gravity = f_from_float(player.ph_enabled.gravity);
-	res.physic.height = f_from_float(player.ph_enabled.height);
-	res.physic.pos = vec3_to_fvec3(player.ph_enabled.pos);
-	res.physic.speed_max = vec3_to_fvec3(player.ph_enabled.pos);
-	res.physic.look = vec2_to_fvec2(player.ph_enabled.look);
+	res.physic.gravity = f_from_float(player.physic.gravity);
+	res.physic.height = f_from_float(player.physic.height);
+	res.physic.pos = vec3_to_fvec3(player.physic.pos);
+	res.physic.speed_max = vec3_to_fvec3(player.physic.pos);
+	res.physic.look = vec2_to_fvec2(player.physic.look);
 	return (res);
 }
 
