@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/22 14:53:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/29 17:57:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 ** This header contains all the structures used to draw on screen in an
 ** optimized manner.
 */
+
+# include <structure.h>
 
 typedef struct		s_color
 {
@@ -58,5 +60,7 @@ typedef struct		s_order
 
 void				quad(t_color *buf, t_pix_fixed points[4], t_color color);
 t_pix_fixed			from_pix(t_pix pixel);
+
+void				display_wall(t_wall wall, t_game game, t_color *buf);
 
 #endif
