@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/20 16:10:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/29 00:58:52 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int				main(void)
 		if (game.events.quit || game.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
 		game_loop(game, frame);
+		usleep(1000000 / 60); // 60 frame per second. Be careful here...
 		frame++;
 	}
 	if (!game.sdl.win)
