@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   load_save.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/26 16:13:14 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/29 17:55:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOAD_SAVE_H
 # define LOAD_SAVE_H
 
-# include <doom.h>
+# include <structure.h>
 # include <structure_clone.h>
 
 void		save(const char *filename, t_game game);

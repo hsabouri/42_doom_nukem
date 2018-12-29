@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/29 16:40:45 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/29 17:57:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,54 +37,54 @@ static t_sdl	init_sdl(void)
 	});
 }
 
-static void		game_loop(t_game game, size_t frame)
+static void		game_loop(t_env env, size_t frame)
 {
 	t_color			*content;
 	size_t			i;
 	int				pitch;
 
 	content = NULL;
-	SDL_LockTexture(game.sdl.buf, NULL, (void **)&content, &pitch);
+	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	i = 0;
 	while (i < WIDTH * HEIGHT)
 	{
 		content[i] = NO_COLOR;
 		i++;
 	}
-	game.current_buffer = content;
+	env.current_buffer = content;
 	
 	i = 0;
-	while (i < game.nwalls)
+	while (i < env.game.nwalls)
 	{
-		display_wall(game.walls[i], game);
+		display_wall(env.game.walls[i], env.game, env.current_buffer);
 		i++;
 	}
 
-	SDL_UnlockTexture(game.sdl.buf);
-	SDL_RenderCopy(game.sdl.renderer, game.sdl.buf, NULL, NULL);
-	SDL_RenderPresent(game.sdl.renderer);
+	SDL_UnlockTexture(env.sdl.buf);
+	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
+	SDL_RenderPresent(env.sdl.renderer);
 }
 
 int				main(void)
 {
-	t_game			game;
-	size_t			frame;
+	t_env		env;
+	size_t		frame;
 
-	game.sdl = init_sdl();
-	game.events = init_events();
-	game = generate_map(game);
-	save("test.doom", game);
+	env.sdl = init_sdl();
+	env.events = init_events();
+	env.game = generate_map(env.game);
+	//save("test.doom", game);
 	frame = 0;
-	while (game.sdl.win)
+	while (env.sdl.win)
 	{
-		game.events = capture_events(game.events);
-		if (game.events.quit || game.events.keys[SDL_SCANCODE_ESCAPE])
+		env.events = capture_events(env.events);
+		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
-		game_loop(game, frame);
+		game_loop(env, frame);
 		usleep(1000000 / 60); // 60 frame per second. Be careful here...
 		frame++;
 	}
-	if (!game.sdl.win)
+	if (!env.sdl.win)
 	{
 		console_error("doom_nukem", SDL_GetError());
 		exit(EXIT_FAILURE);

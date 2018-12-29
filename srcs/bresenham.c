@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 14:34:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/12/28 18:14:21 by iporsenn         ###   ########.fr       */
+/*   Updated: 2018/12/29 18:00:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
 	inc[1] = (diff[1] > 0) ? 1 : -1;
 	diff[0] = abs(diff[0]);
 	diff[1] = abs(diff[1]);
-	if ((coord_src[1] > 0 && coord_src[1] < WIDTH) && (coord_src[0] > 0 && \
-				coord_src[0] < HEIGHT))
-		buff[(int)coord_src[1] + (int)coord_src[0] * WIDTH] = color;
 	if (diff[1] > diff[0])
 		draw_horizon(coord_src, diff, inc, buff, color);
 	else
