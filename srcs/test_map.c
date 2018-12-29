@@ -18,7 +18,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			9.81,
 			1.80,
-			(t_vec3){10, 10, 0},
+			(t_vec3){13, 3, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){8, 8, 53},
 			(t_vec2){0, 0}

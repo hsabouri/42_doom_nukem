@@ -69,6 +69,7 @@ int				main(void)
 		if (game.events.quit || game.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
 		game_loop(game, frame);
+		usleep(1000000 / 60); // 60 frame per second. Be careful here...
 		frame++;
 	}
 	if (!game.sdl.win)

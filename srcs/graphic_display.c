@@ -14,8 +14,8 @@
 
 static void	screen_space(t_vec2 a, t_vec2 b, t_color *buf)
 {
-	t_pix_fixed		pixes[4];
-	float			coef;
+	t_pix	pixes[4];
+	float	coef;
 
 	if (a.v > FLT_EPSILON || b.v > FLT_EPSILON)
 	{
@@ -31,19 +31,22 @@ static void	screen_space(t_vec2 a, t_vec2 b, t_color *buf)
 			b = (t_vec2) {coef * (b.u - a.u) + a.u, 0.001};
 		}
 		// printf("	   a: {%f,	%f}		b: {%f,	%f}\n", a.u, a.v, b.u, b.v);
-		pixes[0] = (t_pix_fixed) {
-			f_from_float(a.u * (180 / a.v) + WIDTH / 2),
-			f_from_float(HEIGHT / 2 + 180 / a.v)};
-		pixes[1] = (t_pix_fixed) {
-			f_from_float(b.u * (180 / b.v) + WIDTH / 2),
-			f_from_float(HEIGHT / 2 + 180 / b.v)};
-		pixes[2] = (t_pix_fixed) {
-			f_from_float(b.u * (180 / b.v) + WIDTH / 2),
-			f_from_float(HEIGHT / 2 - 180 / b.v)};
-		pixes[3] = (t_pix_fixed) {
-			f_from_float(a.u * (180 / a.v) + WIDTH / 2),
-			f_from_float(HEIGHT / 2 - 180 / a.v)};
-		quad(buf, pixes, RED);
+		pixes[0] = (t_pix) {
+			(int)(a.u * (180 / a.v) + WIDTH / 2),
+			(int)(HEIGHT / 2 + 180 / a.v)};
+		pixes[1] = (t_pix) {
+			(int)(b.u * (180 / b.v) + WIDTH / 2),
+			(int)(HEIGHT / 2 + 180 / b.v)};
+		pixes[2] = (t_pix) {
+			(int)(b.u * (180 / b.v) + WIDTH / 2),
+			(int)(HEIGHT / 2 - 180 / b.v)};
+		pixes[3] = (t_pix) {
+			(int)(a.u * (180 / a.v) + WIDTH / 2),
+			(int)(HEIGHT / 2 - 180 / a.v)};
+		bresenham(buf, pixes[0], pixes[1], WHITE);
+		bresenham(buf, pixes[1], pixes[2], WHITE);
+		bresenham(buf, pixes[2], pixes[3], WHITE);
+		bresenham(buf, pixes[3], pixes[0], WHITE);
 	}
 }
 
