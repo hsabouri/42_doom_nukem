@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/27 17:55:08 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/29 16:40:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,14 @@ typedef struct			s_sdl
 typedef struct			s_game
 {
 	t_player	player;
-	t_array		sectors;
-	t_array		walls;
-	t_array		portals;
-	t_array		points;
+	t_sector	*sectors;
+	size_t		nsectors;
+	t_wall		*walls;
+	size_t		nwalls;
+	t_portal	*portals;
+	size_t		nportals;
+	t_vec2		*points;
+	size_t		npoints;
 	t_color		*current_buffer;
 	t_sdl		sdl;
 	t_event		events; //must be last
@@ -136,7 +140,7 @@ typedef struct			s_game
 t_event					capture_events(t_event events);
 t_event					init_events(void);
 
-void					display_wall(void *wall, void *game);
+void					display_wall(t_wall wall, t_game game);
 
 t_game					generate_map(t_game game);
 

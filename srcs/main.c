@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/27 18:27:39 by hugo             ###   ########.fr       */
+/*   Updated: 2018/12/29 16:40:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,25 @@ static t_sdl	init_sdl(void)
 static void		game_loop(t_game game, size_t frame)
 {
 	t_color			*content;
+	size_t			i;
 	int				pitch;
 
 	content = NULL;
 	SDL_LockTexture(game.sdl.buf, NULL, (void **)&content, &pitch);
-
+	i = 0;
+	while (i < WIDTH * HEIGHT)
+	{
+		content[i] = NO_COLOR;
+		i++;
+	}
 	game.current_buffer = content;
-	aforeach_state(&game.walls, &display_wall, (void *)&game);
+	
+	i = 0;
+	while (i < game.nwalls)
+	{
+		display_wall(game.walls[i], game);
+		i++;
+	}
 
 	SDL_UnlockTexture(game.sdl.buf);
 	SDL_RenderCopy(game.sdl.renderer, game.sdl.buf, NULL, NULL);
