@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/29 16:11:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/29 16:21:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ static void	screen_space(t_vec2 a, t_vec2 b, t_color *buf)
 	}
 }
 
-void		display_wall(void *wall, void *game)
+void		display_wall(t_wall wall, t_game game)
 {
-	const t_array	points = ((t_game *)game)->points;
+	const t_vec2	*points = game.points;
 	t_vec2			a;
 	t_vec2			b;
 
-	a = *((t_vec2 *)anth(&points, ((t_wall *)wall)->a));
-	b = *((t_vec2 *)anth(&points, ((t_wall *)wall)->b));
-	a = vec2_sub(a, vec3_to_vec2(((t_game *)game)->player.ph_enabled.pos));
-	b = vec2_sub(b, vec3_to_vec2(((t_game *)game)->player.ph_enabled.pos));
-	a = vec2_rot(a, -((t_game *)game)->player.ph_enabled.look.u);
-	b = vec2_rot(b, -((t_game *)game)->player.ph_enabled.look.u);
-	screen_space(a, b, ((t_game *)game)->current_buffer);
+	a = points[wall.a];
+	b = points[wall.b];
+	a = vec2_sub(a, vec3_to_vec2(game.player.ph_enabled.pos));
+	b = vec2_sub(b, vec3_to_vec2(game.player.ph_enabled.pos));
+	a = vec2_rot(a, -game.player.ph_enabled.look.u);
+	b = vec2_rot(b, -game.player.ph_enabled.look.u);
+	screen_space(a, b, game.current_buffer);
 }
