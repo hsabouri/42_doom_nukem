@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2018/12/20 13:44:18 by hsabouri         ###   ########.fr        #
+#    Updated: 2018/12/26 11:07:13 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,9 @@ SRCNAM	= ft_atoi.c\
 		  ft_aforeach.c\
 		  ft_toupper.c\
 		  ft_memjoin.c\
-		  get_next_line.c
+		  get_next_line.c\
+		  console.c
+
 INCNAM = libft.h get_next_line.h
 
 
