@@ -58,9 +58,9 @@ void		display_wall(t_wall wall, t_game game, t_color *buf)
 
 	a = points[wall.a];
 	b = points[wall.b];
-	a = vec2_sub(a, vec3_to_vec2(game.player.ph_enabled.pos));
-	b = vec2_sub(b, vec3_to_vec2(game.player.ph_enabled.pos));
-	a = vec2_rot(a, -game.player.ph_enabled.look.u);
-	b = vec2_rot(b, -game.player.ph_enabled.look.u);
+	a = vec2_sub(a, vec3_to_vec2(game.player.physic.pos));
+	b = vec2_sub(b, vec3_to_vec2(game.player.physic.pos));
+	a = vec2_rot(a, -game.player.physic.look.u);
+	b = vec2_rot(b, -game.player.physic.look.u);
 	screen_space(a, b, buf);
 }

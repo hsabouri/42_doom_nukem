@@ -30,6 +30,7 @@
 
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
+# define SPEED_REDUCE 30
 
 typedef struct			s_event
 {
@@ -57,4 +58,13 @@ t_event					init_events(void);
 
 void					bresenham(t_color *buff, t_pix a, t_pix b, \
 						t_color color);
+
+t_game					physic(t_game game, t_event events);
+t_player				player_physic(t_player player, t_event events);
+int						collision(t_vec3 next_pos, t_game game,
+						t_player player);
+
+t_game					physic(t_game game, t_event events);
+t_player				player_physic(t_player player, t_event events);
+
 #endif

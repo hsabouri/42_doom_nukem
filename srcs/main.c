@@ -52,7 +52,7 @@ static void		game_loop(t_env env, size_t frame)
 		i++;
 	}
 	env.current_buffer = content;
-	
+
 	i = 0;
 	while (i < env.game.nwalls)
 	{
@@ -80,6 +80,7 @@ int				main(void)
 		env.events = capture_events(env.events);
 		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
+		env.game = physic(env.game, env.events);
 		game_loop(env, frame);
 		usleep(1000000 / 60); // 60 frame per second. Be careful here...
 		frame++;
