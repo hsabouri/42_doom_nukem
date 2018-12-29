@@ -3,23 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/22 14:52:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2018/12/27 18:09:22 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <unistd.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <errno.h>
 
 # define LPUSH(list, elem) push(list, (t_elem *)elem)
 # define LPPUSH(list, elem) push(list, (t_pelem *)elem)
 # define LINSERT(list, elem) insert(list, (t_elem *)elem)
 # define LPINSERT(list, elem) insert(list, (t_pelem *)elem)
+
+# define C_RED     "\x1b[31m"
+# define C_GREEN   "\x1b[32m"
+# define C_YELLOW  "\x1b[33m"
+# define C_BLUE    "\x1b[34m"
+# define C_MAGENTA "\x1b[35m"
+# define C_CYAN    "\x1b[36m"
+# define C_RESET   "\x1b[0m"
 
 typedef struct	s_elem
 {
@@ -184,5 +194,9 @@ t_array			*ainsert(t_array *array, void *element);
 t_array			*aforeach(t_array *array, void (*f)(void *));
 t_array			*aforeach_state(t_array *array, void (*f)(void *, void *), void *state);
 t_array			*aforeachi(t_array *array, void (*f)(void *, size_t i));
+
+void			console_error(const char *service, const char *error);
+void			console_log(const char *service, const char *log);
+void			perror_quit(void);
 
 #endif

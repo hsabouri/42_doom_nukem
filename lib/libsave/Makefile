@@ -6,12 +6,12 @@
 #    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2018/12/26 11:51:19 by hugo             ###   ########.fr        #
+#    Updated: 2018/12/26 17:36:46 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libvec.a
-INCLUDES = ./includes
+NAME = libsave.a
+INCLUDES = -I./includes -I../libvec/includes -I../libft/includes -I../../includes
 CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
 CFLAGS += -g -O3 -fPIC
@@ -20,22 +20,8 @@ CC = clang
 SRCDIR = sources
 OBJDIR = objs
 INCDIR = includes
-SRCNAM = float_math.c\
-		float_vec_new.c\
-		float_vec_op.c\
-		float_vec_prod.c\
-		float_vec_mult.c\
-		float_vec_rot.c\
-		float_vec_convert.c\
-		fixed_convert.c\
-		fixed_math.c\
-		fixed_vec_new.c\
-		fixed_vec_op.c\
-		fixed_vec_prod.c\
-		fixed_vec_convert.c\
-		fixed_vec_mult.c
-
-INCNAM = fixed_math.h fixed_vec.h float_math.h float_vec.h vec.h
+SRCNAM = open_file.c parse.c default.c write.c
+INCNAM = structure_clone.h load_save.h
 
 SRC=$(SRCNAM:%=$(SRCDIR)/%)
 INC=$(INCNAM:%=$(INCDIR)/%)
@@ -49,7 +35,7 @@ $(NAME): $(OBJ) $(INC)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
 	mkdir -p $(OBJDIR)
-	$(CC) -c -o $@ $< -I$(INCLUDES) $(CFLAGS)
+	$(CC) -c -o $@ $< $(INCLUDES) $(CFLAGS)
 
 clean:
 	rm -rf $(OBJDIR)
