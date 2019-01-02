@@ -3,80 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 14:34:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/12/28 18:14:21 by iporsenn         ###   ########.fr       */
+/*   Updated: 2018/12/31 11:10:03 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-static void		draw_horizon(float *coord, int *diff, int *inc, t_color *buff, \
-								t_color color)
+static void		draw_horizon(t_bres bres, t_color *buff, t_color color)
 {
 	int		i;
 	int		cumul;
 
-	cumul = diff[1] / 2;
+	cumul = bres.diff[1] >> 1;
 	i = -1;
-	while (++i < diff[1])
+	while (++i < bres.diff[1])
 	{
-		coord[1] += inc[1];
-		cumul += diff[0];
-		if (cumul >= diff[1])
+		bres.src.y += f_from_int(bres.inc[1]);
+		cumul += bres.diff[0];
+		if (cumul >= bres.diff[1])
 		{
-			cumul -= diff[1];
-			coord[0] += inc[0];
+			cumul -= bres.diff[1];
+			bres.src.x += f_from_int(bres.inc[0]);
 		}
-		if ((coord[1] > 0 && coord[1] < HEIGHT) && (coord[0] > 0 && coord[0] < \
-					WIDTH))
-			buff[(int)coord[0] + (int)coord[1] * WIDTH] = color;
+		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT &&
+		bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH)
+			buff[f_to_int(bres.src.x) + f_to_int(bres.src.y) * WIDTH] = color;
 	}
 }
 
-static void		draw_vertical(float *coord, int *diff, int *inc, t_color *buff,\
-								t_color color)
+static void		draw_vertical(t_bres bres, t_color *buff, t_color color)
 {
-	int i;
-	int cumul;
+	int		i;
+	int		cumul;
 
-	cumul = diff[0] / 2;
+	cumul = bres.diff[0] >> 1;
 	i = -1;
-	while (++i < diff[0])
+	while (++i < bres.diff[0])
 	{
-		coord[0] += inc[0];
-		cumul += diff[1];
-		if (cumul >= diff[0])
+		bres.src.x += f_from_int(bres.inc[0]);
+		cumul += bres.diff[1];
+		if (cumul >= bres.diff[0])
 		{
-			cumul -= diff[0];
-			coord[1] += inc[1];
+			cumul -= bres.diff[0];
+			bres.src.y += f_from_int(bres.inc[1]);
 		}
-		if ((coord[1] > 0 && coord[1] < HEIGHT) && (coord[0] > 0 && coord[0] < \
-					WIDTH))
-			buff[(int)coord[0] + (int)coord[1] * WIDTH] = color;
+		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT &&
+		bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH)
+			buff[f_to_int(bres.src.x) + f_to_int(bres.src.y) * WIDTH] = color;
 	}
 }
 
 void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
 {
-	int		diff[2];
-	int 	inc[2];
-	float	coord_src[2];
-	float	coord_dst[2];
+	t_bres		bres;
+	t_pix_fixed	dst;
 
-	coord_src[0] = (float)a.x;
-	coord_src[1] = (float)a.y;
-	coord_dst[0] = (float)b.x;
-	coord_dst[1] = (float)b.y;
-	diff[0] = coord_dst[0] - coord_src[0];
-	diff[1] = coord_dst[1] - coord_src[1];
-	inc[0] = (diff[0] > 0) ? 1 : -1;
-	inc[1] = (diff[1] > 0) ? 1 : -1;
-	diff[0] = abs(diff[0]);
-	diff[1] = abs(diff[1]);
-	if (diff[1] > diff[0])
-		draw_horizon(coord_src, diff, inc, buff, color);
+	bres.src.x = f_from_int(a.x);
+	bres.src.y = f_from_int(a.y);
+	dst.x = f_from_int(b.x);
+	dst.y = f_from_int(b.y);
+	bres.diff[0] = b.x - a.x;
+	bres.diff[1] = b.y - a.y;
+	bres.inc[0] = (bres.diff[0] > 0) ? 1 : -1;
+	bres.inc[1] = (bres.diff[1] > 0) ? 1 : -1;
+	bres.diff[0] = abs(bres.diff[0]);
+	bres.diff[1] = abs(bres.diff[1]);
+	if (bres.diff[1] > bres.diff[0])
+		draw_horizon(bres, buff, color);
 	else
-		draw_vertical(coord_src, diff, inc, buff, color);
+		draw_vertical(bres, buff, color);
 }

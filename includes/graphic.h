@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/29 17:57:45 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/02 18:40:44 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 # define GRAPHIC_H
 
 /*
-** This header contains all the structures used to draw on screen in an
-** optimized manner.
+** This header contains all the structures used to draw on screen in a
+** highly optimized manner.
 */
 
 # include <structure.h>
+
+# define WIDTH 640
+# define HEIGHT 480
+# define RATIO WIDTH / 2
 
 typedef struct		s_color
 {
@@ -53,14 +57,37 @@ typedef struct		s_order
 	int	right[2];
 }					t_order;
 
+typedef struct		s_bres
+{
+	t_pix_fixed	src;
+	int			diff[2];
+	int			inc[2];
+}					t_bres;
+
+/*
 # define A highest
 # define B ((highest + 1) % 4)
 # define C ((highest + 2) % 4)
 # define D ((highest + 3) % 4)
+*/
+
+/*
+** Faster modulo
+**	n % m == n & (m - 1)
+** where m is a power of 2
+** 10x faster and works with negative values of n (% can not)
+*/
+
+# define A highest
+# define B ((highest + 1) & 3)
+# define C ((highest + 2) & 3)
+# define D ((highest + 3) & 3)
 
 void				quad(t_color *buf, t_pix_fixed points[4], t_color color);
 t_pix_fixed			from_pix(t_pix pixel);
 
 void				display_wall(t_wall wall, t_game game, t_color *buf);
+void				bresenham(t_color *buff, t_pix a, t_pix b, \
+					t_color color);
 
 #endif

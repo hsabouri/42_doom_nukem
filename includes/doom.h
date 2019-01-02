@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/29 17:51:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/02 18:40:33 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include <vec.h>
 # include <graphic.h>
 
-# define WIDTH 640
-# define HEIGHT 480
 # define N_KEY 284
 
 # define MIN(a, b) ((a < b) ? a : b)
@@ -55,9 +53,6 @@ typedef struct			s_env
 
 t_event					capture_events(t_event events);
 t_event					init_events(void);
-
-void					bresenham(t_color *buff, t_pix a, t_pix b, \
-						t_color color);
 
 t_game					physic(t_game game, t_event events);
 t_player				player_physic(t_player player, t_event events);
