@@ -14,14 +14,16 @@ endif
 # SOURCE FILES (.c)
 # -----------------
 
-SRCS_FILES = main.c event.c test_map.c\
+SRCS_FILES = main.c\
+			event.c \
+			test_map.c\
 			graphic_polygon.c\
 			graphic_utils.c\
 			graphic_display.c\
 			bresenham.c\
 			physic.c\
 			player_physic.c\
-			# collision.c
+			collision.c
 
 # -----------------
 

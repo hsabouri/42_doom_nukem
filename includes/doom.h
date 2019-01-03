@@ -54,12 +54,11 @@ typedef struct			s_env
 t_event					capture_events(t_event events);
 t_event					init_events(void);
 
-t_game					physic(t_game game, t_event events);
-t_player				player_physic(t_player player, t_event events);
-int						collision(t_vec3 next_pos, t_game game,
-						t_player player);
+void					bresenham(t_color *buff, t_pix a, t_pix b, \
+						t_color color);
 
 t_game					physic(t_game game, t_event events);
-t_player				player_physic(t_player player, t_event events);
+t_player				player_physic(t_event events, t_game game);
+int						collision(t_vec3 next_pos, t_game game);
 
 #endif

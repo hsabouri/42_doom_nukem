@@ -17,6 +17,6 @@ t_game	physic(t_game game, t_event events)
 	t_game new_game;
 
 	new_game = game;
-	new_game.player = player_physic(game.player, events);
+	new_game.player = player_physic(events, game);
 	return (new_game);
 }

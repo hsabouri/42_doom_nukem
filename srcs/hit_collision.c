@@ -34,7 +34,7 @@ static void	nearest_entity(t_player player, float *enemy1, float *enemy2)
 	return (0);
 }
 
-static void	entities_collision(float *mouse, t_array entities, t_player player)
+static void	entities_collision(float *mouse, t_game game, t_player player)
 {
 	int 	i;
 	int 	nearest;
@@ -43,18 +43,18 @@ static void	entities_collision(float *mouse, t_array entities, t_player player)
 
 	i = -1;
 	nearest = 0;
-	while (i < entities.len)
+	while (i < game.nentities)
 	{
-		entity_1[0] = (collision_AABB(mouse, entities[i] == "headshot") ?
-						entities[i].physic.pos_h.u : entities[i].physic.pos.u;
-		entity_1[1] = (collision_AABB(mouse, entities[i] == "headshot") ?
-						entities[i].physic.pos_h.v : entities[i].physic.pos.v;
-		entity_1[3] = entities[i].physic.pos.u;
-		entity_1[4] = entities[i].physic.pos.v;
-		entity_2[0] = entities[nearest].physic.pos.u;
-		entity_2[1] = entities[nearest].physic.pos.v;
-		entity_2[3] = entities[nearest].physic.pos_h.u;
-		entity_2[4] = entities[nearest].physic.pos_h.v;
+		entity_1[0] = (collision_AABB(mouse, game.entities[i] == "headshot") ?
+					game.entities[i].physic.pos_h.u : entities[i].physic.pos.u;
+		entity_1[1] = (collision_AABB(mouse, game.entities[i] == "headshot") ?
+					game.entities[i].physic.pos_h.v : entities[i].physic.pos.v;
+		entity_1[3] = game.entities[i].physic.pos.u;
+		entity_1[4] = game.entities[i].physic.pos.v;
+		entity_2[0] = game.entities[nearest].physic.pos.u;
+		entity_2[1] = game.entities[nearest].physic.pos.v;
+		entity_2[3] = game.entities[nearest].physic.pos_h.u;
+		entity_2[4] = game.entities[nearest].physic.pos_h.v;
 		if (nearest_entity(player, entity_1, entity_2) == 1)
 			nearest = i;
 	}
@@ -70,5 +70,5 @@ void			check_shot(t_game game, float mouse_x, float mouse_y)
 	mouse[0] = mouse_x;
 	mouse[1] = mouse_y
 	// shot = anew(NULL, 1, sizeof(t_shot));
-	entities_collision(mouse, game.entities);
+	entities_collision(mouse, game, game.player);
 }
