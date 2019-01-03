@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/02 18:40:44 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/03 16:43:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ typedef struct		s_bres
 void				quad(t_color *buf, t_pix_fixed points[4], t_color color);
 t_pix_fixed			from_pix(t_pix pixel);
 
-void				display_wall(t_wall wall, t_game game, t_color *buf);
+void				display_sector(t_sector sector, t_game game, t_color *buf);
+
 void				bresenham(t_color *buff, t_pix a, t_pix b, \
 					t_color color);
 
