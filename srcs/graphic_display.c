@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/02 18:52:33 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/03 17:48:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	minimap(t_fvec2 a, t_fvec2 b, t_color *buf)
 	bresenham(buf, (t_pix) {100, 100}, (t_pix){100, 120}, GREEN);
 }
 
-static void	screen_space(t_fvec2 a, t_fvec2 b, t_color *buf, t_color color)
+static void	screen_space(t_fvec2 a, t_fvec2 b, t_fvec2 h, t_color *buf)
 {
 	t_pix	pixes[4];
 	t_fixed	coef;
@@ -50,19 +50,19 @@ static void	screen_space(t_fvec2 a, t_fvec2 b, t_color *buf, t_color color)
 		}
 		pixes[0] = (t_pix) {
 			WIDTH / 2 - f_to_int(f_mul(a.u, f_div(f_from_int(RATIO), a.v))),
-			HEIGHT / 2 - f_to_int(f_div(f_from_int(RATIO), a.v))
+			HEIGHT / 2 - f_to_int(f_div(f_from_int(RATIO) + h.v * 100, a.v))
 		};
 		pixes[1] = (t_pix) {
 			WIDTH / 2 - f_to_int(f_mul(b.u, f_div(f_from_int(RATIO), b.v))),
-			HEIGHT / 2 - f_to_int(f_div(f_from_int(RATIO), b.v))
+			HEIGHT / 2 - f_to_int(f_div(f_from_int(RATIO) + h.v * 100, b.v))
 		};
 		pixes[2] = (t_pix) {
 			WIDTH / 2 - f_to_int(f_mul(b.u, f_div(f_from_int(RATIO), b.v))),
-			HEIGHT / 2 + f_to_int(f_div(f_from_int(RATIO), b.v))
+			HEIGHT / 2 + f_to_int(f_div(f_from_int(RATIO) - h.u * 100, b.v))
 		};
 		pixes[3] = (t_pix) {
 			WIDTH / 2 - f_to_int(f_mul(a.u, f_div(f_from_int(RATIO), a.v))),
-			HEIGHT / 2 + f_to_int(f_div(f_from_int(RATIO), a.v))
+			HEIGHT / 2 + f_to_int(f_div(f_from_int(RATIO) - h.u * 100, a.v))
 		};
 		bresenham(buf, pixes[0], pixes[1], WHITE);
 		bresenham(buf, pixes[1], pixes[2], WHITE);
@@ -71,7 +71,7 @@ static void	screen_space(t_fvec2 a, t_fvec2 b, t_color *buf, t_color color)
 	}
 }
 
-void		display_wall(t_wall wall, t_game game, t_color *buf)
+static void		display_wall(t_wall wall, t_game game, t_vec2 h, t_color *buf)
 {
 	const t_vec2	*points = game.points;
 	t_vec2			a;
@@ -79,6 +79,7 @@ void		display_wall(t_wall wall, t_game game, t_color *buf)
 	t_fvec2			a_f;
 	t_fvec2			b_f;
 
+	h = (t_vec2) {h.u - game.player.physic.pos.z, h.v - game.player.physic.pos.z};
 	a = points[wall.a];
 	b = points[wall.b];
 	a = vec2_sub(a, vec3_to_vec2(game.player.physic.pos));
@@ -87,8 +88,20 @@ void		display_wall(t_wall wall, t_game game, t_color *buf)
 	b = vec2_rot(b, -game.player.physic.look.u);
 	a_f = vec2_to_fvec2(a);
 	b_f = vec2_to_fvec2(b);
-	if (wall.portal >= 0)
-		screen_space(a_f, b_f, buf, BLUE);
-	else
-		screen_space(a_f, b_f, buf, WHITE);
+	screen_space(a_f, b_f, vec2_to_fvec2(h), buf);
+}
+
+void			display_sector(t_sector sector, t_game game, t_color *buf)
+{
+	size_t	i;
+	t_vec2	h;
+
+	i = 0;
+	while (i < sector.number && sector.start + i < game.nwalls)
+	{
+		h.u = sector.floor;
+		h.v = sector.ceiling;
+		display_wall(game.walls[sector.start + i], game, h, buf);
+		i++;
+	}
 }

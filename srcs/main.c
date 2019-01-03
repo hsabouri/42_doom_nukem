@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/29 17:57:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:42:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void		game_loop(t_env env, size_t frame)
 	env.current_buffer = content;
 
 	i = 0;
-	while (i < env.game.nwalls)
+	while (i < env.game.nsectors)
 	{
-		display_wall(env.game.walls[i], env.game, env.current_buffer);
+		display_sector(env.game.sectors[i], env.game, env.current_buffer);
 		i++;
 	}
 
