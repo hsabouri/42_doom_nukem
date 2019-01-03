@@ -41,16 +41,15 @@ static t_vec3	set_speed(t_player player, t_event events)
 	return (new_speed);
 }
 
-static t_vec3	move_player(t_player player, t_vec3 speed)
+static t_vec3	move_player(t_vec3 speed, t_game game)
 {
 	t_vec3		next_pos;
 
-	next_pos = vec3_add(player.physic.pos, speed);
-	// if (collision(next_pos, game, player) == 1)
-	// {
-	// 	printf("True\n");
-	// }
-	return (next_pos);
+	next_pos = vec3_add(game.player.physic.pos, speed);
+	if (collision(next_pos, game) == 1)
+		return (game.player.physic.pos);
+	else
+		return (next_pos);
 }
 
 // t_vec2			teleportation(t_player player, t_portal portal1, \
@@ -63,13 +62,13 @@ static t_vec3	move_player(t_player player, t_vec3 speed)
 // 	return (next_pos);
 // }
 
-t_player		player_physic(t_player player, t_event events)
+t_player		player_physic(t_event events, t_game game)
 {
 	t_player	new_player;
 
-	new_player = player;
-	new_player.physic.speed = set_speed(player, events);
-	new_player.physic.pos = move_player(player, new_player.physic.speed);
+	new_player = game.player;
+	new_player.physic.speed = set_speed(game.player, events);
+	new_player.physic.pos = move_player(new_player.physic.speed, game);
 	new_player.physic.speed.x = 0;
 	new_player.physic.speed.y = 0;
 	new_player.physic.speed.z = 0;
