@@ -21,6 +21,8 @@ SRCS_FILES = main.c event.c test_map.c move.c\
 			bresenham.c\
 			physic.c\
 			player_physic.c\
+			game.c\
+			editor.c\
 			collision.c
 
 # -----------------
