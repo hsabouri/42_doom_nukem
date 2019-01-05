@@ -37,7 +37,7 @@ static t_vec3	set_speed(t_player player, t_event events)
 	// if (events.keys[SDL_SCANCODE_SPACE] && !events.keys[SDL_SCANCODE_LSHIFT] \
 	// 	&& CollisionFloor == 1)
 	// 	new_speed.z = (5 - FLT_EPSILON) * events.keys[SDL_SCANCODE_SPACE];
-	new_speed = vec3_rot_z(new_speed, player.physic.look.v);
+	new_speed = vec3_rot_z(new_speed, player.physic.look.u);
 	return (new_speed);
 }
 
