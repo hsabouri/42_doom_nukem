@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/05 12:15:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/05 14:36:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,19 @@ typedef struct			s_sdl
 typedef struct			s_env
 {
 	t_game		game;
+	int			toggle_editor;
+	//t_editor	editor;
 	t_color		*current_buffer;
 	t_sdl		sdl;
 	t_event		events; //must be last
 }						t_env;
 
-t_event					capture_events(t_event events);
+t_env					game_loop(t_env env, size_t frame);
+t_env					editor_loop(t_env env, size_t frame);
+
+t_event					capture_events(t_event events, t_env *env);
 t_event					init_events(void);
+t_ph					update_mouse(t_event *events, t_ph player_physic);
 
 void					bresenham(t_color *buff, t_pix a, t_pix b, \
 						t_color color);
@@ -67,7 +73,5 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 t_game					physic(t_game game, t_event events);
 t_player				player_physic(t_event events, t_game game);
 int						collision(t_vec3 next_pos, t_game game);
-
-t_ph					update_mouse(t_event *events, t_ph player_physic);
 
 #endif

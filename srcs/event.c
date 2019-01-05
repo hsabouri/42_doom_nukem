@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/05 12:21:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/05 14:35:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,13 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event)
 	return (events);
 }
 
-t_event			capture_events(t_event events)
+static void		keyactions(int scancode, t_env *env)
+{
+	if (scancode == SDL_SCANCODE_E)
+		env->toggle_editor = (env->toggle_editor) ? 0 : 1;
+}
+
+t_event			capture_events(t_event events, t_env *env)
 {
 	SDL_Event	polled_event;
 
@@ -57,7 +63,10 @@ t_event			capture_events(t_event events)
 	while (SDL_PollEvent(&polled_event))
 	{
 		if (polled_event.type == SDL_KEYDOWN)
+		{
+			keyactions(polled_event.key.keysym.scancode, env);
 			events.keys[polled_event.key.keysym.scancode] = 1;
+		}
 		else if (polled_event.type == SDL_KEYUP)
 			events.keys[polled_event.key.keysym.scancode] = 0;
 		else if (polled_event.type == SDL_QUIT)

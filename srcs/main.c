@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/05 12:07:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/05 14:35:08 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,6 @@ static t_sdl	init_sdl(void)
 	});
 }
 
-static void		game_loop(t_env env, size_t frame)
-{
-	t_color			*content;
-	size_t			i;
-	int				pitch;
-
-	content = NULL;
-	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
-	i = 0;
-	while (i < WIDTH * HEIGHT)
-	{
-		content[i] = NO_COLOR;
-		i++;
-	}
-	env.current_buffer = content;
-	i = 0;
-	while (i < env.game.nsectors)
-	{
-		display_sector(env.game.sectors[i], env.game, env.current_buffer);
-		i++;
-	}
-	SDL_UnlockTexture(env.sdl.buf);
-	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
-	SDL_RenderPresent(env.sdl.renderer);
-}
-
 int				main(void)
 {
 	t_env		env;
@@ -74,12 +48,14 @@ int				main(void)
 	frame = 0;
 	while (env.sdl.win)
 	{
-		env.events = capture_events(env.events);
+		env.events = capture_events(env.events, &env);
 		env.game.player.physic = update_mouse(&env.events, env.game.player.physic);
 		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
-		env.game = physic(env.game, env.events);
-		game_loop(env, frame);
+		if (env.toggle_editor)
+			env = editor_loop(env, frame);
+		else
+			env = game_loop(env, frame);
 		usleep(1000000 / 60); // 60 frame per second. Be careful here...
 		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
