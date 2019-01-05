@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/05 14:35:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/05 17:10:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ t_event			init_events(void)
 	size_t	key;
 
 	key = 0;
-	res.left = 0;
-	res.right = 0;
 	res.x = 0;
 	res.old_x = 0;
 	res.y = 0;
 	res.old_y = 0;
+	while (key < N_BUTTON)
+	{
+		res.mouse[key] = 0;
+		key++;
+	}
+	key = 0;
 	while (key < N_KEY)
 	{
 		res.keys[key] = 0;
@@ -35,6 +39,7 @@ t_event			init_events(void)
 
 static t_event	mouse_event(t_event events, SDL_Event polled_event)
 {
+	events.wheel = 0;
 	if (polled_event.type == SDL_MOUSEMOTION)
 	{
 		events.old_x = events.x;
@@ -43,9 +48,11 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event)
 		events.y = polled_event.motion.y;
 	}
 	else if (polled_event.type == SDL_MOUSEBUTTONDOWN)
-		events.left = 1;
+		events.mouse[polled_event.button.button] = 1;
 	else if (polled_event.type == SDL_MOUSEBUTTONUP)
-		events.left = 0;
+		events.mouse[polled_event.button.button] = 0;
+	else if (polled_event.type == SDL_MOUSEWHEEL)
+		events.wheel = (polled_event.wheel.y > 0) ? 1 : -1;
 	return (events);
 }
 

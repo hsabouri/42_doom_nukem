@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/05 14:36:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/05 16:45:31 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <graphic.h>
 
 # define N_KEY 284
+# define N_BUTTON 5
 
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
@@ -37,9 +38,9 @@ typedef struct			s_event
 	int16_t		y;
 	int16_t		old_x;
 	int16_t		old_y;
-	int8_t		left;
-	int8_t		right;
+	int16_t		wheel;
 	u_int8_t	quit;
+	u_int8_t	mouse[N_BUTTON];
 	u_int8_t	keys[N_KEY]; //must be last
 }						t_event;
 
