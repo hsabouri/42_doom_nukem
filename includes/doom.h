@@ -23,13 +23,14 @@
 # include <libft.h>
 # include <vec.h>
 # include <graphic.h>
+# include <physic.h>
 
 # define N_KEY 284
 # define N_BUTTON 5
 
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
-# define SPEED_REDUCE 30
+
 # define LOOK_SPEED 0.01
 
 typedef struct			s_event
@@ -73,6 +74,6 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 
 t_game					physic(t_game game, t_event events);
 t_player				player_physic(t_event events, t_game game);
-int						collision(t_vec3 next_pos, t_game game);
+
 
 #endif

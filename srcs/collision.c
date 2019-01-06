@@ -29,41 +29,27 @@ static int	seg_seg(t_vec3  next_pos, t_player player, t_wall wall, t_game game)
 		return (-1);
 	t = -(game.points[wall.a].u * CD.v - player.physic.pos.x * CD.v - CD.u * \
 		game.points[wall.a].v + CD.u * player.physic.pos.y) / denom.z;
-	if (t < 0 || t >= 1)
+	if (t < 0 || t > 1)
 		return (0);
 	u = -(-AB.u * game.points[wall.a].v + AB.u * player.physic.pos.y + AB.v * \
 		game.points[wall.a].u - AB.v * player.physic.pos.x) / denom.z;
-	if (u < 0 || u >= 1)
+	if (u < 0 || u > 1)
 		return (0);
 	return (1);
 }
 
-int			collision(t_vec3 next_pos, t_game game)
+int			collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall)
 {
-	int			nbr_inter;
-	size_t		cpt;
+	int		cpt;
+	int		len;
 
-	cpt = 0;
-	nbr_inter = 0;
-	while (cpt < game.nwalls)
+	cpt = game.sectors[*sector_id].start;
+	len = game.sectors[*sector_id].start + game.sectors[*sector_id].number;
+	while (cpt < len)
 	{
-		if (seg_seg(next_pos, game.player, game.walls[cpt], game) == 1)
-		{
-			nbr_inter++;
-			if (game.walls[cpt].portal != -1)
-				printf("Portal\n");
-		}
+		if (cpt != wall && seg_seg(next_pos, game.player, game.walls[cpt], game) == 1)
+			return (cpt);
 		cpt++;
-		// else if (seg_seg(next_pos, game.player, game.walls[cpt], game) == 1 && \
-		// 		game.walls[cpt].portal >= 0)
-		// {
-		// 		player.pos = teleportation(player, game.walls[cpt].portal, \
-		// 						game.walls[game.walls[cpt].to_wall].portal);
-		// 		player.id = game.walls[cpt].to_sector;
-		// 		break;
-		// }
 	}
-	if (nbr_inter != 0)
-		return (1);
-	return (0);
+	return (-1);
 }
