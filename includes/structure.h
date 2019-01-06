@@ -21,6 +21,17 @@
 # include <libft.h>
 # include <vec.h>
 
+typedef struct			s_ph
+{
+	float		gravity;
+	float		height;
+	t_vec3		pos;
+	t_vec3		speed;
+	t_vec3		speed_max;
+	t_vec2		look;
+	u_int32_t	sector_id;
+}						t_ph;
+
 /*
 typedef struct			s_texture
 {
@@ -30,16 +41,6 @@ typedef struct			s_texture
 	int			transparent;
 }						t_texture;
 */
-
-typedef struct			s_ph
-{
-	float		gravity;
-	float		height;
-	t_vec3		pos;
-	t_vec3		speed;
-	t_vec3		speed_max;
-	t_vec2		look;
-}						t_ph;
 
 /*
 typedef enum			u_wtype
@@ -93,6 +94,7 @@ typedef struct			s_sector
 {
 	u_int32_t	start;
 	u_int32_t	number;
+	size_t		sector_id;
 	float		floor;
 	float		ceiling;
 	//float		luminosity;

@@ -18,10 +18,11 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			9.81,
 			1.80,
-			(t_vec3){13, 3, 0},
+			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){8, 8, 53},
-			(t_vec2){0, 0}
+			(t_vec2){0, 0},
+			0
 		}
 	};
 
@@ -78,17 +79,17 @@ t_game	generate_map(t_game game)
 	walls[27] = ((t_wall){-1, 19, 14});
 
 	t_portal *portals = (t_portal *)malloc(4 * sizeof(t_portal));
-	portals[0] = ((t_portal){0, 1, 9, 0, 8, 9});
-	portals[1] = ((t_portal){1, 2, 3, 0, 10, 11});
-	portals[2] = ((t_portal){2, 3, 3, 0, 12, 13});
-	portals[3] = ((t_portal){3, 4, 3, 0, 14, 15});
+	portals[0] = ((t_portal){0, 1, 9, 10, 8, 9});
+	portals[1] = ((t_portal){1, 2, 13, 14, 10, 11});
+	portals[2] = ((t_portal){2, 3, 17, 18, 12, 13});
+	portals[3] = ((t_portal){3, 4, 21, 22, 14, 15});
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
-	sectors[0] = ((t_sector){0, 10, 0, 2.5});
-	sectors[1] = ((t_sector){10, 4, 0.2, 2.7});
-	sectors[2] = ((t_sector){14, 4, 0.4, 2.9});
-	sectors[3] = ((t_sector){18, 4, 0.6, 3.1});
-	sectors[4] = ((t_sector){22, 6, -30, 4.0});
+	sectors[0] = ((t_sector){0, 10, 0, 0, 2.5});
+	sectors[1] = ((t_sector){10, 4, 1, 0.2, 2.7});
+	sectors[2] = ((t_sector){14, 4, 2, 0.4, 2.9});
+	sectors[3] = ((t_sector){18, 4, 3, 0.6, 3.1});
+	sectors[4] = ((t_sector){22, 6, 4, -30, 4.0});
 
 	game.player = player;
 	game.sectors = sectors;
