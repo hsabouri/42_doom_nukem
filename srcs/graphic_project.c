@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/16 14:07:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/16 17:08:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_proj	project_wall(t_ph physic, t_fixed dis, t_sector sector[2], t_wall 
 	t_fixed		top;
 	t_fixed		bot;
 
+	dis = (dis) ? dis : 1;
 	h = (t_fvec2) {
 		f_from_float((physic.pos.z + physic.height) - sector[0].floor),
 		f_from_float((physic.pos.z + physic.height) - sector[0].ceiling)};
@@ -104,7 +105,7 @@ static t_proj	ray_sector(t_ray ray, t_sector sector, t_game game, t_color *buf)
 		}
 		++i_wall.wall_id;
 	}
-	return ((t_proj) {game.walls[0], 0, 0, 0, 0, 0});
+	return ((t_proj) {game.walls[0], 0, 0, 0, 0, 0, 0});
 }
 
 void			raycast(t_game game, size_t sector_id, t_color *buf)
