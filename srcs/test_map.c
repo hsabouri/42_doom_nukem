@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/15 15:17:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/16 19:21:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ t_game	generate_map(t_game game)
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1});
 
+	t_img *textures = (t_img *)malloc(1 * sizeof(t_img));
+	textures[0] = parse_tga("./textures/licorne.tga");
+
 	game.player = player;
 	game.sectors = sectors;
 	game.nsectors = 5;
@@ -100,5 +103,7 @@ t_game	generate_map(t_game game)
 	game.nportals = 4;
 	game.points = points;
 	game.npoints = 20;
+	game.textures = textures;
+	game.ntextures = 2;
 	return (game);
 }

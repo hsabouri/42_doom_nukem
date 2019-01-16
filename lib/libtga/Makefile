@@ -6,12 +6,12 @@
 #    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/01/16 18:51:27 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/01/16 18:05:55 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libsave.a
-INCLUDES = -I./includes -I../libvec/includes -I../libft/includes -I../../includes -I../libtga/includes
+NAME = libtga.a
+INCLUDES = -I./includes -I../libvec/includes -I../libft/includes -I../../includes -I../libsave/includes
 CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
 CFLAGS += -g -O3 -fPIC
@@ -20,8 +20,8 @@ CC = clang
 SRCDIR = sources
 OBJDIR = objs
 INCDIR = includes
-SRCNAM = open_file.c parse.c default.c write.c
-INCNAM = structure_clone.h load_save.h
+SRCNAM = tga.c
+INCNAM = tga.h
 
 SRC=$(SRCNAM:%=$(SRCDIR)/%)
 INC=$(INCNAM:%=$(INCDIR)/%)
