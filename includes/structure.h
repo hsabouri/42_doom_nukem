@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/29 17:50:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/15 14:50:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # include <float.h>
 # include <libft.h>
 # include <vec.h>
+
+typedef struct		s_color
+{
+	u_int8_t	b;
+	u_int8_t	g;
+	u_int8_t	r;
+	u_int8_t	a;
+}					t_color;
 
 typedef struct			s_ph
 {
@@ -86,6 +94,7 @@ typedef struct			s_wall
 	int32_t		portal;
 	u_int32_t	a;
 	u_int32_t	b;
+	t_color		color;
 	//u_char		texture;
 	//u_char		transparent;
 }						t_wall;
@@ -111,6 +120,7 @@ typedef struct			s_game
 	size_t		nportals;
 	t_vec2		*points;
 	size_t		npoints;
+	size_t		frame;
 }						t_game;
 
 t_game					generate_map(t_game game);
