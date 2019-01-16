@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/15 14:50:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/16 18:54:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,9 @@
 # include <float.h>
 # include <libft.h>
 # include <vec.h>
+# include <tga.h>
 
-typedef struct		s_color
-{
-	u_int8_t	b;
-	u_int8_t	g;
-	u_int8_t	r;
-	u_int8_t	a;
-}					t_color;
-
-typedef struct			s_ph
+typedef struct		s_ph
 {
 	float		gravity;
 	float		height;
@@ -38,7 +31,7 @@ typedef struct			s_ph
 	t_vec3		speed_max;
 	t_vec2		look;
 	u_int32_t	sector_id;
-}						t_ph;
+}					t_ph;
 
 /*
 typedef struct			s_texture
@@ -69,7 +62,7 @@ typedef struct			s_weapon
 }						t_weapon;
 */
 
-typedef struct			s_player
+typedef struct		s_player
 {
 	t_ph		physic;
 	//float		life;
@@ -77,9 +70,9 @@ typedef struct			s_player
 	//t_array		inventory;
 	//uint8_t		equiped;
 	//t_weapon	weapons[5];
-}						t_player;
+}					t_player;
 
-typedef struct			s_portal
+typedef struct		s_portal
 {
 	u_int32_t	from_sector;
 	u_int32_t	to_sector;
@@ -87,9 +80,9 @@ typedef struct			s_portal
 	u_int32_t	to_wall;
 	u_int32_t	a;
 	u_int32_t	b;
-}						t_portal;
+}					t_portal;
 
-typedef struct			s_wall
+typedef struct		s_wall
 {
 	int32_t		portal;
 	u_int32_t	a;
@@ -97,9 +90,9 @@ typedef struct			s_wall
 	t_color		color;
 	//u_char		texture;
 	//u_char		transparent;
-}						t_wall;
+}					t_wall;
 
-typedef struct			s_sector
+typedef struct		s_sector
 {
 	u_int32_t	start;
 	u_int32_t	number;
@@ -107,9 +100,9 @@ typedef struct			s_sector
 	float		floor;
 	float		ceiling;
 	//float		luminosity;
-}						t_sector;
+}					t_sector;
 
-typedef struct			s_game
+typedef struct		s_game
 {
 	t_player	player;
 	t_sector	*sectors;
@@ -120,9 +113,11 @@ typedef struct			s_game
 	size_t		nportals;
 	t_vec2		*points;
 	size_t		npoints;
+	t_img		*textures;
+	size_t		ntextures;
 	size_t		frame;
-}						t_game;
+}					t_game;
 
-t_game					generate_map(t_game game);
+t_game				generate_map(t_game game);
 
 #endif
