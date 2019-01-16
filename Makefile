@@ -15,9 +15,9 @@ endif
 # -----------------
 
 SRCS_FILES = main.c event.c test_map.c move.c\
-			graphic_polygon.c\
 			graphic_utils.c\
 			graphic_display.c\
+			graphic_project.c\
 			bresenham.c\
 			physic.c\
 			player_physic.c\
@@ -50,7 +50,7 @@ LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(LIBSAVE_DIR) -L$(SDL2_DIR) -lsave -
 
 all: libft libvec libsave installSDL $(NAME)
 
-ifeq ($(shell uname -s), Darwin)
+ifeq ($(shell uname -s), Darwin_o) # remove _o
 installSDL:
 	@brew install sdl2
 else

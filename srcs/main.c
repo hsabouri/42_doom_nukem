@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/05 14:35:08 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/16 13:24:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int				main(void)
 			env = editor_loop(env, frame);
 		else
 			env = game_loop(env, frame);
-		usleep(1000000 / 60); // 60 frame per second. Be careful here...
 		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
 		frame++;
