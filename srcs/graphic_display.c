@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/16 16:47:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/17 14:39:47 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static int		draw_step_ceiling(int x, t_proj proj, t_last last, t_color *buf)
 	y = (proj.top >= last.start) ? proj.top : last.start;
 	while (y < proj.ceil && y < last.end)
 	{
-		buf[x + y * WIDTH] = proj.wall.color;
+		buf[x + y * WIDTH] = get_material_pixel(proj.mat, proj, y);
 		++y;
 	}
 	res = y;
 	y = (proj.step >= 0) ? proj.step : 0;
 	while (y < proj.bot && y < last.end)
 	{
-		buf[x + y * WIDTH] = proj.wall.color;
+		buf[x + y * WIDTH] = get_material_pixel(proj.mat, proj, y);
 		++y;
 	}
 	return (res);
@@ -53,7 +53,7 @@ static int		draw_wall(int x, t_proj proj, t_last last, t_color *buf)
 	y = (proj.top >= last.start) ? proj.top : last.start;
 	while (y < proj.bot && y < last.end)
 	{
-		buf[x + y * WIDTH] = proj.wall.color;
+		buf[x + y * WIDTH] = get_material_pixel(proj.mat, proj, y);
 		++y;
 	}
 	return (y);

@@ -19,6 +19,7 @@ SRCS_FILES = main.c event.c test_map.c move.c\
 			graphic_utils.c\
 			graphic_display.c\
 			graphic_project.c\
+			graphic_material.c\
 			bresenham.c\
 			physic.c\
 			player_physic.c\

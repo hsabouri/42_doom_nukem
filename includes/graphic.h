@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/16 11:20:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/19 18:11:07 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct		s_hit
 	t_fixed		u;
 }					t_hit;
 
+# define Y_ITER_MUL 512
+
 typedef struct		s_proj
 {
 	t_wall	wall;
@@ -92,6 +94,9 @@ typedef struct		s_proj
 	int		step;
 	int		is_ceil;
 	int		ceil;
+	t_mat	mat;
+	t_fixed	y_iter;
+	t_fixed	x_col;
 }					t_proj;
 
 typedef struct		s_last
@@ -102,25 +107,6 @@ typedef struct		s_last
 	int		end;
 }					t_last;
 
-/*
-# define A highest
-# define B ((highest + 1) % 4)
-# define C ((highest + 2) % 4)
-# define D ((highest + 3) % 4)
-*/
-
-/*
-** Faster modulo
-**	n % m == n & (m - 1)
-** where m is a power of 2
-** 10x faster and works with negative values of n (% can not)
-*/
-
-# define A highest
-# define B ((highest + 1) & 3)
-# define C ((highest + 2) & 3)
-# define D ((highest + 3) & 3)
-
 void				bresenham(t_color *buff, t_pix a, t_pix b, \
 					t_color color);
 
@@ -128,5 +114,6 @@ t_vec2				player_space(t_vec2 vec, t_ph physic);
 void				raycast(t_game game, size_t sector_id, t_color *buf);
 void				render_wall(int x, t_proj proj, t_color *buf,\
 					size_t frame);
+t_color				get_material_pixel(t_mat mat, t_proj proj, int y);
 
 #endif

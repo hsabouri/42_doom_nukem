@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/16 18:54:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/17 14:35:22 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # include <libft.h>
 # include <vec.h>
 # include <tga.h>
+
+typedef struct		s_mat
+{
+	t_fvec2		pos;
+	t_fvec2		sca;
+	t_color		color;
+	t_img		*texture;
+	t_color		filter;
+	t_img		*overlay;
+}					t_mat;
 
 typedef struct		s_ph
 {
@@ -89,9 +99,7 @@ typedef struct		s_wall
 	int32_t		portal;
 	u_int32_t	a;
 	u_int32_t	b;
-	t_color		color;
-	//u_char		texture;
-	//u_char		transparent;
+	size_t		mat;
 }					t_wall;
 
 typedef struct		s_sector
@@ -115,6 +123,8 @@ typedef struct		s_game
 	size_t		nportals;
 	t_vec2		*points;
 	size_t		npoints;
+	t_mat		*materials;
+	size_t		nmaterials;
 	t_img		*textures;
 	size_t		ntextures;
 	size_t		frame;
