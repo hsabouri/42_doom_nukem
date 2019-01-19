@@ -31,7 +31,9 @@ typedef struct		s_ph
 	t_vec3		speed_max;
 	t_vec2		look;
 	u_int32_t	sector_id;
-}					t_ph;
+	char		jump;
+    char		fly;
+}						t_ph;
 
 /*
 typedef struct			s_texture

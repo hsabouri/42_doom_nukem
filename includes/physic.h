@@ -21,6 +21,8 @@
 # include <structure.h>
 
 # define SPEED_REDUCE 30
+# define MAX_JUMP 2
+# define MAX_FALL -3
 # define EPSILON 0.001
 
 typedef struct      s_tp
@@ -33,5 +35,6 @@ typedef struct      s_tp
 }                   t_tp;
 
 int				collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall);
+t_vec3	    	floor_col(t_vec3 n_pos, t_sector sector, t_vec3 speed, t_game game);
 
 #endif
