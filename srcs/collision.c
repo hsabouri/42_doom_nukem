@@ -29,7 +29,7 @@ static int	seg_seg(t_vec3  next_pos, t_player player, t_wall wall, t_game game)
 		return (-1);
 	t = -(game.points[wall.a].u * CD.v - player.physic.pos.x * CD.v - CD.u * \
 		game.points[wall.a].v + CD.u * player.physic.pos.y) / denom.z;
-	if (t < 0 || t > 1)
+	if (t < -0 || t > 1)
 		return (0);
 	u = -(-AB.u * game.points[wall.a].v + AB.u * player.physic.pos.y + AB.v * \
 		game.points[wall.a].u - AB.v * player.physic.pos.x) / denom.z;
@@ -52,4 +52,22 @@ int			collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall)
 		cpt++;
 	}
 	return (-1);
+}
+
+t_vec3		floor_col(t_vec3 n_pos, t_sector sector, t_vec3 speed, t_game game)
+{
+	t_vec3	final_speed;
+	t_vec3	final_pos;
+	float	delta;
+
+	delta = sector.floor - n_pos.z;
+	if (delta > 0)
+	{
+		final_speed.z = speed.z + delta;
+		final_speed.x = final_speed.z / speed.z * speed.x;
+		final_speed.y = final_speed.z / speed.z * speed.y;
+		final_pos = vec3_add(game.player.physic.pos, final_speed);
+		return (final_pos);
+	}
+	return (n_pos);
 }

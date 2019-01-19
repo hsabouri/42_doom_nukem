@@ -22,6 +22,8 @@ t_player	player_default(void)
 			(t_vec3) {0, 0, 0},
 			(t_vec3) {8, 8, 54},
 			(t_vec2) {0, 0},
+			0,
+			0,
 			0
 	}});
 }

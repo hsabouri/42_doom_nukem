@@ -60,6 +60,8 @@ static void		keyactions(int scancode, t_env *env)
 {
 	if (scancode == SDL_SCANCODE_E)
 		env->toggle_editor = (env->toggle_editor) ? 0 : 1;
+	if (scancode == SDL_SCANCODE_SPACE)
+		env->game.player.physic.jump = (env->game.player.physic.jump) ? 0 : 1; 
 }
 
 t_event			capture_events(t_event events, t_env *env)
