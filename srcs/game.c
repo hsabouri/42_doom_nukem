@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/15 14:51:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/17 13:58:50 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	minimap(t_game game, t_color *buf)
 		a = player_space(a, game.player.physic);
 		b = player_space(b, game.player.physic);
 		bresenham(buf, (t_pix) {(a.u + 10) * 10, (a.v + 10) * 10},
-			(t_pix) {(b.u + 10) * 10, (b.v + 10) * 10}, wall.color);
+			(t_pix) {(b.u + 10) * 10, (b.v + 10) * 10}, WHITE);
 		i++;
 	}
 	bresenham(buf, (t_pix) {100, 100}, (t_pix) {100, 110}, RED);

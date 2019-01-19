@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/16 17:08:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/19 18:46:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 
-static t_proj	project_wall(t_ph physic, t_fixed dis, t_sector sector[2], t_wall wall)
+static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game game)
 {
 	t_proj		res;
 	t_fvec2		h;
@@ -20,7 +20,8 @@ static t_proj	project_wall(t_ph physic, t_fixed dis, t_sector sector[2], t_wall 
 	t_fixed		top;
 	t_fixed		bot;
 
-	dis = (dis) ? dis : 1;
+	hit.u = (hit.u > 100) ? hit.u : 100;
+	res.wall = game.walls[hit.wall];
 	h = (t_fvec2) {
 		f_from_float((physic.pos.z + physic.height) - sector[0].floor),
 		f_from_float((physic.pos.z + physic.height) - sector[0].ceiling)};
@@ -29,20 +30,24 @@ static t_proj	project_wall(t_ph physic, t_fixed dis, t_sector sector[2], t_wall 
 		f_from_float((physic.pos.z + physic.height) - sector[1].ceiling)};
 	res.ceil = 0;
 	res.step = 0;
-	top = f_div(RATIO * h.v, dis);
-	bot = f_div(RATIO * h.u, dis);
-	if (wall.portal >= 0)
+	top = f_div(RATIO * h.v, hit.u);
+	bot = f_div(RATIO * h.u, hit.u);
+	if (res.wall.portal >= 0)
 	{
 		res.is_ceil = (h2.v - h.v > 0) ? 1 : 0;
 		res.is_step = (h2.u - h.u < 0) ? 1 : 0;
-		res.ceil = top + f_div(RATIO * (h2.v - h.v), dis);
-		res.step = bot + f_div(RATIO * (h2.u - h.u), dis);
+		res.ceil = top + f_div(RATIO * (h2.v - h.v), hit.u);
+		res.step = bot + f_div(RATIO * (h2.u - h.u), hit.u);
 		res.ceil = f_to_int((f_from_int(HEIGHT) >> 1) + res.ceil);
 		res.step = f_to_int((f_from_int(HEIGHT) >> 1) + res.step);
 	}
-	res.top = f_to_int((f_from_int(HEIGHT) >> 1) + top);
-	res.bot = f_to_int((f_from_int(HEIGHT) >> 1) + bot);
-	res.wall = wall;
+	res.top = (f_from_int(HEIGHT) >> 1) + top;
+	res.bot = (f_from_int(HEIGHT) >> 1) + bot;
+	res.y_iter = f_div(f_from_int(Y_ITER_MUL), res.bot - res.top);
+	res.x_col = hit.t;
+	res.top = f_to_int(res.top);
+	res.bot = f_to_int(res.bot);
+	res.mat = game.materials[res.wall.mat];
 	return (res);
 }
 
@@ -97,15 +102,15 @@ static t_proj	ray_sector(t_ray ray, t_sector sector, t_game game, t_color *buf)
 				ray.mask_wall = (sector.sector_id == portal.from_sector) ?
 					portal.from_wall : portal.to_wall;
 				p_sectors[1] = sector;
-				render_wall(ray.id, project_wall(game.player.physic, hit.u, p_sectors, wall), buf, game.frame);
+				render_wall(ray.id, project_wall(game.player.physic, hit, p_sectors, game), buf, game.frame);
 				return (ray_sector(ray, sector, game, buf));
 			}
 			else
-				return (project_wall(game.player.physic, hit.u, &sector, wall));
+				return (project_wall(game.player.physic, hit, &sector, game));
 		}
 		++i_wall.wall_id;
 	}
-	return ((t_proj) {game.walls[0], 0, 0, 0, 0, 0, 0});
+	return ((t_proj) {game.walls[0], 0, 0, 0, 0, 0, 0, game.materials[0], 0, 0});
 }
 
 void			raycast(t_game game, size_t sector_id, t_color *buf)
@@ -122,6 +127,7 @@ void			raycast(t_game game, size_t sector_id, t_color *buf)
 		ray.dir = vec2_to_fvec2(
 			vec2_rot((t_vec2){x_start - ray.id * (PWIDTH / WIDTH), PDIS},\
 			game.player.physic.look.u));
+		//printf("%f - %f\n", f_to_float(ray.dir.u), f_to_float(ray.dir.v));
 		proj = ray_sector(ray, sector, game, buf);
 		render_wall(ray.id, proj, buf, game.frame);
 		ray.id++;
