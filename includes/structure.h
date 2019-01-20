@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/17 14:35:22 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/20 17:18:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,21 @@
 # include <vec.h>
 # include <tga.h>
 
+typedef enum		u_mode
+{
+	TILING,
+	NO_TILING
+}					t_mode;
+
 typedef struct		s_mat
 {
-	t_fvec2		pos;
-	t_fvec2		sca;
-	t_color		color;
-	t_img		*texture;
-	t_color		filter;
-	t_img		*overlay;
+	t_fvec2			pos;
+	t_fvec2			sca;
+	t_color			color;
+	t_img			*texture;
+	t_mode			mode;
+	t_color			filter;
+	struct s_mat	*overlay;
 }					t_mat;
 
 typedef struct		s_ph
@@ -109,7 +116,7 @@ typedef struct		s_sector
 	size_t		sector_id;
 	float		floor;
 	float		ceiling;
-	//float		luminosity;
+	t_color		ambient;
 }					t_sector;
 
 typedef struct		s_game

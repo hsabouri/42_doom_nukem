@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/19 18:11:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:28:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 # include <structure.h>
 
-# define WIDTH 640
+# define WIDTH 720
 # define HEIGHT 480
-# define RATIO WIDTH / 2
 # define PWIDTH	2.5
+# define RATIO WIDTH / PWIDTH
 # define PDIS	1.0
 
 # define WHITE		(t_color){255,255,255,255}
@@ -83,7 +83,7 @@ typedef struct		s_hit
 	t_fixed		u;
 }					t_hit;
 
-# define Y_ITER_MUL 512
+# define Y_PRECISION 8
 
 typedef struct		s_proj
 {
@@ -97,6 +97,7 @@ typedef struct		s_proj
 	t_mat	mat;
 	t_fixed	y_iter;
 	t_fixed	x_col;
+	t_color	ambient;
 }					t_proj;
 
 typedef struct		s_last
@@ -114,6 +115,6 @@ t_vec2				player_space(t_vec2 vec, t_ph physic);
 void				raycast(t_game game, size_t sector_id, t_color *buf);
 void				render_wall(int x, t_proj proj, t_color *buf,\
 					size_t frame);
-t_color				get_material_pixel(t_mat mat, t_proj proj, int y);
+t_color				get_wall_pixel(t_mat mat, t_proj proj, int y);
 
 #endif
