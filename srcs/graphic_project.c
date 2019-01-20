@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/20 17:19:40 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/20 18:16:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static t_proj	ray_sector(t_ray ray, t_sector sector, t_game game, t_color *buf)
 		}
 		++i_wall.wall_id;
 	}
-	return ((t_proj) {game.walls[0], 0, 0, 0, 0, 0, 0, game.materials[0], 0, 0});
+	return ((t_proj) {game.walls[0], 0, 0, 0, 0, 0, 0, game.materials[0], 0, 0, NO_COLOR});
 }
 
 void			raycast(t_game game, size_t sector_id, t_color *buf)

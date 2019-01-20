@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/17 13:58:50 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/20 18:14:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,12 @@ static void	minimap(t_game game, t_color *buf)
 t_env		game_loop(t_env env, size_t frame)
 {
 	t_color			*content;
-	size_t			i;
 	int				pitch;
 
 	env.game = physic(env.game, env.events);
 	env.game.frame = frame;
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
-	i = 0;
-	while (i < WIDTH * HEIGHT)
-	{
-		content[i] = NO_COLOR;
-		i++;
-	}
 	env.current_buffer = content;
 	raycast(env.game, env.game.player.physic.sector_id, env.current_buffer);
 	minimap(env.game, env.current_buffer);

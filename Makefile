@@ -6,9 +6,13 @@ LIBVEC_DIR = lib/libvec
 ifeq ($(shell uname -s), Darwin)
 	SDL2_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/lib/
 	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/include/
+	SDL2_TTF_DIR = $(HOME)/.brew/Cellar/sdl2_ttf/2.0.14/lib/
+	SDL2_TTF_INC_DIR = $(HOME)/.brew/Cellar/sdl2_ttf/2.0.14/include/
 else
 	SDL2_DIR =.
 	SDL2_INC_DIR =.
+	SDL2_TTF_DIR =.
+	SDL2_TTF_INC_DIR =.
 endif
 
 # -----------------
@@ -25,6 +29,9 @@ SRCS_FILES = main.c event.c test_map.c move.c\
 			player_physic.c\
 			game.c\
 			editor.c\
+			editor_draw.c\
+			editor_selectors.c\
+			editor_legend.c\
 			collision.c
 
 # -----------------
@@ -45,16 +52,17 @@ OBJS_DIR = objs
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 CC = clang
-CFLAGS = -Wall -Wextra -Iincludes -I$(LIBFT_DIR)/includes -I$(LIBVEC_DIR)/includes -I$(SDL2_INC_DIR) -I$(LIBSAVE_DIR)/includes -I$(LIBTGA_DIR)/includes
+CFLAGS = -Wall -Wextra -Iincludes -I$(LIBFT_DIR)/includes -I$(LIBVEC_DIR)/includes -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR) -I$(LIBSAVE_DIR)/includes -I$(SDL2_TTF_INC_DIR) -I$(SDL2_TTF_INC_DIR)/SDL2 -I$(LIBTGA_DIR)/includes 
 CFLAGS += -g
 #CFLAGS += -Werror
-LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(LIBSAVE_DIR) -L$(SDL2_DIR) -L$(LIBTGA_DIR) -lsave -lm -lvec -lft -ltga -lSDL2 -lSDL2main -lpthread -ldl
+LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(LIBSAVE_DIR) -L$(SDL2_DIR) -L$(SDL2_TTF_DIR) -L$(LIBTGA_DIR) -lsave -lm -lvec -lft -ltga -lSDL2 -lSDL2main -lSDL2_ttf -lpthread -ldl
 
 all: libft libvec libsave libtga installSDL $(NAME)
 
 ifeq ($(shell uname -s), Darwin_o) # remove _o
 installSDL:
 	@brew install sdl2
+	@brew install sdl2_ttf
 else
 installSDL:
 	@echo "Can't install SDL on Linux"

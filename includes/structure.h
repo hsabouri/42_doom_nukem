@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/20 17:18:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:56:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct			s_weapon
 typedef struct		s_player
 {
 	t_ph		physic;
+	t_ph		spawn;
 	//float		life;
 	//float		armor;
 	//t_array		inventory;

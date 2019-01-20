@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/05 16:45:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:47:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 # include <sys/types.h>
 # include <math.h>
 # include <SDL2/SDL.h>
+# include <SDL2/SDL_ttf.h>
 # include <float.h>
 
 # include <libft.h>
 # include <vec.h>
 # include <graphic.h>
 # include <physic.h>
+# include <editor.h>
 
 # define N_KEY 284
 # define N_BUTTON 5
@@ -50,13 +52,14 @@ typedef struct			s_sdl
 	SDL_Window		*win;
 	SDL_Texture		*buf;
 	SDL_Renderer	*renderer;
+	TTF_Font		*font;
 }						t_sdl;
 
 typedef struct			s_env
 {
 	t_game		game;
 	int			toggle_editor;
-	//t_editor	editor;
+	t_editor	editor;
 	t_color		*current_buffer;
 	t_sdl		sdl;
 	t_event		events; //must be last
@@ -75,5 +78,16 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 t_game					physic(t_game game, t_event events);
 t_player				player_physic(t_event events, t_game game);
 
+t_pix					text(const char *str, t_pix pos, t_sdl sdl);
+
+
+/*
+** EDITOR
+*/
+
+long					select_point(t_game game, t_editor editor,\
+						t_event events);
+void					legend_text(t_sdl sdl);
+void					legend_graphic(t_color *buf);
 
 #endif
