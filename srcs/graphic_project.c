@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/19 18:46:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:19:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 	}
 	res.top = (f_from_int(HEIGHT) >> 1) + top;
 	res.bot = (f_from_int(HEIGHT) >> 1) + bot;
-	res.y_iter = f_div(f_from_int(Y_ITER_MUL), res.bot - res.top);
+	res.y_iter = f_div(f_from_int(1) << Y_PRECISION, res.bot - res.top);
 	res.x_col = hit.t;
 	res.top = f_to_int(res.top);
 	res.bot = f_to_int(res.bot);
 	res.mat = game.materials[res.wall.mat];
+	res.ambient = sector[0].ambient;
 	return (res);
 }
 

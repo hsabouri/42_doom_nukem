@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/19 18:46:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:21:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,18 @@ t_game	generate_map(t_game game)
 	points[18] = ((t_vec2){9, 5});
 	points[19] = ((t_vec2){8, 5});
 
-	t_img *textures = (t_img *)malloc(1 * sizeof(t_img));
+	t_img *textures = (t_img *)malloc(2 * sizeof(t_img));
 	textures[0] = parse_tga("./textures/wall.tga");
+	textures[1] = parse_tga("./textures/licorne.tga");
 
-	t_mat *materials = (t_mat *)malloc(2 * sizeof(t_mat));
+	t_mat *materials = (t_mat *)malloc(4 * sizeof(t_mat));
 	materials[0] = (t_mat) {
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		(t_color){0xFF, 0x00, 0x60, 0xFF},
 		NULL,
-		NO_COLOR,
+		TILING,
+		WHITE,
 		NULL
 	};
 	materials[1] = (t_mat) {
@@ -67,6 +69,25 @@ t_game	generate_map(t_game game)
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		(t_color){0xFF, 0x00, 0x06, 0xFF},
 		textures,
+		TILING,
+		(t_color) {255, 255, 255, 255},
+		NULL
+	};
+	materials[2] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		(t_color){0xFF, 0x00, 0x06, 0xFF},
+		textures,
+		TILING,
+		RED,
+		&materials[3]
+	};
+	materials[3] = (t_mat) {
+		fvec2_new(f_from_float(0.5), f_from_float(0.5)),
+		fvec2_new(f_from_int(2), f_from_int(2)),
+		NO_COLOR,
+		&textures[1],
+		NO_TILING,
 		WHITE,
 		NULL
 	};
@@ -74,7 +95,7 @@ t_game	generate_map(t_game game)
 	t_wall *walls = (t_wall *)malloc(28 * sizeof(t_wall));
 	walls[0] = ((t_wall){-1, 9, 0, 1});
 	walls[1] = ((t_wall){-1, 0, 1, 1});
-	walls[2] = ((t_wall){-1, 1, 2, 1});
+	walls[2] = ((t_wall){-1, 1, 2, 2});
 	walls[3] = ((t_wall){-1, 2, 3, 1});
 	walls[4] = ((t_wall){-1, 3, 4, 1});
 	walls[5] = ((t_wall){-1, 4, 5, 1});
@@ -108,11 +129,11 @@ t_game	generate_map(t_game game)
 	portals[3] = ((t_portal){3, 4, 21, 22, 14, 15});
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
-	sectors[0] = ((t_sector){0, 10, 0, 0, 2.50});
-	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9});
-	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3});
-	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7});
-	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1});
+	sectors[0] = ((t_sector){0, 10, 0, 0, 2.50, WHITE});
+	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9, WHITE});
+	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE});
+	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE});
+	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE});
 
 	game.player = player;
 	game.sectors = sectors;
