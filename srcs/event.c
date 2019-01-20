@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/05 17:10:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/05 18:57:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_event			init_events(void)
 
 static t_event	mouse_event(t_event events, SDL_Event polled_event)
 {
-	events.wheel = 0;
 	if (polled_event.type == SDL_MOUSEMOTION)
 	{
 		events.old_x = events.x;
@@ -68,6 +67,7 @@ t_event			capture_events(t_event events, t_env *env)
 {
 	SDL_Event	polled_event;
 
+	events.wheel = 0;
 	SDL_CaptureMouse(SDL_TRUE);
 	while (SDL_PollEvent(&polled_event))
 	{

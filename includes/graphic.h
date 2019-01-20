@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/20 17:28:51 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/20 18:15:44 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,37 @@
 # define BLACK		(t_color){0,0,0,255}
 # define NO_COLOR	(t_color){0,0,0,0}
 
-typedef struct		s_pix
+# define UBE		(t_color){125,122,188,255}
+# define LIBERTY	(t_color){100,87,166,255}
+# define TRACTOR_R	(t_color){239,20,54,255}
+# define RICH_BLACK	(t_color){0,20,33,255}
+# define MOONSTONE	(t_color){98,190,193,255}
+# define MUSTARD	(t_color){255,224,102,255}
+
+typedef struct	s_pix
 {
 	int32_t	x;
 	int32_t	y;
-}					t_pix;
+}				t_pix;
 
-typedef struct		s_pix_fixed
+typedef struct	s_pix_fixed
 {
 	t_fixed	x;
 	t_fixed	y;
-}					t_pix_fixed;
+}				t_pix_fixed;
 
-typedef struct		s_order
+typedef struct	s_order
 {
 	int	left[2];
 	int	right[2];
-}					t_order;
+}				t_order;
 
-typedef struct		s_bres
+typedef struct	s_bres
 {
 	t_pix_fixed	src;
 	int			diff[2];
 	int			inc[2];
-}					t_bres;
-
-/*
-*	RAYCASTING STRUCTURES
-*/
+}				t_bres;
 
 typedef struct		s_ray
 {
@@ -108,8 +111,9 @@ typedef struct		s_last
 	int		end;
 }					t_last;
 
-void				bresenham(t_color *buff, t_pix a, t_pix b, \
-					t_color color);
+void				background(t_color *buf, t_color color);
+void				bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
+void				draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 
 t_vec2				player_space(t_vec2 vec, t_ph physic);
 void				raycast(t_game game, size_t sector_id, t_color *buf);
