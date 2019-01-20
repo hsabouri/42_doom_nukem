@@ -54,20 +54,19 @@ int			collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall)
 	return (-1);
 }
 
-t_vec3		floor_col(t_vec3 n_pos, t_sector sector, t_vec3 speed, t_game game)
+t_vec3		floor_col(float pos_z, t_sector sector, t_vec3 speed)
 {
 	t_vec3	final_speed;
-	t_vec3	final_pos;
 	float	delta;
 
-	delta = sector.floor - n_pos.z;
+	final_speed = speed;
+	delta = sector.floor - pos_z;
 	if (delta > 0)
 	{
 		final_speed.z = speed.z + delta;
 		final_speed.x = final_speed.z / speed.z * speed.x;
 		final_speed.y = final_speed.z / speed.z * speed.y;
-		final_pos = vec3_add(game.player.physic.pos, final_speed);
-		return (final_pos);
+		return (final_speed);
 	}
-	return (n_pos);
+	return (final_speed);
 }
