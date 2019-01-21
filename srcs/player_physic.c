@@ -51,6 +51,8 @@ t_vec3		z_move(t_ph *n_physic, t_game game)
 		new_speed.z -= (new_speed.z > MAX_FALL) ? n_physic->gravity : 0;  
 	tmp = game.player.physic.pos.z + new_speed.z;
 	new_speed = floor_col(tmp, game.sectors[n_physic->sector_id], new_speed);
+	tmp = game.player.physic.pos.z + game.player.physic.height + new_speed.z;
+	new_speed = ceil_col(tmp, game.sectors[n_physic->sector_id], new_speed);
 	return (new_speed);
 }
 
@@ -58,13 +60,15 @@ static t_vec3		teleportation(t_vec3 pos, t_game game, t_tp teleport, t_ph	*n_phy
 {
 	t_vec2	diff;
 	t_vec3	next_pos;
-	float	delta;
+	float	delta_floor;
+	float	delta_ceil;
 
 	n_physic->sector_id = ((int)teleport.portal.from_wall == teleport.portal_in) ? \
 				teleport.portal.to_sector : \
 				teleport.portal.from_sector;
-	delta = game.sectors[n_physic->sector_id].floor - pos.z;
-	if (delta >= 20)
+	delta_floor = game.sectors[n_physic->sector_id].floor - pos.z;
+	delta_ceil = game.sectors[n_physic->sector_id].ceiling - (pos.z + n_physic->height);
+	if (delta_floor >= 20 || delta_ceil < -0.0001)
 	{
 		n_physic->sector_id = ((int)teleport.portal.from_wall == teleport.portal_in) ? \
 			teleport.portal.from_sector : \
@@ -78,8 +82,8 @@ static t_vec3		teleportation(t_vec3 pos, t_game game, t_tp teleport, t_ph	*n_phy
 		diff = vec2_sub(game.points[teleport.to_wall.a], game.points[teleport.from_wall.a]);
 		next_pos.x = pos.x + diff.u;
 		next_pos.y = pos.y + diff.v;
-		if (delta >= 0 && delta < 20)
-			next_pos.z = pos.z + delta;
+		if (delta_floor >= 0 && delta_floor < 20)
+			next_pos.z = pos.z + delta_floor;
 		return (next_pos);
 	}
 	return (pos);

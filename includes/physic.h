@@ -36,5 +36,6 @@ typedef struct      s_tp
 
 int				collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall);
 t_vec3	    	floor_col(float pos_z, t_sector sector, t_vec3 speed);
+t_vec3	    	ceil_col(float pos_z, t_sector sector, t_vec3 speed);
 
 #endif
