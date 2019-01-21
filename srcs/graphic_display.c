@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/21 18:59:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/21 20:02:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int		draw_floor(int x, t_proj proj, t_last last, t_color *buf)
 {
 	int y;
 
-	y = (proj.bot >= 0) ? proj.bot : 0;
+	y = (proj.bot >= last.start) ? proj.bot : last.start;
 	if (y >= last.end)
 		return (last.end);
 	while (y < last.end)
