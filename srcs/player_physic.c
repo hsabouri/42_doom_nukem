@@ -43,10 +43,7 @@ t_vec3		z_move(t_ph *n_physic, t_game game)
 	new_speed = n_physic->speed;
 	delta = game.sectors[n_physic->sector_id].floor - n_physic->pos.z;
 	if (n_physic->jump && game.sectors[n_physic->sector_id].floor - n_physic->pos.z == 0)
-	{
 			new_speed.z = 0.2;
-			n_physic->jump = 0;
-	}
 	if (delta < 0 && !n_physic->fly)
 		new_speed.z -= (new_speed.z > MAX_FALL) ? n_physic->gravity : 0;  
 	tmp = game.player.physic.pos.z + new_speed.z;
@@ -138,6 +135,10 @@ t_player		player_physic(t_event events, t_game game)
 	if ((n_player.physic.pos.z < game.sectors[n_player.physic.sector_id].floor + EPSILON && \
 		n_player.physic.pos.z > game.sectors[n_player.physic.sector_id].floor - EPSILON) || \
 		n_player.physic.fly)
+	{
 		n_player.physic.speed.z = 0;
+		n_player.physic.jump = 0;
+
+	}
 	return (n_player);
 }
