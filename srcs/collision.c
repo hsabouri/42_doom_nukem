@@ -78,9 +78,9 @@ t_vec3		ceil_col(float pos_z, t_sector sector, t_vec3 speed)
 
 	final_speed = speed;
 	delta = sector.ceiling - pos_z;
-	if (delta < -0.0001)
+	if (delta < -0.05)
 	{
-		final_speed.z = speed.z + delta;
+		final_speed.z = speed.z + (delta - 0.05);
 		final_speed.x = final_speed.z / speed.z * speed.x;
 		final_speed.y = final_speed.z / speed.z * speed.y;
 		return (final_speed);
