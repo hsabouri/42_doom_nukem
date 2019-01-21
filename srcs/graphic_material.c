@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:58:11 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/20 17:20:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/21 12:46:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static t_color		get_mat_pixel(t_mat mat, t_color ambient, t_fvec2 pix, u_int8_t 
 			res = color_filter(tex.content[x + y * tex.width], mat.filter);
 	}
 	if (mat.overlay)
-		return (color_superpose(res,
-			get_mat_pixel(*mat.overlay, ambient, pix, precision)));
+		res = color_superpose(res,\
+		get_mat_pixel(*mat.overlay, ambient, pix, precision));
 	return (color_filter(res, ambient));
 }
 
