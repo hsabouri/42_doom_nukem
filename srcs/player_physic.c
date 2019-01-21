@@ -25,6 +25,11 @@ static t_vec3	set_speed(t_player player, t_event events)
 	if (events.keys[SDL_SCANCODE_W] || events.keys[SDL_SCANCODE_S])
 		new_speed.y = (-(2 + EPSILON) * events.keys[SDL_SCANCODE_S] + \
 				(2 - EPSILON) * events.keys[SDL_SCANCODE_W]) / SPEED_REDUCE;
+	if (player.physic.fly)
+	{
+		new_speed.z = (-(0.2 + EPSILON) * events.keys[SDL_SCANCODE_LSHIFT] + \
+			(0.2 - EPSILON) * events.keys[SDL_SCANCODE_SPACE]);
+	}
 	new_speed = vec3_rot_z(new_speed, player.physic.look.u);
 	return (new_speed);
 }
@@ -37,16 +42,14 @@ t_vec3		z_move(t_ph *n_physic, t_game game)
 
 	new_speed = n_physic->speed;
 	delta = game.sectors[n_physic->sector_id].floor - n_physic->pos.z;
-	// if (n_physic->jump)
-	// {
-	// 		new_speed.z = 1;
-	// 		n_physic->jump = 0;
-	// }
-	if (delta < 0)
+	if (n_physic->jump && game.sectors[n_physic->sector_id].floor - n_physic->pos.z == 0)
+	{
+			new_speed.z = 0.2;
+			n_physic->jump = 0;
+	}
+	if (delta < 0 && !n_physic->fly)
 		new_speed.z -= (new_speed.z > MAX_FALL) ? n_physic->gravity : 0;  
-	// else if (delta == 0)
-	// 	new_speed.z = 0;
-	tmp = vec3_add(n_physic->pos, new_speed).z;
+	tmp = game.player.physic.pos.z + new_speed.z;
 	new_speed = floor_col(tmp, game.sectors[n_physic->sector_id], new_speed);
 	return (new_speed);
 }
@@ -128,8 +131,9 @@ t_player		player_physic(t_event events, t_game game)
 	n_player.physic.pos = move_player(&n_player.physic, game, events, -1);
 	n_player.physic.speed.x = 0;
 	n_player.physic.speed.y = 0;
-	if (n_player.physic.pos.z < game.sectors[n_player.physic.sector_id].floor + EPSILON && \
-		n_player.physic.pos.z > game.sectors[n_player.physic.sector_id].floor - EPSILON)
+	if ((n_player.physic.pos.z < game.sectors[n_player.physic.sector_id].floor + EPSILON && \
+		n_player.physic.pos.z > game.sectors[n_player.physic.sector_id].floor - EPSILON) || \
+		n_player.physic.fly)
 		n_player.physic.speed.z = 0;
 	return (n_player);
 }
