@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/20 13:27:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/21 18:59:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		draw_roof(int x, t_proj proj, t_last last, t_color *buf)
 	y = last.start;
 	while (y < proj.top && y < last.end)
 	{
-		buf[x + y * WIDTH] = WHITE;
+		buf[x + y * WIDTH] = get_roof_pixel(*proj.sector.ceiling_mat, proj, y);
 		++y;
 	}
 	return (y);
@@ -33,14 +33,14 @@ static int		draw_step_ceiling(int x, t_proj proj, t_last last, t_color *buf)
 	y = (proj.top >= last.start) ? proj.top : last.start;
 	while (y < proj.ceil && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_wall_pixel(proj.mat, proj, y);
+		buf[x + y * WIDTH] = get_wall_pixel(*proj.wall.mat, proj, y);
 		++y;
 	}
 	res = y;
 	y = (proj.step >= 0) ? proj.step : 0;
 	while (y < proj.bot && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_wall_pixel(proj.mat, proj, y);
+		buf[x + y * WIDTH] = get_wall_pixel(*proj.wall.mat, proj, y);
 		++y;
 	}
 	return (res);
@@ -53,7 +53,7 @@ static int		draw_wall(int x, t_proj proj, t_last last, t_color *buf)
 	y = (proj.top >= last.start) ? proj.top : last.start;
 	while (y < proj.bot && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_wall_pixel(proj.mat, proj, y);
+		buf[x + y * WIDTH] = get_wall_pixel(*proj.wall.mat, proj, y);
 		++y;
 	}
 	return (y);
@@ -68,7 +68,7 @@ static int		draw_floor(int x, t_proj proj, t_last last, t_color *buf)
 		return (last.end);
 	while (y < last.end)
 	{
-		buf[x + y * WIDTH] = (t_color) {200, 200, 200, 255};
+		buf[x + y * WIDTH] = get_floor_pixel(*proj.sector.floor_mat, proj, y);
 		++y;
 	}
 	return (y);

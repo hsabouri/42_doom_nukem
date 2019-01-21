@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fixed_vec.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:38:21 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 11:48:11 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/21 14:18:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ t_fvec3			fvec3_rot(t_fvec3 a, t_fvec3 b);
 t_fvec3			fvec3_rot_x(t_fvec3 a, t_fixed t);
 t_fvec3			fvec3_rot_y(t_fvec3 a, t_fixed t);
 t_fvec3			fvec3_rot_z(t_fvec3 a, t_fixed t);
+
+t_fvec3			fvec2_to_fvec3(t_fvec2 a);
+t_fvec2			fvec3_to_fvec2(t_fvec3 a);
 
 t_fvec2			fvec2_new(t_fixed u, t_fixed v);
 t_fvec2			fvec2_scale(t_fvec2 a, t_fixed s);

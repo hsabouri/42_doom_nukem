@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:58:11 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/21 12:46:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/21 17:58:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,38 @@ t_color				get_wall_pixel(t_mat mat, t_proj proj, int y)
 
 	pix.u = proj.x_col;
 	pix.v = (proj.y_iter * (proj.bot - y));
-	return (get_mat_pixel(mat, proj.ambient, pix, Y_PRECISION));
+	return (get_mat_pixel(mat, proj.sector.ambient, pix, Y_PRECISION));
 }
+
+t_color				get_roof_pixel(t_mat mat, t_proj proj, int y)
+{
+	const t_fixed	wratio = f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH));
+	t_fixed			z;
+	t_fvec2			pix;
+
+	z = f_from_int(HEIGHT / 2 - y) / HEIGHT;
+	if (z == 0)
+		return (NO_COLOR);
+	pix = fvec2_scale(proj.ray,\
+		f_div(f_div(-proj.h.v, wratio), z));
+	pix.u += proj.pos.x;
+	pix.v += proj.pos.y;
+	return (get_mat_pixel(mat, proj.sector.ambient, pix, 0));
+}
+
+t_color				get_floor_pixel(t_mat mat, t_proj proj, int y)
+{
+	const t_fixed	wratio = f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH));
+	t_fixed			z;
+	t_fvec2			pix;
+
+	z = f_from_int(HEIGHT / 2 - y) / HEIGHT;
+	if (z == 0)
+		return (NO_COLOR);
+	pix = fvec2_scale(proj.ray,\
+		f_div(f_div(-proj.h.u, wratio), z));
+	pix.u += proj.pos.x;
+	pix.v += proj.pos.y;
+	return (get_mat_pixel(mat, proj.sector.ambient, pix, 0));
+}
+

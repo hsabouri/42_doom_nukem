@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 11:22:10 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/16 18:54:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/21 16:00:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ t_img			parse_tga(const char *path)
 	res.content = tga_expend(raw,\
 	((short *)header)[T_WIDTH], ((short *)header)[T_HEIGHT], header[BPP]);
 	return ((t_img) {
-		((short *)header)[T_HEIGHT],
 		((short *)header)[T_WIDTH],
+		((short *)header)[T_HEIGHT],
 		res.content
 	});
 }

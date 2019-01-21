@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fixed_vec_convert.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:47:13 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/26 17:46:28 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/21 14:19:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,14 @@ inline t_fvec2			vec2_to_fvec2(t_vec2 vec)
 		f_from_float(vec.u),
 		f_from_float(vec.v)
 	});
+}
+
+inline t_fvec2			fvec3_to_fvec2(t_fvec3 a)
+{
+	return ((t_fvec2) {a.x, a.y});
+}
+
+inline t_fvec3			fvec2_to_fvec3(t_fvec2 a)
+{
+	return ((t_fvec3) {a.u, a.v, 0});
 }

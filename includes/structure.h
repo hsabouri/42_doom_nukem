@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/20 17:56:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/21 18:56:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct		s_wall
 	int32_t		portal;
 	u_int32_t	a;
 	u_int32_t	b;
-	size_t		mat;
+	t_mat		*mat;
 }					t_wall;
 
 typedef struct		s_sector
@@ -118,6 +118,8 @@ typedef struct		s_sector
 	float		floor;
 	float		ceiling;
 	t_color		ambient;
+	t_mat		*ceiling_mat;
+	t_mat		*floor_mat;
 }					t_sector;
 
 typedef struct		s_game
