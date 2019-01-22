@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:58:11 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/21 17:58:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/22 15:02:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 
-static t_color		color_filter(t_color a, t_color filter)
+static t_color	color_filter(t_color a, t_color filter)
 {
 	return ((t_color) {
 		.a = (a.a * filter.a) >> 8,
@@ -22,7 +22,7 @@ static t_color		color_filter(t_color a, t_color filter)
 	});
 }
 
-static t_color		color_superpose(t_color a, t_color b)
+static t_color	color_superpose(t_color a, t_color b)
 {
 	if (b.a)
 		return (b);
@@ -30,7 +30,8 @@ static t_color		color_superpose(t_color a, t_color b)
 		return (a);
 }
 
-static t_color		get_mat_pixel(t_mat mat, t_color ambient, t_fvec2 pix, u_int8_t precision)
+static t_color	get_mat_pixel(t_mat mat, t_tex_proj tex_proj, t_fvec2 pix,\
+				u_int8_t precision)
 {
 	int		x;
 	int		y;
@@ -57,48 +58,47 @@ static t_color		get_mat_pixel(t_mat mat, t_color ambient, t_fvec2 pix, u_int8_t 
 	}
 	if (mat.overlay)
 		res = color_superpose(res,\
-		get_mat_pixel(*mat.overlay, ambient, pix, precision));
-	return (color_filter(res, ambient));
+		get_mat_pixel(*mat.overlay, tex_proj, pix, precision));
+	return (color_filter(res, tex_proj.sector.ambient));
 }
 
-t_color				get_wall_pixel(t_mat mat, t_proj proj, int y)
+t_color			get_wall_pixel(t_wall_proj w_proj, t_tex_proj tex_proj, int y)
 {
 	t_fvec2 pix;
 
-	pix.u = proj.x_col;
-	pix.v = (proj.y_iter * (proj.bot - y));
-	return (get_mat_pixel(mat, proj.sector.ambient, pix, Y_PRECISION));
+	pix.u = w_proj.tex_x;
+	pix.v = (w_proj.tex_y_iter * y);
+	return (get_mat_pixel(w_proj.wall, tex_proj, pix, Y_PRECISION));
 }
 
-t_color				get_roof_pixel(t_mat mat, t_proj proj, int y)
+t_color			get_roof_pixel(t_h_proj h_proj, t_tex_proj tex_proj, int y)
 {
-	const t_fixed	wratio = f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH));
-	t_fixed			z;
-	t_fvec2			pix;
+	t_fixed	wr;
+	t_fixed	z;
+	t_fvec2	pix;
 
+	wr = f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH));
 	z = f_from_int(HEIGHT / 2 - y) / HEIGHT;
 	if (z == 0)
 		return (NO_COLOR);
-	pix = fvec2_scale(proj.ray,\
-		f_div(f_div(-proj.h.v, wratio), z));
-	pix.u += proj.pos.x;
-	pix.v += proj.pos.y;
-	return (get_mat_pixel(mat, proj.sector.ambient, pix, 0));
+	pix = fvec2_scale(h_proj.ray,\
+		f_div(f_div(-h_proj.h.v, wr), z));
+	pix = fvec2_add(pix, h_proj.pos);
+	return (get_mat_pixel(h_proj.ceiling, tex_proj, pix, 0));
 }
 
-t_color				get_floor_pixel(t_mat mat, t_proj proj, int y)
+t_color			get_floor_pixel(t_h_proj h_proj, t_tex_proj tex_proj, int y)
 {
-	const t_fixed	wratio = f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH));
-	t_fixed			z;
-	t_fvec2			pix;
+	t_fixed	wr;
+	t_fixed	z;
+	t_fvec2	pix;
 
+	wr = f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH));
 	z = f_from_int(HEIGHT / 2 - y) / HEIGHT;
 	if (z == 0)
 		return (NO_COLOR);
-	pix = fvec2_scale(proj.ray,\
-		f_div(f_div(-proj.h.u, wratio), z));
-	pix.u += proj.pos.x;
-	pix.v += proj.pos.y;
-	return (get_mat_pixel(mat, proj.sector.ambient, pix, 0));
+	pix = fvec2_scale(h_proj.ray,\
+		f_div(f_div(-h_proj.h.u, wr), z));
+	pix = fvec2_add(pix, h_proj.pos);
+	return (get_mat_pixel(h_proj.floor, tex_proj, pix, 0));
 }
-

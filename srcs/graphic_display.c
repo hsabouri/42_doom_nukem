@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/21 20:02:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/22 15:25:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		draw_roof(int x, t_proj proj, t_last last, t_color *buf)
 	y = last.start;
 	while (y < proj.top && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_roof_pixel(*proj.sector.ceiling_mat, proj, y);
+		buf[x + y * WIDTH] = get_roof_pixel(proj.h_proj, proj.tex_proj, y);
 		++y;
 	}
 	return (y);
@@ -33,14 +33,16 @@ static int		draw_step_ceiling(int x, t_proj proj, t_last last, t_color *buf)
 	y = (proj.top >= last.start) ? proj.top : last.start;
 	while (y < proj.ceil && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_wall_pixel(*proj.wall.mat, proj, y);
+		buf[x + y * WIDTH] =\
+			get_wall_pixel(proj.w_proj, proj.tex_proj, proj.bot - y);
 		++y;
 	}
 	res = y;
 	y = (proj.step >= 0) ? proj.step : 0;
 	while (y < proj.bot && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_wall_pixel(*proj.wall.mat, proj, y);
+		buf[x + y * WIDTH] =\
+			get_wall_pixel(proj.w_proj, proj.tex_proj, proj.bot - y);
 		++y;
 	}
 	return (res);
@@ -53,7 +55,8 @@ static int		draw_wall(int x, t_proj proj, t_last last, t_color *buf)
 	y = (proj.top >= last.start) ? proj.top : last.start;
 	while (y < proj.bot && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_wall_pixel(*proj.wall.mat, proj, y);
+		buf[x + y * WIDTH] =\
+			get_wall_pixel(proj.w_proj, proj.tex_proj, proj.bot - y);
 		++y;
 	}
 	return (y);
@@ -68,7 +71,7 @@ static int		draw_floor(int x, t_proj proj, t_last last, t_color *buf)
 		return (last.end);
 	while (y < last.end)
 	{
-		buf[x + y * WIDTH] = get_floor_pixel(*proj.sector.floor_mat, proj, y);
+		buf[x + y * WIDTH] = get_floor_pixel(proj.h_proj, proj.tex_proj, y);
 		++y;
 	}
 	return (y);
@@ -81,7 +84,7 @@ void			render_wall(int x, t_proj proj, t_color *buf, size_t frame)
 	if (x != last.x || frame != last.frame)
 		last = (t_last) {frame, x, 0, HEIGHT};
 	last.start = draw_roof(x, proj, last, buf);
-	if (proj.wall.portal == -1)
+	if (proj.tex_proj.wall.portal == -1)
 		last.start = draw_wall(x, proj, last, buf);
 	else
 		last.start = draw_step_ceiling(x, proj, last, buf);

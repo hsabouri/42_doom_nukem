@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/21 19:00:16 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/22 15:16:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 	t_fixed		bot;
 
 	hit.u = (hit.u > 100) ? hit.u : 100;
-	res.wall = game.walls[hit.wall];
+	res.tex_proj.wall = game.walls[hit.wall];
 	h = (t_fvec2) {
 		f_from_float((physic.pos.z + physic.height) - sector[0].floor),
 		f_from_float((physic.pos.z + physic.height) - sector[0].ceiling)};
@@ -32,7 +32,7 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 	res.step = 0;
 	top = f_div(RATIO * h.v, hit.u);
 	bot = f_div(RATIO * h.u, hit.u);
-	if (res.wall.portal >= 0)
+	if (res.tex_proj.wall.portal >= 0)
 	{
 		res.is_ceil = (h2.v - h.v > 0) ? 1 : 0;
 		res.is_step = (h2.u - h.u < 0) ? 1 : 0;
@@ -43,14 +43,17 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 	}
 	res.top = (f_from_int(HEIGHT) >> 1) + top;
 	res.bot = (f_from_int(HEIGHT) >> 1) + bot;
-	res.y_iter = f_div(f_from_int(1) << Y_PRECISION, res.bot - res.top);
-	res.x_col = hit.t;
+	res.w_proj.tex_y_iter = f_div(f_from_int(1) << Y_PRECISION, res.bot - res.top);
+	res.w_proj.tex_x = hit.t;
 	res.top = f_to_int(res.top);
 	res.bot = f_to_int(res.bot);
-	res.sector = sector[0];
-	res.ray = hit.ray;
-	res.pos = vec3_to_fvec3(physic.pos);
-	res.h = h;
+	res.tex_proj.sector = sector[0];
+	res.h_proj.ray = hit.ray;
+	res.h_proj.pos = vec2_to_fvec2(vec3_to_vec2(physic.pos));
+	res.h_proj.h = h;
+	res.h_proj.ceiling = *sector[0].ceiling_mat;
+	res.h_proj.floor = *sector[0].floor_mat;
+	res.w_proj.wall = *res.tex_proj.wall.mat;
 	return (res);
 }
 
@@ -114,8 +117,7 @@ static t_proj	ray_sector(t_ray ray, t_sector sector, t_game game, t_color *buf)
 		++i_wall.wall_id;
 	}
 	return ((t_proj) {
-		game.walls[sector.start],
-		sector
+		.tex_proj = (t_tex_proj) {sector, game.walls[sector.start]}
 	});
 }
 /*
