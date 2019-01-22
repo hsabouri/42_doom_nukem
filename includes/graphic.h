@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/21 19:12:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/22 14:54:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,39 @@ typedef struct	s_hit
 
 # define Y_PRECISION 8
 
+typedef struct	s_wall_proj
+{
+	t_fixed		tex_x;
+	t_fixed		tex_y_iter;
+	t_mat		wall;
+}				t_wall_proj;
+
+typedef struct	s_h_proj
+{
+	t_fvec2		ray;
+	t_fvec2		pos;
+	t_fvec2		h;
+	t_mat		floor;
+	t_mat		ceiling;
+}				t_h_proj;
+
+typedef struct	s_tex_proj
+{
+	t_sector	sector;
+	t_wall		wall;
+}				t_tex_proj;
+
 typedef struct	s_proj
 {
-	t_wall		wall;
-	t_sector	sector;
-	t_fvec2		ray;
-	t_fvec3		pos;
-	t_fvec2		h;
 	int			top;
 	int			bot;
 	int			is_step;
 	int			step;
 	int			is_ceil;
 	int			ceil;
-	t_fixed		y_iter;
-	t_fixed		x_col;
+	t_wall_proj	w_proj;
+	t_h_proj	h_proj;
+	t_tex_proj	tex_proj;
 }				t_proj;
 
 typedef struct	s_last
@@ -121,8 +139,9 @@ void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 t_vec2			player_space(t_vec2 vec, t_ph physic);
 void			raycast(t_game game, size_t sector_id, t_color *buf);
 void			render_wall(int x, t_proj proj, t_color *buf, size_t frame);
-t_color			get_wall_pixel(t_mat mat, t_proj proj, int y);
-t_color			get_roof_pixel(t_mat mat, t_proj proj, int y);
-t_color			get_floor_pixel(t_mat mat, t_proj proj, int y);
+
+t_color			get_floor_pixel(t_h_proj w_proj, t_tex_proj tex_proj, int y);
+t_color			get_roof_pixel(t_h_proj w_proj, t_tex_proj tex_proj, int y);
+t_color			get_wall_pixel(t_wall_proj w_proj, t_tex_proj tex_proj, int y);
 
 #endif
