@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/05 18:57:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 14:58:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event)
 static void		keyactions(int scancode, t_env *env)
 {
 	if (scancode == SDL_SCANCODE_E)
+	{
 		env->toggle_editor = (env->toggle_editor) ? 0 : 1;
+		SDL_SetRelativeMouseMode((env->toggle_editor) ? SDL_FALSE : SDL_TRUE);
+	}
 	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.physic.fly)
-		env->game.player.physic.jump = 1; 
+		env->game.player.physic.jump = 1;
 	if (scancode == SDL_SCANCODE_F)
 		env->game.player.physic.fly = (env->game.player.physic.fly) ? 0 : 1;
 }
