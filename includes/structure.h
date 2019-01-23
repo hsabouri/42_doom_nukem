@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/21 18:56:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:28:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct		s_ph
 	t_vec3		pos;
 	t_vec3		speed;
 	t_vec3		speed_max;
-	t_vec2		look;
+	float		look_h;
+	t_fixed		look_v;
 	u_int32_t	sector_id;
 	char		jump;
     char		fly;

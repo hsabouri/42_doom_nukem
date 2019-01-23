@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/22 15:16:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:43:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 		f_from_float((physic.pos.z + physic.height) - sector[1].ceiling)};
 	res.ceil = 0;
 	res.step = 0;
-	top = f_div(RATIO * h.v, hit.u);
-	bot = f_div(RATIO * h.u, hit.u);
-	if (res.tex_proj.wall.portal >= 0)
-	{
+	top = f_div(RATIO * h.v, hit.u) + physic.look_v * 100;
+	bot = f_div(RATIO * h.u, hit.u) + physic.look_v * 100;
+	if (res.tex_proj.wall.portal >= 0) {
 		res.is_ceil = (h2.v - h.v > 0) ? 1 : 0;
 		res.is_step = (h2.u - h.u < 0) ? 1 : 0;
 		res.ceil = top + f_div(RATIO * (h2.v - h.v), hit.u);
@@ -49,6 +48,7 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 	res.bot = f_to_int(res.bot);
 	res.tex_proj.sector = sector[0];
 	res.h_proj.ray = hit.ray;
+	res.h_proj.z_axis = physic.look_v;
 	res.h_proj.pos = vec2_to_fvec2(vec3_to_vec2(physic.pos));
 	res.h_proj.h = h;
 	res.h_proj.ceiling = *sector[0].ceiling_mat;
@@ -120,25 +120,6 @@ static t_proj	ray_sector(t_ray ray, t_sector sector, t_game game, t_color *buf)
 		.tex_proj = (t_tex_proj) {sector, game.walls[sector.start]}
 	});
 }
-/*
-typedef struct	s_proj
-{
-	t_wall		wall;
-	t_sector	sector;
-	t_fvec2		ray;
-	t_fvec3		pos;
-	t_fvec2		h;
-	int			top;
-	int			bot;
-	int			is_step;
-	int			step;
-	int			is_ceil;
-	int			ceil;
-	t_mat		mat;
-	t_fixed		y_iter;
-	t_fixed		x_col;
-}				t_proj;
-*/
 
 void			raycast(t_game game, size_t sector_id, t_color *buf)
 {
@@ -153,7 +134,7 @@ void			raycast(t_game game, size_t sector_id, t_color *buf)
 	{
 		ray.dir = vec2_to_fvec2(
 			vec2_rot((t_vec2){x_start - ray.id * (PWIDTH / WIDTH), PDIS},\
-			game.player.physic.look.u));
+			game.player.physic.look_h));
 		proj = ray_sector(ray, sector, game, buf);
 		render_wall(ray.id, proj, buf, game.frame);
 		ray.id++;

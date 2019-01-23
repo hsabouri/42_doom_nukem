@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/27 18:26:53 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/23 13:34:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void	verify_magic(void *t_c_struct, size_t magic, size_t index)
 
 void		debug(t_game game)
 {
-	printf("player.ph.gravity: %f\n", game.player.physic.gravity);
-	printf("player.ph.height: %f\n", game.player.physic.height);
-	printf("player.ph.pos: {%f, %f, %f}\n", game.player.physic.pos.x, game.player.physic.pos.y, game.player.physic.pos.z);
-	printf("player.ph.speed: {%f, %f, %f}\n", game.player.physic.pos.x, game.player.physic.pos.y, game.player.physic.pos.z);
-	printf("player.ph.speed_max: {%f, %f, %f}\n", game.player.physic.speed_max.x, game.player.physic.speed_max.y, game.player.physic.speed_max.z);
-	printf("player.ph.look: {%f, %f}\n", game.player.physic.look.u, game.player.physic.look.v);
+	//printf("player.ph.gravity: %f\n", game.player.physic.gravity);
+	//printf("player.ph.height: %f\n", game.player.physic.height);
+	//printf("player.ph.pos: {%f, %f, %f}\n", game.player.physic.pos.x, game.player.physic.pos.y, game.player.physic.pos.z);
+	//printf("player.ph.speed: {%f, %f, %f}\n", game.player.physic.pos.x, game.player.physic.pos.y, game.player.physic.pos.z);
+	//printf("player.ph.speed_max: {%f, %f, %f}\n", game.player.physic.speed_max.x, game.player.physic.speed_max.y, game.player.physic.speed_max.z);
+	//printf("player.ph.look: {%f, %f}\n", game.player.physic.look.u, game.player.physic.look.v);
 }
 
 t_player	parse_player(t_c_player player)
@@ -52,9 +52,11 @@ t_player	parse_player(t_c_player player)
 	res.physic.height = f_to_float(player.physic.height);
 	res.physic.pos = fvec3_to_vec3(player.physic.pos);
 	res.physic.speed_max = fvec3_to_vec3(player.physic.speed_max);
+	/*
 	res.physic.look = fvec2_to_vec2(player.physic.look);
 	if (res.physic.look.v < M_PI / 2 && res.physic.look.v > -M_PI / 2)
 		res.physic.look.v = 0;
+		*/
 	return (res);
 }
 

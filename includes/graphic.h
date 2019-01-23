@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/22 14:54:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 14:02:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define HEIGHT 480
 # define PWIDTH	2.5
 # define RATIO WIDTH / PWIDTH
-# define PDIS 1.0
+# define PDIS 0.8
 
 # define WHITE		(t_color){255,255,255,255}
 # define RED		(t_color){255,0,0,255}
@@ -99,6 +99,7 @@ typedef struct	s_wall_proj
 typedef struct	s_h_proj
 {
 	t_fvec2		ray;
+	t_fixed		z_axis;
 	t_fvec2		pos;
 	t_fvec2		h;
 	t_mat		floor;

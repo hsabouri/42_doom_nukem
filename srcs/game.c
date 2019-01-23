@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/20 18:14:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:36:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec2		player_space(t_vec2 vec, t_ph physic)
 {
-	return (vec2_rot(vec2_sub(vec, vec3_to_vec2(physic.pos)), -physic.look.u));
+	return (vec2_rot(vec2_sub(vec, vec3_to_vec2(physic.pos)), -physic.look_h));
 }
 
 static void	minimap(t_game game, t_color *buf)
