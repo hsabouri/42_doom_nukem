@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/27 18:26:37 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/23 13:33:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_c_player	translate_player(t_player player)
 	res.physic.height = f_from_float(player.physic.height);
 	res.physic.pos = vec3_to_fvec3(player.physic.pos);
 	res.physic.speed_max = vec3_to_fvec3(player.physic.pos);
-	res.physic.look = vec2_to_fvec2(player.physic.look);
+	//res.physic.look = vec2_to_fvec2(player.physic.look);
 	return (res);
 }
 

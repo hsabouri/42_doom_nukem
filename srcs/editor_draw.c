@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/07 11:12:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:36:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_color color)
 	t_vec2	points[2];
 
 	points[0] = screen_space(vec3_to_vec2(ph.pos), editor);
-	points[1] = vec2_add(vec2_rot((t_vec2) {0, 20}, ph.look.u), points[0]);
+	points[1] = vec2_add(vec2_rot((t_vec2) {0, 20}, ph.look_h), points[0]);
 	draw_point(vec2_to_fvec2(points[0]), ENTITY_SIZE, buf, color);
 	bresenham(buf, (t_pix) {points[0].u, points[0].v},
 		(t_pix) {points[1].u, points[1].v}, color);

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/22 15:25:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:47:12 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		draw_roof(int x, t_proj proj, t_last last, t_color *buf)
 	y = last.start;
 	while (y < proj.top && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_roof_pixel(proj.h_proj, proj.tex_proj, y);
+		buf[x + y * WIDTH] = get_roof_pixel(proj.h_proj, proj.tex_proj, y - f_to_int(proj.h_proj.z_axis * 100));
 		++y;
 	}
 	return (y);
@@ -71,7 +71,7 @@ static int		draw_floor(int x, t_proj proj, t_last last, t_color *buf)
 		return (last.end);
 	while (y < last.end)
 	{
-		buf[x + y * WIDTH] = get_floor_pixel(proj.h_proj, proj.tex_proj, y);
+		buf[x + y * WIDTH] = get_floor_pixel(proj.h_proj, proj.tex_proj, y - f_to_int(proj.h_proj.z_axis * 100));
 		++y;
 	}
 	return (y);

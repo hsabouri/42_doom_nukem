@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/20 17:58:08 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:54:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static t_sdl	init_sdl(void)
 	buf = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32,\
 		SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 	font = init_font();
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	return ((t_sdl) {win, buf, renderer, font});
 }
 

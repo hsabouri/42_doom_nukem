@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_physic.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:52:28 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/12/21 17:52:30 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:36:12 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_vec3	set_speed(t_player player, t_event events)
 		new_speed.z = (-(0.2 + EPSILON) * events.keys[SDL_SCANCODE_LSHIFT] + \
 			(0.2 - EPSILON) * events.keys[SDL_SCANCODE_SPACE]);
 	}
-	new_speed = vec3_rot_z(new_speed, player.physic.look.u);
+	new_speed = vec3_rot_z(new_speed, player.physic.look_h);
 	return (new_speed);
 }
 
