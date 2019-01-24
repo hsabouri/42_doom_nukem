@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:29:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/08 15:13:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 15:21:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ inline t_editor		init_editor(void)
 		.zoom = 25.0,
 		.offset = (t_vec2) {0.0, 0.0},
 		.sel_point = -1,
-		.components = NULL});
+		.components = NULL,
+		.enabled = 1});
 }
 
 static t_vec2		move_point(t_event events, t_editor editor)
