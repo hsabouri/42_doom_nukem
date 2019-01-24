@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/07 11:07:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/24 14:34:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # define POINT_SIZE 4
 # define ENTITY_SIZE 3
 
+typedef enum	e_part
+{
+	PART_FLOOR,
+	PART_CEILING
+}				t_part;
+
 typedef struct	s_component
 {
 	char	hover;
@@ -32,6 +38,7 @@ typedef struct	s_component
 
 typedef struct	s_editor
 {
+	int			enabled;
 	float		zoom;
 	t_vec2		offset;
 	long		sel_point;
@@ -42,5 +49,8 @@ typedef struct	s_editor
 t_editor		init_editor(void);
 
 void			draw_map(t_game game, t_editor editor, t_color *buf);
+
+t_sector		sector_height(t_game game, t_sector sector, t_part part,\
+				float add);
 
 #endif

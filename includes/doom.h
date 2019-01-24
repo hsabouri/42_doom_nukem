@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/20 17:47:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/24 14:59:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ long					select_point(t_game game, t_editor editor,\
 						t_event events);
 void					legend_text(t_sdl sdl);
 void					legend_graphic(t_color *buf);
+t_game					game_editing(t_game game, t_event events,\
+						t_player player);
 
 #endif

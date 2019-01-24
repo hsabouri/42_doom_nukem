@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:36:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/24 15:01:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_env		game_loop(t_env env, size_t frame)
 	t_color			*content;
 	int				pitch;
 
+	if (env.editor.enabled)
+		env.game = game_editing(env.game, env.events, env.game.player);
 	env.game = physic(env.game, env.events);
 	env.game.frame = frame;
 	content = NULL;

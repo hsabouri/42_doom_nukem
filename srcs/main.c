@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:54:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/23 17:55:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int				main(void)
 	while (env.sdl.win)
 	{
 		env.events = capture_events(env.events, &env);
-		env.game.player.physic = update_mouse(&env.events, env.game.player.physic);
+		if (!env.toggle_editor)
+			env.game.player.physic = update_mouse(&env.events, env.game.player.physic);
 		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
 		if (env.toggle_editor)
