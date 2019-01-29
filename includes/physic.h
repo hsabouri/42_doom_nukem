@@ -20,10 +20,10 @@
 
 # include <structure.h>
 
-# define SPEED_REDUCE 30
+# define SPEED_REDUCE 7
 # define MAX_JUMP 2
 # define MAX_FALL -1
-# define EPSILON 0.001
+# define EPSILON 0.5
 
 typedef struct      s_tp
 {
@@ -34,8 +34,15 @@ typedef struct      s_tp
     int         portal_out;
 }                   t_tp;
 
-int				collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall);
+typedef struct      s_touch
+{
+    int     wall;
+    float   dist;
+}                   t_touch;
+
+t_touch			collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall);
 t_vec3	    	floor_col(float pos_z, t_sector sector, t_vec3 speed);
 t_vec3	    	ceil_col(float pos_z, t_sector sector, t_vec3 speed);
+t_vec3	    	slide_wall(t_vec3 next_pos, t_game game, t_wall wall);
 
 #endif

@@ -12,14 +12,21 @@
 
 #include <vec.h>
 
-inline float	vec3_size(t_vec3 a)
+inline float	vec3_inv_size(t_vec3 a)
 {
-	return (fast_sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
+	return (fast_inv_sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
-inline float	vec2_size(t_vec2 a)
+inline float	vec2_inv_size(t_vec2 a)
 {
-	return (fast_sqrt(a.u * a.u + a.v * a.v));
+	return (fast_inv_sqrt(a.u * a.u + a.v * a.v));
+}
+
+inline t_vec2	vec2_normalize(t_vec2 a)
+{
+	const float i_size = vec2_inv_size(a);
+
+	return (vec2_scale(a, i_size));
 }
 
 inline t_vec3	vec3_new(float x, float y, float z)
