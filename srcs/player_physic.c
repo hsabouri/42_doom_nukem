@@ -21,16 +21,19 @@ static t_vec3	set_speed(t_player player, t_event events)
 	new_speed.z = player.physic.speed.z;
 	if (events.keys[SDL_SCANCODE_A] || events.keys[SDL_SCANCODE_D])
 	{
-		new_speed.x = (-1 * events.keys[SDL_SCANCODE_D] + \
-				1 * events.keys[SDL_SCANCODE_A]) / (float)SPEED_REDUCE;
+		new_speed.x = (-player.physic.speed_max.x * events.keys[SDL_SCANCODE_D] \
+			+ player.physic.speed_max.x * events.keys[SDL_SCANCODE_A]) / \
+			(float)SPEED_REDUCE;
 	}
 	if (events.keys[SDL_SCANCODE_W] || events.keys[SDL_SCANCODE_S])
-		new_speed.y = (-1 * events.keys[SDL_SCANCODE_S] + \
-				1 * events.keys[SDL_SCANCODE_W]) / (float)SPEED_REDUCE;
+		new_speed.y = (-player.physic.speed_max.y * events.keys[SDL_SCANCODE_S] \
+		+ player.physic.speed_max.y * events.keys[SDL_SCANCODE_W]) / \
+		(float)SPEED_REDUCE;
 	if (player.physic.fly)
 	{
-		new_speed.z = (-1 * events.keys[SDL_SCANCODE_LSHIFT] + \
-			1 * events.keys[SDL_SCANCODE_SPACE]) / (float)SPEED_REDUCE;
+		new_speed.z = (-player.physic.speed_max.z * \
+		events.keys[SDL_SCANCODE_LCTRL] + player.physic.speed_max.z * \
+		events.keys[SDL_SCANCODE_SPACE]) / (float)SPEED_REDUCE;
 	}
 	new_speed = vec3_rot_z(new_speed, player.physic.look_h);
 	return (new_speed);
@@ -67,8 +70,8 @@ static t_vec3		teleportation(t_vec3 pos, t_game game, t_tp teleport, \
 					? teleport.portal.to_sector : teleport.portal.from_sector;
 	delta_floor = game.sectors[n_physic->sector_id].floor - pos.z;
 	delta_ceil = game.sectors[n_physic->sector_id].ceiling - (pos.z + \
-															n_physic->height);
-	if (delta_floor >= 20 || delta_ceil < -0.0001)
+																n_physic->height);
+	if (delta_floor >= 0.5 || delta_ceil < -0.0001)
 	{
 		n_physic->sector_id = ((int)teleport.portal.from_wall == \
 							teleport.portal_in) ? teleport.portal.from_sector : \
@@ -83,7 +86,7 @@ static t_vec3		teleportation(t_vec3 pos, t_game game, t_tp teleport, \
 						game.points[teleport.from_wall.a]);
 		next_pos.x = pos.x + diff.u;
 		next_pos.y = pos.y + diff.v;
-		if (delta_floor >= 0 && delta_floor < 20)
+		if (delta_floor >= 0 || delta_floor > -0.5)
 			next_pos.z = pos.z + delta_floor;
 		return (next_pos);
 	}

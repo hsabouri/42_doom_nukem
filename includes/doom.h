@@ -98,5 +98,6 @@ void					legend_text(t_sdl sdl);
 void					legend_graphic(t_color *buf);
 t_game					game_editing(t_game game, t_event events,\
 						t_player player);
+t_game					player_properties(t_game game, t_event events);
 
 #endif
