@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/27 18:09:22 by hugo             ###   ########.fr       */
+/*   Updated: 2019/01/27 18:43:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,9 @@ t_array			*ainsert(t_array *array, void *element);
 t_array			*aforeach(t_array *array, void (*f)(void *));
 t_array			*aforeach_state(t_array *array, void (*f)(void *, void *), void *state);
 t_array			*aforeachi(t_array *array, void (*f)(void *, size_t i));
+
+void			*array_open(void *ptr, size_t loc, size_t size, size_t elem_size);
+void			*array_close(void *ptr, size_t loc, size_t size, size_t elem_size);
 
 void			console_error(const char *service, const char *error);
 void			console_log(const char *service, const char *log);

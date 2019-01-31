@@ -34,6 +34,10 @@ SRCS_FILES = main.c event.c test_map.c move.c\
 			editor_legend.c\
 			editor_ingame.c\
 			editor_tools.c\
+			editor_delete.c\
+			editor_create.c\
+			editor_del_update.c\
+			editor_new_update.c\
 			collision.c
 
 # -----------------

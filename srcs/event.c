@@ -6,11 +6,24 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 17:53:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/31 14:22:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
+
+t_event			reset_clicks(t_event events)
+{
+	size_t key;
+
+	key = 0;
+	while (key < N_BUTTON)
+	{
+		events.mouse_click[key] = 0;
+		key++;
+	}
+	return (events);
+}
 
 t_event			init_events(void)
 {
@@ -27,6 +40,7 @@ t_event			init_events(void)
 		res.mouse[key] = 0;
 		key++;
 	}
+	res = reset_clicks(res);
 	key = 0;
 	while (key < N_KEY)
 	{
@@ -47,7 +61,10 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event)
 		events.y = polled_event.motion.y;
 	}
 	else if (polled_event.type == SDL_MOUSEBUTTONDOWN)
+	{
 		events.mouse[polled_event.button.button] = 1;
+		events.mouse_click[polled_event.button.button] = 1;
+	}
 	else if (polled_event.type == SDL_MOUSEBUTTONUP)
 		events.mouse[polled_event.button.button] = 0;
 	else if (polled_event.type == SDL_MOUSEWHEEL)
@@ -66,6 +83,12 @@ static void		keyactions(int scancode, t_env *env)
 		env->game.player.physic.jump = 1;
 	if (scancode == SDL_SCANCODE_F)
 		env->game.player.physic.fly = (env->game.player.physic.fly) ? 0 : 1;
+	if (env->toggle_editor && scancode == SDL_SCANCODE_O)
+		env->editor.tool = WALL;
+	if (env->toggle_editor && scancode == SDL_SCANCODE_P)
+		env->editor.tool = POINT;
+	if (env->toggle_editor && scancode == SDL_SCANCODE_I)
+		env->editor.tool = PORTAL;
 }
 
 t_event			capture_events(t_event events, t_env *env)

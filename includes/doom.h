@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/24 14:59:35 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:30:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct			s_event
 	int16_t		wheel;
 	u_int8_t	quit;
 	u_int8_t	mouse[N_BUTTON];
+	u_int8_t	mouse_click[N_BUTTON];
 	u_int8_t	keys[N_KEY]; //must be last
 }						t_event;
 
@@ -71,6 +72,7 @@ t_env					editor_loop(t_env env, size_t frame);
 t_event					capture_events(t_event events, t_env *env);
 t_event					init_events(void);
 t_ph					update_mouse(t_event *events, t_ph player_physic);
+t_event					reset_clicks(t_event events);
 
 void					bresenham(t_color *buff, t_pix a, t_pix b, \
 						t_color color);
@@ -85,8 +87,13 @@ t_pix					text(const char *str, t_pix pos, t_sdl sdl);
 ** EDITOR
 */
 
-long					select_point(t_game game, t_editor editor,\
+t_vec2					point_from_mouse(t_event events, t_editor editor);
+ssize_t					select_point(t_game game, t_editor editor,\
 						t_event events);
+ssize_t					select_wall(t_game game, t_editor editor,\
+						t_event events);
+t_editor				select_multi_points(t_editor editor,\
+						t_event events, ssize_t point);
 void					legend_text(t_sdl sdl);
 void					legend_graphic(t_color *buf);
 t_game					game_editing(t_game game, t_event events,\

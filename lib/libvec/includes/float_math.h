@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:22:02 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/19 18:22:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:04:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ typedef union	u_inv_sqrt
 
 float			fast_inv_sqrt(float x);
 float			fast_sqrt(float x);
+float			clamp(float x, float min, float max);
 
 #endif

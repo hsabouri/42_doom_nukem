@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:36:47 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/31 14:22:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,23 @@ static t_vec2		screen_space(t_vec2 vec, t_editor editor)
 static void			draw_walls(t_game game, t_editor editor, t_color *buf)
 {
 	size_t	i;
-	t_vec2	points[2];
+	t_vec2	pts[2];
+	t_wall	wall;
 
 	i = 0;
 	while (i < game.nwalls)
 	{
-		points[0] = screen_space(game.points[game.walls[i].a], editor);
-		points[1] = screen_space(game.points[game.walls[i].b], editor);
-		bresenham(buf, (t_pix) {(int)points[0].u, (int)points[0].v},\
-			(t_pix) {(int)points[1].u, (int)points[1].v},\
-			(game.walls[i].portal >= 0) ? TRACTOR_R : WHITE);
+		wall = game.walls[i];
+		pts[0] = screen_space(game.points[wall.a], editor);
+		pts[1] = screen_space(game.points[wall.b], editor);
+		if (i == (size_t)editor.sel_wall || editor.tool == POINT)
+			bresenham(buf, (t_pix) {(int)pts[0].u, (int)pts[0].v},\
+				(t_pix) {(int)pts[1].u, (int)pts[1].v},\
+				(wall.portal >= 0) ? TRACTOR_R : WHITE);
+		else
+			bresenham(buf, (t_pix) {(int)pts[0].u, (int)pts[0].v},\
+				(t_pix) {(int)pts[1].u, (int)pts[1].v},\
+				(wall.portal >= 0) ? LOW_R : GREY);
 		i++;
 	}
 }
@@ -58,8 +65,13 @@ void				draw_map(t_game game, t_editor editor, t_color *buf)
 	while (i < game.npoints)
 	{
 		point = screen_space(game.points[i], editor);
-		draw_point(vec2_to_fvec2(point), POINT_SIZE, buf,\
-			(editor.sel_point == (long)i) ? UBE : LIBERTY);
+		if (editor.tool == WALL && (editor.points_wall[0] == (long)i ||\
+		editor.points_wall[1] == (long)i))
+			draw_point(vec2_to_fvec2(point), POINT_SIZE, buf, RED);
+		else if (editor.sel_point == (long)i)
+			draw_point(vec2_to_fvec2(point), POINT_SIZE, buf, UBE);
+		else
+			draw_point(vec2_to_fvec2(point), POINT_SIZE, buf, LIBERTY);
 		i++;
 	}
 	draw_physic(game.player.physic, editor, buf, MOONSTONE);

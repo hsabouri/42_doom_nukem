@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 17:55:39 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/26 21:26:54 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int				main(void)
 	env.events = init_events();
 	env.game = generate_map(env.game);
 	env.editor = init_editor();
+	env.toggle_editor = 0;
 	frame = 0;
 	while (env.sdl.win)
 	{
@@ -77,6 +78,7 @@ int				main(void)
 			env = game_loop(env, frame);
 		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
+		env.events = reset_clicks(env.events);
 		frame++;
 	}
 	if (!env.sdl.win)
