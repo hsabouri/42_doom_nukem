@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:19:36 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/22 13:36:40 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:04:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ inline float	fast_sqrt(float x)
 	u.x = 0.5 * (u.x + x / u.x);
 	u.x = 0.5 * (u.x + x / u.x);
 	return (u.x);
+}
+
+inline float	clamp(float x, float min, float max)
+{
+	if (x > max)
+		return (max);
+	else if (x < min)
+		return (min);
+	else
+		return (x);
 }
