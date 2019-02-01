@@ -1,4 +1,4 @@
-NAME = doom-nukem
+BIN = doom-nukem
 LIBFT_DIR = lib/libft
 LIBSAVE_DIR = lib/libsave
 LIBTGA_DIR = lib/libtga
@@ -19,28 +19,7 @@ endif
 # SOURCE FILES (.c)
 # -----------------
 
-SRCS_FILES = main.c event.c test_map.c move.c\
-			graphic_utils.c\
-			graphic_display.c\
-			graphic_project.c\
-			graphic_material.c\
-			bresenham.c\
-			physic.c\
-			player_physic.c\
-			game.c\
-			editor.c\
-			editor_draw.c\
-			editor_selectors.c\
-			editor_legend.c\
-			editor_ingame.c\
-			editor_tools.c\
-			player_properties.c\
-			editor_delete.c\
-			editor_create.c\
-			editor_del_update.c\
-			editor_new_update.c\
-			collision.c\
-			tracking_player.c
+SRCS_FILES = $(shell find srcs/. -name *.c)
 
 # -----------------
 
@@ -65,7 +44,7 @@ CFLAGS += -g
 #CFLAGS += -Werror
 LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(LIBSAVE_DIR) -L$(SDL2_DIR) -L$(SDL2_TTF_DIR) -L$(LIBTGA_DIR) -lsave -lm -lvec -lft -ltga -lSDL2 -lSDL2main -lSDL2_ttf -lpthread -ldl
 
-all: libft libvec libsave libtga installSDL $(NAME)
+all: libft libvec libsave libtga installSDL $(BIN)
 
 ifeq ($(shell uname -s), Darwin_o) # remove _o
 installSDL:
@@ -88,7 +67,7 @@ libsave:
 libtga:
 	@$(MAKE) -j -C $(LIBTGA_DIR)
 
-$(NAME): $(OBJS)
+$(BIN): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c #$(INCS)
@@ -108,7 +87,7 @@ fclean:
 	$(MAKE) -C $(LIBVEC_DIR) fclean
 	$(MAKE) -C $(LIBSAVE_DIR) fclean
 	$(MAKE) -C $(LIBTGA_DIR) fclean
-	rm -rf $(NAME)
+	rm -rf $(BIN)
 
 re: fclean
 	$(MAKE) all
