@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hit_collision.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:52:36 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/12/23 17:52:38 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/02/02 17:09:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
+
+/*
 
 static void	collision_AABB(float *mouse, void *entity)
 {
@@ -72,3 +74,5 @@ void			check_shot(t_game game, float mouse_x, float mouse_y)
 	// shot = anew(NULL, 1, sizeof(t_shot));
 	entities_collision(mouse, game, game.player);
 }
+
+*/

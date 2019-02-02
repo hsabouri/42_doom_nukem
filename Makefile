@@ -19,19 +19,23 @@ endif
 # SOURCE FILES (.c)
 # -----------------
 
-SRCS_FILES = $(shell find srcs/. -name *.c)
+SRCS_FILES = $(shell find srcs -name "*.c")
 
 # -----------------
 
 SRCS_DIR = srcs
-SRCS = $(SRCS_FILES:%=$(SRCS_DIR)/%)
+SRCS = $(SRCS_FILES:%=%)
 
 # -----------------
 # HEADER FILES (.h)
 # -----------------
 
+INCS_FILES = $(shell find srcs -name "*.c")
+
+# -----------------
+
 INCS_DIR = incs
-INCS = $(INCS_FILES:%=$(INCS_DIR)/%)
+INCS = $(INCS_FILES:%=%)
 
 # -----------------
 
@@ -71,7 +75,7 @@ $(BIN): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c #$(INCS)
-	mkdir -p $(OBJS_DIR)
+	mkdir -p $(dir $@)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
