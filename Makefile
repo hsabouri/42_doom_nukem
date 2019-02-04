@@ -17,6 +17,7 @@ endif
 
 NO_COLOR=\x1b[0m
 GREEN=\x1b[32;01m
+YELLOW=\x1b[33;01m
 BLUE=\x1b[36;01m
 BLINK=\x1b[5;01m
 
@@ -71,7 +72,10 @@ LDFLAGS += -L$(LIBSAVE_DIR) -lsave
 LDFLAGS += -L$(SDL2_TTF_DIR) -lSDL2_ttf
 LDFLAGS += -L$(LIBTGA_DIR) -ltga
 
-all: libft libvec libsave libtga installSDL $(BIN)
+message: 
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $(BIN)
+
+all: message libft libvec libsave libtga installSDL $(BIN)
 
 ifeq ($(shell uname -s), Darwin_o) # remove _o
 installSDL:
@@ -83,43 +87,47 @@ installSDL:
 endif
 
 libft:
-	@$(MAKE) -j -C $(LIBFT_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBFT_DIR)
 
 libvec:
-	@$(MAKE) -j -C $(LIBVEC_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBVEC_DIR)
 
 libsave:
-	@$(MAKE) -j -C $(LIBSAVE_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBSAVE_DIR)
 
 libtga:
-	@$(MAKE) -j -C $(LIBTGA_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBTGA_DIR)
 
 $(BIN): $(OBJS)
-	@echo "$(BLUE)" "[LINK]" "$(NO_COLOR)" $@
+	@echo -e "$(BLUE)" "[LINK]" "$(NO_COLOR)" $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
-	@echo "$(BLINK)" "FINISHED !" "$(NO_COLOR)"
+	@echo -e "$(BLINK)" "FINISHED !" "$(NO_COLOR)"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCS)
-	@echo "$(GREEN)" "[COMPILE]" "$(NO_COLOR)" $<
+	@echo -e "$(GREEN)" "[COMPILE]" "$(NO_COLOR)" $<
 	@mkdir -p $(dir $@)
 	@$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-	rm -rf $(OBJS_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(LIBVEC_DIR) clean
-	$(MAKE) -C $(LIBSAVE_DIR) clean
-	$(MAKE) -C $(LIBTGA_DIR) clean
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(LIBVEC_DIR) clean
+	@$(MAKE) -s -C $(LIBSAVE_DIR) clean
+	@$(MAKE) -s -C $(LIBTGA_DIR) clean
 
 fclean:
-	rm -rf $(OBJS_DIR)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(LIBVEC_DIR) fclean
-	$(MAKE) -C $(LIBSAVE_DIR) fclean
-	$(MAKE) -C $(LIBTGA_DIR) fclean
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@$(MAKE) -s -C $(LIBVEC_DIR) fclean
+	@$(MAKE) -s -C $(LIBSAVE_DIR) fclean
+	@$(MAKE) -s -C $(LIBTGA_DIR) fclean
 	rm -rf $(BIN)
 
 re: fclean
-	$(MAKE) all
+	@$(MAKE) all
 
 .PHONY: clean fclean libft libvec re all
