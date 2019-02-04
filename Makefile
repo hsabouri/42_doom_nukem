@@ -1,4 +1,4 @@
-NAME = doom-nukem
+BIN = doom-nukem
 LIBFT_DIR = lib/libft
 LIBSAVE_DIR = lib/libsave
 LIBTGA_DIR = lib/libtga
@@ -15,57 +15,67 @@ else
 	SDL2_TTF_INC_DIR =.
 endif
 
+NO_COLOR=\x1b[0m
+GREEN=\x1b[32;01m
+YELLOW=\x1b[33;01m
+BLUE=\x1b[36;01m
+BLINK=\x1b[5;01m
+
 # -----------------
 # SOURCE FILES (.c)
+# Don't forget to list files at the end of the project
 # -----------------
 
-SRCS_FILES = main.c event.c test_map.c move.c\
-			graphic_utils.c\
-			graphic_display.c\
-			graphic_project.c\
-			graphic_material.c\
-			bresenham.c\
-			physic.c\
-			player_physic.c\
-			game.c\
-			editor.c\
-			editor_draw.c\
-			editor_selectors.c\
-			editor_legend.c\
-			editor_ingame.c\
-			editor_tools.c\
-			player_properties.c\
-			editor_delete.c\
-			editor_create.c\
-			editor_del_update.c\
-			editor_new_update.c\
-			collision.c\
-			tracking_player.c
+SRCS_FILES = $(shell find srcs -name "*.c")
 
 # -----------------
 
 SRCS_DIR = srcs
-SRCS = $(SRCS_FILES:%=$(SRCS_DIR)/%)
+SRCS = $(SRCS_FILES:%=%)
 
 # -----------------
 # HEADER FILES (.h)
+# Don't forget to list files at the end of the project
+# -----------------
+
+INCS_FILES = $(shell find srcs -name "*.c")
+
 # -----------------
 
 INCS_DIR = incs
-INCS = $(INCS_FILES:%=$(INCS_DIR)/%)
+INCS = $(INCS_FILES:%=%)
 
 # -----------------
 
 OBJS_DIR = objs
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
+# -----------------
+
 CC = clang
-CFLAGS = -Wall -Wextra -Iincludes -I$(LIBFT_DIR)/includes -I$(LIBVEC_DIR)/includes -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR) -I$(LIBSAVE_DIR)/includes -I$(SDL2_TTF_INC_DIR) -I$(SDL2_TTF_INC_DIR)/SDL2 -I$(LIBTGA_DIR)/includes 
+CFLAGS = -Wall -Wextra -Iincludes
 CFLAGS += -g
 #CFLAGS += -Werror
-LDFLAGS = -L$(LIBFT_DIR) -L$(LIBVEC_DIR) -L$(LIBSAVE_DIR) -L$(SDL2_DIR) -L$(SDL2_TTF_DIR) -L$(LIBTGA_DIR) -lsave -lm -lvec -lft -ltga -lSDL2 -lSDL2main -lSDL2_ttf -lpthread -ldl
 
-all: libft libvec libsave libtga installSDL $(NAME)
+CFLAGS += -I$(LIBFT_DIR)/includes
+CFLAGS += -I$(LIBVEC_DIR)/includes 
+CFLAGS += -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR) 
+CFLAGS += -I$(SDL2_TTF_INC_DIR) -I$(SDL2_TTF_INC_DIR)/SDL2
+CFLAGS += -I$(LIBSAVE_DIR)/includes
+CFLAGS += -I$(LIBTGA_DIR)/includes
+
+LDFLAGS = -L$(LIBFT_DIR) -lft
+LDFLAGS += -lpthread -ldl -lm
+LDFLAGS += -L$(LIBVEC_DIR) -lvec
+LDFLAGS += -L$(SDL2_DIR) -lSDL2 -lSDL2main
+LDFLAGS += -L$(LIBSAVE_DIR) -lsave 
+LDFLAGS += -L$(SDL2_TTF_DIR) -lSDL2_ttf
+LDFLAGS += -L$(LIBTGA_DIR) -ltga
+
+message: 
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $(BIN)
+
+all: message libft libvec libsave libtga installSDL $(BIN)
 
 ifeq ($(shell uname -s), Darwin_o) # remove _o
 installSDL:
@@ -77,40 +87,47 @@ installSDL:
 endif
 
 libft:
-	@$(MAKE) -j -C $(LIBFT_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBFT_DIR)
 
 libvec:
-	@$(MAKE) -j -C $(LIBVEC_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBVEC_DIR)
 
 libsave:
-	@$(MAKE) -j -C $(LIBSAVE_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBSAVE_DIR)
 
 libtga:
-	@$(MAKE) -j -C $(LIBTGA_DIR)
+	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
+	@$(MAKE) -j -s -C $(LIBTGA_DIR)
 
-$(NAME): $(OBJS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+$(BIN): $(OBJS)
+	@echo -e "$(BLUE)" "[LINK]" "$(NO_COLOR)" $@
+	@$(CC) -o $@ $^ $(LDFLAGS)
+	@echo -e "$(BLINK)" "FINISHED !" "$(NO_COLOR)"
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c #$(INCS)
-	mkdir -p $(OBJS_DIR)
-	$(CC) -c -o $@ $< $(CFLAGS)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCS)
+	@echo -e "$(GREEN)" "[COMPILE]" "$(NO_COLOR)" $<
+	@mkdir -p $(dir $@)
+	@$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-	rm -rf $(OBJS_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(LIBVEC_DIR) clean
-	$(MAKE) -C $(LIBSAVE_DIR) clean
-	$(MAKE) -C $(LIBTGA_DIR) clean
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(LIBVEC_DIR) clean
+	@$(MAKE) -s -C $(LIBSAVE_DIR) clean
+	@$(MAKE) -s -C $(LIBTGA_DIR) clean
 
 fclean:
-	rm -rf $(OBJS_DIR)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(LIBVEC_DIR) fclean
-	$(MAKE) -C $(LIBSAVE_DIR) fclean
-	$(MAKE) -C $(LIBTGA_DIR) fclean
-	rm -rf $(NAME)
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@$(MAKE) -s -C $(LIBVEC_DIR) fclean
+	@$(MAKE) -s -C $(LIBSAVE_DIR) fclean
+	@$(MAKE) -s -C $(LIBTGA_DIR) fclean
+	rm -rf $(BIN)
 
 re: fclean
-	$(MAKE) all
+	@$(MAKE) all
 
 .PHONY: clean fclean libft libvec re all
