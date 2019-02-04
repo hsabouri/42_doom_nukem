@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-static int	seg_seg(t_vec3  next_pos, t_player player, t_touch *touch, t_game game)
+int		seg_seg(t_vec3  next_pos, t_player player, t_touch *touch, t_game game)
 {
 	t_vec2	AB;
 	t_vec2	CD;
@@ -28,9 +28,9 @@ static int	seg_seg(t_vec3  next_pos, t_player player, t_touch *touch, t_game gam
 	denom = vec2_cross(AB, CD).z;
 	if (denom < -0.0001 && denom > 0.0001)
 		return (-1);
-	dist[0] = -(game.points[game.walls[touch->wall].a].u * CD.v - player.physic.pos.x * \
-		CD.v - CD.u * game.points[game.walls[touch->wall].a].v + CD.u * \
-		player.physic.pos.y) / denom;
+	dist[0] = -(game.points[game.walls[touch->wall].a].u * CD.v - \
+	player.physic.pos.x * CD.v - CD.u * game.points[game.walls[touch->wall].a].v\
+	+ CD.u * player.physic.pos.y) / denom;
 	if (dist[0] < 0 || dist[0] > 1)
 		return (0);
 	dist[1] = -(-AB.u * game.points[game.walls[touch->wall].a].v + AB.u * \
@@ -42,7 +42,8 @@ static int	seg_seg(t_vec3  next_pos, t_player player, t_touch *touch, t_game gam
 	return (1);
 }
 
-t_touch		collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall)
+t_touch		collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, \
+						int wall)
 {
 	int		end;
 	t_touch	touch;
@@ -52,7 +53,8 @@ t_touch		collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, int wall)
 	touch.dist = 0;
 	while (touch.wall < end)
 	{
-		if (touch.wall != wall && seg_seg(next_pos, game.player, &touch, game) == 1)
+		if (touch.wall != wall && seg_seg(next_pos, game.player, &touch, game) \
+			== 1)
 			return (touch);
 		touch.wall++;
 	}

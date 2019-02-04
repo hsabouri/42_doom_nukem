@@ -39,7 +39,8 @@ SRCS_FILES = main.c event.c test_map.c move.c\
 			editor_create.c\
 			editor_del_update.c\
 			editor_new_update.c\
-			collision.c
+			collision.c\
+			tracking_player.c
 
 # -----------------
 
