@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/01/27 18:44:16 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/02/04 11:39:52 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,21 +104,29 @@ SRC=$(SRCNAM:%=$(SRCDIR)/%)
 INC=$(INCNAM:%=$(INCDIR)/%)
 OBJ=$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
+NO_COLOR=\x1b[0m
+GREEN=\x1b[32;01m
+YELLOW=\x1b[33;01m
+BLUE=\x1b[36;01m
+BLINK=\x1b[5;01m
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
-	ar rcs $@ $^
-	ranlib $@
+	@echo -e "$(BLUE)" "[PACK]" "$(NO_COLOR)" $@
+	@ar rcs $@ $^
+	@ranlib $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
-	mkdir -p $(OBJDIR)
-	$(CC) -c -o $@ $< -I$(INCLUDES) $(CFLAGS)
+	@echo -e "$(GREEN)" "[COMPILE]" "$(NO_COLOR)" $<
+	@mkdir -p $(OBJDIR)
+	@$(CC) -c -o $@ $< -I$(INCLUDES) $(CFLAGS)
 
 clean:
-	rm -rf $(OBJDIR)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean
 	@$(MAKE) all
