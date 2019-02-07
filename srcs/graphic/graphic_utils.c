@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/08 14:17:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/05 11:55:09 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
-
-inline t_pix_fixed	from_pix(t_pix pixel)
-{
-	return ((t_pix_fixed) {f_from_int(pixel.x), f_from_int(pixel.y)});
-}
 
 void				draw_point(t_fvec2 point, int s, t_color *buf, t_color c)
 {

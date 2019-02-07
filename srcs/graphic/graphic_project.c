@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_project.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:43:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/07 07:12:29 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
+#include "./graphic_project.h"
 
 static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game game)
 {

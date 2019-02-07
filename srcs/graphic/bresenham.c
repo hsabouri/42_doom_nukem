@@ -6,11 +6,11 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 14:34:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/12/31 11:10:03 by hugo             ###   ########.fr       */
+/*   Updated: 2019/02/05 11:30:04 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <doom.h>
+#include "./bresenham.h"
 
 static void		draw_horizon(t_bres bres, t_color *buff, t_color color)
 {

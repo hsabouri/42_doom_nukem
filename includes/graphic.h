@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/30 16:25:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/07 07:12:48 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHIC_H
 # define GRAPHIC_H
 
-/*
-** This header contains all the structures used to draw on screen in a
-** highly optimized manner.
-*/
-
+# include <_graphic_singletons.h>
 # include <structure.h>
 
 # define WIDTH 720
@@ -48,46 +44,12 @@ typedef struct	s_pix
 	int32_t	y;
 }				t_pix;
 
-typedef struct	s_pix_fixed
-{
-	t_fixed	x;
-	t_fixed	y;
-}				t_pix_fixed;
-
-typedef struct	s_order
-{
-	int	left[2];
-	int	right[2];
-}				t_order;
-
-typedef struct	s_bres
-{
-	t_pix_fixed	src;
-	int			diff[2];
-	int			inc[2];
-}				t_bres;
-
 typedef struct	s_ray
 {
 	t_fvec2		dir;
 	int			id;
 	ssize_t		mask_wall;
 }				t_ray;
-
-typedef struct	s_i_wall
-{
-	size_t		wall_id;
-	t_fvec2		a;
-	t_fvec2		b;
-}				t_i_wall;
-
-typedef struct	s_hit
-{
-	ssize_t		wall;
-	t_fvec2		ray;
-	t_fixed		t;
-	t_fixed		u;
-}				t_hit;
 
 # define Y_PRECISION 8
 
@@ -127,16 +89,10 @@ typedef struct	s_proj
 	t_tex_proj	tex_proj;
 }				t_proj;
 
-typedef struct	s_last
-{
-	size_t	frame;
-	int		x;
-	int		start;
-	int		end;
-}				t_last;
+
+# include "srcs/graphic/bresenham.h"
 
 void			background(t_color *buf, t_color color);
-void			bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
 void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 
 t_vec2			player_space(t_vec2 vec, t_ph physic);
