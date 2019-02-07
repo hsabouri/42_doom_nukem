@@ -63,6 +63,7 @@ CFLAGS += -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR)
 CFLAGS += -I$(SDL2_TTF_INC_DIR) -I$(SDL2_TTF_INC_DIR)/SDL2
 CFLAGS += -I$(LIBSAVE_DIR)/includes
 CFLAGS += -I$(LIBTGA_DIR)/includes
+CFLAGS += -I.
 
 LDFLAGS = -L$(LIBFT_DIR) -lft
 LDFLAGS += -lpthread -ldl -lm
