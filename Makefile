@@ -131,4 +131,6 @@ fclean:
 re: fclean
 	@$(MAKE) all
 
-.PHONY: clean fclean libft libvec re all
+.PHONY: clean fclean libft libvec libsave libtga re all
+
+.SILENT: clean fclean libft libvec libsave libtga re all
