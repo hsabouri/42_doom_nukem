@@ -96,8 +96,8 @@ t_env				editor_loop(t_env env, size_t frame)
 	legend_graphic(env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
-	text("Editor3030", (t_pix) {10, 10}, env.sdl);
-	legend_text(env.sdl);
+	//text("Editor3030", (t_pix) {10, 10}, env.sdl);
+	//legend_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	return (env);
 }

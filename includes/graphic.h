@@ -38,6 +38,8 @@
 # define MOONSTONE	(t_color){98,190,193,255}
 # define MUSTARD	(t_color){255,224,102,255}
 
+# define TEXT_MAX	256
+
 typedef struct	s_pix
 {
 	int32_t	x;

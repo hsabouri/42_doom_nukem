@@ -43,20 +43,30 @@ void				background(t_color *buf, t_color color)
 	}
 }
 
-t_pix				text(const char *str, t_pix pos, t_sdl sdl)
+t_text				text(const char *str, t_pix pos, t_sdl *sdl)
 {
 	SDL_Surface	*text_surface;
-	SDL_Texture	*text_texture;
-	int			w;
-	int			h;
+	t_text		text;
 
-	text_surface = TTF_RenderText_Shaded(sdl.font, str,\
+	text.x = pos.x;
+	text.y = pos.y;
+	text_surface = TTF_RenderText_Shaded(sdl->font, str,\
 		(SDL_Color){255, 255, 255, 255}, (SDL_Color){0, 20, 33, 255});
-	text_texture = SDL_CreateTextureFromSurface(sdl.renderer, text_surface);
-	SDL_QueryTexture(text_texture, NULL, NULL, &w, &h);
-	SDL_RenderCopy(sdl.renderer, text_texture, NULL,\
-		&((SDL_Rect) {pos.x, pos.y, w, h}));
-	SDL_DestroyTexture(text_texture);
+	text.text_texture = SDL_CreateTextureFromSurface(sdl->renderer, text_surface);
+	SDL_QueryTexture(text.text_texture, NULL, NULL, &text.w, &text.h);
 	SDL_FreeSurface(text_surface);
-	return ((t_pix) {w, h});
+	sdl->text = *apush(&sdl->text, &text);
+	return (text);
+}
+
+void				display_text(t_sdl sdl)
+{
+	t_text	*current;
+
+	while ((current = (t_text*)apop(&sdl.text)))
+	{
+		SDL_RenderCopy(sdl.renderer, current->text_texture, NULL,\
+			&((SDL_Rect) {current->x, current->y, current->w, current->h}));
+		SDL_DestroyTexture(current->text_texture);
+	}
 }
