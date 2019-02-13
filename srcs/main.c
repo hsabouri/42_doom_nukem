@@ -54,11 +54,13 @@ static t_sdl	init_sdl(void)
 	return ((t_sdl) {win, buf, renderer, font});
 }
 
-int				main(void)
+int				main(int ac, char **av)
 {
 	t_env		env;
 	size_t		frame;
 
+	if (ac == 2)
+		return(main_save(av[1]));
 	env.sdl = init_sdl();
 	env.events = init_events();
 	env.game = generate_map(env.game);
