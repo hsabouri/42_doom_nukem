@@ -73,10 +73,10 @@ LDFLAGS += -L$(LIBSAVE_DIR) -lsave
 LDFLAGS += -L$(SDL2_TTF_DIR) -lSDL2_ttf
 LDFLAGS += -L$(LIBTGA_DIR) -ltga
 
+all: message libft libvec libsave libtga installSDL $(BIN)
+
 message: 
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $(BIN)
-
-all: message libft libvec libsave libtga installSDL $(BIN)
 
 ifeq ($(shell uname -s), Darwin_o) # remove _o
 installSDL:
