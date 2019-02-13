@@ -27,6 +27,9 @@
 # include <physic.h>
 # include <editor.h>
 
+# include <load_save.h>
+# include <structure_clone.h>
+
 # define N_KEY 284
 # define N_BUTTON 5
 

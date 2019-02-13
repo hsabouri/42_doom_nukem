@@ -27,6 +27,17 @@
 # include <vec.h>
 # include <libft.h>
 
+typedef struct		s_c_mat
+{
+	t_fvec2			pos;
+	t_fvec2			sca;
+	t_color			color;
+	t_img			*texture;
+	t_mode			mode;
+	t_color			filter;
+	size_t			overlay;
+}					t_c_mat;
+
 typedef struct		s_c_ph
 {
 	t_fixed		gravity;
@@ -38,7 +49,7 @@ typedef struct		s_c_ph
 
 typedef struct		s_c_player
 {
-	t_c_ph		physic;
+	t_c_ph			spawn;
 	// float		life;
 	// float		armor;
 	// size_t		inventory;
@@ -46,6 +57,13 @@ typedef struct		s_c_player
 	// uint8_t		equiped;
 	// size_t		weapons[5];
 }					t_c_player;
+
+typedef struct		s_c_point
+{
+	size_t	magic;
+	t_fvec2	point;
+}					t_c_point;
+
 
 typedef struct		s_c_portal
 {
@@ -64,8 +82,7 @@ typedef struct		s_c_wall
 	int32_t		portal;
 	u_int32_t	a;
 	u_int32_t	b;
-	//u_char		texture;
-	//u_char		transparent;
+	size_t		mat;
 }					t_c_wall;
 
 typedef struct		s_c_sector
@@ -73,23 +90,30 @@ typedef struct		s_c_sector
 	size_t		magic;
 	u_int32_t	start;
 	u_int32_t	number;
+	size_t		sector_id;
 	t_fixed		floor;
 	t_fixed		ceiling;
-	//t_fixed		luminosity;
+	t_color		ambient;
+	size_t		ceiling_mat;
+	size_t		floor_mat;
 }					t_c_sector;
 
 typedef struct		s_c_game
 {
 	size_t		magic;
 	t_c_player	player;
+	size_t		points;
+	size_t		npoints;
 	size_t		sectors;
 	size_t		nsectors;
 	size_t		walls;
 	size_t		nwalls;
 	size_t		portals;
 	size_t		nportals;
-	size_t		points;
-	size_t		npoints;
+	size_t		materials;
+	size_t		nmaterials;
+	size_t		textures;
+	size_t		ntextures;
 }					t_c_game;
 
 int					open_file(const char *file, int edit_mode, size_t *filesize);
