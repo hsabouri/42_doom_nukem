@@ -38,6 +38,18 @@
 
 # define LOOK_SPEED 0.01
 
+# define NB_TEXT 	100
+
+
+typedef struct	s_text
+{
+	int16_t		x;
+	int16_t		y;
+	int32_t		w;
+	int32_t		h;
+	SDL_Texture	*text_texture;
+}				t_text;
+
 typedef struct			s_event
 {
 	int16_t		x;
@@ -57,6 +69,7 @@ typedef struct			s_sdl
 	SDL_Texture		*buf;
 	SDL_Renderer	*renderer;
 	TTF_Font		*font;
+	t_array			text;
 }						t_sdl;
 
 typedef struct			s_env
@@ -83,12 +96,13 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 t_game					physic(t_game game, t_event events);
 t_player				player_physic(t_event events, t_game game);
 
-t_pix					text(const char *str, t_pix pos, t_sdl sdl);
+t_text					text(const char *str, t_pix pos, t_sdl *sdl);
 
 
 /*
 ** EDITOR
 */
+void					display_text(t_sdl sdl);
 
 t_vec2					point_from_mouse(t_event events, t_editor editor);
 ssize_t					select_point(t_game game, t_editor editor,\

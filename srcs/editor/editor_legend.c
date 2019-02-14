@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-void	legend_text(t_sdl sdl)
+/*void	legend_text(t_sdl sdl)
 {
 	int		y_pos;
 	t_pix	size;
@@ -23,7 +23,7 @@ void	legend_text(t_sdl sdl)
 	size = text("Player: ", (t_pix) {20, y_pos}, sdl);
 	y_pos = y_pos - 30 - 5;
 	size = text("Point: ", (t_pix) {20, y_pos}, sdl);
-}
+}*/
 
 void	legend_graphic(t_color *buf)
 {

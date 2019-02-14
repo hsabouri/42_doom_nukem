@@ -37,6 +37,7 @@ static t_sdl	init_sdl(void)
 	SDL_Texture		*buf;
 	SDL_Renderer	*renderer;
 	TTF_Font		*font;
+	t_array			text;
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
@@ -51,7 +52,8 @@ static t_sdl	init_sdl(void)
 		SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 	font = init_font();
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	return ((t_sdl) {win, buf, renderer, font});
+	text = anew(NULL, NB_TEXT, sizeof(t_text));
+	return ((t_sdl) {win, buf, renderer, font, text});
 }
 
 int				main(int ac, char **av)
