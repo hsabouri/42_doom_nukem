@@ -19,6 +19,14 @@
 # define POINT_MAGIC	0x8BADF00D
 # define WALL_MAGIC		0x1B16B00B
 
+# define LOC_POINT sizeof(t_c_game)
+# define LOC_WALL(npoints) LOC_POINT + sizeof(t_c_point) * npoints
+# define LOC_SECTOR(npoints, nwalls) LOC_WALL(npoints) + sizeof(t_c_wall) * \
+			nwalls
+# define LOC_PORTAL(npoints, nwalls, nsectors) LOC_SECTOR(npoints, nwalls) + \
+			sizeof(t_c_sector) * nsectors
+
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
