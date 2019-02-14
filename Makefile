@@ -38,11 +38,11 @@ SRCS = $(SRCS_FILES:%=%)
 # Don't forget to list files at the end of the project
 # -----------------
 
-INCS_FILES = $(shell find srcs -name "*.c")
+INCS_FILES = $(shell find includes -name "*.h")
 
 # -----------------
 
-INCS_DIR = incs
+INCS_DIR = includes
 INCS = $(INCS_FILES:%=%)
 
 # -----------------
