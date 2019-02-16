@@ -14,17 +14,19 @@
 # define STRUCTURE_CLONE_H
 
 # define GAME_MAGIC		0xDEAD10C4
-# define SECTOR_MAGIC	0xCAFED00D
-# define PORTAL_MAGIC	0xC11BE
+# define MAT_MAGIC		0x0D15EA5E
 # define POINT_MAGIC	0x8BADF00D
 # define WALL_MAGIC		0x1B16B00B
+# define SECTOR_MAGIC	0xCAFED00D
+# define PORTAL_MAGIC	0xC11BE
 
-# define LOC_POINT sizeof(t_c_game)
-# define LOC_WALL(npoints) LOC_POINT + sizeof(t_c_point) * npoints
-# define LOC_SECTOR(npoints, nwalls) LOC_WALL(npoints) + sizeof(t_c_wall) * \
-			nwalls
-# define LOC_PORTAL(npoints, nwalls, nsectors) LOC_SECTOR(npoints, nwalls) + \
-			sizeof(t_c_sector) * nsectors
+# define LOC_MAT sizeof(t_c_game)
+# define LOC_POINT(nmats) LOC_MAT + sizeof(t_c_mat) * nmats
+# define LOC_WALL(nmats, npoints) LOC_POINT(nmats) + sizeof(t_c_point) * npoints
+# define LOC_SECTOR(nmats, npoints, nwalls) LOC_WALL(nmats, npoints) + \
+					sizeof(t_c_wall) * nwalls
+# define LOC_PORTAL(nmats, npoints, nwalls, nsectors) LOC_SECTOR(nmats, npoints,\
+					nwalls) + sizeof(t_c_sector) * nsectors
 
 
 # include <unistd.h>
@@ -37,13 +39,14 @@
 
 typedef struct		s_c_mat
 {
+	size_t			magic;
 	t_fvec2			pos;
 	t_fvec2			sca;
 	t_color			color;
 	t_img			*texture;
 	t_mode			mode;
 	t_color			filter;
-	size_t			overlay;
+	ssize_t			overlay;
 }					t_c_mat;
 
 typedef struct		s_c_ph
@@ -110,15 +113,10 @@ typedef struct		s_c_game
 {
 	size_t		magic;
 	t_c_player	player;
-	size_t		points;
 	size_t		npoints;
-	size_t		sectors;
 	size_t		nsectors;
-	size_t		walls;
 	size_t		nwalls;
-	size_t		portals;
 	size_t		nportals;
-	size_t		materials;
 	size_t		nmaterials;
 	size_t		textures;
 	size_t		ntextures;
@@ -126,5 +124,8 @@ typedef struct		s_c_game
 
 int					open_file(const char *file, int edit_mode, size_t *filesize);
 void				*dump_file(const char *file, int edit_mode, size_t *size);
+
+size_t				id_from_p(void *p_objet, void *tab, size_t size);
+void				*id_to_p(ssize_t index, void *tab, size_t size);
 
 #endif

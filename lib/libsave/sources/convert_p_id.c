@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_save.c                                        :+:      :+:    :+:   */
+/*   convert_p_addr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/11 11:08:23 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/11 11:08:25 by iporsenn         ###   ########.fr       */
+/*   Created: 2019/02/16 14:28:03 by iporsenn          #+#    #+#             */
+/*   Updated: 2019/02/16 14:28:08 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <doom.h>
+#include <load_save.h>
 
-int		main_save(char *name, char *type)
+inline size_t	id_from_p(void *ptr, void *tab, size_t size)
 {
-	t_game		game;
+	return ((ptr - tab) / size);
+}
 
-	if ((ft_strcmp(type, "save")) == 0)
-	{
-		game = generate_map(game);
-		save(name, game);
-	}
-	else if ((ft_strcmp(type, "load")) == 0)
-		game = load(name);
-	return (0);
+inline void		*id_to_p(ssize_t index, void *tab, size_t size)
+{
+	return (tab + index * size);
 }

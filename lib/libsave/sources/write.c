@@ -34,6 +34,32 @@ void		write_struct(void *struc, int fd, size_t size)
 	}
 }
 
+void		write_mats(int fd, t_mat *mats, size_t nmats)
+{
+	t_c_mat		fmats;
+	size_t	i;
+
+	i = 0;
+	while (i < nmats)
+	{
+		fmats.magic = MAT_MAGIC + i;
+		fmats.pos.u = mats[i].pos.u;
+		fmats.pos.v = mats[i].pos.v;
+		fmats.sca.u = mats[i].sca.u;
+		fmats.sca.v = mats[i].sca.v;
+		fmats.color = mats[i].color;
+		fmats.texture = NULL; // a voir apres save/load texture;
+		fmats.mode = mats[i].mode;
+		fmats.filter = mats[i].filter;
+		if (mats[i].overlay != NULL)
+			fmats.overlay = id_from_p(mats[i].overlay, mats, sizeof(t_mat));
+		else
+			fmats.overlay = -1;
+		write_struct(&fmats, fd, sizeof(t_c_mat));
+		i++;
+	}
+}
+
 void		write_points(int fd, t_vec2 *points, size_t npoints)
 {
 	t_c_point	fpoints;
@@ -49,7 +75,7 @@ void		write_points(int fd, t_vec2 *points, size_t npoints)
 	}
 }
 
-void	write_walls(int fd, t_wall *walls, size_t nwalls)
+void	write_walls(int fd, t_wall *walls, size_t nwalls, t_mat	*mats)
 {
 	t_c_wall	fwalls;
 	size_t		i;
@@ -61,13 +87,13 @@ void	write_walls(int fd, t_wall *walls, size_t nwalls)
 		fwalls.portal = walls[i].portal;
 		fwalls.a = walls[i].a;
 		fwalls.b = walls[i].b;
-		fwalls.mat = 0;
+		fwalls.mat = id_from_p(walls[i].mat, mats, sizeof(t_mat));
 		write_struct(&fwalls, fd, sizeof(t_c_wall));
 		i++;
 	}
 }
 
-void		write_sectors(int fd, t_sector *sectors, size_t nsectors)
+void		write_sectors(int fd, t_sector *sectors, size_t nsectors, t_mat *mats)
 {
 	t_c_sector	fsectors;
 	size_t		i;
@@ -82,8 +108,8 @@ void		write_sectors(int fd, t_sector *sectors, size_t nsectors)
 		fsectors.floor = f_from_float(sectors[i].floor);
 		fsectors.ceiling = f_from_float(sectors[i].ceiling);
 		fsectors.ambient = sectors[i].ambient;
-		fsectors.ceiling_mat = 0;
-		fsectors.floor_mat = 0;
+		fsectors.ceiling_mat = id_from_p(sectors[i].ceiling_mat, mats, sizeof(t_mat));
+		fsectors.floor_mat = id_from_p(sectors[i].floor_mat, mats, sizeof(t_mat));
 		write_struct(&fsectors, fd, sizeof(t_c_sector));
 		i++;
 	}
@@ -116,15 +142,17 @@ void		save(const char *filename, t_game game)
 
 	to_save.magic = GAME_MAGIC;
 	to_save.player = translate_player(game.player);
+	to_save.nmaterials = game.nmaterials;
 	to_save.npoints	= game.npoints;
 	to_save.nwalls = game.nwalls;
 	to_save.nsectors = game.nsectors;
 	to_save.nportals = game.nportals;
 	fd = open_file(filename, 1, NULL);
 	write_struct(&to_save, fd, sizeof(t_c_game));
+	write_mats(fd, game.materials, game.nmaterials);
 	write_points(fd, game.points, game.npoints);
-	write_walls(fd, game.walls, game.nwalls);
-	write_sectors(fd, game.sectors, game.nsectors);
+	write_walls(fd, game.walls, game.nwalls, game.materials);
+	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals);
 	console_log("FileLoader3030", "Successfully saved file.");
 	close(fd);
