@@ -20,5 +20,5 @@ void		save(const char *filename, t_game game);
 t_game		load(const char *filename);
 t_player	player_default(void);
 
-int			main_save();
+int			main_save(char *name, char *type);
 #endif

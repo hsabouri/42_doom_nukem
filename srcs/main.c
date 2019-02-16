@@ -61,8 +61,8 @@ int				main(int ac, char **av)
 	t_env		env;
 	size_t		frame;
 
-	if (ac == 2)
-		return(main_save(av[1]));
+	if (ac == 3)
+		return(main_save(av[1], av[2]));
 	env.sdl = init_sdl();
 	env.events = init_events();
 	env.game = generate_map(env.game);
