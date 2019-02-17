@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/26 21:26:54 by hugo             ###   ########.fr       */
+/*   Updated: 2019/02/16 17:00:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int				main(int ac, char **av)
 	env.game = generate_map(env.game);
 	env.editor = init_editor();
 	env.toggle_editor = 0;
+	env.game.id_buf = (u_int32_t *)malloc(WIDTH * HEIGHT * sizeof(int));
 	frame = 0;
 	while (env.sdl.win)
 	{

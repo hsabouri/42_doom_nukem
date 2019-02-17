@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bresenham.h                                        :+:      :+:    :+:   */
+/*   graphic_singletons.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/05 11:21:46 by hugo              #+#    #+#             */
-/*   Updated: 2019/02/17 14:45:21 by hsabouri         ###   ########.fr       */
+/*   Created: 2019/02/07 07:04:14 by hugo              #+#    #+#             */
+/*   Updated: 2019/02/16 14:43:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRESEMHAM_H
-# define BRESEMHAM_H
+#ifndef _GRAPHIC_SINGLETONS_H
+# define _GRAPHIC_SINGLETONS_H
 
 # include <vec.h>
 
-# ifndef GRAPHIC_H
+/*
+** This header contains all the singletons structures used to draw on screen
+** in a highly optimized manner.
+*/
 
-typedef struct	s_pix_fixed
+typedef struct	s_last
 {
-	t_fixed	x;
-	t_fixed	y;
-}				t_pix_fixed;
+	size_t	frame;
+	int		x;
+	int		start;
+	int		end;
+}				t_last;
 
-typedef struct	s_bres
+typedef struct	s_i_wall
 {
-	t_pix_fixed	src;
-	int			diff[2];
-	int			inc[2];
-}				t_bres;
-
-# endif
-
-# include <graphic.h>
-
-void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
+	size_t		wall_id;
+	t_fvec2		a;
+	t_fvec2		b;
+}				t_i_wall;
 
 #endif

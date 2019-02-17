@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/07 07:12:48 by hugo             ###   ########.fr       */
+/*   Updated: 2019/02/16 17:01:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHIC_H
 # define GRAPHIC_H
 
-# include <_graphic_singletons.h>
+# include <graphic_singletons.h>
 # include <structure.h>
 
 # define WIDTH 720
@@ -60,6 +60,7 @@ typedef struct	s_wall_proj
 	t_fixed		tex_x;
 	t_fixed		tex_y_iter;
 	t_mat		wall;
+	u_int32_t	id;
 }				t_wall_proj;
 
 typedef struct	s_h_proj
@@ -69,7 +70,9 @@ typedef struct	s_h_proj
 	t_fvec2		pos;
 	t_fvec2		h;
 	t_mat		floor;
+	u_int32_t	fl_id;
 	t_mat		ceiling;
+	u_int32_t	cl_id;
 }				t_h_proj;
 
 typedef struct	s_tex_proj
@@ -86,9 +89,12 @@ typedef struct	s_proj
 	int			step;
 	int			is_ceil;
 	int			ceil;
+	u_int32_t	st_id;
+	u_int32_t	tp_id;
 	t_wall_proj	w_proj;
 	t_h_proj	h_proj;
 	t_tex_proj	tex_proj;
+	u_int32_t	*id_buf;
 }				t_proj;
 
 

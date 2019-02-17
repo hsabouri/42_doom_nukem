@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/24 15:01:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/17 13:12:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	minimap(t_game game, t_color *buf)
 	}
 	bresenham(buf, (t_pix) {100, 100}, (t_pix) {100, 110}, RED);
 	bresenham(buf, (t_pix) {95, 100}, (t_pix) {105, 100}, RED);
+	draw_point((t_fvec2) {f_from_int(WIDTH / 2), f_from_int(HEIGHT / 2)},\
+		1, buf, RED);
 }
 
 t_env		game_loop(t_env env, size_t frame)
@@ -46,7 +48,7 @@ t_env		game_loop(t_env env, size_t frame)
 	int				pitch;
 
 	if (env.editor.enabled)
-		env.game = game_editing(env.game, env.events, env.game.player);
+		env.game = game_editing(env.game, env.events, env.game.player, &env.sdl);
 	env.game = player_properties(env.game, env.events);
 	env.game = physic(env.game, env.events);
 	env.game.frame = frame;
@@ -57,6 +59,7 @@ t_env		game_loop(t_env env, size_t frame)
 	minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
+	display_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	return (env);
 }

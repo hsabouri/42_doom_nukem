@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:29:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/31 14:23:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/17 11:31:08 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ inline t_editor		init_editor(void)
 		.zoom = 25.0,
 		.offset = (t_vec2) {0.0, 0.0},
 		.sel_point = -1,
-		.components = NULL,
 		.enabled = 1 };
 	res.points_wall[0] = -1;
 	res.points_wall[1] = -1;
@@ -98,6 +97,7 @@ t_env				editor_loop(t_env env, size_t frame)
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 	//text("Editor3030", (t_pix) {10, 10}, env.sdl);
 	//legend_text(env.sdl);
+	display_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	return (env);
 }

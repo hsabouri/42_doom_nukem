@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/05 11:55:09 by hugo             ###   ########.fr       */
+/*   Updated: 2019/02/17 13:31:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ t_text				text(const char *str, t_pix pos, t_sdl *sdl)
 	text.x = pos.x;
 	text.y = pos.y;
 	text_surface = TTF_RenderText_Shaded(sdl->font, str,\
-		(SDL_Color){255, 255, 255, 255}, (SDL_Color){0, 20, 33, 255});
-	text.text_texture = SDL_CreateTextureFromSurface(sdl->renderer, text_surface);
+		(SDL_Color){255, 255, 255, 255}, (SDL_Color){0, 0, 0, 0});
+	SDL_SetColorKey(text_surface, SDL_TRUE, 0);
+	text.text_texture = SDL_CreateTextureFromSurface(sdl->renderer,\
+		text_surface);
 	SDL_QueryTexture(text.text_texture, NULL, NULL, &text.w, &text.h);
 	SDL_FreeSurface(text_surface);
 	sdl->text = *apush(&sdl->text, &text);
@@ -66,7 +68,8 @@ void				display_text(t_sdl sdl)
 	while ((current = (t_text*)apop(&sdl.text)))
 	{
 		SDL_RenderCopy(sdl.renderer, current->text_texture, NULL,\
-			&((SDL_Rect) {current->x, current->y, current->w, current->h}));
+			&((SDL_Rect) {current->x, current->y, current->w * 0.8,\
+			current->h}));
 		SDL_DestroyTexture(current->text_texture);
 	}
 }
