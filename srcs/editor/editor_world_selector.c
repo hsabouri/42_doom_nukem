@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bresenham.h                                        :+:      :+:    :+:   */
+/*   editor_world_selector.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/05 11:21:46 by hugo              #+#    #+#             */
-/*   Updated: 2019/02/17 14:45:21 by hsabouri         ###   ########.fr       */
+/*   Created: 2019/02/12 14:16:54 by hugo              #+#    #+#             */
+/*   Updated: 2019/02/17 11:25:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRESEMHAM_H
-# define BRESEMHAM_H
+#include <editor.h>
+#include <graphic.h>
 
-# include <vec.h>
-
-# ifndef GRAPHIC_H
-
-typedef struct	s_pix_fixed
+t_selected			world_selector(t_game game)
 {
-	t_fixed	x;
-	t_fixed	y;
-}				t_pix_fixed;
+	const size_t		sc_center = (WIDTH >> 1) + (HEIGHT >> 1) * WIDTH;
+	const u_int32_t		serial = game.id_buf[sc_center];
+	const t_selected	res = translate_out(serial);
 
-typedef struct	s_bres
-{
-	t_pix_fixed	src;
-	int			diff[2];
-	int			inc[2];
-}				t_bres;
-
-# endif
-
-# include <graphic.h>
-
-void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
-
-#endif
+	return (res);
+}

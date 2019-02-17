@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:47:12 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/17 14:36:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ static int		draw_roof(int x, t_proj proj, t_last last, t_color *buf)
 	y = last.start;
 	while (y < proj.top && y < last.end)
 	{
-		buf[x + y * WIDTH] = get_roof_pixel(proj.h_proj, proj.tex_proj, y - f_to_int(proj.h_proj.z_axis * 100));
+		buf[x + y * WIDTH] = get_roof_pixel(proj.h_proj, proj.tex_proj, y\
+			- f_to_int(proj.h_proj.z_axis * 100));
+		++y;
+	}
+	y = last.start;
+	while (y < proj.top && y < last.end)
+	{
+		proj.id_buf[x + y * WIDTH] = proj.h_proj.cl_id;
 		++y;
 	}
 	return (y);
@@ -35,6 +42,7 @@ static int		draw_step_ceiling(int x, t_proj proj, t_last last, t_color *buf)
 	{
 		buf[x + y * WIDTH] =\
 			get_wall_pixel(proj.w_proj, proj.tex_proj, proj.bot - y);
+		proj.id_buf[x + y * WIDTH] = proj.tp_id;
 		++y;
 	}
 	res = y;
@@ -43,6 +51,7 @@ static int		draw_step_ceiling(int x, t_proj proj, t_last last, t_color *buf)
 	{
 		buf[x + y * WIDTH] =\
 			get_wall_pixel(proj.w_proj, proj.tex_proj, proj.bot - y);
+		proj.id_buf[x + y * WIDTH] = proj.st_id;
 		++y;
 	}
 	return (res);
@@ -59,6 +68,12 @@ static int		draw_wall(int x, t_proj proj, t_last last, t_color *buf)
 			get_wall_pixel(proj.w_proj, proj.tex_proj, proj.bot - y);
 		++y;
 	}
+	y = (proj.top >= last.start) ? proj.top : last.start;
+	while (y < proj.bot && y < last.end)
+	{
+		proj.id_buf[x + y * WIDTH] = proj.w_proj.id;
+		++y;
+	}
 	return (y);
 }
 
@@ -71,7 +86,14 @@ static int		draw_floor(int x, t_proj proj, t_last last, t_color *buf)
 		return (last.end);
 	while (y < last.end)
 	{
-		buf[x + y * WIDTH] = get_floor_pixel(proj.h_proj, proj.tex_proj, y - f_to_int(proj.h_proj.z_axis * 100));
+		buf[x + y * WIDTH] = get_floor_pixel(proj.h_proj, proj.tex_proj, y\
+			- f_to_int(proj.h_proj.z_axis * 100));
+		++y;
+	}
+	y = (proj.bot >= last.start) ? proj.bot : last.start;
+	while (y < last.end)
+	{
+		proj.id_buf[x + y * WIDTH] = proj.h_proj.fl_id;
 		++y;
 	}
 	return (y);

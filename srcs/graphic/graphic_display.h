@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _graphic_singletons.h                              :+:      :+:    :+:   */
+/*   graphic_display.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/07 07:04:14 by hugo              #+#    #+#             */
-/*   Updated: 2019/02/07 07:09:30 by hugo             ###   ########.fr       */
+/*   Created: 2019/02/12 10:28:14 by hugo              #+#    #+#             */
+/*   Updated: 2019/02/12 11:03:44 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _GRAPHIC_SINGLETONS_H
-# define _GRAPHIC_SINGLETONS_H
+#ifndef GRAPHIC_DISPLAY_H
+# define GRAPHIC_DISPLAY_H
 
-# include <vec.h>
-
-/*
-** This header contains all the singletons structures used to draw on screen
-** in a highly optimized manner.
-*/
+# include <stdlib.h>
 
 typedef struct	s_last
 {
@@ -27,12 +22,5 @@ typedef struct	s_last
 	int		start;
 	int		end;
 }				t_last;
-
-typedef struct	s_i_wall
-{
-	size_t		wall_id;
-	t_fvec2		a;
-	t_fvec2		b;
-}				t_i_wall;
 
 #endif

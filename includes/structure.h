@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:28:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/16 16:46:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ typedef struct		s_game
 	t_img		*textures;
 	size_t		ntextures;
 	size_t		frame;
+	u_int32_t	*id_buf;
 }					t_game;
 
 t_game				generate_map(t_game game);

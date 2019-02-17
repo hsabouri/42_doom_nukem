@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/30 16:30:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/17 14:43:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define NB_TEXT 	100
 
 
-typedef struct	s_text
+typedef struct			s_text
 {
 	int16_t		x;
 	int16_t		y;
@@ -114,7 +114,7 @@ t_editor				select_multi_points(t_editor editor,\
 void					legend_text(t_sdl sdl);
 void					legend_graphic(t_color *buf);
 t_game					game_editing(t_game game, t_event events,\
-						t_player player);
+						t_player player, t_sdl *sdl);
 t_game					player_properties(t_game game, t_event events);
 
 #endif

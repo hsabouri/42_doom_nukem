@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/31 14:20:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/17 11:17:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,7 @@
 # define POINT_SIZE 4
 # define ENTITY_SIZE 3
 
-typedef enum	e_part
-{
-	PART_FLOOR,
-	PART_CEILING
-}				t_part;
+# include <srcs/common/translate_id.h>
 
 typedef enum	e_tool
 {
@@ -32,16 +28,6 @@ typedef enum	e_tool
 	WALL,
 	PORTAL
 }				t_tool;
-
-typedef struct	s_component
-{
-	char	hover;
-	char	focus;
-	t_pix	position;
-	t_pix	size;
-	t_color	color;
-	t_color	hlcolor;
-}				t_component;
 
 typedef struct	s_editor
 {
@@ -53,7 +39,6 @@ typedef struct	s_editor
 	ssize_t		sel_wall;
 	ssize_t		points_wall[2];
 	int			selecting;
-	t_component	*components;
 }				t_editor;
 
 t_editor		init_editor(void);
@@ -71,6 +56,8 @@ t_game			delete_portal(size_t portal, t_game game);
 t_game			delete_sector(size_t sector, t_game game);
 t_game			delete_wall(size_t wall, t_game game);
 t_game			delete_point(size_t point, t_game game);
+
+t_selected		world_selector(t_game game);
 
 t_game			del_update_walls(ssize_t pts, ssize_t portal, ssize_t mat,\
 				t_game game);

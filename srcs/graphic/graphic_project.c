@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_project.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/07 07:12:29 by hugo             ###   ########.fr       */
+/*   Updated: 2019/02/16 17:00:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 #include "./graphic_project.h"
+#include "../common/translate_id.h"
 
 static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game game)
 {
@@ -40,7 +41,11 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 		res.step = bot + f_div(RATIO * (h2.u - h.u), hit.u);
 		res.ceil = f_to_int((f_from_int(HEIGHT) >> 1) + res.ceil);
 		res.step = f_to_int((f_from_int(HEIGHT) >> 1) + res.step);
+		res.st_id = translate_in(PART_PORTAL, MOD_STEP, hit.wall, 0);
+		res.tp_id = translate_in(PART_PORTAL, MOD_CEIL, hit.wall, 0);
 	}
+	res.h_proj.fl_id = translate_in(PART_FLOOR, MOD_NO, sector[0].sector_id, 0);
+	res.h_proj.cl_id = translate_in(PART_CEILING, MOD_NO, sector[0].sector_id, 0);
 	res.top = (f_from_int(HEIGHT) >> 1) + top;
 	res.bot = (f_from_int(HEIGHT) >> 1) + bot;
 	res.w_proj.tex_y_iter = f_div(f_from_int(1) << Y_PRECISION, res.bot - res.top);
@@ -55,6 +60,8 @@ static t_proj	project_wall(t_ph physic, t_hit hit, t_sector sector[2], t_game ga
 	res.h_proj.ceiling = *sector[0].ceiling_mat;
 	res.h_proj.floor = *sector[0].floor_mat;
 	res.w_proj.wall = *res.tex_proj.wall.mat;
+	res.w_proj.id = translate_in(PART_WALL, MOD_NO, hit.wall, 0);
+	res.id_buf = game.id_buf;
 	return (res);
 }
 
