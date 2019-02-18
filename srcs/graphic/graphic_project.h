@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 07:10:48 by hugo              #+#    #+#             */
-/*   Updated: 2019/02/15 12:11:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/18 12:23:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ typedef struct	s_hit
 	t_fixed		t;
 	t_fixed		u;
 }				t_hit;
+
+t_proj			projection(t_ph physic, t_hit hit, t_sector sector[2],
+				t_game game);
 
 #endif
