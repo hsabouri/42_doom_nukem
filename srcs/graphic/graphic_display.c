@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/17 14:36:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/18 15:59:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void			render_wall(int x, t_proj proj, t_color *buf, size_t frame)
 {
 	static t_last	last = (t_last) {0, 0, 0, HEIGHT};
 
+	if (proj.not_found == 1)
+		return ;
 	if (x != last.x || frame != last.frame)
 		last = (t_last) {frame, x, 0, HEIGHT};
 	last.start = draw_roof(x, proj, last, buf);

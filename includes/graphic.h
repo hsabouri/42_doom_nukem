@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/16 17:01:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/18 15:56:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_tex_proj
 
 typedef struct	s_proj
 {
+	int			not_found;
 	int			top;
 	int			bot;
 	int			is_step;
