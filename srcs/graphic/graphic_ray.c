@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 11:51:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/18 16:04:51 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/18 16:22:07 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,12 @@ t_color *buf)
 		i_wall.b = vec2_to_fvec2(game.points[wall.b]);
 		hit = ray_wall(ray.dir, i_wall, game.player.physic);
 		if (hit.wall >= 0)
+		{
 			if (wall.portal >= 0)
 				return (teleport(game, wall, sector, ray, hit, buf));
 			else
 				return (projection(game.player.physic, hit, &sector, game));
+		}
 		++i_wall.wall_id;
 	}
 	return ((t_proj) {.not_found = 1});
