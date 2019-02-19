@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 07:04:14 by hugo              #+#    #+#             */
-/*   Updated: 2019/02/16 14:43:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:30:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_last
 typedef struct	s_i_wall
 {
 	size_t		wall_id;
+	ssize_t		portal;
 	t_fvec2		a;
 	t_fvec2		b;
 }				t_i_wall;
