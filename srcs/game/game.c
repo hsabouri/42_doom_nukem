@@ -6,11 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/17 13:12:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/20 12:15:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
+#include "srcs/common/time_measure.h"
 
 t_vec2		player_space(t_vec2 vec, t_ph physic)
 {
@@ -46,7 +47,9 @@ t_env		game_loop(t_env env, size_t frame)
 {
 	t_color			*content;
 	int				pitch;
+	double			timer;
 
+	timer = start_timer();
 	if (env.editor.enabled)
 		env.game = game_editing(env.game, env.events, env.game.player, &env.sdl);
 	env.game = player_properties(env.game, env.events);
@@ -61,5 +64,7 @@ t_env		game_loop(t_env env, size_t frame)
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 	display_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
+	timer = end_timer(timer);
+	printf("%f\n", 1 / timer);
 	return (env);
 }
