@@ -26,7 +26,15 @@ BLINK=\x1b[5;01m
 SRCDIR = sources
 OBJDIR = objs
 INCDIR = includes
-SRCNAM = open_file.c parse.c default.c write.c convert_p_id.c
+SRCNAM =	open_file.c\
+			parse.c\
+			write.c\
+			write_map.c\
+			convert_p_id.c\
+			parse_map.c\
+			parse_textures_sounds.c\
+			default.c\
+			debug.c
 INCNAM = structure_clone.h load_save.h
 
 SRC=$(SRCNAM:%=$(SRCDIR)/%)

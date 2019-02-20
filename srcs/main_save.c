@@ -12,16 +12,11 @@
 
 #include <doom.h>
 
-int		main_save(char *name, char *type)
+int		main_save(char *name)
 {
 	t_game		game;
 
-	if ((ft_strcmp(type, "save")) == 0)
-	{
-		game = generate_map(game);
-		save(name, game);
-	}
-	else if ((ft_strcmp(type, "load")) == 0)
-		game = load(name);
+	game = generate_map(game);
+	save(name, game);
 	return (0);
 }
