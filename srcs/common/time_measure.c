@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphic_singletons.h                               :+:      :+:    :+:   */
+/*   time_measure.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/07 07:04:14 by hugo              #+#    #+#             */
-/*   Updated: 2019/02/19 18:30:25 by hsabouri         ###   ########.fr       */
+/*   Created: 2019/02/20 12:05:23 by hsabouri          #+#    #+#             */
+/*   Updated: 2019/02/20 12:10:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _GRAPHIC_SINGLETONS_H
-# define _GRAPHIC_SINGLETONS_H
+#include "./time_measure.h"
 
-# include <vec.h>
-
-/*
-** This header contains all the singletons structures used to draw on screen
-** in a highly optimized manner.
-*/
-
-typedef struct	s_last
+inline double	start_timer(void)
 {
-	size_t	frame;
-	int		x;
-	int		start;
-	int		end;
-}				t_last;
+	return ((double)clock());
+}
 
-typedef struct	s_i_wall
+inline double	end_timer(double start)
 {
-	size_t		wall_id;
-	ssize_t		portal;
-	t_fvec2		a;
-	t_fvec2		b;
-}				t_i_wall;
-
-#endif
+	return ((double)(clock() - start) / CLOCKS_PER_SEC);
+}
