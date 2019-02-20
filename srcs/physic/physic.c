@@ -22,5 +22,6 @@ t_game	physic(t_game game, t_event events)
 	last_pos.sector_id = game.player.physic.sector_id;
 	new_game.player = player_physic(events, game);
 	new_game.player = player_track(new_game.player, game, last_pos);
+	// printf("pos.x = %f, pos.y = %f\n", game.player.physic.pos.x, game.player.physic.pos.y);
 	return (new_game);
 }

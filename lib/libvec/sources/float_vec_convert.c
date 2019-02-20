@@ -34,7 +34,7 @@ inline t_vec3	fvec3_to_vec3(t_fvec3 fvec)
 inline t_vec2	fvec2_to_vec2(t_fvec2 fvec)
 {
 	return ((t_vec2) {
-		f_to_float(fvec.v),
-		f_to_float(fvec.u)
+		f_to_float(fvec.u),
+		f_to_float(fvec.v)
 	});
 }

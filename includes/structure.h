@@ -54,16 +54,6 @@ typedef struct		s_ph
 }						t_ph;
 
 /*
-typedef struct			s_texture
-{
-	t_color		*data;
-	uint16_t	width;
-	uint16_t	height;
-	int			transparent;
-}						t_texture;
-*/
-
-/*
 typedef enum			u_wtype
 {
 	GUN,

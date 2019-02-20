@@ -28,9 +28,9 @@ t_game	generate_map(t_game game)
 			0
 		},
 		(t_ph) {
-			9.81,
-			1.80,
-			(t_vec3){13, 3, 0},
+			0.02,
+			1.25,
+			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -178,8 +178,8 @@ t_game	generate_map(t_game game)
 	game.points = points;
 	game.npoints = 20;
 	game.textures = textures;
-	game.ntextures = 2;
+	game.ntextures = 3;
 	game.materials = materials;
-	game.nmaterials = 2;
+	game.nmaterials = 6;
 	return (game);
 }

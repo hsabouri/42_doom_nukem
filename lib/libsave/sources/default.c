@@ -16,11 +16,11 @@ t_player	player_default(void)
 {
 	return ((t_player) {
 		(t_ph) {
-			9.81,
-			2,
-			(t_vec3) {0, 0, 0},
-			(t_vec3) {0, 0, 0},
-			(t_vec3) {1, 1, 1},
+			0.02,
+			1.25,
+			(t_vec3){7, 9, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
 			0,
 			0,
 			0,
@@ -28,11 +28,11 @@ t_player	player_default(void)
 			0
 		},
 		(t_ph) {
-			9.81,
-			2,
-			(t_vec3) {0, 0, 0},
-			(t_vec3) {0, 0, 0},
-			(t_vec3) {1, 1, 1},
+			0.02,
+			1.25,
+			(t_vec3){7, 9, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
 			0,
 			0,
 			0,
