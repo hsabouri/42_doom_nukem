@@ -12,16 +12,41 @@
 
 #include <doom.h>
 
-t_game	physic(t_game game, t_event events)
+static t_vec3	set_speed(t_ph physic, t_event events)
+{
+	t_vec3	new_speed;
+
+	new_speed.x = 0;
+	new_speed.y = 0;
+	new_speed.z = physic.speed.z;
+	if (events.keys[SDL_SCANCODE_A] || events.keys[SDL_SCANCODE_D])
+	{
+		new_speed.x = (-physic.speed_max.x * events.keys[SDL_SCANCODE_D]
+			+ physic.speed_max.x * events.keys[SDL_SCANCODE_A]) /
+			(float)SPEED_REDUCE;
+	}
+	if (events.keys[SDL_SCANCODE_W] || events.keys[SDL_SCANCODE_S])
+		new_speed.y = (-physic.speed_max.y * events.keys[SDL_SCANCODE_S]
+		+ physic.speed_max.y * events.keys[SDL_SCANCODE_W]) /
+		(float)SPEED_REDUCE;
+	if (physic.fly)
+	{
+		new_speed.z = (-physic.speed_max.z * events.keys[SDL_SCANCODE_LCTRL]
+		+ physic.speed_max.z * events.keys[SDL_SCANCODE_SPACE]) /
+		(float)SPEED_REDUCE;
+	}
+	new_speed = vec3_rot_z(new_speed, physic.look_h);
+	return (new_speed);
+}
+
+t_game			physic(t_game game, t_event events)
 {
 	t_game		new_game;
-	t_last_pos	last_pos;
+	t_ph		new_physic;
 
 	new_game = game;
-	last_pos.pos = game.player.physic.pos;
-	last_pos.sector_id = game.player.physic.sector_id;
-	new_game.player = player_physic(events, game);
-	new_game.player = player_track(new_game.player, game, last_pos);
-	// printf("pos.x = %f, pos.y = %f\n", game.player.physic.pos.x, game.player.physic.pos.y);
+	new_physic = game.player.physic;
+	new_physic.speed = set_speed(game.player.physic, events);
+	new_game.player.physic = entities_physic(new_physic, game);
 	return (new_game);
 }
