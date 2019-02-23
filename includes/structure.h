@@ -49,7 +49,7 @@ typedef struct		s_ph
 	float		look_h;
 	t_fixed		look_v;
 	u_int32_t	sector_id;
-	char		jump;
+	u_int32_t	jump;
     char		fly;
 }						t_ph;
 

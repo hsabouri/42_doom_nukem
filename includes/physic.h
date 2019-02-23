@@ -38,6 +38,7 @@ typedef struct      s_touch
 {
     int     wall;
     float   dist;
+    t_vec3  pos;
 }                   t_touch;
 
 typedef struct      s_last_pos
@@ -46,14 +47,17 @@ typedef struct      s_last_pos
     t_vec3      pos;
 }                   t_last_pos;
 
-int	        	seg_seg(t_vec3  next_pos, t_player player, t_touch *touch, \
-                t_game game);
-t_touch			collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, \
-                int wall);
+int	        	seg_seg(t_vec3  next_pos, t_ph physic, t_touch *touch,\
+t_game game);
+t_touch			collision(t_vec3 next_pos, t_ph physic, t_game game, int wall);
 t_vec3	    	floor_col(float pos_z, t_sector sector, t_vec3 speed);
 t_vec3	    	ceil_col(float pos_z, t_sector sector, t_vec3 speed);
 t_vec3	    	slide_wall(t_vec3 next_pos, t_game game, t_wall wall);
 
-t_player	    player_track(t_player player, t_game game, t_last_pos last_pos);
+t_ph		    entities_physic(t_ph physic, t_game game);
+t_ph            entities_track(t_ph physic, t_game game, t_last_pos last_pos);
 
+void			set_tp(t_tp *teleport, t_touch touch, t_game game);
+t_vec3		    teleportation(t_vec3 pos, t_game game, t_tp teleport,\
+t_ph *physic);
 #endif

@@ -12,49 +12,47 @@
 
 #include <doom.h>
 
-int		seg_seg(t_vec3  next_pos, t_player player, t_touch *touch, t_game game)
+int			seg_seg(t_vec3 next_pos, t_ph physic, t_touch *touch, t_game game)
 {
-	t_vec2	AB;
-	t_vec2	CD;
+	t_vec2	ab;
+	t_vec2	cd;
 	float	denom;
 	float	dist[2];
 
-	AB = vec2_new(game.points[game.walls[touch->wall].b].u - \
-					game.points[game.walls[touch->wall].a].u, \
-					game.points[game.walls[touch->wall].b].v - \
-					game.points[game.walls[touch->wall].a].v);
-	CD = vec2_new(next_pos.x - player.physic.pos.x, \
-					next_pos.y - player.physic.pos.y);
-	denom = vec2_cross(AB, CD).z;
+	ab = vec2_new(game.points[game.walls[touch->wall].b].u -
+		game.points[game.walls[touch->wall].a].u,
+		game.points[game.walls[touch->wall].b].v -
+		game.points[game.walls[touch->wall].a].v);
+	cd = vec2_new(next_pos.x - physic.pos.x, next_pos.y - physic.pos.y);
+	denom = vec2_cross(ab, cd).z;
 	if (denom < -0.0001 && denom > 0.0001)
 		return (-1);
-	dist[0] = -(game.points[game.walls[touch->wall].a].u * CD.v - \
-	player.physic.pos.x * CD.v - CD.u * game.points[game.walls[touch->wall].a].v\
-	+ CD.u * player.physic.pos.y) / denom;
+	dist[0] = -(game.points[game.walls[touch->wall].a].u * cd.v -
+		physic.pos.x * cd.v - cd.u * game.points[game.walls[touch->wall].a].v
+		+ cd.u * physic.pos.y) / denom;
 	if (dist[0] < 0 || dist[0] > 1)
 		return (0);
-	dist[1] = -(-AB.u * game.points[game.walls[touch->wall].a].v + AB.u * \
-		player.physic.pos.y + AB.v * game.points[game.walls[touch->wall].a].u - \
-		AB.v * player.physic.pos.x) / denom;
+	dist[1] = -(-ab.u * game.points[game.walls[touch->wall].a].v + ab.u *
+		physic.pos.y + ab.v * game.points[game.walls[touch->wall].a].u -
+		ab.v * physic.pos.x) / denom;
 	if (dist[1] < 0 || dist[1] > 1)
 		return (0);
 	touch->dist = dist[1];
 	return (1);
 }
 
-t_touch		collision(t_vec3 next_pos, t_game game, u_int32_t *sector_id, \
-						int wall)
+t_touch		collision(t_vec3 next_pos, t_ph physic, t_game game, int wall)
 {
 	int		end;
 	t_touch	touch;
 
-	end = game.sectors[*sector_id].start + game.sectors[*sector_id].number;
-	touch.wall = game.sectors[*sector_id].start;
+	end = game.sectors[physic.sector_id].start +
+		game.sectors[physic.sector_id].number;
+	touch.wall = game.sectors[physic.sector_id].start;
 	touch.dist = 0;
 	while (touch.wall < end)
 	{
-		if (touch.wall != wall && seg_seg(next_pos, game.player, &touch, game) \
-			== 1)
+		if (touch.wall != wall && seg_seg(next_pos, physic, &touch, game) == 1)
 			return (touch);
 		touch.wall++;
 	}
@@ -104,8 +102,7 @@ t_vec3		slide_wall(t_vec3 next_pos, t_game game, t_wall wall)
 	float		d;
 	float		dist[2];
 
-	line_vector = vec2_sub(game.points[wall.b], \
-							game.points[wall.a]);
+	line_vector = vec2_sub(game.points[wall.b], game.points[wall.a]);
 	v2_normal.u = line_vector.v;
 	v2_normal.v = -line_vector.u;
 	v2_normal = vec2_normalize(v2_normal);

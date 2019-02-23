@@ -65,6 +65,6 @@ t_env		game_loop(t_env env, size_t frame)
 	display_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	timer = end_timer(timer);
-	printf("%f\n", 1 / timer);
+	// printf("%f\n", 1 / timer);
 	return (env);
 }
