@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/25 16:48:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/25 17:19:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,6 @@ t_limit limits)
 void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 {
 	const t_limit	limit_rays = build_limits(context);
-	//const t_bunch	bunch = build_bunch(game, context, limit_rays);
+	const t_bunch	bunch = build_bunch(game, context, limit_rays);
 	//build_sections(game, context, bunch, limit_rays);
 }
