@@ -125,8 +125,7 @@ int		get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
 	if (col.ratios.v <= 0 || col.ratios.v >= f_from_int(1) || col.ratios.u < 0)
 		id = max;
 	else
-		id = f_to_int(col.ratios.v * (context.right - context.left));
-	printf("ray id: %d\n", id);
+		id = f_to_int(col.ratios.v * (context.right - context.left)) + (max == 0);
 	return (id);
 }
 
@@ -139,26 +138,28 @@ t_limit limits)
 	t_render		render;
 
 	render.nsections = 0;
-	//while (render.nsections < bunch.nwalls)
-	//{
+	while (render.nsections < bunch.nwalls)
+	{
 		current = bunch.walls[render.nsections];
 		current_section.wall = current;
-		printf("wall id: %zu\n", current.id);
 		current_section.start = get_ray_id(take_left(current.a, current.b), limits, context, context.left);
-		//current_section.end = get_ray_id(pos, take_right(current.a, current.b), limits, limits.i_right);
+		current_section.end = get_ray_id(take_right(current.a, current.b), limits, context, context.right);
 		current_section.a = ray_seg(
 			take_left(current.a, current.b),
 			take_right(current.a, current.b),
 			fvec2_new(0, 0),
 			get_ray_dir(context.physic, current_section.start)
 		).ratios;
-		printf("	left: (%f, %f)\n", f_to_float(current_section.a.u), f_to_float(current_section.a.v));
-		printf("	ray: (%f, %f)\n",
-			f_to_float(get_ray_dir(context.physic, current_section.start).u),
-			f_to_float(get_ray_dir(context.physic, current_section.start).v)
-		);
+		current_section.b = ray_seg(
+			take_left(current.a, current.b),
+			take_right(current.a, current.b),
+			fvec2_new(0, 0),
+			get_ray_dir(context.physic, current_section.end)
+		).ratios;
+		printf("from %d to %d (wall: %zu), ", current_section.start, current_section.end, current_section.wall.id);
 		++render.nsections;
-	//}
+	}
+	printf("\n");
 }
 
 /*********************************************************************************
@@ -166,7 +167,6 @@ t_limit limits)
 
 void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 {
-	printf("%f\n", game.player.physic.look_h);
 	const t_limit	limit_rays = build_limits(context);
 	const t_bunch	bunch = build_bunch(game, context, limit_rays);
 	build_sections(game, context, bunch, limit_rays);
