@@ -6,12 +6,14 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/20 12:15:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/25 17:01:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 #include "srcs/common/time_measure.h"
+
+#include "srcs/graphic/graphic_v2.h"
 
 t_vec2		player_space(t_vec2 vec, t_ph physic)
 {
@@ -58,7 +60,13 @@ t_env		game_loop(t_env env, size_t frame)
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	env.current_buffer = content;
-	raycast(env.game, env.game.player.physic.sector_id, env.current_buffer);
+	background(env.current_buffer, NO_COLOR);
+	render(
+		env.game,
+		(t_context) {0, WIDTH - 1, env.game.player.physic, -1, env.game.player.physic.sector_id},
+		env.current_buffer, env.game.id_buf);
+	
+	//raycast(env.game, env.game.player.physic.sector_id, env.current_buffer);
 	minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
