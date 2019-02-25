@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/25 17:19:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/25 1:48:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_bunch
 t_fvec2	get_ray_dir(t_ph physic, int id)
 {
 	return (vec2_to_fvec2(vec2_rot((t_vec2) {
-		(-PWIDTH / 2) - id * (PWIDTH / WIDTH), PDIS},
+		(-PWIDTH / 2) + id * (PWIDTH / WIDTH), PDIS},
 		physic.look_h)));
 }
 
@@ -66,11 +66,9 @@ t_bunch	build_bunch(t_game game, t_context context, t_limit limit)
 			current.mat = *game.walls[i].mat;
 			ret.walls[ret.nwalls] = current;
 			++ret.nwalls;
-			printf("%d, ", current.id);
 		}
 		++i;
 	}
-	printf("\n");
 	return (ret);
 }
 
@@ -99,7 +97,7 @@ t_hit	ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d)
 
 int		is_left(t_fvec2 a, t_fvec2 b)
 {
-	return (fvec2_cross(a, b).z <= 0);
+	return (fvec2_cross(a, b).z >= 0);
 }
 
 t_fvec2	take_left(t_fvec2 a, t_fvec2 b)
@@ -123,7 +121,7 @@ int		get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
 	t_hit	col;
 	int		id;
 	
-	col = ray_seg(fvec2_new(0, 0), point, limit.right.dir, limit.left.dir);
+	col = ray_seg(fvec2_new(0, 0), point, limit.left.dir, limit.right.dir);
 	if (col.ratios.v <= 0 || col.ratios.v >= f_from_int(1) || col.ratios.u < 0)
 		id = max;
 	else
@@ -168,7 +166,8 @@ t_limit limits)
 
 void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 {
+	printf("%f\n", game.player.physic.look_h);
 	const t_limit	limit_rays = build_limits(context);
 	const t_bunch	bunch = build_bunch(game, context, limit_rays);
-	//build_sections(game, context, bunch, limit_rays);
+	build_sections(game, context, bunch, limit_rays);
 }
