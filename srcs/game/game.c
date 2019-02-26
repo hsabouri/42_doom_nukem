@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/25 19:13:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/26 19:31:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_env		game_loop(t_env env, size_t frame)
 	background(env.current_buffer, NO_COLOR);
 	render(
 		env.game,
-		(t_context) {0, WIDTH - 1, env.game.player.physic, -1, env.game.player.physic.sector_id},
+		(t_context) {150, WIDTH - 150, env.game.player.physic, -1, env.game.sectors[env.game.player.physic.sector_id]},
 		env.current_buffer, env.game.id_buf);
 	
 	//raycast(env.game, env.game.player.physic.sector_id, env.current_buffer);
