@@ -90,6 +90,17 @@ typedef struct		s_player
 	//t_weapon	weapons[5];
 }					t_player;
 
+typedef struct		s_entity
+{
+	t_ph		physic;
+	t_ph		spawn;
+	t_mat		sprite[4];
+	//float life;
+	//float  armor;
+	//t_weapon weapons;
+	//int damage;
+}					t_entity;
+
 typedef struct		s_portal
 {
 	u_int32_t	from_sector;
@@ -123,6 +134,8 @@ typedef struct		s_sector
 typedef struct		s_game
 {
 	t_player	player;
+	t_entity	*entities;
+	size_t		nentities;
 	t_sector	*sectors;
 	size_t		nsectors;
 	t_wall		*walls;

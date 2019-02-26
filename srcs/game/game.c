@@ -49,6 +49,17 @@ static void	minimap(t_game game, t_color *buf)
 	bresenham(buf, (t_pix) {95, HEIGHT - 100}, (t_pix) {105, HEIGHT - 100}, RED);
 	draw_point((t_fvec2) {f_from_int(WIDTH / 2), f_from_int(HEIGHT / 2)},\
 		1, buf, RED);
+	i = 0;
+	while (i < game.nentities)
+	{
+		a = vec3_to_vec2(game.entities[i].physic.pos);
+		a = player_space(a, game.player.physic);
+		t_fvec2 a_f = vec2_to_fvec2(a);
+		a_f = fvec2_scale(fvec2_add(a_f, fvec2_new(f_from_int(10), f_from_int(10))), f_from_int(10));
+		draw_point(a_f,\
+		2,buf, BLUE);
+		i++;
+	}
 }
 
 t_env		game_loop(t_env env, size_t frame)
@@ -59,9 +70,12 @@ t_env		game_loop(t_env env, size_t frame)
 
 	timer = start_timer();
 	if (env.editor.enabled)
-		env.game = game_editing(env.game, env.events, env.game.player, &env.sdl);
+	
+	env.game = game_editing(env.game, env.events, env.game.player, &env.sdl);
 	env.game = player_properties(env.game, env.events);
+	//env.game = entities_properties(env.game, env.events);
 	env.game = physic(env.game, env.events);
+
 	env.game.frame = frame;
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
