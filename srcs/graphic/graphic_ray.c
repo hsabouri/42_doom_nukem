@@ -6,12 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 11:51:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/25 12:58:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/27 15:48:31 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 #include "./graphic_project.h"
+/*
 
 static t_proj	teleport(t_game game, t_wall wall, t_sector sector,
 t_ray ray, t_hit hit, t_color *buf)
@@ -117,3 +118,5 @@ void			raycast(t_game game, size_t sector_id, t_color *buf)
 		ray.id++;
 	}
 }
+
+*/

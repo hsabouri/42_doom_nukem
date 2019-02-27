@@ -26,12 +26,15 @@ t_fvec2	get_ray_dir(t_ph physic, int id)
 }
 
 t_limit	build_limits(t_context context)
-{ t_limit		limit_rays;
+{
+	t_limit		limit_rays;
 
 	limit_rays.left.dir = get_ray_dir(context.physic, context.left);
 	limit_rays.left.id = context.left;
+	limit_rays.left.mask_wall = context.mask;
 	limit_rays.right.dir = get_ray_dir(context.physic, context.right);
-	limit_rays.left.id = context.right;
+	limit_rays.right.id = context.right;
+	limit_rays.right.mask_wall = context.mask;
 	return (limit_rays);
 }
 
@@ -126,7 +129,7 @@ int		get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
 	if (col.ratios.v <= 0 || col.ratios.v >= f_from_int(1) || col.ratios.u < 0)
 		id = max;
 	else
-		id = f_to_int(col.ratios.v * (context.right - context.left));
+		id = context.left + f_to_int(col.ratios.v * (context.right - context.left));
 	return (id);
 }
 
@@ -146,6 +149,7 @@ t_limit limits)
 			limits, context, context.left);
 		current_section.end = get_ray_id(take_right(current.a, current.b),
 			limits, context, context.right);
+		/*
 		current_section.a = ray_seg( take_left(current.a, current.b),
 			take_right(current.a, current.b), fvec2_new(0, 0),
 			get_ray_dir(context.physic, current_section.start)
@@ -154,6 +158,7 @@ t_limit limits)
 			take_right(current.a, current.b), fvec2_new(0, 0),
 			get_ray_dir(context.physic, current_section.end)
 		).ratios;
+		*/
 		render.sections[render.nsections] = current_section;
 		++render.nsections;
 	}
@@ -207,9 +212,34 @@ t_wall_proj_tmp	wall_projection(int id, t_hit hit, t_context context, t_section 
 	return (res);
 }
 
+t_portal_proj	portal_projection(int id, t_hit hit, t_context context, t_section section)
+{
+	t_portal_proj	res;
+	t_fvec2			h;
+	t_fvec2			h2;
+	const int		span = section.end - section.start;
+
+	if (hit.ratios.v < 10)
+		hit.ratios.v = 10;
+	h.u = f_from_float((context.physic.pos.z + context.physic.height) - context.sector.floor);
+	h.v = f_from_float((context.physic.pos.z + context.physic.height) - context.sector.ceiling);
+	h2.u = f_from_float((context.physic.pos.z + context.physic.height) - section.next.floor);
+	h2.v = f_from_float((context.physic.pos.z + context.physic.height) - section.next.ceiling);
+	res.mat_ceiling = *context.sector.ceiling_mat;
+	res.mat_floor = *context.sector.floor_mat;
+	res.mat_wall = section.wall.mat;
+	res.bot = f_to_int(f_div(RATIO * h.u, hit.ratios.v) + (f_from_int(2) + context.physic.look_v) * 100);
+	res.top = f_to_int(f_div(RATIO * h.v, hit.ratios.v) + (f_from_int(2) + context.physic.look_v) * 100);
+	res.step = res.bot + f_to_int(f_div(RATIO * (h2.u - h.u), hit.ratios.v));
+	res.ceil = res.top + f_to_int(f_div(RATIO * (h2.v - h.v), hit.ratios.v));
+	res.id = id;
+	res.u = hit.ratios.u;
+	res.sector = context.sector;
+	return (res);
+}
+
 /*********************************************************************************
 *********************************************************************************/
-
 
 /*********************************************************************************
  * RENDERING
@@ -217,22 +247,59 @@ t_wall_proj_tmp	wall_projection(int id, t_hit hit, t_context context, t_section 
 
 void	draw_wall(int id, t_wall_proj_tmp proj, t_color *buf, u_int32_t *ids)
 {
+	const u_int32_t	*verif = (u_int32_t *)buf;
 	int	i;
 
 	i = 0;
 	while (i < proj.top && i < HEIGHT)
 	{
-		buf[i * WIDTH + id] = BLUE;
+		if (verif[i * WIDTH + id] == 0)
+			buf[i * WIDTH + id] = BLUE;
 		++i;
 	}
 	while (i < proj.bot & i < HEIGHT)
 	{
-		buf[i * WIDTH + id] = RED;
+		if (verif[i * WIDTH + id] == 0)
+			buf[i * WIDTH + id] = RED;
 		++i;
 	}
 	while (i < HEIGHT)
 	{
-		buf[i * WIDTH + id] = GREEN;
+		if (verif[i * WIDTH + id] == 0)
+			buf[i * WIDTH + id] = GREEN;
+		++i;
+	}
+}
+
+void	draw_portal(int id, t_portal_proj proj, t_color *buf, u_int32_t *ids)
+{
+	const u_int32_t	*verif = (u_int32_t *)buf;
+	int				i;
+
+	i = 0;
+	while (i < proj.top && i < HEIGHT)
+	{
+		if (verif[i * WIDTH + id] == 0)
+			buf[i * WIDTH + id] = BLUE;
+		++i;
+	}
+	while (i < proj.ceil && i < HEIGHT)
+	{
+		if (verif[i * WIDTH + id] == 0)
+			buf[i * WIDTH + id] = RED;
+		++i;
+	}
+	i = (proj.step >= 0) ? proj.step : 0;
+	while (i < proj.bot && i < HEIGHT)
+	{
+		if (verif[i * WIDTH + id] == 0)
+			buf[i * WIDTH + id] = RED;
+		++i;
+	}
+	while (i < HEIGHT)
+	{
+		if (verif[i * WIDTH + id] == 0)
+			buf[i * WIDTH + id] = GREEN;
 		++i;
 	}
 }
@@ -245,6 +312,28 @@ u_int32_t *ids)
 	t_wall_proj_tmp	proj;
 
 	id = section.start;
+	while (id <= section.end)
+	{
+		hit = ray_seg(
+			take_left(section.wall.a, section.wall.b),
+			take_right(section.wall.a, section.wall.b),
+			fvec2_new(0, 0),
+			get_ray_dir(context.physic, id)
+		);
+		proj = wall_projection(id - section.start - 1, hit, context, section);
+		draw_wall(id, proj, buf, ids);
+		++id;
+	}
+}
+
+void	render_portal(t_context context, t_section section, t_color *buf,
+u_int32_t *ids)
+{
+	int				id;
+	t_hit			hit;
+	t_portal_proj	proj;
+
+	id = section.start;
 	while (id < section.end)
 	{
 		hit = ray_seg(
@@ -253,14 +342,25 @@ u_int32_t *ids)
 			fvec2_new(0, 0),
 			get_ray_dir(context.physic, id)
 		);
-		proj = wall_projection(id - section.start, hit, context, section);
-		draw_wall(id, proj, buf, ids);
+		proj = portal_projection(id - section.start, hit, context, section);
+		draw_portal(id, proj, buf, ids);
 		++id;
 	}
 }
 
 /*********************************************************************************
 *********************************************************************************/
+
+t_sector	teleport_sector(t_game game, t_context context, t_section section)
+{
+	t_sector	next;
+
+	if (game.portals[section.wall.portal].from_sector == context.sector.sector_id)
+		next = game.sectors[game.portals[section.wall.portal].to_sector];
+	else
+		next = game.sectors[game.portals[section.wall.portal].from_sector];
+	return (next);
+}
 
 t_context	teleport(t_game game, t_context context, t_section section)
 {
@@ -291,7 +391,6 @@ t_context	teleport(t_game game, t_context context, t_section section)
 
 void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 {
-	printf("(%f, %f)\n", context.physic.pos.x, context.physic.pos.y);
 	const t_limit	limit_rays = build_limits(context);
 	const t_bunch	bunch = build_bunch(game, context, limit_rays);
 	t_render		r;
@@ -304,10 +403,19 @@ void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 	while (i < r.nsections)
 	{
 		current = r.sections[i];
+		if (context.mask == -1)
+			printf("%d -> %d, ", current.start, current.end);
 		if (current.wall.portal == -1)
 			render_wall_tmp(context, current, buf, id_buf);
+		else
+		{
+			current.next = teleport_sector(game, context, current);
+			render_portal(context, current, buf, id_buf);
+		}
 		++i;
 	}
+	if (context.mask == -1)
+		printf("\n");
 	i = 0;
 	while (i < r.nportals)
 	{

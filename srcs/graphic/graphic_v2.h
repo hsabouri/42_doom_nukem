@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:46:10 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/26 13:45:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/27 15:36:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_cache_wall
 typedef struct	s_section
 {
 	t_cache_wall	wall;
+	t_sector		next;
 	int				start;
 	int				end;
 	t_fvec2			a;
@@ -75,6 +76,20 @@ typedef struct	s_wall_proj_tmp
 	t_fixed		u;
 	t_sector	sector;
 }				t_wall_proj_tmp;
+
+typedef struct	s_portal_proj
+{
+	t_mat		mat_ceiling;
+	t_mat		mat_wall;
+	t_mat		mat_floor;
+	int			top;
+	int			ceil;
+	int			step;
+	int			bot;
+	int			id;
+	t_fixed		u;
+	t_sector	sector;
+}				t_portal_proj;
 
 void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf);
 
