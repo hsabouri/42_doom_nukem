@@ -22,7 +22,7 @@
 # include <vec.h>
 # include <tga.h>
 
-typedef enum		u_mode
+typedef enum		e_mode
 {
 	TILING,
 	NO_TILING

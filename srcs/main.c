@@ -64,9 +64,12 @@ int				main(int ac, char **av)
 	if (ac == 3 && (ft_strcmp(av[2], "save")) == 0)
 		return(main_save(av[1]));
 	else if (ac == 3 && (ft_strcmp(av[2], "load")) == 0)
+	{
 		env.game = load(av[1]);
+		launch_check(env.game);	
+	}
 	else
-		env.game = generate_map(env.game);	
+		env.game = generate_map(env.game);
 	env.sdl = init_sdl();
 	env.events = init_events();
 	env.editor = init_editor();

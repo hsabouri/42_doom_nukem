@@ -76,7 +76,13 @@ static void		keyactions(int scancode, t_env *env)
 {
 	if (scancode == SDL_SCANCODE_E)
 	{
-		env->toggle_editor = (env->toggle_editor || !env->editor.enabled) ? 0 : 1;
+		if (env->toggle_editor || !env->editor.enabled)
+		{
+			launch_check(env->game);
+			env->toggle_editor = 0;
+		}
+		else
+			env->toggle_editor = 1;
 		SDL_SetRelativeMouseMode((env->toggle_editor) ? SDL_FALSE : SDL_TRUE);
 	}
 	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.physic.fly)
