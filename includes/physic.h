@@ -53,6 +53,7 @@ t_touch			collision(t_vec3 next_pos, t_ph physic, t_game game, int wall);
 t_vec3	    	floor_col(float pos_z, t_sector sector, t_vec3 speed);
 t_vec3	    	ceil_col(float pos_z, t_sector sector, t_vec3 speed);
 t_vec3	    	slide_wall(t_vec3 next_pos, t_game game, t_wall wall);
+u_int32_t		is_in_sector(t_ph physic, t_game game, u_int32_t sector_id);
 
 t_ph		    entities_physic(t_ph physic, t_game game);
 t_ph            entities_track(t_ph physic, t_game game, t_last_pos last_pos);

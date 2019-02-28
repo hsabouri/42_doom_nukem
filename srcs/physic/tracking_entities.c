@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tracking_player.c                                  :+:      :+:    :+:   */
+/*   tracking_entities.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-static u_int32_t	is_in_sector(t_ph physic, t_game game, u_int32_t sector_id)
+u_int32_t			is_in_sector(t_ph physic, t_game game, u_int32_t sector_id)
 {
 	u_int32_t	nb_inter;
 	t_touch		touch;
