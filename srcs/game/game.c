@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/01 13:58:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:48:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_env		game_loop(t_env env, size_t frame)
 		env.current_buffer, env.game.id_buf);
 	
 	//raycast(env.game, env.game.player.physic.sector_id, env.current_buffer);
+	printf("\n");
 	minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);

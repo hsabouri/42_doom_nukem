@@ -172,8 +172,10 @@ t_limit limits)
 		current_section.end = get_ray_id(take_right(current.a, current.b),
 			limits, context, context.right);
 		render.sections[render.nsections] = current_section;
+		printf("%d -> %d (%d), ", current_section.start, current_section.end, current_section.wall.id);
 		++render.nsections;
 	}
+	printf("\n");
 	return (render);
 }
 
@@ -494,8 +496,7 @@ void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 	i = 0;
 	while (i < r.nportals)
 	{
-		context = teleport(game, context, r.portals[i]);
-		render(game, context, buf, id_buf);
+		render(game, teleport(game, context, r.portals[i]), buf, id_buf);
 		++i;
 	}
 }
