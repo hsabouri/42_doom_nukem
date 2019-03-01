@@ -55,6 +55,7 @@ OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 CC = clang
 CFLAGS = -Wall -Wextra -Iincludes
 CFLAGS += -g
+#CFLAGS += -O3 -march=native
 #CFLAGS += -Werror
 
 CFLAGS += -I$(LIBFT_DIR)/includes

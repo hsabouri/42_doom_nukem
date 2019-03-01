@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:46:10 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/28 19:37:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/01 17:32:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct	s_hit
 {
 	int		hit;
+	t_fvec2	ray;
 	t_fvec2	ratios;
 }				t_hit;
 
@@ -67,36 +68,47 @@ typedef struct	s_render
 
 typedef struct	s_tex_proj
 {
-	t_fixed x;
-	t_fixed y_iter;
 	t_color	ambient;
 }				t_tex_proj;
+
+typedef struct	s_pl_proj
+{
+	int			look_v;
+	t_fvec2		wr;
+	t_fvec2		ray;
+	t_fvec2		h;
+	t_fvec2		pos;
+	t_mat		mat_floor;
+	t_mat		mat_ceiling;
+}				t_pl_proj;
 
 
 typedef struct	s_wall_proj
 {
-	t_mat		mat_ceiling;
 	t_mat		mat_wall;
-	t_mat		mat_floor;
 	t_tex_proj	tex;
+	t_pl_proj	plane;
 	int			top;
 	int			bot;
 	int			id;
 	t_fixed		u;
+	t_fixed		x;
+	t_fixed		y_iter;
 }				t_wall_proj;
 
 typedef struct	s_portal_proj
 {
-	t_mat		mat_ceiling;
 	t_mat		mat_wall;
-	t_mat		mat_floor;
 	t_tex_proj	tex;
+	t_pl_proj	plane;
 	int			top;
 	int			ceil;
 	int			step;
 	int			bot;
 	int			id;
 	t_fixed		u;
+	t_fixed		x;
+	t_fixed		y_iter;
 	t_sector	sector;
 }				t_portal_proj;
 

@@ -79,12 +79,12 @@ t_hit	ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d)
 	const t_fixed	denom = fvec2_cross(p, q).z;
 
 	if (denom == 0)
-		return ((t_hit) {0, fvec2_new(0, 0)});
+		return ((t_hit) {0, d, fvec2_new(0, 0)});
 	ratios.u = -f_div(f_mul(a.u, q.v) - f_mul(c.u, q.v) -
 		f_mul(q.u, a.v) + f_mul(c.v, q.u), denom);
 	ratios.v = -f_div(-f_mul(a.v, p.u) + f_mul(c.v, p.u) +
 		f_mul(p.v, a.u) - f_mul(c.u, p.v), denom);
-	return ((t_hit) {1, ratios});
+	return ((t_hit) {1, d, ratios});
 }
 
 int		get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
@@ -172,10 +172,8 @@ t_limit limits)
 		current_section.end = get_ray_id(take_right(current.a, current.b),
 			limits, context, context.right);
 		render.sections[render.nsections] = current_section;
-		printf("%d -> %d (%d), ", current_section.start, current_section.end, current_section.wall.id);
 		++render.nsections;
 	}
-	printf("\n");
 	return (render);
 }
 
@@ -215,17 +213,23 @@ t_wall_proj	wall_projection(int id, t_hit hit, t_context context, t_section sect
 		hit.ratios.v = 10;
 	h.u = f_from_float((context.physic.pos.z + context.physic.height) - context.sector.floor);
 	h.v = f_from_float((context.physic.pos.z + context.physic.height) - context.sector.ceiling);
-	res.mat_ceiling = *context.sector.ceiling_mat;
-	res.mat_floor = *context.sector.floor_mat;
+	res.plane.mat_ceiling = *context.sector.ceiling_mat;
+	res.plane.mat_floor = *context.sector.floor_mat;
 	res.mat_wall = section.wall.mat;
-	res.bot = f_to_int(f_div(RATIO * h.u, hit.ratios.v) + (f_from_int(2) + context.physic.look_v) * 100);
-	res.top = f_to_int(f_div(RATIO * h.v, hit.ratios.v) + (f_from_int(2) + context.physic.look_v) * 100);
+	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) + context.physic.look_v * 100);
+	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) + context.physic.look_v * 100);
 	res.id = id;
 	res.u = hit.ratios.u;
-	res.tex.x = hit.ratios.u;
+	res.x = hit.ratios.u;
 	span = res.bot - res.top;
-	res.tex.y_iter = f_from_int(1 << 7) / (span + !span);
+	res.y_iter = f_from_int(1 << 8) / (span + !span);
 	res.tex.ambient = context.sector.ambient;
+	res.plane.h = h;
+	res.plane.pos = vec2_to_fvec2(vec3_to_vec2(context.physic.pos));
+	res.plane.ray = hit.ray;
+	res.plane.wr.u = f_div(-h.v, f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH)));
+	res.plane.wr.v = f_div(-h.u, f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH)));
+	res.plane.look_v = f_to_int(context.physic.look_v * 100);
 	return (res);
 }
 
@@ -242,19 +246,25 @@ t_portal_proj	portal_projection(int id, t_hit hit, t_context context, t_section 
 	h.v = f_from_float((context.physic.pos.z + context.physic.height) - context.sector.ceiling);
 	h2.u = f_from_float((context.physic.pos.z + context.physic.height) - section.next.floor);
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height) - section.next.ceiling);
-	res.mat_ceiling = *context.sector.ceiling_mat;
-	res.mat_floor = *context.sector.floor_mat;
+	res.plane.mat_ceiling = *context.sector.ceiling_mat;
+	res.plane.mat_floor = *context.sector.floor_mat;
 	res.mat_wall = section.wall.mat;
-	res.bot = f_to_int(f_div(RATIO * h.u, hit.ratios.v) + (f_from_int(2) + context.physic.look_v) * 100);
-	res.top = f_to_int(f_div(RATIO * h.v, hit.ratios.v) + (f_from_int(2) + context.physic.look_v) * 100);
+	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) + context.physic.look_v * 100);
+	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) + context.physic.look_v * 100);
 	res.step = res.bot + f_to_int(f_div(RATIO * (h2.u - h.u), hit.ratios.v));
 	res.ceil = res.top + f_to_int(f_div(RATIO * (h2.v - h.v), hit.ratios.v));
 	res.id = id;
 	res.u = hit.ratios.u;
-	res.tex.x = hit.ratios.u;
+	res.x = hit.ratios.u;
 	span = res.bot - res.top;
-	res.tex.y_iter = f_from_int(1 << 7) / (span + !span);
+	res.y_iter = f_from_int(1 << 8) / (span + !span);
 	res.tex.ambient = context.sector.ambient;
+	res.plane.h = h;
+	res.plane.pos = vec2_to_fvec2(vec3_to_vec2(context.physic.pos));
+	res.plane.ray = hit.ray;
+	res.plane.wr.u = f_div(-h.v, f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH)));
+	res.plane.wr.v = f_div(-h.u, f_mul((f_from_int(HEIGHT) / WIDTH), f_from_float(PWIDTH)));
+	res.plane.look_v = f_to_int(context.physic.look_v * 100);
 	return (res);
 }
 
@@ -283,7 +293,7 @@ static t_color	color_superpose(t_color a, t_color b)
 		return (a);
 }
 
-t_color	get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix)
+t_color	get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, char p)
 {
 	int		x;
 	int		y;
@@ -296,7 +306,7 @@ t_color	get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix)
 	{
 		img = *mat.texture;
 		x = f_to_int((f_mul(pix.u, mat.sca.u) - mat.pos.u) * img.width);
-		y = f_to_int((f_mul(pix.v, mat.sca.v) - mat.pos.v) * img.height) >> 7;
+		y = f_to_int((f_mul(pix.v, mat.sca.v) - mat.pos.v) * img.height) >> p;
 		if (mat.mode == TILING)
 		{
 			y = y % img.height;
@@ -308,7 +318,7 @@ t_color	get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix)
 			res = color_filter(img.content[x + y * img.width], mat.filter);
 	}
 	if (mat.overlay)
-		res = color_superpose(res, get_mat_pixel(*mat.overlay, tex, pix));
+		res = color_superpose(res, get_mat_pixel(*mat.overlay, tex, pix, p));
 	return (color_filter(res, tex.ambient));
 }
 
@@ -316,9 +326,35 @@ t_color	get_wall_pixel(t_wall_proj proj, int y)
 {
 	t_fvec2 pix;
 
-	pix.u = proj.tex.x;
-	pix.v = proj.tex.y_iter * (y - proj.top);
-	return (get_mat_pixel(proj.mat_wall, proj.tex, pix));
+	pix.u = proj.x;
+	pix.v = proj.y_iter * (y - proj.top);
+	return (get_mat_pixel(proj.mat_wall, proj.tex, pix, 8));
+}
+
+t_color	get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
+{
+	t_fixed	z;
+	t_fvec2	pix;
+
+	z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
+	if (z == 0)
+		return (NO_COLOR);
+	pix = fvec2_scale(proj.ray, f_div(proj.wr.u, z));
+	pix = fvec2_add(pix, proj.pos);
+	return (get_mat_pixel(proj.mat_ceiling, tex, pix, 0));
+}
+
+t_color	get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y)
+{
+	t_fixed	z;
+	t_fvec2	pix;
+
+	z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
+	if (z == 0)
+		return (NO_COLOR);
+	pix = fvec2_scale(proj.ray, f_div(proj.wr.v, z));
+	pix = fvec2_add(pix, proj.pos);
+	return (get_mat_pixel(proj.mat_floor, tex, pix, 0));
 }
 
 void	draw_wall(int id, t_wall_proj proj, t_color *buf, u_int32_t *ids)
@@ -330,7 +366,7 @@ void	draw_wall(int id, t_wall_proj proj, t_color *buf, u_int32_t *ids)
 	while (i < proj.top && i < HEIGHT)
 	{
 		if (verif[i * WIDTH + id] == 0)
-			buf[i * WIDTH + id] = BLUE;
+			buf[i * WIDTH + id] = get_roof_pixel(proj.plane, proj.tex, i);
 		++i;
 	}
 	while (i < proj.bot & i < HEIGHT)
@@ -342,7 +378,7 @@ void	draw_wall(int id, t_wall_proj proj, t_color *buf, u_int32_t *ids)
 	while (i < HEIGHT)
 	{
 		if (verif[i * WIDTH + id] == 0)
-			buf[i * WIDTH + id] = GREEN;
+			buf[i * WIDTH + id] = get_floor_pixel(proj.plane, proj.tex, i);
 		++i;
 	}
 }
@@ -356,7 +392,7 @@ void	draw_portal(int id, t_portal_proj proj, t_color *buf, u_int32_t *ids)
 	while (i < proj.top && i < HEIGHT)
 	{
 		if (verif[i * WIDTH + id] == 0)
-			buf[i * WIDTH + id] = BLUE;
+			buf[i * WIDTH + id] = get_roof_pixel(proj.plane, proj.tex, i);
 		++i;
 	}
 	while (i < proj.ceil && i < HEIGHT)
@@ -380,7 +416,7 @@ void	draw_portal(int id, t_portal_proj proj, t_color *buf, u_int32_t *ids)
 	while (i < HEIGHT)
 	{
 		if (verif[i * WIDTH + id] == 0)
-			buf[i * WIDTH + id] = GREEN;
+			buf[i * WIDTH + id] = get_floor_pixel(proj.plane, proj.tex, i);
 		++i;
 	}
 }

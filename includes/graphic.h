@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/28 17:09:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/01 17:21:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define WIDTH 720
 # define HEIGHT 480
 # define PWIDTH	2.5
-# define RATIO WIDTH / PWIDTH
+# define RATIO (WIDTH / PWIDTH)
 # define PDIS 0.8
 
 # define WHITE		(t_color){255,255,255,255}
