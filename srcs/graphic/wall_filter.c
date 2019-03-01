@@ -6,10 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:29:26 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/20 12:01:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:11:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include <graphic.h>
 #include "./graphic_project.h"
 
@@ -68,3 +69,4 @@ ssize_t mask)
 	}
 	return (res);
 }
+*/

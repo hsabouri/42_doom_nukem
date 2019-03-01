@@ -6,16 +6,16 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:15:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/27 15:20:02 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:10:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include <graphic.h>
 #include "./graphic_project.h"
 #include "../common/translate_id.h"
 #include <signal.h>
 
-/*
 
 static t_proj	project_portal(t_proj res, t_fvec2 top_bot, t_fvec2 h[2],
 t_hit hit)

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/27 17:35:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/01 13:58:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_env		game_loop(t_env env, size_t frame)
 		env.game,
 		(t_context) {
 			0,
-			WIDTH,
+			WIDTH - 1,
 			env.game.player.physic,
 			-1,
 			env.game.sectors[env.game.player.physic.sector_id]
@@ -87,5 +87,6 @@ t_env		game_loop(t_env env, size_t frame)
 	display_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	timer = end_timer(timer);
+	//printf("%f\n", 1 / timer);
 	return (env);
 }

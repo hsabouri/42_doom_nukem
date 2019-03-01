@@ -6,12 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 11:25:08 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/18 15:59:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:09:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 
+/*
 static int		draw_roof(int x, t_proj proj, t_last last, t_color *buf)
 {
 	int y;
@@ -118,3 +119,4 @@ void			render_wall(int x, t_proj proj, t_color *buf, size_t frame)
 	else
 		last.end = (proj.bot < last.end) ? proj.bot : last.end;
 }
+*/

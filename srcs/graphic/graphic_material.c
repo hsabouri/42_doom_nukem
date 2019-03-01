@@ -6,29 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:58:11 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/22 15:02:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:08:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 
-static t_color	color_filter(t_color a, t_color filter)
-{
-	return ((t_color) {
-		.a = (a.a * filter.a) >> 8,
-		.b = (a.b * filter.b) >> 8,
-		.g = (a.g * filter.g) >> 8,
-		.r = (a.r * filter.r) >> 8,
-	});
-}
-
-static t_color	color_superpose(t_color a, t_color b)
-{
-	if (b.a)
-		return (b);
-	else
-		return (a);
-}
+/*
 
 static t_color	get_mat_pixel(t_mat mat, t_tex_proj tex_proj, t_fvec2 pix,\
 				u_int8_t precision)
@@ -102,3 +86,5 @@ t_color			get_floor_pixel(t_h_proj h_proj, t_tex_proj tex_proj, int y)
 	pix = fvec2_add(pix, h_proj.pos);
 	return (get_mat_pixel(h_proj.floor, tex_proj, pix, 0));
 }
+
+*/

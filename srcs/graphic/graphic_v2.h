@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:46:10 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/27 15:36:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/28 19:37:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,32 @@ typedef struct	s_render
 	t_section	portals[NCACHEWALL]; //probably need to change type
 }				t_render;
 
-typedef struct	s_wall_proj_tmp
+typedef struct	s_tex_proj
+{
+	t_fixed x;
+	t_fixed y_iter;
+	t_color	ambient;
+}				t_tex_proj;
+
+
+typedef struct	s_wall_proj
 {
 	t_mat		mat_ceiling;
 	t_mat		mat_wall;
 	t_mat		mat_floor;
+	t_tex_proj	tex;
 	int			top;
 	int			bot;
 	int			id;
 	t_fixed		u;
-	t_sector	sector;
-}				t_wall_proj_tmp;
+}				t_wall_proj;
 
 typedef struct	s_portal_proj
 {
 	t_mat		mat_ceiling;
 	t_mat		mat_wall;
 	t_mat		mat_floor;
+	t_tex_proj	tex;
 	int			top;
 	int			ceil;
 	int			step;

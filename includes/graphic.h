@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/18 15:56:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:09:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct	s_ray
 
 # define Y_PRECISION 8
 
+/*
+
 typedef struct	s_wall_proj
 {
 	t_fixed		tex_x;
@@ -97,7 +99,7 @@ typedef struct	s_proj
 	t_tex_proj	tex_proj;
 	u_int32_t	*id_buf;
 }				t_proj;
-
+*/
 
 # include "srcs/graphic/bresenham.h"
 
@@ -105,11 +107,14 @@ void			background(t_color *buf, t_color color);
 void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 
 t_vec2			player_space(t_vec2 vec, t_ph physic);
+
+/*
 void			raycast(t_game game, size_t sector_id, t_color *buf);
 void			render_wall(int x, t_proj proj, t_color *buf, size_t frame);
 
 t_color			get_floor_pixel(t_h_proj w_proj, t_tex_proj tex_proj, int y);
 t_color			get_roof_pixel(t_h_proj w_proj, t_tex_proj tex_proj, int y);
 t_color			get_wall_pixel(t_wall_proj w_proj, t_tex_proj tex_proj, int y);
+*/
 
 #endif
