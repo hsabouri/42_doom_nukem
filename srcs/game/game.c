@@ -6,14 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/01 17:39:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/02 12:31:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 #include "srcs/common/time_measure.h"
-
-#include "srcs/graphic/graphic_v2.h"
 
 t_vec2		player_space(t_vec2 vec, t_ph physic)
 {
