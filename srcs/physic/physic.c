@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/12/21 17:57:35 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/02/25 17:03:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static t_vec3	set_speed(t_ph physic, t_event events)
 	new_speed.z = physic.speed.z;
 	if (events.keys[SDL_SCANCODE_A] || events.keys[SDL_SCANCODE_D])
 	{
-		new_speed.x = (-physic.speed_max.x * events.keys[SDL_SCANCODE_D]
-			+ physic.speed_max.x * events.keys[SDL_SCANCODE_A]) /
+		new_speed.x = (-physic.speed_max.x * events.keys[SDL_SCANCODE_A]
+			+ physic.speed_max.x * events.keys[SDL_SCANCODE_D]) /
 			(float)SPEED_REDUCE;
 	}
 	if (events.keys[SDL_SCANCODE_W] || events.keys[SDL_SCANCODE_S])

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/18 15:56:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 14:01:49 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define WIDTH 720
 # define HEIGHT 480
 # define PWIDTH	2.5
-# define RATIO WIDTH / PWIDTH
+# define RATIO (WIDTH / PWIDTH)
 # define PDIS 0.8
 
 # define WHITE		(t_color){255,255,255,255}
@@ -46,70 +46,179 @@ typedef struct	s_pix
 	int32_t	y;
 }				t_pix;
 
-typedef struct	s_ray
-{
-	t_fvec2		dir;
-	int			id;
-	ssize_t		mask_wall;
-}				t_ray;
+# define NCACHEWALL 50
 
-# define Y_PRECISION 8
-
-typedef struct	s_wall_proj
+typedef struct	s_hit
 {
-	t_fixed		tex_x;
-	t_fixed		tex_y_iter;
-	t_mat		wall;
-	u_int32_t	id;
-}				t_wall_proj;
+	int		hit;
+	t_fvec2	ray;
+	t_fvec2	ratios;
+}				t_hit;
 
-typedef struct	s_h_proj
+typedef struct	s_context
 {
-	t_fvec2		ray;
-	t_fixed		z_axis;
-	t_fvec2		pos;
-	t_fvec2		h;
-	t_mat		floor;
-	u_int32_t	fl_id;
-	t_mat		ceiling;
-	u_int32_t	cl_id;
-}				t_h_proj;
+	int			left;
+	int			right;
+	t_ph		physic;
+	ssize_t		mask;
+	t_sector	sector;
+}				t_context;
+
+typedef struct	s_cache_wall
+{
+	int32_t	portal;
+	size_t	id;
+	t_fvec2	a;
+	t_fvec2	b;
+	t_mat	mat;
+}				t_cache_wall;
+
+typedef struct	s_cache_entity
+{
+	size_t			id;
+	t_fvec2			a;
+	t_fvec2			b;
+	t_fixed			h;
+	t_mat			mat;
+}				t_cache_entity;
+
+typedef struct	s_bunch
+{
+	int				nwalls;
+	t_cache_wall	walls[NCACHEWALL];
+	int				nentities;
+	t_cache_entity	entities[NCACHEWALL];
+}				t_bunch;
+
+typedef struct	s_section
+{
+	t_cache_wall	wall;
+	t_sector		next;
+	int				start;
+	int				end;
+	t_fvec2			a;
+	t_fvec2			b;
+}				t_section;
+
+typedef struct	s_section_entity
+{
+	t_cache_entity	entity;
+	int				start;
+	int				end;
+	t_fvec2			a;
+	t_fvec2			b;
+}				t_section_entity;
 
 typedef struct	s_tex_proj
 {
-	t_sector	sector;
-	t_wall		wall;
+	t_color	ambient;
 }				t_tex_proj;
+
+typedef struct	s_pl_proj
+{
+	int			look_v;
+	t_fvec2		wr;
+	t_fvec2		ray;
+	t_fvec2		h;
+	t_fvec2		pos;
+	t_mat		mat_floor;
+	t_mat		mat_ceiling;
+}				t_pl_proj;
 
 typedef struct	s_proj
 {
-	int			not_found;
+	int			is_portal;
+	t_mat		mat_wall;
+	t_tex_proj	tex;
+	t_pl_proj	plane;
 	int			top;
-	int			bot;
-	int			is_step;
-	int			step;
-	int			is_ceil;
 	int			ceil;
-	u_int32_t	st_id;
-	u_int32_t	tp_id;
-	t_wall_proj	w_proj;
-	t_h_proj	h_proj;
-	t_tex_proj	tex_proj;
-	u_int32_t	*id_buf;
+	int			step;
+	int			bot;
+	int			id; //check if used
+	t_fixed		u;
+	t_fixed		x;
+	t_fixed		y_iter;
 }				t_proj;
 
+typedef struct	s_e_proj
+{
+	t_mat		mat;
+	t_tex_proj	tex;
+	int			top;
+	int			bot;
+	t_fixed		u;
+	t_fixed		x;
+	t_fixed		y_iter;
+}				t_e_proj;
+
+typedef struct	s_render
+{
+	int			nentities;
+	int			nsections;
+	int			nportals;
+	t_section	sections[NCACHEWALL];
+	t_section_entity	entities[NCACHEWALL];
+	t_section	portals[NCACHEWALL]; //probably need to change type
+}				t_render;
+
+void			render(t_game game, t_context context, t_color *buf,
+				u_int32_t *id_buf);
 
 # include "srcs/graphic/bresenham.h"
+
+int				is_left(t_fvec2 a, t_fvec2 b);
+t_fvec2			take_left(t_fvec2 a, t_fvec2 b);
+t_fvec2			take_right(t_fvec2 a, t_fvec2 b);
 
 void			background(t_color *buf, t_color color);
 void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 
 t_vec2			player_space(t_vec2 vec, t_ph physic);
-void			raycast(t_game game, size_t sector_id, t_color *buf);
-void			render_wall(int x, t_proj proj, t_color *buf, size_t frame);
 
-t_color			get_floor_pixel(t_h_proj w_proj, t_tex_proj tex_proj, int y);
-t_color			get_roof_pixel(t_h_proj w_proj, t_tex_proj tex_proj, int y);
-t_color			get_wall_pixel(t_wall_proj w_proj, t_tex_proj tex_proj, int y);
+t_proj			wall_projection(int id, t_hit hit, t_context context,
+				t_section section);
+t_proj			portal_projection(int id, t_hit hit, t_context context,
+				t_section section);
+t_e_proj		entity_projection(int id, t_hit hit, t_context context,
+				t_section_entity section);
+
+t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
+t_render		build_sections(t_context context, t_bunch bunch,
+				t_limit limits);
+t_render		build_sections_portals(t_game game, t_context context,
+				t_render render);
+
+void			draw_wall(int id, t_proj proj, t_color *buf,
+				u_int32_t *ids);
+void			draw_portal(int id, t_proj proj, t_color *buf,
+				u_int32_t *ids);
+void			draw_entity(int id, t_e_proj proj, t_color *buf,
+				u_int32_t *ids);
+
+t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y);
+t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y);
+t_color			get_wall_pixel(t_proj proj, int y);
+t_color			get_entity_pixel(t_e_proj proj, int y);
+
+t_fvec2			get_ray_dir(t_ph physic, int id);
+int				get_ray_id(t_fvec2 point, t_limit limit,
+				t_context context, int max);
+t_limit			build_limits(t_context context);
+int				is_in_limit(t_limit limit, t_context context,
+				t_fvec2 a, t_fvec2 b, int id);
+
+t_hit			ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d);
+
+void			render_wall(t_context context, t_section section,
+				t_color *buf, u_int32_t *ids);
+
+void			render_portal(t_context context, t_section section,
+				t_color *buf, u_int32_t *ids);
+void			render(t_game game, t_context context,
+				t_color *buf, u_int32_t *id_buf);
+
+t_sector		teleport_sector(t_game game, t_context context, t_section section);
+t_context		teleport(t_game game, t_context context, t_section section);
 
 #endif
