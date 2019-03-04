@@ -6,14 +6,14 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 14:01:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:05:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
+#include "srcs/common/translate_id.h"
 
-
-static t_proj	projection(t_hit hit, t_context context, t_fvec2 h)
+static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, size_t sector)
 {
 	t_proj	res;
 	int			span;
@@ -26,6 +26,8 @@ static t_proj	projection(t_hit hit, t_context context, t_fvec2 h)
 	res.x = hit.ratios.u;
 	span = res.bot - res.top;
 	res.y_iter = f_from_int(1 << 8) / (span + !span);
+	res.plane.uid_floor = translate_in(PART_FLOOR, MOD_NO, sector, 0);
+	res.plane.uid_roof = translate_in(PART_CEILING, MOD_NO, sector, 0);
 	res.plane.h = h;
 	res.plane.pos = vec2_to_fvec2(vec3_to_vec2(context.physic.pos));
 	res.plane.ray = hit.ray;
@@ -49,7 +51,8 @@ t_section section)
 		context.sector.floor);
 	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
 		context.sector.ceiling);
-	res = projection(hit, context, h);
+	res = projection(hit, context, h, context.sector.sector_id);
+	res.uid = translate_in(PART_WALL, MOD_NO, section.wall.id, 0);
 	res.is_portal = 0;
 	res.plane.mat_ceiling = *context.sector.ceiling_mat;
 	res.plane.mat_floor = *context.sector.floor_mat;
@@ -77,7 +80,10 @@ t_section section)
 		section.next.floor);
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height) -
 		section.next.ceiling);
-	res = projection(hit, context, h);
+	res = projection(hit, context, h, context.sector.sector_id);
+	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);
+	res.uid_step = translate_in(PART_PORTAL, MOD_STEP, section.wall.id, 0);
+	res.uid_ceil = translate_in(PART_PORTAL, MOD_CEIL, section.wall.id, 0);
 	res.is_portal = 1;
 	res.step = res.bot + f_to_int(f_div(RATIO * (h2.u - h.u), hit.ratios.v));
 	res.ceil = res.top + f_to_int(f_div(RATIO * (h2.v - h.v), hit.ratios.v));
@@ -104,6 +110,7 @@ t_section_entity section)
 		context.physic.look_v * 100);
 	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) +
 		context.physic.look_v * 100);
+	res.uid = translate_in(PART_ENTITY, MOD_NO, section.entity.id, 0);
 	res.mat = section.entity.mat;
 	span = res.bot - res.top;
 	res.u = hit.ratios.u;

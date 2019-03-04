@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 14:01:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 16:58:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ typedef struct	s_tex_proj
 
 typedef struct	s_pl_proj
 {
+	u_int32_t	uid_roof;
+	u_int32_t	uid_floor;
 	int			look_v;
 	t_fvec2		wr;
 	t_fvec2		ray;
@@ -127,6 +129,9 @@ typedef struct	s_pl_proj
 
 typedef struct	s_proj
 {
+	u_int32_t	uid;
+	u_int32_t	uid_step;
+	u_int32_t	uid_ceil;
 	int			is_portal;
 	t_mat		mat_wall;
 	t_tex_proj	tex;
@@ -143,6 +148,7 @@ typedef struct	s_proj
 
 typedef struct	s_e_proj
 {
+	u_int32_t	uid;
 	t_mat		mat;
 	t_tex_proj	tex;
 	int			top;

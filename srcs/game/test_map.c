@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/04 16:11:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:21:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ t_game	generate_map(t_game game)
 		NULL
 	};
 
-	t_wall *walls = (t_wall *)malloc(28 * sizeof(t_wall));
+	t_wall *walls = (t_wall *)malloc(29 * sizeof(t_wall));
 	walls[0] = ((t_wall){-1, 9, 0, &materials[1]});
 	walls[1] = ((t_wall){-1, 0, 1, &materials[1]});
 	walls[2] = ((t_wall){-1, 1, 2, &materials[2]});
@@ -236,7 +236,7 @@ t_game	generate_map(t_game game)
 	game.sectors = sectors;
 	game.nsectors = 5;
 	game.walls = walls;
-	game.nwalls = 28;
+	game.nwalls = 29;
 	game.portals = portals;
 	game.nportals = 4;
 	game.points = points;
