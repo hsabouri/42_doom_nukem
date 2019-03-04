@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/16 16:46:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 12:32:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ typedef struct		s_ph
 	u_int32_t	jump;
     char		fly;
 }						t_ph;
+
+typedef struct		s_test_entity
+{
+	t_ph	physic;
+	float	w;
+	t_mat	*mat;
+}					t_test_entity;
 
 /*
 typedef enum			u_wtype
@@ -124,6 +131,8 @@ typedef struct		s_game
 	size_t		nportals;
 	t_vec2		*points;
 	size_t		npoints;
+	t_test_entity *entities;
+	size_t		nentities;
 	t_mat		*materials;
 	size_t		nmaterials;
 	t_img		*textures;

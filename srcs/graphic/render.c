@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphic_v2.c                                       :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/25 1:48:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 14:08:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,40 @@ u_int32_t *ids)
 	}
 }
 
+void	render_entity(t_context context, t_section_entity section, t_color *buf,
+u_int32_t *ids)
+{
+	int			id;
+	t_hit		hit;
+	t_e_proj	proj;
+	const int	span = (section.end - section.start);
+
+	id = section.start;
+	while (id < section.end)
+	{
+		hit = ray_seg(section.entity.a, section.entity.b,
+			fvec2_new(0, 0), get_ray_dir(context.physic, id));
+		proj = entity_projection(id - section.start, hit, context, section);
+		draw_entity(id, proj, buf, ids);
+		++id;
+	}
+}
+
+void	sections_entities(t_render render, t_context context, t_color *buf,
+u_int32_t *id_buf)
+{
+	t_section_entity	current;
+	int					i;
+
+	i = 0;
+	while (i < render.nentities)
+	{
+		current = render.entities[i];
+		render_entity(context, current, buf, id_buf);
+		++i;
+	}
+}
+
 void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 {
 	const t_limit	limit_rays = build_limits(context);
@@ -67,6 +101,7 @@ void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 	i = 0;
 	r = build_sections(context, bunch, limit_rays);
 	r = build_sections_portals(game, context, r);
+	sections_entities(r, context, buf, id_buf);
 	while (i < r.nsections)
 	{
 		current = r.sections[i];

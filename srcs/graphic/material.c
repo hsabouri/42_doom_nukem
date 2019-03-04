@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/02 14:19:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 15:05:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,15 @@ t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 	pix = fvec2_scale(proj.ray, f_div(proj.wr.v, z));
 	pix = fvec2_add(pix, proj.pos);
 	return (get_mat_pixel(proj.mat_floor, tex, pix, 0));
+}
+
+t_color			get_entity_pixel(t_e_proj proj, int y)
+{
+	t_fvec2	pix;
+	t_color	res;
+
+	pix.u = proj.x;
+	pix.v = proj.y_iter * (y - proj.top);
+	res = get_mat_pixel(proj.mat, proj.tex, pix, 8);
+	return (res);
 }

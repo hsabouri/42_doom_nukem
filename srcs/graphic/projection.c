@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/02 14:01:44 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/04 14:01:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,3 +89,26 @@ t_section section)
 	return (res);
 }
 
+t_e_proj		entity_projection(int id, t_hit hit, t_context context,
+t_section_entity section)
+{
+	t_e_proj	res;
+	t_fvec2		h;
+	int			span;
+
+	h.u = f_from_float((context.physic.pos.z + context.physic.height) -
+		section.entity.h);
+	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
+		(section.entity.h + 1)); // replace by height of entity
+	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) +
+		context.physic.look_v * 100);
+	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) +
+		context.physic.look_v * 100);
+	res.mat = section.entity.mat;
+	span = res.bot - res.top;
+	res.u = hit.ratios.u;
+	res.x = hit.ratios.u;
+	res.tex.ambient = context.sector.ambient;
+	res.y_iter = f_from_int(1 << 8) / (span + !span);
+	return (res);
+}
