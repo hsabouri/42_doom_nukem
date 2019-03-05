@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 15:53:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/05 12:57:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_fvec2 pos)
 
 	i = -1;
 	ret.nentities = 0;
-	while (++i != -1 && i < game.nentities)
+	while (++i != (size_t)-1 && i < game.nentities)
 		if (game.entities[i].physic.sector_id == sector)
 		{
 			tmp = vec2_to_fvec2(vec2_rot(vec2_new(game.entities[i].w / 2, 0), context.physic.look_h));
@@ -35,6 +35,7 @@ t_fvec2 pos)
 			{
 				current.id = i;
 				current.h = f_from_float(game.entities[i].physic.pos.z);
+				current.physic = game.entities[i].physic;
 				current.mat = *game.entities[i].mat;
 				ret.entities[ret.nentities] = current;
 				++ret.nentities;
@@ -77,8 +78,6 @@ t_render		build_sections_entities(t_context context, t_bunch bunch, t_limit limi
 	t_cache_entity		current;
 	t_section_entity	current_section;
 	t_render			render;
-	size_t				ray_id;
-	int					half;
 
 	render.nentities = 0;
 	while (render.nentities < bunch.nentities)
@@ -111,15 +110,14 @@ t_limit limits)
 		current_section.start = get_ray_id(take_left(current.a, current.b),
 			limits, context, context.left);
 		current_section.end = get_ray_id(take_right(current.a, current.b),
-			limits, context, context.right);
+			limits, context, context.right - 1);
 		render.sections[render.nsections] = current_section;
 		++render.nsections;
 	}
 	return (render);
 }
 
-t_render		build_sections_portals(t_game game, t_context context,
-t_render render)
+t_render		build_sections_portals(t_render render)
 {
 	int	i;
 

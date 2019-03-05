@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 17:05:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:14:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,19 +100,31 @@ t_section_entity section)
 {
 	t_e_proj	res;
 	t_fvec2		h;
+	t_fvec2		sector_h;
+	int			tmp;
 	int			span;
 
-	h.u = f_from_float((context.physic.pos.z + context.physic.height) -
-		section.entity.h);
-	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
-		(section.entity.h + 1)); // replace by height of entity
+	h.u = f_from_float((context.physic.pos.z + context.physic.height)) -
+		section.entity.h;
+	h.v = h.u - f_from_float(section.entity.physic.height);
+	sector_h.u = f_from_float((context.physic.pos.z + context.physic.height) -
+		context.sector.floor);
+	sector_h.v = f_from_float((context.physic.pos.z + context.physic.height) -
+		context.sector.ceiling);
 	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) +
 		context.physic.look_v * 100);
 	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) +
 		context.physic.look_v * 100);
+	if (context.physic.look_v > 0)
+		res.top += f_to_int(context.physic.look_v * 30);
+	else
+		res.top -= f_to_int(context.physic.look_v * 30);
+	span = res.bot - res.top;
+	if (h.u > sector_h.u)
+		res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * sector_h.u, hit.ratios.v) +
+		context.physic.look_v * 100);
 	res.uid = translate_in(PART_ENTITY, MOD_NO, section.entity.id, 0);
 	res.mat = section.entity.mat;
-	span = res.bot - res.top;
 	res.u = hit.ratios.u;
 	res.x = hit.ratios.u;
 	res.tex.ambient = context.sector.ambient;
