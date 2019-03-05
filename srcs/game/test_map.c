@@ -173,18 +173,30 @@ t_game	generate_map(t_game game)
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
 	sectors[0] = ((t_sector){0, 10, 0, 0, 2.50, (t_color) {125, 125, 125, 255},
-		&materials[1], &materials[4]});
+	&materials[1], &materials[4]});
 	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9, WHITE, &materials[1], &materials[4]});
 	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, &materials[1], &materials[4]});
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, &materials[1], &materials[4]});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, &materials[1], &materials[4]});
 
-	game.entities = (t_test_entity *)malloc(10 * sizeof(t_test_entity));
-	game.entities[0] = (t_test_entity) {
+	t_entity *entities = (t_entity *)malloc(2 * sizeof(t_entity));
+	entities[0] = ((t_entity){
 		(t_ph) {
 			0.02,
-			1.25,
-			(t_vec3){4, 9, 0},
+			1.50,
+			(t_vec3){7, 9, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		(t_ph) {
+			0.02,
+			1.50,
+			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -194,14 +206,14 @@ t_game	generate_map(t_game game)
 			0
 		},
 		1,
-		&materials[6]
-	};
-
-	game.entities[1] = (t_test_entity) {
+		&materials[6],
+		0
+		});
+	entities[1] = ((t_entity){
 		(t_ph) {
 			0.02,
-			1,
-			(t_vec3){2, 9, 0},
+			1.50,
+			(t_vec3){7, 8, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -210,29 +222,26 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		0.5,
-		&materials[6]
-	};
-
-	game.entities[2] = (t_test_entity) {
 		(t_ph) {
 			0.02,
-			1,
-			(t_vec3){4.5, 5, 0},
+			1.50,
+			(t_vec3){7, 8, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
 			0,
-			1,
+			0,
 			0,
 			0
 		},
-		0.5,
-		&materials[6]
-	};
+		1,
+		&materials[6],
+		1
+		});
 
-	game.nentities = 3;
 	game.player = player;
+	game.entities = entities;
+	game.nentities = 2;
 	game.sectors = sectors;
 	game.nsectors = 5;
 	game.walls = walls;

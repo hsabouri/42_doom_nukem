@@ -43,10 +43,20 @@ t_game			physic(t_game game, t_event events)
 {
 	t_game		new_game;
 	t_ph		new_physic;
+	// int i;
 
 	new_game = game;
 	new_physic = game.player.physic;
 	new_physic.speed = set_speed(game.player.physic, events);
 	new_game.player.physic = entities_physic(new_physic, game);
+	
+	// i = 0;
+
+	// while (i < nentities)
+	// {
+	// 	new_game.entities[i].physic = entities_physic(new_physic, game);
+	// 	i++;
+	// }
+
 	return (new_game);
 }
