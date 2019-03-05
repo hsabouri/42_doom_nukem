@@ -205,7 +205,8 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		(&materials[2],&materials[2],&materials[2],&materials[2])		
+		materials[2],
+		0
 		});
 	entities[1] = ((t_entity){
 		(t_ph) {
@@ -232,7 +233,8 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		(&materials[2],&materials[2],&materials[2],&materials[2])		
+		materials[2],
+		1
 		});
 
 	game.player = player;

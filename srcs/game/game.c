@@ -23,6 +23,7 @@ static void	minimap(t_game game, t_color *buf)
 	t_vec2	a;
 	t_vec2	b;
 	t_wall	wall;
+	t_color color;
 	size_t	i;
 
 	i = 0;
@@ -55,9 +56,13 @@ static void	minimap(t_game game, t_color *buf)
 		a = vec3_to_vec2(game.entities[i].physic.pos);
 		a = player_space(a, game.player.physic);
 		t_fvec2 a_f = vec2_to_fvec2(a);
+		if (game.entities[i].damage == 0)
+			color = BLUE;
+		else
+			color = RED;
 		a_f = fvec2_scale(fvec2_add(a_f, fvec2_new(f_from_int(10), f_from_int(10))), f_from_int(10));
 		draw_point(a_f,\
-		2,buf, BLUE);
+		2,buf, color);
 		i++;
 	}
 }
@@ -99,6 +104,5 @@ t_env		game_loop(t_env env, size_t frame)
 	display_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	timer = end_timer(timer);
-	printf("%f\n", 1 / timer);
 	return (env);
 }

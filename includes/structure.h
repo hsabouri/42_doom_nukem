@@ -94,11 +94,11 @@ typedef struct		s_entity
 {
 	t_ph		physic;
 	t_ph		spawn;
-	t_mat		sprite[4];
+	t_mat		sprite;
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
-	//int damage;
+	int 		damage;
 }					t_entity;
 
 typedef struct		s_portal
