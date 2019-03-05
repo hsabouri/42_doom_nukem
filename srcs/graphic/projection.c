@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/05 14:14:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/05 16:08:19 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,6 @@ t_section_entity section)
 		context.physic.look_v * 100);
 	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) +
 		context.physic.look_v * 100);
-	if (context.physic.look_v > 0)
-		res.top += f_to_int(context.physic.look_v * 30);
-	else
-		res.top -= f_to_int(context.physic.look_v * 30);
 	span = res.bot - res.top;
 	if (h.u > sector_h.u)
 		res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * sector_h.u, hit.ratios.v) +
