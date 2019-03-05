@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/05 15:59:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/05 16:09:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ u_int32_t *ids)
 	int			id;
 	t_hit		hit;
 	t_e_proj	proj;
-	const int	span = (section.end - section.start);
 
 	id = section.start;
 	while (id < section.end)
