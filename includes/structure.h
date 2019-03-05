@@ -53,12 +53,6 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
-typedef struct		s_test_entity
-{
-	t_ph	physic;
-	float	w;
-	t_mat	*mat;
-}					t_test_entity;
 
 /*
 typedef enum			u_wtype
@@ -94,7 +88,8 @@ typedef struct		s_entity
 {
 	t_ph		physic;
 	t_ph		spawn;
-	t_mat		sprite;
+	float		w;
+	t_mat		*mat;
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
@@ -144,8 +139,6 @@ typedef struct		s_game
 	size_t		nportals;
 	t_vec2		*points;
 	size_t		npoints;
-	t_test_entity *entities;
-	size_t		nentities;
 	t_mat		*materials;
 	size_t		nmaterials;
 	t_img		*textures;

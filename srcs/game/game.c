@@ -60,7 +60,8 @@ static void	minimap(t_game game, t_color *buf)
 			color = BLUE;
 		else
 			color = RED;
-		a_f = fvec2_scale(fvec2_add(a_f, fvec2_new(f_from_int(10), f_from_int(10))), f_from_int(10));
+		a_f.u = f_add_int(a_f.u, 10) * 10;
+		a_f.v = f_from_int(HEIGHT) - f_add_int(a_f.v, 10) * 10;
 		draw_point(a_f,\
 		2,buf, color);
 		i++;

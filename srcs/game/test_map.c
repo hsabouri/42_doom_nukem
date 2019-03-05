@@ -173,7 +173,7 @@ t_game	generate_map(t_game game)
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
 	sectors[0] = ((t_sector){0, 10, 0, 0, 2.50, (t_color) {125, 125, 125, 255},
-	åå	&materials[1], &materials[4]});
+	&materials[1], &materials[4]});
 	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9, WHITE, &materials[1], &materials[4]});
 	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, &materials[1], &materials[4]});
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, &materials[1], &materials[4]});
@@ -205,7 +205,8 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		materials[2],
+		1,
+		&materials[6],
 		0
 		});
 	entities[1] = ((t_entity){
@@ -233,7 +234,8 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		materials[2],
+		1,
+		&materials[6],
 		1
 		});
 
