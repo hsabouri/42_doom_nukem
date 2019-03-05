@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 14:08:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:59:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	render(t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 	
 	i = 0;
 	r = build_sections(context, bunch, limit_rays);
-	r = build_sections_portals(game, context, r);
+	r = build_sections_portals(r);
 	sections_entities(r, context, buf, id_buf);
 	while (i < r.nsections)
 	{

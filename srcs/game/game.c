@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 15:54:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/05 16:01:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,19 @@ t_env		game_loop(t_env env, size_t frame)
 		env.game,
 		(t_context) {
 			0,
-			WIDTH - 1,
+			WIDTH + 2,
 			env.game.player.physic,
 			-1,
 			env.game.sectors[env.game.player.physic.sector_id]
 		},
 		env.current_buffer, env.game.id_buf);
 	
-	//raycast(env.game, env.game.player.physic.sector_id, env.current_buffer);
 	minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 	display_text(env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	timer = end_timer(timer);
+	//printf("%f\n", 1 / timer);
 	return (env);
 }
