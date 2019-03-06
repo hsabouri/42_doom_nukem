@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/05 12:57:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:24:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_fvec2 pos)
 			current.b = fvec2_add(current.a, tmp);
 			current.a = fvec2_sub(current.a, tmp);
 			if (is_in_limit(limit, context, take_left(current.a, current.b),
-				take_right(current.a, current.b), i))
+				take_right(current.a, current.b)))
 			{
 				current.id = i;
 				current.h = f_from_float(game.entities[i].physic.pos.z);
@@ -60,7 +60,7 @@ t_bunch	build_bunch(t_game game, t_context context, t_limit limit)
 		current.a = fvec2_sub(vec2_to_fvec2(game.points[game.walls[i].a]), pos);
 		current.b = fvec2_sub(vec2_to_fvec2(game.points[game.walls[i].b]), pos);
 		if ((size_t)context.mask != i &&
-			is_in_limit(limit, context, current.a, current.b, i))
+			is_in_limit(limit, context, current.a, current.b))
 		{
 			current.id = i;
 			current.portal = game.walls[i].portal;

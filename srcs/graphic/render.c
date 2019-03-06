@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/05 16:09:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:17:05 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ u_int32_t *ids)
 			fvec2_new(0, 0),
 			get_ray_dir(context.physic, id)
 		);
-		proj = wall_projection(id - section.start - 1, hit, context, section);
+		proj = wall_projection(id, hit, context, section);
 		draw_wall(id, proj, buf, ids);
 		++id;
 	}
@@ -50,7 +50,7 @@ u_int32_t *ids)
 			fvec2_new(0, 0),
 			get_ray_dir(context.physic, id)
 		);
-		proj = portal_projection(id - section.start, hit, context, section);
+		proj = portal_projection(id, hit, context, section);
 		draw_portal(id, proj, buf, ids);
 		++id;
 	}
@@ -68,7 +68,7 @@ u_int32_t *ids)
 	{
 		hit = ray_seg(section.entity.a, section.entity.b,
 			fvec2_new(0, 0), get_ray_dir(context.physic, id));
-		proj = entity_projection(id - section.start, hit, context, section);
+		proj = entity_projection(hit, context, section);
 		draw_entity(id, proj, buf, ids);
 		++id;
 	}
