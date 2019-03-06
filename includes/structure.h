@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 12:32:54 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/05 16:25:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef enum		e_mode
 {
+	SKYBOX,
 	TILING,
 	NO_TILING
 }					t_mode;

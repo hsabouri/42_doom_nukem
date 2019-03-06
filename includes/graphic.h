@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 19:19:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:18:38 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ typedef struct	s_section_entity
 
 typedef struct	s_tex_proj
 {
-	t_color	ambient;
+	t_color		ambient;
+	t_mat		mat;
+	int			x;
+	int			angle;
 }				t_tex_proj;
 
 typedef struct	s_pl_proj
@@ -120,12 +123,13 @@ typedef struct	s_pl_proj
 	u_int32_t	uid_roof;
 	u_int32_t	uid_floor;
 	int			look_v;
+	int			is_skybox;
 	t_fvec2		wr;
 	t_fvec2		ray;
 	t_fvec2		h;
 	t_fvec2		pos;
-	t_mat		mat_floor;
-	t_mat		mat_ceiling;
+	t_tex_proj	tex_floor;
+	t_tex_proj	tex_roof;
 }				t_pl_proj;
 
 typedef struct	s_proj
@@ -134,14 +138,12 @@ typedef struct	s_proj
 	u_int32_t	uid_step;
 	u_int32_t	uid_ceil;
 	int			is_portal;
-	t_mat		mat_wall;
-	t_tex_proj	tex;
+	t_tex_proj	tex_wall;
 	t_pl_proj	plane;
 	int			top;
 	int			ceil;
 	int			step;
 	int			bot;
-	int			id; //check if used
 	t_fixed		u;
 	t_fixed		x;
 	t_fixed		y_iter;
@@ -188,7 +190,7 @@ t_proj			wall_projection(int id, t_hit hit, t_context context,
 				t_section section);
 t_proj			portal_projection(int id, t_hit hit, t_context context,
 				t_section section);
-t_e_proj		entity_projection(int id, t_hit hit, t_context context,
+t_e_proj		entity_projection(t_hit hit, t_context context,
 				t_section_entity section);
 
 t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
@@ -212,8 +214,8 @@ t_fvec2			get_ray_dir(t_ph physic, int id);
 int				get_ray_id(t_fvec2 point, t_limit limit,
 				t_context context, int max);
 t_limit			build_limits(t_context context);
-int				is_in_limit(t_limit limit, t_context context,
-				t_fvec2 a, t_fvec2 b, int id);
+int			is_in_limit(t_limit limit, t_context context,
+			t_fvec2 a, t_fvec2 b);
 
 t_hit			ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d);
 

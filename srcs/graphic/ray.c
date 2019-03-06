@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:23:25 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/02 14:31:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:18:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
 }
 
 int			is_in_limit(t_limit limit, t_context context,
-t_fvec2 a, t_fvec2 b, int id)
+t_fvec2 a, t_fvec2 b)
 {
 	t_fvec2			r_l;
 	t_fvec2			r_r;

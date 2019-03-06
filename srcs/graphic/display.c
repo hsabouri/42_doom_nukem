@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:16:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/04 17:06:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/06 12:18:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	draw_roof(int id, t_proj proj, t_color *buf, u_int32_t *ids)
 	{
 		if (verif[i * WIDTH + id] == 0)
 		{
-			buf[i * WIDTH + id] = get_roof_pixel(proj.plane, proj.tex, i);
+			buf[i * WIDTH + id] = get_roof_pixel(proj.plane, proj.plane.tex_roof, i);
 			ids[i * WIDTH + id] = proj.plane.uid_roof;
 		}
 		++i;
@@ -40,7 +40,7 @@ static void	draw_floor(int id, t_proj proj, t_color *buf, u_int32_t *ids)
 	{
 		if (verif[i * WIDTH + id] == 0)
 		{
-			buf[i * WIDTH + id] = get_floor_pixel(proj.plane, proj.tex, i);
+			buf[i * WIDTH + id] = get_floor_pixel(proj.plane, proj.plane.tex_floor, i);
 			ids[i * WIDTH + id] = proj.plane.uid_floor;
 		}
 		++i;

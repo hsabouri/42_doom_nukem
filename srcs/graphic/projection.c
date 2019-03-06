@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/05 16:08:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:17:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, size_t sector)
 {
 	t_proj	res;
-	int			span;
+	int		span;
 
 	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) +
 		context.physic.look_v * 100);
@@ -36,6 +36,20 @@ static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, size_t sector)
 	res.plane.wr.v = f_div(-h.u, f_mul((f_from_int(HEIGHT) / WIDTH),
 		f_from_float(PWIDTH)));
 	res.plane.look_v = f_to_int(context.physic.look_v * 100);
+	res.tex_wall.ambient = context.sector.ambient;
+	res.plane.tex_floor.ambient = context.sector.ambient;
+	res.plane.tex_roof.ambient = context.sector.ambient;
+	return (res);
+}
+
+t_proj			skybox(t_proj res, int id, t_context context)
+{
+	res.tex_wall.x = -context.physic.look_h * RATIO + id;
+	res.tex_wall.angle = f_to_int(context.physic.look_v * 100);
+	res.plane.tex_roof.x = res.tex_wall.x;
+	res.plane.tex_roof.angle = res.tex_wall.angle;
+	res.plane.tex_floor.x = res.tex_wall.x;
+	res.plane.tex_floor.angle = res.tex_wall.angle;
 	return (res);
 }
 
@@ -52,13 +66,15 @@ t_section section)
 	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
 		context.sector.ceiling);
 	res = projection(hit, context, h, context.sector.sector_id);
+	res = skybox(res, id, context);
 	res.uid = translate_in(PART_WALL, MOD_NO, section.wall.id, 0);
 	res.is_portal = 0;
-	res.plane.mat_ceiling = *context.sector.ceiling_mat;
-	res.plane.mat_floor = *context.sector.floor_mat;
-	res.mat_wall = section.wall.mat;
-	res.tex.ambient = context.sector.ambient;
-	res.id = id;
+	res.plane.tex_roof.mat = *context.sector.ceiling_mat;
+	res.plane.tex_floor.mat = *context.sector.floor_mat;
+	res.tex_wall.mat = section.wall.mat;
+	res.tex_wall.ambient = context.sector.ambient;
+	res.plane.tex_floor.ambient = context.sector.ambient;
+	res.plane.tex_roof.ambient = context.sector.ambient;
 	return (res);
 }
 
@@ -81,27 +97,25 @@ t_section section)
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height) -
 		section.next.ceiling);
 	res = projection(hit, context, h, context.sector.sector_id);
+	res = skybox(res, id, context);
 	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);
 	res.uid_step = translate_in(PART_PORTAL, MOD_STEP, section.wall.id, 0);
 	res.uid_ceil = translate_in(PART_PORTAL, MOD_CEIL, section.wall.id, 0);
 	res.is_portal = 1;
 	res.step = res.bot + f_to_int(f_div(RATIO * (h2.u - h.u), hit.ratios.v));
 	res.ceil = res.top + f_to_int(f_div(RATIO * (h2.v - h.v), hit.ratios.v));
-	res.plane.mat_ceiling = *context.sector.ceiling_mat;
-	res.plane.mat_floor = *context.sector.floor_mat;
-	res.mat_wall = section.wall.mat;
-	res.tex.ambient = context.sector.ambient;
-	res.id = id;
+	res.plane.tex_roof.mat = *context.sector.ceiling_mat;
+	res.plane.tex_floor.mat = *context.sector.floor_mat;
+	res.tex_wall.mat = section.wall.mat;
 	return (res);
 }
 
-t_e_proj		entity_projection(int id, t_hit hit, t_context context,
+t_e_proj		entity_projection(t_hit hit, t_context context,
 t_section_entity section)
 {
 	t_e_proj	res;
 	t_fvec2		h;
 	t_fvec2		sector_h;
-	int			tmp;
 	int			span;
 
 	h.u = f_from_float((context.physic.pos.z + context.physic.height)) -
