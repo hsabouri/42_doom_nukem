@@ -44,6 +44,7 @@ typedef struct		s_ph
 {
 	float		gravity;
 	float		height;
+	float		radius;
 	t_vec3		pos;
 	t_vec3		speed;
 	t_vec3		speed_max;
@@ -89,7 +90,6 @@ typedef struct		s_entity
 {
 	t_ph		physic;
 	t_ph		spawn;
-	float		w;
 	t_mat		*mat;
 	//float life;
 	//float  armor;
@@ -129,23 +129,23 @@ typedef struct		s_sector
 
 typedef struct		s_game
 {
-	t_player	player;
-	t_entity	*entities;
-	size_t		nentities;
-	t_sector	*sectors;
-	size_t		nsectors;
-	t_wall		*walls;
-	size_t		nwalls;
-	t_portal	*portals;
-	size_t		nportals;
-	t_vec2		*points;
-	size_t		npoints;
-	t_mat		*materials;
-	size_t		nmaterials;
-	t_img		*textures;
-	size_t		ntextures;
-	size_t		frame;
-	u_int32_t	*id_buf;
+	t_player		player;
+	t_sector		*sectors;
+	size_t			nsectors;
+	t_wall			*walls;
+	size_t			nwalls;
+	t_portal		*portals;
+	size_t			nportals;
+	t_vec2			*points;
+	size_t			npoints;
+	t_entity		*entities;
+	size_t			nentities;
+	t_mat			*materials;
+	size_t			nmaterials;
+	t_img			*textures;
+	size_t			ntextures;
+	size_t			frame;
+	u_int32_t		*id_buf;
 }					t_game;
 
 t_game				generate_map(t_game game);

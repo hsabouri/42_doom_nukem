@@ -18,6 +18,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.05,
 			1.25,
+			0,
 			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -30,6 +31,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.05,
 			1.25,
+			0,
 			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -213,6 +215,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
+			0.5,
 			(t_vec3){6, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -225,6 +228,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
+			0.5,
 			(t_vec3){6, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -234,7 +238,6 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		1,
 		&materials[6],
 		0
 		});
@@ -242,6 +245,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
+			0.5,
 			(t_vec3){6, 8, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -254,6 +258,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
+			0.5,
 			(t_vec3){6, 8, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -263,7 +268,6 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		1,
 		&materials[6],
 		1
 		});
@@ -271,6 +275,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
+			0.5,
 			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -283,6 +288,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
+			0.5,
 			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -292,7 +298,6 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		1,
 		&materials[6],
 		1
 		});
