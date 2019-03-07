@@ -6,11 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/06 17:17:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/07 13:35:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
+#include "./sort.h"
 
 void	render_wall(t_context context, t_section section, t_color *buf,
 u_int32_t *ids)
@@ -81,6 +82,7 @@ u_int32_t *id_buf)
 	int					i;
 
 	i = 0;
+	render = sort_entities(render, context);
 	while (i < render.nentities)
 	{
 		current = render.entities[i];

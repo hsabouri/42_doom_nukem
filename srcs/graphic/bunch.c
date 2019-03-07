@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/06 17:24:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/07 13:55:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_fvec2 pos)
 		{
 			tmp = vec2_to_fvec2(vec2_rot(vec2_new(game.entities[i].w / 2, 0), context.physic.look_h));
 			current.a = fvec2_sub(vec2_to_fvec2(vec3_to_vec2(game.entities[i].physic.pos)), pos);
+			current.dis = fvec2_ssize(current.a);
 			current.b = fvec2_add(current.a, tmp);
 			current.a = fvec2_sub(current.a, tmp);
 			if (is_in_limit(limit, context, take_left(current.a, current.b),

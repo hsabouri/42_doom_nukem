@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities_physic.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/22 13:43:43 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/06 18:12:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_vec3	z_move(t_ph *physic, t_game game)
 	if (physic->jump && (physic->pos.z > game.sectors[physic->sector_id].floor
 		- 0.1 && physic->pos.z < game.sectors[physic->sector_id].floor + 0.1))
 	{
-		new_speed.z = 0.2;
+		new_speed.z = 0.3;
 		physic->jump = 0;
 	}
 	else if (delta < 0 && !physic->fly)
