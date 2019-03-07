@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/06 14:38:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/07 13:58:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_game	generate_map(t_game game)
 {
 	t_player player = (t_player) {
 		(t_ph) {
-			0.02,
+			0.05,
 			1.25,
 			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
@@ -28,7 +28,7 @@ t_game	generate_map(t_game game)
 			0
 		},
 		(t_ph) {
-			0.02,
+			0.05,
 			1.25,
 			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
@@ -208,12 +208,12 @@ t_game	generate_map(t_game game)
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, &materials[7], &materials[4]});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, &materials[7], &materials[4]});
 
-	t_entity *entities = (t_entity *)malloc(2 * sizeof(t_entity));
+	t_entity *entities = (t_entity *)malloc(3 * sizeof(t_entity));
 	entities[0] = ((t_entity){
 		(t_ph) {
 			0.02,
 			1.50,
-			(t_vec3){7, 9, 0},
+			(t_vec3){6, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -225,7 +225,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
-			(t_vec3){7, 9, 0},
+			(t_vec3){6, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -242,7 +242,7 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
-			(t_vec3){7, 8, 0},
+			(t_vec3){6, 8, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -254,7 +254,36 @@ t_game	generate_map(t_game game)
 		(t_ph) {
 			0.02,
 			1.50,
-			(t_vec3){7, 8, 0},
+			(t_vec3){6, 8, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		1,
+		&materials[6],
+		1
+		});
+	entities[2] = ((t_entity){
+		(t_ph) {
+			0.02,
+			1.50,
+			(t_vec3){5, 8.5, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		(t_ph) {
+			0.02,
+			1.50,
+			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -270,7 +299,7 @@ t_game	generate_map(t_game game)
 
 	game.player = player;
 	game.entities = entities;
-	game.nentities = 2;
+	game.nentities = 3;
 	game.sectors = sectors;
 	game.nsectors = 5;
 	game.walls = walls;

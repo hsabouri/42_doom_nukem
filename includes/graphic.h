@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/06 17:18:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/07 13:55:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct	s_cache_entity
 	t_fvec2			a;
 	t_fvec2			b;
 	t_fixed			h;
+	t_fixed			dis;
 	t_ph			physic;
 	t_mat			mat;
 }				t_cache_entity;
