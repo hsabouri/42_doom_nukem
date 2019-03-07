@@ -53,6 +53,7 @@ typedef struct		s_c_ph
 {
 	t_fixed		gravity;
 	t_fixed		height;
+	t_fixed		radius;
 	t_fvec3		pos;
 	t_fvec3		speed_max;
 	t_fvec2		look;

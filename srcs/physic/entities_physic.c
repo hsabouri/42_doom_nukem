@@ -80,9 +80,38 @@ static t_vec3	move_entities(t_ph *physic, t_game game, int wall)
 	return (next_pos);
 }
 
-t_ph			entities_physic(t_ph physic, t_game game)
+static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game game, size_t id)
 {
-	t_ph	n_physic;
+	t_vec3	pos;
+	size_t	i;
+	float	d;
+
+	i = -1;
+	pos = n_physic.pos;
+	while (++i < game.nentities)
+	{
+		d = circle_circle(n_physic, game.entities[i].physic);
+		if (d != -1 && i != id)
+		{
+			if (n_physic.pos.x > game.entities[i].physic.pos.x)
+			{
+				physic.pos.x += (game.entities[i].physic.radius - d);
+				physic.pos.y += (game.entities[i].physic.radius - d);
+			}
+			else
+			{
+				physic.pos.x -= (game.entities[i].physic.radius - d);
+				physic.pos.y -= (game.entities[i].physic.radius - d);
+			}
+			pos = vec3_add(physic.pos, physic.speed);
+		}
+	}
+	return (pos);
+}
+
+t_ph			entities_physic(t_ph physic, t_game game, size_t id)
+{
+	t_ph		n_physic;
 	t_last_pos	last_pos;
 
 	n_physic = physic;
@@ -98,6 +127,7 @@ t_ph			entities_physic(t_ph physic, t_game game)
 	}
 	last_pos.pos = game.player.physic.pos;
 	last_pos.sector_id = game.player.physic.sector_id;
+	n_physic.pos = col_entities(n_physic, physic, game, id);
 	n_physic = entities_track(n_physic, game, last_pos);
 	return (n_physic);
 }

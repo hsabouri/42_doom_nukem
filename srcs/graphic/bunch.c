@@ -26,7 +26,7 @@ t_fvec2 pos)
 	while (++i != (size_t)-1 && i < game.nentities)
 		if (game.entities[i].physic.sector_id == sector)
 		{
-			tmp = vec2_to_fvec2(vec2_rot(vec2_new(game.entities[i].w / 2, 0), context.physic.look_h));
+			tmp = vec2_to_fvec2(vec2_rot(vec2_new(game.entities[i].physic.radius, 0), context.physic.look_h));
 			current.a = fvec2_sub(vec2_to_fvec2(vec3_to_vec2(game.entities[i].physic.pos)), pos);
 			current.dis = fvec2_ssize(current.a);
 			current.b = fvec2_add(current.a, tmp);
