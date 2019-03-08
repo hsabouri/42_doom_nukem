@@ -6,14 +6,14 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/06 17:17:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/08 10:36:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 #include "srcs/common/translate_id.h"
 
-static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, size_t sector)
+static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, t_section section)
 {
 	t_proj	res;
 	int		span;
@@ -23,11 +23,12 @@ static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, size_t sector)
 	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) +
 		context.physic.look_v * 100);
 	res.u = hit.ratios.u;
-	res.x = hit.ratios.u;
+	res.x = f_mul(section.wall.size, hit.ratios.u) + section.wall.tex_pos.u;
 	span = res.bot - res.top;
-	res.y_iter = f_from_int(1 << 8) / (span + !span);
-	res.plane.uid_floor = translate_in(PART_FLOOR, MOD_NO, sector, 0);
-	res.plane.uid_roof = translate_in(PART_CEILING, MOD_NO, sector, 0);
+	res.y_start = section.wall.tex_pos.v * 200;
+	res.y_iter = ((h.u - h.v) << 8) / (span + !span);
+	res.plane.uid_floor = translate_in(PART_FLOOR, MOD_NO, context.sector.sector_id, 0);
+	res.plane.uid_roof = translate_in(PART_CEILING, MOD_NO, context.sector.sector_id, 0);
 	res.plane.h = h;
 	res.plane.pos = vec2_to_fvec2(vec3_to_vec2(context.physic.pos));
 	res.plane.ray = hit.ray;
@@ -65,7 +66,7 @@ t_section section)
 		context.sector.floor);
 	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
 		context.sector.ceiling);
-	res = projection(hit, context, h, context.sector.sector_id);
+	res = projection(hit, context, h, section);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_WALL, MOD_NO, section.wall.id, 0);
 	res.is_portal = 0;
@@ -96,7 +97,7 @@ t_section section)
 		section.next.floor);
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height) -
 		section.next.ceiling);
-	res = projection(hit, context, h, context.sector.sector_id);
+	res = projection(hit, context, h, section);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);
 	res.uid_step = translate_in(PART_PORTAL, MOD_STEP, section.wall.id, 0);
