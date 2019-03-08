@@ -19,6 +19,7 @@
 # define WALL_MAGIC		0x1B16B00B
 # define SECTOR_MAGIC	0xCAFED00D
 # define PORTAL_MAGIC	0xC11BE
+# define ENTITY_MAGIC	0xFEEEFEEE
 # define TEXT_MAGIC		0xFEE1DEAD
 
 # include <unistd.h>
@@ -57,6 +58,7 @@ typedef struct		s_c_ph
 	t_fvec3		pos;
 	t_fvec3		speed_max;
 	t_fvec2		look;
+	u_int32_t	sector_id;
 }					t_c_ph;
 
 typedef struct		s_c_player
@@ -69,6 +71,17 @@ typedef struct		s_c_player
 	// uint8_t		equiped;
 	// size_t		weapons[5];
 }					t_c_player;
+
+typedef struct		s_c_entity
+{
+	size_t		magic;
+	t_c_ph		spawn;
+	size_t		mat;
+	//float life;
+	//float  armor;
+	//t_weapon weapons;
+	int 		damage;
+}					t_c_entity;
 
 typedef struct		s_c_point
 {
@@ -90,6 +103,7 @@ typedef struct		s_c_portal
 typedef struct		s_c_wall
 {
 	size_t		magic;
+	t_fvec2		tex_pos;
 	int32_t		portal;
 	u_int32_t	a;
 	u_int32_t	b;
@@ -123,6 +137,8 @@ typedef struct		s_c_game
 	size_t		loc_sectors;
 	size_t		nportals;
 	size_t		loc_portals;
+	size_t		nentities;
+	size_t		loc_entities;
 	size_t		ntextures;
 	size_t		loc_textures;
 }					t_c_game;

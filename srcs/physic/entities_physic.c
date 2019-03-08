@@ -52,7 +52,7 @@ static t_vec3	wall_touch(t_touch touch, t_ph *physic, int wall, t_game game)
 		next_pos = vec3_add(physic->pos, final_speed);
 	}
 	return (next_pos);
-}
+}          
 
 static t_vec3	move_entities(t_ph *physic, t_game game, int wall)
 {

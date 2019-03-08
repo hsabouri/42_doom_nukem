@@ -30,6 +30,7 @@ SRCNAM =	open_file.c\
 			parse.c\
 			write.c\
 			write_map.c\
+			write_entities.c\
 			convert_p_id.c\
 			parse_map.c\
 			parse_textures_sounds.c\

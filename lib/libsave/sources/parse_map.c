@@ -77,6 +77,7 @@ size_t n_entities)
 			sizeof(t_c_wall) * i, sizeof(t_c_wall), save.max);
 		verify_magic(&struc_w, WALL_MAGIC, i);
 		current = walls[i];
+		current.tex_pos = struc_w.tex_pos;
 		current.portal = struc_w.portal;
 		current.a = struc_w.a;
 		current.b = struc_w.b;

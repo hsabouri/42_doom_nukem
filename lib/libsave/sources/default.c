@@ -18,7 +18,7 @@ t_player	player_default(void)
 		(t_ph) {
 			0.02,
 			1.25,
-			0.3,
+			0,
 			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -31,7 +31,7 @@ t_player	player_default(void)
 		(t_ph) {
 			0.02,
 			1.25,
-			0.3,
+			0,
 			(t_vec3){7, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -42,4 +42,37 @@ t_player	player_default(void)
 			0
 		}
 	});
+}
+
+t_entity	entity_default(void)
+{
+	return ((t_entity) {
+		(t_ph) {
+			0.02,
+			1.25,
+			0,
+			(t_vec3){7, 9, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		(t_ph) {
+			0.02,
+			1.25,
+			0,
+			(t_vec3){7, 9, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+	NULL,
+	0});
 }
