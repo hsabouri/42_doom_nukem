@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/07 13:55:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/07 18:05:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ t_bunch	build_bunch(t_game game, t_context context, t_limit limit)
 			is_in_limit(limit, context, current.a, current.b))
 		{
 			current.id = i;
+			current.size = f_from_float(1 / vec2_inv_size(vec2_sub(
+				game.points[game.walls[i].b], game.points[game.walls[i].a])));
 			current.portal = game.walls[i].portal;
+			current.tex_pos = game.walls[i].tex_pos;
 			current.mat = *game.walls[i].mat;
 			ret.walls[ret.nwalls] = current;
 			++ret.nwalls;

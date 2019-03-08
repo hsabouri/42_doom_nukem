@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/05 16:25:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/07 18:01:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct		s_portal
 
 typedef struct		s_wall
 {
+	t_fvec2		tex_pos;
 	int32_t		portal;
 	u_int32_t	a;
 	u_int32_t	b;

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 13:46:50 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/31 16:15:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/07 18:03:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,14 @@ t_game		create_wall(ssize_t pts[2], int new_sector, t_game game)
 	if (before == -1 || new_sector == 1)
 	{
 		game.walls = (t_wall *)realloc(game.walls, (game.nwalls + 1) * sizeof(t_wall));
-		game.walls[game.nwalls] = (t_wall) {
+		game.walls[game.nwalls] = (t_wall) {fvec2_new(0, 0),
 		-1, (u_int32_t)pts[0], (u_int32_t)pts[1], game.materials};
 		game.nwalls++;
 		game = create_sector(game.nwalls - 1, 1, game);
 		return (game);
 	}
 	game.walls = array_open(game.walls, before + 1, game.nwalls, sizeof(t_wall));
-	game.walls[before + 1] = (t_wall) {
+	game.walls[before + 1] = (t_wall) {fvec2_new(0, 0),
 		-1, (u_int32_t)pts[0], (u_int32_t)pts[1], game.materials};
 	game.nwalls++;
 	game = new_update_sectors((ssize_t)(before + 1), -1, -1, game);

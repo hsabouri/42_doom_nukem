@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/07 13:55:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/08 10:28:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct	s_cache_wall
 {
 	int32_t	portal;
 	size_t	id;
+	t_fixed	size;
+	t_fvec2	tex_pos;
 	t_fvec2	a;
 	t_fvec2	b;
 	t_mat	mat;
@@ -148,6 +150,7 @@ typedef struct	s_proj
 	t_fixed		u;
 	t_fixed		x;
 	t_fixed		y_iter;
+	t_fixed		y_start;
 }				t_proj;
 
 typedef struct	s_e_proj

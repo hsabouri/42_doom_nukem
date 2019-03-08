@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/05 16:01:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/08 10:36:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ t_env		game_loop(t_env env, size_t frame)
 
 	timer = start_timer();
 	if (env.editor.enabled)
-	
-	env.game = game_editing(env.game, env.events, env.game.player, &env.sdl);
+		env.game = game_editing(env.game, env.events, env.game.player, &env.sdl);
 	env.game = player_properties(env.game, env.events);
 	//env.game = entities_properties(env.game, env.events);
 	env.game = physic(env.game, env.events);
