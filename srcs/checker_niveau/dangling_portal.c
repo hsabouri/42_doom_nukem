@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dangling_portal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:39:36 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/25 14:39:37 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/08 16:49:33 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ t_game game)
 {
 	t_list		error;
 
+	error = lnew(NULL);
 	check_first_wall(portals, game, nportals, &error);
 	check_second_wall(portals, game, nportals, &error);
 	return (error);

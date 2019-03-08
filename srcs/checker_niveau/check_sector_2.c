@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_sector_2                                     :+:      :+:    :+:   */
+/*   check_sector_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:56:49 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/26 13:57:06 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/08 16:35:12 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_list			open_sector(t_sector *sectors, size_t nsectors, t_game game)
 	size_t			cpt;
 
 	cpt = 0;
+	error = lnew(NULL);
 	while (cpt < nsectors)
 	{
 		data.start = sectors[cpt].start;
@@ -68,6 +69,7 @@ t_list			height_sector(t_sector *sectors, size_t nsectors)
 	size_t		cpt;
 
 	cpt = 0;
+	error = lnew(NULL);
 	while (cpt < nsectors)
 	{
 		if ((sectors[cpt].ceiling - sectors[cpt].floor) < 0.1)
@@ -112,6 +114,7 @@ t_game game)
 	size_t	end;
 
 	cpt = 0;
+	error = lnew(NULL);
 	while (cpt < nsectors)
 	{
 		start = sectors[cpt].start;
