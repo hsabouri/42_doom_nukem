@@ -18,9 +18,12 @@ static t_c_player	translate_player(t_player player)
 
 	res.spawn.gravity = f_from_float(player.spawn.gravity);
 	res.spawn.height = f_from_float(player.spawn.height);
+	res.spawn.radius = f_from_float(player.spawn.radius);
 	res.spawn.pos = vec3_to_fvec3(player.spawn.pos);
 	res.spawn.speed_max = vec3_to_fvec3(player.spawn.speed_max);
-	//res.physic.look = vec2_to_fvec2(player.physic.look);
+	res.spawn.look.u = f_from_float(player.physic.look_h);
+	res.spawn.look.v = player.spawn.look_v;
+	res.spawn.sector_id = player.spawn.sector_id;
 	return (res);
 }
 
@@ -54,8 +57,8 @@ int index)
 			loc_content += (size_t)(textures[i - 1].width *
 				textures[i - 1].height) * sizeof(t_color);
 		ftextures.content = loc_content;
-		i++;
 		write_struct(&ftextures, fd, sizeof(t_c_img));
+		i++;
 	}
 }
 
@@ -72,9 +75,12 @@ static t_c_game		save_entities(t_c_game to_save, t_game game)
 	to_save.nportals = game.nportals;
 	to_save.loc_portals = to_save.loc_sectors + sizeof(t_c_sector) *\
 		game.nsectors;
-	to_save.ntextures = game.ntextures;
-	to_save.loc_textures = to_save.loc_portals + sizeof(t_c_portal) *\
+	to_save.nentities = game.nentities;
+	to_save.loc_entities = to_save.loc_portals + sizeof(t_c_portal) *\
 		game.nportals;
+	to_save.ntextures = game.ntextures;
+	to_save.loc_textures = to_save.loc_entities + sizeof(t_c_entity) *\
+		game.nentities;
 	to_save.player = translate_player(game.player);
 	return (to_save);
 }
@@ -96,6 +102,7 @@ void				save(const char *filename, t_game game)
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals);
+	translate_entity(fd, game.entities, game.nentities, game.materials);
 	loc_imgs = to_save.loc_textures + sizeof(t_c_img) * game.ntextures;
 	write_textures(fd, game.textures, game.ntextures, loc_imgs);
 	while (i < to_save.ntextures)

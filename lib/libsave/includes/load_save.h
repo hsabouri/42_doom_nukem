@@ -27,6 +27,7 @@ t_game			load(const char *filename);
 void			*dump_struct(void *buf, size_t start, size_t size, size_t max);
 void			verify_magic(void *t_c_struct, size_t magic, size_t index);
 t_player		player_default(void);
+t_entity		entity_default(void);
 
 void			write_struct(void *struc, int fd, size_t size);
 void			write_mats(int fd, t_mat *mats, size_t nmats, t_img *textures);
@@ -45,6 +46,8 @@ size_t n_entities);
 t_sector		*parse_sectors(void *buf, t_save save, t_mat *mats,\
 size_t n_entities);
 t_portal		*parse_portals(void *buf, t_save save, size_t n_entities);
+void			translate_entity(int fd, t_entity *entities, size_t nentities,\
+t_mat *mats);
 
 int				main_save(char *name);
 #endif

@@ -63,6 +63,7 @@ void	write_walls(int fd, t_wall *walls, size_t nwalls, t_mat *mats)
 	while (i < nwalls)
 	{
 		fwalls.magic = WALL_MAGIC + i;
+		fwalls.tex_pos = walls[i].tex_pos;
 		fwalls.portal = walls[i].portal;
 		fwalls.a = walls[i].a;
 		fwalls.b = walls[i].b;

@@ -35,6 +35,40 @@ void			verify_magic(void *t_c_struct, size_t magic, size_t index)
 	}
 }
 
+t_entity		*parse_entities(void *buf, t_save save, t_mat *mats,\
+size_t n_entities)
+{
+	t_c_entity	struc_e;
+	t_entity	*entities;
+	t_entity	current;
+	size_t		i;
+
+	entities = (t_entity *)malloc(sizeof(t_entity) * n_entities);
+	i = 0;
+	while (i < n_entities)
+	{
+		struc_e = *(t_c_entity *)dump_struct(buf, save.index +
+			sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
+		verify_magic(&struc_e, ENTITY_MAGIC, i);
+		current = entity_default();
+		current.physic.gravity = f_to_float(struc_e.spawn.gravity);
+		current.physic.height = f_to_float(struc_e.spawn.height);
+		current.physic.radius = f_to_float(struc_e.spawn.radius);
+		current.physic.pos = fvec3_to_vec3(struc_e.spawn.pos);
+		current.physic.speed_max = fvec3_to_vec3(struc_e.spawn.speed_max);
+		current.physic.look_v = struc_e.spawn.look.v;
+		current.physic.look_h = f_to_float(struc_e.spawn.look.u);
+		if (current.physic.look_h > M_PI / 2 && current.physic.look_h < -M_PI / 2)
+			current.physic.look_h = 0;
+		current.physic.sector_id = struc_e.spawn.sector_id;
+		current.mat = id_to_p((ssize_t)struc_e.mat, mats, sizeof(t_mat));
+		current.damage = struc_e.damage;
+		entities[i] = current;
+		i++;
+	}
+	return (entities);
+}
+
 t_player		parse_player(t_c_player player)
 {
 	t_player	res;
@@ -42,13 +76,14 @@ t_player		parse_player(t_c_player player)
 	res = player_default();
 	res.physic.gravity = f_to_float(player.spawn.gravity);
 	res.physic.height = f_to_float(player.spawn.height);
+	res.physic.radius = f_to_float(player.spawn.radius);
 	res.physic.pos = fvec3_to_vec3(player.spawn.pos);
 	res.physic.speed_max = fvec3_to_vec3(player.spawn.speed_max);
-	/*
-	res.physic.look = fvec2_to_vec2(player.physic.look);
-	if (res.physic.look.v < M_PI / 2 && res.physic.look.v > -M_PI / 2)
-		res.physic.look.v = 0;
-		*/
+	res.physic.look_v = player.spawn.look.v;
+	res.physic.look_h = f_to_float(player.spawn.look.u);
+	if (res.physic.look_h > M_PI / 2 && res.physic.look_h < -M_PI / 2)
+		res.physic.look_h = 0;
+	res.physic.sector_id = player.spawn.sector_id;
 	return (res);
 }
 
@@ -73,6 +108,9 @@ static t_game	parse_1(void *buf, t_game res, t_c_game game, t_save save)
 	save.index = game.loc_portals;
 	res.portals = parse_portals(buf, save, game.nportals);
 	res.nportals = game.nportals;
+	save.index = game.loc_entities;
+	res.entities = parse_entities(buf, save, res.materials, game.nentities);
+	res.nentities = game.nentities;
 	return (res);
 }
 
