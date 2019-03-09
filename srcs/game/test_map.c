@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/04/14 17:25:36 by hsabouri         ###   ########.fr       */
+=======
+/*   Updated: 2019/04/01 13:26:08 by lbougero         ###   ########.fr       */
+>>>>>>> trigger en cours
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,6 +437,7 @@ t_game	generate_map(void)
 			0
 		},
 		multi,
+		1,
 		0
 	});
 	entities[1] = ((t_entity){
