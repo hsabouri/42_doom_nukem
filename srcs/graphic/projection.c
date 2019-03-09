@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/08 10:36:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 13:20:33 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_section section)
 	res = projection(hit, context, h, section);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_WALL, MOD_NO, section.wall.id, 0);
-	res.is_portal = 0;
+	res.is_portal_tex = 0;
 	res.plane.tex_roof.mat = *context.sector.ceiling_mat;
 	res.plane.tex_floor.mat = *context.sector.floor_mat;
 	res.tex_wall.mat = section.wall.mat;
@@ -102,11 +102,18 @@ t_section section)
 	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);
 	res.uid_step = translate_in(PART_PORTAL, MOD_STEP, section.wall.id, 0);
 	res.uid_ceil = translate_in(PART_PORTAL, MOD_CEIL, section.wall.id, 0);
-	res.is_portal = 1;
 	res.step = res.bot + f_to_int(f_div(RATIO * (h2.u - h.u), hit.ratios.v));
 	res.ceil = res.top + f_to_int(f_div(RATIO * (h2.v - h.v), hit.ratios.v));
 	res.plane.tex_roof.mat = *context.sector.ceiling_mat;
 	res.plane.tex_floor.mat = *context.sector.floor_mat;
+	res.tex_open = res.tex_wall;
+	if (section.wall.open)
+	{
+		res.is_portal_tex = 1;
+		res.tex_open.mat = *section.wall.open;
+	}
+	else
+		res.is_portal_tex = 0;
 	res.tex_wall.mat = section.wall.mat;
 	return (res);
 }

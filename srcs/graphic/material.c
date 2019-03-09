@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/08 10:35:39 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 13:23:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ t_color			get_wall_pixel(t_proj proj, int y)
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
 	return (get_mat_pixel(proj.tex_wall.mat, proj.tex_wall, pix, 8, y));
+}
+
+t_color			get_portal_pixel(t_proj proj, int y)
+{
+	t_fvec2 pix;
+
+	pix.u = proj.x;
+	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
+	return (get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, 8, y));
 }
 
 t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
