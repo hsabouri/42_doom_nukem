@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:16:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/06 12:18:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 13:29:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ void		draw_portal(int id, t_proj proj, t_color *buf, u_int32_t *ids)
 		}
 		++i;
 	}
+	if (proj.is_portal_tex)
+		while (i < proj.step && i < proj.bot && i < HEIGHT)
+		{
+			if (verif[i * WIDTH + id] == 0)
+			{
+				buf[i * WIDTH + id] = get_portal_pixel(proj, i);
+				ids[i * WIDTH + id] = proj.uid_step;
+			}
+			++i;
+		}
 	if (proj.step < proj.bot)
 	{
 		i = (proj.step >= 0) ? proj.step : 0;

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/07 18:05:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 13:19:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_bunch	build_bunch(t_game game, t_context context, t_limit limit)
 				game.points[game.walls[i].b], game.points[game.walls[i].a])));
 			current.portal = game.walls[i].portal;
 			current.tex_pos = game.walls[i].tex_pos;
+			current.open = (current.portal >= 0) ? game.portals[current.portal].mat : NULL;
 			current.mat = *game.walls[i].mat;
 			ret.walls[ret.nwalls] = current;
 			++ret.nwalls;

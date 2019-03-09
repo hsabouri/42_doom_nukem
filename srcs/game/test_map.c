@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/08 10:24:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 13:38:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_game	generate_map(t_game game)
 	textures[3] = parse_tga("./textures/skybox.tga");
 	textures[4] = parse_tga("./textures/fence.tga");
 
-	t_mat *materials = (t_mat *)malloc(8 * sizeof(t_mat));
+	t_mat *materials = (t_mat *)malloc(9 * sizeof(t_mat));
 	materials[0] = (t_mat) { // Default
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
@@ -158,8 +158,17 @@ t_game	generate_map(t_game game)
 		NULL
 	};
 	t_mat *fence = &materials[7];
-
-
+	
+	materials[8] = (t_mat) { // Fence
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		NULL,
+		TILING,
+		WHITE,
+		fence
+	};
+	t_mat *tfence = &materials[8];
 
 	t_wall *walls = (t_wall *)malloc(29 * sizeof(t_wall));
 	walls[0] =  ((t_wall){fvec2_new(0, 0), -1, 9, 0, bricks});
@@ -193,10 +202,10 @@ t_game	generate_map(t_game game)
 	walls[28] = ((t_wall){fvec2_new(0, 0), -1, 19, 14, bricks});
 
 	t_portal *portals = (t_portal *)malloc(4 * sizeof(t_portal));
-	portals[0] = ((t_portal){0, 1, 9, 10, 8, 9});
-	portals[1] = ((t_portal){1, 2, 12, 14, 10, 11});
-	portals[2] = ((t_portal){2, 3, 16, 18, 12, 13});
-	portals[3] = ((t_portal){3, 4, 20, 22, 14, 15});
+	portals[0] = ((t_portal){0, 1, 9, 10, 8, 9, tfence});
+	portals[1] = ((t_portal){1, 2, 12, 14, 10, 11, NULL});
+	portals[2] = ((t_portal){2, 3, 16, 18, 12, 13, NULL});
+	portals[3] = ((t_portal){3, 4, 20, 22, 14, 15, NULL});
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
 	sectors[0] = ((t_sector){0, 10, 0, 0, 2.50, (t_color) {125, 125, 125, 255},
@@ -312,6 +321,6 @@ t_game	generate_map(t_game game)
 	game.textures = textures;
 	game.ntextures = 5;
 	game.materials = materials;
-	game.nmaterials = 8;
+	game.nmaterials = 9;
 	return (game);
 }
