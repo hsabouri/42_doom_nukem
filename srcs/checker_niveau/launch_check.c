@@ -48,6 +48,8 @@ void	init_errors_text(char *errors_text[NBR_ERROR])
 	errors_text[21] = "missing id in sector";
 	errors_text[22] = "missing overlay in sector";
 	errors_text[23] = "portals aren't parallel";
+	errors_text[24] = "missing texture of entity";
+	errors_text[25] = "bad sector_id of entity";
 }
 
 void	launch_check(t_game game)
@@ -66,7 +68,8 @@ void	launch_check(t_game game)
 	if (launch_check_wall(error, game, errors_text, mats) == 1 &&
 		launch_check_portal(error, game, errors_text) == 1 &&
 		launch_check_sector(error, game, errors_text, mats) == 1 &&
-		launch_check_mats(error, game, errors_text, mats) == 1)
+		launch_check_mats(error, game, errors_text, mats) == 1 &&
+		launch_check_entities(error, game, errors_text, mats) == 1)
 		printf("no blocking errors\n");
 	error_list = lnew(NULL);
 	current = check_max_wall(game.sectors, game.nsectors);
@@ -85,10 +88,13 @@ void	launch_check(t_game game)
 	error_list = *ljoin(&error_list, &current);
 	current = parallel_portal(game.portals, game.nportals, game);
 	error_list = *ljoin(&error_list, &current);
+	current = sector_entity(game.entities, game.nentities, game);
+	error_list = *ljoin(&error_list, &current);
 	while ((buh = (t_lvl_error *)lnext(&error_list)))
 	{
-		printf("%s: point: %ld, wall: %ld, portal: %d, sector: %ld, mat: %ld\n",
+		printf("%s: point: %ld, wall: %ld, portal: %d, sector: %ld, mat: %ld,\
+			entity: %ld\n",
 			errors_text[buh->error_type], buh->point, buh->wall, buh->portal,
-			buh->sector, buh->mats);
+			buh->sector, buh->mats, buh->entities);
 	}
 }

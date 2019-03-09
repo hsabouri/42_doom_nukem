@@ -13,7 +13,7 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# define NBR_ERROR 24
+# define NBR_ERROR 26
 
 typedef enum	e_error_type
 {
@@ -40,7 +40,9 @@ typedef enum	e_error_type
 	WALL_PORTAL,
 	ID_SECTOR,
 	OVERLAY_MAT,
-	PARALLEL_PORTAL
+	PARALLEL_PORTAL,
+	MATS_ENTITIES,
+	BAD_SECTOR,
 }				t_error_type;
 
 typedef struct	s_lvl_error
@@ -111,6 +113,11 @@ t_img *textures, t_check_mat materials);
 t_lvl_error		check_overlay(t_mat *materials, t_lvl_error error,\
 size_t nmaterials);
 
+u_int32_t		launch_check_entities(t_lvl_error error, t_game game,\
+char *errors_text[NBR_ERROR], t_check_mat mats);
+t_lvl_error		check_mat_entities(t_entity *entities, t_lvl_error error,\
+size_t nentities, t_check_mat mats);
+
 t_list			check_max_wall(t_sector *sectors, size_t nsectors);
 t_list			dangling_portal_wall(t_portal *portals, size_t nportals,\
 t_game game);
@@ -123,5 +130,7 @@ t_list			height_next_sector(t_sector *sectors, size_t nsectors,\
 t_game game);
 t_list			convex_sector(t_sector *sectors, size_t nsectors, t_game game);
 t_list			parallel_portal(t_portal *portal, size_t nportals, t_game game);
+t_list			sector_entity(t_entity *entities, size_t nentities,\
+t_game game);
 
 #endif
