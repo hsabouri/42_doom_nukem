@@ -7,14 +7,23 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2019/04/25 11:57:27 by hsabouri         ###   ########.fr       */
 =======
+=======
+>>>>>>> need collision
 <<<<<<< HEAD
 /*   Updated: 2019/03/19 16:02:37 by hsabouri         ###   ########.fr       */
 =======
 /*   Updated: 2019/03/11 18:44:25 by lbougero         ###   ########.fr       */
 >>>>>>> trigger en cours
+<<<<<<< HEAD
 >>>>>>> trigger en cours
+=======
+=======
+/*   Updated: 2019/03/11 18:46:30 by lbougero         ###   ########.fr       */
+>>>>>>> need collision
+>>>>>>> need collision
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +141,7 @@ typedef struct		s_trigger
 typedef struct		s_game_event
 {
 	t_trigger	 trigger;
-	int			is_trigger;
+	// int			is_trigger;
 	// t_action	 action;
 }					t_game_event;
 
