@@ -6,24 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2019/04/25 11:57:27 by hsabouri         ###   ########.fr       */
-=======
-=======
->>>>>>> need collision
-<<<<<<< HEAD
-/*   Updated: 2019/03/19 16:02:37 by hsabouri         ###   ########.fr       */
-=======
-/*   Updated: 2019/03/11 18:44:25 by lbougero         ###   ########.fr       */
->>>>>>> trigger en cours
-<<<<<<< HEAD
->>>>>>> trigger en cours
-=======
-=======
-/*   Updated: 2019/03/11 18:46:30 by lbougero         ###   ########.fr       */
->>>>>>> need collision
->>>>>>> need collision
+/*   Updated: 2019/04/26 11:58:16 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +68,6 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
-<<<<<<< HEAD
-=======
 
 /*
 typedef enum			u_wtype
@@ -116,8 +97,12 @@ typedef enum	e_condition
 	TRIGGER_NO = 0x0
 }				t_condition;
 
+typedef enum	e_condition
+{
+	ACTION_SPAWN = 0x1,
+	ACTION_NO = 0x0
+}				t_condition;
 
->>>>>>> trigger en cours
 typedef struct		s_entity
 {
 	t_ph		physic;
@@ -129,8 +114,6 @@ typedef struct		s_entity
 	int 		damage;
 }					t_entity;
 
-<<<<<<< HEAD
-=======
 typedef struct		s_trigger
 {
 	t_entity	e_actif;
@@ -146,25 +129,17 @@ typedef struct		s_game_event
 }					t_game_event;
 
 
->>>>>>> trigger en cours
 typedef struct		s_player
 {
-	t_ph		physic;
-	t_ph		spawn;
-<<<<<<< HEAD
+	// t_ph		physic;
+	// t_ph		spawn;
+	t_entity	my_entity;
 	size_t		life;
 	u_int32_t	weapons[2];
 	u_int32_t	secondary;
 	u_int32_t	equiped;
 	t_array		inventory;
 	// float		armor;
-=======
-	//float		life;
-	//float		armor;
-	//t_array		inventory;
-	//uint8_t		equiped;
-	//t_weapon	weapons[5];
->>>>>>> trigger en cours
 }					t_player;
 
 typedef struct		s_portal

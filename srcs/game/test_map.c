@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2019/04/14 17:25:36 by hsabouri         ###   ########.fr       */
 =======
 /*   Updated: 2019/04/01 13:26:08 by lbougero         ###   ########.fr       */
 >>>>>>> trigger en cours
+=======
+/*   Updated: 2019/04/01 13:32:56 by lbougero         ###   ########.fr       */
+>>>>>>> je ve la musik
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,6 +410,11 @@ t_game	generate_map(void)
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles, fvec2_new(0, 0)});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles, fvec2_new(0, 0)});
 
+<<<<<<< HEAD
+=======
+	t_trigger *c_log = (t_entity *)malloc(10 * sizeof(t_entity));
+
+>>>>>>> je ve la musik
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
 		(t_ph) {
@@ -604,6 +613,7 @@ t_game	generate_map(void)
 	};
 
 	game.player = player;
+	game.log = c_log;
 	game.entities = entities;
 	game.nentities = 4;
 	game.sectors = sectors;

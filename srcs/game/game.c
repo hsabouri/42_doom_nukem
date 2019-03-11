@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/03/26 12:04:26 by hsabouri         ###   ########.fr       */
+=======
+/*   Updated: 2019/03/11 18:19:10 by lbougero         ###   ########.fr       */
+>>>>>>> je ve la musik
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +37,18 @@ void		minimap(t_game game, t_color *buf)
 		wall = game.walls[i];
 		a = game.points[wall.a];
 		b = game.points[wall.b];
-		a = player_space(a, game.player.physic);
-		b = player_space(b, game.player.physic);
+		a = player_space(a, game.player.my_entity.physic);
+		b = player_space(b, game.player.my_entity.physic);
 		bresenham(buf, (t_pix) {(a.u + 10) * 10, HEIGHT - (a.v + 10) * 10},
 			(t_pix) {(b.u + 10) * 10, HEIGHT - (b.v + 10) * 10}, WHITE);
 		i++;
 	}
-	a = player_space((t_vec2) {0, 0}, game.player.physic);
-	b = player_space((t_vec2) {250, 0}, game.player.physic);
+	a = player_space((t_vec2) {0, 0}, game.player.my_entity.physic);
+	b = player_space((t_vec2) {250, 0}, game.player.my_entity.physic);
 	bresenham(buf, (t_pix) {(a.u + 10) * 10, HEIGHT - (a.v + 10) * 10},
 		(t_pix) {(b.u + 10) * 10, HEIGHT - (b.v + 10) * 10}, WHITE);
-	a = player_space((t_vec2) {0, 0}, game.player.physic);
-	b = player_space((t_vec2) {0, 250}, game.player.physic);
+	a = player_space((t_vec2) {0, 0}, game.player.my_entity.physic);
+	b = player_space((t_vec2) {0, 250}, game.player.my_entity.physic);
 	bresenham(buf, (t_pix) {(a.u + 10) * 10, HEIGHT - (a.v + 10) * 10},
 		(t_pix) {(b.u + 10) * 10, HEIGHT - (b.v + 10) * 10}, WHITE);
 	bresenham(buf, (t_pix) {100, HEIGHT - 100}, (t_pix) {100, HEIGHT - 110}, RED);
@@ -55,7 +59,7 @@ void		minimap(t_game game, t_color *buf)
 	while (i < game.nentities)
 	{
 		a = vec3_to_vec2(game.entities[i].physic.pos);
-		a = player_space(a, game.player.physic);
+		a = player_space(a, game.player.my_entity.physic);
 		t_fvec2 a_f = vec2_to_fvec2(a);
 		if (game.entities[i].damage == 0)
 			color = BLUE;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities_physic.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/20 14:41:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/01 13:33:01 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game game, size_t id)
 		d = circle_circle(n_physic, game.entities[i].physic, COL_ENTITY);
 		if (d != -1 && i != id)
 		{
+			//game.log[0].e_actif = game.player // Set the player as an entities
+
+			game.log[0].condi = TRIGGER_TOUCH;
+			game.log[0].e_passif = game.entities[i];
 			if (n_physic.pos.x > game.entities[i].physic.pos.x)
 			{
 				physic.pos.x += (game.entities[i].physic.radius - d);
@@ -140,8 +144,8 @@ t_ph			entities_physic(t_ph physic, t_game game, size_t id, float old_timer)
 		n_physic.speed.z = 0;
 		n_physic.jump = 0;
 	}
-	last_pos.pos = game.player.physic.pos;
-	last_pos.sector_id = game.player.physic.sector_id;
+	last_pos.pos = game.player.my_entity.physic.pos;
+	last_pos.sector_id = game.player.my_entity.physic.sector_id;
 	n_physic.pos = col_entities(n_physic, physic, game, id);
 	n_physic = entities_track(n_physic, game, last_pos);
 	col_interact(n_physic, game, id);
