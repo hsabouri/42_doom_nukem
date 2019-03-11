@@ -118,4 +118,8 @@ t_game					game_editing(t_game game, t_event events,\
 						t_player player, t_sdl *sdl);
 t_game					player_properties(t_game game, t_event events);
 
+void					play_music(t_game game, size_t id, size_t vol, size_t frame);	
+t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);
+t_game					play_sounds(t_game game);
+
 #endif

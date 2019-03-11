@@ -22,6 +22,10 @@
 # include <vec.h>
 # include <tga.h>
 
+# ifndef LOAD_SAVE_H
+#  include <SDL2/SDL_mixer.h>
+# endif
+
 typedef enum		e_mode
 {
 	SKYBOX,
@@ -129,6 +133,34 @@ typedef struct		s_sector
 	t_mat		*floor_mat;
 }					t_sector;
 
+# ifndef LOAD_SAVE_H
+typedef struct		s_music
+{
+	Mix_Music	*music;
+}					t_music;
+
+typedef	struct		s_sound
+{
+	Mix_Chunk	*sound;
+}					t_sound;
+# else
+typedef struct		s_music
+{
+	size_t	music;
+}					t_music;
+
+typedef	struct		s_sound
+{
+	size_t	sound;
+}					t_sound;
+# endif
+
+typedef struct		s_chunk
+{
+	size_t	chunk_id;
+	char	volume;
+}					t_chunk;
+
 typedef struct		s_game
 {
 	t_player		player;
@@ -146,6 +178,12 @@ typedef struct		s_game
 	size_t			nmaterials;
 	t_img			*textures;
 	size_t			ntextures;
+	t_music			*music;
+	size_t			nmusic;
+	size_t			played_music;
+	t_sound			*sounds;
+	size_t			nsounds;
+	t_array			chunks;
 	size_t			frame;
 	u_int32_t		*id_buf;
 }					t_game;

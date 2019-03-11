@@ -307,6 +307,14 @@ t_game	generate_map(t_game game)
 		1
 		});
 
+	t_music *music = (t_music *)malloc(2 * sizeof(t_music));
+	music[0].music = Mix_LoadMUS("audio/test.ogg");
+	music[1].music = Mix_LoadMUS("audio/test2.ogg");
+
+	t_sound *sounds = (t_sound *)malloc(2 * sizeof(t_sound));
+	sounds[0].sound = Mix_LoadWAV("audio/open_door.ogg");
+	sounds[1].sound = Mix_LoadWAV("audio/dog.ogg");
+
 	game.player = player;
 	game.entities = entities;
 	game.nentities = 3;
@@ -322,5 +330,10 @@ t_game	generate_map(t_game game)
 	game.ntextures = 5;
 	game.materials = materials;
 	game.nmaterials = 9;
+	game.music = music;
+	game.nmusic = 1;
+	game.played_music = 0;
+	game.sounds = sounds;
+	game.nsounds = 2;
 	return (game);
 }

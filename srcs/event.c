@@ -95,6 +95,8 @@ static void		keyactions(int scancode, t_env *env)
 		env->editor.tool = POINT;
 	if (env->toggle_editor && scancode == SDL_SCANCODE_I)
 		env->editor.tool = PORTAL;
+	if (scancode == SDL_SCANCODE_B)
+		env->game.played_music = (env->game.played_music == 0) ? 1 : 0;
 }
 
 t_event			capture_events(t_event events, t_env *env)

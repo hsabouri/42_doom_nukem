@@ -44,6 +44,12 @@ static t_sdl	init_sdl(void)
 		console_error("doom_nukem", "Could not initialize SDL.");
 		exit(EXIT_FAILURE);
 	}
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)
+		== -1)
+	{
+		console_error("doom_nukem", "Could not initialize SDL_Mixer.");
+		exit(EXIT_FAILURE);
+	}
 	win = NULL;
 	win = SDL_CreateWindow("doom_nukem", SDL_WINDOWPOS_UNDEFINED,\
 		SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
@@ -53,6 +59,7 @@ static t_sdl	init_sdl(void)
 	font = init_font();
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	text = anew(NULL, NB_TEXT, sizeof(t_text));
+	Mix_AllocateChannels(10);
 	return ((t_sdl) {win, buf, renderer, font, text});
 }
 
@@ -61,18 +68,19 @@ int				main(int ac, char **av)
 	t_env		env;
 	size_t		frame;
 
-	if (ac == 3 && (ft_strcmp(av[1], "save")) == 0)
-		return(main_save(av[2]));
-	else if (ac == 3 && (ft_strcmp(av[1], "load")) == 0)
+	env.sdl = init_sdl();
+	if (ac == 3 && (ft_strcmp(av[2], "save")) == 0)
+		return(main_save(av[1]));
+	else if (ac == 3 && (ft_strcmp(av[2], "load")) == 0)
 	{
 		env.game = load(av[2]);
 		launch_check(env.game);	
 	}
 	else
 		env.game = generate_map(env.game);
-	env.sdl = init_sdl();
 	env.events = init_events();
 	env.editor = init_editor();
+	env.game.chunks = anew(NULL, 10, sizeof(t_chunk));
 	env.toggle_editor = 0;
 	env.game.id_buf = (u_int32_t *)malloc(WIDTH * HEIGHT * sizeof(int));
 	frame = 0;
@@ -92,6 +100,7 @@ int				main(int ac, char **av)
 		env.events = reset_clicks(env.events);
 		frame++;
 	}
+	Mix_CloseAudio();
 	if (!env.sdl.win)
 	{
 		console_error("doom_nukem", SDL_GetError());
