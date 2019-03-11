@@ -8,11 +8,15 @@ ifeq ($(shell uname -s), Darwin)
 	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/include/
 	SDL2_TTF_DIR = $(HOME)/.brew/Cellar/sdl2_ttf/2.0.14/lib/
 	SDL2_TTF_INC_DIR = $(HOME)/.brew/Cellar/sdl2_ttf/2.0.14/include/
+	SDL2_MIXER_DIR = $(HOME)/.brew/Cellar/sdl2_mixer/2.0.4/lib/
+	SDL2_MIXER_INC_DIR = $(HOME)/.brew/Cellar/sdl2_mixer/2.0.4/include/
 else
 	SDL2_DIR =.
 	SDL2_INC_DIR =.
 	SDL2_TTF_DIR =.
 	SDL2_TTF_INC_DIR =.
+	SDL2_MIXER_DIR = .
+	SDL2_MIXER_INC_DIR = .
 endif
 
 NO_COLOR=\x1b[0m
@@ -62,6 +66,7 @@ CFLAGS += -I$(LIBFT_DIR)/includes
 CFLAGS += -I$(LIBVEC_DIR)/includes 
 CFLAGS += -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR) 
 CFLAGS += -I$(SDL2_TTF_INC_DIR) -I$(SDL2_TTF_INC_DIR)/SDL2
+CFLAGS += -I$(SDL2_MIXER_INC_DIR) -I$(SDL2_MIXER_INC_DIR)/SDL2
 CFLAGS += -I$(LIBSAVE_DIR)/includes
 CFLAGS += -I$(LIBTGA_DIR)/includes
 CFLAGS += -I.
@@ -72,6 +77,7 @@ LDFLAGS += -L$(LIBVEC_DIR) -lvec
 LDFLAGS += -L$(SDL2_DIR) -lSDL2 -lSDL2main
 LDFLAGS += -L$(LIBSAVE_DIR) -lsave 
 LDFLAGS += -L$(SDL2_TTF_DIR) -lSDL2_ttf
+LDFLAGS += -L$(SDL2_MIXER_DIR) -lSDL2_mixer
 LDFLAGS += -L$(LIBTGA_DIR) -ltga
 
 all: message libft libvec libsave libtga installSDL $(BIN)

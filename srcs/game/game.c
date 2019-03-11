@@ -80,7 +80,6 @@ t_env		game_loop(t_env env, size_t frame)
 	env.game = player_properties(env.game, env.events);
 	//env.game = entities_properties(env.game, env.events);
 	env.game = physic(env.game, env.events);
-
 	env.game.frame = frame;
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
@@ -101,6 +100,8 @@ t_env		game_loop(t_env env, size_t frame)
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 	display_text(env.sdl);
+	play_music(env.game, env.game.played_music, 1, frame);
+	env.game = play_sounds(env.game);
 	SDL_RenderPresent(env.sdl.renderer);
 	timer = end_timer(timer);
 	//printf("%f\n", 1 / timer);
