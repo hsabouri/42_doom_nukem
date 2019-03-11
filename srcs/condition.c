@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/03/11 17:43:52 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/03/11 19:01:41 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int      see_trigger(t_trigger trigger, t_trigger c_log)
 
 int      touch_trigger(t_trigger trigger, t_trigger c_log)
 {
-        if (trigger.condi == TRIGGER_TOUCH && trigger.e_actif == c_log.trigger.e_actif && trigger.e_passif == c_log[0].trigger.e_passif)
-            return 1;
-        return 0;
+        // if (trigger.condi == TRIGGER_TOUCH && trigger.e_actif == c_log.trigger.e_actif && trigger.e_passif == c_log[0].trigger.e_passif)
+        //     return 1;
+        // return 0;
 }
 
 int      interact_trigger(t_trigger trigger, t_trigger c_log)
@@ -50,42 +50,42 @@ t_game    check_conditions(t_game game, t_game_event *trigger_tab)
 
     // while (GAME_EVENT 0 -> len) {
     // you check , it seems OK, but change the player type
-        if (ft_trigger[trigger_tab[0].trigger.condi](trigger_tab[0].trigger, n_game.log[0]) == 1);
-        {
-            if (n_game.entities[3] == NULL) {
-                n_game.entities[3] = ((t_entity){
-            (t_ph) {
-                0.02,
-                1.50,
-                0.5,
-                (t_vec3){5, 8.5, 0},
-                (t_vec3){0, 0, 0},
-                (t_vec3){1, 1, 1},
-                0,
-                0,
-                0,
-                0,
-                0
-            },
-            (t_ph) {
-                0.02,
-                1.50,
-                0.5,
-                (t_vec3){7, 9.5, 0},
-                (t_vec3){0, 0, 0},
-                (t_vec3){1, 1, 1},
-                0,
-                0,
-                0,
-                0,
-                0
-            },
-            game.materials[3],
-            1
-            });
-            //trigger_tab[0].trigger.action
-            }
-        }
+        // if (ft_trigger[trigger_tab[0].trigger.condi](trigger_tab[0].trigger, n_game.log[0]) == 1);
+        // {
+        //     if (n_game.entities[3] == NULL) {
+        //         n_game.entities[3] = ((t_entity){
+        //     (t_ph) {
+        //         0.02,
+        //         1.50,
+        //         0.5,
+        //         (t_vec3){5, 8.5, 0},
+        //         (t_vec3){0, 0, 0},
+        //         (t_vec3){1, 1, 1},
+        //         0,
+        //         0,
+        //         0,
+        //         0,
+        //         0
+        //     },
+        //     (t_ph) {
+        //         0.02,
+        //         1.50,
+        //         0.5,
+        //         (t_vec3){7, 9.5, 0},
+        //         (t_vec3){0, 0, 0},
+        //         (t_vec3){1, 1, 1},
+        //         0,
+        //         0,
+        //         0,
+        //         0,
+        //         0
+        //     },
+        //     &game.materials[3],
+        //     1
+        //     });
+        //     //trigger_tab[0].trigger.action
+        //     }
+        // }
     //}
 
     return (n_game);

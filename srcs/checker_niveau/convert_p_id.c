@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   convert_p_id.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 12:16:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/01 13:35:30 by lbougero         ###   ########.fr       */
+/*   Created: 2019/02/16 14:28:03 by iporsenn          #+#    #+#             */
+/*   Updated: 2019/03/11 19:17:08 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include <load_save.h>
+#include <doom.h>
 
-int		ft_isprint(int c)
+// remettre ca dans libsave/sources
+inline size_t	id_from_p(void *ptr, void *tab, size_t size)
 {
-	if (c <= 126 && c >= 32)
-		return (1);
-	return (0);
+	return ((ptr - tab) / size);
+}
+
+inline void		*id_to_p(ssize_t index, void *tab, size_t size)
+{
+	return (tab + index * size);
 }

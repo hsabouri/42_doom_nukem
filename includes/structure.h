@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 11:58:16 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:09:17 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ typedef enum	e_condition
 	TRIGGER_NO = 0x0
 }				t_condition;
 
-typedef enum	e_condition
+typedef enum	e_action
 {
 	ACTION_SPAWN = 0x1,
 	ACTION_NO = 0x0
-}				t_condition;
+}				t_action;
 
 typedef struct		s_entity
 {
@@ -131,8 +131,6 @@ typedef struct		s_game_event
 
 typedef struct		s_player
 {
-	// t_ph		physic;
-	// t_ph		spawn;
 	t_entity	my_entity;
 	size_t		life;
 	u_int32_t	weapons[2];

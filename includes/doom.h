@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
 /*   Updated: 2019/04/16 11:13:35 by hugo             ###   ########.fr       */
+=======
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
+/*   Updated: 2019/04/01 13:35:31 by lbougero         ###   ########.fr       */
+>>>>>>> g les sons mnt
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +33,8 @@
 # include <graphic.h>
 # include <physic.h>
 
-# include <load_save.h>
-# include <structure_clone.h>
+// # include <load_save.h>
+// # include <structure_clone.h>
 
 # include <checker.h>
 
@@ -194,7 +201,31 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 t_game					physic(t_game game, t_event events, float old_timer);
 
 t_text					text(const char *str, t_pix pos, t_sdl *sdl);
-void					display_text(t_sdl *sdl);
+
+// lib save fc a retirer une fois corriger
+size_t	id_from_p(void *ptr, void *tab, size_t size);
+
+void		*id_to_p(ssize_t index, void *tab, size_t size);
+//
+
+
+/*
+** EDITOR
+*/
+void					display_text(t_sdl sdl);
+
+t_vec2					point_from_mouse(t_event events, t_editor editor);
+ssize_t					select_point(t_game game, t_editor editor,\
+						t_event events);
+ssize_t					select_wall(t_game game, t_editor editor,\
+						t_event events);
+t_editor				select_multi_points(t_editor editor,\
+						t_event events, ssize_t point);
+void					legend_text(t_sdl sdl);
+void					legend_graphic(t_color *buf);
+t_game					game_editing(t_game game, t_event events,\
+						t_player player, t_sdl *sdl);
+t_game					player_properties(t_game game, t_event events);
 
 void					play_music(t_game game, size_t id, size_t vol, size_t frame);	
 t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);

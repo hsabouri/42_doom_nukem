@@ -8,6 +8,7 @@
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2019/04/14 17:25:36 by hsabouri         ###   ########.fr       */
 =======
 /*   Updated: 2019/04/01 13:26:08 by lbougero         ###   ########.fr       */
@@ -15,6 +16,9 @@
 =======
 /*   Updated: 2019/04/01 13:32:56 by lbougero         ###   ########.fr       */
 >>>>>>> je ve la musik
+=======
+/*   Updated: 2019/04/01 13:36:30 by lbougero         ###   ########.fr       */
+>>>>>>> g les sons mnt
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -512,6 +516,7 @@ t_game	generate_map(void)
 		},
 		multi,
 		1
+<<<<<<< HEAD
 	});
 	entities[3] = ((t_entity){
 		(t_ph) {
@@ -536,12 +541,24 @@ t_game	generate_map(void)
 			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
+=======
+		});
+	entities[3] = ((t_entity){
+		(t_ph) {
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+>>>>>>> g les sons mnt
 			0,
 			0,
 			0,
 			0,
 			0
 		},
+<<<<<<< HEAD
 		key_card,
 		1
 	});
@@ -600,10 +617,20 @@ t_game	generate_map(void)
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
+=======
+		(t_ph) {
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+>>>>>>> g les sons mnt
 			0,
 			0,
 			0,
 			0,
+<<<<<<< HEAD
 		},
 		90,
 		{0, 1},
@@ -611,6 +638,54 @@ t_game	generate_map(void)
 		0,
 		inventory
 	};
+=======
+			0
+		},
+		sans,
+		0
+		});
+
+		t_player player = (t_player) {
+		(t_entity) {
+			(t_ph) {
+				0.02,
+				1.50,
+				0.5,
+				(t_vec3){5, 8.5, 0},
+				(t_vec3){0, 0, 0},
+				(t_vec3){1, 1, 1},
+				0,
+				0,
+				0,
+				0,
+				0
+			},
+			(t_ph) {
+				0.02,
+				1.50,
+				0.5,
+				(t_vec3){5, 8.5, 0},
+				(t_vec3){0, 0, 0},
+				(t_vec3){1, 1, 1},
+				0,
+				0,
+				0,
+				0,
+				0
+			},
+			sans,
+			1
+			}
+		};
+
+	t_music *music = (t_music *)malloc(2 * sizeof(t_music));
+	music[0].music = Mix_LoadMUS("audio/test.ogg");
+	music[1].music = Mix_LoadMUS("audio/test2.ogg");
+
+	t_sound *sounds = (t_sound *)malloc(2 * sizeof(t_sound));
+	sounds[0].sound = Mix_LoadWAV("audio/open_door.ogg");
+	sounds[1].sound = Mix_LoadWAV("audio/dog.ogg");
+>>>>>>> g les sons mnt
 
 	game.player = player;
 	game.log = c_log;
