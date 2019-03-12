@@ -46,10 +46,10 @@ t_game	play_sounds(t_game game)
 
 	while ((chunk = (t_chunk *)apop(&game.chunks)))
 	{
-			Mix_VolumeChunk(game.sounds[chunk->chunk_id].sound, MIX_MAX_VOLUME *	
-				chunk->volume);
-			Mix_PlayChannel(cpt, game.sounds[chunk->chunk_id].sound, 0);
-			cpt = (++cpt == 10) ? 0 : cpt;
+		Mix_VolumeChunk(game.sounds[chunk->chunk_id].sound, MIX_MAX_VOLUME *	
+			chunk->volume);
+		Mix_PlayChannel(cpt, game.sounds[chunk->chunk_id].sound, 0);
+		cpt = (++cpt == 10) ? 0 : cpt;
 	}
 	return (game);
 }

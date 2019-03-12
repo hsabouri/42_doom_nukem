@@ -114,7 +114,7 @@ static t_game	parse_1(void *buf, t_game res, t_c_game game, t_save save)
 	return (res);
 }
 
-t_game			load(const char *filename)
+t_game			load(const char *filename, int edit_mode)
 {
 	void		*buf;
 	size_t		max;
@@ -122,11 +122,17 @@ t_game			load(const char *filename)
 	t_game		res;
 	t_save		save;
 
-	buf = dump_file(filename, 0, &max);
-	game = *(t_c_game *)dump_struct(buf, 0, sizeof(t_c_game), max);
-	verify_magic(&game, GAME_MAGIC, 0);
-	save.max = max;
-	res = parse_1(buf, res, game, save);
-	// debug(res);
+	if (!(buf = dump_file(filename, edit_mode, &max)))
+		res = default_map();
+	else
+	{
+		game = *(t_c_game *)dump_struct(buf, 0, sizeof(t_c_game), max);
+		verify_magic(&game, GAME_MAGIC, 0);
+		save.max = max;
+		res = parse_1(buf, res, game, save);
+		// debug(res);
+	}
+	
+
 	return (res);
 }

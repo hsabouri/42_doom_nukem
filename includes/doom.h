@@ -76,6 +76,7 @@ typedef struct			s_sdl
 
 typedef struct			s_env
 {
+	char		*file;
 	t_game		game;
 	int			toggle_editor;
 	t_editor	editor;

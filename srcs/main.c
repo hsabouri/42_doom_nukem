@@ -67,21 +67,40 @@ int				main(int ac, char **av)
 {
 	t_env		env;
 	size_t		frame;
-
+	
 	env.sdl = init_sdl();
-	if (ac == 3 && (ft_strcmp(av[2], "save")) == 0)
-		return(main_save(av[1]));
-	else if (ac == 3 && (ft_strcmp(av[2], "load")) == 0)
+	env.editor = init_editor();
+	if (ac >= 2)
 	{
-		env.game = load(av[2]);
-		launch_check(env.game);	
+		if (ft_strcmp(av[1], "editor") == 0)
+		{
+			if (ac == 3)
+			{
+				env.file = av[2];
+				env.game = load(av[2], 1);
+			}
+			else
+			{
+				env.file = NULL;	
+				env.game = generate_map(env.game);	
+			}
+			launch_check(env.game);
+			env.editor.enabled = 1;
+		}
+		else
+		{
+			env.file = av[1];
+			env.game = load(av[1], 0);
+			launch_check(env.game);
+		}
 	}
 	else
+	{
+		env.file = NULL;
 		env.game = generate_map(env.game);
+		env.editor.enabled = 0;
+	}
 	env.events = init_events();
-	env.editor = init_editor();
-	env.game.chunks = anew(NULL, 10, sizeof(t_chunk));
-	env.toggle_editor = 0;
 	env.game.id_buf = (u_int32_t *)malloc(WIDTH * HEIGHT * sizeof(int));
 	frame = 0;
 	while (env.sdl.win)

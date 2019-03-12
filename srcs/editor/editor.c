@@ -19,7 +19,7 @@ inline t_editor		init_editor(void)
 		.zoom = 25.0,
 		.offset = (t_vec2) {0.0, 0.0},
 		.sel_point = -1,
-		.enabled = 1 };
+		.enabled = 0 };
 	res.points_wall[0] = -1;
 	res.points_wall[1] = -1;
 	return (res);

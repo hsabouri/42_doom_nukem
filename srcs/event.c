@@ -74,9 +74,9 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event)
 
 static void		keyactions(int scancode, t_env *env)
 {
-	if (scancode == SDL_SCANCODE_E)
+	if (scancode == SDL_SCANCODE_E && env->editor.enabled)
 	{
-		if (env->toggle_editor || !env->editor.enabled)
+		if (env->toggle_editor)
 		{
 			launch_check(env->game);
 			env->toggle_editor = 0;
@@ -84,6 +84,12 @@ static void		keyactions(int scancode, t_env *env)
 		else
 			env->toggle_editor = 1;
 		SDL_SetRelativeMouseMode((env->toggle_editor) ? SDL_FALSE : SDL_TRUE);
+	}
+	if (env->editor.enabled && scancode == SDL_SCANCODE_Z)
+	{
+		if (env->file == NULL)
+			env->file = "default";
+		save(env->file, env->game);
 	}
 	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.physic.fly)
 		env->game.player.physic.jump = 1;
@@ -95,7 +101,7 @@ static void		keyactions(int scancode, t_env *env)
 		env->editor.tool = POINT;
 	if (env->toggle_editor && scancode == SDL_SCANCODE_I)
 		env->editor.tool = PORTAL;
-	if (scancode == SDL_SCANCODE_B)
+	if (scancode == SDL_SCANCODE_M)
 		env->game.played_music = (env->game.played_music == 0) ? 1 : 0;
 }
 
