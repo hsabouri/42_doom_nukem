@@ -308,8 +308,8 @@ t_game	generate_map(t_game game)
 		});
 
 	t_music *music = (t_music *)malloc(2 * sizeof(t_music));
-	music[0].music = Mix_LoadMUS("audio/test.ogg");
-	music[1].music = Mix_LoadMUS("audio/test2.ogg");
+	music[0].music = Mix_LoadMUS("./audio/test.ogg");
+	music[1].music = Mix_LoadMUS("./audio/test2.ogg");
 
 	t_sound *sounds = (t_sound *)malloc(2 * sizeof(t_sound));
 	sounds[0].sound = Mix_LoadWAV("audio/open_door.ogg");
@@ -331,7 +331,7 @@ t_game	generate_map(t_game game)
 	game.materials = materials;
 	game.nmaterials = 9;
 	game.music = music;
-	game.nmusic = 1;
+	game.nmusic = 2;
 	game.played_music = 0;
 	game.sounds = sounds;
 	game.nsounds = 2;

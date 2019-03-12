@@ -16,6 +16,16 @@
 # include <structure.h>
 # include <structure_clone.h>
 
+# define HEIGHT 480
+
+# define WHITE		(t_color){255,255,255,255}
+# define GREY		(t_color){128,128,128,255}
+# define RED		(t_color){255,0,0,255}
+# define GREEN		(t_color){0,255,0,255}
+# define BLUE		(t_color){0,0,255,255}
+# define BLACK		(t_color){0,0,0,255}
+# define NO_COLOR	(t_color){0,0,0,0}
+
 typedef struct	s_save
 {
 	size_t	index;
@@ -23,7 +33,8 @@ typedef struct	s_save
 }				t_save;
 
 void			save(const char *filename, t_game game);
-t_game			load(const char *filename);
+t_game			load(const char *filename, int edit_mode);
+t_game			default_map(void);
 void			*dump_struct(void *buf, size_t start, size_t size, size_t max);
 void			verify_magic(void *t_c_struct, size_t magic, size_t index);
 t_player		player_default(void);
