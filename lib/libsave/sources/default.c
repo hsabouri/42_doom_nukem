@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:33:35 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 12:20:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,11 +276,11 @@ t_game	default_map(void)
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
 	sectors[0] = ((t_sector){0, 10, 0, 0, 2.50, (t_color) {125, 125, 125, 255},
-	skybox, tiles});
-	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9, WHITE, skybox, tiles});
-	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, skybox, tiles});
-	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles});
-	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles});
+	skybox, tiles, fvec2_new(0, 0)});
+	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9, WHITE, skybox, tiles, fvec2_new(0, 0)});
+	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, skybox, tiles, fvec2_new(0, 0)});
+	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles, fvec2_new(0, 0)});
+	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles, fvec2_new(0, 0)});
 
 	t_entity *entities = (t_entity *)malloc(3 * sizeof(t_entity));
 	entities[0] = ((t_entity){

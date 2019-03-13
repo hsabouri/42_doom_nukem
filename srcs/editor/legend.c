@@ -6,28 +6,27 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 11:24:33 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/08 15:20:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/10 13:43:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <doom.h>
+#include <editor.h>
 
-/*void	legend_text(t_sdl sdl)
+void	legend(t_color *buf, t_sdl *sdl)
 {
 	int		y_pos;
-	t_pix	size;
+	t_text	r_text;
 
 	y_pos = HEIGHT - 30;
-	size = text("Spawn: ", (t_pix) {20, y_pos}, sdl);
+	r_text = text("Spawn: ", (t_pix) {20, y_pos}, sdl);
+	draw_point((t_fvec2) {f_from_int(r_text.w + 10),
+		f_from_int(HEIGHT - 25)}, 8, buf, MUSTARD);
 	y_pos = y_pos - 30 - 5;
-	size = text("Player: ", (t_pix) {20, y_pos}, sdl);
+	r_text = text("Player: ", (t_pix) {20, y_pos}, sdl);
+	draw_point((t_fvec2) {f_from_int(r_text.w + 10),
+		f_from_int(HEIGHT - 60)}, 8, buf, MOONSTONE);
 	y_pos = y_pos - 30 - 5;
-	size = text("Point: ", (t_pix) {20, y_pos}, sdl);
-}*/
-
-void	legend_graphic(t_color *buf)
-{
-	draw_point((t_fvec2) {f_from_int(130), f_from_int(HEIGHT - 25)}, 8, buf, MUSTARD);
-	draw_point((t_fvec2) {f_from_int(130), f_from_int(HEIGHT - 60)}, 8, buf, MOONSTONE);
-	draw_point((t_fvec2) {f_from_int(130), f_from_int(HEIGHT - 95)}, 8, buf, UBE);
+	r_text = text("Point: ", (t_pix) {20, y_pos}, sdl);
+	draw_point((t_fvec2) {f_from_int(r_text.w + 10),
+		f_from_int(HEIGHT - 95)}, 8, buf, UBE);
 }

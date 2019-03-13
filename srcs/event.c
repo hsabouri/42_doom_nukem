@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/31 14:22:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 15:16:42 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,14 @@ static void		keyactions(int scancode, t_env *env)
 		if (env->toggle_editor)
 		{
 			launch_check(env->game);
+			SDL_SetRelativeMouseMode(SDL_TRUE);
 			env->toggle_editor = 0;
 		}
 		else
+		{
 			env->toggle_editor = 1;
-		SDL_SetRelativeMouseMode((env->toggle_editor) ? SDL_FALSE : SDL_TRUE);
+			SDL_SetRelativeMouseMode(SDL_TRUE);
+		}
 	}
 	if (env->editor.enabled && scancode == SDL_SCANCODE_Z)
 	{
@@ -96,13 +99,19 @@ static void		keyactions(int scancode, t_env *env)
 	if (scancode == SDL_SCANCODE_F)
 		env->game.player.physic.fly = (env->game.player.physic.fly) ? 0 : 1;
 	if (env->toggle_editor && scancode == SDL_SCANCODE_O)
-		env->editor.tool = WALL;
+		env->editor.current_tool = WALL;
 	if (env->toggle_editor && scancode == SDL_SCANCODE_P)
-		env->editor.tool = POINT;
+		env->editor.current_tool = POINT;
 	if (env->toggle_editor && scancode == SDL_SCANCODE_I)
-		env->editor.tool = PORTAL;
+		env->editor.current_tool = PORTAL;
 	if (scancode == SDL_SCANCODE_M)
 		env->game.played_music = (env->game.played_music == 0) ? 1 : 0;
+	if (!env->toggle_editor &&
+		(scancode == SDL_SCANCODE_KP_PLUS || scancode == SDL_SCANCODE_EQUALS))
+		env->editor.depth += 1;
+	if (!env->toggle_editor &&
+		(scancode == SDL_SCANCODE_MINUS || scancode == SDL_SCANCODE_KP_MINUS))
+		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
 }
 
 t_event			capture_events(t_event events, t_env *env)

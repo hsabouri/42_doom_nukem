@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 13:13:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/11 13:29:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct		s_sector
 	t_color		ambient;
 	t_mat		*ceiling_mat;
 	t_mat		*floor_mat;
+	t_fvec2		tex_pos;
 }					t_sector;
 
 # ifndef LOAD_SAVE_H

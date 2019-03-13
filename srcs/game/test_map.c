@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/09 13:38:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 14:46:45 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,11 +209,11 @@ t_game	generate_map(t_game game)
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
 	sectors[0] = ((t_sector){0, 10, 0, 0, 2.50, (t_color) {125, 125, 125, 255},
-	skybox, tiles});
-	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9, WHITE, skybox, tiles});
-	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, skybox, tiles});
-	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles});
-	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles});
+	skybox, tiles, fvec2_new(0, 0)});
+	sectors[1] = ((t_sector){10, 4, 1, 0.4, 2.9, WHITE, skybox, tiles, fvec2_new(0, 0)});
+	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, skybox, tiles, fvec2_new(0, 0)});
+	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles, fvec2_new(0, 0)});
+	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles, fvec2_new(0, 0)});
 
 	t_entity *entities = (t_entity *)malloc(3 * sizeof(t_entity));
 	entities[0] = ((t_entity){
@@ -221,7 +221,7 @@ t_game	generate_map(t_game game)
 			0.02,
 			1.50,
 			0.5,
-			(t_vec3){6, 9, 0},
+			(t_vec3){7.5, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -307,14 +307,6 @@ t_game	generate_map(t_game game)
 		1
 		});
 
-	t_music *music = (t_music *)malloc(2 * sizeof(t_music));
-	music[0].music = Mix_LoadMUS("./audio/test.ogg");
-	music[1].music = Mix_LoadMUS("./audio/test2.ogg");
-
-	t_sound *sounds = (t_sound *)malloc(2 * sizeof(t_sound));
-	sounds[0].sound = Mix_LoadWAV("audio/open_door.ogg");
-	sounds[1].sound = Mix_LoadWAV("audio/dog.ogg");
-
 	game.player = player;
 	game.entities = entities;
 	game.nentities = 3;
@@ -330,10 +322,6 @@ t_game	generate_map(t_game game)
 	game.ntextures = 5;
 	game.materials = materials;
 	game.nmaterials = 9;
-	game.music = music;
-	game.nmusic = 2;
 	game.played_music = 0;
-	game.sounds = sounds;
-	game.nsounds = 2;
 	return (game);
 }

@@ -6,11 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:35:03 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/31 11:57:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 16:17:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <doom.h>
+#include <editor.h>
 
 float		capsule(t_vec2 a, t_vec2 b, t_vec2 p)
 {
@@ -32,6 +32,8 @@ t_vec2		point_from_mouse(t_event events, t_editor editor)
 
 	new_point = (t_vec2) {events.x, events.y};
 	new_point = vec2_sub(new_point, editor.offset);
+	new_point.v -= HEIGHT;
+	new_point.v *= -1;
 	new_point = vec2_scale(new_point, 1 / editor.zoom);
 	return (new_point);
 }
