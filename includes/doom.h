@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/02/17 14:43:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 14:50:21 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@
 # include <vec.h>
 # include <graphic.h>
 # include <physic.h>
-# include <editor.h>
 
 # include <load_save.h>
 # include <structure_clone.h>
 
 # include <checker.h>
+
+# include "srcs/common/translate_id.h"
 
 # define N_KEY 284
 # define N_BUTTON 5
@@ -62,7 +63,8 @@ typedef struct			s_event
 	u_int8_t	quit;
 	u_int8_t	mouse[N_BUTTON];
 	u_int8_t	mouse_click[N_BUTTON];
-	u_int8_t	keys[N_KEY]; //must be last
+	u_int8_t	keys[N_KEY];
+	u_int8_t	key_click[N_KEY];
 }						t_event;
 
 typedef struct			s_sdl
@@ -74,6 +76,40 @@ typedef struct			s_sdl
 	t_array			text;
 }						t_sdl;
 
+typedef enum	e_tool
+{
+	POINT = 0,
+	WALL = 1,
+	PORTAL = 2
+}				t_tool;
+
+typedef enum	e_game_tool
+{
+	TEXTURE_MOVE = 0,
+	MATERIAL_MOVE = 1,
+	MATERIAL_SCALE = 2,
+	SECTOR_HEIGHT = 3,
+	TOOL_NO
+}				t_game_tool;
+
+struct			s_env;
+
+typedef struct	s_editor
+{
+	int				enabled;
+	float			zoom;
+	t_vec2			offset;
+	t_tool			current_tool;
+	t_game_tool			game_tool;
+	struct s_env	(*tools[3])(struct s_env);
+	struct s_env	(*game_tools[10])(struct s_env, t_selected);
+	ssize_t			sel_point;
+	ssize_t			sel_wall;
+	ssize_t			points_wall[2];
+	uint8_t			depth;
+	int				selecting;
+}				t_editor;
+
 typedef struct			s_env
 {
 	char		*file;
@@ -84,6 +120,8 @@ typedef struct			s_env
 	t_sdl		sdl;
 	t_event		events; //must be last
 }						t_env;
+
+t_game					init_audio(t_game game);
 
 t_env					game_loop(t_env env, size_t frame);
 t_env					editor_loop(t_env env, size_t frame);
@@ -99,25 +137,6 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 t_game					physic(t_game game, t_event events);
 
 t_text					text(const char *str, t_pix pos, t_sdl *sdl);
-
-
-/*
-** EDITOR
-*/
-void					display_text(t_sdl sdl);
-
-t_vec2					point_from_mouse(t_event events, t_editor editor);
-ssize_t					select_point(t_game game, t_editor editor,\
-						t_event events);
-ssize_t					select_wall(t_game game, t_editor editor,\
-						t_event events);
-t_editor				select_multi_points(t_editor editor,\
-						t_event events, ssize_t point);
-void					legend_text(t_sdl sdl);
-void					legend_graphic(t_color *buf);
-t_game					game_editing(t_game game, t_event events,\
-						t_player player, t_sdl *sdl);
-t_game					player_properties(t_game game, t_event events);
 
 void					play_music(t_game game, size_t id, size_t vol, size_t frame);	
 t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);

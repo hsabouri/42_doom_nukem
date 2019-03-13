@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/08 10:36:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 16:20:31 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
+#include <editor.h>
 #include "srcs/common/time_measure.h"
 
 t_vec2		player_space(t_vec2 vec, t_ph physic)
@@ -76,7 +77,7 @@ t_env		game_loop(t_env env, size_t frame)
 
 	timer = start_timer();
 	if (env.editor.enabled)
-		env.game = game_editing(env.game, env.events, env.game.player, &env.sdl);
+		env = game_editing(env, env.game.player);
 	env.game = player_properties(env.game, env.events);
 	//env.game = entities_properties(env.game, env.events);
 	env.game = physic(env.game, env.events);
@@ -85,8 +86,7 @@ t_env		game_loop(t_env env, size_t frame)
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	env.current_buffer = content;
 	background(env.current_buffer, NO_COLOR);
-	render(
-		env.game,
+	render(env.game,
 		(t_context) {
 			0,
 			WIDTH + 2,
@@ -95,15 +95,14 @@ t_env		game_loop(t_env env, size_t frame)
 			env.game.sectors[env.game.player.physic.sector_id]
 		},
 		env.current_buffer, env.game.id_buf);
-	
-	minimap(env.game, env.current_buffer);
+	//minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
-	display_text(env.sdl);
+	display_text(&env.sdl);
 	play_music(env.game, env.game.played_music, 1, frame);
-	env.game = play_sounds(env.game);
 	SDL_RenderPresent(env.sdl.renderer);
+	env.game = play_sounds(env.game);
 	timer = end_timer(timer);
-	//printf("%f\n", 1 / timer);
+	printf("%f\n", 1 / timer);
 	return (env);
 }

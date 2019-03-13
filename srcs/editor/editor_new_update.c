@@ -6,11 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/30 14:28:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 16:17:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <doom.h>
+#include <editor.h>
 
 t_game	new_update_portals(ssize_t point, ssize_t wall, ssize_t sector,\
 t_game game)

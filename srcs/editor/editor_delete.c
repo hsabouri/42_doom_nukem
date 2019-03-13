@@ -6,11 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 13:34:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/28 16:07:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/09 16:17:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <doom.h>
+#include <editor.h>
 
 t_game	delete_portal(size_t portal, t_game game)
 {

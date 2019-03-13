@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/17 11:17:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 12:02:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
-# include <structure.h>
+# include <doom.h>
 
 # define MOVE_SPEED 5
 # define ZOOM_SPEED 0.2
@@ -22,31 +22,9 @@
 
 # include <srcs/common/translate_id.h>
 
-typedef enum	e_tool
-{
-	POINT,
-	WALL,
-	PORTAL
-}				t_tool;
-
-typedef struct	s_editor
-{
-	int			enabled;
-	float		zoom;
-	t_vec2		offset;
-	t_tool		tool;
-	ssize_t		sel_point;
-	ssize_t		sel_wall;
-	ssize_t		points_wall[2];
-	int			selecting;
-}				t_editor;
-
 t_editor		init_editor(void);
 
 void			draw_map(t_game game, t_editor editor, t_color *buf);
-
-t_sector		sector_height(t_game game, t_sector sector, t_part part,\
-				float add);
 
 t_game			create_point(t_vec2 pts, t_game game);
 t_game			create_wall(ssize_t pts[2], int new_sector, t_game game);
@@ -70,5 +48,27 @@ t_game			new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,\
 				t_game game);
 t_game			new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
 				t_game game);
+
+void			display_text(t_sdl *sdl);
+
+t_vec2			point_from_mouse(t_event events, t_editor editor);
+ssize_t			select_point(t_game game, t_editor editor,\
+				t_event events);
+ssize_t			select_wall(t_game game, t_editor editor,\
+				t_event events);
+t_editor		select_multi_points(t_editor editor,\
+				t_event events, ssize_t point);
+void			legend(t_color *buf, t_sdl *sdl);
+t_env			game_editing(t_env env, t_player player);
+t_game			player_properties(t_game game, t_event events);
+
+t_env			point_tool(t_env env);
+t_env			wall_tool(t_env env);
+t_env			portal_tool(t_env env);
+
+t_env			move_texture_tool(t_env env, t_selected selected);
+t_env			move_material_tool(t_env env, t_selected selected);
+t_env			scale_material_tool(t_env env, t_selected selected);
+t_env			sector_height_tool(t_env env, t_selected selected);
 
 #endif

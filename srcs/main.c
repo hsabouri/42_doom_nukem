@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/02/16 17:00:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 16:18:17 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
+#include <editor.h>
 #include <load_save.h>
 
 static TTF_Font	*init_font(void)
@@ -44,12 +45,6 @@ static t_sdl	init_sdl(void)
 		console_error("doom_nukem", "Could not initialize SDL.");
 		exit(EXIT_FAILURE);
 	}
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)
-		== -1)
-	{
-		console_error("doom_nukem", "Could not initialize SDL_Mixer.");
-		exit(EXIT_FAILURE);
-	}
 	win = NULL;
 	win = SDL_CreateWindow("doom_nukem", SDL_WINDOWPOS_UNDEFINED,\
 		SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
@@ -59,7 +54,6 @@ static t_sdl	init_sdl(void)
 	font = init_font();
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	text = anew(NULL, NB_TEXT, sizeof(t_text));
-	Mix_AllocateChannels(10);
 	return ((t_sdl) {win, buf, renderer, font, text});
 }
 
@@ -70,6 +64,7 @@ int				main(int ac, char **av)
 	
 	env.sdl = init_sdl();
 	env.editor = init_editor();
+	env.toggle_editor = 0;
 	if (ac >= 2)
 	{
 		if (ft_strcmp(av[1], "editor") == 0)
@@ -100,6 +95,7 @@ int				main(int ac, char **av)
 		env.game = generate_map(env.game);
 		env.editor.enabled = 0;
 	}
+	env.game = init_audio(env.game);
 	env.events = init_events();
 	env.game.id_buf = (u_int32_t *)malloc(WIDTH * HEIGHT * sizeof(int));
 	frame = 0;
