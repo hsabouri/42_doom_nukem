@@ -3,32 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   material.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 13:23:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 16:44:06 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
+#include "./color.h"
 
-static t_color	color_filter(t_color a, t_color filter)
-{
-	return ((t_color) {
-		.a = (a.a * filter.a) >> 8,
-		.b = (a.b * filter.b) >> 8,
-		.g = (a.g * filter.g) >> 8,
-		.r = (a.r * filter.r) >> 8,
-	});
-}
-
-static t_color	color_superpose(t_color a, t_color b)
-{
-	if (b.a)
-		return (b);
-	else
-		return (a);
-}
 
 static t_color	get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, char p, int y_s)
 {
@@ -120,7 +104,7 @@ t_color			get_entity_pixel(t_e_proj proj, int y)
 	t_color	res;
 
 	pix.u = proj.x;
-	pix.v = proj.y_iter * (y - proj.top); // here
+	pix.v = proj.y_iter * (y - proj.top);
 	res = get_mat_pixel(proj.mat, proj.tex, pix, 8, y);
 	return (res);
 }
