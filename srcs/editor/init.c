@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 14:39:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 12:03:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 17:38:01 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ t_editor		init_editor(void)
 	res.game_tools[1] = &move_material_tool;
 	res.game_tools[2] = &scale_material_tool;
 	res.game_tools[3] = &sector_height_tool;
+	res.game_tools[4] = &change_material_tool;
 	return (res);
 }

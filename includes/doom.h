@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/13 14:50:21 by hugo             ###   ########.fr       */
+/*   Updated: 2019/03/13 17:37:00 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef enum	e_game_tool
 	MATERIAL_MOVE = 1,
 	MATERIAL_SCALE = 2,
 	SECTOR_HEIGHT = 3,
+	MATERIAL_CHANGE = 4,
 	TOOL_NO
 }				t_game_tool;
 

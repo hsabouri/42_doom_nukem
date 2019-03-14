@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 12:02:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 17:38:28 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ t_env			move_texture_tool(t_env env, t_selected selected);
 t_env			move_material_tool(t_env env, t_selected selected);
 t_env			scale_material_tool(t_env env, t_selected selected);
 t_env			sector_height_tool(t_env env, t_selected selected);
+t_env			change_material_tool(t_env env, t_selected selected);
 
 #endif
