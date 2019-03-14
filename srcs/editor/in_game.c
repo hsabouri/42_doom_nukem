@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_ingame.c                                    :+:      :+:    :+:   */
+/*   in_game.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:01:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/12 14:01:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/13 17:54:44 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_game_tool	select_tool(t_env env, t_selected object)
 		res = MATERIAL_SCALE;
 	else if (env.events.keys[SDL_SCANCODE_H])
 		res = SECTOR_HEIGHT;
+	else if (env.events.keys[SDL_SCANCODE_G])
+		res = MATERIAL_CHANGE;
 	else
 		res = env.editor.game_tool;
 	env.events.keys[SDL_SCANCODE_T] = 0;
@@ -79,15 +81,5 @@ t_env		game_editing(t_env env, t_player player)
 		env.editor.depth = 0;
 	if (env.editor.game_tool != TOOL_NO)
 		env = env.editor.game_tools[env.editor.game_tool](env, sel);
-	/*
-	if (env.game.player.physic.look_v >= 0 && env.events.keys[SDL_SCANCODE_KP_PLUS])
-		*sector = sector_height(env.game, *sector, PART_CEILING, 0.1);
-	if (env.game.player.physic.look_v >= 0 && env.events.keys[SDL_SCANCODE_KP_MINUS])
-		*sector = sector_height(env.game, *sector, PART_CEILING, -0.1);
-	if (env.game.player.physic.look_v < 0 && env.events.keys[SDL_SCANCODE_KP_PLUS])
-		*sector = sector_height(env.game, *sector, PART_FLOOR, 0.1);
-	if (env.game.player.physic.look_v < 0 && env.events.keys[SDL_SCANCODE_KP_MINUS])
-		*sector = sector_height(env.game, *sector, PART_FLOOR, -0.1);
-		*/
 	return (env);
 }

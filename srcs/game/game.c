@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/14 11:53:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/14 13:52:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_env		game_loop(t_env env, size_t frame)
 			env.game.sectors[env.game.player.physic.sector_id]
 		},
 		env.current_buffer, env.game.id_buf);
-	//minimap(env.game, env.current_buffer);
+	minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 	display_text(&env.sdl);
