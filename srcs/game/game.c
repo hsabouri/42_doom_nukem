@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 16:20:31 by hugo             ###   ########.fr       */
+/*   Updated: 2019/03/14 11:53:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@ t_env		game_loop(t_env env, size_t frame)
 	SDL_RenderPresent(env.sdl.renderer);
 	env.game = play_sounds(env.game);
 	timer = end_timer(timer);
-	printf("%f\n", 1 / timer);
+	//printf("%f\n", 1 / timer);
 	return (env);
 }

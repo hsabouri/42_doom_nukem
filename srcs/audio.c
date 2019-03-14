@@ -31,7 +31,7 @@ t_game	init_audio(t_game game)
 	game.sounds = (t_sound *)malloc(2 * sizeof(t_sound));
 	game.sounds[0].sound = Mix_LoadWAV("audio/open_door.ogg");
 	game.sounds[1].sound = Mix_LoadWAV("audio/dog.ogg");
-	game.nmusics = 2;
+	game.nmusic = 2;
 	game.nsounds = 2;
 	return (game);
 }
