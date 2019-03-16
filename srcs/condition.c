@@ -12,6 +12,58 @@
 
 #include <doom.h>
 
+// TEST // SET entities to 0
+
+t_game ft_reset_log(t_game game)
+{
+    t_game n_game;
+    n_game = game;
+
+    t_entity Z_E = ((t_entity){
+		-2,
+		(t_ph) {
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		(t_ph) {
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		0,
+		0
+		});
+
+        t_trigger trig_Z = ((t_trigger){Z_E, TRIGGER_NO, Z_E});
+
+        int i = 0;
+        while(i < 3)
+        {
+            n_game.log[i] = trig_Z;
+            i++;
+        }
+    return(n_game);
+}
+
+//////////
+
 
 int    no_trigger(t_trigger trigger, t_trigger c_log)
 {
@@ -25,9 +77,9 @@ int      see_trigger(t_trigger trigger, t_trigger c_log)
 
 int      touch_trigger(t_trigger trigger, t_trigger c_log)
 {
-        // if (trigger.condi == TRIGGER_TOUCH && trigger.e_actif == c_log.trigger.e_actif && trigger.e_passif == c_log[0].trigger.e_passif)
-        //     return 1;
-        // return 0;
+      if (trigger.condi == TRIGGER_TOUCH && trigger.e_actif.id == c_log.e_actif.id && trigger.e_passif.id == c_log.e_passif.id)
+            return 1;
+        return 0;
 }
 
 int      interact_trigger(t_trigger trigger, t_trigger c_log)
@@ -40,53 +92,27 @@ int      sector_trigger(t_trigger trigger, t_trigger c_log)
     // Player / entitie is in a sector
 }
 
-int    (* ft_trigger[4]) = {no_trigger, see_trigger,touch_trigger,interact_trigger};
+int    (* ft_trigger[4])(t_trigger trigger, t_trigger c_log) = {no_trigger, see_trigger,touch_trigger,interact_trigger};
 
-t_game    check_conditions(t_game game, t_game_event *trigger_tab)
+t_game    check_conditions(t_game game)
 {
     t_game  n_game;
 
     n_game = game;
+    int i = 0;
+    int j = 0;
 
-    // while (GAME_EVENT 0 -> len) {
-    // you check , it seems OK, but change the player type
-        // if (ft_trigger[trigger_tab[0].trigger.condi](trigger_tab[0].trigger, n_game.log[0]) == 1);
-        // {
-        //     if (n_game.entities[3] == NULL) {
-        //         n_game.entities[3] = ((t_entity){
-        //     (t_ph) {
-        //         0.02,
-        //         1.50,
-        //         0.5,
-        //         (t_vec3){5, 8.5, 0},
-        //         (t_vec3){0, 0, 0},
-        //         (t_vec3){1, 1, 1},
-        //         0,
-        //         0,
-        //         0,
-        //         0,
-        //         0
-        //     },
-        //     (t_ph) {
-        //         0.02,
-        //         1.50,
-        //         0.5,
-        //         (t_vec3){7, 9.5, 0},
-        //         (t_vec3){0, 0, 0},
-        //         (t_vec3){1, 1, 1},
-        //         0,
-        //         0,
-        //         0,
-        //         0,
-        //         0
-        //     },
-        //     &game.materials[3],
-        //     1
-        //     });
-        //     //trigger_tab[0].trigger.action
-        //     }
-        // }
-    //}
+    while (i < game.nwaiting_events) {
+        while (j < game.nlog) {
+            if (ft_trigger[game.waiting_events[i].trigger.condi] (game.waiting_events[i].trigger, n_game.log[j]) == 1)
+            {
+                ft_putendl("HELLO !!!"); // Action trigger Zone
+            }
+            j++;
+        }
+        j = 0;
+        i++;
+    }
 
     return (n_game);
 }

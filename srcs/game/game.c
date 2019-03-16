@@ -6,11 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/03/26 12:04:26 by hsabouri         ###   ########.fr       */
-=======
-/*   Updated: 2019/03/11 18:19:10 by lbougero         ###   ########.fr       */
->>>>>>> je ve la musik
+/*   Updated: 2019/04/01 13:38:26 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +68,16 @@ void		minimap(t_game game, t_color *buf)
 	}
 }
 
+// t_game		fill_game_env(t_game	game)
+// {
+// 	t_game n_game;
+
+// 	n_game = game;
+// 	n_game.waiting_events
+
+// 	return n_game;
+// }
+
 t_env		game_loop(t_env env, size_t frame)
 {
 	t_color			*content;
@@ -86,6 +92,7 @@ t_env		game_loop(t_env env, size_t frame)
 	// env.game = entities_properties(env.game, env.events);
 	env.game = physic(env.game, env.events, old_timer);
 	env.game.frame = frame;
+	env.game = check_conditions(env.game);
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	env.current_buffer = content;

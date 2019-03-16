@@ -105,6 +105,7 @@ typedef enum	e_action
 
 typedef struct		s_entity
 {
+	int			id;
 	t_ph		physic;
 	t_ph		spawn;
 	t_array		mat;
@@ -201,7 +202,8 @@ typedef struct		s_game
 	size_t			nwaiting_events;
 
 	t_trigger	*log;
-
+	size_t		nlog;
+	
 	t_entity	*entities;
 	size_t		nentities;
 	

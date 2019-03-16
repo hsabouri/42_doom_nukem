@@ -208,6 +208,12 @@ size_t	id_from_p(void *ptr, void *tab, size_t size);
 void		*id_to_p(ssize_t index, void *tab, size_t size);
 //
 
+/*
+** CONDITION
+*/
+
+t_game    check_conditions(t_game game);
+t_game 	ft_reset_log(t_game game);
 
 /*
 ** EDITOR

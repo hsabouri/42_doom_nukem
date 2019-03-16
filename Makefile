@@ -80,10 +80,7 @@ CFLAGS += -I$(LIBVEC_DIR)/includes
 CFLAGS += -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR) 
 CFLAGS += -I$(SDL2_TTF_INC_DIR) -I$(SDL2_TTF_INC_DIR)/SDL2
 CFLAGS += -I$(SDL2_MIXER_INC_DIR) -I$(SDL2_MIXER_INC_DIR)/SDL2
-<<<<<<< HEAD
-=======
 # CFLAGS += -I$(LIBSAVE_DIR)/includes
->>>>>>> g les sons mnt
 CFLAGS += -I$(LIBTGA_DIR)/includes
 CFLAGS += -I.
 
@@ -91,10 +88,7 @@ LDFLAGS += -L$(LIBFT_DIR) -lft
 LDFLAGS += -lpthread -ldl -lm
 LDFLAGS += -L$(LIBVEC_DIR) -lvec
 LDFLAGS += -L$(SDL2_DIR) -lSDL2 -lSDL2main
-<<<<<<< HEAD
-=======
 # LDFLAGS += -L$(LIBSAVE_DIR) -lsave 
->>>>>>> g les sons mnt
 LDFLAGS += -L$(SDL2_TTF_DIR) -lSDL2_ttf
 LDFLAGS += -L$(SDL2_MIXER_DIR) -lSDL2_mixer
 LDFLAGS += -L$(LIBTGA_DIR) -ltga

@@ -418,9 +418,15 @@ t_game	generate_map(void)
 =======
 	t_trigger *c_log = (t_entity *)malloc(10 * sizeof(t_entity));
 
+<<<<<<< HEAD
 >>>>>>> je ve la musik
+=======
+
+
+>>>>>>> Ëvent react to Hello
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
+		0,
 		(t_ph) {
 			0.02,
 			1.50,
@@ -454,6 +460,7 @@ t_game	generate_map(void)
 		0
 	});
 	entities[1] = ((t_entity){
+		1,
 		(t_ph) {
 			0.02,
 			1.50,
@@ -486,6 +493,7 @@ t_game	generate_map(void)
 		1
 	});
 	entities[2] = ((t_entity){
+		2,
 		(t_ph) {
 			0.02,
 			1.50,
@@ -544,6 +552,7 @@ t_game	generate_map(void)
 =======
 		});
 	entities[3] = ((t_entity){
+		3,
 		(t_ph) {
 			0,
 			0,
@@ -647,6 +656,7 @@ t_game	generate_map(void)
 
 		t_player player = (t_player) {
 		(t_entity) {
+			-1,
 			(t_ph) {
 				0.02,
 				1.50,
@@ -678,6 +688,14 @@ t_game	generate_map(void)
 			}
 		};
 
+	t_game_event *g_e = (t_game_event *)malloc(2 * sizeof(t_game_event));
+
+	g_e[0] = ((t_game_event){
+		(t_trigger){
+			player.my_entity, 2, entities[0]
+			}
+		});
+
 	t_music *music = (t_music *)malloc(2 * sizeof(t_music));
 	music[0].music = Mix_LoadMUS("audio/test.ogg");
 	music[1].music = Mix_LoadMUS("audio/test2.ogg");
@@ -689,6 +707,9 @@ t_game	generate_map(void)
 
 	game.player = player;
 	game.log = c_log;
+	game.nlog = 10;
+	game.waiting_events = g_e;
+	game.nwaiting_events = 1;
 	game.entities = entities;
 	game.nentities = 4;
 	game.sectors = sectors;
