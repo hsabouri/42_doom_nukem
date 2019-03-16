@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 14:48:59 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 14:57:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/16 11:31:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_env	point_tool(t_env env)
 	else if (env.editor.sel_point >= 0 && env.events.mouse_click[SDL_BUTTON_RIGHT])
 		env.game = delete_point(env.editor.sel_point, env.game);
 	else if (env.editor.sel_point == -1 && env.events.mouse_click[SDL_BUTTON_RIGHT])
-		env.game = create_point(point_from_mouse(env.events, env.editor), env.game);
+		env.game = create_point(point_from_mouse(env.events, env.editor), -1, env.game);
 	env.editor.selecting = env.events.mouse[SDL_BUTTON_LEFT];
 	return (env);
 }

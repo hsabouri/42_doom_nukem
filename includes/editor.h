@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 17:38:28 by hugo             ###   ########.fr       */
+/*   Updated: 2019/03/16 11:27:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ t_editor		init_editor(void);
 
 void			draw_map(t_game game, t_editor editor, t_color *buf);
 
-t_game			create_point(t_vec2 pts, t_game game);
+t_game			create_point(t_vec2 pts, ssize_t index, t_game game);
 t_game			create_wall(ssize_t pts[2], int new_sector, t_game game);
 t_game			create_portal(ssize_t wa, ssize_t wb, t_game game);
+t_game			create_sector(size_t start, size_t nwalls, t_game game);
 
 t_game			delete_portal(size_t portal, t_game game);
 t_game			delete_sector(size_t sector, t_game game);
