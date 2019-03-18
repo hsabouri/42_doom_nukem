@@ -76,7 +76,7 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	write_points(fd, game.points, game.npoints);
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
-	write_portals(fd, game.portals, game.nportals);
+	write_portals(fd, game.portals, game.nportals, game.materials);
 	translate_entity(fd, game.entities, game.nentities, game.materials);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);

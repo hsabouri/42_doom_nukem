@@ -71,7 +71,8 @@ void			write_points(int fd, t_vec2 *points, size_t npoints);
 void			write_walls(int fd, t_wall *walls, size_t nwalls, t_mat	*mats);
 void			write_sectors(int fd, t_sector *sectors, size_t nsectors,\
 t_mat *mats);
-void			write_portals(int fd, t_portal *portals, size_t nportals);
+void			write_portals(int fd, t_portal *portals, size_t nportals,\
+t_mat *mats);
 void			translate_entity(int fd, t_entity *entities, size_t nentities,\
 t_mat *mats);
 size_t			write_textures(int fd, t_img *textures, size_t ntextures,\
@@ -87,7 +88,8 @@ t_wall			*parse_walls(void *buf, t_save save, t_mat *mats,\
 size_t n_entities);
 t_sector		*parse_sectors(void *buf, t_save save, t_mat *mats,\
 size_t n_entities);
-t_portal		*parse_portals(void *buf, t_save save, size_t n_entities);
+t_portal		*parse_portals(void *buf, t_save save, size_t n_entities,\
+t_mat *mats);
 t_entity		*parse_entities(void *buf, t_save save, t_mat *mats,\
 size_t n_entities);
 void			parse_audio(void *buf, t_save save, size_t n_entities,\

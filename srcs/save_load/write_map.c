@@ -67,7 +67,10 @@ void	write_walls(int fd, t_wall *walls, size_t nwalls, t_mat *mats)
 		fwalls.portal = walls[i].portal;
 		fwalls.a = walls[i].a;
 		fwalls.b = walls[i].b;
-		fwalls.mat = id_from_p(walls[i].mat, mats, sizeof(t_mat));
+		if (walls[i].mat != NULL)
+			fwalls.mat = id_from_p(walls[i].mat, mats, sizeof(t_mat));
+		else
+			fwalls.mat = -1;
 		write_struct(&fwalls, fd, sizeof(t_c_wall));
 		i++;
 	}
@@ -89,16 +92,23 @@ t_mat *mats)
 		fsectors.floor = f_from_float(sectors[i].floor);
 		fsectors.ceiling = f_from_float(sectors[i].ceiling);
 		fsectors.ambient = sectors[i].ambient;
-		fsectors.ceiling_mat = id_from_p(sectors[i].ceiling_mat, mats,\
-		sizeof(t_mat));
-		fsectors.floor_mat = id_from_p(sectors[i].floor_mat, mats, \
-		sizeof(t_mat));
+		if (sectors[i].ceiling_mat != NULL)
+			fsectors.ceiling_mat = id_from_p(sectors[i].ceiling_mat, mats,\
+				sizeof(t_mat));
+		else
+			fsectors.ceiling_mat = -1;
+		if (sectors[i].floor_mat != NULL)
+			fsectors.floor_mat = id_from_p(sectors[i].floor_mat, mats, \
+				sizeof(t_mat));
+		else
+			fsectors.floor_mat = -1;
+		fsectors.tex_pos = sectors[i].tex_pos;
 		write_struct(&fsectors, fd, sizeof(t_c_sector));
 		i++;
 	}
 }
 
-void	write_portals(int fd, t_portal *portals, size_t nportals)
+void	write_portals(int fd, t_portal *portals, size_t nportals, t_mat *mats)
 {
 	t_c_portal	fportals;
 	size_t		i;
@@ -113,6 +123,10 @@ void	write_portals(int fd, t_portal *portals, size_t nportals)
 		fportals.to_wall = portals[i].to_wall;
 		fportals.a = portals[i].a;
 		fportals.b = portals[i].b;
+		if (portals[i].mat != NULL)
+			fportals.mat = id_from_p(portals[i].mat, mats, sizeof(t_mat));
+		else
+			fportals.mat = -1;
 		write_struct(&fportals, fd, sizeof(t_c_portal));
 		i++;
 	}

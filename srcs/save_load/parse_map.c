@@ -81,7 +81,10 @@ size_t n_entities)
 		current.portal = struc_w.portal;
 		current.a = struc_w.a;
 		current.b = struc_w.b;
-		current.mat = id_to_p((ssize_t)struc_w.mat, mats, sizeof(t_mat));
+		if (struc_w.mat == -1)
+			current.mat = NULL;
+		else
+			current.mat = id_to_p(struc_w.mat, mats, sizeof(t_mat));
 		walls[i] = current;
 		i++;
 	}
@@ -105,20 +108,21 @@ size_t n_entities)
 		verify_magic(&struc_s, SECTOR_MAGIC, i);
 		current = sectors[i];
 		current = (t_sector) {.start = struc_s.start, .number = struc_s.number,
-			.sector_id = struc_s.sector_id,
+			.sector_id = struc_s.sector_id, .tex_pos = struc_s.tex_pos,
 			.floor = f_to_float(struc_s.floor),
 			.ceiling = f_to_float(struc_s.ceiling),
 			.ambient = struc_s.ambient,
-			.ceiling_mat = id_to_p((ssize_t)struc_s.ceiling_mat,
-				mats, sizeof(t_mat)),
-			.floor_mat = id_to_p((ssize_t)struc_s.floor_mat, mats,
-				sizeof(t_mat))};
+			.ceiling_mat = (struc_s.ceiling_mat == -1) ? NULL : 
+				id_to_p(struc_s.ceiling_mat, mats, sizeof(t_mat)),
+			.floor_mat = (struc_s.floor_mat == -1) ? NULL : 
+				id_to_p(struc_s.floor_mat, mats, sizeof(t_mat))};
 		sectors[i] = current;
 	}
 	return (sectors);
 }
 
-t_portal	*parse_portals(void *buf, t_save save, size_t n_entities)
+t_portal	*parse_portals(void *buf, t_save save, size_t n_entities,\
+t_mat *mats)
 {
 	t_c_portal	struc_p;
 	t_portal	*portals;
@@ -139,6 +143,8 @@ t_portal	*parse_portals(void *buf, t_save save, size_t n_entities)
 		current.to_wall = struc_p.to_wall;
 		current.a = struc_p.a;
 		current.b = struc_p.b;
+		current.mat = (struc_p.mat == -1) ? NULL : 
+			id_to_p(struc_p.mat, mats, sizeof(t_mat));
 		portals[i] = current;
 		i++;
 	}

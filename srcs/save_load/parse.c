@@ -74,7 +74,7 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	res.sectors = parse_sectors(buf, save, res.materials, game.nsectors);
 	res.nsectors = game.nsectors;
 	save.index = game.loc_portals;
-	res.portals = parse_portals(buf, save, game.nportals);
+	res.portals = parse_portals(buf, save, game.nportals, res.materials);
 	res.nportals = game.nportals;
 	save.index = game.loc_entities;
 	res.entities = parse_entities(buf, save, res.materials, game.nentities);

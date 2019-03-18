@@ -32,7 +32,11 @@ t_game	init_audio(t_game game)
 	Mix_AllocateChannels(10);
 
 	i = 0;
-	drt = opendir("./audio_tmp/music_tmp");
+	if (!(drt = opendir("./audio_tmp/music_tmp")))
+	{
+		console_error("Audio", "Could not open directory");
+		exit(EXIT_FAILURE);
+	}
 	game.music = anew(NULL, 1, sizeof(t_music));
 	while ((read = readdir(drt)))
 	{
@@ -51,7 +55,11 @@ t_game	init_audio(t_game game)
 	closedir(drt);
 
 	i = 0;
-	drt = opendir("./audio_tmp/sound_tmp");
+	if (!(drt = opendir("./audio_tmp/sound_tmp")))
+	{
+		console_error("Audio", "Could not open directory");
+		exit(EXIT_FAILURE);
+	}
 	game.sounds = anew(NULL, 1, sizeof(t_sound));
 	while ((read = readdir(drt)))
 	{
