@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 13:24:51 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/17 11:52:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define PWIDTH	2.5
 # define RATIO (WIDTH / PWIDTH)
 # define PDIS 0.8
+# define N_THREADS 8
 
 # define WHITE		(t_color){255,255,255,255}
 # define GREY		(t_color){128,128,128,255}
@@ -46,7 +47,7 @@ typedef struct	s_pix
 	int32_t	y;
 }				t_pix;
 
-# define NCACHEWALL 50
+# define NCACHEWALL 20
 
 typedef struct	s_hit
 {
@@ -90,8 +91,8 @@ typedef struct	s_cache_entity
 typedef struct	s_bunch
 {
 	int				nwalls;
-	t_cache_wall	walls[NCACHEWALL];
 	int				nentities;
+	t_cache_wall	walls[NCACHEWALL];
 	t_cache_entity	entities[NCACHEWALL];
 }				t_bunch;
 
@@ -178,8 +179,7 @@ typedef struct	s_render
 	t_section	portals[NCACHEWALL]; //probably need to change type
 }				t_render;
 
-void			render(t_game game, t_context context, t_color *buf,
-				u_int32_t *id_buf);
+void			render(const t_game game, const t_context context, t_color *buf, u_int32_t *id_buf);
 
 # include "srcs/graphic/bresenham.h"
 
@@ -188,6 +188,7 @@ t_fvec2			take_left(t_fvec2 a, t_fvec2 b);
 t_fvec2			take_right(t_fvec2 a, t_fvec2 b);
 
 void			background(t_color *buf, t_color color);
+void			m_background(t_color *buf, t_color color, t_pix start, t_pix size);
 void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 
 t_vec2			player_space(t_vec2 vec, t_ph physic);

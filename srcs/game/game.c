@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/14 13:52:47 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/17 15:02:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,14 @@ t_env		game_loop(t_env env, size_t frame)
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	env.current_buffer = content;
-	background(env.current_buffer, NO_COLOR);
-	render(env.game,
-		(t_context) {
-			0,
-			WIDTH + 2,
-			env.game.player.physic,
-			-1,
-			env.game.sectors[env.game.player.physic.sector_id]
-		},
-		env.current_buffer, env.game.id_buf);
+	render_multi_threaded(env, env.current_buffer);
 	minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 	display_text(&env.sdl);
-	play_music(env.game, env.game.played_music, 1, frame);
+	//play_music(env.game, env.game.played_music, 1, frame);
 	SDL_RenderPresent(env.sdl.renderer);
 	env.game = play_sounds(env.game);
 	timer = end_timer(timer);
-	//printf("%f\n", 1 / timer);
 	return (env);
 }

@@ -6,20 +6,20 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 13:19:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/17 15:19:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 
-t_bunch	build_entity_bunch(t_game game, t_context context, t_limit limit,
+t_bunch	build_entity_bunch(const t_game game, const t_context context, const t_limit limit,
 t_fvec2 pos)
 {
-	t_bunch			ret;
-	t_cache_entity	current;
-	const size_t	sector = context.sector.sector_id;
-	size_t			i;
-	t_fvec2			tmp;
+	volatile t_bunch	ret;
+	t_cache_entity		current;
+	const size_t		sector = context.sector.sector_id;
+	size_t				i;
+	t_fvec2				tmp;
 
 	i = -1;
 	ret.nentities = 0;
@@ -45,7 +45,7 @@ t_fvec2 pos)
 	return (ret);
 }
 
-t_bunch	build_bunch(t_game game, t_context context, t_limit limit)
+t_bunch	build_bunch(const t_game game, const t_context context, const t_limit limit)
 {
 	t_bunch			ret;
 	t_cache_wall	current;
@@ -78,7 +78,7 @@ t_bunch	build_bunch(t_game game, t_context context, t_limit limit)
 	return (ret);
 }
 
-t_render		build_sections_entities(t_context context, t_bunch bunch, t_limit limits)
+t_render		build_sections_entities(const t_context context, const t_bunch bunch, const t_limit limits)
 {
 	t_cache_entity		current;
 	t_section_entity	current_section;
@@ -99,8 +99,7 @@ t_render		build_sections_entities(t_context context, t_bunch bunch, t_limit limi
 	return (render);
 }
 
-t_render		build_sections(t_context context, t_bunch bunch,
-t_limit limits)
+t_render		build_sections(const t_context context, const t_bunch bunch, const t_limit limits)
 {
 	t_cache_wall	current;
 	t_section		current_section;
@@ -115,7 +114,7 @@ t_limit limits)
 		current_section.start = get_ray_id(take_left(current.a, current.b),
 			limits, context, context.left);
 		current_section.end = get_ray_id(take_right(current.a, current.b),
-			limits, context, context.right - 1);
+			limits, context, context.right);
 		render.sections[render.nsections] = current_section;
 		++render.nsections;
 	}

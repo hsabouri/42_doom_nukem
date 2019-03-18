@@ -6,14 +6,14 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 13:20:33 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/18 14:31:07 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 #include "srcs/common/translate_id.h"
 
-static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, t_section section)
+static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h, const t_section section)
 {
 	t_proj	res;
 	int		span;
@@ -26,7 +26,7 @@ static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, t_section sect
 	res.x = f_mul(section.wall.size, hit.ratios.u) + section.wall.tex_pos.u;
 	span = res.bot - res.top;
 	res.y_start = section.wall.tex_pos.v * 200;
-	res.y_iter = ((h.u - h.v) << 8) / (span + !span);
+	res.y_iter = ((h.u - h.v) << 9) / (span + !span);
 	res.plane.uid_floor = translate_in(PART_FLOOR, MOD_NO, context.sector.sector_id, 0);
 	res.plane.uid_roof = translate_in(PART_CEILING, MOD_NO, context.sector.sector_id, 0);
 	res.plane.h = h;
@@ -43,7 +43,7 @@ static t_proj	projection(t_hit hit, t_context context, t_fvec2 h, t_section sect
 	return (res);
 }
 
-t_proj			skybox(t_proj res, int id, t_context context)
+t_proj			skybox(t_proj res, int id, const t_context context)
 {
 	res.tex_wall.x = -context.physic.look_h * RATIO + id;
 	res.tex_wall.angle = f_to_int(context.physic.look_v * 100);
@@ -54,7 +54,7 @@ t_proj			skybox(t_proj res, int id, t_context context)
 	return (res);
 }
 
-t_proj			wall_projection(int id, t_hit hit, t_context context,
+t_proj			wall_projection(int id, t_hit hit, const t_context context,
 t_section section)
 {
 	t_proj res;
@@ -79,7 +79,7 @@ t_section section)
 	return (res);
 }
 
-t_proj			portal_projection(int id, t_hit hit, t_context context,
+t_proj			portal_projection(int id, t_hit hit, const t_context context,
 t_section section)
 {
 	t_proj		res;
@@ -118,14 +118,16 @@ t_section section)
 	return (res);
 }
 
-t_e_proj		entity_projection(t_hit hit, t_context context,
-t_section_entity section)
+t_e_proj		entity_projection(t_hit hit, const t_context context,
+const t_section_entity section)
 {
 	t_e_proj	res;
 	t_fvec2		h;
 	t_fvec2		sector_h;
 	int			span;
 
+	if (hit.ratios.v < 10)
+		hit.ratios.v = 10;
 	h.u = f_from_float((context.physic.pos.z + context.physic.height)) -
 		section.entity.h;
 	h.v = h.u - f_from_float(section.entity.physic.height);

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:23:25 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/06 17:18:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/17 15:18:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_fvec2		get_ray_dir(t_ph physic, int id)
 {
 	return (vec2_to_fvec2(vec2_rot((t_vec2) {
-		(-PWIDTH / 2) + id * (PWIDTH / WIDTH), PDIS},
+		(-PWIDTH / 2) + (id) * (PWIDTH / WIDTH), PDIS},
 		physic.look_h)));
 }
 
@@ -54,7 +54,7 @@ int			get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
 	int		id;
 	
 	col = ray_seg(fvec2_new(0, 0), point, limit.left.dir, limit.right.dir);
-	if (col.ratios.v <= 0 || col.ratios.v >= f_from_int(1) || col.ratios.u < 0)
+	if (col.ratios.v < 0 || col.ratios.v > f_from_int(1) || col.ratios.u < 0)
 		id = max;
 	else
 		id = context.left + f_to_int(col.ratios.v * (context.right - context.left));
