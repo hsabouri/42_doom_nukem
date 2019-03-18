@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/13 17:37:00 by hugo             ###   ########.fr       */
+/*   Updated: 2019/03/16 19:11:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,8 @@ t_text					text(const char *str, t_pix pos, t_sdl *sdl);
 void					play_music(t_game game, size_t id, size_t vol, size_t frame);	
 t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);
 t_game					play_sounds(t_game game);
+
+void					render_multi_threaded(const t_env env, t_color *buf);
+void					render_single_threaded(const t_env env, t_color *buf);
 
 #endif

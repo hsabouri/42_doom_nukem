@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/11 11:58:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/17 11:49:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-void				draw_point(t_fvec2 point, int s, t_color *buf, t_color c)
+void	draw_point(t_fvec2 point, int s, t_color *buf, t_color c)
 {
 	int			i;
 	int			j;
@@ -31,7 +31,7 @@ void				draw_point(t_fvec2 point, int s, t_color *buf, t_color c)
 	}
 }
 
-void				background(t_color *buf, t_color color)
+void	background(t_color *buf, t_color color)
 {
 	size_t			i;
 
@@ -40,6 +40,30 @@ void				background(t_color *buf, t_color color)
 	{
 		buf[i] = color;
 		i++;
+	}
+}
+
+void	m_background(t_color *buf, t_color color, t_pix start, t_pix end)
+{
+	int		x;
+	int		y;
+
+	start = (t_pix) {
+		(start.x >= 0) ? start.x : 0,
+		(start.y >= 0) ? start.y : 0};
+	end = (t_pix) {
+		(end.x <= WIDTH) ? end.x : (WIDTH),
+		(end.y <= HEIGHT) ? end.y : (HEIGHT)};
+	x = start.x;
+	while (x < end.x)
+	{
+		y = start.y;
+		while (y < end.y)
+		{
+			buf[x + y * WIDTH] = color;
+			++y;
+		}
+		++x;
 	}
 }
 
@@ -61,7 +85,7 @@ t_text				text(const char *str, t_pix pos, t_sdl *sdl)
 	return (text);
 }
 
-void				display_text(t_sdl *sdl)
+void	display_text(t_sdl *sdl)
 {
 	t_text	*current;
 
