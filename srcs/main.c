@@ -12,7 +12,7 @@
 
 #include <doom.h>
 #include <editor.h>
-#include <load_save.h>
+#include <doom.h>
 
 static TTF_Font	*init_font(void)
 {
@@ -76,7 +76,7 @@ int				main(int ac, char **av)
 			}
 			else
 			{
-				env.file = NULL;	
+				env.file = NULL;
 				env.game = generate_map(env.game);	
 			}
 			launch_check(env.game);
