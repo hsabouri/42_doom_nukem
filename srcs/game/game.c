@@ -79,7 +79,7 @@ t_env		game_loop(t_env env, size_t frame)
 	if (env.editor.enabled)
 		env = game_editing(env, env.game.player);
 	env.game = player_properties(env.game, env.events);
-	//env.game = entities_properties(env.game, env.events);
+	// env.game = entities_properties(env.game, env.events);
 	env.game = physic(env.game, env.events);
 	env.game.frame = frame;
 	content = NULL;
