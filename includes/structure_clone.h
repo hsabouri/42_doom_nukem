@@ -78,7 +78,7 @@ typedef struct		s_c_entity
 {
 	size_t		magic;
 	t_c_ph		spawn;
-	size_t		mat;
+	ssize_t		mat;
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
@@ -100,6 +100,7 @@ typedef struct		s_c_portal
 	u_int32_t	to_wall;
 	u_int32_t	a;
 	u_int32_t	b;
+	ssize_t		mat;
 }					t_c_portal;
 
 typedef struct		s_c_wall
@@ -109,7 +110,7 @@ typedef struct		s_c_wall
 	int32_t		portal;
 	u_int32_t	a;
 	u_int32_t	b;
-	size_t		mat;
+	ssize_t		mat;
 }					t_c_wall;
 
 typedef struct		s_c_sector
@@ -121,8 +122,9 @@ typedef struct		s_c_sector
 	t_fixed		floor;
 	t_fixed		ceiling;
 	t_color		ambient;
-	size_t		ceiling_mat;
-	size_t		floor_mat;
+	ssize_t		ceiling_mat;
+	ssize_t		floor_mat;
+	t_fvec2		tex_pos;
 }					t_c_sector;
 
 typedef struct		s_c_music
