@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/17 11:52:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/20 14:46:38 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <graphic_singletons.h>
 # include <structure.h>
 
-# define WIDTH 720
-# define HEIGHT 480
+# define WIDTH 1280
+# define HEIGHT 720
 # define PWIDTH	2.5
 # define RATIO (WIDTH / PWIDTH)
 # define PDIS 0.8

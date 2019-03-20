@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/29 17:55:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/20 14:42:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <structure_clone.h>
 # include <sys/types.h>
 # include <dirent.h>
-
-# define HEIGHT 480
 
 # define WHITE		(t_color){255,255,255,255}
 # define GREY		(t_color){128,128,128,255}

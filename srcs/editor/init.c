@@ -19,7 +19,7 @@ t_editor		init_editor(void)
 		.zoom = 25.0,
 		.offset = (t_vec2) {0.0, 0.0},
 		.sel_point = -1,
-		.enabled = 1,
+		.enabled = 0,
 		.current_tool = POINT,
 		.depth = 0,
 		.game_tool = TOOL_NO};

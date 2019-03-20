@@ -45,7 +45,7 @@ static t_c_music	set_fmusic(t_save_music *music, size_t i, t_audio type)
 	t_c_music fmusic;
 
 	music->path = (char *)malloc(sizeof(char) * (15 +
-			ft_strlen(music->read->d_name)));
+		ft_strlen(music->read->d_name)));
 	music->path = (type == MUSIC) ? ft_strcpy(music->path, "./audio/music/") :
 		ft_strcpy(music->path, "./audio/sound/");
 	music->path = ft_strcat(music->path, music->read->d_name);
@@ -74,7 +74,8 @@ size_t				write_audio(int fd, int index, t_audio type)
 	while ((music.read = readdir(music.drt)))
 	{
 		if (ft_strcmp(music.read->d_name, ".") != 0 &&
-			ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8)
+			ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8 &&
+			(ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
 		{
 			fmusic = set_fmusic(&music, i, type);
 			write_struct(&fmusic, fd, sizeof(t_c_music));
@@ -95,7 +96,8 @@ void				write_music(int fd, t_audio type)
 	while ((music.read = readdir(music.drt)))
 	{
 		if (ft_strcmp(music.read->d_name, ".") != 0 &&
-			ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8)
+			ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8 &&
+			(ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
 		{
 			music.path = (char *)malloc(sizeof(char) * (15 +
 				ft_strlen(music.read->d_name)));

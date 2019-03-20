@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/13 17:22:32 by hugo             ###   ########.fr       */
+/*   Updated: 2019/03/20 14:57:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_game	generate_map(t_game game)
 	t_mat *sans = &materials[3];
 
 	materials[4] = (t_mat) { // Skybox
-		fvec2_new(0, f_from_int(2.5 * HEIGHT)),
+		fvec2_new(0, f_from_int(1300)),
 		fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		NO_COLOR,
 		&textures[3],
@@ -127,7 +127,7 @@ t_game	generate_map(t_game game)
 	t_mat *skybox = &materials[4];
 
 	materials[5] = (t_mat) { // Fence + skybox
-		fvec2_new(0, f_from_int(2.5 * HEIGHT)),
+		fvec2_new(0, f_from_int(1300)),
 		fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		NO_COLOR,
 		&textures[3],
