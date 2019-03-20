@@ -41,7 +41,8 @@ t_game	init_audio(t_game game)
 	while ((read = readdir(drt)))
 	{
 		if (ft_strcmp(read->d_name, ".") != 0 && ft_strcmp(read->d_name, "..")
-			&& read->d_type == 8)
+			&& read->d_type == 8 && 
+			(ft_strcmp(ft_strrchr(read->d_name, '.'), ".ogg") == 0))
 		{
 			path = (char *)malloc(sizeof(char) * (23 + ft_strlen(read->d_name)));
 			path = ft_strcpy(path, "./audio_tmp/music_tmp/");
@@ -64,7 +65,8 @@ t_game	init_audio(t_game game)
 	while ((read = readdir(drt)))
 	{
 		if (ft_strcmp(read->d_name, ".") != 0 && ft_strcmp(read->d_name, "..")
-			&& read->d_type == 8)
+			&& read->d_type == 8 &&
+			(ft_strcmp(ft_strrchr(read->d_name, '.'), ".ogg") == 0))
 		{
 			path = (char *)malloc(sizeof(char) * (23 + ft_strlen(read->d_name)));
 			path = ft_strcpy(path, "./audio_tmp/sound_tmp/");

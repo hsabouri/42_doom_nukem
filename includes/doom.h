@@ -135,7 +135,7 @@ t_event					reset_clicks(t_event events);
 void					bresenham(t_color *buff, t_pix a, t_pix b, \
 						t_color color);
 
-t_game					physic(t_game game, t_event events);
+t_game					physic(t_game game, t_event events, float old_timer);
 
 t_text					text(const char *str, t_pix pos, t_sdl *sdl);
 
