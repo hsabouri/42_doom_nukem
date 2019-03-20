@@ -6,19 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2019/04/14 17:25:36 by hsabouri         ###   ########.fr       */
-=======
-/*   Updated: 2019/04/01 13:26:08 by lbougero         ###   ########.fr       */
->>>>>>> trigger en cours
-=======
-/*   Updated: 2019/04/01 13:32:56 by lbougero         ###   ########.fr       */
->>>>>>> je ve la musik
-=======
-/*   Updated: 2019/04/01 13:36:30 by lbougero         ###   ########.fr       */
->>>>>>> g les sons mnt
+/*   Updated: 2019/04/26 12:19:55 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,17 +401,8 @@ t_game	generate_map(void)
 	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, skybox, tiles, fvec2_new(0, 0)});
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles, fvec2_new(0, 0)});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles, fvec2_new(0, 0)});
-
-<<<<<<< HEAD
-=======
 	t_trigger *c_log = (t_entity *)malloc(10 * sizeof(t_entity));
 
-<<<<<<< HEAD
->>>>>>> je ve la musik
-=======
-
-
->>>>>>> Ëvent react to Hello
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
 		0,
@@ -524,7 +503,6 @@ t_game	generate_map(void)
 		},
 		multi,
 		1
-<<<<<<< HEAD
 	});
 	entities[3] = ((t_entity){
 		(t_ph) {
@@ -549,25 +527,12 @@ t_game	generate_map(void)
 			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
-=======
-		});
-	entities[3] = ((t_entity){
-		3,
-		(t_ph) {
-			0,
-			0,
-			0,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
->>>>>>> g les sons mnt
 			0,
 			0,
 			0,
 			0,
 			0
 		},
-<<<<<<< HEAD
 		key_card,
 		1
 	});
@@ -626,20 +591,10 @@ t_game	generate_map(void)
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
-=======
-		(t_ph) {
-			0,
-			0,
-			0,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
->>>>>>> g les sons mnt
 			0,
 			0,
 			0,
 			0,
-<<<<<<< HEAD
 		},
 		90,
 		{0, 1},
@@ -647,52 +602,58 @@ t_game	generate_map(void)
 		0,
 		inventory
 	};
-=======
+
+	// t_game_event *g_e = (t_game_event *)malloc(2 * sizeof(t_game_event));
+
+	t_entity dummy = ((t_entity){
+		3,
+		(t_ph) {
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			0,
+			0,
+			1,
+			0,
+			0
+		},
+		(t_ph) {
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			0,
+			0,
+			1,
+			0,
 			0
 		},
 		sans,
 		0
 		});
 
-		t_player player = (t_player) {
-		(t_entity) {
-			-1,
-			(t_ph) {
-				0.02,
-				1.50,
-				0.5,
-				(t_vec3){5, 8.5, 0},
-				(t_vec3){0, 0, 0},
-				(t_vec3){1, 1, 1},
-				0,
-				0,
-				0,
-				0,
-				0
-			},
-			(t_ph) {
-				0.02,
-				1.50,
-				0.5,
-				(t_vec3){5, 8.5, 0},
-				(t_vec3){0, 0, 0},
-				(t_vec3){1, 1, 1},
-				0,
-				0,
-				0,
-				0,
-				0
-			},
-			sans,
-			1
-			}
-		};
+	t_array g_e = anew(NULL, 10, sizeof(t_game_event));
 
-	t_game_event *g_e = (t_game_event *)malloc(2 * sizeof(t_game_event));
-
-	g_e[0] = ((t_game_event){
+	apush(&g_e, &(t_game_event){
 		(t_trigger){
-			player.my_entity, 2, entities[0]
+			player.my_entity, TRIGGER_TOUCH, entities[0] // Game event : list event wanted
+			}
+		});
+
+	apush(&g_e, &(t_game_event){
+		(t_trigger){
+			player.my_entity, TRIGGER_SEE, entities[1] // Game event : list event wanted
+			}
+		});
+
+	apush(&g_e, &(t_game_event){
+		(t_trigger){
+			dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
 			}
 		});
 
@@ -700,16 +661,18 @@ t_game	generate_map(void)
 	music[0].music = Mix_LoadMUS("audio/test.ogg");
 	music[1].music = Mix_LoadMUS("audio/test2.ogg");
 
-	t_sound *sounds = (t_sound *)malloc(2 * sizeof(t_sound));
+	t_sound *sounds = (t_sound *)malloc(5 * sizeof(t_sound));
 	sounds[0].sound = Mix_LoadWAV("audio/open_door.ogg");
 	sounds[1].sound = Mix_LoadWAV("audio/dog.ogg");
->>>>>>> g les sons mnt
+	sounds[2].sound = Mix_LoadWAV("audio/oof.ogg");
+	sounds[3].sound = Mix_LoadWAV("audio/touch.ogg");
+	sounds[4].sound = Mix_LoadWAV("audio/salut.ogg");
 
 	game.player = player;
 	game.log = c_log;
 	game.nlog = 10;
 	game.waiting_events = g_e;
-	game.nwaiting_events = 1;
+	game.nwaiting_events = 10;
 	game.entities = entities;
 	game.nentities = 4;
 	game.sectors = sectors;

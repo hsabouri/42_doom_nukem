@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/01 13:33:01 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/01 13:40:08 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game game, size_t id)
 		d = circle_circle(n_physic, game.entities[i].physic, COL_ENTITY);
 		if (d != -1 && i != id)
 		{
-			game.log[0].e_actif = game.player.my_entity; // Set the player as an entities
+			game.log[1].e_actif = game.player.my_entity; // Set the player as an entities
 
-			game.log[0].condi = TRIGGER_TOUCH;
-			game.log[0].e_passif = game.entities[i];
+			game.log[1].condi = TRIGGER_TOUCH;
+			game.log[1].e_passif = game.entities[i];
 
 			if (n_physic.pos.x > game.entities[i].physic.pos.x)
 			{

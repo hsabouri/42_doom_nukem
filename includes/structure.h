@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:09:17 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:20:08 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef enum	e_condition
 	TRIGGER_SEE = 0x1,
 	TRIGGER_TOUCH = 0x2,
 	TRIGGER_INTERACT = 0x3,
+	TRIGGER_SECTOR = 0x4,
 	TRIGGER_NO = 0x0
 }				t_condition;
 
@@ -195,10 +196,10 @@ typedef struct		s_game
 	
 	t_player		player;
 	
-	t_game_event		*events;
-	size_t				nevents;
+	t_array		events;
+	size_t		nevents;
 
-	t_game_event 	*waiting_events;
+	t_array 	waiting_events;
 	size_t			nwaiting_events;
 
 	t_trigger	*log;

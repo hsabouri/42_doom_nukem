@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/01 13:38:26 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/01 13:39:45 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,25 @@ void		minimap(t_game game, t_color *buf)
 	}
 }
 
-// t_game		fill_game_env(t_game	game)
-// {
-// 	t_game n_game;
 
-// 	n_game = game;
-// 	n_game.waiting_events
+t_game		check_see(t_game game)
+{
+	t_game n_game;
+	t_selected ren;
 
-// 	return n_game;
-// }
+	n_game = game;
+
+	ren = world_selector(n_game);
+	if (ren.type == PART_ENTITY)
+	{
+		n_game.log[0].e_actif = n_game.player.my_entity;
+		n_game.log[0].condi = TRIGGER_SEE;
+		n_game.log[0].e_passif = n_game.entities[ren.id];
+
+		// printf("Salut harry PLAYER SEE ENTITY %zd\n", ren.id);
+	}
+	return n_game;
+}
 
 t_env		game_loop(t_env env, size_t frame)
 {
@@ -89,21 +99,21 @@ t_env		game_loop(t_env env, size_t frame)
 	if (env.editor.enabled)
 		env = game_editing(env, env.game.player);
 	env.game = player_properties(env.game, env.events);
-	// env.game = entities_properties(env.game, env.events);
-	env.game = physic(env.game, env.events, old_timer);
+	//env.game = entities_properties(env.game, env.events);
+	env.game = check_see(env.game);
+
+	env.game = physic(env.game, env.events);
 	env.game.frame = frame;
-	env.game = check_conditions(env.game);
+	env.game = check_conditions(env.game, env.events, env.condition);
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	env.current_buffer = content;
 	render_multi_threaded(env, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
-
-	*env.component = trigger_component(&env, *env.component, &env.sdl);
-	display_component(*env.component, &env.sdl);
-
-	//play_music(env.game, env.game.played_music, 1, frame);
+	display_text(env.sdl);
+	play_music(env.game, env.game.played_music, 0, frame);
+	env.game = play_sounds(env.game);
 	SDL_RenderPresent(env.sdl.renderer);
 	
 	env.game = play_sounds(env.game);

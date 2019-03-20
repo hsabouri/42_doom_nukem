@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/16 11:13:35 by hugo             ###   ########.fr       */
-=======
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/01 13:35:31 by lbougero         ###   ########.fr       */
->>>>>>> g les sons mnt
+/*   Updated: 2019/04/26 12:21:14 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +157,9 @@ typedef struct			s_env
 	t_color		*current_buffer;
 	t_component	*component;
 	t_sdl		sdl;
+	ft_trigger	*condition;
 	t_event		events; //must be last
+	
 }						t_env;
 
 int						is_clicked_on(const t_component component, t_event events);
@@ -212,7 +207,8 @@ void		*id_to_p(ssize_t index, void *tab, size_t size);
 ** CONDITION
 */
 
-t_game    check_conditions(t_game game);
+t_env	init_conditions(t_env env);
+t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers);
 t_game 	ft_reset_log(t_game game);
 
 /*
