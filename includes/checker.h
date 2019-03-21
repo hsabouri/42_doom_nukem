@@ -13,7 +13,7 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# define NBR_ERROR 26
+# define NBR_ERROR 27
 
 typedef enum	e_error_type
 {
@@ -43,6 +43,7 @@ typedef enum	e_error_type
 	PARALLEL_PORTAL,
 	MATS_ENTITIES,
 	BAD_SECTOR,
+	LOOP_OVERLAY,
 }				t_error_type;
 
 typedef struct	s_lvl_error
@@ -112,6 +113,7 @@ t_lvl_error		check_texture(t_lvl_error error, size_t ntextures,\
 t_img *textures, t_check_mat materials);
 t_lvl_error		check_overlay(t_mat *materials, t_lvl_error error,\
 size_t nmaterials);
+t_lvl_error		check_boucle_mat(t_lvl_error error, t_mat *materials, size_t nmaterials);
 
 u_int32_t		launch_check_entities(t_lvl_error error, t_game game,\
 char *errors_text[NBR_ERROR], t_check_mat mats);

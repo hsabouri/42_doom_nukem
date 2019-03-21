@@ -50,6 +50,7 @@ void	init_errors_text(char *errors_text[NBR_ERROR])
 	errors_text[23] = "portals aren't parallel";
 	errors_text[24] = "missing texture of entity";
 	errors_text[25] = "bad sector_id of entity";
+	errors_text[26] = "loop overlay in mat";
 }
 
 void	launch_check(t_game game)
