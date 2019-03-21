@@ -122,7 +122,7 @@ t_game	generate_map(t_game game)
 		&textures[3],
 		SKYBOX,
 		WHITE,
-		NULL
+		NULL,
 	};
 	t_mat *skybox = &materials[4];
 
