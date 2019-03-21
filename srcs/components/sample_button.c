@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 13:48:06 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/21 16:05:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:47:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_component	init_button(char *str, t_sdl *sdl)
 {
 	t_component component;
 	
-	component.img = parse_tga("./textures/button_on.tga");
+	component.img.content = NULL;
 	component.text = component_text(str, component.pos, sdl);
 	component.size.x = component.text.w + 10;
 	component.size.y = component.text.h + 10;

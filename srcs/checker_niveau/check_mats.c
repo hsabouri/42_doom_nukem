@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_mats.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:28:12 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/25 12:28:17 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:51:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_mat *materials, size_t cpt)
 	{
 		if (lievre == tortue)
 			return (1);
-		else if (materials[id_1].overlay && materials[id_2].overlay->overlay)
+		else if (materials[id_1].overlay && id_2 != -1 && materials[id_2].overlay->overlay)
 		{
 			tortue = materials[id_1].overlay;
 			id_1 = id_from_p(tortue, materials, sizeof(t_mat));
