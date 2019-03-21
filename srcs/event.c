@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/14 11:53:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/10 15:56:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event)
 
 static void		keyactions(int scancode, t_env *env)
 {
-	if (scancode == SDL_SCANCODE_E && env->editor.enabled)
+	env->events.key_click[scancode] = 1;
+	if (scancode == SDL_SCANCODE_E)
 	{
 		if (env->toggle_editor)
 		{

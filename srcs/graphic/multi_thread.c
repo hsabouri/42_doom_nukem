@@ -35,7 +35,7 @@ static void	*start_render(void *info)
 
 void	render_single_threaded(const t_env env, t_color *buf)
 {
-	background(buf, NO_COLOR);
+	background(buf, NO_COLOR, (t_pix){WIDTH, HEIGHT});
 	render(env.game,
 		(t_context) {
 			0,

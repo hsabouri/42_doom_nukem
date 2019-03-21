@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/16 19:11:39 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:50:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@
 
 # define NB_TEXT 	100
 
-
-typedef struct			s_text
-{
-	int16_t		x;
-	int16_t		y;
-	int32_t		w;
-	int32_t		h;
-	SDL_Texture	*text_texture;
-}				t_text;
-
 typedef struct			s_event
 {
 	int16_t		x;
@@ -67,6 +57,15 @@ typedef struct			s_event
 	u_int8_t	key_click[N_KEY];
 }						t_event;
 
+typedef struct	s_text
+{
+	int16_t		x;
+	int16_t		y;
+	int32_t		w;
+	int32_t		h;
+	SDL_Texture	*text_texture;
+}				t_text;
+
 typedef struct			s_sdl
 {
 	SDL_Window		*win;
@@ -75,6 +74,27 @@ typedef struct			s_sdl
 	TTF_Font		*font;
 	t_array			text;
 }						t_sdl;
+
+typedef struct	s_component_event
+{
+    int hover;
+    // potentiellement + plus tard
+}				t_component_event;
+
+typedef struct	s_component
+{
+	int				display;
+    t_pix 			pos;
+	t_pix			size;
+    t_text			text;
+    t_img			img;
+    void			*state;
+    void			(*render)(struct s_component self, t_color *buf);
+    int				(*update)(struct s_component *self, void *state);
+	void			(*destroy)(struct s_component *self);
+    t_array			childs;
+	SDL_Texture		*last_render;
+}				t_component;
 
 typedef enum	e_tool
 {
@@ -118,11 +138,22 @@ typedef struct			s_env
 	int			toggle_editor;
 	t_editor	editor;
 	t_color		*current_buffer;
+	t_component	*component;
 	t_sdl		sdl;
 	t_event		events; //must be last
 }						t_env;
 
+int						is_clicked_on(const t_component component, t_event events);
+void					m_background(t_color *buf, t_color color, t_pix start, t_pix end);
 t_game					init_audio(t_game game);
+
+t_component     		*init_component(t_sdl *sdl);
+t_component	    		trigger_component(t_env env, t_component component, t_sdl *sdl);
+void					display_component(const t_component component, t_sdl *sdl);
+void					destroy_component(t_component *component);
+t_text					component_text(const char *str, t_pix pos, t_sdl *sdl);
+void					component_image(const t_img img, t_pix pos,
+						const t_pix buf_size, t_color *buf);
 
 t_env					game_loop(t_env env, size_t frame);
 t_env					editor_loop(t_env env, size_t frame);
@@ -138,6 +169,7 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 t_game					physic(t_game game, t_event events, float old_timer);
 
 t_text					text(const char *str, t_pix pos, t_sdl *sdl);
+void					display_text(t_sdl *sdl);
 
 void					play_music(t_game game, size_t id, size_t vol, size_t frame);	
 t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);

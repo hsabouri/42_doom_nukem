@@ -187,8 +187,7 @@ int				is_left(t_fvec2 a, t_fvec2 b);
 t_fvec2			take_left(t_fvec2 a, t_fvec2 b);
 t_fvec2			take_right(t_fvec2 a, t_fvec2 b);
 
-void			background(t_color *buf, t_color color);
-void			m_background(t_color *buf, t_color color, t_pix start, t_pix size);
+void			background(t_color *buf, t_color color, t_pix size);
 void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 
 t_vec2			player_space(t_vec2 vec, t_ph physic);
@@ -222,8 +221,8 @@ t_fvec2			get_ray_dir(t_ph physic, int id);
 int				get_ray_id(t_fvec2 point, t_limit limit,
 				t_context context, int max);
 t_limit			build_limits(t_context context);
-int			is_in_limit(t_limit limit, t_context context,
-			t_fvec2 a, t_fvec2 b);
+int				is_in_limit(t_limit limit, t_context context,
+								t_fvec2 a, t_fvec2 b);
 
 t_hit			ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d);
 

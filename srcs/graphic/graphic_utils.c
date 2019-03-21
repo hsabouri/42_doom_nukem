@@ -31,12 +31,12 @@ void	draw_point(t_fvec2 point, int s, t_color *buf, t_color c)
 	}
 }
 
-void	background(t_color *buf, t_color color)
+void	background(t_color *buf, t_color color, t_pix size)
 {
 	size_t			i;
 
 	i = 0;
-	while (i < WIDTH * HEIGHT)
+	while ((int)i < size.x * size.y)
 	{
 		buf[i] = color;
 		i++;
@@ -80,12 +80,13 @@ t_text				text(const char *str, t_pix pos, t_sdl *sdl)
 	text.text_texture = SDL_CreateTextureFromSurface(sdl->renderer,\
 		text_surface);
 	SDL_QueryTexture(text.text_texture, NULL, NULL, &text.w, &text.h);
-	SDL_FreeSurface(text_surface);
+	if (text_surface != NULL)
+		SDL_FreeSurface(text_surface);
 	sdl->text = *apush(&sdl->text, &text);
 	return (text);
 }
 
-void	display_text(t_sdl *sdl)
+void				display_text(t_sdl *sdl)
 {
 	t_text	*current;
 

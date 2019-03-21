@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 16:18:17 by hugo             ###   ########.fr       */
+/*   Updated: 2019/03/21 15:51:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@ static t_sdl	init_sdl(void)
 	return ((t_sdl) {win, buf, renderer, font, text});
 }
 
+void				clean_env(t_env env)
+{
+	int i;
+
+	Mix_CloseAudio();
+	if (env.component)
+		destroy_component(env.component);
+}
+
 int				main(int ac, char **av)
 {
 	t_env		env;
@@ -64,6 +73,7 @@ int				main(int ac, char **av)
 	
 	env.sdl = init_sdl();
 	env.editor = init_editor();
+	env.component = init_component(&env.sdl);
 	env.toggle_editor = 0;
 	if (ac >= 2)
 	{
@@ -99,6 +109,7 @@ int				main(int ac, char **av)
 	env.events = init_events();
 	env.game.id_buf = (u_int32_t *)malloc(WIDTH * HEIGHT * sizeof(int));
 	frame = 0;
+
 	while (env.sdl.win)
 	{
 		env.events = capture_events(env.events, &env);
@@ -109,17 +120,18 @@ int				main(int ac, char **av)
 		if (env.toggle_editor)
 			env = editor_loop(env, frame);
 		else
+		{
 			env = game_loop(env, frame);
-		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
-			break ;
+		}
+		if (!env.sdl.win)
+		{
+			console_error("doom_nukem", SDL_GetError());
+			exit(EXIT_FAILURE);
+		}
 		env.events = reset_clicks(env.events);
 		frame++;
 	}
-	Mix_CloseAudio();
-	if (!env.sdl.win)
-	{
-		console_error("doom_nukem", SDL_GetError());
-		exit(EXIT_FAILURE);
-	}
+	clean_env(env);
 	return (0);
 }
+
