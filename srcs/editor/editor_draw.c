@@ -38,7 +38,7 @@ static void			draw_walls(t_game game, t_editor editor, t_color *buf)
 				(t_pix) {(int)pts[1].u, (int)pts[1].v},\
 				(wall.portal >= 0) ? TRACTOR_R : WHITE);
 		else
-			bresenham(buf, (t_pix) {(int)pts[0].u, (int)pts[0].v},\
+			bresenham(buf, (t_pix) {(int)pts[0].u,  HEIGHT - (int)pts[0].v},\
 				(t_pix) {(int)pts[1].u, (int)pts[1].v},\
 				(wall.portal >= 0) ? LOW_R : GREY);
 		i++;

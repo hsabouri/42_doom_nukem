@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/17 15:02:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/11 12:04:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,12 @@ t_env		game_loop(t_env env, size_t frame)
 	minimap(env.game, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
+	*env.component = trigger_component(env, env.component[0], &env.sdl);
+	//display_component(env.component[0], &env.sdl);
 	display_text(&env.sdl);
 	//play_music(env.game, env.game.played_music, 1, frame);
 	SDL_RenderPresent(env.sdl.renderer);
+	
 	env.game = play_sounds(env.game);
 	old_timer = end_timer(timer);
 	return (env);

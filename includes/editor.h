@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/16 11:27:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/11 15:18:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <srcs/common/translate_id.h>
 
 t_editor		init_editor(void);
-
 void			draw_map(t_game game, t_editor editor, t_color *buf);
 
 t_game			create_point(t_vec2 pts, ssize_t index, t_game game);
@@ -50,7 +49,6 @@ t_game			new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,\
 t_game			new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
 				t_game game);
 
-void			display_text(t_sdl *sdl);
 
 t_vec2			point_from_mouse(t_event events, t_editor editor);
 ssize_t			select_point(t_game game, t_editor editor,\
@@ -69,8 +67,5 @@ t_env			portal_tool(t_env env);
 
 t_env			move_texture_tool(t_env env, t_selected selected);
 t_env			move_material_tool(t_env env, t_selected selected);
-t_env			scale_material_tool(t_env env, t_selected selected);
-t_env			sector_height_tool(t_env env, t_selected selected);
-t_env			change_material_tool(t_env env, t_selected selected);
 
 #endif
