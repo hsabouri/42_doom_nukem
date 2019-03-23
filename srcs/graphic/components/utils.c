@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:11:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/21 14:18:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 16:05:49 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ t_text			component_text(const char *str, t_pix pos, t_sdl *sdl)
 void			component_image(const t_img img, t_pix pos,
 const t_pix buf_size, t_color *buf)
 {
-	int x;
-	int y;
+	size_t x;
+	size_t y;
 
 	x = pos.x;
-	while (x < img.width + pos.x && x < buf_size.x)
+	while (x < img.width + pos.x && x < (size_t)buf_size.x)
 	{
 		y = pos.y;
-		while (y < img.height + pos.y && y < buf_size.y)
+		while (y < img.height + pos.y && y < (size_t)buf_size.y)
 		{
 			buf[x + y * buf_size.x] =
 				img.content[x - pos.x + (y - pos.y) * img.width];
@@ -48,4 +48,11 @@ const t_pix buf_size, t_color *buf)
 		}
 		x++;
 	}
+}
+
+SDL_Texture		*empty_render(t_component any, t_sdl *sdl)
+{
+	(void)sdl;
+	(void)any;
+	return (NULL);
 }

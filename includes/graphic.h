@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/20 14:46:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 15:40:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define RED		(t_color){255,0,0,255}
 # define GREEN		(t_color){0,255,0,255}
 # define BLUE		(t_color){0,0,255,255}
+# define ORANGE		(t_color){251,126,20,255}
 # define BLACK		(t_color){0,0,0,255}
 # define NO_COLOR	(t_color){0,0,0,0}
 
@@ -192,6 +193,13 @@ void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
 
 t_vec2			player_space(t_vec2 vec, t_ph physic);
 
+void			draw_wall(int id, t_proj proj, t_color *buf,
+				u_int32_t *ids);
+void			draw_portal(int id, t_proj proj, t_color *buf,
+				u_int32_t *ids);
+void			draw_entity(int id, t_e_proj proj, t_color *buf,
+				u_int32_t *ids);
+
 t_proj			wall_projection(int id, t_hit hit, t_context context,
 				t_section section);
 t_proj			portal_projection(int id, t_hit hit, t_context context,
@@ -203,13 +211,6 @@ t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
 t_render		build_sections(t_context context, t_bunch bunch,
 				t_limit limits);
 t_render		build_sections_portals(t_render render);
-
-void			draw_wall(int id, t_proj proj, t_color *buf,
-				u_int32_t *ids);
-void			draw_portal(int id, t_proj proj, t_color *buf,
-				u_int32_t *ids);
-void			draw_entity(int id, t_e_proj proj, t_color *buf,
-				u_int32_t *ids);
 
 t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y);
 t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y);

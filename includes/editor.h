@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/11 15:18:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 12:09:58 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 # define MOVE_SPEED 5
 # define ZOOM_SPEED 0.2
+# define INITIAL_ZOOM 30
+# define INITIAL_OFFSET_X 100
+# define INITIAL_OFFSET_Y -100
 
 # define POINT_SIZE 4
 # define ENTITY_SIZE 3
@@ -23,7 +26,6 @@
 # include <srcs/common/translate_id.h>
 
 t_editor		init_editor(void);
-void			draw_map(t_game game, t_editor editor, t_color *buf);
 
 t_game			create_point(t_vec2 pts, ssize_t index, t_game game);
 t_game			create_wall(ssize_t pts[2], int new_sector, t_game game);
@@ -67,5 +69,8 @@ t_env			portal_tool(t_env env);
 
 t_env			move_texture_tool(t_env env, t_selected selected);
 t_env			move_material_tool(t_env env, t_selected selected);
+t_env			scale_material_tool(t_env env, t_selected selected);
+t_env			sector_height_tool(t_env env, t_selected selected);
+t_env			change_material_tool(t_env env, t_selected selected);
 
 #endif

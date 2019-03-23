@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/21 15:50:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/22 15:49:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 
 typedef struct			s_event
 {
+	int			any;
 	int16_t		x;
 	int16_t		y;
 	int16_t		old_x;
@@ -90,6 +91,7 @@ typedef struct	s_component
     t_img			img;
     void			*state;
     void			(*render)(struct s_component self, t_color *buf);
+    SDL_Texture		*(*complete_render)(struct s_component self, t_sdl *sdl);
     int				(*update)(struct s_component *self, void *state);
 	void			(*destroy)(struct s_component *self);
     t_array			childs;
@@ -147,13 +149,16 @@ int						is_clicked_on(const t_component component, t_event events);
 void					m_background(t_color *buf, t_color color, t_pix start, t_pix end);
 t_game					init_audio(t_game game);
 
-t_component     		*init_component(t_sdl *sdl);
-t_component	    		trigger_component(t_env env, t_component component, t_sdl *sdl);
+t_component     		*init_component(t_env *env, t_sdl *sdl);
+t_component				trigger_component(void *parent, t_component component, t_sdl *sdl);
 void					display_component(const t_component component, t_sdl *sdl);
 void					destroy_component(t_component *component);
+
 t_text					component_text(const char *str, t_pix pos, t_sdl *sdl);
 void					component_image(const t_img img, t_pix pos,
 						const t_pix buf_size, t_color *buf);
+
+SDL_Texture				*empty_render(t_component any, t_sdl *sdl);
 
 t_env					game_loop(t_env env, size_t frame);
 t_env					editor_loop(t_env env, size_t frame);

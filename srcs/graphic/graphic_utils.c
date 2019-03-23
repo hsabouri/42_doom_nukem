@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/17 11:49:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 12:36:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	draw_point(t_fvec2 point, int s, t_color *buf, t_color c)
 	const int	s_j = (f_to_int(point.u) - s >= 0) ? f_to_int(point.u) - s : 0;
 
 	i = (f_to_int(point.v) - s >= 0) ? f_to_int(point.v) - s : 0;
-	while (i < f_to_int(point.v) + s && i < HEIGHT)
+	while (i < f_to_int(point.v) + s - 1 && i < HEIGHT)
 	{
 		j = s_j;
-		while (j < f_to_int(point.u) + s && j < WIDTH)
+		while (j < f_to_int(point.u) + s  - 1 && j < WIDTH)
 		{
 			buf[i * WIDTH + j] = c;
 			j++;
