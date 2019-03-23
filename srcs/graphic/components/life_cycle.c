@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/21 16:19:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 15:55:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
 
-#include "srcs/components/sample_button.h"
+#include "srcs/components/root.h"
 
 SDL_Texture		*render_component(const t_component self, t_sdl *sdl)
 {
@@ -32,18 +32,21 @@ SDL_Texture		*render_component(const t_component self, t_sdl *sdl)
 	return (texture);
 }
 
-t_component		trigger_component(t_env env, t_component component, t_sdl *sdl)
+t_component		trigger_component(void *parent, t_component component, t_sdl *sdl)
 {
 	t_component *child;
 	size_t		i;
 
-    if (!component.update || component.update(&component, &env))
+    if (!component.update || component.update(&component, parent))
 	{
 		i = 0;
-    	component.last_render = render_component(component, sdl);
+		if (component.complete_render)
+			component.last_render = component.complete_render(component, sdl);
+		else
+			component.last_render = render_component(component, sdl);
 		while ((child = (t_component *)anth(&component.childs, i)) != NULL)
 		{
-    		*child = trigger_component(env, *child, sdl);
+    		*child = trigger_component(component.state, *child, sdl);
 			i++;
 		}
 	}
@@ -56,6 +59,8 @@ void			display_component(const t_component component, t_sdl *sdl)
 	t_component	*child;
 
 	i = 0;
+	if (!component.display)
+		return ;
 	if (component.last_render)
 		SDL_RenderCopy(sdl->renderer, component.last_render, NULL,
 			&((SDL_Rect) {component.pos.x, component.pos.y, component.size.x,
@@ -93,11 +98,11 @@ void			destroy_component(t_component *component)
 }
 
 
-t_component		*init_component(t_sdl *sdl)
+t_component		*init_component(t_env *env, t_sdl *sdl)
 {
 	t_component	*component;
 
 	component = (t_component*)malloc(sizeof(t_component));
-	*component = init_button("Sample", sdl);
+	*component = init_root(env, sdl);
 	return (component);
 }

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/21 15:51:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/22 18:26:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ static t_sdl	init_sdl(void)
 
 void				clean_env(t_env env)
 {
-	int i;
-
 	Mix_CloseAudio();
 	if (env.component)
 		destroy_component(env.component);
@@ -73,7 +71,6 @@ int				main(int ac, char **av)
 	
 	env.sdl = init_sdl();
 	env.editor = init_editor();
-	env.component = init_component(&env.sdl);
 	env.toggle_editor = 0;
 	if (ac >= 2)
 	{
@@ -110,6 +107,7 @@ int				main(int ac, char **av)
 	env.game.id_buf = (u_int32_t *)malloc(WIDTH * HEIGHT * sizeof(int));
 	frame = 0;
 
+	env.component = init_component(&env, &env.sdl);
 	while (env.sdl.win)
 	{
 		env.events = capture_events(env.events, &env);
