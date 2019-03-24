@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:11:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 16:05:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/24 18:07:08 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ const t_pix buf_size, t_color *buf)
 		y = pos.y;
 		while (y < img.height + pos.y && y < (size_t)buf_size.y)
 		{
-			buf[x + y * buf_size.x] =
-				img.content[x - pos.x + (y - pos.y) * img.width];
+			if (img.content[x - pos.x + (y - pos.y) * img.width].a > 0)
+				buf[x + y * buf_size.x] =
+					img.content[x - pos.x + (y - pos.y) * img.width];
 			y++;
 		}
 		x++;
@@ -55,4 +56,10 @@ SDL_Texture		*empty_render(t_component any, t_sdl *sdl)
 	(void)sdl;
 	(void)any;
 	return (NULL);
+}
+
+void			no_destroy(t_component *self)
+{
+	(void)self;
+	return ;
 }

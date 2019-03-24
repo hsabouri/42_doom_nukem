@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:29:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 15:51:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/24 17:31:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_env				editor_loop(t_env env, size_t frame)
 	env.editor.sel_wall = -1;
 	env = env.editor.tools[env.editor.current_tool](env);
 
-	legend(env.current_buffer, &env.sdl);
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 
