@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 12:07:00 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 16:03:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 18:07:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./root.h"
 #include "./hud/hud.h"
-#include "./editor/editor.h"
+#include "./editor_comp/editor_comp.h"
 
 static t_array	init_childs(t_array array, t_env *env, t_sdl *sdl)
 {
@@ -37,12 +37,6 @@ static int		self_update(t_component *self, void *parent)
 		return (0);
 }
 
-static void		self_destroy(t_component *self)
-{
-	(void)self;
-	return ;
-}
-
 t_component		init_root(t_env *env, t_sdl *sdl)
 {
 	t_component ret;
@@ -56,7 +50,7 @@ t_component		init_root(t_env *env, t_sdl *sdl)
 	ret.display = 1;
 	ret.state = env;
 	ret.update = &self_update;
-	ret.destroy = &self_destroy;
+	ret.destroy = &no_destroy;
 	ret.render = NULL;
 	ret.complete_render = &empty_render;
 	ret.last_render = NULL;

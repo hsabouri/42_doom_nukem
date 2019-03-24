@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:23:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 16:03:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 17:18:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int			self_update(t_component *self, void *parent)
 
 	parent_state = (t_env *)parent;
 	state = (t_hud_state *)self->state;
-	return (0);
 	if (parent_state->toggle_editor == 0)
 	{
 		self->display = 1;

@@ -6,12 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 15:41:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/24 14:59:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./editor.h"
-
+#include "./map.h"
 
 static t_vec2		screen_space(t_vec2 vec, t_editor_map_state state)
 {

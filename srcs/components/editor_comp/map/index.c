@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 15:37:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/24 17:27:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../root.h"
-#include "./editor.h"
+#include "./map.h"
 
 static t_editor_map_state	zoom_move(t_editor_map_state state, t_event events)
 {
@@ -35,19 +34,32 @@ static void					self_render(const t_component self, t_color *buf)
 
 static int					self_update(t_component *self, void *parent)
 {
-	t_editor_root_state	*parent_state;
-	t_editor_map_state	*state;
+	t_editor_root_state		*parent_state;
+	t_editor_map_state		*state;
+	static t_editor_type	last = MAP;
 
 	parent_state = (t_editor_root_state *)parent;
 	state = (t_editor_map_state *)self->state;
 	if (parent_state->type != MAP)
 	{
+		last = parent_state->type;
 		self->display = 0;
 		return (0);
 	}
-	*state = zoom_move(*state, parent_state->env->events);
-	if (parent_state->env->events.any)
-		return (1);
+	else if (parent_state->type == MAP)
+	{
+		*state = zoom_move(*state, parent_state->env->events);
+		if (last != MAP)
+		{
+			last = MAP;
+			self->display = 1;
+			return (1);
+		}
+		if (parent_state->env->events.any)
+			return (1);
+		return (0);
+	}
+	else 
 	return (0);
 }
 
@@ -85,6 +97,6 @@ t_component					init_editor_map(t_env *env, t_sdl *sdl)
 	ret.complete_render = NULL;
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
-	ret.childs = anew(NULL, 0, sizeof(t_component));
+	ret.childs = anew(NULL, 0, 1);
 	return (ret);
 }

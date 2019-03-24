@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 15:55:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/24 15:16:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "srcs/components/root.h"
 
-SDL_Texture		*render_component(const t_component self, t_sdl *sdl)
+SDL_Texture			*render_component(const t_component self, t_sdl *sdl)
 {
 	SDL_Texture	*texture;
 	t_color		*content;
@@ -32,7 +32,7 @@ SDL_Texture		*render_component(const t_component self, t_sdl *sdl)
 	return (texture);
 }
 
-t_component		trigger_component(void *parent, t_component component, t_sdl *sdl)
+t_component			trigger_component(void *parent, t_component component, t_sdl *sdl)
 {
 	t_component *child;
 	size_t		i;
@@ -53,7 +53,7 @@ t_component		trigger_component(void *parent, t_component component, t_sdl *sdl)
 	return (component);
 }
 
-void			display_component(const t_component component, t_sdl *sdl)
+void				display_component(const t_component component, t_sdl *sdl)
 {
 	size_t		i;
 	t_component	*child;
@@ -77,7 +77,7 @@ void			display_component(const t_component component, t_sdl *sdl)
 	}
 }
 
-void			destroy_component(t_component *component)
+void				destroy_component(t_component *component)
 {
 	t_component	*current;
 
@@ -97,12 +97,30 @@ void			destroy_component(t_component *component)
 		SDL_DestroyTexture(component->last_render);
 }
 
+static t_component	render_all(t_component component, t_sdl *sdl)
+{
+	t_component *child;
+	size_t i;
 
-t_component		*init_component(t_env *env, t_sdl *sdl)
+	i = 0;
+	if (component.complete_render)
+		component.last_render = component.complete_render(component, sdl);
+	else
+		component.last_render = render_component(component, sdl);
+	while ((child = (t_component *)anth(&component.childs, i)) != NULL)
+	{
+		*child = render_all(*child, sdl);
+		i++;
+	}
+	return (component);
+}
+
+t_component			*init_component(t_env *env, t_sdl *sdl)
 {
 	t_component	*component;
 
 	component = (t_component*)malloc(sizeof(t_component));
 	*component = init_root(env, sdl);
+	*component = render_all(*component, sdl);
 	return (component);
 }

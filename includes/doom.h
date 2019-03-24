@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/22 15:49:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/23 18:09:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void					component_image(const t_img img, t_pix pos,
 						const t_pix buf_size, t_color *buf);
 
 SDL_Texture				*empty_render(t_component any, t_sdl *sdl);
+void					no_destroy(t_component *self);
 
 t_env					game_loop(t_env env, size_t frame);
 t_env					editor_loop(t_env env, size_t frame);

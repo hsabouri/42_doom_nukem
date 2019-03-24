@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   root.h                                             :+:      :+:    :+:   */
+/*   editor_comp.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/22 12:02:38 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/24 16:09:39 by hsabouri         ###   ########.fr       */
+/*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
+/*   Updated: 2019/03/24 16:09:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROOT_H
-# define ROOT_H
+#ifndef EDITOR_COMP_H
+# define EDITOR_COMP_H
 
-# include <editor.h>
+# include "../root.h"
 
-t_component		init_root(t_env *env, t_sdl *sdl);
+typedef enum	e_editor_type
+{
+	MAP,
+	MATERIAL,
+	ENTITY,
+	ACTION_EVENT
+}				t_editor_type;
+
+typedef struct	s_editor_root_state
+{
+	t_editor_type	type;
+	t_env			*env;
+}				t_editor_root_state;
+
+t_component		init_editor_root(t_env *env, t_sdl *sdl);
 
 #endif
