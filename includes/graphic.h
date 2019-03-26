@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 15:40:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 12:04:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct	s_cache_entity
 	t_fixed			h;
 	t_fixed			dis;
 	t_ph			physic;
-	t_mat			mat;
+	t_mat			*mat;
 }				t_cache_entity;
 
 typedef struct	s_bunch

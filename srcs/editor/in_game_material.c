@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 17:37:21 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/16 12:02:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:05:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ t_env				change_material_tool(t_env env, t_selected selected)
 		m = &env.game.sectors[selected.id].floor_mat;
 	else if (selected.type == PART_CEILING)
 		m = &env.game.sectors[selected.id].ceiling_mat;
+		/*
 	else if (selected.type == PART_ENTITY)
 		m = &env.game.entities[selected.id].mat;
+		*/
 	if (m != NULL && *m != NULL)
 		*m = change(*m, &env);
 	if (selected.type == PART_PORTAL)

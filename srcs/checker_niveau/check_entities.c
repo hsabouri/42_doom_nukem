@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 14:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/09 14:43:44 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:05:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t nentities, t_check_mat mats)
 	cpt = 0;
 	while (cpt < nentities)
 	{
+		/*
 		index = id_from_p(entities[cpt].mat, mats.materials, sizeof(t_mat));
 		if (index > mats.nmaterials)
 		{
@@ -28,6 +29,7 @@ size_t nentities, t_check_mat mats)
 			error.entities = cpt;
 			return (error);
 		}
+		*/
 		cpt++;
 	}
 	return (error);

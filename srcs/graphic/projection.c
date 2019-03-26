@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/18 14:31:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:16:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ const t_section_entity section)
 		res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * sector_h.u, hit.ratios.v) +
 		context.physic.look_v * 100);
 	res.uid = translate_in(PART_ENTITY, MOD_NO, section.entity.id, 0);
-	res.mat = section.entity.mat;
+	res.mat = *section.entity.mat;
 	res.u = hit.ratios.u;
 	res.x = hit.ratios.u;
 	res.tex.ambient = context.sector.ambient;

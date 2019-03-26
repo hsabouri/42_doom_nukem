@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/21 16:21:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 12:03:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,22 @@ t_game	generate_map(t_game game)
 	points[18] = ((t_vec2){9, 5});
 	points[19] = ((t_vec2){8, 5});
 
-	t_img *textures = (t_img *)malloc(5 * sizeof(t_img));
+	t_img *textures = (t_img *)malloc(13 * sizeof(t_img));
 	textures[0] = parse_tga("./textures/wall.tga");
 	textures[1] = parse_tga("./textures/floor.tga");
 	textures[2] = parse_tga("./textures/player.tga");
 	textures[3] = parse_tga("./textures/skybox.tga");
 	textures[4] = parse_tga("./textures/fence.tga");
+	textures[5] = parse_tga("./textures/multi_sprite/1.tga");
+	textures[6] = parse_tga("./textures/multi_sprite/2.tga");
+	textures[7] = parse_tga("./textures/multi_sprite/3.tga");
+	textures[8] = parse_tga("./textures/multi_sprite/4.tga");
+	textures[9] = parse_tga("./textures/multi_sprite/5.tga");
+	textures[10] = parse_tga("./textures/multi_sprite/6.tga");
+	textures[11] = parse_tga("./textures/multi_sprite/7.tga");
+	textures[12] = parse_tga("./textures/multi_sprite/8.tga");
 
-	t_mat *materials = (t_mat *)malloc(8 * sizeof(t_mat));
+	t_mat *materials = (t_mat *)malloc(16 * sizeof(t_mat));
 	materials[0] = (t_mat) { // Default
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
@@ -159,6 +167,96 @@ t_game	generate_map(t_game game)
 	};
 	t_mat *fence = &materials[7];
 
+	materials[8] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[5],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	materials[9] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[6],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	materials[10] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[7],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	materials[11] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[8],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	materials[12] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[9],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	materials[13] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[10],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	materials[14] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[11],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	materials[15] = (t_mat) {
+		fvec2_new(0, 0),
+		fvec2_new(f_from_int(1), f_from_int(1)),
+		NO_COLOR,
+		&textures[12],
+		NO_TILING,
+		WHITE,
+		NULL
+	};
+	t_array	multi = anew(NULL, 8, sizeof(t_mat *));
+	t_mat	*yolo = &materials[8];
+	apush(&multi, &yolo);
+	yolo = &materials[9];
+	apush(&multi, &yolo);
+	yolo = &materials[10];
+	apush(&multi, &yolo);
+	yolo = &materials[11];
+	apush(&multi, &yolo);
+	yolo = &materials[12];
+	apush(&multi, &yolo);
+	yolo = &materials[13];
+	apush(&multi, &yolo);
+	yolo = &materials[14];
+	apush(&multi, &yolo);
+	yolo = &materials[15];
+	apush(&multi, &yolo);
+
 	t_wall *walls = (t_wall *)malloc(29 * sizeof(t_wall));
 	walls[0] =  ((t_wall){fvec2_new(0, 0), -1, 9, 0, bricks});
 	walls[1] =  ((t_wall){fvec2_new(0, 0), -1, 0, 1, bricks});
@@ -210,7 +308,7 @@ t_game	generate_map(t_game game)
 			0.02,
 			1.50,
 			0.5,
-			(t_vec3){7.5, 9, 0},
+			(t_vec3){6, 9, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -232,9 +330,9 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		sans,
+		multi,
 		0
-		});
+	});
 	entities[1] = ((t_entity){
 		(t_ph) {
 			0.02,
@@ -262,9 +360,9 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		sans,
+		multi,
 		1
-		});
+	});
 	entities[2] = ((t_entity){
 		(t_ph) {
 			0.02,
@@ -292,9 +390,9 @@ t_game	generate_map(t_game game)
 			0,
 			0
 		},
-		sans,
+		multi,
 		1
-		});
+	});
 
 	game.player = player;
 	game.entities = entities;

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/11 13:29:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:02:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct		s_entity
 {
 	t_ph		physic;
 	t_ph		spawn;
-	t_mat		*mat;
+	t_array		mat;
 	//float life;
 	//float  armor;
 	//t_weapon weapons;

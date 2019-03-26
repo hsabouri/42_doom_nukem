@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/16 17:47:42 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:20:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ size_t n_entities)
 		if (current.physic.look_h > M_PI / 2 && current.physic.look_h < -M_PI / 2)
 			current.physic.look_h = 0;
 		current.physic.sector_id = struc_e.spawn.sector_id;
-		current.mat = id_to_p((ssize_t)struc_e.mat, mats, sizeof(t_mat));
+		//current.mat = id_to_p((ssize_t)struc_e.mat, mats, sizeof(t_mat));
+		current.mat = anew(NULL, 0, sizeof(t_mat *));
 		current.damage = struc_e.damage;
 		entities[i] = current;
 		i++;
