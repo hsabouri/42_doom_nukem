@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 17:13:57 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/07 17:13:59 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:21:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_mat *mats)
 		res.spawn.look.u = f_from_float(entities[i].physic.look_h);
 		res.spawn.look.v = entities[i].spawn.look_v;
 		res.spawn.sector_id = entities[i].spawn.sector_id;
-		res.mat = id_from_p(entities[i].mat, mats, sizeof(t_mat));
+		// res.mat = id_from_p(entities[i].mat, mats, sizeof(t_mat));
+		res.mat = 0;
 		res.damage = entities[i].damage;
 		write_struct(&res, fd, sizeof(t_c_entity));
 		i++;

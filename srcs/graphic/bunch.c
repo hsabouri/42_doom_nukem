@@ -6,11 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/17 15:19:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:13:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
+#include "srcs/graphic/multi_sprite.h"
 
 t_bunch	build_entity_bunch(const t_game game, const t_context context, const t_limit limit,
 t_fvec2 pos)
@@ -37,7 +38,7 @@ t_fvec2 pos)
 				current.id = i;
 				current.h = f_from_float(game.entities[i].physic.pos.z);
 				current.physic = game.entities[i].physic;
-				current.mat = *game.entities[i].mat;
+				current.mat = choose_entity_material(game.entities[i], vec3_to_vec2(context.physic.pos));
 				ret.entities[ret.nentities] = current;
 				++ret.nentities;
 			}

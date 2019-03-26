@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 16:03:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 12:04:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ static void	minimap(t_game game, t_color *buf)
 			color = RED;
 		a_f.u = f_add_int(a_f.u, 10) * 10;
 		a_f.v = f_from_int(HEIGHT) - f_add_int(a_f.v, 10) * 10;
-		draw_point(a_f,\
-		2,buf, color);
+		draw_point(a_f, 2, buf, color);
 		i++;
 	}
 }
