@@ -6,20 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/24 14:59:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:53:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./map.h"
-
-static t_vec2		screen_space(t_vec2 vec, t_editor_map_state state)
-{
-	vec = vec2_scale(vec, state.zoom);
-	vec = vec2_mult(vec, vec2_new(1, -1));
-	vec = vec2_add(vec, state.offset);
-	vec.v += HEIGHT;
-	return (vec);
-}
 
 static void			grid(t_editor_map_state state, t_color *buf)
 {
@@ -57,8 +48,8 @@ static void			foreach_wall(void *wall, void *param)
 	t_pix				b_p;
 	const t_state_buf	*state = ((t_state_buf *)param);
 
-	a = state->state.game->points[((t_wall *)wall)->a];
-	b = state->state.game->points[((t_wall *)wall)->b];
+	a = state->state.env->game.points[((t_wall *)wall)->a];
+	b = state->state.env->game.points[((t_wall *)wall)->b];
 	a = screen_space(a, state->state);
 	b = screen_space(b, state->state);
 	a_p.x = a.u;
@@ -68,17 +59,25 @@ static void			foreach_wall(void *wall, void *param)
 	bresenham(state->buf, a_p, b_p, state->color);
 }
 
-static void			foreach_point(void *point, void *param)
+static void			foreach_point(void *point, void *param, size_t i)
 {
 	const t_state_buf	*state = ((t_state_buf *)param);
 	t_vec2				p;
 	int					size;
+	t_color				color;
 	
 	size = (state->state.zoom < 10) ? 2 : 4;
 	size = (state->state.zoom > 60) ? 6 : size;
 	p = *(t_vec2 *)point;
 	p = screen_space(p, state->state);
-	draw_point(vec2_to_fvec2(p), size, state->buf, state->color);
+	color = state->color;
+	if ((size_t)state->state.selected_point == i)
+	{
+		color.r += 30;
+		color.g += 30;
+		color.b += 30;
+	}
+	draw_point(vec2_to_fvec2(p), size, state->buf, color);
 }
 
 void				draw_map(t_editor_map_state state, t_color *buf)
@@ -86,15 +85,16 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 	t_state_buf			state_buf;
 	t_array				tmp_array;
 	
-	grid(state, buf);
+	if (state.grid_size)
+		grid(state, buf);
 	state_buf = (t_state_buf) {state, buf, WHITE};
-	tmp_array = anew(state.game->walls, state.game->nwalls, sizeof(t_wall));
+	tmp_array = anew(state.env->game.walls, state.env->game.nwalls, sizeof(t_wall));
 	aforeach_state(&tmp_array, &foreach_wall, (void *)&state_buf);
 	state_buf.color = ORANGE;
-	aforeach_state(&state.unassigned_walls, &foreach_wall, (void *)&state_buf);
+	// aforeach_state(&state.unassigned_walls, &foreach_wall, (void *)&state_buf);
 	state_buf.color = LIBERTY;
-	tmp_array = anew(state.game->points, state.game->npoints, sizeof(t_vec2));
-	aforeach_state(&tmp_array, &foreach_point, (void *)&state_buf);
+	tmp_array = anew(state.env->game.points, state.env->game.npoints, sizeof(t_vec2));
+	aforeachi_state(&tmp_array, &foreach_point, (void *)&state_buf);
 	//draw_physic(game.player.physic, state, buf, MOONSTONE);
 	//draw_physic(game.player.spawn, state, buf, MUSTARD);
 }

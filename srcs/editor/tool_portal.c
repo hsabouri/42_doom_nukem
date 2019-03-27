@@ -6,11 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 14:51:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 14:57:48 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 18:36:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
+/*
 
 t_env	portal_tool(t_env env)
 {
@@ -24,3 +25,4 @@ t_env	portal_tool(t_env env)
 	}
 	return (env);
 }
+*/

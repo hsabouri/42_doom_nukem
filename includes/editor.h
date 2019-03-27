@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 12:09:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 18:14:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ t_game			new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
 				t_game game);
 
 
-t_vec2			point_from_mouse(t_event events, t_editor editor);
-ssize_t			select_point(t_game game, t_editor editor,\
-				t_event events);
 ssize_t			select_wall(t_game game, t_editor editor,\
 				t_event events);
 t_editor		select_multi_points(t_editor editor,\

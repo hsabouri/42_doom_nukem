@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/24 18:19:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:09:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 #include "./materials/materials.h"
 #include "../common/common.h"
 
-static t_array				init_childs(t_editor_root_state *state, t_sdl *sdl)
+static t_array				init_childs(t_editor_root_state *state, t_env *env,
+t_sdl *sdl)
 {
 	t_array		ret;
 	t_component	current;
 
 	ret = anew(NULL, 5, sizeof(t_component));
-	current = init_editor_map(state->env, sdl);
+	current = init_editor_map(env, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
 		.pos = (t_pix) {WIDTH - 42, HEIGHT - 42},
@@ -31,6 +32,7 @@ static t_array				init_childs(t_editor_root_state *state, t_sdl *sdl)
 		.events = &state->env->events,
 		.img = parse_tga("./textures/ui/map_mode.tga"),
 		.to_activate = (int *)&state->type,
+		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = MAP}, sdl);
 	apush(&ret, &current);
 	current =  init_button((t_button) {
@@ -40,6 +42,7 @@ static t_array				init_childs(t_editor_root_state *state, t_sdl *sdl)
 		.events = &state->env->events,
 		.img = parse_tga("./textures/ui/event_mode.tga"),
 		.to_activate = (int *)&state->type,
+		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = ACTION_EVENT}, sdl);
 	apush(&ret, &current);
 	current =  init_button((t_button) {
@@ -47,8 +50,9 @@ static t_array				init_childs(t_editor_root_state *state, t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/materials_mode.tga"),
+		.img = parse_tga("./textures/ui/material_mode.tga"),
 		.to_activate = (int *)&state->type,
+		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = MATERIAL}, sdl);
 	apush(&ret, &current);
 	current =  init_button((t_button) {
@@ -58,6 +62,7 @@ static t_array				init_childs(t_editor_root_state *state, t_sdl *sdl)
 		.events = &state->env->events,
 		.img = parse_tga("./textures/ui/entity_mode.tga"),
 		.to_activate = (int *)&state->type,
+		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = ENTITY}, sdl);
 	apush(&ret, &current);
 /*
@@ -73,10 +78,13 @@ static t_array				init_childs(t_editor_root_state *state, t_sdl *sdl)
 
 static int					self_update(t_component *self, void *parent)
 {
-	t_env	*env;
+	t_env				*env;
+	t_editor_root_state	*state;
 
 	env = (t_env *)parent;
-	if (self->state && env->toggle_editor)
+	state = (t_editor_root_state *)self->state;
+	state->env = env;
+	if (state && env->toggle_editor)
 	{
 		self->display = 1;
 		return (1);
@@ -113,6 +121,6 @@ t_component					init_editor_root(t_env *env, t_sdl *sdl)
 	ret.render = NULL;
 	ret.complete_render = &empty_render;
 	ret.last_render = NULL;
-	ret.childs = init_childs((t_editor_root_state *)ret.state, sdl);
+	ret.childs = init_childs((t_editor_root_state *)ret.state, env, sdl);
 	return (ret);
 }

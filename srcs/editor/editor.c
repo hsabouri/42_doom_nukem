@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:29:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/24 17:31:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:26:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ t_env				editor_loop(t_env env, size_t frame)
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	env.current_buffer = content;
-	background(content, RICH_BLACK, (t_pix) {WIDTH, HEIGHT});
-	//env.editor = zoom_move(env.events, env.editor);
-
-	env.editor.sel_wall = -1;
-	env = env.editor.tools[env.editor.current_tool](env);
 
 	SDL_UnlockTexture(env.sdl.buf);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);

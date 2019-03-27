@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/23 18:09:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:47:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int						is_clicked_on(const t_component component, t_event events);
 void					m_background(t_color *buf, t_color color, t_pix start, t_pix end);
 t_game					init_audio(t_game game);
 
+t_component				default_component(void *state_address, t_pix size, t_sdl *sdl);
 t_component     		*init_component(t_env *env, t_sdl *sdl);
 t_component				trigger_component(void *parent, t_component component, t_sdl *sdl);
 void					display_component(const t_component component, t_sdl *sdl);
