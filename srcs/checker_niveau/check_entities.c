@@ -16,20 +16,24 @@ t_lvl_error	check_mat_entities(t_entity *entities, t_lvl_error error,\
 size_t nentities, t_check_mat mats)
 {
 	size_t		cpt;
+	t_entity	entity;
 	u_int32_t	index;
+	t_mat		**material;
 
 	cpt = 0;
 	while (cpt < nentities)
 	{
-		/*
-		index = id_from_p(entities[cpt].mat, mats.materials, sizeof(t_mat));
-		if (index > mats.nmaterials)
+		entity = entities[cpt];
+		while ((material = (t_mat **)apop(&entity.mat)))
 		{
-			error.error_type = MATS_ENTITIES;
-			error.entities = cpt;
-			return (error);
+			index = id_from_p(*material, mats.materials, sizeof(t_mat));
+			if (index >= mats.nmaterials)
+			{
+				error.error_type = MATS_ENTITIES;
+				error.entities = cpt;
+				return (error);
+			}
 		}
-		*/
 		cpt++;
 	}
 	return (error);

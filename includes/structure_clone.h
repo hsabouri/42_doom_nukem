@@ -78,7 +78,7 @@ typedef struct		s_c_entity
 {
 	size_t		magic;
 	t_c_ph		spawn;
-	ssize_t		mat;
+	ssize_t		mat[16];
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
