@@ -123,7 +123,7 @@ typedef struct	s_editor
 	float			zoom;
 	t_vec2			offset;
 	t_tool			current_tool;
-	t_game_tool			game_tool;
+	t_game_tool		game_tool;
 	struct s_env	(*tools[3])(struct s_env);
 	struct s_env	(*game_tools[10])(struct s_env, t_selected);
 	ssize_t			sel_point;
@@ -184,5 +184,13 @@ t_game					play_sounds(t_game game);
 
 void					render_multi_threaded(const t_env env, t_color *buf);
 void					render_single_threaded(const t_env env, t_color *buf);
+
+void					*safe_malloc(size_t size, char *location);
+t_array					safe_anew(void *first, size_t len, size_t elem_size,\
+char *location);
+
+void					clean_music(t_game game);
+void					clean_env(t_env env);
+void					clean_game(t_game game);
 
 #endif

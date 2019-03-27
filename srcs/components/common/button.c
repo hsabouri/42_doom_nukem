@@ -56,7 +56,7 @@ static t_button_state		*init_state(t_button button)
 {
 	t_button_state	*ret;
 
-	ret = (t_button_state *)malloc(sizeof(t_button_state));
+	ret = (t_button_state *)safe_malloc(sizeof(t_button_state), "components");
 	ret->active_value = button.active_value;
 	ret->background = button.background;
 	ret->events = button.events;
@@ -90,6 +90,6 @@ t_component					init_button(t_button button, t_sdl *sdl)
 	ret.render = &self_render;
 	ret.complete_render = NULL;
 	ret.destroy = NULL;
-	ret.childs = anew(NULL, 0, 1);
+	ret.childs = safe_anew(NULL, 0, 1, "components");
 	return (ret);
 }

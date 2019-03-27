@@ -53,15 +53,17 @@ static t_sdl	init_sdl(void)
 		SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 	font = init_font();
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	text = anew(NULL, NB_TEXT, sizeof(t_text));
+	text = safe_anew(NULL, NB_TEXT, sizeof(t_text), "doom_nukem");
 	return ((t_sdl) {win, buf, renderer, font, text});
 }
 
-void				clean_env(t_env env)
+void				clean(t_env env)
 {
-	Mix_CloseAudio();
+	clean_game(env.game);
+	clean_texture(env);
 	if (env.component)
 		destroy_component(env.component);
+	exit(EXIT_SUCCESS);
 }
 
 int				main(int ac, char **av)
@@ -104,7 +106,7 @@ int				main(int ac, char **av)
 	}
 	env.game = init_audio(env.game);
 	env.events = init_events();
-	env.game.id_buf = (u_int32_t *)malloc(WIDTH * HEIGHT * sizeof(int));
+	env.game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT * sizeof(int)), "doom_nukem");
 	frame = 0;
 
 	env.component = init_component(&env, &env.sdl);
@@ -129,7 +131,7 @@ int				main(int ac, char **av)
 		env.events = reset_clicks(env.events);
 		frame++;
 	}
-	clean_env(env);
+	clean(env);
 	return (0);
 }
 

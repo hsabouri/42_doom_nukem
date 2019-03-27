@@ -119,7 +119,7 @@ t_component			*init_component(t_env *env, t_sdl *sdl)
 {
 	t_component	*component;
 
-	component = (t_component*)malloc(sizeof(t_component));
+	component = (t_component*)safe_malloc(sizeof(t_component), "components");
 	*component = init_root(env, sdl);
 	*component = render_all(*component, sdl);
 	return (component);

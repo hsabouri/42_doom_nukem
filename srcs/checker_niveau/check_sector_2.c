@@ -19,7 +19,7 @@ t_list *error)
 
 	if (game.walls[data.start].a != data.previous && data.start != data.end)
 	{
-		elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+		elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 		elem->elem.next = NULL;
 		elem->error_type = OPEN_SECTOR;
 		elem->sector = cpt;
@@ -28,7 +28,7 @@ t_list *error)
 	}
 	if (data.start == data.end - 1 && game.walls[data.start].b != data.first)
 	{
-		elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+		elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 		elem->elem.next = NULL;
 		elem->error_type = OPEN_SECTOR;
 		elem->sector = cpt;
@@ -74,7 +74,7 @@ t_list			height_sector(t_sector *sectors, size_t nsectors)
 	{
 		if ((sectors[cpt].ceiling - sectors[cpt].floor) < 0.1)
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			elem->elem.next = NULL;
 			elem->error_type = HEIGHT_SECTOR;
 			elem->sector = cpt;
@@ -96,7 +96,7 @@ t_list *error)
 		game.portals[game.walls[start].portal].from_sector;
 	if (game.sectors[sector_out].ceiling - game.sectors[cpt].floor < 0.1)
 	{
-		elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+		elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 		elem->elem.next = NULL;
 		elem->error_type = HEIGHT_SECTOR_NEXT;
 		elem->sector = cpt;

@@ -44,8 +44,8 @@ static t_c_music	set_fmusic(t_save_music *music, size_t i, t_audio type)
 {
 	t_c_music fmusic;
 
-	music->path = (char *)malloc(sizeof(char) * (15 +
-		ft_strlen(music->read->d_name)));
+	music->path = (char *)safe_malloc((sizeof(char) * (15 +
+		ft_strlen(music->read->d_name))), "saver");
 	music->path = (type == MUSIC) ? ft_strcpy(music->path, "./audio/music/") :
 		ft_strcpy(music->path, "./audio/sound/");
 	music->path = ft_strcat(music->path, music->read->d_name);
@@ -99,8 +99,8 @@ void				write_music(int fd, t_audio type)
 			ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8 &&
 			(ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
 		{
-			music.path = (char *)malloc(sizeof(char) * (15 +
-				ft_strlen(music.read->d_name)));
+			music.path = (char *)safe_malloc((sizeof(char) * (15 +
+				ft_strlen(music.read->d_name))), "saver");
 			music.path = (type == MUSIC) ?
 				ft_strcpy(music.path, "./audio/music/") :
 				ft_strcpy(music.path, "./audio/sound/");

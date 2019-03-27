@@ -54,13 +54,13 @@ t_component			init_hud_root(t_env *env, t_sdl *sdl)
 	ret.pos.x = 0;
 	ret.pos.y = 0;
 	ret.display = 1;
-	ret.state = init_state((t_hud_state *)malloc(
-		sizeof(t_hud_state)), env);
+	ret.state = init_state((t_hud_state *)safe_malloc(
+		sizeof(t_hud_state), "components"), env);
 	ret.update = &self_update;
 	ret.destroy = NULL; // Will automatically destroy component
 	ret.complete_render = &empty_render; // Will not draw anythin for this component
 	ret.last_render = NULL;
-	ret.childs = anew(NULL, 0, sizeof(t_component));
+	ret.childs = safe_anew(NULL, 0, sizeof(t_component), "components");
 	ret.childs = init_childs(ret.childs, env, sdl);
 	return (ret);
 }

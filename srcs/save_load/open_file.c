@@ -40,8 +40,7 @@ void		*dump_file(const char *file, int edit_mode, size_t *size)
 
 	if (*size == 0)
 		return (NULL);
-	if ((dump = (void *)malloc(*size)) == NULL)
-		perror_quit();
+	dump = safe_malloc(*size, "doom_nukem");
 	if (read(fd, dump, *size) == -1)
 		perror_quit();
 	close(fd);

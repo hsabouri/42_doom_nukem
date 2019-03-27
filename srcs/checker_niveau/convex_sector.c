@@ -47,7 +47,7 @@ static t_list	*check_angle(t_check_sect data, size_t cpt, t_list *error)
 	{
 		if (data.angle < 0)
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			elem->elem.next = NULL;
 			elem->error_type = CONCAVE_SECTOR;
 			elem->sector = cpt;
@@ -58,7 +58,7 @@ static t_list	*check_angle(t_check_sect data, size_t cpt, t_list *error)
 	{
 		if (data.angle > 0)
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			elem->elem.next = NULL;
 			elem->error_type = CONCAVE_SECTOR;
 			elem->sector = cpt;
@@ -115,7 +115,7 @@ t_list			parallel_portal(t_portal *portals, size_t nportals, t_game game)
 			game.points[game.walls[portals[cpt].to_wall].a].v);
 		if ((data.ab.u * data.cd.v) - (data.cd.u * data.ab.v) != 0)
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			*elem = (t_lvl_error) {.elem.next = NULL, .portal = cpt,
 				.error_type = PARALLEL_PORTAL};
 			lpush(&error, (t_elem *)elem);

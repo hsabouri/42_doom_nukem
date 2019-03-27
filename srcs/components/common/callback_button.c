@@ -54,7 +54,7 @@ static t_cb_button_state	*init_stat(t_cb_button button)
 {
 	t_cb_button_state	*ret;
 
-	ret = (t_cb_button_state *)malloc(sizeof(t_cb_button_state));
+	ret = (t_cb_button_state *)safe_malloc(sizeof(t_cb_button_state), "components");
 	ret->background = button.background;
 	ret->events = button.events;
 	ret->is_active = 0;
@@ -85,7 +85,7 @@ t_component				init_cb_button(t_cb_button button, t_sdl *sdl)
 	ret.render = &self_render;
 	ret.complete_render = NULL;
 	ret.destroy = NULL;
-	ret.childs = anew(NULL, 0, 1);
+	ret.childs = safe_anew(NULL, 0, 1, "components");
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, ret.size.x, ret.size.y);
 	SDL_SetTextureBlendMode(ret.last_render, SDL_BLENDMODE_BLEND);

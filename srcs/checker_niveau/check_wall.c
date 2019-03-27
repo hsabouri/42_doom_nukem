@@ -24,7 +24,7 @@ t_list		check_max_wall(t_sector *sectors, size_t nsectors)
 	{
 		if (sectors[cpt].number > 14)
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			elem->elem.next = NULL;
 			elem->error_type = MAX_WALL;
 			elem->sector = cpt;

@@ -22,7 +22,7 @@ size_t n_entities)
 	size_t		i;
 	size_t		j;
 
-	entities = (t_entity *)malloc(sizeof(t_entity) * n_entities);
+	entities = (t_entity *)safe_malloc((sizeof(t_entity) * n_entities), "loader");
 	i = 0;
 	while (i < n_entities)
 	{
@@ -40,7 +40,7 @@ size_t n_entities)
 		if (current.physic.look_h > M_PI / 2 && current.physic.look_h < -M_PI / 2)
 			current.physic.look_h = 0;
 		current.physic.sector_id = struc_e.spawn.sector_id;
-		current.mat = anew(NULL, 1, sizeof(t_mat *));
+		current.mat = safe_anew(NULL, 1, sizeof(t_mat *), "loader");
 		j = 0;
 		while (j < 16)
 		{
