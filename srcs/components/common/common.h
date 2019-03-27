@@ -23,6 +23,15 @@ typedef struct	s_button_state
 	t_color	background;
 }				t_button_state;
 
+typedef struct	s_cb_button_state
+{
+	t_event *events;
+	t_color	background;
+	int		is_active;
+	int		(*callback)(void *parent_state);
+	int		scancode;
+}				t_cb_button_state;
+
 typedef struct	s_button
 {
 	t_pix		pos;
@@ -35,6 +44,19 @@ typedef struct	s_button
 	t_img		img;
 } 				t_button;
 
+typedef struct	s_cb_button
+{
+	t_pix	pos;
+	t_pix	size;
+	t_color	background;
+	t_event	*events;
+	char	*place_holder;
+	int		(*callback)(void *parent_state);
+	t_img	img;
+	int		scancode;
+}				t_cb_button;
+
 t_component		init_button(t_button button, t_sdl *sdl);
+t_component		init_cb_button(t_cb_button button, t_sdl *sdl);
 
 #endif
