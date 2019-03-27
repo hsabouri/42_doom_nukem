@@ -34,17 +34,17 @@ t_game	init_audio(t_game game)
 	i = 0;
 	if (!(drt = opendir("./audio_tmp/music_tmp")))
 	{
-		console_error("Audio", "Could not open directory");
+		console_error("audio", "Could not open directory");
 		exit(EXIT_FAILURE);
 	}
-	game.music = anew(NULL, 1, sizeof(t_music));
+	game.music = safe_anew(NULL, 1, sizeof(t_music), "audio");
 	while ((read = readdir(drt)))
 	{
 		if (ft_strcmp(read->d_name, ".") != 0 && ft_strcmp(read->d_name, "..")
 			&& read->d_type == 8 && 
 			(ft_strcmp(ft_strrchr(read->d_name, '.'), ".ogg") == 0))
 		{
-			path = (char *)malloc(sizeof(char) * (23 + ft_strlen(read->d_name)));
+			path = (char *)safe_malloc((23 + ft_strlen(read->d_name) * sizeof(char)), "audio");
 			path = ft_strcpy(path, "./audio_tmp/music_tmp/");
 			path = ft_strcat(path, read->d_name);
 			music.music = Mix_LoadMUS(path);
@@ -58,17 +58,17 @@ t_game	init_audio(t_game game)
 	i = 0;
 	if (!(drt = opendir("./audio_tmp/sound_tmp")))
 	{
-		console_error("Audio", "Could not open directory");
+		console_error("audio", "Could not open directory");
 		exit(EXIT_FAILURE);
 	}
-	game.sounds = anew(NULL, 1, sizeof(t_sound));
+	game.sounds = safe_anew(NULL, 1, sizeof(t_sound), "audio");
 	while ((read = readdir(drt)))
 	{
 		if (ft_strcmp(read->d_name, ".") != 0 && ft_strcmp(read->d_name, "..")
 			&& read->d_type == 8 &&
 			(ft_strcmp(ft_strrchr(read->d_name, '.'), ".ogg") == 0))
 		{
-			path = (char *)malloc(sizeof(char) * (23 + ft_strlen(read->d_name)));
+			path = (char *)safe_malloc((23 + ft_strlen(read->d_name) * sizeof(char)), "audio");
 			path = ft_strcpy(path, "./audio_tmp/sound_tmp/");
 			path = ft_strcat(path, read->d_name);
 			sound.sound = Mix_LoadWAV(path);
@@ -80,7 +80,7 @@ t_game	init_audio(t_game game)
 	closedir(drt);
 	
 	game.played_music = 0;
-	game.chunks = anew(NULL, 10, sizeof(t_chunk));
+	game.chunks = safe_anew(NULL, 10, sizeof(t_chunk), "audio");
 	return (game);
 }
 

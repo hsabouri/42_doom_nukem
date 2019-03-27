@@ -20,7 +20,7 @@ t_img		*parse_textures(void *buf, t_save save, size_t n_entities)
 	size_t		i;
 
 	i = 0;
-	textures = (t_img *)malloc(sizeof(t_img) * n_entities);
+	textures = (t_img *)safe_malloc((sizeof(t_img) * n_entities), "loader");
 	while (i < n_entities)
 	{
 		struc_i = *(t_c_img *)dump_struct(buf, save.index +
@@ -29,8 +29,8 @@ t_img		*parse_textures(void *buf, t_save save, size_t n_entities)
 		current = textures[i];
 		current.width = struc_i.width;
 		current.height = struc_i.height;
-		current.content = (t_color *)malloc(sizeof(t_color) * current.width *
-			current.height);
+		current.content = (t_color *)safe_malloc((sizeof(t_color) *
+			current.width * current.height), "loader");
 		ft_memmove(current.content, buf + struc_i.content, sizeof(t_color) *
 			current.width * current.height);
 		textures[i] = current;
@@ -51,7 +51,7 @@ size_t i)
 		verify_magic(&struc_m, MUSIC_MAGIC, i);
 	else
 		verify_magic(&struc_m, SOUND_MAGIC, i);
-	music.path = (char *)malloc(sizeof(char) * (32 + ft_strlen(ft_itoa(i))));
+	music.path = (char *)safe_malloc((sizeof(char) * (32 + ft_strlen(ft_itoa(i)))), "loader");
 	music.path = (music.type == MUSIC) ? ft_strcpy(music.path,
 		"./audio_tmp/music_tmp/music_") : ft_strcpy(music.path,
 		"./audio_tmp/sound_tmp/sound_");

@@ -54,7 +54,7 @@ t_component		init_root(t_env *env, t_sdl *sdl)
 	ret.render = NULL;
 	ret.complete_render = &empty_render;
 	ret.last_render = NULL;
-	ret.childs = anew(NULL, 1, sizeof(t_component));
+	ret.childs = safe_anew(NULL, 1, sizeof(t_component), "component");
 	ret.childs = init_childs(ret.childs, env, sdl);
 	return (ret);
 }

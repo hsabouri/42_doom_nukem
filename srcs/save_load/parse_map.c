@@ -20,7 +20,7 @@ size_t n_entities)
 	t_mat	current;
 	size_t	i;
 
-	materials = (t_mat *)malloc(sizeof(t_mat) * n_entities);
+	materials = (t_mat *)safe_malloc((sizeof(t_mat) * n_entities), "loader");
 	i = -1;
 	while (++i < n_entities)
 	{
@@ -48,7 +48,7 @@ t_vec2		*parse_points(void *buf, t_save save, size_t n_entities)
 	t_vec2		*points;
 	size_t		i;
 
-	points = (t_vec2 *)malloc(sizeof(t_vec2) * n_entities);
+	points = (t_vec2 *)safe_malloc((sizeof(t_vec2) * n_entities), "loader");
 	i = 0;
 	while (i < n_entities)
 	{
@@ -69,7 +69,7 @@ size_t n_entities)
 	t_wall		current;
 	size_t		i;
 
-	walls = (t_wall *)malloc(sizeof(t_wall) * n_entities);
+	walls = (t_wall *)safe_malloc((sizeof(t_wall) * n_entities), "loader");
 	i = 0;
 	while (i < n_entities)
 	{
@@ -99,7 +99,7 @@ size_t n_entities)
 	t_sector	current;
 	size_t		i;
 
-	sectors = (t_sector *)malloc(sizeof(t_sector) * n_entities);
+	sectors = (t_sector *)safe_malloc((sizeof(t_sector) * n_entities), "loader");
 	i = -1;
 	while (++i < n_entities)
 	{
@@ -129,7 +129,7 @@ t_mat *mats)
 	t_portal	current;
 	size_t		i;
 
-	portals = (t_portal *)malloc(sizeof(t_portal) * n_entities);
+	portals = (t_portal *)safe_malloc((sizeof(t_portal) * n_entities), "loader");
 	i = 0;
 	while (i < n_entities)
 	{

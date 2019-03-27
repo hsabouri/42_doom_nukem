@@ -26,7 +26,7 @@ t_game game)
 		if (game.walls[portals[cpt].to_wall].portal != cpt ||
 			game.walls[portals[cpt].from_wall].portal != cpt)
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			elem->elem.next = NULL;
 			elem->error_type = DANGLING_PORTAL_WALL;
 			elem->portal = cpt;
@@ -61,7 +61,7 @@ size_t nportals, t_list *error)
 			< game.sectors[portals[cpt].from_sector].start ||
 			portals[cpt].to_wall >= end_wall_to))
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			*elem = (t_lvl_error) {.elem.next = NULL, .portal = cpt,
 			.error_type = DANGLING_PORTAL_SECTOR, .wall = portals[cpt].to_wall};
 			lpush(error, (t_elem *)elem);
@@ -92,7 +92,7 @@ size_t nportals, t_list *error)
 			< game.sectors[portals[i].from_sector].start ||
 			portals[i].from_wall >= end_wall_to))
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			*elem = (t_lvl_error) {.error_type = DANGLING_PORTAL_SECTOR,
 				.elem.next = NULL, .portal = i, .wall = portals[i].from_wall};
 			lpush(error, (t_elem *)elem);

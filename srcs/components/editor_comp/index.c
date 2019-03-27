@@ -22,7 +22,7 @@ t_sdl *sdl)
 	t_array		ret;
 	t_component	current;
 
-	ret = anew(NULL, 5, sizeof(t_component));
+	ret = safe_anew(NULL, 5, sizeof(t_component), "components");
 	current = init_editor_map(env, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
@@ -114,8 +114,8 @@ t_component					init_editor_root(t_env *env, t_sdl *sdl)
 	ret.pos.x = 0;
 	ret.pos.y = 0;
 	ret.display = 1;
-	ret.state = init_state((t_editor_root_state *)malloc(
-		sizeof(t_editor_root_state)), env);
+	ret.state = init_state((t_editor_root_state *)safe_malloc(
+		sizeof(t_editor_root_state), "components"), env);
 	ret.update = &self_update;
 	ret.destroy = NULL;
 	ret.render = NULL;

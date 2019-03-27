@@ -88,12 +88,12 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 	if (state.grid_size)
 		grid(state, buf);
 	state_buf = (t_state_buf) {state, buf, WHITE};
-	tmp_array = anew(state.env->game.walls, state.env->game.nwalls, sizeof(t_wall));
+	tmp_array = safe_anew(state.env->game.walls, state.env->game.nwalls, sizeof(t_wall), "components");
 	aforeach_state(&tmp_array, &foreach_wall, (void *)&state_buf);
 	state_buf.color = ORANGE;
 	// aforeach_state(&state.unassigned_walls, &foreach_wall, (void *)&state_buf);
 	state_buf.color = LIBERTY;
-	tmp_array = anew(state.env->game.points, state.env->game.npoints, sizeof(t_vec2));
+	tmp_array = safe_anew(state.env->game.points, state.env->game.npoints, sizeof(t_vec2), "components");
 	aforeachi_state(&tmp_array, &foreach_point, (void *)&state_buf);
 	//draw_physic(game.player.physic, state, buf, MOONSTONE);
 	//draw_physic(game.player.spawn, state, buf, MUSTARD);

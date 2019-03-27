@@ -79,7 +79,7 @@ static int					self_update(t_component *self, void *parent)
 static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 {
 	state->env = env;
-	state->unassigned_walls = anew(NULL, 5, sizeof(t_wall));
+	state->unassigned_walls = safe_anew(NULL, 5, sizeof(t_wall), "components");
 	apush(&state->unassigned_walls, &env->game.walls[0]);
 	apush(&state->unassigned_walls, &env->game.walls[1]);
 	apush(&state->unassigned_walls, &env->game.walls[2]);
@@ -100,7 +100,7 @@ t_sdl *sdl)
 	t_array		ret;
 	t_component	current;
 
-	ret = anew(NULL, 10, sizeof(t_component));
+	ret = safe_anew(NULL, 10, sizeof(t_component), "commponents");
 	current = init_button((t_button) {
 		.pos = (t_pix) {2, 2},
 		.size = (t_pix) {40, 40},
@@ -187,8 +187,8 @@ t_component					init_editor_map(t_env *env, t_sdl *sdl)
 	ret.pos.x = 0;
 	ret.pos.y = 0;
 	ret.display = 1;
-	ret.state = init_state((t_editor_map_state *)malloc(
-		sizeof(t_editor_map_state)), env);
+	ret.state = init_state((t_editor_map_state *)safe_malloc(
+		sizeof(t_editor_map_state), "components"), env);
 	ret.update = &self_update;
 	ret.destroy = NULL;
 	ret.render = &self_render;

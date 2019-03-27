@@ -52,7 +52,7 @@ t_list		sector_entity(t_entity *entities, size_t nentities, t_game game)
 		if (is_in_sector(entities[cpt].physic, game,
 			entities[cpt].physic.sector_id) % 2 == 0)
 		{
-			elem = (t_lvl_error *)malloc(sizeof(t_lvl_error));
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			elem->elem.next = NULL;
 			elem->error_type = BAD_SECTOR;
 			elem->entities = cpt;
