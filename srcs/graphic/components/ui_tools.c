@@ -24,7 +24,7 @@ int			is_over(const t_component component, t_event events)
 
 int			is_clicked_on(const t_component component, t_event events)
 {
-	if (is_over(component, events) && events.mouse_click[SDL_BUTTON_LEFT])
+	if (is_over(component, events) && events.mouse[SDL_BUTTON_LEFT])
 		return (1);
 	return (0);
 }
