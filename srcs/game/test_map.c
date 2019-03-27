@@ -406,9 +406,10 @@ t_game	generate_map(t_game game)
 	game.points = points;
 	game.npoints = 20;
 	game.textures = textures;
-	game.ntextures = 5;
+	game.ntextures = 13;
 	game.materials = materials;
-	game.nmaterials = 8;
+	game.nmaterials = 16;
 	game.played_music = 0;
 	return (game);
 }
+

@@ -18,7 +18,9 @@ size_t n_entities)
 	t_c_entity	struc_e;
 	t_entity	*entities;
 	t_entity	current;
+	t_mat		*mat;
 	size_t		i;
+	size_t		j;
 
 	entities = (t_entity *)malloc(sizeof(t_entity) * n_entities);
 	i = 0;
@@ -38,8 +40,18 @@ size_t n_entities)
 		if (current.physic.look_h > M_PI / 2 && current.physic.look_h < -M_PI / 2)
 			current.physic.look_h = 0;
 		current.physic.sector_id = struc_e.spawn.sector_id;
-		//current.mat = id_to_p((ssize_t)struc_e.mat, mats, sizeof(t_mat));
-		current.mat = anew(NULL, 0, sizeof(t_mat *));
+		current.mat = anew(NULL, 1, sizeof(t_mat *));
+		j = 0;
+		while (j < 16)
+		{
+			mat = (struc_e.mat[j] == -1) ? NULL : 
+				id_to_p(struc_e.mat[j], mats, sizeof(t_mat));
+			if (!mat)
+				break;
+			else
+				apush(&current.mat, &mat);
+			j++;
+		}
 		current.damage = struc_e.damage;
 		entities[i] = current;
 		i++;
