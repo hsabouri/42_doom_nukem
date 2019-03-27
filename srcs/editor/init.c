@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 14:39:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/22 10:57:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 18:37:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ t_editor		init_editor(void)
 		.game_tool = TOOL_NO};
 	res.points_wall[0] = -1;
 	res.points_wall[1] = -1;
-	res.tools[0] = &point_tool;
-	res.tools[1] = &wall_tool;
-	res.tools[2] = &portal_tool;
 	res.game_tools[0] = &move_texture_tool;
 	res.game_tools[1] = &move_material_tool;
 	res.game_tools[2] = &scale_material_tool;

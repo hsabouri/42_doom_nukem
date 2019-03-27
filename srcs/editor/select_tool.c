@@ -6,11 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 18:18:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/16 11:28:48 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 18:36:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
+/*
 
 t_tool	editor_select_tool(t_env env)
 {
@@ -30,3 +31,4 @@ t_tool	editor_select_tool(t_env env)
 	env.events.keys[SDL_SCANCODE_U] = 0;
 	return (res);
 }
+*/

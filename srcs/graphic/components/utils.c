@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:11:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/24 18:07:08 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:51:33 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,28 @@ void			no_destroy(t_component *self)
 {
 	(void)self;
 	return ;
+}
+
+t_component		default_component(void *state_address, t_pix size, t_sdl *sdl)
+{
+	t_component ret;
+
+	ret.img.content = NULL;
+	ret.text.text_texture = NULL;
+	ret.size = size;
+	ret.pos.x = 0;
+	ret.pos.y = 0;
+	ret.display = 1;
+	ret.state = state_address;
+	ret.update = NULL;
+	if (ret.state)
+		ret.destroy = NULL;
+	else
+		ret.destroy = &no_destroy;
+	ret.render = NULL;
+	ret.complete_render = NULL;
+	if (size.x && size.y)
+		ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
+			SDL_TEXTUREACCESS_STREAMING, size.x, size.y);
+	return (ret);
 }

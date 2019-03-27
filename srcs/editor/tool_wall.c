@@ -6,11 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 14:50:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 14:57:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/26 18:36:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
+
+/*
 
 t_env	wall_tool(t_env env)
 {
@@ -30,3 +32,4 @@ t_env	wall_tool(t_env env)
 		env.game = delete_wall((size_t)env.editor.sel_wall, env.game);
 	return (env);
 }
+*/
