@@ -65,5 +65,7 @@ t_vec3		    teleportation(t_vec3 pos, t_game game, t_tp teleport,\
 t_ph *physic);
 
 u_int32_t       point_in_circle(t_ph entity_1, t_ph entity_2);
-float           circle_circle(t_ph entity_1, t_ph entity_2);
+float           circle_circle(t_ph entity_1, t_ph entity_2, t_col_mode col);
+int		    	interact(t_ph entity_1, t_ph entity_2);
+
 #endif

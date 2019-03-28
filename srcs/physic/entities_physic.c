@@ -90,7 +90,7 @@ static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game game, size_t id)
 	pos = n_physic.pos;
 	while (++i < game.nentities)
 	{
-		d = circle_circle(n_physic, game.entities[i].physic);
+		d = circle_circle(n_physic, game.entities[i].physic, COL_ENTITY);
 		if (d != -1 && i != id)
 		{
 			if (n_physic.pos.x > game.entities[i].physic.pos.x)
@@ -107,6 +107,21 @@ static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game game, size_t id)
 		}
 	}
 	return (pos);
+}
+
+static void		col_interact(t_ph n_physic, t_game game, size_t id)
+{
+	size_t	cpt;
+	size_t	log_inter;
+
+	cpt = 0;
+	log_inter = 0;
+	while (cpt < game.nentities)
+	{
+		if (interact(n_physic, game.entities[cpt].physic) == 1 && cpt != id)
+			log_inter = cpt; //a remplacer par log des collisions
+		cpt++;
+	}
 }
 
 t_ph			entities_physic(t_ph physic, t_game game, size_t id, float old_timer)
@@ -129,5 +144,6 @@ t_ph			entities_physic(t_ph physic, t_game game, size_t id, float old_timer)
 	last_pos.sector_id = game.player.physic.sector_id;
 	n_physic.pos = col_entities(n_physic, physic, game, id);
 	n_physic = entities_track(n_physic, game, last_pos);
+	col_interact(n_physic, game, id);
 	return (n_physic);
 }

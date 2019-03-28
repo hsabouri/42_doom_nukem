@@ -48,6 +48,5 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	new_physic = game.player.physic;
 	new_physic.speed = set_speed(game.player.physic, events, old_timer);
 	new_game.player.physic = entities_physic(new_physic, game, -1, old_timer);
-	// point_in_circle(new_game.player.physic.pos, new_game.entities[0].physic);
 	return (new_game);
 }
