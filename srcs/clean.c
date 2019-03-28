@@ -29,7 +29,6 @@ void		clean_music(t_game game)
 void		clean_texture(t_env env)
 {
 	SDL_DestroyTexture(env.sdl.buf);
-	ft_strdel(&env.file);
 }
 
 void		clean_game(t_game game)

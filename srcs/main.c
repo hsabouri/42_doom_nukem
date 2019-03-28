@@ -86,7 +86,7 @@ int				main(int ac, char **av)
 			else
 			{
 				env.file = NULL;
-				env.game = generate_map(env.game);	
+				env.game = generate_map();	
 			}
 			launch_check(env.game);
 			env.editor.enabled = 1;
@@ -101,7 +101,7 @@ int				main(int ac, char **av)
 	else
 	{
 		env.file = NULL;
-		env.game = generate_map(env.game);
+		env.game = generate_map();
 		env.editor.enabled = 0;
 	}
 	env.game = init_audio(env.game);

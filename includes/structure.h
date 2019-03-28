@@ -33,6 +33,12 @@ typedef enum		e_mode
 	NO_TILING
 }					t_mode;
 
+typedef enum		s_col_mode
+{
+	COL_ENTITY,
+	COL_INTERACT
+}					t_col_mode;
+
 typedef struct		s_mat
 {
 	t_fvec2			pos;
@@ -49,6 +55,7 @@ typedef struct		s_ph
 	float		gravity;
 	float		height;
 	float		radius;
+	float		rad_inter;
 	t_vec3		pos;
 	t_vec3		speed;
 	t_vec3		speed_max;
@@ -175,6 +182,6 @@ typedef struct		s_game
 	u_int32_t		*id_buf;
 }					t_game;
 
-t_game				generate_map(t_game game);
+t_game				generate_map(void);
 
 #endif
