@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 12:19:55 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:23:28 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -401,7 +401,8 @@ t_game	generate_map(void)
 	sectors[2] = ((t_sector){14, 4, 2, 0.8, 3.3, WHITE, skybox, tiles, fvec2_new(0, 0)});
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles, fvec2_new(0, 0)});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles, fvec2_new(0, 0)});
-	t_trigger *c_log = (t_entity *)malloc(10 * sizeof(t_entity));
+
+	t_trigger *c_log = (t_trigger *)malloc(10 * sizeof(t_trigger));
 
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
@@ -637,25 +638,65 @@ t_game	generate_map(void)
 		0
 		});
 
-	t_array g_e = anew(NULL, 10, sizeof(t_game_event));
+	// T_ARRAY -> T_LIST needed :/
 
-	apush(&g_e, &(t_game_event){
+	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
+
+	*first_e = (t_game_event){
+		(t_elem) {NULL},
 		(t_trigger){
 			player.my_entity, TRIGGER_TOUCH, entities[0] // Game event : list event wanted
 			}
-		});
+		};
 
-	apush(&g_e, &(t_game_event){
+	t_game_event * secon_e = (t_game_event *)malloc(sizeof(t_game_event));
+	*secon_e = (t_game_event){
+		(t_elem) {NULL},
 		(t_trigger){
 			player.my_entity, TRIGGER_SEE, entities[1] // Game event : list event wanted
 			}
-		});
+		};
 
-	apush(&g_e, &(t_game_event){
+		t_game_event * kuadro_e = (t_game_event *)malloc(sizeof(t_game_event));
+	*kuadro_e = (t_game_event){
+		(t_elem) {NULL},
+		(t_trigger){
+			player.my_entity, TRIGGER_SEE, entities[0] // Game event : list event wanted
+			}
+		};
+
+	t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
+
+	*third_e = (t_game_event){
+		(t_elem) {NULL},
 		(t_trigger){
 			dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
 			}
-		});
+		};
+	t_plist	g_e	= lpnew(secon_e);
+	lppush(&g_e, first_e);
+	lppush(&g_e, third_e);
+	lppush(&g_e, kuadro_e);
+
+	// t_array g_e = anew(NULL, 10, sizeof(t_game_event));
+
+	// apush(&g_e, &(t_game_event){
+	// 	(t_trigger){
+	// 		player.my_entity, TRIGGER_TOUCH, entities[0] // Game event : list event wanted
+	// 		}
+	// 	});
+
+	// apush(&g_e, &(t_game_event){
+	// 	(t_trigger){
+	// 		player.my_entity, TRIGGER_SEE, entities[1] // Game event : list event wanted
+	// 		}
+	// 	});
+
+	// apush(&g_e, &(t_game_event){
+	// 	(t_trigger){
+	// 		dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
+	// 		}
+	// 	});
 
 	t_music *music = (t_music *)malloc(2 * sizeof(t_music));
 	music[0].music = Mix_LoadMUS("audio/test.ogg");

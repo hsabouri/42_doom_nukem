@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 12:21:14 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:21:45 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void		*id_to_p(ssize_t index, void *tab, size_t size);
 */
 
 t_env	init_conditions(t_env env);
-t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers);
+t_game  check_conditions(t_game game, t_event events, ft_trigger *triggers);
 t_game 	ft_reset_log(t_game game);
 
 /*

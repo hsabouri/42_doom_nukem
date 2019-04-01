@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:20:08 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:21:56 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ typedef struct		s_trigger
 
 typedef struct		s_game_event
 {
-	t_trigger	 trigger;
+	t_elem		elem;
+	t_trigger	trigger;
 	// int			is_trigger;
 	// t_action	 action;
 }					t_game_event;
@@ -199,8 +200,10 @@ typedef struct		s_game
 	t_array		events;
 	size_t		nevents;
 
-	t_array 	waiting_events;
-	size_t			nwaiting_events;
+	// t_array 	waiting_events;
+	t_plist 	waiting_events;
+
+	size_t		nwaiting_events;
 
 	t_trigger	*log;
 	size_t		nlog;

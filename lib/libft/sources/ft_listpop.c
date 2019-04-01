@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_listpop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 13:49:49 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/12 11:05:27 by hugo             ###   ########.fr       */
+/*   Updated: 2019/03/28 16:06:57 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,31 @@
 /*
 **  pop removes the last element of a list and returns of pointer onto it
 */
+
+t_elem  *lremove(t_plist *list, t_pelem *del_elem)
+{
+    t_pelem  *current;
+    t_pelem *sav;
+
+    if (!list)
+        return (NULL);
+    if (list->first == del_elem || list->last == del_elem)
+    {
+        if (list->first == del_elem)
+            sav = lshift(list);
+        else
+            sav = lpop(list);
+    }
+    else {
+        current = del_elem;
+        sav = del_elem;
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
+        current = NULL;
+    }
+    list->len += -1;
+    return sav;
+}
 
 t_elem  *lpop(t_list *list)
 {
