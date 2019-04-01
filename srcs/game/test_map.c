@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 12:23:28 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:30:28 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,8 +436,7 @@ t_game	generate_map(void)
 			0
 		},
 		multi,
-		1,
-		0
+		1
 	});
 	entities[1] = ((t_entity){
 		1,
@@ -463,7 +462,6 @@ t_game	generate_map(void)
 			(t_vec3){6, 8, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
-			0,
 			0,
 			0,
 			0,
@@ -612,6 +610,7 @@ t_game	generate_map(void)
 			0,
 			0,
 			0,
+			0,
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
@@ -625,6 +624,7 @@ t_game	generate_map(void)
 			0,
 			0,
 			0,
+			0,
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
@@ -634,7 +634,7 @@ t_game	generate_map(void)
 			0,
 			0
 		},
-		sans,
+		multi,
 		0
 		});
 
@@ -697,17 +697,6 @@ t_game	generate_map(void)
 	// 		dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
 	// 		}
 	// 	});
-
-	t_music *music = (t_music *)malloc(2 * sizeof(t_music));
-	music[0].music = Mix_LoadMUS("audio/test.ogg");
-	music[1].music = Mix_LoadMUS("audio/test2.ogg");
-
-	t_sound *sounds = (t_sound *)malloc(5 * sizeof(t_sound));
-	sounds[0].sound = Mix_LoadWAV("audio/open_door.ogg");
-	sounds[1].sound = Mix_LoadWAV("audio/dog.ogg");
-	sounds[2].sound = Mix_LoadWAV("audio/oof.ogg");
-	sounds[3].sound = Mix_LoadWAV("audio/touch.ogg");
-	sounds[4].sound = Mix_LoadWAV("audio/salut.ogg");
 
 	game.player = player;
 	game.log = c_log;

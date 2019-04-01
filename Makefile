@@ -1,6 +1,5 @@
 BIN = doom-nukem
 LIBFT_DIR = lib/libft
-# LIBSAVE_DIR = lib/libsave
 LIBTGA_DIR = lib/libtga
 LIBVEC_DIR = lib/libvec
 ifeq ($(shell uname -s), Darwin)
@@ -93,17 +92,8 @@ LDFLAGS += -L$(SDL2_TTF_DIR) -lSDL2_ttf
 LDFLAGS += -L$(SDL2_MIXER_DIR) -lSDL2_mixer
 LDFLAGS += -L$(LIBTGA_DIR) -ltga
 
-<<<<<<< HEAD
 all: message libft libvec libtga $(BIN)
-=======
-<<<<<<< HEAD
-all: message libft libvec libtga installSDL $(BIN)
->>>>>>> g les sons mnt
 
-=======
-# all: message libft libvec libsave libtga installSDL $(BIN)
-all: message libft libvec libtga installSDL $(BIN)
->>>>>>> g les sons mnt
 message: 
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $(BIN)
 
@@ -114,10 +104,6 @@ libft:
 libvec:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
 	@$(MAKE) -j -s -C $(LIBVEC_DIR) SAN=$(SAN) OPT=$(OPT)
-
-# libsave:
-	# @echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
-	# @$(MAKE) -j -s -C $(LIBSAVE_DIR)
 
 libtga:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
@@ -137,22 +123,18 @@ clean:
 	@rm -rf $(OBJS_DIR)
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
 	@$(MAKE) -s -C $(LIBVEC_DIR) clean
-	# @$(MAKE) -s -C $(LIBSAVE_DIR) clean
 	@$(MAKE) -s -C $(LIBTGA_DIR) clean
 
 fclean:
 	@rm -rf $(OBJS_DIR)
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 	@$(MAKE) -s -C $(LIBVEC_DIR) fclean
-	# @$(MAKE) -s -C $(LIBSAVE_DIR) fclean
 	@$(MAKE) -s -C $(LIBTGA_DIR) fclean
 	rm -rf $(BIN)
 
 re: fclean
 	@$(MAKE) all
 
-# .PHONY: clean fclean libft libvec libsave libtga re all
 .PHONY: clean fclean libft libvec libtga re all
 
-# .SILENT: clean fclean libft libvec libsave libtga re all
 .SILENT: clean fclean libft libvec libtga re all

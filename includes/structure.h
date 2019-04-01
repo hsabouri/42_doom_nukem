@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:21:56 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:26:32 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "./weapons.h"
 
 # ifndef LOAD_SAVE_H
-#  include <SDL2/SDL_mixer.h>
+#	include <SDL2/SDL_mixer.h>
 # endif
 
 typedef enum		e_mode

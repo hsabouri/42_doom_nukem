@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/03/28 17:52:43 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/01 14:21:28 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_game ft_reset_log(t_game game)
 			0,
 			0,
 			0,
+            0,
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
@@ -38,6 +39,7 @@ t_game ft_reset_log(t_game game)
 			0,
 			0,
 			0,
+            0,
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
@@ -48,7 +50,8 @@ t_game ft_reset_log(t_game game)
 			0
 		},
 		0,
-		0
+		0,
+        0
 		});
 
         t_trigger trig_Z = ((t_trigger){Z_E, TRIGGER_NO, Z_E});

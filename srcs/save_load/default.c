@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 12:20:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:31:53 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,47 +16,49 @@ t_player	player_default(void)
 {
 	t_array inventory = safe_anew(NULL, 1, sizeof(t_entity), "loader");
 
-	t_player player = (t_player) {
-		(t_ph) {
-			0.05,
-			1.25,
-			0,
-			0,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0,
-		},
-		(t_ph) {
-			0.05,
-			1.25,
-			0,
-			0,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0,
-		},
+	return ((t_player) {
+		(t_entity) {
+			-1,
+			(t_ph) {
+				0.02,
+				1.50,
+				0.5,
+				0,
+				(t_vec3){5, 8.5, 0},
+				(t_vec3){0, 0, 0},
+				(t_vec3){1, 1, 1},
+				0,
+				0,
+				0,
+				0,
+				0
+			},
+			(t_ph) {
+				0.02,
+				1.50,
+				0.5,
+				0,
+				(t_vec3){5, 8.5, 0},
+				(t_vec3){0, 0, 0},
+				(t_vec3){1, 1, 1},
+				0,
+				0,
+				0,
+				0,
+				0
+					},
 		100,
 		{0, 1},
 		6,
 		0,
 		inventory,
 	};
-	return (player);
 }
 
 t_entity	entity_default(void)
 {
 	return ((t_entity) {
+		1,
 		(t_ph) {
 			0.02,
 			1.25,

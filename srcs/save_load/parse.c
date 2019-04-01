@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:02:52 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:02:46 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,18 @@ t_save save)
 	t_player	res;
 
 	res = player_default();
-	res.physic.gravity = f_to_float(game.player.spawn.gravity);
-	res.physic.height = f_to_float(game.player.spawn.height);
-	res.physic.radius = f_to_float(game.player.spawn.radius);
-	res.physic.pos = fvec3_to_vec3(game.player.spawn.pos);
-	res.physic.speed_max = fvec3_to_vec3(game.player.spawn.speed_max);
-	res.physic.look_v = game.player.spawn.look.v;
-	res.physic.look_h = f_to_float(game.player.spawn.look.u);
-	if (res.physic.look_h > M_PI / 2 && res.physic.look_h < -M_PI / 2)
-		res.physic.look_h = 0;
-	res.physic.sector_id = game.player.spawn.sector_id;
+	res.my_entity.physic.gravity = f_to_float(game.player.c_my_entity.spawn.gravity);
+	res.my_entity.physic.height = f_to_float(game.player.c_my_entity.spawn.height);
+	res.my_entity.physic.radius = f_to_float(game.player.c_my_entity.spawn.radius);
+	res.my_entity.physic.pos = fvec3_to_vec3(game.player.c_my_entity.spawn.pos);
+	res.my_entity.physic.speed_max = fvec3_to_vec3(game.player.c_my_entity.spawn.speed_max);
+	res.my_entity.physic.look_v = game.player.c_my_entity.spawn.look.v;
+	res.my_entity.physic.look_h = f_to_float(game.player.c_my_entity.spawn.look.u);
+	if (res.my_entity.physic.look_h > M_PI / 2 && res.my_entity.physic.look_h < -M_PI / 2)
+		res.my_entity.physic.look_h = 0;
+	res.my_entity.physic.sector_id = game.player.c_my_entity.spawn.sector_id;
 	res.life = game.player.life;
+	
 	res.weapons[0] = game.player.weapons[0];
 	res.weapons[1] = game.player.weapons[1];
 	res.secondary = game.player.secondary;

@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/01 13:39:45 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:05:37 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_env		game_loop(t_env env, size_t frame)
 	//env.game = entities_properties(env.game, env.events);
 	env.game = check_see(env.game);
 
-	env.game = physic(env.game, env.events);
+	env.game = physic(env.game, env.events, old_timer);
 	env.game.frame = frame;
 	env.game = check_conditions(env.game, env.events, env.condition);
 	content = NULL;

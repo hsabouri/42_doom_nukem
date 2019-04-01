@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/11 18:59:16 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:26:54 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,17 @@ typedef struct		s_c_entity
 	//t_weapon weapons;
 	int 		damage;
 }					t_c_entity;
+
+typedef struct		s_c_player
+{
+	t_c_entity			c_my_entity;
+	// float		life;
+	// float		armor;
+	// size_t		inventory;
+	// size_t		ninventory;
+	// uint8_t		equiped;
+	// size_t		weapons[5];
+}					t_c_player;
 
 typedef struct		s_c_point
 {

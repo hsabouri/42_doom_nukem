@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 12:02:50 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:03:28 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ static t_c_player	translate_player(t_player player)
 {
 	t_c_player	res;
 
-	res.spawn.gravity = f_from_float(player.spawn.gravity);
-	res.spawn.height = f_from_float(player.spawn.height);
-	res.spawn.radius = f_from_float(player.spawn.radius);
-	res.spawn.pos = vec3_to_fvec3(player.spawn.pos);
-	res.spawn.speed_max = vec3_to_fvec3(player.spawn.speed_max);
-	res.spawn.look.u = f_from_float(player.physic.look_h);
-	res.spawn.look.v = player.spawn.look_v;
-	res.spawn.sector_id = player.spawn.sector_id;
+	res.c_my_entity.spawn.gravity = f_from_float(player.my_entity.spawn.gravity);
+	res.c_my_entity.spawn.height = f_from_float(player.my_entity.spawn.height);
+	res.c_my_entity.spawn.radius = f_from_float(player.my_entity.spawn.radius);
+	res.c_my_entity.spawn.pos = vec3_to_fvec3(player.my_entity.spawn.pos);
+	res.c_my_entity.spawn.speed_max = vec3_to_fvec3(player.my_entity.spawn.speed_max);
+	res.c_my_entity.spawn.look.u = f_from_float(player.my_entity.physic.look_h);
+	res.c_my_entity.spawn.look.v = player.my_entity.spawn.look_v;
+	res.c_my_entity.spawn.sector_id = player.my_entity.spawn.sector_id;
 	res.life = player.life;
 	res.weapons[0] = player.weapons[0];
 	res.weapons[1] = player.weapons[1];

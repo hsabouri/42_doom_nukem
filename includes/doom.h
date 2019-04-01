@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 12:21:45 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:25:34 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <graphic.h>
 # include <physic.h>
 
-// # include <load_save.h>
+# include <load_save.h>
 // # include <structure_clone.h>
 
 # include <checker.h>
@@ -55,6 +55,8 @@ typedef	enum	e_game_mode
 	GAME_MODE,
 	QUIT
 }				t_game_mode;
+
+typedef int (*ft_trigger)(t_trigger trigger, t_trigger c_log);
 
 typedef struct			s_event
 {
@@ -214,19 +216,14 @@ t_game 	ft_reset_log(t_game game);
 /*
 ** EDITOR
 */
-void					display_text(t_sdl sdl);
+// void					display_text(t_sdl sdl);
 
-t_vec2					point_from_mouse(t_event events, t_editor editor);
-ssize_t					select_point(t_game game, t_editor editor,\
-						t_event events);
 ssize_t					select_wall(t_game game, t_editor editor,\
 						t_event events);
 t_editor				select_multi_points(t_editor editor,\
 						t_event events, ssize_t point);
 void					legend_text(t_sdl sdl);
 void					legend_graphic(t_color *buf);
-t_game					game_editing(t_game game, t_event events,\
-						t_player player, t_sdl *sdl);
 t_game					player_properties(t_game game, t_event events);
 
 void					play_music(t_game game, size_t id, size_t vol, size_t frame);	
