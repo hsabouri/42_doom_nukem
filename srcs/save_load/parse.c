@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:02:46 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:16:00 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,47 @@ t_player		parse_player(t_c_game game, t_game new_game, void *buf,\
 t_save save)
 {
 	t_player	res;
+	t_player	current;
+	t_c_player  struc_p;
+	t_mat		*mat;
+	size_t		j;
 
 	res = player_default();
-	res.my_entity.physic.gravity = f_to_float(game.player.c_my_entity.spawn.gravity);
-	res.my_entity.physic.height = f_to_float(game.player.c_my_entity.spawn.height);
-	res.my_entity.physic.radius = f_to_float(game.player.c_my_entity.spawn.radius);
-	res.my_entity.physic.pos = fvec3_to_vec3(game.player.c_my_entity.spawn.pos);
-	res.my_entity.physic.speed_max = fvec3_to_vec3(game.player.c_my_entity.spawn.speed_max);
-	res.my_entity.physic.look_v = game.player.c_my_entity.spawn.look.v;
-	res.my_entity.physic.look_h = f_to_float(game.player.c_my_entity.spawn.look.u);
-	if (res.my_entity.physic.look_h > M_PI / 2 && res.my_entity.physic.look_h < -M_PI / 2)
-		res.my_entity.physic.look_h = 0;
-	res.my_entity.physic.sector_id = game.player.c_my_entity.spawn.sector_id;
-	res.life = game.player.life;
-	
-	res.weapons[0] = game.player.weapons[0];
-	res.weapons[1] = game.player.weapons[1];
-	res.secondary = game.player.secondary;
-	res.equiped = game.player.equiped;
-	res.inventory = parse_inventory(buf, save, new_game.entities,
+	struc_p = *(t_c_player *)dump_struct(buf, save.index +
+			sizeof(t_c_player), sizeof(t_c_player), save.max);
+	verify_magic(&struc_p, PLAYER_MAGIC, 0);
+	current = player_default();
+	current.my_entity.physic.gravity = f_to_float(struc_p.my_entity.spawn.gravity);
+	current.my_entity.physic.height = f_to_float(struc_p.my_entity.spawn.height);
+	current.my_entity.physic.radius = f_to_float(struc_p.my_entity.spawn.radius);
+	current.my_entity.physic.pos = fvec3_to_vec3(struc_p.my_entity.spawn.pos);
+	current.my_entity.physic.speed_max = fvec3_to_vec3(struc_p.my_entity.spawn.speed_max);
+	current.my_entity.physic.look_v = struc_p.my_entity.spawn.look.v;
+	current.my_entity.physic.look_h = f_to_float(struc_p.my_entity.spawn.look.u);
+	if (current.my_entity.physic.look_h > M_PI / 2 && current.my_entity.physic.look_h < -M_PI / 2)
+		current.my_entity.physic.look_h = 0;
+	current.my_entity.physic.sector_id = struc_p.my_entity.spawn.sector_id;
+	current.my_entity.mat = safe_anew(NULL, 1, sizeof(t_mat *), "loader");
+	j = 0;
+	while (j < 16)
+	{
+		mat = (struc_p.my_entity.mat[j] == -1) ? NULL : 
+			id_to_p(struc_p.my_entity.mat[j], mats, sizeof(t_mat));
+		if (!mat)
+			break;
+		else
+			apush(&current.my_entity.mat, &mat);
+		j++;
+	}
+	current.life = struc_p.life;
+	current.weapons[0] = struc_p.weapons[0];
+	current.weapons[1] = struc_p.weapons[1];
+	current.secondary = struc_p.secondary;
+	current.equiped = struc_p.equiped;
+	current.inventory = parse_inventory(buf, save, new_game.entities,
 		game.ninventory);
+	current.my_entity.damage = struc_p.my_entity.damage;
+	res = current;
 	return (res);
 }
 
@@ -93,6 +114,8 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_mats;
 	res.materials = parse_mats(buf, save, res.textures, game.nmaterials);
 	res.nmaterials = game.nmaterials;
+	save.index = game.loc_player;
+	res.player = parse_player(buf, save, res.materials);
 	save.index = game.loc_points;
 	res.points = parse_points(buf, save, game.npoints);
 	res.npoints = game.npoints;

@@ -6,13 +6,14 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:26:54 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:07:33 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_CLONE_H
 # define STRUCTURE_CLONE_H
 
+# define PLAYER_MAGIC	0xDEADBABE
 # define GAME_MAGIC		0xDEAD10C4
 # define MAT_MAGIC		0x0D15EA5E
 # define POINT_MAGIC	0x8BADF00D
@@ -91,6 +92,7 @@ typedef struct		s_c_player
 typedef struct		s_c_entity
 {
 	size_t		magic;
+	u_int32_t	id;
 	t_c_ph		spawn;
 	ssize_t		mat[16];
 	//float life;
@@ -101,7 +103,8 @@ typedef struct		s_c_entity
 
 typedef struct		s_c_player
 {
-	t_c_entity			c_my_entity;
+	size_t			magic;
+	t_c_entity		my_entity;
 	// float		life;
 	// float		armor;
 	// size_t		inventory;
@@ -167,6 +170,7 @@ typedef struct		s_c_game
 	size_t		loc_inventory;
 	size_t		nmaterials;
 	size_t		loc_mats;
+	size_t		loc_player;
 	size_t		npoints;
 	size_t		loc_points;
 	size_t		nwalls;

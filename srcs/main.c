@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:27:36 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:11:08 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int				main(int ac, char **av)
 	t_env		env;
 	size_t		frame;
 	
-	// env.sdl = init_sdl();
 	// // if (ac == 3 && (ft_strcmp(av[2], "save")) == 0)
 	// // 	return(main_save(av[1]));
 	// // else if (ac == 3 && (ft_strcmp(av[2], "load")) == 0)

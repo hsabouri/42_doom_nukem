@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:03:28 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:06:33 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,38 @@ int fd)
 static t_c_player	translate_player(t_player player)
 {
 	t_c_player	res;
+	u_int32_t	index;
+	t_mat		**material;
+	size_t		j;
 
-	res.c_my_entity.spawn.gravity = f_from_float(player.my_entity.spawn.gravity);
-	res.c_my_entity.spawn.height = f_from_float(player.my_entity.spawn.height);
-	res.c_my_entity.spawn.radius = f_from_float(player.my_entity.spawn.radius);
-	res.c_my_entity.spawn.pos = vec3_to_fvec3(player.my_entity.spawn.pos);
-	res.c_my_entity.spawn.speed_max = vec3_to_fvec3(player.my_entity.spawn.speed_max);
-	res.c_my_entity.spawn.look.u = f_from_float(player.my_entity.physic.look_h);
-	res.c_my_entity.spawn.look.v = player.my_entity.spawn.look_v;
-	res.c_my_entity.spawn.sector_id = player.my_entity.spawn.sector_id;
+	res.magic = PLAYER_MAGIC;
+	res.my_entity.spawn.gravity = f_from_float(player.my_entity.spawn.gravity);
+	res.my_entity.spawn.height = f_from_float(player.my_entity.spawn.height);
+	res.my_entity.spawn.radius = f_from_float(player.my_entity.spawn.radius);
+	res.my_entity.spawn.pos = vec3_to_fvec3(player.my_entity.spawn.pos);
+	res.my_entity.spawn.speed_max = vec3_to_fvec3(player.my_entity.spawn.speed_max);
+	res.my_entity.spawn.look.u = f_from_float(player.my_entity.physic.look_h);
+	res.my_entity.spawn.look.v = player.my_entity.spawn.look_v;
+	res.my_entity.spawn.sector_id = player.my_entity.spawn.sector_id;
 	res.life = player.life;
 	res.weapons[0] = player.weapons[0];
 	res.weapons[1] = player.weapons[1];
 	res.secondary = player.secondary;
 	res.equiped = player.equiped;
-	return (res);
+	j = 0;
+	while ((material = (t_mat **)ashift(&player.my_entity.mat)))
+	{
+		index = id_from_p(*material, mats, sizeof(t_mat));
+		res.my_entity.mat[j] = (ssize_t)index;
+		j++;
+	}
+	while (j < 16)
+	{
+		res.my_entity.mat[j] = -1;
+		j++;
+	}
+	res.my_entity.damage = player.my_entity.damage;
+	write_struct(&res, fd, sizeof(t_c_entity));
 }
 
 void				write_struct(void *struc, int fd, size_t size)
@@ -62,8 +79,9 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 	game_s.loc_inventory = sizeof(t_c_game);
 	game_s.nmaterials = game.nmaterials;
 	game_s.loc_mats = sizeof(t_c_game) + sizeof(size_t) * game_s.ninventory;
+	game_s.loc_player = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.npoints = game.npoints;
-	game_s.loc_points = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
+	game_s.loc_points = game_s.loc_player + sizeof(t_c_player);
 	game_s.nwalls = game.nwalls;
 	game_s.nuwalls = game.nuwalls;
 	game_s.loc_walls = game_s.loc_points + sizeof(t_c_point) * game.npoints;
@@ -99,6 +117,7 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 
 	write_inventory(game.player, game.entities,fd);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
+	translate_player(game.player, fd, game.materials);
 	write_points(fd, game.points, game.npoints);
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
