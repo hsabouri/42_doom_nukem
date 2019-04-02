@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:27:05 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:16:45 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void		keyactions(int scancode, t_env *env)
 	{
 		if (env->file == NULL)
 			env->file = "default";
-		// save(env->file, env->game);
+		save(env->file, env->game);
 	}
 	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic.fly)
 		env->game.player.my_entity.physic.jump = 1;

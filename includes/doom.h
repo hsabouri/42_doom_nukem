@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:06:48 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:16:39 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,12 +198,6 @@ void					bresenham(t_color *buff, t_pix a, t_pix b, \
 t_game					physic(t_game game, t_event events, float old_timer);
 
 t_text					text(const char *str, t_pix pos, t_sdl *sdl);
-
-// lib save fc a retirer une fois corriger
-size_t	id_from_p(void *ptr, void *tab, size_t size);
-
-void		*id_to_p(ssize_t index, void *tab, size_t size);
-//
 
 /*
 ** CONDITION

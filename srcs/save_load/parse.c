@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:16:00 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:17:39 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,16 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 
 	save.index = game.loc_textures;
 	res.textures = parse_textures(buf, save, game.ntextures);
+	printf("pute\n");
 	res.ntextures = game.ntextures;
 	save.index = game.loc_mats;
 	res.materials = parse_mats(buf, save, res.textures, game.nmaterials);
+	printf("encule\n");
 	res.nmaterials = game.nmaterials;
 	save.index = game.loc_player;
+	printf("buh\n");
 	res.player = parse_player(buf, save, res.materials);
+	printf("nyah\n");
 	save.index = game.loc_points;
 	res.points = parse_points(buf, save, game.npoints);
 	res.npoints = game.npoints;
