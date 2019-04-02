@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:10:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/02 17:10:26 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/02 18:03:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 	{
 		struc_i = *(t_c_img *)dump_struct(buf, save.index +
 			sizeof(t_c_img) * i, sizeof(t_c_img), save.max);
-		printf("magic %zu\n", struc_i.magic);
+		printf("magic %zuh\n", struc_i.magic);
 		verify_magic(&struc_i, TEXT_MAGIC, i);
 		printf("poiu\n");
 		current = textures[i];

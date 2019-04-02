@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/04/01 14:21:28 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/02 18:43:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,69 +145,39 @@ t_env     init_conditions(t_env env)
 
 t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
 {
-    t_game          n_game;
+    // t_game          n_game;
     t_game_event    *current;
 
-    n_game = game;
+    // n_game = game;
     int j = 0;
 
-    while ((current = (t_game_event *)lpnext(&n_game.waiting_events)) != NULL) {
+    while ((current = (t_game_event *)lpnext(&game.waiting_events)) != NULL) {
 
-        if (current == NULL)
-            printf("La c est la merde\n");
+        // printf("CURRENT thing check : By ENT %d to ENT %d \n", current->trigger.e_actif.id, current->trigger.e_passif.id);
             
 
         //  printf("Hello\n");
-        while (j < n_game.nlog) {
+        while (j < game.nlog) {
         
-           n_game = general_conditions(n_game, n_game.log[j], events);
+           game = general_conditions(game, game.log[j], events);
            
-            if (triggers[current->trigger.condi] (current->trigger, n_game.log[j]) == 1)
+            if (triggers[current->trigger.condi] (current->trigger, game.log[j]) == 1)
             {
            
                 if (current->trigger.condi == TRIGGER_SECTOR)
                 {
-                    n_game.chunks = stack_sounds(n_game.chunks, 4, 1);
+                    game.chunks = stack_sounds(game.chunks, 4, 1);
                     
                 }
-                // lremove(&n_game.waiting_events, current);
-                ft_putendl("Hello my dear");
+                lremove(&game.waiting_events, current);
+                // ft_putendl("Hello my dear");
+                printf("By ENT %d to ENT %d \n", current->trigger.e_actif.id, current->trigger.e_passif.id );
             }
             j++;
         }
         j = 0;
 
     }
-    printf("List : %zu \n", n_game.waiting_events.len);
-    return (n_game);
+    printf("List : %zu \n", game.waiting_events.len);
+    return (game);
 }
-
-// t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
-// {
-//     t_game  n_game;
-
-//     n_game = game;
-//     int i = 0;
-//     int j = 0;
-
-//     while (i < n_game.waiting_events.len) {
-
-//         while (j < n_game.nlog) {
-        
-//            n_game = general_conditions(n_game, n_game.log[j], events);
-//             if (triggers[((t_game_event *)anth(&n_game.waiting_events, i))->trigger.condi] (((t_game_event *)anth(&n_game.waiting_events, i))->trigger, n_game.log[j]) == 1)
-//             {
-           
-//                 if (((t_game_event *)anth(&n_game.waiting_events, i))->trigger.condi == TRIGGER_SECTOR)
-//                     n_game.chunks = stack_sounds(n_game.chunks, 4, 1);
-
-//                 ft_putendl("Hello my dear");
-//             }
-//             j++;
-//         }
-//         j = 0;
-//         i++;
-//     }
-
-//     return (n_game);
-// }

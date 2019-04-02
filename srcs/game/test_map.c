@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:17:34 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:18:13 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -605,7 +605,7 @@ t_game	generate_map(void)
 	// t_game_event *g_e = (t_game_event *)malloc(2 * sizeof(t_game_event));
 
 	t_entity dummy = ((t_entity){
-		3,
+		2,
 		(t_ph) {
 			0,
 			0,
@@ -643,60 +643,40 @@ t_game	generate_map(void)
 	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
 
 	*first_e = (t_game_event){
-		(t_elem) {NULL},
+		(t_pelem) {NULL},
 		(t_trigger){
-			player.my_entity, TRIGGER_TOUCH, entities[0] // Game event : list event wanted
+			player.my_entity, TRIGGER_SEE, entities[2] // Game event : list event wanted
 			}
 		};
+	// printf("1 Element 1 : %d \n",first_e->trigger.e_actif.id);
 
 	t_game_event * secon_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*secon_e = (t_game_event){
-		(t_elem) {NULL},
+		(t_pelem) {NULL},
 		(t_trigger){
 			player.my_entity, TRIGGER_SEE, entities[1] // Game event : list event wanted
 			}
 		};
+	// printf("2 Element 2 : %d \n",secon_e->trigger.e_actif.id);
+	// printf("3 Element 3 : %d \n",third_e->trigger.e_actif.id);
 
-		t_game_event * kuadro_e = (t_game_event *)malloc(sizeof(t_game_event));
-	*kuadro_e = (t_game_event){
-		(t_elem) {NULL},
+
+			t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
+	*third_e = (t_game_event){
+		(t_pelem) {NULL},
 		(t_trigger){
 			player.my_entity, TRIGGER_SEE, entities[0] // Game event : list event wanted
 			}
 		};
+	// printf("4 Element 4 : %d \n",kuadro_e->trigger.e_actif.id);
 
-	t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
 
-	*third_e = (t_game_event){
-		(t_elem) {NULL},
-		(t_trigger){
-			dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
-			}
-		};
-	t_plist	g_e	= lpnew(secon_e);
-	lppush(&g_e, first_e);
+	t_plist	g_e	= lpnew(first_e);
+	// printf("Element 1 : %d \n",first_e->trigger.e_actif.id);
+	lppush(&g_e, secon_e);
+	// printf("Element 2 : %d \n",secon_e->trigger.e_actif.id);
 	lppush(&g_e, third_e);
-	lppush(&g_e, kuadro_e);
-
-	// t_array g_e = anew(NULL, 10, sizeof(t_game_event));
-
-	// apush(&g_e, &(t_game_event){
-	// 	(t_trigger){
-	// 		player.my_entity, TRIGGER_TOUCH, entities[0] // Game event : list event wanted
-	// 		}
-	// 	});
-
-	// apush(&g_e, &(t_game_event){
-	// 	(t_trigger){
-	// 		player.my_entity, TRIGGER_SEE, entities[1] // Game event : list event wanted
-	// 		}
-	// 	});
-
-	// apush(&g_e, &(t_game_event){
-	// 	(t_trigger){
-	// 		dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
-	// 		}
-	// 	});
+	// printf("Element 3 : %d \n",third_e->trigger.e_actif.id);
 
 	game.player = player;
 	game.log = c_log;

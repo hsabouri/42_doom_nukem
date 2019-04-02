@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:26:32 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:17:55 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct		s_trigger
 
 typedef struct		s_game_event
 {
-	t_elem		elem;
+	t_pelem		elem;
 	t_trigger	trigger;
 	// int			is_trigger;
 	// t_action	 action;
