@@ -74,54 +74,49 @@ int				main(int ac, char **av)
 	env.sdl = init_sdl();
 	env.editor = init_editor();
 	env.toggle_editor = 0;
-	if (ac >= 2)
-	{
-		if (ft_strcmp(av[1], "editor") == 0)
-		{
-			if (ac == 3)
-			{
-				env.file = av[2];
-				env.game = load(av[2], 1);
-			}
-			else
-			{
-				env.file = NULL;
-				env.game = generate_map();	
-			}
-			launch_check(env.game);
-			env.editor.enabled = 1;
-		}
-		else
-		{
-			env.file = av[1];
-			env.game = load(av[1], 0);
-			launch_check(env.game);
-		}
-	}
-	else
-	{
-		env.file = NULL;
-		env.game = generate_map();
-		env.editor.enabled = 0;
-	}
-	env.game = init_audio(env.game);
 	env.events = init_events();
-	env.game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT * sizeof(int)), "doom_nukem");
+	env.component = init_menu(&env, &env.sdl);
+	*env.component = render_all(*env.component, &env.sdl);
+	env.game_mode = 0;
+	env.init_game = 1;	
 	frame = 0;
-
-	env.component = init_component(&env, &env.sdl);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	while (env.sdl.win)
 	{
 		env.events = capture_events(env.events, &env);
+		if (env.init_game && (env.game_mode == 1 || env.game_mode == 2))
+		{
+			if (ac == 2 && env.game_mode == 1)
+				{
+					env.file = av[1];
+					env.game = load(av[1], 0);
+				}
+				else
+				{
+					env.file = NULL;
+					env.game = generate_map();
+				}
+				launch_check(env.game);
+			env.game = init_audio(env.game);
+			env.game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT * sizeof(int)), "doom_nukem");
+			if (env.component)
+				destroy_component(env.component);
+			env.component = init_component(&env, &env.sdl);
+			env.init_game = 0;
+		}
 		if (!env.toggle_editor)
 			env.game.player.physic = update_mouse(&env.events, env.game.player.physic);
-		if (env.events.quit || env.events.keys[SDL_SCANCODE_ESCAPE])
+		if (env.events.quit || env.game_mode == -1 ||
+			env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
-		if (env.toggle_editor)
-			env = editor_loop(env, frame);
-		else
+		if (env.game_mode == 0)
+			env = menu_loop(env, frame);
+		else if (env.game_mode == 1 || env.game_mode == 2)
 		{
-			env = game_loop(env, frame);
+			if (!env.toggle_editor)
+				env = game_loop(env, frame);
+			else
+				env = editor_loop(env, frame);
 		}
 		if (!env.sdl.win)
 		{

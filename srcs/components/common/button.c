@@ -15,33 +15,44 @@
 static int					self_update(t_component *self, void *parent)
 {
 	t_button_state	*state;
-	static int		last_to_activate_value = 0;
 	int				ret;
 
 	(void)parent;
 	ret = 0;
 	state = (t_button_state *)self->state;
-	if ((state->scancode != SDL_SCANCODE_UNKNOWN &&
+	if (((state->scancode != SDL_SCANCODE_UNKNOWN &&
 		(*state->events).keys[state->scancode]) ||
 		(is_clicked_on(*self, *state->events) &&
-		state->active_value != *state->to_activate))
+		state->active_value != *state->to_activate)))
+	{
+		state->is_active = 1;
+		ret = 1;
+	}
+	else if (!(is_clicked_on(*self, *state->events)) &&
+		state->active_value != *state->to_activate && state->is_active)
 	{
 		*state->to_activate = state->active_value;
 		(*state->events).keys[state->scancode] = 0;
+		state->is_active = 0;
 		ret = 1;
 	}
-	else if (state->active_value != *state->to_activate)
+	else if (is_over(*self, *state->events))
 		ret = 1;
-	last_to_activate_value = *state->to_activate;
+	else if (!(is_over(*self, *state->events)))
+		ret = 1;
 	return (ret);
 }
 
-static void					self_render(const t_component self, t_color *buf)
+static void					self_render(t_component self, t_color *buf)
 {
 	const t_button_state	*state = (t_button_state *)self.state;
 	t_color					bg;
+	t_img					img;
 
 	bg = state->background;
+	img = self.img;
+	if (is_over(self, *state->events) && state->img_active.content)
+		img = state->img_active;
 	if (state->active_value == *state->to_activate)
 	{
 		bg.r = bg.r - 30;
@@ -49,7 +60,8 @@ static void					self_render(const t_component self, t_color *buf)
 		bg.b = bg.b - 30;
 	}
 	background(buf, bg, self.size);
-	component_image(self.img, (t_pix) {5, 5}, self.size, buf);
+	if (img.content)
+		component_image(img, (t_pix) {5, 5}, self.size, buf);
 }
 
 static t_button_state		*init_state(t_button button)
@@ -61,7 +73,11 @@ static t_button_state		*init_state(t_button button)
 	ret->background = button.background;
 	ret->events = button.events;
 	ret->to_activate = button.to_activate;
+	ret->is_active = 0;
 	ret->scancode = button.scancode;
+	ret->img_active.content = NULL;
+	if (button.img_active.content)
+		ret->img_active = button.img_active;
 	return (ret);
 }
 
