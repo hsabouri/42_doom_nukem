@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 12:55:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:17:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 	state->magnetisme = 0;
 	state->tool = MOVE;
 	state->selected_point = -1;
-	state->n_buttons = 4;
+	//state->n_buttons = 4; // Used to test lists
 	return (state);
 }
 
@@ -174,8 +174,8 @@ t_sdl *sdl)
 		.callback = &grid_size,
 		.scancode = SDL_SCANCODE_SPACE}, sdl);
 	apush(&ret, &current);
-	// current = create_list_sectors(env, sdl);
-	// apush(&ret, &current);
+	//current = create_list_sectors(env, sdl);
+	//apush(&ret, &current); // Used to test lists
 	return (ret);
 }
 

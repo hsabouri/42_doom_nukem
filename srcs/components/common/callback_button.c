@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_button.c                                        :+:      :+:    :+:   */
+/*   callback_button.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:13:01 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/26 12:13:05 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/04/03 14:43:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void				self_render(const t_component self, t_color *buf)
 	}
 	background(buf, bg, self.size);
 	if (img.content)
-		component_image(img, (t_pix) {0, 0}, self.size, buf);
+		component_image(img, (t_pix) {5, 5}, self.size, buf);
 }
 
 static t_cb_button_state	*init_stat(t_cb_button button)

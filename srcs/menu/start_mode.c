@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_mode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 15:44:43 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/30 15:44:47 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/04/03 14:58:08 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	current = init_button((t_button) {
-		.pos = (t_pix) {96, 417},
+		.pos = (t_pix) {96, 416},
 		.size = (t_pix) {256, 56},
 		.background = NO_COLOR,
 		.events = &state->env->events,
@@ -51,9 +51,9 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl),
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {101, 650},
-		.size = (t_pix) {251, 51},
-		.background = (t_color) {255, 87, 51, 255},
+		.pos = (t_pix) {96, 664},
+		.size = (t_pix) {256, 56},
+		.background = NO_COLOR,
 		.events = &state->env->events,
 		.place_holder = NULL,
 		.callback = &quit_game,

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:17:59 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 12:40:02 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:25:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ static t_array		generator(void *parent)
 	return (ret);
 }
 
+static int			on_del(void *parent, size_t i)
+{
+	size_t	*nbuttons = &((t_editor_map_state *)parent)->n_buttons;
+
+	(*nbuttons)--;
+	return (1);
+}
+
 static int			on_add(void *parent)
 {
 	size_t	*nbuttons = &((t_editor_map_state *)parent)->n_buttons;
@@ -42,7 +50,7 @@ static int			on_add(void *parent)
 
 static int			on_click(void *parent, size_t i)
 {
-	printf("YOLO: %zu\n", i);
+	printf("%zu\n", i);
 	return (0);
 }
 
@@ -52,7 +60,7 @@ t_component			create_list_sectors(t_env *env, t_sdl *sdl)
 
 	ret = init_list_comp((t_list_comp) {
 		&generator,
-		NULL,
+		&on_del,
 		&on_add,
 		&on_click,
 		"Ma super liste",
