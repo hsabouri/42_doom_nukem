@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:23:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/02 18:17:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:22:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 # define LIST_COMP_H
 
 # include "../common.h"
-
-typedef struct	s_list_button_state
-{
-	size_t		i;
-	int			(*del)(void *parent, size_t i);
-	int			(*select)(void *parent, size_t i);
-	int			is_active;
-	t_event		*events;
-	void		*parent;
-	t_color		bg;
-}				t_list_button_state;
-
-typedef struct	s_list_button
-{
-	size_t		i;
-	void		*parent;
-	t_pix		pos;
-	t_pix		size;
-	t_img		img;
-	char		text[28];
-}				t_list_button;
 
 typedef struct	s_list_content
 {
@@ -67,6 +46,28 @@ typedef struct	s_list_comp
 	t_pix		pos;
 	t_pix		size;
 }				t_list_comp;
+
+typedef struct	s_list_button_state
+{
+	size_t			i;
+	int				(*del)(void *parent, size_t i);
+	int				(*select)(void *parent, size_t i);
+	int				is_active;
+	t_event			*events;
+	void			*parent;
+	t_list_state 	*list;
+	t_color			bg;
+}				t_list_button_state;
+
+typedef struct	s_list_button
+{
+	size_t		i;
+	void		*parent;
+	t_pix		pos;
+	t_pix		size;
+	t_img		img;
+	char		text[28];
+}				t_list_button;
 
 t_component		init_list_comp(t_list_comp list, t_sdl *sdl);
 t_component		init_list_button(t_list_button button, t_list_state state,

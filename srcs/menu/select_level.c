@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_level.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 15:24:43 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/30 15:24:45 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/04/03 14:57:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_menu_state *state)
 		.display_value = GAME_MODE,
 		.state = state
 	}, init_cb_button((t_cb_button) {
-		.pos = (t_pix) {101, 365},
-		.size = (t_pix) {251, 51},
-		.background = (t_color) {255, 87, 51, 255},
+		.pos = (t_pix) {96, 365},
+		.size = (t_pix) {256, 56},
+		.background = NO_COLOR,
 		.events = &state->env->events,
 		.place_holder = NULL,
 		.callback = &new_game,
@@ -37,9 +37,9 @@ t_menu_state *state)
 		.display_value = EDITOR_MODE,
 		.state = state
 	}, init_cb_button((t_cb_button) {
-		.pos = (t_pix) {101, 365},
-		.size = (t_pix) {251, 51},
-		.background = (t_color) {255, 87, 51, 255},
+		.pos = (t_pix) {96, 365},
+		.size = (t_pix) {256, 56},
+		.background = NO_COLOR,
 		.events = &state->env->events,
 		.place_holder = NULL,
 		.callback = &new_map,
@@ -48,9 +48,9 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl));
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {101, 417},
-		.size = (t_pix) {251, 51},
-		.background = (t_color) {255, 87, 51, 255},
+		.pos = (t_pix) {96, 412},
+		.size = (t_pix) {256, 56},
+		.background = NO_COLOR,
 		.events = &state->env->events,
 		.place_holder = NULL,
 		.callback = &level_1,
@@ -59,9 +59,9 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {101, 472},
-		.size = (t_pix) {251, 51},
-		.background = (t_color) {255, 87, 51, 255},
+		.pos = (t_pix) {96, 462},
+		.size = (t_pix) {256, 56},
+		.background = NO_COLOR,
 		.events = &state->env->events,
 		.place_holder = NULL,
 		.callback = &level_2,
@@ -70,9 +70,9 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {101, 523},
-		.size = (t_pix) {251, 51},
-		.background = (t_color) {255, 87, 51, 255},
+		.pos = (t_pix) {96, 513},
+		.size = (t_pix) {256, 56},
+		.background = NO_COLOR,
 		.events = &state->env->events,
 		.place_holder = NULL,
 		.callback = &level_3,
@@ -81,7 +81,7 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	current = init_button((t_button) {
-		.pos = (t_pix) {96, 650},
+		.pos = (t_pix) {96, 664},
 		.size = (t_pix) {256, 56},
 		.background = NO_COLOR,
 		.events = &state->env->events,

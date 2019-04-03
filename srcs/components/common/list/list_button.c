@@ -6,11 +6,20 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:54:32 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 12:49:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:56:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./list_comp.h"
+
+static int					self_del(void *button)
+{
+	t_list_button_state	*state;
+
+	state = (t_list_button_state *)button;
+	state->list->need_update = state->del(state->parent, state->i);
+	return (0);
+}
 
 static int					self_update(t_component *self, void* parent)
 {
@@ -22,6 +31,8 @@ static int					self_update(t_component *self, void* parent)
 	ret = 0;
 	state = (t_list_button_state *)self->state;
 	list_state = (t_list_state *)parent;
+	state->parent = list_state->parent;
+	state->list = list_state;
 	clicked = is_clicked_on(*self, *state->events);
 	if (clicked && state->is_active == 0 && state->select)
 	{
@@ -30,10 +41,12 @@ static int					self_update(t_component *self, void* parent)
 	}
 	if (!clicked && state->is_active && state->select)
 	{
-		list_state->need_update = state->select(parent, state->i);
+		list_state->need_update = state->select(list_state->parent, state->i);
 		state->is_active = 0;
 		ret = 1;
 	}
+	if (!clicked && state->events->any)
+		ret = 1;
 	return (ret);
 }
 
@@ -72,6 +85,29 @@ static t_list_button_state	*init_state(t_list_button button, t_list_state state)
 	return (ret);
 }
 
+static t_array				init_childs(t_component *p, t_list_button button,
+t_list_state state, t_sdl *sdl)
+{
+	t_array		childs;
+	t_component	current;
+
+	if (state.del)
+	{
+		p->size.x -= 30;
+		childs = safe_anew(NULL, 1, sizeof(t_component), "components");
+		current = init_cb_button((t_cb_button) {
+			.pos = (t_pix) {p->pos.x + p->size.x, p->pos.y + 1},
+			.size = (t_pix) {30, 29}, .background = state.bg,
+			.events = state.events, .place_holder = NULL,
+			.callback = &self_del, .scancode = SDL_SCANCODE_UNKNOWN,
+			.img = parse_tga("./textures/ui/cross.tga")}, sdl);
+		apush(&childs, &current);
+	}
+	else
+		childs = safe_anew(NULL, 0, sizeof(t_component), "components");
+	return (childs);
+}
+
 t_component					init_list_button(t_list_button button,
 t_list_state state, t_sdl *sdl)
 {
@@ -91,7 +127,7 @@ t_list_state state, t_sdl *sdl)
 	ret.render = &self_render;
 	ret.complete_render = NULL;
 	ret.destroy = NULL;
-	ret.childs = safe_anew(NULL, 0, sizeof(t_component), "components");
+	ret.childs = init_childs(&ret, button, state, sdl);
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, ret.size.x, ret.size.y);
 	SDL_SetTextureBlendMode(ret.last_render, SDL_BLENDMODE_BLEND);

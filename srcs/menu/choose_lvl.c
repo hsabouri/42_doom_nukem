@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   choose_lvl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 12:51:03 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/30 12:51:04 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/04/03 15:05:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			new_map(void *parent_state)
 	deco = (t_display_deco_state *)parent_state;
 	menu = (t_menu_state *)deco->state;
 	menu->env->game_mode = 2;
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	return (1);
 }
 
