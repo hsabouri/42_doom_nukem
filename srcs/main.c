@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:25:04 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:26:01 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,7 @@ int				main(int ac, char **av)
 	t_env		env;
 	size_t		frame;
 	
-	// // if (ac == 3 && (ft_strcmp(av[2], "save")) == 0)
-	// // 	return(main_save(av[1]));
-	// // else if (ac == 3 && (ft_strcmp(av[2], "load")) == 0)
-	// // {
-	// // 	env.game = load(av[2]);
-	// // 	launch_check(env.game);	
-	// // }
-	// // else
-	// env.game = generate_map();
-	// env.events = init_events();
-	// env.editor = init_editor();
 	env = init_conditions(env);
-	// env.game.chunks = anew(NULL, 10, sizeof(t_chunk));
 	env.toggle_editor = 0;
 	env.sdl = init_sdl();
 	env.editor = init_editor();

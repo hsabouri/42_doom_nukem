@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/04/02 18:43:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/03 18:24:49 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_game ft_reset_log(t_game game)
         t_trigger trig_Z = ((t_trigger){Z_E, TRIGGER_NO, Z_E});
 
         int i = 0;
-        while(i < 3)
+        while(i < 4)
         {
             n_game.log[i] = trig_Z;
             i++;
@@ -77,7 +77,7 @@ int      see_trigger(t_trigger trigger, t_trigger c_log)
 {
       if (trigger.condi == TRIGGER_SEE && trigger.condi == c_log.condi 
       && trigger.e_actif.id == c_log.e_actif.id && trigger.e_passif.id == c_log.e_passif.id){
-           ft_putendl("SEE !!!");
+           ft_putstr("SEE ");
             return 1;
             }
         return 0;
@@ -86,7 +86,7 @@ int      see_trigger(t_trigger trigger, t_trigger c_log)
 int      touch_trigger(t_trigger trigger, t_trigger c_log)
 {
       if (trigger.condi == TRIGGER_TOUCH && trigger.condi == c_log.condi && trigger.e_actif.id == c_log.e_actif.id && trigger.e_passif.id == c_log.e_passif.id){
-            ft_putendl("TOUCH !!!");
+            ft_putstr("TOUCH ");
             return 1;
         }
         return 0;
@@ -94,7 +94,11 @@ int      touch_trigger(t_trigger trigger, t_trigger c_log)
 
 int      interact_trigger(t_trigger trigger, t_trigger c_log)
 {
-    // Need 2nd Collision for interaction
+       if (trigger.condi == TRIGGER_INTERACT && trigger.condi == c_log.condi && trigger.e_actif.id == c_log.e_actif.id && trigger.e_passif.id == c_log.e_passif.id){
+            ft_putstr("INTERACT ");
+            return 1;
+        }
+        return 0;
 }
 
 int      sector_trigger(t_trigger trigger, t_trigger c_log)
@@ -108,19 +112,6 @@ int      sector_trigger(t_trigger trigger, t_trigger c_log)
 }
 
 
-t_game  general_conditions(t_game game, t_trigger c_log, t_event events)
-{
-        t_game n_game;
-
-        n_game = game;
-
-        // player touch bad entities
-       if(c_log.condi == TRIGGER_TOUCH && n_game.player.my_entity.id == c_log.e_actif.id && c_log.e_passif.damage == 1)
-            n_game.chunks = stack_sounds(n_game.chunks, 3, 1);
-    if (events.mouse_click[SDL_BUTTON_LEFT] && c_log.condi == TRIGGER_SEE && n_game.player.my_entity.id == c_log.e_actif.id && c_log.e_passif.damage == 1)
-            n_game.chunks = stack_sounds(n_game.chunks, 2, 1);
-        return n_game;
-}
 
 // int    (* ft_trigger[5])(t_trigger trigger, t_trigger c_log) = {no_trigger, see_trigger,touch_trigger,interact_trigger,sector_trigger};
 
@@ -143,34 +134,43 @@ t_env     init_conditions(t_env env)
 
 }
 
+t_game  general_conditions(t_game game, t_event events)
+{
+        t_game n_game;
+
+        n_game = game;
+        int j;
+
+
+        j = 0;
+        // // player touch bad entities
+        //   printf("$$$$$$$$$$$$$$$ \n");
+        while (j < 4)
+        {
+            if(n_game.log[j].condi == TRIGGER_TOUCH && n_game.player.my_entity.id == n_game.log[j].e_actif.id && n_game.log[j].e_passif.damage == 1)
+                  n_game.chunks = stack_sounds(n_game.chunks, 1, 1);
+            if (events.mouse_click[SDL_BUTTON_LEFT] && n_game.log[j].condi == TRIGGER_SEE && n_game.player.my_entity.id == n_game.log[j].e_actif.id && n_game.log[j].e_passif.damage == 1)
+                n_game.chunks = stack_sounds(n_game.chunks, 2, 1);
+            
+            // printf(" ENT %d , ??? , ENT %d \n", n_game.log[j].e_actif.id, n_game.log[j].e_passif.id );
+            
+            j++;
+        }
+        return n_game;
+}
+
 t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
 {
-    // t_game          n_game;
     t_game_event    *current;
 
-    // n_game = game;
     int j = 0;
 
+    game = general_conditions(game, events);
     while ((current = (t_game_event *)lpnext(&game.waiting_events)) != NULL) {
-
-        // printf("CURRENT thing check : By ENT %d to ENT %d \n", current->trigger.e_actif.id, current->trigger.e_passif.id);
-            
-
-        //  printf("Hello\n");
         while (j < game.nlog) {
-        
-           game = general_conditions(game, game.log[j], events);
-           
             if (triggers[current->trigger.condi] (current->trigger, game.log[j]) == 1)
             {
-           
-                if (current->trigger.condi == TRIGGER_SECTOR)
-                {
-                    game.chunks = stack_sounds(game.chunks, 4, 1);
-                    
-                }
                 lremove(&game.waiting_events, current);
-                // ft_putendl("Hello my dear");
                 printf("By ENT %d to ENT %d \n", current->trigger.e_actif.id, current->trigger.e_passif.id );
             }
             j++;
@@ -178,6 +178,7 @@ t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
         j = 0;
 
     }
-    printf("List : %zu \n", game.waiting_events.len);
+    // printf("List : %zu \n", game.waiting_events.len);
+    game =  ft_reset_log(game);
     return (game);
 }

@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/01 13:40:08 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:10:43 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,12 @@ static void		col_interact(t_ph n_physic, t_game game, size_t id)
 	log_inter = 0;
 	while (cpt < game.nentities)
 	{
-		if (interact(n_physic, game.entities[cpt].physic) == 1 && cpt != id)
-			log_inter = cpt; //a remplacer par log des collisions
+		if (interact(n_physic, game.entities[cpt].physic) == 1 && cpt != id) {
+			
+			game.log[3].e_actif = game.player.my_entity; // Set the player as an entities
+			game.log[3].condi = TRIGGER_INTERACT;
+			game.log[3].e_passif = game.entities[cpt]; //a remplacer par log des collisions
+		}
 		cpt++;
 	}
 }

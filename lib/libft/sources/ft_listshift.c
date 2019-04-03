@@ -55,5 +55,6 @@ t_pelem  *lpshift(t_plist *list)
     res->next = NULL;
     res->prev = NULL;
     list->len -= 1;
+
     return (res);
 }

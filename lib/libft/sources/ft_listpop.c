@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 13:49:49 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/28 16:06:57 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:46:34 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_elem  *lremove(t_plist *list, t_pelem *del_elem)
     if (list->first == del_elem || list->last == del_elem)
     {
         if (list->first == del_elem)
-            sav = lshift(list);
+            sav = lpshift(list);
         else
-            sav = lpop(list);
+            sav = lppop(list);
     }
     else {
         current = del_elem;
@@ -36,8 +36,8 @@ t_elem  *lremove(t_plist *list, t_pelem *del_elem)
         current->prev->next = current->next;
         current->next->prev = current->prev;
         current = NULL;
+        list->len -= 1;
     }
-    list->len += -1;
     return sav;
 }
 
@@ -60,6 +60,8 @@ t_elem  *lpop(t_list *list)
     while (list->last->next != res)
         list->last = list->last->next;
     list->last->next = NULL;
+    list->len -= 1;
+
     return (res);
 }
 
@@ -72,5 +74,7 @@ t_pelem *lppop(t_plist *list)
     res = list->last;
     list->last = list->last->prev;
     list->last->next = NULL;
+    list->len -= 1;
+    
     return (res);
 }
