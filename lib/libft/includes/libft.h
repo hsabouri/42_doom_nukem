@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/26 18:34:35 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/29 12:10:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,8 @@ t_array			*aforeach_state(t_array *array, void (*f)(void *, void *), void *state
 t_array			*aforeachi(t_array *array, void (*f)(void *, size_t i));
 t_array			*aforeachi_state(t_array *array, void (*f)(void *, void *, size_t),
 				void *state);
+t_array			amapi_state(t_array *array, void *(*f)(void *, void *, size_t),
+void *state, size_t new_elem_size);
 
 void			*array_open(void *ptr, size_t loc, size_t size, size_t elem_size);
 void			*array_close(void *ptr, size_t loc, size_t size, size_t elem_size);

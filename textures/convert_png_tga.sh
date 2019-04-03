@@ -16,7 +16,7 @@ do
         do
 			nfichier=$dossier$i$extention
             echo "$fichier"
-			convert $dossier/$fichier -alpha on -channel rgba -flop $dossier/$nfichier && rm $dossier/$fichier
+			convert $dossier/$fichier -alpha on -channel rgba -flop -negate $dossier/$nfichier && rm $dossier/$fichier
             i=$(($i + 1))
         done
     fi

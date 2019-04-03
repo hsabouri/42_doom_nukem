@@ -6,14 +6,15 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 17:46:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/27 12:07:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/02 11:53:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMON_H
 # define COMMON_H
 
-#include <editor.h>
+# include <editor.h>
+# include "./list/list_comp.h"
 
 typedef struct	s_button_state
 {
