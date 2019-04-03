@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/22 18:26:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/28 15:58:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static TTF_Font	*init_font(void)
 		console_error("SDL_ttf", "Could not init SDL_ttf");
 		exit(EXIT_FAILURE);
 	}
-	if ((font = TTF_OpenFont("pressstart.ttf", 12)) != NULL)
+	if ((font = TTF_OpenFont("assistant.ttf", 16)) != NULL)
 		return (font);
 	if ((font = TTF_OpenFont("arial.ttf", 12)) != NULL)
 		return (font);

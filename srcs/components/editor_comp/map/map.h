@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/27 14:48:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/03 12:25:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_editor_map_state
 	int					magnetisme;
 	t_editor_map_mode	tool;
 	ssize_t				selected_point;
+	size_t				n_buttons;
 }				t_editor_map_state;
 
 typedef struct	s_state_buf
@@ -56,6 +57,8 @@ t_component		init_point_tool(t_env *env, ssize_t *selected, t_sdl *sdl);
 t_vec2			screen_space(t_vec2 vec, t_editor_map_state state);
 t_vec2			point_from_mouse(t_editor_map_state state, t_event events,
 				int magnet);
+
+t_component		create_list_sectors(t_env *env, t_sdl *sdl);
 
 float			capsule(t_vec2 a, t_vec2 b, t_vec2 p);
 float			circle(t_vec2 a, t_vec2 p);

@@ -6,7 +6,7 @@
 #    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/03/11 11:29:52 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/03/29 12:27:04 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ INCDIR = includes
 SRCNAM	= ft_atoi.c\
 		  ft_bzero.c\
 		  ft_isalnum.c\
+		  ft_amap.c\
 		  ft_isalpha.c\
 		  ft_isascii.c\
 		  ft_isblank.c\

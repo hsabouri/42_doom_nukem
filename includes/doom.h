@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/26 16:47:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/03 12:57:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ t_component     		*init_component(t_env *env, t_sdl *sdl);
 t_component				trigger_component(void *parent, t_component component, t_sdl *sdl);
 void					display_component(const t_component component, t_sdl *sdl);
 void					destroy_component(t_component *component);
+void					clean_childs(t_array childs);
 t_component				render_all(t_component component, t_sdl *sdl);
 
 t_text					component_text(const char *str, t_pix pos, t_sdl *sdl);

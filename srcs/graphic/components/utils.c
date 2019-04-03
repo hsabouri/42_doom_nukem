@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:11:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/26 16:51:33 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/03/29 12:31:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_text			component_text(const char *str, t_pix pos, t_sdl *sdl)
 	text.x = pos.x;
 	text.y = pos.y;
 	text_surface = TTF_RenderText_Shaded(sdl->font, str,\
-		(SDL_Color){255, 255, 255, 255}, (SDL_Color){0, 0, 0, 0});
+		(SDL_Color){255, 255, 255, 255}, (SDL_Color){70, 70, 70, 0});
 	SDL_SetColorKey(text_surface, SDL_TRUE, 0);
 	text.text_texture = SDL_CreateTextureFromSurface(sdl->renderer,\
 		text_surface);
@@ -85,5 +85,6 @@ t_component		default_component(void *state_address, t_pix size, t_sdl *sdl)
 	if (size.x && size.y)
 		ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 			SDL_TEXTUREACCESS_STREAMING, size.x, size.y);
+	SDL_SetTextureBlendMode(ret.last_render, SDL_BLENDMODE_BLEND);
 	return (ret);
 }
