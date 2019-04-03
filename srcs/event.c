@@ -80,7 +80,7 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event, int *any)
 static void		keyactions(int scancode, t_env *env)
 {
 	env->events.key_click[scancode] = 1;
-	if (scancode == SDL_SCANCODE_E)
+	if (scancode == SDL_SCANCODE_E && env->editor.enabled)
 	{
 		if (env->toggle_editor)
 		{

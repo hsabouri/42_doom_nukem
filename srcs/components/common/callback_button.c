@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_button.c                                  :+:      :+:    :+:   */
+/*   cb_button.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,8 +20,7 @@ static int				self_update(t_component *self, void* parent)
 	(void)parent;
 	ret = 0;
 	state = (t_cb_button_state *)self->state;
-	if (((state->events)->keys[state->scancode]) ||
-		is_clicked_on(*self, *state->events))
+	if (is_clicked_on(*self, *state->events))
 	{
 		state->is_active = 1;
 		ret = 1;
@@ -31,6 +30,10 @@ static int				self_update(t_component *self, void* parent)
 		ret = state->callback(parent);
 		state->is_active = 0;
 	}
+	else if (is_over(*self, *state->events))
+		ret = 1;
+	else if (!(is_over(*self, *state->events)))
+		ret = 1;
 	return (ret);
 }
 
@@ -38,8 +41,12 @@ static void				self_render(const t_component self, t_color *buf)
 {
 	const t_cb_button_state	*state = (t_cb_button_state *)self.state;
 	t_color					bg;
+	t_img					img;
 
 	bg = state->background;
+	img = self.img;
+	if (is_over(self, *state->events) && state->img_active.content)
+		img = state->img_active;
 	if (state->is_active)
 	{
 		bg.r = bg.r - 30;
@@ -47,19 +54,24 @@ static void				self_render(const t_component self, t_color *buf)
 		bg.b = bg.b - 30;
 	}
 	background(buf, bg, self.size);
-	component_image(self.img, (t_pix) {5, 5}, self.size, buf);
+	if (img.content)
+		component_image(img, (t_pix) {0, 0}, self.size, buf);
 }
 
 static t_cb_button_state	*init_stat(t_cb_button button)
 {
 	t_cb_button_state	*ret;
 
-	ret = (t_cb_button_state *)safe_malloc(sizeof(t_cb_button_state), "components");
+	ret = (t_cb_button_state *)safe_malloc(sizeof(t_cb_button_state),
+		"components");
 	ret->background = button.background;
 	ret->events = button.events;
 	ret->is_active = 0;
 	ret->callback = button.callback;
 	ret->scancode = button.scancode;
+	ret->img_active.content = NULL;
+	if (button.img_active.content)
+		ret->img_active = button.img_active;
 	return (ret);
 }
 

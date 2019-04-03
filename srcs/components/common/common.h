@@ -20,8 +20,10 @@ typedef struct	s_button_state
 	t_event *events;
 	int		*to_activate;
 	int		active_value;
+	int		is_active;
 	t_color	background;
 	int		scancode;
+	t_img	img_active;
 }				t_button_state;
 
 typedef struct	s_cb_button_state
@@ -31,6 +33,7 @@ typedef struct	s_cb_button_state
 	int		is_active;
 	int		(*callback)(void *parent_state);
 	int		scancode;
+	t_img	img_active;
 }				t_cb_button_state;
 
 typedef struct	s_switch_button_state
@@ -54,6 +57,7 @@ typedef struct	s_button
 	int			*to_activate;
 	int			active_value;
 	t_img		img;
+	t_img		img_active;
 } 				t_button;
 
 typedef struct	s_cb_button
@@ -66,6 +70,7 @@ typedef struct	s_cb_button
 	int		(*callback)(void *parent_state);
 	t_img	img;
 	int		scancode;
+	t_img	img_active;
 }				t_cb_button;
 
 typedef struct	s_switch_button
@@ -82,8 +87,17 @@ typedef struct	s_switch_button
 	t_img		img;
 } 				t_sw_button;
 
+typedef struct	s_display_deco_state
+{
+	int		*to_look_at;
+	int		display_value;
+	void	*state;
+}				t_display_deco_state;
+
 t_component		init_button(t_button button, t_sdl *sdl);
 t_component		init_cb_button(t_cb_button button, t_sdl *sdl);
 t_component		init_sw_button(t_sw_button button, t_sdl *sdl);
+t_component		init_display_deco(t_display_deco_state deco, t_component child);
+
 
 #endif

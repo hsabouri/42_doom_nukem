@@ -138,6 +138,8 @@ typedef struct			s_env
 	char		*file;
 	t_game		game;
 	int			toggle_editor;
+	int			game_mode;
+	int			init_game;
 	t_editor	editor;
 	t_color		*current_buffer;
 	t_component	*component;
@@ -146,6 +148,7 @@ typedef struct			s_env
 }						t_env;
 
 int						is_clicked_on(const t_component component, t_event events);
+int						is_over(const t_component component, t_event events);
 void					m_background(t_color *buf, t_color color, t_pix start, t_pix end);
 t_game					init_audio(t_game game);
 
@@ -154,6 +157,7 @@ t_component     		*init_component(t_env *env, t_sdl *sdl);
 t_component				trigger_component(void *parent, t_component component, t_sdl *sdl);
 void					display_component(const t_component component, t_sdl *sdl);
 void					destroy_component(t_component *component);
+t_component				render_all(t_component component, t_sdl *sdl);
 
 t_text					component_text(const char *str, t_pix pos, t_sdl *sdl);
 void					component_image(const t_img img, t_pix pos,
@@ -192,5 +196,9 @@ char *location);
 void					clean_music(t_game game);
 void					clean_env(t_env env);
 void					clean_game(t_game game);
+void					clean_texture(t_env env);
+
+t_component				*init_menu(t_env *env, t_sdl *sdl);
+t_env					menu_loop(t_env env, size_t frame);
 
 #endif

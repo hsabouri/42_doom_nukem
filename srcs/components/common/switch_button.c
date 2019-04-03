@@ -52,7 +52,8 @@ static void					self_render(const t_component self, t_color *buf)
 		bg.b = bg.b - 30;
 	}
 	background(buf, bg, self.size);
-	component_image(self.img, (t_pix) {5, 5}, self.size, buf);
+	if (self.img.content)
+		component_image(self.img, (t_pix) {5, 5}, self.size, buf);
 }
 
 static t_sw_button_state		*init_state(t_sw_button button)

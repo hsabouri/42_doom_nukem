@@ -43,7 +43,7 @@ typedef enum	e_error_type
 	PARALLEL_PORTAL,
 	MATS_ENTITIES,
 	BAD_SECTOR,
-	LOOP_OVERLAY,
+	LOOP_OVERLAY
 }				t_error_type;
 
 typedef struct	s_lvl_error

@@ -97,7 +97,7 @@ void				destroy_component(t_component *component)
 		SDL_DestroyTexture(component->last_render);
 }
 
-static t_component	render_all(t_component component, t_sdl *sdl)
+t_component			render_all(t_component component, t_sdl *sdl)
 {
 	t_component *child;
 	size_t i;
