@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:07:33 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:25:39 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,12 +165,11 @@ typedef struct		s_c_music
 typedef struct		s_c_game
 {
 	size_t		magic;
-	t_c_player	player;
 	size_t		ninventory;
 	size_t		loc_inventory;
+	size_t		loc_player;
 	size_t		nmaterials;
 	size_t		loc_mats;
-	size_t		loc_player;
 	size_t		npoints;
 	size_t		loc_points;
 	size_t		nwalls;

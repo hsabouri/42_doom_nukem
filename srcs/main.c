@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:17:17 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:25:04 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				main(int ac, char **av)
 	// env.editor = init_editor();
 	env = init_conditions(env);
 	// env.game.chunks = anew(NULL, 10, sizeof(t_chunk));
-	// env.toggle_editor = 0;
+	env.toggle_editor = 0;
 	env.sdl = init_sdl();
 	env.editor = init_editor();
 	env.toggle_editor = 0;

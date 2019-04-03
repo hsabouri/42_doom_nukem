@@ -678,6 +678,8 @@ t_game	generate_map(void)
 	lppush(&g_e, third_e);
 	// printf("Element 3 : %d \n",third_e->trigger.e_actif.id);
 
+	// t_array	music = safe_anew()
+
 	game.player = player;
 	game.log = c_log;
 	game.nlog = 10;

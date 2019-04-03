@@ -72,7 +72,7 @@ void			write_sectors(int fd, t_sector *sectors, size_t nsectors,\
 t_mat *mats);
 void			write_portals(int fd, t_portal *portals, size_t nportals,\
 t_mat *mats);
-void			translate_entity(int fd, t_entity *entities, size_t nentities,\
+void			write_entities(int fd, t_entity *entities, size_t nentities,\
 t_mat *mats);
 void			write_weapons(int fd, t_weapon *weapons, size_t nentities,\
 t_img *textures);

@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:06:33 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:23:44 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int fd)
 	}
 }
 
-static t_c_player	translate_player(t_player player)
+static void		write_player(t_player player, int fd, t_mat *materials)
 {
 	t_c_player	res;
 	u_int32_t	index;
@@ -60,7 +60,7 @@ static t_c_player	translate_player(t_player player)
 		j++;
 	}
 	res.my_entity.damage = player.my_entity.damage;
-	write_struct(&res, fd, sizeof(t_c_entity));
+	write_struct(&res, fd, sizeof(t_c_player));
 }
 
 void				write_struct(void *struc, int fd, size_t size)
@@ -81,7 +81,7 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 	game_s.loc_mats = sizeof(t_c_game) + sizeof(size_t) * game_s.ninventory;
 	game_s.loc_player = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.npoints = game.npoints;
-	game_s.loc_points = game_s.loc_player + sizeof(t_c_player);
+	game_s.loc_points = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.nwalls = game.nwalls;
 	game_s.nuwalls = game.nuwalls;
 	game_s.loc_walls = game_s.loc_points + sizeof(t_c_point) * game.npoints;
@@ -103,9 +103,9 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)\
 		* game.ntextures;
 	game_s.nsounds = game.sounds.len;
-	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music)\
-		* game.music.len;
-	game_s.player = translate_player(game.player);
+	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music) *\
+		game.music.len;
+	printf("n_sound: %zu\n", game.sounds.len);
 	return (game_s);
 }
 
@@ -116,13 +116,13 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	size_t	loc_sound;
 
 	write_inventory(game.player, game.entities,fd);
+	write_player(game.player, fd, game.materials);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
-	translate_player(game.player, fd, game.materials);
 	write_points(fd, game.points, game.npoints);
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
-	translate_entity(fd, game.entities, game.nentities, game.materials);
+	write_entities(fd, game.entities, game.nentities, game.materials);
 	write_weapons(fd, game.weapons, game.nweapons, game.textures);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);
@@ -149,8 +149,9 @@ void				save(const char *filename, t_game game)
 		game.textures[i].height * game.textures[i].width);
 		i++;
 	}
-	write_music(fd, MUSIC);
-	write_music(fd, SOUND);
+	// write_music(fd, MUSIC);
+	// write_music(fd, SOUND);
 	console_log("FileLoader3030", "Successfully saved file.");
 	close(fd);
 }
+// 

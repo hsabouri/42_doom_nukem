@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-void	translate_entity(int fd, t_entity *entities, size_t nentities,\
+void	write_entities(int fd, t_entity *entities, size_t nentities,\
 t_mat *mats)
 {
 	t_c_entity	res;

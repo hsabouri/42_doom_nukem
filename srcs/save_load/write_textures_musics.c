@@ -32,6 +32,7 @@ int index)
 			loc_content += (size_t)(textures[i - 1].width *
 				textures[i - 1].height) * sizeof(t_color);
 		ftextures.content = loc_content;
+		printf("loc_content = %zu\n", loc_content);
 		write_struct(&ftextures, fd, sizeof(t_c_img));
 		i++;
 	}
