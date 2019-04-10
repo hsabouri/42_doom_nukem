@@ -55,10 +55,11 @@ OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 # -----------------
 
-CC = clang
+CC = gcc
 CFLAGS = -Wall -Wextra -Iincludes
-CFLAGS += -g
-#CFLAGS += -O3 -march=native
+CFLAGS += -g 
+#CFLAGS += -fsanitize=address
+CFLAGS += -O3 -march=native
 #CFLAGS += -Werror
 
 CFLAGS += -I$(LIBFT_DIR)/includes
@@ -69,7 +70,8 @@ CFLAGS += -I$(SDL2_MIXER_INC_DIR) -I$(SDL2_MIXER_INC_DIR)/SDL2
 CFLAGS += -I$(LIBTGA_DIR)/includes
 CFLAGS += -I.
 
-LDFLAGS = -L$(LIBFT_DIR) -lft
+LDFLAGS = -lasan
+LDFLAGS += -L$(LIBFT_DIR) -lft
 LDFLAGS += -lpthread -ldl -lm
 LDFLAGS += -L$(LIBVEC_DIR) -lvec
 LDFLAGS += -L$(SDL2_DIR) -lSDL2 -lSDL2main

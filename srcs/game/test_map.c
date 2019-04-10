@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/26 12:03:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 13:49:58 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -411,6 +411,7 @@ t_game	generate_map(void)
 	game.nsectors = 5;
 	game.walls = walls;
 	game.nwalls = 29;
+	game.nuwalls = 0;
 	game.portals = portals;
 	game.nportals = 4;
 	game.points = points;
@@ -420,6 +421,9 @@ t_game	generate_map(void)
 	game.materials = materials;
 	game.nmaterials = 16;
 	game.played_music = 0;
+	game.music = anew(NULL, 0, sizeof(t_music));
+	game.sounds = anew(NULL, 0, sizeof(t_sound));
+	game.chunks = anew(NULL, 0, sizeof(t_chunk));
 	return (game);
 }
 

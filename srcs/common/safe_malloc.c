@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:35:21 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/27 11:35:22 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/04/07 10:17:24 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@ void	*safe_malloc(size_t size, char *location)
 	if (!(ret = malloc(size)))
 	{
 		console_error(location, "Could not allocate memory");
+		exit(EXIT_FAILURE);
+	}
+	return (ret);
+}
+
+void	*safe_realloc(void *ptr, size_t size, char *location)
+{
+	void *ret;
+
+	if (!(ret = realloc(ptr, size)))
+	{
+		console_error(location, "Could not reallocate memory");
 		exit(EXIT_FAILURE);
 	}
 	return (ret);

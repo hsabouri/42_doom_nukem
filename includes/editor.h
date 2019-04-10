@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/26 18:14:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 14:52:32 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 t_editor		init_editor(void);
 
 t_game			create_point(t_vec2 pts, ssize_t index, t_game game);
-t_game			create_wall(ssize_t pts[2], int new_sector, t_game game);
+t_game			create_wall(size_t uwall, size_t sector, t_game game);
 t_game			create_portal(ssize_t wa, ssize_t wb, t_game game);
 t_game			create_sector(size_t start, size_t nwalls, t_game game);
 
@@ -52,10 +52,6 @@ t_game			new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
 				t_game game);
 
 
-ssize_t			select_wall(t_game game, t_editor editor,\
-				t_event events);
-t_editor		select_multi_points(t_editor editor,\
-				t_event events, ssize_t point);
 void			legend(t_color *buf, t_sdl *sdl);
 t_env			game_editing(t_env env, t_player player);
 t_game			player_properties(t_game game, t_event events);
