@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 17:46:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/02 11:53:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 19:53:21 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct	s_display_deco_state
 	int		*to_look_at;
 	int		display_value;
 	void	*state;
+	int		invert;
 }				t_display_deco_state;
 
 t_component		init_button(t_button button, t_sdl *sdl);

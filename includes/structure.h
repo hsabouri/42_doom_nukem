@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/19 16:02:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 09:20:01 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct		s_game
 	size_t			nsectors;
 	t_wall			*walls;
 	size_t			nwalls;
+	size_t			nuwalls;
 	t_portal		*portals;
 	size_t			nportals;
 	t_vec2			*points;

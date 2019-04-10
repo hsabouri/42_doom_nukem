@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:11:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/29 12:31:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 11:36:23 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,21 @@ const t_pix buf_size, t_color *buf)
 	size_t x;
 	size_t y;
 
-	x = pos.x;
-	while (x < img.width + pos.x && x < (size_t)buf_size.x)
+	if (img.content)
 	{
-		y = pos.y;
-		while (y < img.height + pos.y && y < (size_t)buf_size.y)
+		x = pos.x;
+		while (x < img.width + pos.x && x < (size_t)buf_size.x)
 		{
-			if (img.content[x - pos.x + (y - pos.y) * img.width].a > 0)
-				buf[x + y * buf_size.x] =
-					img.content[x - pos.x + (y - pos.y) * img.width];
-			y++;
+			y = pos.y;
+			while (y < img.height + pos.y && y < (size_t)buf_size.y)
+			{
+				if (img.content[x - pos.x + (y - pos.y) * img.width].a > 0)
+					buf[x + y * buf_size.x] =
+						img.content[x - pos.x + (y - pos.y) * img.width];
+				y++;
+			}
+			x++;
 		}
-		x++;
 	}
 }
 

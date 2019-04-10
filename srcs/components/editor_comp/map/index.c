@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 17:17:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 09:23:29 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,18 @@ static int					self_update(t_component *self, void *parent)
 static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 {
 	state->env = env;
-	state->unassigned_walls = safe_anew(NULL, 5, sizeof(t_wall), "components");
-	apush(&state->unassigned_walls, &env->game.walls[0]);
-	apush(&state->unassigned_walls, &env->game.walls[1]);
-	apush(&state->unassigned_walls, &env->game.walls[2]);
-	apush(&state->unassigned_walls, &env->game.walls[3]);
-	apush(&state->unassigned_walls, &env->game.walls[4]);
 	state->offset = vec2_new(INITIAL_OFFSET_X, INITIAL_OFFSET_Y);
 	state->zoom = INITIAL_ZOOM;
 	state->grid_size = 1;
 	state->magnetisme = 0;
 	state->tool = MOVE;
 	state->selected_point = -1;
+	state->selected_wall = -1;
+	state->unassigned_wall = -1;
+	state->wall_points[0] = -1;
+	state->wall_points[1] = -1;
+	state->selected_walls[0] = -1;
+	state->selected_walls[1] = -1;
 	//state->n_buttons = 4; // Used to test lists
 	return (state);
 }
@@ -153,6 +153,10 @@ t_sdl *sdl)
 		.active_value = MOVE}, sdl);
 	apush(&ret, &current);
 	current = init_point_tool(env, &state->selected_point, sdl);
+	apush(&ret, &current);
+	current = init_wall_tool(env, state, sdl);
+	apush(&ret, &current);
+	current = init_assign_tool(env, state, sdl);
 	apush(&ret, &current);
 	current = init_sw_button((t_sw_button) {
 		.pos = (t_pix) {214, 2},

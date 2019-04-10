@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/03/29 12:27:04 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/04/10 17:07:12 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
 CFLAGS += -g -fPIC
 CFLAGS += -O3 -march=native
-CC = clang
+#CFLAGS += -fsanitize=address
+CC = gcc
 
 SRCDIR = sources
 OBJDIR = objs

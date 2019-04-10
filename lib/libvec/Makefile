@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/03/07 13:22:06 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/04/10 17:07:46 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ NAME = libvec.a
 INCLUDES = ./includes
 CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
-CFLAGS += -g -O3 -fPIC
-CC = clang
+CFLAGS += -g -fPIC
+CFLAGS += -O3 -march=native
+#CFLAGS += -fsanitize=address
+CC = gcc
 
 SRCDIR = sources
 OBJDIR = objs

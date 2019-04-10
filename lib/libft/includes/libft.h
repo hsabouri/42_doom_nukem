@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/29 12:10:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 14:51:46 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,8 @@ void *state, size_t new_elem_size);
 
 void			*array_open(void *ptr, size_t loc, size_t size, size_t elem_size);
 void			*array_close(void *ptr, size_t loc, size_t size, size_t elem_size);
+void			*array_open_swap(void *ptr, size_t loc1, size_t loc2,
+				size_t elem_size);
 
 void			console_error(const char *service, const char *error);
 void			console_log(const char *service, const char *log);

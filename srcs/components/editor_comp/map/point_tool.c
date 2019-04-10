@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   point_tool.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 16:46:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/27 16:45:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 20:01:13 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./map.h"
-
-static ssize_t	select_point(t_editor_map_state editor, t_point_tool state,
-t_event events)
-{
-	const t_game	game = editor.env->game;
-	float	min;
-	ssize_t	min_id;
-	size_t	i;
-	float	current;
-
-	if (events.mouse[SDL_BUTTON_LEFT] && *state.selected_point >= 0)
-		return (*state.selected_point);
-	i = 0;
-	min = 20 / editor.zoom;
-	min_id = -1;
-	while (i < game.npoints)
-	{
-		current = circle(game.points[i], point_from_mouse(editor, events, 0));
-		if (current < min + 0.0001)
-		{
-			min = current;
-			min_id = (ssize_t)i;
-		}
-		i++;
-	}
-	return (min_id);
-}
 
 static int		self_update(t_component *self, void *parent)
 {
@@ -52,14 +25,18 @@ static int		self_update(t_component *self, void *parent)
 	if (parent_state->tool != CREATE_POINT)
 	{
 		self->display = 0;
-		return (1);
+		return (0);
 	}
-	*state->selected_point = select_point(*parent_state, *state, events);
-	if (state->selected_point >= 0 && state->events->mouse[SDL_BUTTON_LEFT] &&
+	else
+		self->display = 1;
+	*state->selected_point = select_point(*parent_state, *state->selected_point,
+		events);
+	if (*state->selected_point >= 0 && state->events->mouse[SDL_BUTTON_LEFT] &&
 		(size_t)*state->selected_point < parent_state->env->game.npoints)
 		game.points[*state->selected_point] = point_from_mouse(*parent_state,
 			*state->events, parent_state->magnetisme);
-	else if (*state->selected_point >= 0 && events.mouse_click[SDL_BUTTON_RIGHT])
+	else if (*state->selected_point >= 0 && events.mouse_click[SDL_BUTTON_RIGHT]
+		&& game.nuwalls == 0)
 		game = delete_point(*state->selected_point, game);
 	else if (*state->selected_point < 0 && events.mouse_click[SDL_BUTTON_RIGHT])
 		game = create_point(point_from_mouse(*parent_state, events,
@@ -73,7 +50,7 @@ t_component		init_point_tool(t_env *env, ssize_t *selected, t_sdl *sdl)
 	t_component		ret;
 	t_point_tool	*state;
 
-	state = (t_point_tool *)malloc(sizeof(t_point_tool));
+	state = (t_point_tool *)safe_malloc(sizeof(t_point_tool), "component");
 	ret = default_component(state, (t_pix) {0, 0}, sdl);
 	state->events = &env->events;
 	state->selected_point = selected;

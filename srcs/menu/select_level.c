@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_level.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 15:24:43 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/03 14:57:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 19:56:24 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_menu_state *state)
 	current = init_display_deco((t_display_deco_state) {
 		.to_look_at = (int *)&state->type,
 		.display_value = GAME_MODE,
-		.state = state
+		.state = state,
+		.invert = 0
 	}, init_cb_button((t_cb_button) {
 		.pos = (t_pix) {96, 365},
 		.size = (t_pix) {256, 56},
@@ -35,7 +36,8 @@ t_menu_state *state)
 	current = init_display_deco((t_display_deco_state) {
 		.to_look_at = (int *)&state->type,
 		.display_value = EDITOR_MODE,
-		.state = state
+		.state = state,
+		.invert = 0
 	}, init_cb_button((t_cb_button) {
 		.pos = (t_pix) {96, 365},
 		.size = (t_pix) {256, 56},

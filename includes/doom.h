@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/03 12:57:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/07 10:18:01 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,9 @@ void					render_multi_threaded(const t_env env, t_color *buf);
 void					render_single_threaded(const t_env env, t_color *buf);
 
 void					*safe_malloc(size_t size, char *location);
+void					*safe_realloc(void *ptr, size_t size, char *location);
 t_array					safe_anew(void *first, size_t len, size_t elem_size,\
-char *location);
+						char *location);
 
 void					clean_music(t_game game);
 void					clean_env(t_env env);
