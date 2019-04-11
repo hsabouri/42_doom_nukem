@@ -58,9 +58,18 @@ OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Iincludes
 CFLAGS += -g 
-#CFLAGS += -fsanitize=address
-CFLAGS += -O3 -march=native
+#CFLAGS += -O3 -march=native
 #CFLAGS += -Werror
+
+ifeq ($(SAN), yes)
+ifeq ($(shell uname -s), Darwin) # remove _o
+LDFLAGS = -fsanitize=address
+CFLAGS += -fsanitize=address
+else
+LDFLAGS = -lasan
+CFLAGS += -fsanitize=address
+endif
+endif
 
 CFLAGS += -I$(LIBFT_DIR)/includes
 CFLAGS += -I$(LIBVEC_DIR)/includes 
@@ -70,7 +79,6 @@ CFLAGS += -I$(SDL2_MIXER_INC_DIR) -I$(SDL2_MIXER_INC_DIR)/SDL2
 CFLAGS += -I$(LIBTGA_DIR)/includes
 CFLAGS += -I.
 
-LDFLAGS = -lasan
 LDFLAGS += -L$(LIBFT_DIR) -lft
 LDFLAGS += -lpthread -ldl -lm
 LDFLAGS += -L$(LIBVEC_DIR) -lvec
@@ -79,19 +87,10 @@ LDFLAGS += -L$(SDL2_TTF_DIR) -lSDL2_ttf
 LDFLAGS += -L$(SDL2_MIXER_DIR) -lSDL2_mixer
 LDFLAGS += -L$(LIBTGA_DIR) -ltga
 
-all: message libft libvec libtga installSDL $(BIN)
+all: message libft libvec libtga $(BIN)
 
 message: 
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $(BIN)
-
-ifeq ($(shell uname -s), Darwin_o) # remove _o
-installSDL:
-	@brew install sdl2
-	@brew install sdl2_ttf
-else
-installSDL:
-	@echo "Can't install SDL on Linux"
-endif
 
 libft:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
