@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 14:10:04 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/19 14:45:48 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:02:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,32 @@ static void	if_not_tp(t_ph *physic, t_tp teleport)
 	physic->speed.y = 0;
 }
 
-t_vec3		teleportation(t_vec3 pos, t_game game, t_tp teleport, t_ph *physic)
+t_vec3		teleportation(t_vec3 pos, t_game *game, t_tp teleport, t_ph *physic)
 {
 	t_vec2	diff;
 	t_vec3	next_pos;
+	t_trigger tmp_log;
 	float	delta_floor;
 	float	delta_ceil;
 
 	physic->sector_id = ((int)teleport.portal.from_wall == teleport.portal_in)
 		? teleport.portal.to_sector : teleport.portal.from_sector;
-	delta_floor = game.sectors[physic->sector_id].floor - pos.z;
-	delta_ceil = game.sectors[physic->sector_id].ceiling - pos.z;
+	delta_floor = game->sectors[physic->sector_id].floor - pos.z;
+	delta_ceil = game->sectors[physic->sector_id].ceiling - pos.z;
 	if (delta_floor >= 0.5 || delta_ceil < -0.0001)
 		if_not_tp(physic, teleport);
 	else
 	{
 
-		game.log[2].e_actif = game.player.my_entity; // Set the player as an entities
-		game.log[2].e_actif.physic.sector_id = physic->sector_id;
-		game.log[2].condi = TRIGGER_SECTOR;
-		game.log[2].e_passif = game.log[2].e_actif;
-			// game.log[1].e_passif = game.entities[i];
+		tmp_log.e_actif = game->player.my_entity;
+		tmp_log.e_actif.physic.sector_id = physic->sector_id;
+		tmp_log.condi = TRIGGER_SECTOR;
+		tmp_log.e_passif = tmp_log.e_actif;
+		apush(&game->log, &tmp_log);
+
 		next_pos = pos;
-		diff = vec2_sub(game.points[teleport.to_wall.a],
-			game.points[teleport.from_wall.a]);
+		diff = vec2_sub(game->points[teleport.to_wall.a],
+		game->points[teleport.from_wall.a]);
 		next_pos.x = pos.x + diff.u;
 		next_pos.y = pos.y + diff.v;
 		if (delta_floor >= 0 || delta_floor > -0.5)

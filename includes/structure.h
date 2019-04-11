@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:25:54 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:30:50 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,12 +200,12 @@ typedef struct		s_game
 	t_array		events;
 	size_t		nevents;
 
-	// t_array 	waiting_events;
 	t_plist 	waiting_events;
 
 	size_t		nwaiting_events;
 
-	t_trigger	*log;
+	// t_trigger	*log;
+	t_array		log;
 	size_t		nlog;
 	
 	t_entity	*entities;

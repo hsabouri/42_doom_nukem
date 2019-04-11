@@ -6,67 +6,11 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/04/03 18:24:49 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:17:29 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
-
-// TEST // SET entities to 0
-
-t_game ft_reset_log(t_game game)
-{
-    t_game n_game;
-    n_game = game;
-
-    t_entity Z_E = ((t_entity){
-		-2,
-		(t_ph) {
-			0,
-			0,
-			0,
-            0,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		(t_ph) {
-			0,
-			0,
-			0,
-            0,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		0,
-		0,
-        0
-		});
-
-        t_trigger trig_Z = ((t_trigger){Z_E, TRIGGER_NO, Z_E});
-
-        int i = 0;
-        while(i < 4)
-        {
-            n_game.log[i] = trig_Z;
-            i++;
-        }
-    return(n_game);
-}
-
-//////////
-
 
 int    no_trigger(t_trigger trigger, t_trigger c_log)
 {
@@ -134,25 +78,23 @@ t_env     init_conditions(t_env env)
 
 }
 
+
 t_game  general_conditions(t_game game, t_event events)
 {
         t_game n_game;
+        t_trigger       *c_log;
 
         n_game = game;
         int j;
 
 
         j = 0;
-        // // player touch bad entities
-        //   printf("$$$$$$$$$$$$$$$ \n");
-        while (j < 4)
+        while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
         {
-            if(n_game.log[j].condi == TRIGGER_TOUCH && n_game.player.my_entity.id == n_game.log[j].e_actif.id && n_game.log[j].e_passif.damage == 1)
+            if(c_log->condi == TRIGGER_TOUCH && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
                   n_game.chunks = stack_sounds(n_game.chunks, 1, 1);
-            if (events.mouse_click[SDL_BUTTON_LEFT] && n_game.log[j].condi == TRIGGER_SEE && n_game.player.my_entity.id == n_game.log[j].e_actif.id && n_game.log[j].e_passif.damage == 1)
+            if (events.mouse_click[SDL_BUTTON_LEFT] && c_log->condi == TRIGGER_SEE && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
                 n_game.chunks = stack_sounds(n_game.chunks, 2, 1);
-            
-            // printf(" ENT %d , ??? , ENT %d \n", n_game.log[j].e_actif.id, n_game.log[j].e_passif.id );
             
             j++;
         }
@@ -162,16 +104,24 @@ t_game  general_conditions(t_game game, t_event events)
 t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
 {
     t_game_event    *current;
+    t_trigger       *c_log;
 
     int j = 0;
 
+    printf("LOG LEN %d\n", game.log.len);
     game = general_conditions(game, events);
     while ((current = (t_game_event *)lpnext(&game.waiting_events)) != NULL) {
-        while (j < game.nlog) {
-            if (triggers[current->trigger.condi] (current->trigger, game.log[j]) == 1)
+        
+        // while (j < game.nlog) {
+
+        while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL) {
+
+            printf("DETECTED : LOG ENT %d LOG ENT %d \n", c_log->e_actif.id, c_log->e_passif.id );
+            
+            if (triggers[current->trigger.condi] (current->trigger, *c_log) == 1)
             {
                 lremove(&game.waiting_events, current);
-                printf("By ENT %d to ENT %d \n", current->trigger.e_actif.id, current->trigger.e_passif.id );
+                printf("$$$$$$$$$$$$$$$$$ %d to $$$$$$$$$$$$$$$$$$ %d \n", current->trigger.e_actif.id, current->trigger.e_passif.id );
             }
             j++;
         }
@@ -179,6 +129,6 @@ t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
 
     }
     // printf("List : %zu \n", game.waiting_events.len);
-    game =  ft_reset_log(game);
+    game.log.len = 0;
     return (game);
 }

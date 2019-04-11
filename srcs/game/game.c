@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 16:30:42 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:13:40 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void		minimap(t_game game, t_color *buf)
 t_game		check_see(t_game game)
 {
 	t_game n_game;
+	t_trigger tmp_log;
+	    t_trigger       *c_log;
+
 	t_selected ren;
 
 	n_game = game;
@@ -79,11 +82,10 @@ t_game		check_see(t_game game)
 	ren = world_selector(n_game);
 	if (ren.type == PART_ENTITY)
 	{
-		n_game.log[0].e_actif = n_game.player.my_entity;
-		n_game.log[0].condi = TRIGGER_SEE;
-		n_game.log[0].e_passif = n_game.entities[ren.id];
-
-		// printf("Salut harry PLAYER SEE ENTITY %zd\n", ren.id);
+		tmp_log.e_actif = n_game.player.my_entity;
+		tmp_log.condi = TRIGGER_SEE;
+		tmp_log.e_passif = n_game.entities[ren.id];
+		apush(&n_game.log, &tmp_log);
 	}
 	return n_game;
 }

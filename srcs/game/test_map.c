@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:30:27 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:31:25 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -643,7 +643,9 @@ t_game	generate_map(void)
 		0
 		});
 
-	// T_ARRAY -> T_LIST needed :/
+
+
+	t_array c_log = anew(NULL, 100, sizeof(t_trigger));
 
 	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
 
@@ -653,7 +655,6 @@ t_game	generate_map(void)
 			player.my_entity, TRIGGER_INTERACT, entities[2] // Game event : list event wanted
 			}
 		};
-	// printf("1 Element 1 : %d \n",first_e->trigger.e_actif.id);
 
 	t_game_event * secon_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*secon_e = (t_game_event){
@@ -662,9 +663,6 @@ t_game	generate_map(void)
 			player.my_entity, TRIGGER_TOUCH, entities[1] // Game event : list event wanted
 			}
 		};
-	// printf("2 Element 2 : %d \n",secon_e->trigger.e_actif.id);
-	// printf("3 Element 3 : %d \n",third_e->trigger.e_actif.id);
-
 
 			t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*third_e = (t_game_event){
@@ -673,7 +671,7 @@ t_game	generate_map(void)
 			player.my_entity, TRIGGER_SEE, entities[0] // Game event : list event wanted
 			}
 		};
-	// printf("4 Element 4 : %d \n",kuadro_e->trigger.e_actif.id);
+
 			t_game_event * kuadro_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*kuadro_e = (t_game_event){
 		(t_pelem) {NULL},
@@ -683,14 +681,9 @@ t_game	generate_map(void)
 		};
 
 	t_plist	g_e	= lpnew(first_e);
-	// printf("Element 1 : %d \n",first_e->trigger.e_actif.id);
 	lppush(&g_e, secon_e);
-	// printf("Element 2 : %d \n",secon_e->trigger.e_actif.id);
 	lppush(&g_e, third_e);
-	// printf("Element 3 : %d \n",third_e->trigger.e_actif.id);
 	lppush(&g_e, kuadro_e);
-
-	// t_array	music = safe_anew()
 
 	game.player = player;
 	game.log = c_log;
