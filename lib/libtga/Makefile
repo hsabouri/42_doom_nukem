@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/04/10 17:07:38 by hugo             ###   ########.fr        #
+#    Updated: 2019/04/11 12:57:48 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,15 @@ CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
 CFLAGS += -g -fPIC
 CFLAGS += -O3 -march=native
-#CFLAGS += -fsanitize=address
 CC = gcc
+
+ifeq ($(SAN), yes)
+ifeq ($(shell uname -s), Darwin) # remove _o
+CFLAGS += -fsanitize=address
+else
+CFLAGS += -fsanitize=address
+endif
+endif
 
 SRCDIR = sources
 OBJDIR = objs
