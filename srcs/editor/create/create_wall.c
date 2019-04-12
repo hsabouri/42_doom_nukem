@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:24:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/07 14:45:48 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/11 15:48:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_game			create_wall(size_t uwall, size_t sector, t_game game)
 	game.walls[id] = new_wall;
 	game.nwalls++;
 	game.nuwalls--;
-	game = new_update_sectors((ssize_t)(id), -1, -1, game);
-	game = new_update_portals(-1, (ssize_t)(id), -1, game);
+	game.sectors[sector].number += 1;
 	return (game);
 }
