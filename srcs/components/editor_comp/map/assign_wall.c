@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 11:43:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/10 17:06:08 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/12 13:26:31 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int			callback_new_sector(void *parent)
 	t_assign_tool	*state;
 	t_game			game;
 
-printf("enculé\n");
 	state = (t_assign_tool *)((t_display_deco_state *)parent)->state;
 	game = state->parent->env->game;
 	game = create_sector(game.nwalls, 0, game);

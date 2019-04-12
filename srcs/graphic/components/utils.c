@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:11:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/07 11:36:23 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/11 14:21:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_component		default_component(void *state_address, t_pix size, t_sdl *sdl)
 		ret.destroy = &no_destroy;
 	ret.render = NULL;
 	ret.complete_render = NULL;
+	ret.last_render = NULL;
 	if (size.x && size.y)
 		ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 			SDL_TEXTUREACCESS_STREAMING, size.x, size.y);
