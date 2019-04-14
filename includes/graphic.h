@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/26 12:04:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/12 15:40:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define RICH_BLACK	(t_color){0,20,33,255}
 # define MOONSTONE	(t_color){98,190,193,255}
 # define MUSTARD	(t_color){255,224,102,255}
+# define PORTAL_B	(t_color){62,189,236,255}
+# define PORTAL_O	(t_color){233,131,31,255}
 
 # define TEXT_MAX	256
 

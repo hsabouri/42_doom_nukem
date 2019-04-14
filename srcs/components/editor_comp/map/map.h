@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/08 07:38:04 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/12 15:27:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ typedef struct	s_assign_tool
 	t_editor_map_state	*parent;
 }				t_assign_tool;
 
+typedef struct	s_assign_portal_tool
+{
+	ssize_t				*walls;
+	ssize_t				*selected_wall;
+	t_event				*events;
+	t_editor_map_state	*parent;
+}				t_assign_portal_tool;
+
 typedef struct	s_state_buf
 {
 	t_editor_map_state	state;
@@ -81,6 +89,8 @@ t_component		init_wall_tool(t_env *env, t_editor_map_state *parent,
 				t_sdl *sdl);
 t_component		init_assign_tool(t_env *env, t_editor_map_state *parent,
 				t_sdl *sdl);
+t_component		init_assign_portal_tool(t_env *env, t_editor_map_state *parent,
+t_sdl *sdl);
 
 t_vec2			screen_space(t_vec2 vec, t_editor_map_state state);
 t_vec2			point_from_mouse(t_editor_map_state state, t_event events,
