@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 11:43:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/12 13:26:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:52:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,11 @@ t_sdl *sdl)
 	ret.childs = anew(NULL, 1, sizeof(t_component));
 	child = init_display_deco((t_display_deco_state) {
 		(int *)state->walls, -1, state, 1
-	}, init_cb_button((t_cb_button) {
-		.pos = (t_pix) {2, 44},
-		.size = (t_pix) {40, 40},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &env->events,
-		.scancode = SDL_SCANCODE_N,
-		.place_holder = NULL,
+	}, init_cb_button((t_cb_button) { .pos = (t_pix) {2, 44},
+		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
+		.events = &env->events, .scancode = SDL_SCANCODE_N, .place_holder = NULL,
 		.callback = &callback_new_sector,
-		.img = parse_tga("./textures/ui/plus.tga")
-	}, sdl));
+		.img = parse_tga("./textures/ui/plus.tga")}, sdl));
 	apush(&ret.childs, &child);
 	return (ret);
 }

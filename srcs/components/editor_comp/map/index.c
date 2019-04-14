@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/07 09:23:29 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/12 15:27:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,8 @@ t_sdl *sdl)
 	current = init_wall_tool(env, state, sdl);
 	apush(&ret, &current);
 	current = init_assign_tool(env, state, sdl);
+	apush(&ret, &current);
+	current = init_assign_portal_tool(env, state, sdl);
 	apush(&ret, &current);
 	current = init_sw_button((t_sw_button) {
 		.pos = (t_pix) {214, 2},

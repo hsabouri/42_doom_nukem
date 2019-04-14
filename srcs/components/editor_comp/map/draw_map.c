@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/07 09:25:32 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/12 15:41:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,20 @@ static void			foreach_wall(void *wall, void *param, size_t i)
 	a_p.y = a.v;
 	b_p.x = b.u;
 	b_p.y = b.v;
-	if (state.state.tool == ASSIGN_WALL || state.state.tool == CREATE_WALL)
+	if (state.state.tool == ASSIGN_WALL || state.state.tool == CREATE_WALL ||
+		state.state.tool == CREATE_PORTAL)
 	{
 		state.color.r /= 2;
 		state.color.g /= 2;
 		state.color.b /= 2;
 	}
-	if ((i == (size_t)state.state.selected_wall ||
+	if (state.state.tool == CREATE_PORTAL &&
+		i == (size_t)state.state.selected_walls[0])
+		bresenham(state.buf, a_p, b_p, PORTAL_B);
+	else if (state.state.tool == CREATE_PORTAL &&
+		i == (size_t)state.state.selected_walls[1])
+		bresenham(state.buf, a_p, b_p, PORTAL_O);
+	else if ((i == (size_t)state.state.selected_wall ||
 		i == (size_t)state.state.selected_walls[1]) && !state.unassigned)
 		bresenham(state.buf, a_p, b_p, WHITE);
 	else if ((i == (size_t)state.state.unassigned_wall ||
