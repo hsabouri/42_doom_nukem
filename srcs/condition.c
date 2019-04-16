@@ -91,8 +91,8 @@ t_game  general_conditions(t_game game, t_event events)
         j = 0;
         while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
         {
-            if(c_log->condi == TRIGGER_TOUCH && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
-                  n_game.chunks = stack_sounds(n_game.chunks, 1, 1);
+            // if(c_log->condi == TRIGGER_TOUCH && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
+                //   n_game.chunks = stack_sounds(n_game.chunks, 1, 1);
             if (events.mouse_click[SDL_BUTTON_LEFT] && c_log->condi == TRIGGER_SEE && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
                 n_game.chunks = stack_sounds(n_game.chunks, 2, 1);
             
@@ -108,27 +108,22 @@ t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
 
     int j = 0;
 
-    printf("LOG LEN %d\n", game.log.len);
     game = general_conditions(game, events);
     while ((current = (t_game_event *)lpnext(&game.waiting_events)) != NULL) {
         
-        // while (j < game.nlog) {
 
         while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL) {
 
-            printf("DETECTED : LOG ENT %d LOG ENT %d \n", c_log->e_actif.id, c_log->e_passif.id );
             
             if (triggers[current->trigger.condi] (current->trigger, *c_log) == 1)
             {
                 lremove(&game.waiting_events, current);
-                printf("$$$$$$$$$$$$$$$$$ %d to $$$$$$$$$$$$$$$$$$ %d \n", current->trigger.e_actif.id, current->trigger.e_passif.id );
             }
             j++;
         }
         j = 0;
 
     }
-    // printf("List : %zu \n", game.waiting_events.len);
     game.log.len = 0;
     return (game);
 }
