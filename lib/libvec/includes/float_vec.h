@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   float_vec.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:16:54 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/26 17:45:43 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/14 14:23:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ float			vec2_dot(t_vec2 a, t_vec2 b);
 t_vec3			vec2_cross(t_vec2 a, t_vec2 b);
 t_vec2			vec2_mult(t_vec2 a, t_vec2 b);
 t_vec2			vec2_rot(t_vec2 a, float t);
+int				vec2_equal(t_vec2 a, t_vec2 b, float eps);
 
 #endif

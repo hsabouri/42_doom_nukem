@@ -6,7 +6,7 @@
 #    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/04/11 12:57:58 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/04/14 14:23:42 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCNAM = float_math.c\
 		float_vec_mult.c\
 		float_vec_rot.c\
 		float_vec_convert.c\
+		float_vec_compare.c\
 		fixed_convert.c\
 		fixed_math.c\
 		fixed_vec_new.c\

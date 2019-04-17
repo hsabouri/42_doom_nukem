@@ -94,15 +94,15 @@ message:
 
 libft:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
-	@$(MAKE) -j -s -C $(LIBFT_DIR)
+	@$(MAKE) -j -s -C $(LIBFT_DIR) SAN=$(SAN)
 
 libvec:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
-	@$(MAKE) -j -s -C $(LIBVEC_DIR)
+	@$(MAKE) -j -s -C $(LIBVEC_DIR) SAN=$(SAN)
 
 libtga:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
-	@$(MAKE) -j -s -C $(LIBTGA_DIR)
+	@$(MAKE) -j -s -C $(LIBTGA_DIR) SAN=$(SAN)
 
 $(BIN): $(OBJS)
 	@echo -e "$(BLUE)" "[LINK]" "$(NO_COLOR)" $@

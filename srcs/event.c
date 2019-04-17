@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/22 18:40:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/16 11:17:31 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ t_event			capture_events(t_event events, t_env *env)
 			events.quit = 1;
 		events = mouse_event(events, polled_event, &any);
 	}
+	if (ON_LINUX && !env->toggle_editor && env->game_mode != 0)
+		SDL_WarpMouseInWindow(env->sdl.win, WIDTH / 2, HEIGHT / 2);
 	SDL_CaptureMouse(SDL_FALSE);
 	return (events);
 }

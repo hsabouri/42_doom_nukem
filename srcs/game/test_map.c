@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/07 13:49:58 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/14 17:25:36 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ t_game	generate_map(void)
 	textures[12] = parse_tga("./textures/multi_sprite/8.tga");
 
 	t_mat *materials = (t_mat *)malloc(16 * sizeof(t_mat));
-	materials[0] = (t_mat) { // Default
+	materials[0] = (t_mat) { // White tiles
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
-		(t_color){0xFF, 0x00, 0x60, 0xFF},
-		NULL,
+		NO_COLOR,
+		&textures[1],
 		TILING,
 		WHITE,
 		NULL
