@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/28 15:58:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/16 11:04:19 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static t_sdl	init_sdl(void)
 	buf = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32,\
 		SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 	font = init_font();
-	SDL_SetRelativeMouseMode(SDL_TRUE);
 	text = safe_anew(NULL, NB_TEXT, sizeof(t_text), "doom_nukem");
 	return ((t_sdl) {win, buf, renderer, font, text});
 }
@@ -80,7 +79,6 @@ int				main(int ac, char **av)
 	env.game_mode = 0;
 	env.init_game = 1;	
 	frame = 0;
-	SDL_SetRelativeMouseMode(SDL_FALSE);
 	while (env.sdl.win)
 	{
 		env.events = capture_events(env.events, &env);

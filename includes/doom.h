@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/07 10:18:01 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/16 11:13:35 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 # define LOOK_SPEED 0.01
 
 # define NB_TEXT 	100
+
+# ifdef __linux
+#  define ON_LINUX 1
+# else
+#  define ON_LINUX 0
+# endif
 
 typedef struct			s_event
 {

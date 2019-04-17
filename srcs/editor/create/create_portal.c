@@ -6,26 +6,25 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 13:46:50 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/15 15:29:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/14 14:26:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
 
-static t_game	prepare_walls(ssize_t *wa, ssize_t *wb, t_game game)
+static t_game	prepare_walls(t_game game, ssize_t wa, ssize_t wb)
 {
-	if (*wa < 0)
+	const t_wall	a = game.walls[wa];
+	const t_wall	b = game.walls[wb];
+	const t_vec2	diff_a = vec2_sub(game.points[a.a], game.points[b.a]);
+	const t_vec2	diff_b = vec2_sub(game.points[a.b], game.points[b.b]);
+	size_t			tmp;
+
+	if (!vec2_equal(diff_a, diff_b, 0.001))
 	{
-		*wa = *wb;
-		*wb = -1;
-	}
-	if (*wa < 0)
-		return (game);
-	if (*wb < 0)
-	{
-		game = create_wall(\
-			(ssize_t[2]){game.walls[*wa].a, game.walls[*wa].b}, 1, game);
-		*wb = game.nwalls - 1;
+		tmp = game.walls[wb].a;
+		game.walls[wb].a = game.walls[wb].b;
+		game.walls[wb].b = tmp;
 	}
 	return (game);
 }
@@ -60,7 +59,7 @@ t_game			create_portal(ssize_t wa, ssize_t wb, t_game game)
 	size_t		from_sector;
 	size_t		to_sector;
 
-	game = prepare_walls(&wa, &wb, game);
+	game = prepare_walls(game, wa, wb);
 	to_sector = get_sectors(wa, wb, &from_sector, game);
 	if (from_sector == game.nsectors || to_sector == game.nsectors)
 		return (game);
@@ -71,11 +70,7 @@ t_game			create_portal(ssize_t wa, ssize_t wb, t_game game)
 		exit(EXIT_FAILURE);
 	}
 	game.portals[game.nportals] = (t_portal) { from_sector,
-		to_sector, wa, wb,
-		game.walls[wa].a,
-		game.walls[wa].b,
-		NULL
-	};
+		to_sector, wa, wb, game.walls[wa].a, game.walls[wa].b, NULL};
 	game.walls[wa].portal = game.nportals;
 	game.walls[wb].portal = game.nportals;
 	game.nportals++;
