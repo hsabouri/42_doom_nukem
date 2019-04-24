@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_new_update.c                                :+:      :+:    :+:   */
+/*   new_update.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 16:17:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/24 15:56:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
 
-t_game	new_update_portals(ssize_t point, ssize_t wall, ssize_t sector,\
+t_game	new_update_portals(ssize_t point, ssize_t wall, ssize_t sector,
 t_game game)
 {
 	t_portal	curr;
@@ -40,7 +40,7 @@ t_game game)
 	return (game);
 }
 
-t_game	new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,\
+t_game	new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,
 t_game game)
 {
 	t_wall	curr;
@@ -64,7 +64,7 @@ t_game game)
 	return (game);
 }
 
-t_game	new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
+t_game	new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,
 t_game game)
 {
 	t_sector	curr;
@@ -74,7 +74,7 @@ t_game game)
 	while (i < game.nsectors)
 	{
 		curr = game.sectors[i];
-		if (wall >= 0 && curr.start >= (u_int32_t)wall)
+		if (wall >= 0 && curr.start > (u_int32_t)wall)
 			curr.start++;
 		if (wall >= 0 && curr.start + curr.number >= (u_int32_t)wall\
 		&& curr.start <= (u_int32_t)wall)

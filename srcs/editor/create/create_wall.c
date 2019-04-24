@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:24:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/11 15:48:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:00:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ t_game			create_wall(size_t uwall, size_t sector, t_game game)
 {
 	const size_t	id = game.sectors[sector].start;
 	const t_wall	new_wall = game.walls[game.nwalls + uwall];
+	ssize_t			updated;
 	
 	game.walls = array_open_swap(game.walls,
 		id, game.nwalls + uwall, sizeof(t_wall));
 	game.walls[id] = new_wall;
 	game.nwalls++;
 	game.nuwalls--;
-	game.sectors[sector].number += 1;
+	new_update_portals(-1, id, -1, game);
+	new_update_sectors(id, -1, -1, game);
 	return (game);
 }

@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/07 14:52:32 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/23 16:34:25 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_game			del_update_walls(ssize_t pts, ssize_t portal, ssize_t mat,\
 				t_game game);
 t_game			del_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
 				t_game game);
-t_game			del_update_portals(ssize_t wall, ssize_t sector, t_game game);
+t_game			del_update_portals(ssize_t pts, ssize_t wall, ssize_t sector, ssize_t mat,
+				t_game game);
 t_game			new_update_portals(ssize_t point, ssize_t wall, ssize_t sector,\
 				t_game game);
 t_game			new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,\
