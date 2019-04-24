@@ -12,7 +12,6 @@
 
 #include <doom.h>
 #include <editor.h>
-#include <doom.h>
 
 static TTF_Font	*init_font(void)
 {
@@ -74,27 +73,27 @@ int				main(int ac, char **av)
 	env.editor = init_editor();
 	env.toggle_editor = 0;
 	env.events = init_events();
+	env.game_mode = MENU_MODE;
+	env.init_game = 1;
 	env.component = init_menu(&env, &env.sdl);
 	*env.component = render_all(*env.component, &env.sdl);
-	env.game_mode = 0;
-	env.init_game = 1;	
 	frame = 0;
 	while (env.sdl.win)
 	{
 		env.events = capture_events(env.events, &env);
-		if (env.init_game && (env.game_mode == 1 || env.game_mode == 2))
+		if (env.init_game && env.game_mode == GAME_MODE)
 		{
-			if (ac == 2 && env.game_mode == 1)
-				{
-					env.file = av[1];
-					env.game = load(av[1], 0);
-				}
-				else
-				{
-					env.file = NULL;
-					env.game = generate_map();
-				}
-				launch_check(env.game);
+			if (ac == 2)
+			{
+				env.file = av[1];
+				env.game = load(av[1], 0);
+			}
+			else
+			{
+				env.file = NULL;
+				env.game = generate_map(env.game);
+			}
+			launch_check(env.game);
 			env.game = init_audio(env.game);
 			env.game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT * sizeof(int)), "doom_nukem");
 			if (env.component)
@@ -104,12 +103,12 @@ int				main(int ac, char **av)
 		}
 		if (!env.toggle_editor)
 			env.game.player.physic = update_mouse(&env.events, env.game.player.physic);
-		if (env.events.quit || env.game_mode == -1 ||
+		if (env.events.quit || env.game_mode == QUIT ||
 			env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
-		if (env.game_mode == 0)
+		if (env.game_mode == MENU_MODE)
 			env = menu_loop(env, frame);
-		else if (env.game_mode == 1 || env.game_mode == 2)
+		else if (env.game_mode == GAME_MODE)
 		{
 			if (!env.toggle_editor)
 				env = game_loop(env, frame);
@@ -124,7 +123,7 @@ int				main(int ac, char **av)
 		env.events = reset_clicks(env.events);
 		frame++;
 	}
-	clean(env);
+	// clean(env);
 	return (0);
 }
 

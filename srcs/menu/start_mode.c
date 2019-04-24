@@ -17,7 +17,7 @@ static int			quit_game(void *parent_state)
 	t_menu_state *menu;
 
 	menu = (t_menu_state *)parent_state;
-	menu->env->game_mode = -1;
+	menu->env->game_mode = QUIT;
 	return (1);
 }
 
@@ -35,7 +35,7 @@ t_menu_state *state)
 		.img = parse_tga("./textures/menu/start_game.tga"),
 		.img_active = parse_tga("./textures/menu/start_game_active.tga"),
 		.to_activate = (int *)&state->type,
-		.active_value = GAME_MODE,
+		.active_value = NEW_GAME,
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	current = init_button((t_button) {
@@ -47,7 +47,7 @@ t_menu_state *state)
 		.img = parse_tga("./textures/menu/start_editor.tga"),
 		.img_active = parse_tga("./textures/menu/start_editor_active.tga"),
 		.to_activate = (int *)&state->type,
-		.active_value = EDITOR_MODE,
+		.active_value = NEW_MAP,
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl),
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
@@ -68,14 +68,14 @@ static int			self_update(t_component *self, void *parent)
 {
 	const t_menu_state	*parent_state = (t_menu_state *)parent;
 
-	if (self->display == 1 && parent_state->type != MENU_MODE)
+	if (self->display == 1 && parent_state->type != START_MODE)
 	{
-		if (parent_state->type == EDITOR_MODE)
+		if (parent_state->type == NEW_MAP)
 			parent_state->env->editor.enabled = 1;
 		self->display = 0;
 		return (1);
 	}
-	else if (self->display == 0 && parent_state->type == MENU_MODE)
+	else if (self->display == 0 && parent_state->type == START_MODE)
 	{
 		self->display = 1;
 		return (1);

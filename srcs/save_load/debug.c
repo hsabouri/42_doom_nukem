@@ -14,9 +14,9 @@
 
 void		debug(t_game game)
 {
-	int	i;
+	// int	i;
 
-	printf("sector.tex_pos.u: %f, sectors.tex_pos.v: %f\n", f_to_float(game.sectors[0].tex_pos.u), f_to_float(game.sectors[0].tex_pos.v));
+	printf("wepaon.damage : %u\n", game.weapons[5].damage);
 	// i = 0;
 	// while (i < (int)game.nentities)
 	// {

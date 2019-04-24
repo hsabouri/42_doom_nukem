@@ -28,6 +28,7 @@ static int			self_update(t_component *self, void *parent)
 
 static void			self_render(const t_component self, t_color *buf)
 {
+	// background(buf, RED, self.size);
 	component_image(self.img, (t_pix) {0, 0}, self.size, buf);
 }
 
@@ -36,7 +37,7 @@ static t_menu_state	*init_state(t_env *env)
 	t_menu_state *state;
 
 	state = safe_malloc(sizeof(t_component), "components");
-	state->type = MENU_MODE;
+	state->type = START_MODE;
 	state->env = env;
 	return (state);
 }

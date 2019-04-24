@@ -12,40 +12,60 @@
 
 #include <doom.h>
 
-t_game	generate_map(void)
+t_game	generate_map(t_game game)
 {
-	t_game game;
-	
-	t_player player = (t_player) {
-		(t_ph) {
-			0.05,
-			1.25,
-			0,
-			0,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		(t_ph) {
-			0.05,
-			1.25,
-			0,
-			0,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		}
-	};
+
+	t_img *textures = (t_img *)safe_malloc(50 * sizeof(t_img), "textures");
+	textures[0] = parse_tga("./textures/wall.tga");
+	textures[1] = parse_tga("./textures/floor.tga");
+	textures[2] = parse_tga("./textures/items/key_card.tga");
+	textures[3] = parse_tga("./textures/skybox.tga");
+	textures[4] = parse_tga("./textures/fence.tga");
+	textures[5] = parse_tga("./textures/multi_sprite/1.tga");
+	textures[6] = parse_tga("./textures/multi_sprite/2.tga");
+	textures[7] = parse_tga("./textures/multi_sprite/3.tga");
+	textures[8] = parse_tga("./textures/multi_sprite/4.tga");
+	textures[9] = parse_tga("./textures/multi_sprite/5.tga");
+	textures[10] = parse_tga("./textures/multi_sprite/6.tga");
+	textures[11] = parse_tga("./textures/multi_sprite/7.tga");
+	textures[12] = parse_tga("./textures/multi_sprite/8.tga");
+	textures[13] = parse_tga("./textures/hud/cross.tga");
+	textures[14] = parse_tga("./textures/hud/full_life.tga");
+	textures[15] = parse_tga("./textures/hud/empty_life.tga");
+	textures[16] = parse_tga("./textures/hud/help.tga");
+	textures[17] = parse_tga("./textures/weapons/gun/gun0.tga");
+	textures[18] = parse_tga("./textures/weapons/gun/gun1.tga");
+	textures[19] = parse_tga("./textures/weapons/gun/gun2.tga");
+	textures[20] = parse_tga("./textures/weapons/gun/gun3.tga");
+	textures[21] = parse_tga("./textures/weapons/gun/gun4.tga");
+	textures[22] = parse_tga("./textures/weapons/gun/gun5.tga");
+	textures[23] = parse_tga("./textures/weapons/smg/smg0.tga");
+	textures[24] = parse_tga("./textures/weapons/smg/smg1.tga");
+	textures[25] = parse_tga("./textures/weapons/smg/smg2.tga");
+	textures[26] = parse_tga("./textures/weapons/smg/smg3.tga");
+	textures[27] = parse_tga("./textures/weapons/shotgun/shotgun0.tga");
+	textures[28] = parse_tga("./textures/weapons/shotgun/shotgun1.tga");
+	textures[29] = parse_tga("./textures/weapons/shotgun/shotgun2.tga");
+	textures[30] = parse_tga("./textures/weapons/shotgun/shotgun3.tga");
+	textures[31] = parse_tga("./textures/weapons/shotgun/shotgun4.tga");
+	textures[32] = parse_tga("./textures/weapons/shotgun/shotgun5.tga");
+	textures[33] = parse_tga("./textures/weapons/shotgun/shotgun6.tga");
+	textures[34] = parse_tga("./textures/weapons/shotgun/shotgun7.tga");
+	textures[35] = parse_tga("./textures/weapons/revolver/revolver0.tga");
+	textures[36] = parse_tga("./textures/weapons/revolver/revolver1.tga");
+	textures[37] = parse_tga("./textures/weapons/revolver/revolver2.tga");
+	textures[38] = parse_tga("./textures/weapons/revolver/revolver3.tga");
+	textures[39] = parse_tga("./textures/weapons/revolver/revolver4.tga");
+	textures[40] = parse_tga("./textures/weapons/revolver/revolver5.tga");
+	textures[41] = parse_tga("./textures/weapons/nyan_gun/nyan_gun0.tga");
+	textures[42] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga");
+	textures[43] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga");
+	textures[44] = parse_tga("./textures/weapons/nyan_gun/nyan_gun3.tga");
+	textures[45] = parse_tga("./textures/weapons/nyan_gun/nyan_gun4.tga");
+	textures[46] = parse_tga("./textures/weapons/grenade/grenade0.tga");
+	textures[47] = parse_tga("./textures/weapons/grenade/grenade1.tga");
+	textures[48] = parse_tga("./textures/weapons/claymore/claymore0.tga");
+	textures[49] = parse_tga("./textures/weapons/claymore/claymore1.tga");
 
 	t_vec2 *points = (t_vec2 *)malloc(sizeof(t_vec2) * 20);
 	points[0] = ((t_vec2){7, 6});
@@ -68,21 +88,92 @@ t_game	generate_map(void)
 	points[17] = ((t_vec2){9, 0});
 	points[18] = ((t_vec2){9, 5});
 	points[19] = ((t_vec2){8, 5});
-
-	t_img *textures = (t_img *)malloc(13 * sizeof(t_img));
-	textures[0] = parse_tga("./textures/wall.tga");
-	textures[1] = parse_tga("./textures/floor.tga");
-	textures[2] = parse_tga("./textures/player.tga");
-	textures[3] = parse_tga("./textures/skybox.tga");
-	textures[4] = parse_tga("./textures/fence.tga");
-	textures[5] = parse_tga("./textures/multi_sprite/1.tga");
-	textures[6] = parse_tga("./textures/multi_sprite/2.tga");
-	textures[7] = parse_tga("./textures/multi_sprite/3.tga");
-	textures[8] = parse_tga("./textures/multi_sprite/4.tga");
-	textures[9] = parse_tga("./textures/multi_sprite/5.tga");
-	textures[10] = parse_tga("./textures/multi_sprite/6.tga");
-	textures[11] = parse_tga("./textures/multi_sprite/7.tga");
-	textures[12] = parse_tga("./textures/multi_sprite/8.tga");
+	
+	t_weapon *gun = (t_weapon *)safe_malloc(sizeof(t_weapon) * 7, "generate_map");
+	gun[0] = ((t_weapon) {
+		(t_weapon_type) GUN,
+		1,
+		15,
+		20,
+		20,
+		50,
+		(t_shot_type) HITSCAN,
+		-1,
+		init_sprite_gun(textures),
+		200
+	});
+	gun[1] = ((t_weapon) {
+		(t_weapon_type) SMG,
+		1,
+		80,
+		80,
+		30,
+		100,
+		(t_shot_type) HITSCAN,
+		-1,
+		init_sprite_smg(textures),
+		250
+	});
+	gun[2] = ((t_weapon) {
+		(t_weapon_type) SHOTGUN,
+		1,
+		10,
+		10,
+		70,
+		30,
+		(t_shot_type) SHOTS,
+		-1,
+		init_sprite_shotgun(textures),
+		20
+	});
+	gun[3] = ((t_weapon) {
+		(t_weapon_type) REVOLVER,
+		1,
+		6,
+		6,
+		90,
+		20,
+		(t_shot_type) HITSCAN,
+		-1,
+		init_sprite_revolver(textures),
+		250
+	});	
+	gun[4] = ((t_weapon) {
+		(t_weapon_type) NYAN_GUN,
+		1,
+		10,
+		10,
+		10000,
+		30,
+		(t_shot_type) SHOTS,
+		-1,
+		init_sprite_nyan_gun(textures),
+		15
+	});	
+	gun[5] = ((t_weapon) {
+		(t_weapon_type) GRENADE,
+		2,
+		5,
+		5,
+		50,
+		20,
+		(t_shot_type) SHOTS,
+		1,
+		init_sprite_grenade(textures),
+		200
+	});
+	gun[6] = ((t_weapon) {
+		(t_weapon_type) MINE,
+		2,
+		5,
+		5,
+		50,
+		20,
+		(t_shot_type) STATIC,
+		2,
+		init_sprite_mine(textures),
+		0
+	});
 
 	t_mat *materials = (t_mat *)malloc(16 * sizeof(t_mat));
 	materials[0] = (t_mat) { // White tiles
@@ -116,7 +207,7 @@ t_game	generate_map(void)
 	};
 	t_mat *tiles = &materials[2];
 
-	materials[3] = (t_mat) { // Sans
+	materials[3] = (t_mat) { // key_card
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
@@ -125,7 +216,7 @@ t_game	generate_map(void)
 		WHITE,
 		NULL
 	};
-	t_mat *sans = &materials[3];
+	t_mat *key = &materials[3];
 
 	materials[4] = (t_mat) { // Skybox
 		fvec2_new(0, f_from_int(1300)),
@@ -243,6 +334,7 @@ t_game	generate_map(void)
 		WHITE,
 		NULL
 	};
+
 	t_array	multi = anew(NULL, 8, sizeof(t_mat *));
 	t_mat	*yolo = &materials[8];
 	apush(&multi, &yolo);
@@ -260,6 +352,9 @@ t_game	generate_map(void)
 	apush(&multi, &yolo);
 	yolo = &materials[15];
 	apush(&multi, &yolo);
+
+	t_array key_card = anew(NULL, 1, sizeof(t_mat *));
+	apush(&key_card, &key);
 
 	t_wall *walls = (t_wall *)malloc(29 * sizeof(t_wall));
 	walls[0] =  ((t_wall){fvec2_new(0, 0), -1, 9, 0, bricks});
@@ -306,7 +401,7 @@ t_game	generate_map(void)
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles, fvec2_new(0, 0)});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles, fvec2_new(0, 0)});
 
-	t_entity *entities = (t_entity *)malloc(3 * sizeof(t_entity));
+	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
 		(t_ph) {
 			0.02,
@@ -403,10 +498,108 @@ t_game	generate_map(void)
 		multi,
 		1
 	});
+	entities[3] = ((t_entity){
+		(t_ph) {
+			0.02,
+			1.50,
+			0.5,
+			3,
+			(t_vec3){5, 8.5, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		(t_ph) {
+			0.02,
+			1.50,
+			0.5,
+			3,
+			(t_vec3){5, 8.5, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0
+		},
+		key_card,
+		1
+	});
+
+	t_array inventory = safe_anew(NULL, 1, sizeof(t_entity *), "generate_map");
+	t_entity *ent = &entities[3];
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+	apush(&inventory, &ent);
+
+	t_player player = (t_player) {
+		(t_ph) {
+			0.05,
+			1.25,
+			0,
+			0,
+			(t_vec3){7, 9, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0,
+		},
+		(t_ph) {
+			0.05,
+			1.25,
+			0,
+			0,
+			(t_vec3){7, 9, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){1, 1, 1},
+			0,
+			0,
+			0,
+			0,
+			0,
+		},
+		90,
+		{0, 1},
+		6,
+		0,
+		inventory
+	};
 
 	game.player = player;
 	game.entities = entities;
-	game.nentities = 3;
+	game.nentities = 4;
 	game.sectors = sectors;
 	game.nsectors = 5;
 	game.walls = walls;
@@ -416,10 +609,12 @@ t_game	generate_map(void)
 	game.nportals = 4;
 	game.points = points;
 	game.npoints = 20;
-	game.textures = textures;
-	game.ntextures = 13;
 	game.materials = materials;
 	game.nmaterials = 16;
+	game.textures = textures;
+	game.ntextures = 50;
+	game.weapons = gun;
+	game.nweapons = 7;
 	game.played_music = 0;
 	game.music = anew(NULL, 0, sizeof(t_music));
 	game.sounds = anew(NULL, 0, sizeof(t_sound));

@@ -58,3 +58,46 @@ size_t n_entities)
 	}
 	return (entities);
 }
+
+t_weapon		*parse_weapons(void *buf, t_save save, t_img *textures,\
+size_t n_weapons)
+{
+	t_c_weapon	struc_w;
+	t_weapon	*weapons;
+	t_weapon	current;
+	t_img		*mat;
+	size_t		i;
+	size_t		j;
+
+	weapons = (t_weapon *)safe_malloc((sizeof(t_weapon) * n_weapons), "loader");
+	i = 0;
+	while (i < n_weapons)
+	{
+		struc_w = *(t_c_weapon *)dump_struct(buf, save.index +
+			sizeof(t_c_weapon) * i, sizeof(t_c_weapon), save.max);
+		verify_magic(&struc_w, GUN_MAGIC, i);
+		current.name = struc_w.name;
+		current.type = struc_w.type;
+		current.ammo = struc_w.ammo;
+		current.ammo_max = struc_w.ammo_max;
+		current.damage = struc_w.damage;
+		current.cadence = struc_w.cadence;
+		current.type_shot = struc_w.type_shot;
+		current.sprite = safe_anew(NULL, 1, sizeof(t_img *), "loader");
+		j = 0;
+		while (j < 16)
+		{
+			mat = (struc_w.sprite[j] == -1) ? NULL : 
+				(t_img *)(id_to_p(struc_w.sprite[j], textures, sizeof(t_img)));
+			if (!mat)
+				break;
+			else
+				apush(&current.sprite, &mat);
+			j++;
+		}
+		current.decal = struc_w.decal;
+		weapons[i] = current;
+		i++;
+	}
+	return (weapons);
+}

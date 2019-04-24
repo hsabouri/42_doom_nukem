@@ -12,12 +12,6 @@
 
 #include "./hud.h"
 
-static t_array		init_childs(t_array array, t_env *env, t_sdl *sdl)
-{
-	// apush() child components here
-	return (array);
-}
-
 static int			self_update(t_component *self, void *parent)
 {
 	t_env		*parent_state;
@@ -37,10 +31,13 @@ static int			self_update(t_component *self, void *parent)
 	}
 }
 
-static t_hud_state	*init_state(t_hud_state *state, t_env *env)
+static t_hud_state	*init_state(t_env *env)
 {
-	// State initialisation goes here
-	return (state);
+	t_hud_state *hud;
+
+	hud = (t_hud_state *)safe_malloc(sizeof(t_hud_state), "components");
+	hud->env = env;
+	return (hud);
 }
 
 t_component			init_hud_root(t_env *env, t_sdl *sdl)
@@ -48,19 +45,26 @@ t_component			init_hud_root(t_env *env, t_sdl *sdl)
 	t_component ret;
 
 	ret.img.content = NULL;
-	ret.text = component_text("HUD displayed", (t_pix) {10, 100}, sdl);
+	ret.text.text_texture = NULL;
 	ret.size.x = WIDTH;
 	ret.size.y = HEIGHT;
 	ret.pos.x = 0;
 	ret.pos.y = 0;
-	ret.display = 1;
-	ret.state = init_state((t_hud_state *)safe_malloc(
-		sizeof(t_hud_state), "components"), env);
+	ret.display = 0;
+	ret.state = init_state(env);
 	ret.update = &self_update;
-	ret.destroy = NULL; // Will automatically destroy component
-	ret.complete_render = &empty_render; // Will not draw anythin for this component
-	ret.last_render = NULL;
-	ret.childs = safe_anew(NULL, 0, sizeof(t_component), "components");
-	ret.childs = init_childs(ret.childs, env, sdl);
+	ret.destroy = NULL;
+	ret.render = NULL;
+	ret.complete_render = &empty_render;
+	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
+		SDL_TEXTUREACCESS_STREAMING, ret.size.x, ret.size.y);
+	SDL_SetTextureBlendMode(ret.last_render, SDL_BLENDMODE_BLEND);
+	ret.childs = safe_anew(NULL, 1, sizeof(t_component), "components");
+	ret.childs = init_weapon(ret.childs, ret.state, sdl);
+	ret.childs = init_life(ret.childs, ret.state, sdl);
+	ret.childs = init_cross(ret.childs, ret.state, sdl);
+	ret.childs = init_mini_map(ret.childs, ret.state, sdl);
+	ret.childs = init_inventory(ret.childs, ret.state, sdl);
+	ret.childs = init_help(ret.childs, ret.state, sdl);
 	return (ret);
 }

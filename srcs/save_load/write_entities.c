@@ -52,3 +52,43 @@ t_mat *mats)
 		i++;
 	}
 }
+
+void	write_weapons(int fd, t_weapon *weapons, size_t nentities,\
+t_img *textures)
+{
+	t_c_weapon	res;
+	t_weapon	gun;
+	t_img		**material;
+	u_int32_t	index;
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	while (i < nentities)
+	{
+		gun = weapons[i];
+		res.magic = GUN_MAGIC + i;
+		res.name = gun.name;
+		res.type = gun.type;
+		res.ammo = gun.ammo;
+		res.ammo_max = gun.ammo_max;
+		res.damage = gun.damage;
+		res.cadence = gun.cadence;
+		res.type_shot = gun.type_shot;
+		j = 0;
+		while ((material = (t_img **)ashift(&gun.sprite)))
+		{
+			index = id_from_p(*material, textures, sizeof(t_img));
+			res.sprite[j] = (ssize_t)index;
+			j++;
+		}
+		while (j < 16)
+		{
+			res.sprite[j] = -1;
+			j++;
+		}
+		res.decal = gun.decal;
+		write_struct(&res, fd, sizeof(t_c_weapon));
+		i++;
+	}
+}

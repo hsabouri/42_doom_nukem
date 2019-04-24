@@ -12,6 +12,20 @@
 
 #include <doom.h>
 
+void			write_inventory(t_player player, t_entity *entities,\
+int fd)
+{
+	t_entity **entity;
+	size_t	index;
+
+	index = 0;
+	while ((entity = (t_entity **)ashift(&player.inventory)))
+	{
+		index = id_from_p(*entity, entities, sizeof(t_entity));
+		write_struct(&index, fd, sizeof(size_t));
+	}
+}
+
 static t_c_player	translate_player(t_player player)
 {
 	t_c_player	res;
@@ -24,6 +38,11 @@ static t_c_player	translate_player(t_player player)
 	res.spawn.look.u = f_from_float(player.physic.look_h);
 	res.spawn.look.v = player.spawn.look_v;
 	res.spawn.sector_id = player.spawn.sector_id;
+	res.life = player.life;
+	res.weapons[0] = player.weapons[0];
+	res.weapons[1] = player.weapons[1];
+	res.secondary = player.secondary;
+	res.equiped = player.equiped;
 	return (res);
 }
 
@@ -39,29 +58,35 @@ void				write_struct(void *struc, int fd, size_t size)
 
 static t_c_game		save_entities(t_c_game game_s, t_game game)
 {
+	game_s.ninventory = game.player.inventory.len;
+	game_s.loc_inventory = sizeof(t_c_game);
 	game_s.nmaterials = game.nmaterials;
-	game_s.loc_mats = sizeof(t_c_game);
+	game_s.loc_mats = sizeof(t_c_game) + sizeof(size_t) * game_s.ninventory;
 	game_s.npoints = game.npoints;
 	game_s.loc_points = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.nwalls = game.nwalls;
+	game_s.nuwalls = game.nuwalls;
 	game_s.loc_walls = game_s.loc_points + sizeof(t_c_point) * game.npoints;
 	game_s.nsectors = game.nsectors;
 	game_s.loc_sectors = game_s.loc_walls + sizeof(t_c_wall) * game.nwalls;
 	game_s.nportals = game.nportals;
-	game_s.loc_portals = game_s.loc_sectors + sizeof(t_c_sector) *\
-		game.nsectors;
+	game_s.loc_portals = game_s.loc_sectors + sizeof(t_c_sector)\
+		* game.nsectors;
 	game_s.nentities = game.nentities;
-	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal) *\
-		game.nportals;
+	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal)\
+		* game.nportals;
+	game_s.nweapons = game.nweapons;
+	game_s.loc_weapons = game_s.loc_entities + sizeof(t_c_entity)\
+		* game.nentities;
 	game_s.ntextures = game.ntextures;
-	game_s.loc_textures = game_s.loc_entities + sizeof(t_c_entity) *\
-		game.nentities;
+	game_s.loc_textures = game_s.loc_weapons + sizeof(t_c_weapon)\
+		* game.nweapons;
 	game_s.nmusic = game.music.len;
-	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img) *\
-		game.ntextures;
+	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)\
+		* game.ntextures;
 	game_s.nsounds = game.sounds.len;
-	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music) *\
-		game.music.len;
+	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music)\
+		* game.music.len;
 	game_s.player = translate_player(game.player);
 	return (game_s);
 }
@@ -72,12 +97,14 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	size_t	loc_music;
 	size_t	loc_sound;
 
+	write_inventory(game.player, game.entities,fd);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
 	write_points(fd, game.points, game.npoints);
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
 	translate_entity(fd, game.entities, game.nentities, game.materials);
+	write_weapons(fd, game.weapons, game.nweapons, game.textures);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);
 	loc_sound = write_audio(fd, loc_music, MUSIC);
