@@ -13,16 +13,16 @@
 #include <doom.h>
 
 t_mat		*parse_mats(void *buf, t_save save, t_img *texture,\
-size_t n_entities)
+size_t nmats)
 {
 	t_c_mat	struc_m;
 	t_mat	*materials;
 	t_mat	current;
 	size_t	i;
 
-	materials = (t_mat *)safe_malloc((sizeof(t_mat) * n_entities), "loader");
+	materials = (t_mat *)safe_malloc((sizeof(t_mat) * nmats), "loader");
 	i = -1;
-	while (++i < n_entities)
+	while (++i < nmats)
 	{
 		struc_m = *(t_c_mat *)dump_struct(buf, save.index + sizeof(t_c_mat) *
 			i, sizeof(t_c_mat), save.max);
@@ -42,15 +42,15 @@ size_t n_entities)
 	return (materials);
 }
 
-t_vec2		*parse_points(void *buf, t_save save, size_t n_entities)
+t_vec2		*parse_points(void *buf, t_save save, size_t npoints)
 {
 	t_c_point	struc_p;
 	t_vec2		*points;
 	size_t		i;
 
-	points = (t_vec2 *)safe_malloc((sizeof(t_vec2) * n_entities), "loader");
+	points = (t_vec2 *)safe_malloc((sizeof(t_vec2) * npoints), "loader");
 	i = 0;
-	while (i < n_entities)
+	while (i < npoints)
 	{
 		struc_p = *(t_c_point *)dump_struct(buf, save.index +
 			sizeof(t_c_point) * i, sizeof(t_c_point), save.max);
@@ -62,16 +62,16 @@ t_vec2		*parse_points(void *buf, t_save save, size_t n_entities)
 }
 
 t_wall		*parse_walls(void *buf, t_save save, t_mat *mats,\
-size_t n_entities)
+size_t nwalls)
 {
 	t_c_wall	struc_w;
 	t_wall		*walls;
 	t_wall		current;
 	size_t		i;
 
-	walls = (t_wall *)safe_malloc((sizeof(t_wall) * n_entities), "loader");
+	walls = (t_wall *)safe_malloc((sizeof(t_wall) * nwalls), "loader");
 	i = 0;
-	while (i < n_entities)
+	while (i < nwalls)
 	{
 		struc_w = *(t_c_wall *)dump_struct(buf, save.index +
 			sizeof(t_c_wall) * i, sizeof(t_c_wall), save.max);
@@ -92,16 +92,16 @@ size_t n_entities)
 }
 
 t_sector	*parse_sectors(void *buf, t_save save, t_mat *mats,\
-size_t n_entities)
+size_t nsectors)
 {
 	t_c_sector	struc_s;
 	t_sector	*sectors;
 	t_sector	current;
 	size_t		i;
 
-	sectors = (t_sector *)safe_malloc((sizeof(t_sector) * n_entities), "loader");
+	sectors = (t_sector *)safe_malloc((sizeof(t_sector) * nsectors), "loader");
 	i = -1;
-	while (++i < n_entities)
+	while (++i < nsectors)
 	{
 		struc_s = *(t_c_sector *)dump_struct(buf, save.index +
 			sizeof(t_c_sector) * i, sizeof(t_c_sector), save.max);
@@ -121,7 +121,7 @@ size_t n_entities)
 	return (sectors);
 }
 
-t_portal	*parse_portals(void *buf, t_save save, size_t n_entities,\
+t_portal	*parse_portals(void *buf, t_save save, size_t nportals,\
 t_mat *mats)
 {
 	t_c_portal	struc_p;
@@ -129,9 +129,9 @@ t_mat *mats)
 	t_portal	current;
 	size_t		i;
 
-	portals = (t_portal *)safe_malloc((sizeof(t_portal) * n_entities), "loader");
+	portals = (t_portal *)safe_malloc((sizeof(t_portal) * nportals), "loader");
 	i = 0;
-	while (i < n_entities)
+	while (i < nportals)
 	{
 		struc_p = *(t_c_portal *)dump_struct(buf, save.index +
 			sizeof(t_c_portal) * i, sizeof(t_c_portal), save.max);

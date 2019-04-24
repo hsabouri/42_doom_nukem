@@ -23,6 +23,7 @@
 # define TEXT_MAGIC		0xFEE1DEAD
 # define MUSIC_MAGIC	0xDEFEC8ED
 # define SOUND_MAGIC	0xDEADBEEF
+# define GUN_MAGIC		0xD1ED1ED1
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -52,6 +53,20 @@ typedef struct		s_c_mat
 	ssize_t			overlay;
 }					t_c_mat;
 
+typedef struct		s_c_weapon
+{
+	size_t		magic;
+	int32_t		name;
+	u_int32_t	type;
+	u_int32_t	ammo;
+	u_int32_t	ammo_max;
+	u_int32_t	damage;
+	u_int32_t	cadence;
+	int32_t		type_shot;
+	ssize_t		sprite[16];
+	u_int32_t	decal;
+}					t_c_weapon;
+
 typedef struct		s_c_ph
 {
 	t_fixed		gravity;
@@ -66,12 +81,11 @@ typedef struct		s_c_ph
 typedef struct		s_c_player
 {
 	t_c_ph			spawn;
-	// float		life;
+	t_fixed			life;
+	u_int32_t		weapons[2];
+	u_int32_t		secondary;
+	u_int32_t		equiped;
 	// float		armor;
-	// size_t		inventory;
-	// size_t		ninventory;
-	// uint8_t		equiped;
-	// size_t		weapons[5];
 }					t_c_player;
 
 typedef struct		s_c_entity
@@ -138,11 +152,14 @@ typedef struct		s_c_game
 {
 	size_t		magic;
 	t_c_player	player;
+	size_t		ninventory;
+	size_t		loc_inventory;
 	size_t		nmaterials;
 	size_t		loc_mats;
 	size_t		npoints;
 	size_t		loc_points;
 	size_t		nwalls;
+	size_t		nuwalls;
 	size_t		loc_walls;
 	size_t		nsectors;
 	size_t		loc_sectors;
@@ -150,6 +167,8 @@ typedef struct		s_c_game
 	size_t		loc_portals;
 	size_t		nentities;
 	size_t		loc_entities;
+	size_t		nweapons;
+	size_t		loc_weapons;
 	size_t		ntextures;
 	size_t		loc_textures;
 	size_t		nmusic;

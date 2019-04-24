@@ -35,21 +35,50 @@ void			verify_magic(void *t_c_struct, size_t magic, size_t index)
 	}
 }
 
-t_player		parse_player(t_c_player player)
+t_array			parse_inventory(void *buf, t_save save, t_entity *entities,\
+size_t n_inventory)
+{
+	t_array		res;
+	size_t		index;
+	t_entity	*entity;
+	size_t		i;
+
+	res = safe_anew(NULL, 1, sizeof(t_entity *), "loader");
+	i = 0;
+	while (i < n_inventory)
+	{
+		index = *(size_t *)dump_struct(buf, save.index + sizeof(size_t) * i,
+			sizeof(size_t), save.max);
+		entity = id_to_p(index, entities, sizeof(t_entity));
+		apush(&res, &entity);
+		i++;
+	}
+	return (res);
+}
+
+t_player		parse_player(t_c_game game, t_game new_game, void *buf,\
+t_save save)
 {
 	t_player	res;
 
 	res = player_default();
-	res.physic.gravity = f_to_float(player.spawn.gravity);
-	res.physic.height = f_to_float(player.spawn.height);
-	res.physic.radius = f_to_float(player.spawn.radius);
-	res.physic.pos = fvec3_to_vec3(player.spawn.pos);
-	res.physic.speed_max = fvec3_to_vec3(player.spawn.speed_max);
-	res.physic.look_v = player.spawn.look.v;
-	res.physic.look_h = f_to_float(player.spawn.look.u);
+	res.physic.gravity = f_to_float(game.player.spawn.gravity);
+	res.physic.height = f_to_float(game.player.spawn.height);
+	res.physic.radius = f_to_float(game.player.spawn.radius);
+	res.physic.pos = fvec3_to_vec3(game.player.spawn.pos);
+	res.physic.speed_max = fvec3_to_vec3(game.player.spawn.speed_max);
+	res.physic.look_v = game.player.spawn.look.v;
+	res.physic.look_h = f_to_float(game.player.spawn.look.u);
 	if (res.physic.look_h > M_PI / 2 && res.physic.look_h < -M_PI / 2)
 		res.physic.look_h = 0;
-	res.physic.sector_id = player.spawn.sector_id;
+	res.physic.sector_id = game.player.spawn.sector_id;
+	res.life = game.player.life;
+	res.weapons[0] = game.player.weapons[0];
+	res.weapons[1] = game.player.weapons[1];
+	res.secondary = game.player.secondary;
+	res.equiped = game.player.equiped;
+	res.inventory = parse_inventory(buf, save, new_game.entities,
+		game.ninventory);
 	return (res);
 }
 
@@ -57,7 +86,6 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 {
 	t_game res;
 
-	res.player = parse_player(game.player);
 	save.index = game.loc_textures;
 	res.textures = parse_textures(buf, save, game.ntextures);
 	res.ntextures = game.ntextures;
@@ -70,6 +98,7 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_walls;
 	res.walls = parse_walls(buf, save, res.materials, game.nwalls);
 	res.nwalls = game.nwalls;
+	res.nuwalls = game.nuwalls;
 	save.index = game.loc_sectors;
 	res.sectors = parse_sectors(buf, save, res.materials, game.nsectors);
 	res.nsectors = game.nsectors;
@@ -79,6 +108,11 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_entities;
 	res.entities = parse_entities(buf, save, res.materials, game.nentities);
 	res.nentities = game.nentities;
+	save.index = game.loc_weapons;
+	res.weapons = parse_weapons(buf, save, res.textures, game.nweapons);
+	res.nweapons = game.nweapons;
+	save.index = game.loc_inventory;
+	res.player = parse_player(game, res, buf, save);
 	return (res);
 }
 

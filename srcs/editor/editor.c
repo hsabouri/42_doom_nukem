@@ -16,7 +16,7 @@ t_env				editor_loop(t_env env, size_t frame)
 {
 	t_color			*content;
 	int				pitch;
-
+	
 	content = NULL;
 	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
 	env.current_buffer = content;

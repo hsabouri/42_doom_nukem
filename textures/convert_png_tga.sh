@@ -16,8 +16,8 @@ do
         do
 			nfichier=$dossier$i$extention
             echo "$fichier"
-			convert $dossier/$fichier -alpha on -channel rgba -flop $dossier/$nfichier && rm $dossier/$fichier
-            i=$(($i + 1))
+			convert $dossier/$fichier -alpha on -channel rgba $dossier/$nfichier && rm $dossier/$fichier && i=$(($i + 1))
+            # magick convert $dossier/$fichier -flop $dossier/$nfichier
         done
     fi
 done

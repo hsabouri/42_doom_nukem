@@ -21,10 +21,12 @@
 # include <libft.h>
 # include <vec.h>
 # include <tga.h>
+# include "./weapons.h"
 
 # ifndef LOAD_SAVE_H
 #  include <SDL2/SDL_mixer.h>
 # endif
+
 
 typedef enum		e_mode
 {
@@ -66,37 +68,6 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
-
-/*
-typedef enum			u_wtype
-{
-	GUN,
-	MACHINE_GUN,
-	SNIPER,
-	PLASMA_RIFLE,
-	GRENADE
-}						t_wtype;
-
-typedef struct			s_weapon
-{
-	t_wtype		type;
-	float		damage;
-	uint16_t	cooldown;
-	uint16_t	munitions;
-}						t_weapon;
-*/
-
-typedef struct		s_player
-{
-	t_ph		physic;
-	t_ph		spawn;
-	//float		life;
-	//float		armor;
-	//t_array		inventory;
-	//uint8_t		equiped;
-	//t_weapon	weapons[5];
-}					t_player;
-
 typedef struct		s_entity
 {
 	t_ph		physic;
@@ -107,6 +78,18 @@ typedef struct		s_entity
 	//t_weapon weapons;
 	int 		damage;
 }					t_entity;
+
+typedef struct		s_player
+{
+	t_ph		physic;
+	t_ph		spawn;
+	size_t		life;
+	u_int32_t	weapons[2];
+	u_int32_t	secondary;
+	u_int32_t	equiped;
+	t_array		inventory;
+	// float		armor;
+}					t_player;
 
 typedef struct		s_portal
 {
@@ -175,6 +158,8 @@ typedef struct		s_game
 	size_t			nmaterials;
 	t_img			*textures;
 	size_t			ntextures;
+	t_weapon		*weapons;
+	size_t			nweapons;
 	t_array			music;
 	size_t			played_music;
 	t_array			sounds;
@@ -183,6 +168,6 @@ typedef struct		s_game
 	u_int32_t		*id_buf;
 }					t_game;
 
-t_game				generate_map(void);
+t_game				generate_map(t_game game);
 
 #endif

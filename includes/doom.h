@@ -49,6 +49,13 @@
 #  define ON_LINUX 0
 # endif
 
+typedef	enum	e_game_mode
+{
+	MENU_MODE,
+	GAME_MODE,
+	QUIT
+}				t_game_mode;
+
 typedef struct			s_event
 {
 	int			any;
@@ -144,7 +151,7 @@ typedef struct			s_env
 	char		*file;
 	t_game		game;
 	int			toggle_editor;
-	int			game_mode;
+	t_game_mode	game_mode;
 	int			init_game;
 	t_editor	editor;
 	t_color		*current_buffer;
@@ -208,5 +215,14 @@ void					clean_texture(t_env env);
 
 t_component				*init_menu(t_env *env, t_sdl *sdl);
 t_env					menu_loop(t_env env, size_t frame);
+
+// a enlever a fin projet
+t_array					init_sprite_gun();
+t_array					init_sprite_smg();
+t_array					init_sprite_shotgun();
+t_array					init_sprite_revolver();
+t_array					init_sprite_nyan_gun();
+t_array					init_sprite_grenade();
+t_array					init_sprite_mine();
 
 #endif

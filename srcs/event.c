@@ -118,6 +118,12 @@ static void		keyactions(int scancode, t_env *env)
 	if (!env->toggle_editor &&
 		(scancode == SDL_SCANCODE_MINUS || scancode == SDL_SCANCODE_KP_MINUS))
 		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
+	if (scancode == SDL_SCANCODE_TAB)
+		env->game.player.equiped = (env->game.player.equiped == 1) ? 0 : 1;
+	if (scancode == SDL_SCANCODE_M) // a supprimer
+		env->game.player.life -= 1;
+	if (scancode == SDL_SCANCODE_N) // a supprimer
+		env->game.weapons[env->game.player.weapons[env->game.player.equiped]].ammo -= 1;
 }
 
 t_event			capture_events(t_event events, t_env *env)

@@ -18,9 +18,9 @@
 
 typedef	enum	e_menu_mode
 {
-	MENU_MODE,
-	GAME_MODE,
-	EDITOR_MODE
+	START_MODE,
+	NEW_GAME,
+	NEW_MAP
 }				t_menu_mode;
 
 typedef struct	s_menu_state

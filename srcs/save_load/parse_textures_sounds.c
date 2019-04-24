@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-t_img		*parse_textures(void *buf, t_save save, size_t n_entities)
+t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 {
 	t_c_img		struc_i;
 	t_img		*textures;
@@ -20,8 +20,8 @@ t_img		*parse_textures(void *buf, t_save save, size_t n_entities)
 	size_t		i;
 
 	i = 0;
-	textures = (t_img *)safe_malloc((sizeof(t_img) * n_entities), "loader");
-	while (i < n_entities)
+	textures = (t_img *)safe_malloc((sizeof(t_img) * ntextures), "loader");
+	while (i < ntextures)
 	{
 		struc_i = *(t_c_img *)dump_struct(buf, save.index +
 			sizeof(t_c_img) * i, sizeof(t_c_img), save.max);
@@ -63,7 +63,7 @@ size_t i)
 	ft_strdel(&music.path);
 }
 
-void		parse_audio(void *buf, t_save save, size_t n_entities, t_audio type)
+void		parse_audio(void *buf, t_save save, size_t naudios, t_audio type)
 {
 	t_save_music	music;
 	size_t			i;
@@ -76,7 +76,7 @@ void		parse_audio(void *buf, t_save save, size_t n_entities, t_audio type)
 		mkdir("./audio_tmp/sound_tmp", 0700);
 	i = 0;
 	music.type = type;
-	while (i < n_entities)
+	while (i < naudios)
 	{
 		parse_music(music, buf, save, i);
 		i++;

@@ -57,6 +57,7 @@ typedef struct s_save_music
 
 void			save(const char *filename, t_game game);
 t_game			load(const char *filename, int edit_mode);
+
 t_game			default_map(void);
 void			*dump_struct(void *buf, size_t start, size_t size, size_t max);
 void			verify_magic(void *t_c_struct, size_t magic, size_t index);
@@ -73,6 +74,8 @@ void			write_portals(int fd, t_portal *portals, size_t nportals,\
 t_mat *mats);
 void			translate_entity(int fd, t_entity *entities, size_t nentities,\
 t_mat *mats);
+void			write_weapons(int fd, t_weapon *weapons, size_t nentities,\
+t_img *textures);
 size_t			write_textures(int fd, t_img *textures, size_t ntextures,\
 int index);
 size_t			write_audio(int fd, int index, t_audio type);
@@ -89,6 +92,8 @@ size_t n_entities);
 t_portal		*parse_portals(void *buf, t_save save, size_t n_entities,\
 t_mat *mats);
 t_entity		*parse_entities(void *buf, t_save save, t_mat *mats,\
+size_t n_entities);
+t_weapon		*parse_weapons(void *buf, t_save save, t_img *textures,\
 size_t n_entities);
 void			parse_audio(void *buf, t_save save, size_t n_entities,\
 t_audio);

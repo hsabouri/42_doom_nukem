@@ -14,9 +14,11 @@
 
 t_player	player_default(void)
 {
-	return ((t_player) {
+	t_array inventory = safe_anew(NULL, 1, sizeof(t_entity), "loader");
+
+	t_player player = (t_player) {
 		(t_ph) {
-			0.02,
+			0.05,
 			1.25,
 			0,
 			0,
@@ -27,10 +29,10 @@ t_player	player_default(void)
 			0,
 			0,
 			0,
-			0
+			0,
 		},
 		(t_ph) {
-			0.02,
+			0.05,
 			1.25,
 			0,
 			0,
@@ -41,9 +43,15 @@ t_player	player_default(void)
 			0,
 			0,
 			0,
-			0
-		}
-	});
+			0,
+		},
+		100,
+		{0, 1},
+		6,
+		0,
+		inventory,
+	};
+	return (player);
 }
 
 t_entity	entity_default(void)
@@ -77,7 +85,7 @@ t_entity	entity_default(void)
 			0,
 			0
 		},
-	NULL,
+	safe_anew(NULL, 1, sizeof(t_img), "components"),
 	0});
 }
 
@@ -85,6 +93,6 @@ t_game	default_map(void)
 {
 	t_game game;
 
-	game = generate_map();
+	game = generate_map(game);
 	return (game);
 }

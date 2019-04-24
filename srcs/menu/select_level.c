@@ -19,7 +19,7 @@ t_menu_state *state)
 
 	current = init_display_deco((t_display_deco_state) {
 		.to_look_at = (int *)&state->type,
-		.display_value = GAME_MODE,
+		.display_value = NEW_GAME,
 		.state = state,
 		.invert = 0
 	}, init_cb_button((t_cb_button) {
@@ -35,7 +35,7 @@ t_menu_state *state)
 	apush(&childs, &current);
 	current = init_display_deco((t_display_deco_state) {
 		.to_look_at = (int *)&state->type,
-		.display_value = EDITOR_MODE,
+		.display_value = NEW_MAP,
 		.state = state,
 		.invert = 0
 	}, init_cb_button((t_cb_button) {
@@ -50,7 +50,7 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl));
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {96, 412},
+		.pos = (t_pix) {96, 416},
 		.size = (t_pix) {256, 56},
 		.background = NO_COLOR,
 		.events = &state->env->events,
@@ -61,7 +61,7 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {96, 462},
+		.pos = (t_pix) {96, 467},
 		.size = (t_pix) {256, 56},
 		.background = NO_COLOR,
 		.events = &state->env->events,
@@ -72,7 +72,7 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {96, 513},
+		.pos = (t_pix) {96, 518},
 		.size = (t_pix) {256, 56},
 		.background = NO_COLOR,
 		.events = &state->env->events,
@@ -91,7 +91,7 @@ t_menu_state *state)
 		.img = parse_tga("./textures/menu/return.tga"),
 		.img_active = parse_tga("./textures/menu/return_active.tga"),
 		.to_activate = (int *)&state->type,
-		.active_value = MENU_MODE,
+		.active_value = START_MODE,
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	return (childs);
@@ -102,13 +102,13 @@ static int			self_update(t_component *self, void *parent)
 	const t_menu_state	*parent_state = (t_menu_state *)parent;
 
 	if (self->display == 0 &&
-	(parent_state->type == GAME_MODE || parent_state->type == EDITOR_MODE))
+	(parent_state->type == NEW_GAME || parent_state->type == NEW_MAP))
 	{
 		self->display = 1;
 		return (1);
 	}
 	else if (self->display == 1 &&
-	!(parent_state->type == GAME_MODE || parent_state->type == EDITOR_MODE))
+	!(parent_state->type == NEW_GAME || parent_state->type == NEW_MAP))
 	{
 		self->display = 0;
 		return (1);
