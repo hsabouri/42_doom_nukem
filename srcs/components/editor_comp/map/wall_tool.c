@@ -6,11 +6,19 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 11:34:13 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/07 19:32:07 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/23 17:21:18 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./map.h"
+
+static t_game	delete_unassigned(size_t uwall, t_game game)
+{
+	game.walls = array_close(game.walls, game.nwalls + uwall,
+		game.nwalls + game.nuwalls, sizeof(t_wall));
+	game.nuwalls--;
+	return (game);
+}
 
 static t_game	create_unassigned(ssize_t pts[2], t_game game)
 {
@@ -57,6 +65,12 @@ static int		self_update(t_component *self, void *parent)
 	select_multi(*state->selected_point, state->wall_points, *state->events);
 	if (state->wall_points[0] > -1 && state->wall_points[1] > -1)
 		parent_state->env->game = create_unassigned(state->wall_points,
+			parent_state->env->game);
+	if (*state->selected_wall > -1 && events.mouse_click[SDL_BUTTON_RIGHT])
+		parent_state->env->game = delete_wall(*state->selected_wall,
+			parent_state->env->game);
+	else if (*state->unassigned_wall > -1 && events.mouse_click[SDL_BUTTON_RIGHT])
+		parent_state->env->game = delete_unassigned(*state->unassigned_wall,
 			parent_state->env->game);
 	return (1);
 }

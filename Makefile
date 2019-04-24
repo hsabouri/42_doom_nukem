@@ -58,7 +58,6 @@ OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Iincludes
 CFLAGS += -g 
-#CFLAGS += -O3 -march=native
 #CFLAGS += -Werror
 
 ifeq ($(SAN), yes)
@@ -69,6 +68,10 @@ else
 LDFLAGS = -lasan
 CFLAGS += -fsanitize=address
 endif
+endif
+
+ifeq ($(OPT), yes)
+CFLAGS += -O3 -march=native
 endif
 
 CFLAGS += -I$(LIBFT_DIR)/includes
@@ -94,15 +97,15 @@ message:
 
 libft:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
-	@$(MAKE) -j -s -C $(LIBFT_DIR) SAN=$(SAN)
+	@$(MAKE) -j -s -C $(LIBFT_DIR) SAN=$(SAN) OPT=$(OPT)
 
 libvec:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
-	@$(MAKE) -j -s -C $(LIBVEC_DIR) SAN=$(SAN)
+	@$(MAKE) -j -s -C $(LIBVEC_DIR) SAN=$(SAN) OPT=$(OPT)
 
 libtga:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $@
-	@$(MAKE) -j -s -C $(LIBTGA_DIR) SAN=$(SAN)
+	@$(MAKE) -j -s -C $(LIBTGA_DIR) SAN=$(SAN) OPT=$(OPT)
 
 $(BIN): $(OBJS)
 	@echo -e "$(BLUE)" "[LINK]" "$(NO_COLOR)" $@

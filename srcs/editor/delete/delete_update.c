@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_del_update.c                                :+:      :+:    :+:   */
+/*   delete_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 16:17:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:14:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
 
-// ADD POINT MODIFICATION
-t_game	del_update_portals(ssize_t wall, ssize_t sector, t_game game)
+t_game	del_update_portals(ssize_t pts, ssize_t wall, ssize_t sector,
+ssize_t mat, t_game game)
 {
 	size_t		i;
 	t_portal	curr;
@@ -27,6 +27,10 @@ t_game	del_update_portals(ssize_t wall, ssize_t sector, t_game game)
 			game = delete_portal(i--, game);
 		else
 		{
+			if (pts >= 0 && curr.a > pts)
+				curr.a--;
+			if (pts >= 0 && curr.b > pts)
+				curr.b--;
 			if (wall >= 0 && curr.from_wall > wall)
 				curr.from_wall--;
 			if (wall >= 0 && curr.to_wall > wall)
@@ -35,6 +39,10 @@ t_game	del_update_portals(ssize_t wall, ssize_t sector, t_game game)
 				curr.from_sector--;
 			if (sector >= 0 && curr.to_sector > sector)
 				curr.to_sector--;
+			if (mat >= 0 && &game.materials[mat] == curr.mat)
+				curr.mat = game.materials;
+			if (mat >= 0 && &game.materials[mat] > curr.mat)
+				curr.mat = curr.mat - sizeof(t_mat);
 			game.portals[i] = curr;
 		}
 		i++;
@@ -60,6 +68,8 @@ t_game	del_update_walls(ssize_t pts, ssize_t portal, ssize_t mat, t_game game)
 			if (pts >= 0 && curr.b > pts)
 				curr.b--;
 			if (portal >= 0 && curr.portal == portal)
+				curr.portal = -1;
+			else if (portal >= 0 && curr.portal > portal)
 				curr.portal--;
 			if (mat >= 0 && &game.materials[mat] == curr.mat)
 				curr.mat = game.materials;
@@ -87,7 +97,7 @@ t_game game)
 			game = delete_sector(i--, game);
 		else
 		{
-			if (wall >= 0 && curr.start + curr.number >= wall &&\
+			if (wall >= 0 && curr.start + curr.number > wall &&\
 			curr.start <= wall)
 				curr.number--;
 			if (wall >= 0 && curr.start > wall)

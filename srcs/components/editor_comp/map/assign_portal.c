@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_portal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:42:38 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/17 16:19:28 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/24 16:49:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ static int		self_update(t_component *self, void *parent)
 {
 	t_assign_portal_tool		*state;
 	t_event						events;
+	t_game						*game;
 
 	state = (t_assign_portal_tool *)self->state;
 	state->parent = (t_editor_map_state *)parent;
+	game = &state->parent->env->game;
 	events = *state->events;
 	if (state->parent->tool != CREATE_PORTAL)
 	{
@@ -47,7 +49,12 @@ static int		self_update(t_component *self, void *parent)
 		self->display = 1;
 	*state->selected_wall = select_wall(*state->parent,
 		*state->selected_wall, events);
-	select_multi_portal(*state->selected_wall, state->walls, *state->events);
+	if (*state->selected_wall > -1 &&
+		game->walls[*state->selected_wall].portal > -1 &&
+		events.mouse_click[SDL_BUTTON_RIGHT])
+		*game = delete_portal(game->walls[*state->selected_wall].portal, *game);
+	else
+		select_multi_portal(*state->selected_wall, state->walls, *state->events);
 	if (state->walls[0] >= 0 && state->walls[1] >= 0)
 	{
 		if (state->walls[0] != state->walls[1])
