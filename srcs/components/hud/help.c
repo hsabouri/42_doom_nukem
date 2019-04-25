@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:21:20 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/14 15:21:21 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/04/25 13:18:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_help_state	*init_help_state(void *parent_state)
 	t_help_state	*state;
 
 	hud = (t_hud_state *)parent_state;
-	state = (t_help_state *)safe_malloc(sizeof(t_inventory_state), "component");
+	state = (t_help_state *)safe_malloc(sizeof(t_help_state), "component");
 	state->help = hud->env->game.textures[16];
 	state->is_active = 0;
 	state->is_display = 0;
