@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:13:01 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/03 14:43:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/25 11:19:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static int				self_update(t_component *self, void* parent)
 	(void)parent;
 	ret = 0;
 	state = (t_cb_button_state *)self->state;
-	if (is_clicked_on(*self, *state->events))
+	if ((state->scancode != SDL_SCANCODE_UNKNOWN &&
+		state->events->keys[state->scancode]) ||
+		is_clicked_on(*self, *state->events))
 	{
 		state->is_active = 1;
 		ret = 1;

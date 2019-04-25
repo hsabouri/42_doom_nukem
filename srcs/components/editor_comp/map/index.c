@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/12 15:27:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/25 11:14:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ static int					grid_size(void *map_state)
 	t_editor_map_state *state;
 
 	state = (t_editor_map_state *)map_state;
-	if (state->grid_size + 1 >= 5)
+	if (state->grid_size * 2 > 8)
 		state->grid_size = 0;
+	else if (state->grid_size > 0)
+		state->grid_size *= 2;
 	else
-		state->grid_size += 1;
+		state->grid_size = 1;
 	return (1);
 }
 
