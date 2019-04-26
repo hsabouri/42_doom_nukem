@@ -82,7 +82,7 @@ u_int32_t *id_buf)
 	int					i;
 
 	i = 0;
-	render = sort_entities(render, context);
+	render = sort_entities(render);
 	while (i < render.nentities)
 	{
 		current = render.entities[i];

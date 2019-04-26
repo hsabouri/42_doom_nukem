@@ -19,7 +19,7 @@ t_vec2		player_space(t_vec2 vec, t_ph physic)
 	return (vec2_rot(vec2_sub(vec, vec3_to_vec2(physic.pos)), -physic.look_h));
 }
 
-static void	minimap(t_game game, t_color *buf)
+void		minimap(t_game game, t_color *buf)
 {
 	t_vec2	a;
 	t_vec2	b;

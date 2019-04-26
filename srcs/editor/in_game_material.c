@@ -64,7 +64,6 @@ static t_selected	change_or_not(t_event events, t_selected selected)
 t_env				change_material_tool(t_env env, t_selected selected)
 {
 	t_mat				**m;
-	t_portal			portal;
 
 	m = NULL;
 	selected = change_or_not(env.events, selected);

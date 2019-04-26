@@ -32,7 +32,7 @@ t_fvec2 pos)
 			current.dis = fvec2_ssize(current.a);
 			current.b = fvec2_add(current.a, tmp);
 			current.a = fvec2_sub(current.a, tmp);
-			if (is_in_limit(limit, context, take_left(current.a, current.b),
+			if (is_in_limit(limit, take_left(current.a, current.b),
 				take_right(current.a, current.b)))
 			{
 				current.id = i;
@@ -62,7 +62,7 @@ t_bunch	build_bunch(const t_game game, const t_context context, const t_limit li
 		current.a = fvec2_sub(vec2_to_fvec2(game.points[game.walls[i].a]), pos);
 		current.b = fvec2_sub(vec2_to_fvec2(game.points[game.walls[i].b]), pos);
 		if ((size_t)context.mask != i &&
-			is_in_limit(limit, context, current.a, current.b))
+			is_in_limit(limit, current.a, current.b))
 		{
 			current.id = i;
 			current.size = f_from_float(1 / vec2_inv_size(vec2_sub(

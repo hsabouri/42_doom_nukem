@@ -12,7 +12,7 @@
 
 #include <editor.h>
 
-t_env				editor_loop(t_env env, size_t frame)
+t_env				editor_loop(t_env env)
 {
 	t_color			*content;
 	int				pitch;

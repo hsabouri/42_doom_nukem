@@ -70,7 +70,6 @@ t_component		init_assign_portal_tool(t_env *env, t_editor_map_state *parent,
 t_sdl *sdl)
 {
 	t_component				ret;
-	t_component				child;
 	t_assign_portal_tool	*state;
 
 	state = (t_assign_portal_tool *)safe_malloc(sizeof(t_assign_portal_tool),

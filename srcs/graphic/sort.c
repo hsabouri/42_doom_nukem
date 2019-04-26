@@ -22,7 +22,7 @@ void			swap_entities(t_section_entity *a, t_section_entity *b)
 	*b = tmp;
 }
 
-t_render		sort_entities(t_render render, t_context context)
+t_render		sort_entities(t_render render)
 {
 	int			current_id;
 	int			s_id;

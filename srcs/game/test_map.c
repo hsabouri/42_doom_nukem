@@ -12,9 +12,10 @@
 
 #include <doom.h>
 
-t_game	generate_map(t_game game)
+t_game	generate_map(void)
 {
-
+	t_game game;
+	
 	t_img *textures = (t_img *)safe_malloc(50 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga");
 	textures[1] = parse_tga("./textures/floor.tga");

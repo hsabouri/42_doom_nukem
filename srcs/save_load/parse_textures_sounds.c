@@ -51,7 +51,7 @@ size_t i)
 		verify_magic(&struc_m, MUSIC_MAGIC, i);
 	else
 		verify_magic(&struc_m, SOUND_MAGIC, i);
-	music.path = (char *)safe_malloc((sizeof(char) * (32 + ft_strlen(ft_itoa(i)))), "loader");
+	music.path = (char *)safe_malloc((sizeof(char) * (33 + ft_strlen(ft_itoa(i)))), "loader");
 	music.path = (music.type == MUSIC) ? ft_strcpy(music.path,
 		"./audio_tmp/music_tmp/music_") : ft_strcpy(music.path,
 		"./audio_tmp/sound_tmp/sound_");

@@ -13,6 +13,8 @@
 #include "./map.h"
 #include "../../common/common.h"
 
+//a supprimer a la fin
+
 static t_array		generator(void *parent)
 {
 	const size_t	nbuttons = ((t_editor_map_state *)parent)->n_buttons;
