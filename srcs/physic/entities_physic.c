@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities_physic.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/20 14:41:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:31:20 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,24 @@ static t_vec3	wall_touch(t_touch touch, t_ph *physic, int wall, t_game game)
 	return (next_pos);
 }          
 
-static t_vec3	move_entities(t_ph *physic, t_game game, int wall, float old_timer)
+static t_vec3	move_entities(t_ph *physic, t_game *game, int wall, float old_timer)
 {
 	t_vec3	next_pos;
 	t_touch	touch;
 	t_tp	teleport;
 
 	next_pos = vec3_add(physic->pos, physic->speed);
-	physic->speed = z_move(physic, game, old_timer);
+	physic->speed = z_move(physic, *game, old_timer);
 	next_pos = vec3_add(physic->pos, physic->speed);
-	touch = collision(next_pos, *physic, game, wall);
+	touch = collision(next_pos, *physic, *game, wall);
 	if (touch.wall >= 0)
 	{
 		touch.pos = next_pos;
-		if (game.walls[touch.wall].portal == -1)
-			return (wall_touch(touch, physic, wall, game));
+		if ((*game).walls[touch.wall].portal == -1)
+			return (wall_touch(touch, physic, wall, *game));
 		else
 		{
-			set_tp(&teleport, touch, game);
+			set_tp(&teleport, touch, *game);
 			physic->pos = teleportation(physic->pos, game, teleport, physic);
 			return (move_entities(physic, game, teleport.portal_out, old_timer));
 		}
@@ -80,28 +80,42 @@ static t_vec3	move_entities(t_ph *physic, t_game game, int wall, float old_timer
 	return (next_pos);
 }
 
-static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game game, size_t id)
+			// tmp_log.e_actif = game->player.my_entity;
+			// tmp_log.condi = TRIGGER_TOUCH;
+			// tmp_log.e_passif = game->entities[i];
+			// apush(&game->log, &tmp_log);
+
+static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 {
+	t_trigger tmp_log;
+
 	t_vec3	pos;
 	size_t	i;
 	float	d;
 
 	i = -1;
 	pos = n_physic.pos;
-	while (++i < game.nentities)
+
+	while (++i < game->nentities)
 	{
-		d = circle_circle(n_physic, game.entities[i].physic, COL_ENTITY);
+
+		d = circle_circle(n_physic, game->entities[i].physic, COL_ENTITY);
 		if (d != -1 && i != id)
 		{
-			if (n_physic.pos.x > game.entities[i].physic.pos.x)
+			tmp_log.e_actif = game->player.my_entity;
+			tmp_log.condi = TRIGGER_TOUCH;
+			tmp_log.e_passif = game->entities[i];
+			apush(&game->log, &tmp_log);
+
+			if (n_physic.pos.x > game->entities[i].physic.pos.x)
 			{
-				physic.pos.x += (game.entities[i].physic.radius - d);
-				physic.pos.y += (game.entities[i].physic.radius - d);
+				physic.pos.x += (game->entities[i].physic.radius - d);
+				physic.pos.y += (game->entities[i].physic.radius - d);
 			}
 			else
 			{
-				physic.pos.x -= (game.entities[i].physic.radius - d);
-				physic.pos.y -= (game.entities[i].physic.radius - d);
+				physic.pos.x -= (game->entities[i].physic.radius - d);
+				physic.pos.y -= (game->entities[i].physic.radius - d);
 			}
 			pos = vec3_add(physic.pos, physic.speed);
 		}
@@ -109,22 +123,46 @@ static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game game, size_t id)
 	return (pos);
 }
 
-static void		col_interact(t_ph n_physic, t_game game, size_t id)
+int		is_here(t_game game, t_trigger trigger)
 {
+	int j;
+	t_trigger *c_log;
+
+	j = 0;
+	while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
+	{
+		if (c_log->e_actif.id == trigger.e_actif.id && c_log->e_passif.id == trigger.e_passif.id && c_log->condi == trigger.condi)
+			return 1;
+		j++;
+	}
+	return 0;
+} // wtf ??
+
+void		col_interact(t_ph n_physic, t_game *game, size_t id)
+{
+	t_trigger tmp_log;
+
 	size_t	cpt;
 	size_t	log_inter;
 
 	cpt = 0;
 	log_inter = 0;
-	while (cpt < game.nentities)
+	while (cpt < game->nentities)
 	{
-		if (interact(n_physic, game.entities[cpt].physic) == 1 && cpt != id)
-			log_inter = cpt; //a remplacer par log des collisions
+
+		if (interact(n_physic, game->entities[cpt].physic) == 1 && cpt != id) {
+			
+			tmp_log.e_actif = game->player.my_entity;
+			tmp_log.condi = TRIGGER_INTERACT;
+			tmp_log.e_passif = game->entities[cpt];
+
+			apush(&game->log, &tmp_log);
+		}
 		cpt++;
 	}
 }
 
-t_ph			entities_physic(t_ph physic, t_game game, size_t id, float old_timer)
+t_ph			entities_physic(t_ph physic, t_game *game, size_t id, float old_timer)
 {
 	t_ph		n_physic;
 	t_last_pos	last_pos;
@@ -133,17 +171,17 @@ t_ph			entities_physic(t_ph physic, t_game game, size_t id, float old_timer)
 	n_physic.pos = move_entities(&n_physic, game, -1, old_timer);
 	n_physic.speed.x = 0;
 	n_physic.speed.y = 0;
-	if ((n_physic.pos.z > game.sectors[n_physic.sector_id].floor - 0.1 &&
-		n_physic.pos.z < game.sectors[n_physic.sector_id].floor + 0.1) ||
+	if ((n_physic.pos.z > game->sectors[n_physic.sector_id].floor - 0.1 &&
+		n_physic.pos.z < game->sectors[n_physic.sector_id].floor + 0.1) ||
 		n_physic.fly)
 	{
 		n_physic.speed.z = 0;
 		n_physic.jump = 0;
 	}
-	last_pos.pos = game.player.physic.pos;
-	last_pos.sector_id = game.player.physic.sector_id;
+	last_pos.pos = game->player.my_entity.physic.pos;
+	last_pos.sector_id = game->player.my_entity.physic.sector_id;
 	n_physic.pos = col_entities(n_physic, physic, game, id);
-	n_physic = entities_track(n_physic, game, last_pos);
+	n_physic = entities_track(n_physic, *game, last_pos);
 	col_interact(n_physic, game, id);
 	return (n_physic);
 }

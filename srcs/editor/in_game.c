@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_game.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:01:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 17:54:44 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/01 15:04:19 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_env		game_editing(t_env env, t_player player)
 	t_game_tool	last;
 	t_selected	sel;
 
-	sector = &env.game.sectors[player.physic.sector_id];
+	sector = &env.game.sectors[player.my_entity.physic.sector_id];
 	sel = world_selector(env.game);
 	last = env.editor.game_tool;
 	print_selected(sel, &env.sdl);

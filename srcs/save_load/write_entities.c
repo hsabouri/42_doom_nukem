@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   write_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 17:13:57 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/19 16:21:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/01 16:23:26 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-void	translate_entity(int fd, t_entity *entities, size_t nentities,\
+void	write_entities(int fd, t_entity *entities, size_t nentities,\
 t_mat *mats)
 {
 	t_c_entity	res;

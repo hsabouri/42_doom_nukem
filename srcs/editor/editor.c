@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:29:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/27 16:26:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/02 16:40:02 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_env				editor_loop(t_env env)
 	*env.component = trigger_component(&env, *env.component, &env.sdl);
 	display_component(*env.component, &env.sdl);
 
-	display_text(&env.sdl);
 	SDL_RenderPresent(env.sdl.renderer);
 	return (env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/01/23 13:34:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:55:48 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,48 @@ t_player		parse_player(t_c_game game, t_game new_game, void *buf,\
 t_save save)
 {
 	t_player	res;
+	t_player	current;
+	t_c_player  struc_p;
+	t_mat		*mat;
+	size_t		j;
 
 	res = player_default();
-	res.physic.gravity = f_to_float(game.player.spawn.gravity);
-	res.physic.height = f_to_float(game.player.spawn.height);
-	res.physic.radius = f_to_float(game.player.spawn.radius);
-	res.physic.pos = fvec3_to_vec3(game.player.spawn.pos);
-	res.physic.speed_max = fvec3_to_vec3(game.player.spawn.speed_max);
-	res.physic.look_v = game.player.spawn.look.v;
-	res.physic.look_h = f_to_float(game.player.spawn.look.u);
-	if (res.physic.look_h > M_PI / 2 && res.physic.look_h < -M_PI / 2)
-		res.physic.look_h = 0;
-	res.physic.sector_id = game.player.spawn.sector_id;
-	res.life = game.player.life;
-	res.weapons[0] = game.player.weapons[0];
-	res.weapons[1] = game.player.weapons[1];
-	res.secondary = game.player.secondary;
-	res.equiped = game.player.equiped;
-	res.inventory = parse_inventory(buf, save, new_game.entities,
+	struc_p = *(t_c_player *)dump_struct(buf, save.index +
+			sizeof(t_c_player), sizeof(t_c_player), save.max);
+	verify_magic(&struc_p, PLAYER_MAGIC, 0);
+	current = player_default();
+	current.my_entity.physic.gravity = f_to_float(struc_p.my_entity.spawn.gravity);
+	current.my_entity.physic.height = f_to_float(struc_p.my_entity.spawn.height);
+	current.my_entity.physic.radius = f_to_float(struc_p.my_entity.spawn.radius);
+	current.my_entity.physic.pos = fvec3_to_vec3(struc_p.my_entity.spawn.pos);
+	current.my_entity.physic.speed_max = fvec3_to_vec3(struc_p.my_entity.spawn.speed_max);
+	current.my_entity.physic.look_v = struc_p.my_entity.spawn.look.v;
+	current.my_entity.physic.look_h = f_to_float(struc_p.my_entity.spawn.look.u);
+	if (current.my_entity.physic.look_h > M_PI / 2 && current.my_entity.physic.look_h < -M_PI / 2)
+		current.my_entity.physic.look_h = 0;
+	current.my_entity.physic.sector_id = struc_p.my_entity.spawn.sector_id;
+	current.my_entity.mat = safe_anew(NULL, 1, sizeof(t_mat *), "loader");
+	j = 0;
+	while (j < 16)
+	{
+		mat = (struc_p.my_entity.mat[j] == -1) ? NULL : 
+			id_to_p(struc_p.my_entity.mat[j], new_game.materials, sizeof(t_mat));
+		if (!mat)
+			break;
+		else
+			apush(&current.my_entity.mat, &mat);
+		j++;
+	}
+	current.life = struc_p.life;
+	current.weapons[0] = struc_p.weapons[0];
+	current.weapons[1] = struc_p.weapons[1];
+	current.secondary = struc_p.secondary;
+	current.equiped = struc_p.equiped;
+	save.index = game.loc_inventory;
+	current.inventory = parse_inventory(buf, save, new_game.entities,
 		game.ninventory);
+	current.my_entity.damage = struc_p.my_entity.damage;
+	res = current;
 	return (res);
 }
 
@@ -111,7 +134,7 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_weapons;
 	res.weapons = parse_weapons(buf, save, res.textures, game.nweapons);
 	res.nweapons = game.nweapons;
-	save.index = game.loc_inventory;
+	save.index = game.loc_player;
 	res.player = parse_player(game, res, buf, save);
 	return (res);
 }
@@ -125,7 +148,7 @@ t_game			load(const char *filename, int edit_mode)
 	t_save		save;
 
 	if (!(buf = dump_file(filename, edit_mode, &max)))
-		res = default_map();
+		res = generate_map();
 	else
 	{
 		game = *(t_c_game *)dump_struct(buf, 0, sizeof(t_c_game), max);

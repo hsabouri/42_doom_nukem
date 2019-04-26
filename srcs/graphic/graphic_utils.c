@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/23 12:36:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/02 16:40:13 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,4 @@ t_text				text(const char *str, t_pix pos, t_sdl *sdl)
 		SDL_FreeSurface(text_surface);
 	sdl->text = *apush(&sdl->text, &text);
 	return (text);
-}
-
-void				display_text(t_sdl *sdl)
-{
-	t_text	*current;
-
-	while ((current = (t_text*)apop(&sdl->text)))
-	{
-		SDL_RenderCopy(sdl->renderer, current->text_texture, NULL,\
-			&((SDL_Rect) {current->x, current->y, current->w * 0.8,\
-			current->h}));
-		SDL_DestroyTexture(current->text_texture);
-	}
 }

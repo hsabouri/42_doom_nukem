@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 12:07:00 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/27 16:07:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 15:30:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_component		init_root(t_env *env, t_sdl *sdl)
 	ret.render = NULL;
 	ret.complete_render = &empty_render;
 	ret.last_render = NULL;
-	ret.childs = safe_anew(NULL, 1, sizeof(t_component), "component");
+	ret.childs = safe_anew(NULL, 2, sizeof(t_component), "component");
 	ret.childs = init_childs(ret.childs, env, sdl);
 	return (ret);
 }

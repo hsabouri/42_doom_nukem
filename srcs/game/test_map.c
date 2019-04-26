@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/14 17:25:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:43:01 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,6 +404,7 @@ t_game	generate_map(void)
 
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
+		0,
 		(t_ph) {
 			0.02,
 			1.50,
@@ -436,6 +437,7 @@ t_game	generate_map(void)
 		0
 	});
 	entities[1] = ((t_entity){
+		1,
 		(t_ph) {
 			0.02,
 			1.50,
@@ -458,7 +460,6 @@ t_game	generate_map(void)
 			(t_vec3){6, 8, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
-			0,
 			0,
 			0,
 			0,
@@ -468,11 +469,12 @@ t_game	generate_map(void)
 		1
 	});
 	entities[2] = ((t_entity){
+		2,
 		(t_ph) {
 			0.02,
 			1.50,
 			0.5,
-			3,
+			2,
 			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -486,7 +488,7 @@ t_game	generate_map(void)
 			0.02,
 			1.50,
 			0.5,
-			3,
+			2,
 			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
@@ -500,6 +502,7 @@ t_game	generate_map(void)
 		1
 	});
 	entities[3] = ((t_entity){
+		3,
 		(t_ph) {
 			0.02,
 			1.50,
@@ -563,33 +566,38 @@ t_game	generate_map(void)
 	apush(&inventory, &ent);
 
 	t_player player = (t_player) {
-		(t_ph) {
-			0.05,
-			1.25,
-			0,
-			0,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0,
-		},
-		(t_ph) {
-			0.05,
-			1.25,
-			0,
-			0,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0,
+		(t_entity) {
+			-1,
+			(t_ph) {
+				0.02,
+				1.50,
+				0.5,
+				0,
+				(t_vec3){2, 10, 0},
+				(t_vec3){0, 0, 0},
+				(t_vec3){1, 1, 1},
+				0,
+				0,
+				0,
+				0,
+				0
+			},
+			(t_ph) {
+				0.02,
+				1.50,
+				0.5,
+				0,
+				(t_vec3){2, 10, 0},
+				(t_vec3){0, 0, 0},
+				(t_vec3){1, 1, 1},
+				0,
+				0,
+				0,
+				0,
+				0
+			},
+			multi,
+			1
 		},
 		90,
 		{0, 1},
@@ -598,7 +606,87 @@ t_game	generate_map(void)
 		inventory
 	};
 
+	// t_game_event *g_e = (t_game_event *)malloc(2 * sizeof(t_game_event));
+
+	t_entity dummy = ((t_entity){
+		10,
+		(t_ph) {
+			0,
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			0,
+			0,
+			2,
+			0,
+			0
+		},
+		(t_ph) {
+			0,
+			0,
+			0,
+			0,
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			(t_vec3){0, 0, 0},
+			0,
+			0,
+			2,
+			0,
+			0
+		},
+		multi,
+		0
+		});
+
+	t_array c_log = anew(NULL, 100, sizeof(t_trigger));
+
+	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
+
+	*first_e = (t_game_event){
+		(t_pelem) {NULL},
+		(t_trigger){
+			player.my_entity, TRIGGER_INTERACT, entities[2] // Game event : list event wanted
+			}
+		};
+
+	t_game_event * secon_e = (t_game_event *)malloc(sizeof(t_game_event));
+	*secon_e = (t_game_event){
+		(t_pelem) {NULL},
+		(t_trigger){
+			player.my_entity, TRIGGER_TOUCH, entities[1] // Game event : list event wanted
+			}
+		};
+
+			t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
+	*third_e = (t_game_event){
+		(t_pelem) {NULL},
+		(t_trigger){
+			player.my_entity, TRIGGER_SEE, entities[0] // Game event : list event wanted
+			}
+		};
+
+			t_game_event * kuadro_e = (t_game_event *)malloc(sizeof(t_game_event));
+	*kuadro_e = (t_game_event){
+		(t_pelem) {NULL},
+		(t_trigger){
+			dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
+			}
+		};
+
+	t_plist	g_e	= lpnew(first_e);
+	lppush(&g_e, secon_e);
+	lppush(&g_e, third_e);
+	lppush(&g_e, kuadro_e);
+
 	game.player = player;
+	game.log = c_log;
+	game.nlog = 10;
+	game.waiting_events = g_e;
+	game.nwaiting_events = 10;
 	game.entities = entities;
 	game.nentities = 4;
 	game.sectors = sectors;

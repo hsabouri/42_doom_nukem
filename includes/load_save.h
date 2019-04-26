@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_save.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2019/03/20 14:42:45 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:34:53 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			write_sectors(int fd, t_sector *sectors, size_t nsectors,\
 t_mat *mats);
 void			write_portals(int fd, t_portal *portals, size_t nportals,\
 t_mat *mats);
-void			translate_entity(int fd, t_entity *entities, size_t nentities,\
+void			write_entities(int fd, t_entity *entities, size_t nentities,\
 t_mat *mats);
 void			write_weapons(int fd, t_weapon *weapons, size_t nentities,\
 t_img *textures);

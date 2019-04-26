@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/25 11:57:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:30:50 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "./weapons.h"
 
 # ifndef LOAD_SAVE_H
-#  include <SDL2/SDL_mixer.h>
+#	include <SDL2/SDL_mixer.h>
 # endif
 
 typedef enum		e_mode
@@ -51,6 +51,7 @@ typedef struct		s_mat
 	struct s_mat	*overlay;
 }					t_mat;
 
+
 typedef struct		s_ph
 {
 	float		gravity;
@@ -67,8 +68,45 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
+
+/*
+typedef enum			u_wtype
+{
+	GUN,
+	MACHINE_GUN,
+	SNIPER,
+	PLASMA_RIFLE,
+	GRENADE
+}						t_wtype;
+
+typedef struct			s_weapon
+{
+	t_wtype		type;
+	float		damage;
+	uint16_t	cooldown;
+	uint16_t	munitions;
+}						t_weapon;
+*/
+
+
+typedef enum	e_condition
+{
+	TRIGGER_SEE = 0x1,
+	TRIGGER_TOUCH = 0x2,
+	TRIGGER_INTERACT = 0x3,
+	TRIGGER_SECTOR = 0x4,
+	TRIGGER_NO = 0x0
+}				t_condition;
+
+typedef enum	e_action
+{
+	ACTION_SPAWN = 0x1,
+	ACTION_NO = 0x0
+}				t_action;
+
 typedef struct		s_entity
 {
+	int			id;
 	t_ph		physic;
 	t_ph		spawn;
 	t_array		mat;
@@ -78,10 +116,25 @@ typedef struct		s_entity
 	int 		damage;
 }					t_entity;
 
+typedef struct		s_trigger
+{
+	t_entity	e_actif;
+	t_condition	condi;
+	t_entity	e_passif;
+}					t_trigger;
+
+typedef struct		s_game_event
+{
+	t_pelem		elem;
+	t_trigger	trigger;
+	// int			is_trigger;
+	// t_action	 action;
+}					t_game_event;
+
+
 typedef struct		s_player
 {
-	t_ph		physic;
-	t_ph		spawn;
+	t_entity	my_entity;
 	size_t		life;
 	u_int32_t	weapons[2];
 	u_int32_t	secondary;
@@ -141,7 +194,23 @@ typedef struct		s_chunk
 
 typedef struct		s_game
 {
+	
 	t_player		player;
+	
+	t_array		events;
+	size_t		nevents;
+
+	t_plist 	waiting_events;
+
+	size_t		nwaiting_events;
+
+	// t_trigger	*log;
+	t_array		log;
+	size_t		nlog;
+	
+	t_entity	*entities;
+	size_t		nentities;
+	
 	t_sector		*sectors;
 	size_t			nsectors;
 	t_wall			*walls;
@@ -151,8 +220,6 @@ typedef struct		s_game
 	size_t			nportals;
 	t_vec2			*points;
 	size_t			npoints;
-	t_entity		*entities;
-	size_t			nentities;
 	t_mat			*materials;
 	size_t			nmaterials;
 	t_img			*textures;

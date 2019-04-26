@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:22:20 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/12/22 18:22:21 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/03/11 18:19:10 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_vec3		slide_wall(t_vec3 next_pos, t_game game, t_wall wall)
 	v2_normal = vec2_normalize(v2_normal);
 	d = vec2_dot(v2_normal, game.points[wall.a]);
 	v3_normal = vec2_to_vec3(v2_normal);
-	dist[0] = vec3_dot(v3_normal, game.player.physic.pos) - d;
+	dist[0] = vec3_dot(v3_normal, game.player.my_entity.physic.pos) - d;
 	if (dist[0] < 0)
 	{
 		v3_normal = vec3_scale(v3_normal, -1);

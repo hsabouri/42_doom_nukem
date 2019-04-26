@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/16 11:17:31 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/26 13:16:45 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ static void		keyactions(int scancode, t_env *env)
 			env->file = "default";
 		save(env->file, env->game);
 	}
-	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.physic.fly)
-		env->game.player.physic.jump = 1;
+	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic.fly)
+		env->game.player.my_entity.physic.jump = 1;
 	if (scancode == SDL_SCANCODE_F)
-		env->game.player.physic.fly = (env->game.player.physic.fly) ? 0 : 1;
+		env->game.player.my_entity.physic.fly = (env->game.player.my_entity.physic.fly) ? 0 : 1;
 	if (env->toggle_editor && scancode == SDL_SCANCODE_O)
 		env->editor.current_tool = WALL;
 	if (env->toggle_editor && scancode == SDL_SCANCODE_P)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures_sounds.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:10:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/19 17:10:05 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/04/02 18:03:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 	textures = (t_img *)safe_malloc((sizeof(t_img) * ntextures), "loader");
 	while (i < ntextures)
 	{
-		struc_i = *(t_c_img *)dump_struct(buf, save.index +
-			sizeof(t_c_img) * i, sizeof(t_c_img), save.max);
+		struc_i = *(t_c_img *)dump_struct(buf, save.index + i *
+			sizeof(t_c_img), sizeof(t_c_img), save.max);
 		verify_magic(&struc_i, TEXT_MAGIC, i);
 		current = textures[i];
 		current.width = struc_i.width;

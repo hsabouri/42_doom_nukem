@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/23 13:33:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:57:40 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,41 @@ int fd)
 	}
 }
 
-static t_c_player	translate_player(t_player player)
+static void		write_player(t_player player, int fd, t_mat *materials)
 {
 	t_c_player	res;
+	u_int32_t	index;
+	t_mat		**mat;
+	size_t		j;
 
-	res.spawn.gravity = f_from_float(player.spawn.gravity);
-	res.spawn.height = f_from_float(player.spawn.height);
-	res.spawn.radius = f_from_float(player.spawn.radius);
-	res.spawn.pos = vec3_to_fvec3(player.spawn.pos);
-	res.spawn.speed_max = vec3_to_fvec3(player.spawn.speed_max);
-	res.spawn.look.u = f_from_float(player.physic.look_h);
-	res.spawn.look.v = player.spawn.look_v;
-	res.spawn.sector_id = player.spawn.sector_id;
+	res.magic = PLAYER_MAGIC;
+	res.my_entity.spawn.gravity = f_from_float(player.my_entity.spawn.gravity);
+	res.my_entity.spawn.height = f_from_float(player.my_entity.spawn.height);
+	res.my_entity.spawn.radius = f_from_float(player.my_entity.spawn.radius);
+	res.my_entity.spawn.pos = vec3_to_fvec3(player.my_entity.spawn.pos);
+	res.my_entity.spawn.speed_max = vec3_to_fvec3(player.my_entity.spawn.speed_max);
+	res.my_entity.spawn.look.u = f_from_float(player.my_entity.physic.look_h);
+	res.my_entity.spawn.look.v = player.my_entity.spawn.look_v;
+	res.my_entity.spawn.sector_id = player.my_entity.spawn.sector_id;
 	res.life = player.life;
 	res.weapons[0] = player.weapons[0];
 	res.weapons[1] = player.weapons[1];
 	res.secondary = player.secondary;
 	res.equiped = player.equiped;
-	return (res);
+	j = 0;
+	while ((mat = (t_mat **)ashift(&player.my_entity.mat)))
+	{
+		index = id_from_p(*mat, materials, sizeof(t_mat));
+		res.my_entity.mat[j] = (ssize_t)index;
+		j++;
+	}
+	while (j < 16)
+	{
+		res.my_entity.mat[j] = -1;
+		j++;
+	}
+	res.my_entity.damage = player.my_entity.damage;
+	write_struct(&res, fd, sizeof(t_c_player));
 }
 
 void				write_struct(void *struc, int fd, size_t size)
@@ -62,6 +79,7 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 	game_s.loc_inventory = sizeof(t_c_game);
 	game_s.nmaterials = game.nmaterials;
 	game_s.loc_mats = sizeof(t_c_game) + sizeof(size_t) * game_s.ninventory;
+	game_s.loc_player = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.npoints = game.npoints;
 	game_s.loc_points = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.nwalls = game.nwalls;
@@ -85,9 +103,9 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)\
 		* game.ntextures;
 	game_s.nsounds = game.sounds.len;
-	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music)\
-		* game.music.len;
-	game_s.player = translate_player(game.player);
+	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music) *\
+		game.music.len;
+	printf("n_sound: %zu\n", game.sounds.len);
 	return (game_s);
 }
 
@@ -98,12 +116,13 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	size_t	loc_sound;
 
 	write_inventory(game.player, game.entities,fd);
+	write_player(game.player, fd, game.materials);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
 	write_points(fd, game.points, game.npoints);
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
-	translate_entity(fd, game.entities, game.nentities, game.materials);
+	write_entities(fd, game.entities, game.nentities, game.materials);
 	write_weapons(fd, game.weapons, game.nweapons, game.textures);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);
@@ -130,8 +149,9 @@ void				save(const char *filename, t_game game)
 		game.textures[i].height * game.textures[i].width);
 		i++;
 	}
-	write_music(fd, MUSIC);
-	write_music(fd, SOUND);
+	// write_music(fd, MUSIC);
+	// write_music(fd, SOUND);
 	console_log("FileLoader3030", "Successfully saved file.");
 	close(fd);
 }
+// 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/12 15:41:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:27:44 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 	state_buf.color = LIBERTY;
 	tmp_array = anew(state.env->game.points, state.env->game.npoints, sizeof(t_vec2));
 	aforeachi_state(&tmp_array, &foreach_point, (void *)&state_buf);
-	//draw_physic(game.player.physic, state, buf, MOONSTONE);
+	//draw_physic(game.player.my_entity.physic, state, buf, MOONSTONE);
 	//draw_physic(game.player.spawn, state, buf, MUSTARD);
 }

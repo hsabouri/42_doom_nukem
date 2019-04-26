@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structure_clone.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/26 16:16:50 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/26 13:35:30 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_CLONE_H
 # define STRUCTURE_CLONE_H
 
+# define PLAYER_MAGIC	0xDEADBABE
 # define GAME_MAGIC		0xDEAD10C4
 # define MAT_MAGIC		0x0D15EA5E
 # define POINT_MAGIC	0x8BADF00D
@@ -78,19 +79,10 @@ typedef struct		s_c_ph
 	u_int32_t	sector_id;
 }					t_c_ph;
 
-typedef struct		s_c_player
-{
-	t_c_ph			spawn;
-	t_fixed			life;
-	u_int32_t		weapons[2];
-	u_int32_t		secondary;
-	u_int32_t		equiped;
-	// float		armor;
-}					t_c_player;
-
 typedef struct		s_c_entity
 {
 	size_t		magic;
+	u_int32_t	id;
 	t_c_ph		spawn;
 	ssize_t		mat[16];
 	//float life;
@@ -98,6 +90,17 @@ typedef struct		s_c_entity
 	//t_weapon weapons;
 	int 		damage;
 }					t_c_entity;
+
+typedef struct		s_c_player
+{
+	size_t			magic;
+	t_c_entity		my_entity;
+	t_fixed			life;
+	u_int32_t		weapons[2];
+	u_int32_t		secondary;
+	u_int32_t		equiped;
+	// float		armor;
+}					t_c_player;
 
 typedef struct		s_c_point
 {
@@ -151,9 +154,9 @@ typedef struct		s_c_music
 typedef struct		s_c_game
 {
 	size_t		magic;
-	t_c_player	player;
 	size_t		ninventory;
 	size_t		loc_inventory;
+	size_t		loc_player;
 	size_t		nmaterials;
 	size_t		loc_mats;
 	size_t		npoints;
