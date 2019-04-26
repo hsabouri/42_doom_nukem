@@ -61,8 +61,7 @@ int			get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
 	return (id);
 }
 
-int			is_in_limit(t_limit limit, t_context context,
-t_fvec2 a, t_fvec2 b)
+int			is_in_limit(t_limit limit, t_fvec2 a, t_fvec2 b)
 {
 	t_fvec2			r_l;
 	t_fvec2			r_r;

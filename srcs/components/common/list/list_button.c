@@ -85,8 +85,8 @@ static t_list_button_state	*init_state(t_list_button button, t_list_state state)
 	return (ret);
 }
 
-static t_array				init_childs(t_component *p, t_list_button button,
-t_list_state state, t_sdl *sdl)
+static t_array				init_childs(t_component *p, t_list_state state,\
+t_sdl *sdl)
 {
 	t_array		childs;
 	t_component	current;
@@ -127,7 +127,7 @@ t_list_state state, t_sdl *sdl)
 	ret.render = &self_render;
 	ret.complete_render = NULL;
 	ret.destroy = NULL;
-	ret.childs = init_childs(&ret, button, state, sdl);
+	ret.childs = init_childs(&ret, state, sdl);
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, ret.size.x, ret.size.y);
 	SDL_SetTextureBlendMode(ret.last_render, SDL_BLENDMODE_BLEND);

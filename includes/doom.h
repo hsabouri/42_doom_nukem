@@ -181,7 +181,7 @@ SDL_Texture				*empty_render(t_component any, t_sdl *sdl);
 void					no_destroy(t_component *self);
 
 t_env					game_loop(t_env env, size_t frame);
-t_env					editor_loop(t_env env, size_t frame);
+t_env					editor_loop(t_env env);
 
 t_event					capture_events(t_event events, t_env *env);
 t_event					init_events(void);
@@ -214,7 +214,9 @@ void					clean_game(t_game game);
 void					clean_texture(t_env env);
 
 t_component				*init_menu(t_env *env, t_sdl *sdl);
-t_env					menu_loop(t_env env, size_t frame);
+t_env					menu_loop(t_env env);
+
+void					minimap(t_game game, t_color *buf);
 
 // a enlever a fin projet
 t_array					init_sprite_gun();

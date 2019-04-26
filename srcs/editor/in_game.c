@@ -12,7 +12,7 @@
 
 #include <editor.h>
 
-void		print_selected(t_game game, t_selected selected, t_sdl *sdl)
+void		print_selected(t_selected selected, t_sdl *sdl)
 {
 	t_text	s;
 	const char	*id = ft_itoa(selected.id);
@@ -47,7 +47,7 @@ void		print_selected(t_game game, t_selected selected, t_sdl *sdl)
 	free((char *)id);
 }
 
-t_game_tool	select_tool(t_env env, t_selected object)
+t_game_tool	select_tool(t_env env)
 {
 	t_game_tool res;
 	if (env.events.keys[SDL_SCANCODE_T])
@@ -75,8 +75,8 @@ t_env		game_editing(t_env env, t_player player)
 	sector = &env.game.sectors[player.physic.sector_id];
 	sel = world_selector(env.game);
 	last = env.editor.game_tool;
-	print_selected(env.game, sel, &env.sdl);
-	env.editor.game_tool = select_tool(env, sel);
+	print_selected(sel, &env.sdl);
+	env.editor.game_tool = select_tool(env);
 	if (last != env.editor.game_tool)
 		env.editor.depth = 0;
 	if (env.editor.game_tool != TOOL_NO)

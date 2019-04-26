@@ -97,9 +97,14 @@ static t_array		init_childs (t_list_comp list, t_sdl *sdl)
 
 	childs = safe_anew(NULL, 2, sizeof(t_component), "component");
 	current = init_cb_button((t_cb_button) {
-		(t_pix) {list.pos.x + list.size.x - 40, list.pos.y},
-		(t_pix) {40, 40}, list.bg, list.events, NULL, &self_add,
-		parse_tga("./textures/ui/plus.tga"), SDL_SCANCODE_UNKNOWN}, sdl);
+		.pos = (t_pix) {list.pos.x + list.size.x - 40, list.pos.y},
+		.size = (t_pix) {40, 40}, 
+		.background = list.bg,
+		.events = list.events,
+		.callback = &self_add,
+		.img = parse_tga("./textures/ui/plus.tga"),
+		.scancode = SDL_SCANCODE_UNKNOWN,
+	}, sdl);
 	apush(&childs, &current);
 	return (childs);
 }

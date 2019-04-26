@@ -167,6 +167,6 @@ typedef struct		s_game
 	u_int32_t		*id_buf;
 }					t_game;
 
-t_game				generate_map(t_game game);
+t_game				generate_map(void);
 
 #endif

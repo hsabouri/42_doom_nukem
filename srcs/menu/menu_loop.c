@@ -12,7 +12,7 @@
 
 #include "./menu.h"
 
-t_env		menu_loop(t_env env, size_t frame)
+t_env		menu_loop(t_env env)
 {
 	*env.component = trigger_component(&env, *env.component, &env.sdl);
 	display_component(*env.component, &env.sdl);

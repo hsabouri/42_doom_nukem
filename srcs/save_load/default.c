@@ -93,6 +93,6 @@ t_game	default_map(void)
 {
 	t_game game;
 
-	game = generate_map(game);
+	game = generate_map();
 	return (game);
 }

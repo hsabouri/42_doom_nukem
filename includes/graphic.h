@@ -224,8 +224,7 @@ t_fvec2			get_ray_dir(t_ph physic, int id);
 int				get_ray_id(t_fvec2 point, t_limit limit,
 				t_context context, int max);
 t_limit			build_limits(t_context context);
-int				is_in_limit(t_limit limit, t_context context,
-								t_fvec2 a, t_fvec2 b);
+int				is_in_limit(t_limit limit, t_fvec2 a, t_fvec2 b);
 
 t_hit			ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d);
 

@@ -16,7 +16,6 @@ t_game			create_wall(size_t uwall, size_t sector, t_game game)
 {
 	const size_t	id = game.sectors[sector].start;
 	const t_wall	new_wall = game.walls[game.nwalls + uwall];
-	ssize_t			updated;
 	
 	game.walls = array_open_swap(game.walls,
 		id, game.nwalls + uwall, sizeof(t_wall));

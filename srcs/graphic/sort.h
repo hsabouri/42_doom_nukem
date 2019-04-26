@@ -15,6 +15,6 @@
 
 # include <graphic.h>
 
-t_render	sort_entities(t_render render, t_context context);
+t_render	sort_entities(t_render render);
 
 #endif

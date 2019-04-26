@@ -91,7 +91,7 @@ int				main(int ac, char **av)
 			else
 			{
 				env.file = NULL;
-				env.game = generate_map(env.game);
+				env.game = generate_map();
 			}
 			launch_check(env.game);
 			env.game = init_audio(env.game);
@@ -107,13 +107,13 @@ int				main(int ac, char **av)
 			env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
 		if (env.game_mode == MENU_MODE)
-			env = menu_loop(env, frame);
+			env = menu_loop(env);
 		else if (env.game_mode == GAME_MODE)
 		{
 			if (!env.toggle_editor)
 				env = game_loop(env, frame);
 			else
-				env = editor_loop(env, frame);
+				env = editor_loop(env);
 		}
 		if (!env.sdl.win)
 		{
