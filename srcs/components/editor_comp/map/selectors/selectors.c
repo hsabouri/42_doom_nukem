@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   selectors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 12:08:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/07 19:37:14 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/25 17:58:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./map.h"
+#include "../map.h"
 
 void		select_multi(ssize_t curr, ssize_t *dual, t_event events)
 {

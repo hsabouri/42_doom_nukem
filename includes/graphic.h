@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/17 16:17:03 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/25 13:42:08 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define MUSTARD	(t_color){255,224,102,255}
 # define PORTAL_B	(t_color){62,189,236,255}
 # define PORTAL_O	(t_color){233,131,31,255}
+# define E_DAMAGE	(t_color){222,62,65,255}
+# define E_PEACEFUL	(t_color){100,100,100,255}
 
 # define TEXT_MAX	256
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:25:49 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 18:16:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_game			delete_portal(size_t portal, t_game game);
 t_game			delete_sector(size_t sector, t_game game);
 t_game			delete_wall(size_t wall, t_game game);
 t_game			delete_point(size_t point, t_game game);
+t_game			delete_entity(size_t entity, t_game game);
 
 t_selected		world_selector(t_game game);
 
@@ -57,10 +58,6 @@ void			legend(t_color *buf, t_sdl *sdl);
 t_env			game_editing(t_env env, t_player player);
 
 t_game			player_properties(t_game game, t_event events);
-
-t_env			point_tool(t_env env);
-t_env			wall_tool(t_env env);
-t_env			portal_tool(t_env env);
 
 t_env			move_texture_tool(t_env env, t_selected selected);
 t_env			move_material_tool(t_env env, t_selected selected);
