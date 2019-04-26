@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:46 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/01 16:23:32 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:59:50 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int index)
 			loc_content += (size_t)(textures[i - 1].width *
 				textures[i - 1].height) * sizeof(t_color);
 		ftextures.content = loc_content;
-		printf("loc_content = %zu\n", loc_content);
 		write_struct(&ftextures, fd, sizeof(t_c_img));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/06 17:13:40 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 15:34:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ t_env		game_loop(t_env env, size_t frame)
 	env.current_buffer = content;
 	render_multi_threaded(env, env.current_buffer);
 	SDL_UnlockTexture(env.sdl.buf);
+	*env.component = trigger_component(&env, *env.component, &env.sdl);
+	display_component(*env.component, &env.sdl);
 	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
 	play_music(env.game, env.game.played_music, 0, frame);
 	env.game = play_sounds(env.game);

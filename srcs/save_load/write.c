@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:23:44 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:57:40 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		write_player(t_player player, int fd, t_mat *materials)
 {
 	t_c_player	res;
 	u_int32_t	index;
-	t_mat		**material;
+	t_mat		**mat;
 	size_t		j;
 
 	res.magic = PLAYER_MAGIC;
@@ -48,9 +48,9 @@ static void		write_player(t_player player, int fd, t_mat *materials)
 	res.secondary = player.secondary;
 	res.equiped = player.equiped;
 	j = 0;
-	while ((material = (t_mat **)ashift(&player.my_entity.mat)))
+	while ((mat = (t_mat **)ashift(&player.my_entity.mat)))
 	{
-		index = id_from_p(*material, mats, sizeof(t_mat));
+		index = id_from_p(*mat, materials, sizeof(t_mat));
 		res.my_entity.mat[j] = (ssize_t)index;
 		j++;
 	}

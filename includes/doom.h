@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:16:39 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:37:43 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,8 +207,8 @@ t_env	init_conditions(t_env env);
 t_game  check_conditions(t_game game, t_event events, ft_trigger *triggers);
 t_game 	ft_reset_log(t_game game);
 
-ssize_t					select_wall(t_game game, t_editor editor,\
-						t_event events);
+// ssize_t					select_wall(t_game game, t_editor editor,\
+// 						t_event events);
 t_editor				select_multi_points(t_editor editor,\
 						t_event events, ssize_t point);
 void					legend_text(t_sdl sdl);

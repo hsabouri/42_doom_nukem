@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:31:25 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:43:01 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,8 +402,6 @@ t_game	generate_map(void)
 	sectors[3] = ((t_sector){18, 4, 3, 1.2, 3.7, WHITE, skybox, tiles, fvec2_new(0, 0)});
 	sectors[4] = ((t_sector){22, 6, 4, -30, 4.1, WHITE, skybox, tiles, fvec2_new(0, 0)});
 
-	t_trigger *c_log = (t_trigger *)malloc(10 * sizeof(t_trigger));
-
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
 		0,
@@ -504,6 +502,7 @@ t_game	generate_map(void)
 		1
 	});
 	entities[3] = ((t_entity){
+		3,
 		(t_ph) {
 			0.02,
 			1.50,
@@ -599,12 +598,12 @@ t_game	generate_map(void)
 			},
 			multi,
 			1
-			}
-			90,
-			{0, 1},
-			6,
-			0,
-			inventory
+		},
+		90,
+		{0, 1},
+		6,
+		0,
+		inventory
 	};
 
 	// t_game_event *g_e = (t_game_event *)malloc(2 * sizeof(t_game_event));
@@ -642,8 +641,6 @@ t_game	generate_map(void)
 		multi,
 		0
 		});
-
-
 
 	t_array c_log = anew(NULL, 100, sizeof(t_trigger));
 

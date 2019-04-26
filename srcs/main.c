@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:26:01 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:04:22 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int				main(int ac, char **av)
 	size_t		frame;
 	
 	env = init_conditions(env);
-	env.toggle_editor = 0;
 	env.sdl = init_sdl();
 	env.editor = init_editor();
 	env.toggle_editor = 0;
@@ -104,7 +103,7 @@ int				main(int ac, char **av)
 			env.init_game = 0;
 		}
 		if (!env.toggle_editor)
-			env.game.player.physic = update_mouse(&env.events, env.game.player.physic);
+			env.game.player.my_entity.physic = update_mouse(&env.events, env.game.player.my_entity.physic);
 		if (env.events.quit || env.game_mode == QUIT ||
 			env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;

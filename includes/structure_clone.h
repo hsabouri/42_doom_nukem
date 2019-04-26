@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:25:39 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:35:30 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,6 @@ typedef struct		s_c_ph
 	u_int32_t	sector_id;
 }					t_c_ph;
 
-typedef struct		s_c_player
-{
-	t_c_ph			spawn;
-	t_fixed			life;
-	u_int32_t		weapons[2];
-	u_int32_t		secondary;
-	u_int32_t		equiped;
-	// float		armor;
-}					t_c_player;
-
 typedef struct		s_c_entity
 {
 	size_t		magic;
@@ -105,12 +95,11 @@ typedef struct		s_c_player
 {
 	size_t			magic;
 	t_c_entity		my_entity;
-	// float		life;
+	t_fixed			life;
+	u_int32_t		weapons[2];
+	u_int32_t		secondary;
+	u_int32_t		equiped;
 	// float		armor;
-	// size_t		inventory;
-	// size_t		ninventory;
-	// uint8_t		equiped;
-	// size_t		weapons[5];
 }					t_c_player;
 
 typedef struct		s_c_point

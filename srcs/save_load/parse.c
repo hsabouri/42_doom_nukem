@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:24:17 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:55:48 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_save save)
 	while (j < 16)
 	{
 		mat = (struc_p.my_entity.mat[j] == -1) ? NULL : 
-			id_to_p(struc_p.my_entity.mat[j], mats, sizeof(t_mat));
+			id_to_p(struc_p.my_entity.mat[j], new_game.materials, sizeof(t_mat));
 		if (!mat)
 			break;
 		else
@@ -97,6 +97,7 @@ t_save save)
 	current.weapons[1] = struc_p.weapons[1];
 	current.secondary = struc_p.secondary;
 	current.equiped = struc_p.equiped;
+	save.index = game.loc_inventory;
 	current.inventory = parse_inventory(buf, save, new_game.entities,
 		game.ninventory);
 	current.my_entity.damage = struc_p.my_entity.damage;
@@ -114,8 +115,6 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_mats;
 	res.materials = parse_mats(buf, save, res.textures, game.nmaterials);
 	res.nmaterials = game.nmaterials;
-	save.index = game.loc_player;
-	res.player = parse_player(buf, save, res.materials);
 	save.index = game.loc_points;
 	res.points = parse_points(buf, save, game.npoints);
 	res.npoints = game.npoints;
@@ -135,7 +134,7 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_weapons;
 	res.weapons = parse_weapons(buf, save, res.textures, game.nweapons);
 	res.nweapons = game.nweapons;
-	save.index = game.loc_inventory;
+	save.index = game.loc_player;
 	res.player = parse_player(game, res, buf, save);
 	return (res);
 }

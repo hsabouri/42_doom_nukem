@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/01 16:22:02 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:34:53 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <structure.h>
 # include <structure_clone.h>
 # include <sys/types.h>
-// # include <dirent.h>
+# include <dirent.h>
 
 # define WHITE		(t_color){255,255,255,255}
 # define GREY		(t_color){128,128,128,255}
