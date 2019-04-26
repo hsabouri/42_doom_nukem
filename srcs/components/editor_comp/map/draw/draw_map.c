@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:27:44 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 18:15:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./map.h"
+#include "../map.h"
 
 static void			grid(t_editor_map_state state, t_color *buf)
 {
@@ -71,10 +71,10 @@ static void			foreach_wall(void *wall, void *param, size_t i)
 		i == (size_t)state.state.selected_walls[1])
 		bresenham(state.buf, a_p, b_p, PORTAL_O);
 	else if ((i == (size_t)state.state.selected_wall ||
-		i == (size_t)state.state.selected_walls[1]) && !state.unassigned)
+		i == (size_t)state.state.selected_walls[1]) && !state.modifier)
 		bresenham(state.buf, a_p, b_p, WHITE);
 	else if ((i == (size_t)state.state.unassigned_wall ||
-		i == (size_t)state.state.selected_walls[0]) && state.unassigned)
+		i == (size_t)state.state.selected_walls[0]) && state.modifier)
 		bresenham(state.buf, a_p, b_p, MUSTARD);
 	else if (((t_wall *)wall)->portal >= 0)
 		bresenham(state.buf, a_p, b_p, RED);
@@ -113,18 +113,19 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 	
 	if (state.grid_size)
 		grid(state, buf);
-	state_buf = (t_state_buf) {state, buf, WHITE};
+	state_buf = (t_state_buf) {state, buf, WHITE, 0};
 	tmp_array = anew(state.env->game.walls, state.env->game.nwalls, sizeof(t_wall));
-	state_buf.unassigned = 0;
+	state_buf.modifier = 0;
 	aforeachi_state(&tmp_array, &foreach_wall, (void *)&state_buf);
 	state_buf.color = ORANGE;
-	state_buf.unassigned = 1;
+	state_buf.modifier = 1;
 	tmp_array = anew(&state.env->game.walls[state.env->game.nwalls],
 		state.env->game.nuwalls, sizeof(t_wall));
 	aforeachi_state(&tmp_array, &foreach_wall, (void *)&state_buf);
 	state_buf.color = LIBERTY;
 	tmp_array = anew(state.env->game.points, state.env->game.npoints, sizeof(t_vec2));
 	aforeachi_state(&tmp_array, &foreach_point, (void *)&state_buf);
-	//draw_physic(game.player.my_entity.physic, state, buf, MOONSTONE);
-	//draw_physic(game.player.spawn, state, buf, MUSTARD);
+	tmp_array = anew(state.env->game.entities, state.env->game.nentities,
+		sizeof(t_entity));
+	aforeachi_state(&tmp_array, &foreach_entity, (void *)&state_buf);
 }

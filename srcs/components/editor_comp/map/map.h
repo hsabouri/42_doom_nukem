@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:28:45 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 18:15:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ typedef struct	s_wall_tool
 	t_event		*events;
 }				t_wall_tool;
 
+typedef struct	s_entity_tool
+{
+	ssize_t		*selected_entity;
+	ssize_t		*selected_spawn;
+	t_event		*events;
+}				t_entity_tool;
+
 typedef struct	s_point_tool
 {
 	ssize_t		*selected_point;
@@ -36,7 +43,8 @@ typedef enum	e_editor_map_mode
 	CREATE_WALL,
 	ASSIGN_WALL,
 	CREATE_PORTAL,
-	MOVE,
+	TOOL_ENTITY,
+	MOVE
 	// More to come
 }				t_editor_map_mode;
 
@@ -53,6 +61,8 @@ typedef struct	s_editor_map_state
 	ssize_t				unassigned_wall;
 	ssize_t				wall_points[2];
 	ssize_t				selected_walls[2];
+	ssize_t				selected_entity;
+	ssize_t				selected_spawn;
 	size_t				n_buttons;
 }				t_editor_map_state;
 
@@ -78,7 +88,7 @@ typedef struct	s_state_buf
 	t_editor_map_state	state;
 	t_color				*buf;
 	t_color				color;
-	int					unassigned;
+	int					modifier;
 }				t_state_buf;
 
 void			draw_map(t_editor_map_state state, t_color *buf);
@@ -91,6 +101,9 @@ t_component		init_assign_tool(t_env *env, t_editor_map_state *parent,
 				t_sdl *sdl);
 t_component		init_assign_portal_tool(t_env *env, t_editor_map_state *parent,
 t_sdl *sdl);
+
+t_component		init_entity_tool(t_env *env, ssize_t *entity,
+				ssize_t *spawn, t_sdl *sdl);
 
 t_vec2			screen_space(t_vec2 vec, t_editor_map_state state);
 t_vec2			point_from_mouse(t_editor_map_state state, t_event events,
@@ -106,6 +119,13 @@ ssize_t			select_wall(t_editor_map_state editor, ssize_t selected_wall,
 				t_event events);
 ssize_t			select_unassigned_wall(t_editor_map_state editor,
 				ssize_t selected_wall, t_event events);
+ssize_t			select_entity(t_editor_map_state editor, ssize_t selected_entity,
+t_event events, int spawn);
 void			select_multi(ssize_t curr, ssize_t *dual, t_event events);
+
+void			draw_look(t_vec2 sp_pos, float angle, t_color color,
+				t_state_buf state);
+
+void			foreach_entity(void *entity, void *param, size_t i);
 
 #endif

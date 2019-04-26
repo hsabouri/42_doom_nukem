@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_delete.c                                    :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 13:34:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/23 16:36:19 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/26 16:52:05 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,13 @@ t_game	delete_point(size_t point, t_game game)
 		return (game);
 	game.npoints--;
 	return (del_update_walls(point, -1, -1, game));
+}
+
+t_game	delete_entity(size_t entity, t_game game)
+{
+	if (!(game.entities =\
+	array_close(game.entities, entity, game.nentities, sizeof(t_entity))))
+		return (game);
+	game.nentities--;
+	return (game);
 }

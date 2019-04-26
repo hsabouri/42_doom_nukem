@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:28:24 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/26 18:15:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 	state->wall_points[1] = -1;
 	state->selected_walls[0] = -1;
 	state->selected_walls[1] = -1;
+	state->selected_entity = -1;
 	//state->n_buttons = 4; // Used to test lists
 	return (state);
 }
@@ -153,6 +154,15 @@ t_sdl *sdl)
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_M,
 		.active_value = MOVE}, sdl);
+	current = init_button((t_button) {
+		.pos = (t_pix) {172, 2},
+		.size = (t_pix) {40, 40},
+		.background = (t_color) {70, 70, 70, 255},
+		.events = &env->events,
+		.img = parse_tga("./textures/ui/entity_tool.tga"),
+		.to_activate = (int *)&state->tool,
+		.scancode = SDL_SCANCODE_K,
+		.active_value = TOOL_ENTITY}, sdl);
 	apush(&ret, &current);
 	current = init_point_tool(env, &state->selected_point, sdl);
 	apush(&ret, &current);
@@ -162,8 +172,11 @@ t_sdl *sdl)
 	apush(&ret, &current);
 	current = init_assign_portal_tool(env, state, sdl);
 	apush(&ret, &current);
+	current = init_entity_tool(env, &state->selected_entity,
+		&state->selected_spawn, sdl);
+	apush(&ret, &current);
 	current = init_sw_button((t_sw_button) {
-		.pos = (t_pix) {214, 2},
+		.pos = (t_pix) {216, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
@@ -174,7 +187,7 @@ t_sdl *sdl)
 		.disable_value = 0}, sdl);
 	apush(&ret, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {256, 2},
+		.pos = (t_pix) {258, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
