@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 18:15:51 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/27 12:57:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ void			draw_look(t_vec2 sp_pos, float angle, t_color color,
 				t_state_buf state);
 
 void			foreach_entity(void *entity, void *param, size_t i);
+void			foreach_portal(void *port, void *param, size_t i);
 
 #endif

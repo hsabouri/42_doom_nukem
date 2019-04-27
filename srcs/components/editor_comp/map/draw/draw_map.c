@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 18:15:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/27 12:18:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,9 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 	tmp_array = anew(state.env->game.entities, state.env->game.nentities,
 		sizeof(t_entity));
 	aforeachi_state(&tmp_array, &foreach_entity, (void *)&state_buf);
+	if (state.tool == CREATE_PORTAL)
+	{
+		tmp_array = anew(state.env->game.portals, state.env->game.nportals, sizeof(t_portal));
+		aforeachi_state(&tmp_array, &foreach_portal, (void *)&state_buf);
+	}
 }
