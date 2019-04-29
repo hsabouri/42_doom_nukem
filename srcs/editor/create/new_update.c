@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:18:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/28 11:16:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ t_game game)
 		curr = game.sectors[i];
 		if (wall >= 0 && curr.start > (u_int32_t)wall)
 			curr.start++;
-		if (wall >= 0 && curr.start + curr.number >= (u_int32_t)wall &&
-			curr.start <= (u_int32_t)wall)
+		if (wall >= 0 && curr.start == (u_int32_t)wall)
 			curr.number++;
 		if (mat >= 0 && curr.ceiling_mat >= &game.materials[mat])
 			curr.ceiling_mat += sizeof(t_mat);

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 18:16:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/29 12:21:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_game			new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,\
 				t_game game);
 t_game			new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
 				t_game game);
-
 
 void			legend(t_color *buf, t_sdl *sdl);
 t_env			game_editing(t_env env, t_player player);
