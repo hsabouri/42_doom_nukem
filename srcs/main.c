@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 14:04:22 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:34:50 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				main(int ac, char **av)
 {
 	t_env		env;
 	size_t		frame;
-	
+
 	env = init_conditions(env);
 	env.sdl = init_sdl();
 	env.editor = init_editor();
@@ -78,7 +78,10 @@ int				main(int ac, char **av)
 	env.init_game = 1;
 	env.component = init_menu(&env, &env.sdl);
 	*env.component = render_all(*env.component, &env.sdl);
+	env.game_mode = 0;
+	env.init_game = 1;
 	frame = 0;
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	while (env.sdl.win)
 	{
 		env.events = capture_events(env.events, &env);
@@ -101,6 +104,7 @@ int				main(int ac, char **av)
 				destroy_component(env.component);
 			env.component = init_component(&env, &env.sdl);
 			env.init_game = 0;
+			find_center_sectors(env.game);
 		}
 		if (!env.toggle_editor)
 			env.game.player.my_entity.physic = update_mouse(&env.events, env.game.player.my_entity.physic);
@@ -112,7 +116,10 @@ int				main(int ac, char **av)
 		else if (env.game_mode == GAME_MODE)
 		{
 			if (!env.toggle_editor)
+			{
+
 				env = game_loop(env, frame);
+			}
 			else
 				env = editor_loop(env);
 		}
@@ -124,7 +131,5 @@ int				main(int ac, char **av)
 		env.events = reset_clicks(env.events);
 		frame++;
 	}
-	// clean(env);
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:05:59 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/09 16:17:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/15 11:08:34 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ float ceiling)
 			adj_sector = (portal.to_sector == sector.sector_id) ?\
 				game.sectors[portal.from_sector] :\
 				game.sectors[portal.to_sector];
-			if (adj_sector.floor >= ceiling || adj_sector.ceiling <= floor)
+			if (adj_sector.floor.z >= ceiling || adj_sector.ceiling.z <= floor)
 				return (0);
 		}
 		i++;
@@ -39,11 +39,11 @@ float ceiling)
 static t_sector	sector_height(t_game game, t_sector sector, t_part part, float add)
 {
 	if (part == PART_FLOOR &&\
-	verify_height(game, sector, sector.floor + add, sector.ceiling))
-		sector.floor += add;
+	verify_height(game, sector, sector.floor.z + add, sector.ceiling.z))
+		sector.floor.z += add;
 	else if (part == PART_CEILING &&\
-	verify_height(game, sector, sector.floor, sector.ceiling + add))
-		sector.ceiling += add;
+	verify_height(game, sector, sector.floor.z, sector.ceiling.z + add))
+		sector.ceiling.z += add;
 	return (sector);
 }
 

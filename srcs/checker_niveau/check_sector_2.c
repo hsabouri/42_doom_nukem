@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sector_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:56:49 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/08 16:35:12 by hugo             ###   ########.fr       */
+/*   Updated: 2019/04/15 10:59:05 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_list			height_sector(t_sector *sectors, size_t nsectors)
 	error = lnew(NULL);
 	while (cpt < nsectors)
 	{
-		if ((sectors[cpt].ceiling - sectors[cpt].floor) < 0.1)
+		if ((sectors[cpt].ceiling.z - sectors[cpt].floor.z) < 0.1)
 		{
 			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 			elem->elem.next = NULL;
@@ -94,7 +94,7 @@ t_list *error)
 	sector_out = (game.portals[game.walls[start].portal].from_sector == cpt) ?\
 		game.portals[game.walls[start].portal].to_sector :
 		game.portals[game.walls[start].portal].from_sector;
-	if (game.sectors[sector_out].ceiling - game.sectors[cpt].floor < 0.1)
+	if (game.sectors[sector_out].ceiling.z - game.sectors[cpt].floor.z < 0.1)
 	{
 		elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
 		elem->elem.next = NULL;

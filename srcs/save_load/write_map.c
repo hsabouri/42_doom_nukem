@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:32:17 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/01 16:23:29 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/15 11:38:05 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ t_mat *mats)
 		fsectors.start = sectors[i].start;
 		fsectors.number = sectors[i].number;
 		fsectors.sector_id = sectors[i].sector_id;
-		fsectors.floor = f_from_float(sectors[i].floor);
-		fsectors.ceiling = f_from_float(sectors[i].ceiling);
+		fsectors.floor = f_from_float(sectors[i].floor.z);
+		fsectors.ceiling = f_from_float(sectors[i].ceiling.z);
 		fsectors.ambient = sectors[i].ambient;
 		if (sectors[i].ceiling_mat != NULL)
 			fsectors.ceiling_mat = id_from_p(sectors[i].ceiling_mat, mats,\

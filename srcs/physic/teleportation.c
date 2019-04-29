@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   teleportation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 14:10:04 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/06 17:02:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:02:36 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_vec3		teleportation(t_vec3 pos, t_game *game, t_tp teleport, t_ph *physic)
 
 	physic->sector_id = ((int)teleport.portal.from_wall == teleport.portal_in)
 		? teleport.portal.to_sector : teleport.portal.from_sector;
-	delta_floor = game->sectors[physic->sector_id].floor - pos.z;
-	delta_ceil = game->sectors[physic->sector_id].ceiling - pos.z;
+	delta_floor = game->sectors[physic->sector_id].floor.z - pos.z;
+	delta_ceil = game->sectors[physic->sector_id].ceiling.z - pos.z;
 	if (delta_floor >= 0.5 || delta_ceil < -0.0001)
 		if_not_tp(physic, teleport);
 	else

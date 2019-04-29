@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:22:20 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/11 18:19:10 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:00:43 by fmerding         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*   Updated: 2019/04/15 11:33:00 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +70,7 @@ t_vec3		floor_col(float pos_z, t_sector sector, t_vec3 speed)
 	float	delta;
 
 	final_speed = speed;
-	delta = pos_z - sector.floor;
+	delta = pos_z - sector.floor.z;
 	if (delta < -0.0001)
 	{
 		final_speed.z = speed.z - delta;
@@ -83,7 +87,7 @@ t_vec3		ceil_col(float pos_z, t_sector sector, t_vec3 speed)
 	float	delta;
 
 	final_speed = speed;
-	delta = sector.ceiling - pos_z;
+	delta = sector.ceiling.z - pos_z;
 	if (delta < -0.05)
 	{
 		final_speed.z = speed.z + (delta - 0.05);
