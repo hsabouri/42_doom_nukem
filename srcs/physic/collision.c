@@ -116,6 +116,6 @@ t_vec3		slide_wall(t_vec3 next_pos, t_game game, t_wall wall)
 	}
 	dist[1] = vec3_dot(v3_normal, next_pos) - d;
 	if (dist[1] < 0)
-		next_pos = vec3_add(next_pos, vec3_scale(v3_normal, -dist[1] + 0.01));
+		next_pos = vec3_add(next_pos, vec3_scale(v3_normal, -dist[1] + 0.1));
 	return (next_pos);
 }
