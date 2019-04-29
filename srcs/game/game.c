@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 15:47:18 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/24 19:58:57 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ t_env		game_loop(t_env env, size_t frame)
 	play_music(env.game, env.game.played_music, 0, frame);
 	env.game = play_sounds(env.game);
 	SDL_RenderPresent(env.sdl.renderer);
-	
+	// find_center_sectors(env.game);
+	env.game = play_sounds(env.game);
 	old_timer = end_timer(timer);
+		// printf("0");
+		// exit(0);
 	return (env);
 }

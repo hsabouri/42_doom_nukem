@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:30:50 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/29 15:53:45 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
@@ -161,6 +162,8 @@ typedef struct		s_wall
 	u_int32_t	a;
 	u_int32_t	b;
 	t_mat		*mat;
+	t_vec2		left_z;
+	t_vec2		right_z;
 }					t_wall;
 
 typedef struct		s_sector
@@ -168,12 +171,14 @@ typedef struct		s_sector
 	u_int32_t	start;
 	u_int32_t	number;
 	size_t		sector_id;
-	float		floor;
-	float		ceiling;
+	t_vec3		floor;
+	t_vec3		ceiling;
 	t_color		ambient;
 	t_mat		*ceiling_mat;
 	t_mat		*floor_mat;
 	t_fvec2		tex_pos;
+	t_vec2		center; // t_vec3 position
+	int*		sort_v;
 }					t_sector;
 
 typedef struct		s_music
@@ -194,9 +199,9 @@ typedef struct		s_chunk
 
 typedef struct		s_game
 {
-	
+
 	t_player		player;
-	
+
 	t_array		events;
 	size_t		nevents;
 
@@ -207,10 +212,10 @@ typedef struct		s_game
 	// t_trigger	*log;
 	t_array		log;
 	size_t		nlog;
-	
+
 	t_entity	*entities;
 	size_t		nentities;
-	
+
 	t_sector		*sectors;
 	size_t			nsectors;
 	t_wall			*walls;

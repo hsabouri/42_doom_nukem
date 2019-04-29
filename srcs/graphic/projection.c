@@ -6,10 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/19 16:16:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/25 16:06:27 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "doom.h"
 #include <graphic.h>
 #include "srcs/common/translate_id.h"
 
@@ -40,6 +41,11 @@ static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h, co
 	res.tex_wall.ambient = context.sector.ambient;
 	res.plane.tex_floor.ambient = context.sector.ambient;
 	res.plane.tex_roof.ambient = context.sector.ambient;
+	// printf("ray.u = %d ratios.u = %d\n",hit.ray.u,hit.ratios.u );
+	// printf("ray.v = %d ratios.v = %d\n",hit.ray.v,hit.ratios.v );
+	// printf("hit.hit = %d")
+	// printf("section.start = , ")
+	// printf("context.left = %d  context right = %d\n",context.left,context.right);
 	return (res);
 }
 
@@ -59,13 +65,19 @@ t_section section)
 {
 	t_proj res;
 	t_fvec2		h;
+	float dis;
+	float dis2;
 
+	dis = section.wall.left_z.v - section.wall.right_z.v;
+	dis *= f_to_float(hit.ratios.u);
+	dis2 = section.wall.left_z.u - section.wall.right_z.u;
+	dis2 *= f_to_float(hit.ratios.u);
+	h.u = f_from_float((context.physic.pos.z + context.physic.height) -
+		section.wall.left_z.v + 1 * dis);
+	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
+	section.wall.left_z.u + 1 * dis2);
 	if (hit.ratios.v < 10)
 		hit.ratios.v = 10;
-	h.u = f_from_float((context.physic.pos.z + context.physic.height) -
-		context.sector.floor);
-	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
-		context.sector.ceiling);
 	res = projection(hit, context, h, section);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_WALL, MOD_NO, section.wall.id, 0);
@@ -86,17 +98,23 @@ t_section section)
 	t_fvec2			h;
 	t_fvec2			h2;
 
-
 	if (hit.ratios.v < 10)
 		hit.ratios.v = 10;
+	float dis;
+	float dis2;
+
+	dis = section.wall.left_z.v - section.wall.right_z.v;
+	dis *= f_to_float(hit.ratios.u);
+	dis2 = section.wall.left_z.u - section.wall.right_z.u;
+	dis2 *= f_to_float(hit.ratios.u);
 	h.u = f_from_float((context.physic.pos.z + context.physic.height) -
-		context.sector.floor);
+		section.wall.left_z.v + 1 * dis);
 	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
-		context.sector.ceiling);
+		section.wall.left_z.u + 1 * dis2);
 	h2.u = f_from_float((context.physic.pos.z + context.physic.height) -
-		section.next.floor);
+		section.next.floor.z);
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height) -
-		section.next.ceiling);
+		section.next.ceiling.z);
 	res = projection(hit, context, h, section);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);
@@ -132,9 +150,9 @@ const t_section_entity section)
 		section.entity.h;
 	h.v = h.u - f_from_float(section.entity.physic.height);
 	sector_h.u = f_from_float((context.physic.pos.z + context.physic.height) -
-		context.sector.floor);
+		context.sector.floor.z);
 	sector_h.v = f_from_float((context.physic.pos.z + context.physic.height) -
-		context.sector.ceiling);
+		context.sector.ceiling.z);
 	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) +
 		context.physic.look_v * 100);
 	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) +

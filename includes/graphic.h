@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/25 13:42:08 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:54:01 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct	s_cache_wall
 	t_fvec2	b;
 	t_mat	mat;
 	t_mat	*open;
+	t_vec2	left_z;
+	t_vec2	right_z;
 }				t_cache_wall;
 
 typedef struct	s_cache_entity
@@ -240,5 +242,12 @@ void			render(t_game game, t_context context,
 
 t_sector		teleport_sector(t_game game, t_context context, t_section section);
 t_context		teleport(t_game game, t_context context, t_section section);
-
+void			find_center_sectors(t_game game);
+void			find_center(t_game game, size_t i);
+void			sort_tab_z(size_t n, unsigned int i, t_game game);
+void			rotate_y(size_t n, int mode, t_game game);
+int				wall_from_point(size_t n, int point, t_game game, int i);
+unsigned int	find_right(t_game game, int* tab, size_t n, int i);
+void			rotate_floor(size_t n, int mode, t_game game);
+void			rotate_ceiling(size_t n, int mode, t_game game);
 #endif

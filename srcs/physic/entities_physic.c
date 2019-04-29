@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   entities_physic.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/06 17:31:20 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:01:41 by fmerding         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*   Updated: 2019/04/15 11:36:34 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +23,9 @@ static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
 	float	tmp;
 
 	new_speed = physic->speed;
-	delta = game.sectors[physic->sector_id].floor - physic->pos.z;
-	if (physic->jump && (physic->pos.z > game.sectors[physic->sector_id].floor
-		- 0.1 && physic->pos.z < game.sectors[physic->sector_id].floor + 0.1))
+	delta = game.sectors[physic->sector_id].floor.z - physic->pos.z;
+	if (physic->jump && (physic->pos.z > game.sectors[physic->sector_id].floor.z
+		- 0.1 && physic->pos.z < game.sectors[physic->sector_id].floor.z + 0.1))
 	{
 		new_speed.z = 0.1;
 		physic->jump = 0;
@@ -52,7 +56,7 @@ static t_vec3	wall_touch(t_touch touch, t_ph *physic, int wall, t_game game)
 		next_pos = vec3_add(physic->pos, final_speed);
 	}
 	return (next_pos);
-}          
+}
 
 static t_vec3	move_entities(t_ph *physic, t_game *game, int wall, float old_timer)
 {
@@ -151,7 +155,7 @@ void		col_interact(t_ph n_physic, t_game *game, size_t id)
 	{
 
 		if (interact(n_physic, game->entities[cpt].physic) == 1 && cpt != id) {
-			
+
 			tmp_log.e_actif = game->player.my_entity;
 			tmp_log.condi = TRIGGER_INTERACT;
 			tmp_log.e_passif = game->entities[cpt];
@@ -171,8 +175,8 @@ t_ph			entities_physic(t_ph physic, t_game *game, size_t id, float old_timer)
 	n_physic.pos = move_entities(&n_physic, game, -1, old_timer);
 	n_physic.speed.x = 0;
 	n_physic.speed.y = 0;
-	if ((n_physic.pos.z > game->sectors[n_physic.sector_id].floor - 0.1 &&
-		n_physic.pos.z < game->sectors[n_physic.sector_id].floor + 0.1) ||
+	if ((n_physic.pos.z > game->sectors[n_physic.sector_id].floor.z - 0.1 &&
+		n_physic.pos.z < game->sectors[n_physic.sector_id].floor.z + 0.1) ||
 		n_physic.fly)
 	{
 		n_physic.speed.z = 0;

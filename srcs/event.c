@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:16:45 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/29 15:56:48 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,22 @@ static void		keyactions(int scancode, t_env *env)
 	if (!env->toggle_editor &&
 		(scancode == SDL_SCANCODE_MINUS || scancode == SDL_SCANCODE_KP_MINUS))
 		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
-	if (scancode == SDL_SCANCODE_TAB)
-		env->game.player.equiped = (env->game.player.equiped == 1) ? 0 : 1;
-	if (scancode == SDL_SCANCODE_M) // a supprimer
-		env->game.player.life -= 1;
-	if (scancode == SDL_SCANCODE_N) // a supprimer
-		env->game.weapons[env->game.player.weapons[env->game.player.equiped]].ammo -= 1;
+	if (scancode == SDL_SCANCODE_KP_6)
+		rotate_floor(env->game.player.my_entity.physic.sector_id, 1, env->game);
+	if (scancode == SDL_SCANCODE_KP_4)
+		rotate_floor(env->game.player.my_entity.physic.sector_id, 2, env->game);
+	if (scancode == SDL_SCANCODE_KP_8)
+		rotate_floor(env->game.player.my_entity.physic.sector_id, 3, env->game);
+	if (scancode == SDL_SCANCODE_KP_2)
+		rotate_floor(env->game.player.my_entity.physic.sector_id, 4, env->game);
+	if (scancode == SDL_SCANCODE_KP_7)
+		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 1, env->game);
+	if (scancode == SDL_SCANCODE_KP_9)
+		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 2, env->game);
+	if (scancode == SDL_SCANCODE_KP_1)
+		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 3, env->game);
+	if (scancode == SDL_SCANCODE_KP_3)
+		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 4, env->game);
 }
 
 t_event			capture_events(t_event events, t_env *env)

@@ -3,8 +3,8 @@ LIBFT_DIR = lib/libft
 LIBTGA_DIR = lib/libtga
 LIBVEC_DIR = lib/libvec
 ifeq ($(shell uname -s), Darwin)
-	SDL2_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/lib/
-	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9/include/
+	SDL2_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9_1/lib/
+	SDL2_INC_DIR = $(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/
 	SDL2_TTF_DIR = $(HOME)/.brew/Cellar/sdl2_ttf/2.0.14/lib/
 	SDL2_TTF_INC_DIR = $(HOME)/.brew/Cellar/sdl2_ttf/2.0.14/include/
 	SDL2_MIXER_DIR = $(HOME)/.brew/Cellar/sdl2_mixer/2.0.4/lib/
@@ -57,7 +57,8 @@ OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Iincludes
-CFLAGS += -g 
+CFLAGS += -g
+#CFLAGS += -O3 -march=native
 #CFLAGS += -Werror
 
 ifeq ($(SAN), yes)
@@ -75,8 +76,8 @@ CFLAGS += -O3 -march=native
 endif
 
 CFLAGS += -I$(LIBFT_DIR)/includes
-CFLAGS += -I$(LIBVEC_DIR)/includes 
-CFLAGS += -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR) 
+CFLAGS += -I$(LIBVEC_DIR)/includes
+CFLAGS += -I$(SDL2_INC_DIR)/SDL2 -I$(SDL2_INC_DIR)
 CFLAGS += -I$(SDL2_TTF_INC_DIR) -I$(SDL2_TTF_INC_DIR)/SDL2
 CFLAGS += -I$(SDL2_MIXER_INC_DIR) -I$(SDL2_MIXER_INC_DIR)/SDL2
 CFLAGS += -I$(LIBTGA_DIR)/includes
@@ -92,7 +93,7 @@ LDFLAGS += -L$(LIBTGA_DIR) -ltga
 
 all: message libft libvec libtga $(BIN)
 
-message: 
+message:
 	@echo -e "$(YELLOW)" "[BUILD]" "$(NO_COLOR)" $(BIN)
 
 libft:
