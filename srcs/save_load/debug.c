@@ -16,17 +16,16 @@ void		debug(t_game game)
 {
 	// int	i;
 
-	printf("wepaon.damage : %u\n", game.weapons[5].damage);
 	// i = 0;
-	// while (i < (int)game.nentities)
+	// while (i < (int)game.npoints)
 	// {
-	// 	printf("entities.physic.gravity: %f\n", game.entities->physic.gravity);
-	// 	printf("entities.physic.height: %f\n", game.entities->physic.height);
-	// 	printf("entities.physic.radius: %f\n", game.entities->physic.radius);
-	// 	printf("entities.physic.pos: {%f, %f, %f}\n", game.entities->physic.pos.x, game.entities->physic.pos.y, game.entities->physic.pos.z);
-	// 	printf("entities.physic.speed_max: {%f, %f, %f}\n", game.entities->physic.speed_max.x, game.entities->physic.speed_max.y, game.entities->physic.speed_max.z);
-	// 	printf("entities.physic.look: {%f, %f}\n", game.entities->physic.look_h, f_to_float(game.entities->physic.look_v));
-	// 	printf("entities.physic.sector_id: %u\n", game.entities->physic.sector_id);
+	// 	printf("points[i]{%f;%f}\n", game.points[i].u, game.points[i].v);
+	// 	// printf("entities.physic.height: %f\n", game.entities->physic.height);
+	// 	// printf("entities.physic.radius: %f\n", game.entities->physic.radius);
+	// 	// printf("entities.physic.pos: {%f, %f, %f}\n", game.entities->physic.pos.x, game.entities->physic.pos.y, game.entities->physic.pos.z);
+	// 	// printf("entities.physic.speed_max: {%f, %f, %f}\n", game.entities->physic.speed_max.x, game.entities->physic.speed_max.y, game.entities->physic.speed_max.z);
+	// 	// printf("entities.physic.look: {%f, %f}\n", game.entities->physic.look_h, f_to_float(game.entities->physic.look_v));
+	// 	// printf("entities.physic.sector_id: %u\n", game.entities->physic.sector_id);
 	// 	i++;
 	// }
 	// printf("nentities: %zu\n", game.nentities);

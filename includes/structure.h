@@ -69,27 +69,6 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
-
-/*
-typedef enum			u_wtype
-{
-	GUN,
-	MACHINE_GUN,
-	SNIPER,
-	PLASMA_RIFLE,
-	GRENADE
-}						t_wtype;
-
-typedef struct			s_weapon
-{
-	t_wtype		type;
-	float		damage;
-	uint16_t	cooldown;
-	uint16_t	munitions;
-}						t_weapon;
-*/
-
-
 typedef enum	e_condition
 {
 	TRIGGER_SEE = 0x1,
@@ -131,7 +110,6 @@ typedef struct		s_game_event
 	// int			is_trigger;
 	// t_action	 action;
 }					t_game_event;
-
 
 typedef struct		s_player
 {
@@ -178,7 +156,7 @@ typedef struct		s_sector
 	t_mat		*floor_mat;
 	t_fvec2		tex_pos;
 	t_vec2		center; // t_vec3 position
-	int*		sort_v;
+	int			*sort_v;
 }					t_sector;
 
 typedef struct		s_music
@@ -201,21 +179,10 @@ typedef struct		s_game
 {
 
 	t_player		player;
-
-	t_array		events;
-	size_t		nevents;
-
-	t_plist 	waiting_events;
-
-	size_t		nwaiting_events;
-
-	// t_trigger	*log;
-	t_array		log;
-	size_t		nlog;
-
-	t_entity	*entities;
-	size_t		nentities;
-
+	t_plist 		waiting_events;;
+	t_array			log;
+	t_entity		*entities;
+	size_t			nentities;
 	t_sector		*sectors;
 	size_t			nsectors;
 	t_wall			*walls;

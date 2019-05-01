@@ -30,9 +30,11 @@ size_t n_entities)
 			sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
 		verify_magic(&struc_e, ENTITY_MAGIC, i);
 		current = entity_default();
+		current.id = struc_e.id;
 		current.physic.gravity = f_to_float(struc_e.spawn.gravity);
 		current.physic.height = f_to_float(struc_e.spawn.height);
 		current.physic.radius = f_to_float(struc_e.spawn.radius);
+		current.physic.rad_inter = f_to_float(struc_e.spawn.rad_inter);
 		current.physic.pos = fvec3_to_vec3(struc_e.spawn.pos);
 		current.physic.speed_max = fvec3_to_vec3(struc_e.spawn.speed_max);
 		current.physic.look_v = struc_e.spawn.look.v;
