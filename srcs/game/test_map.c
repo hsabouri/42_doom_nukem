@@ -16,7 +16,7 @@ t_game	generate_map(void)
 {
 	t_game game;
 
-	t_img *textures = (t_img *)safe_malloc(50 * sizeof(t_img), "textures");
+	t_img *textures = (t_img *)safe_malloc(52 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga");
 	textures[1] = parse_tga("./textures/floor.tga");
 	textures[2] = parse_tga("./textures/items/key_card.tga");
@@ -67,6 +67,8 @@ t_game	generate_map(void)
 	textures[47] = parse_tga("./textures/weapons/grenade/grenade1.tga");
 	textures[48] = parse_tga("./textures/weapons/claymore/claymore0.tga");
 	textures[49] = parse_tga("./textures/weapons/claymore/claymore1.tga");
+	textures[50] = parse_tga("./textures/hud/map_editor.tga");
+	textures[51] = parse_tga("./textures/hud/in_game_editor.tga");
 
 	t_vec2 *points = (t_vec2 *)malloc(sizeof(t_vec2) * 20);
 	points[0] = ((t_vec2){7, 6});
@@ -697,7 +699,7 @@ t_game	generate_map(void)
 	game.materials = materials;
 	game.nmaterials = 16;
 	game.textures = textures;
-	game.ntextures = 50;
+	game.ntextures = 52;
 	game.weapons = gun;
 	game.nweapons = 7;
 	game.played_music = 0;

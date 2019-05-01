@@ -96,10 +96,17 @@ typedef struct	s_display_deco_state
 	int		invert;
 }				t_display_deco_state;
 
+typedef struct	s_help_component
+{
+	t_img	img;
+}				t_help_state;
+
+
 t_component		init_button(t_button button, t_sdl *sdl);
 t_component		init_cb_button(t_cb_button button, t_sdl *sdl);
 t_component		init_sw_button(t_sw_button button, t_sdl *sdl);
 t_component		init_display_deco(t_display_deco_state deco, t_component child);
+t_component		init_help_component(t_help_state state, t_sdl *sdl);
 
 
 #endif

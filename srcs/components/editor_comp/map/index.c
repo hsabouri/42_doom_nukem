@@ -195,6 +195,14 @@ t_sdl *sdl)
 		.callback = &grid_size,
 		.scancode = SDL_SCANCODE_SPACE}, sdl);
 	apush(&ret, &current);
+	current = init_display_deco((t_display_deco_state) {
+		.to_look_at = (int *)&env->events.keys[SDL_SCANCODE_H],
+		.display_value = 1,
+		.state = state,
+		.invert = 0
+	}, init_help_component((t_help_state) {
+			.img = env->game.textures[50]}, sdl));
+	apush(&ret, &current);
 	//current = create_list_sectors(env, sdl);
 	//apush(&ret, &current); // Used to test lists
 	return (ret);

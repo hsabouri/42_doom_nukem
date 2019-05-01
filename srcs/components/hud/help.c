@@ -23,6 +23,10 @@ static int			self_update(t_component *self, void *parent)
 	{
 		state->is_active = 1;
 		self->display = 1;
+		if (hud->env->editor.enabled == 1 && hud->env->toggle_editor == 0)
+			state->img_display = 1;
+		else
+			state->img_display = 0;
 		return (1);
 	}
 	else if (state->is_active && !hud->env->events.keys[SDL_SCANCODE_H])
@@ -46,8 +50,13 @@ static void			self_render(const t_component self, t_color *buf)
 	{
 		bg.a = bg.a + 150;
 		background(buf, bg, self.size);
-		component_image(state->help, (t_pix) {(WIDTH / 2 - state->help.width
-			/ 2), (HEIGHT / 2 - state->help.height / 2)}, self.size, buf);
+		if (state->img_display == 0)
+			component_image(state->help, (t_pix) {(WIDTH / 2 - state->help.width
+				/ 2), (HEIGHT / 2 - state->help.height / 2)}, self.size, buf);
+		else
+			component_image(state->help_ig_edit, (t_pix) {(WIDTH / 2
+				- state->help.width / 2), (HEIGHT / 2 - state->help.height / 2)},
+				self.size, buf);
 		state->is_display = 1;
 	}
 }
@@ -60,8 +69,10 @@ static t_help_state	*init_help_state(void *parent_state)
 	hud = (t_hud_state *)parent_state;
 	state = (t_help_state *)safe_malloc(sizeof(t_help_state), "component");
 	state->help = hud->env->game.textures[16];
+	state->help_ig_edit = hud->env->game.textures[51];
 	state->is_active = 0;
 	state->is_display = 0;
+	state->img_display = 0;
 	state->background = (t_color) {70, 70, 70, 0};
 	return (state);
 }
