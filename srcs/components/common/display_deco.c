@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "./common.h"
-#include "../../menu/menu.h"
 
 static int				self_update(t_component *self, void *parent)
 {

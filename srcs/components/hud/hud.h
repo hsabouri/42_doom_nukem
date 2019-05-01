@@ -61,8 +61,10 @@ typedef struct	s_inventory_state
 typedef struct	s_help_state
 {
 	t_img		help;
+	t_img		help_ig_edit;
 	int			is_active;
 	int			is_display;
+	int			img_display;
 	t_color		background;
 }				t_help_state;
 
