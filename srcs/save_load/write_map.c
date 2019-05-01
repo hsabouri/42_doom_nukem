@@ -71,6 +71,8 @@ void	write_walls(int fd, t_wall *walls, size_t nwalls, t_mat *mats)
 			fwalls.mat = id_from_p(walls[i].mat, mats, sizeof(t_mat));
 		else
 			fwalls.mat = -1;
+		fwalls.left_z = vec2_to_fvec2(walls[i].left_z);
+		fwalls.right_z = vec2_to_fvec2(walls[i].right_z);
 		write_struct(&fwalls, fd, sizeof(t_c_wall));
 		i++;
 	}
@@ -89,8 +91,8 @@ t_mat *mats)
 		fsectors.start = sectors[i].start;
 		fsectors.number = sectors[i].number;
 		fsectors.sector_id = sectors[i].sector_id;
-		fsectors.floor = f_from_float(sectors[i].floor.z);
-		fsectors.ceiling = f_from_float(sectors[i].ceiling.z);
+		fsectors.floor = vec3_to_fvec3(sectors[i].floor);
+		fsectors.ceiling = vec3_to_fvec3(sectors[i].ceiling);
 		fsectors.ambient = sectors[i].ambient;
 		if (sectors[i].ceiling_mat != NULL)
 			fsectors.ceiling_mat = id_from_p(sectors[i].ceiling_mat, mats,\
@@ -103,6 +105,7 @@ t_mat *mats)
 		else
 			fsectors.floor_mat = -1;
 		fsectors.tex_pos = sectors[i].tex_pos;
+		fsectors.center = vec2_to_fvec2(sectors[i].center);		
 		write_struct(&fsectors, fd, sizeof(t_c_sector));
 		i++;
 	}

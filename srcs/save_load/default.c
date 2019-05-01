@@ -47,7 +47,7 @@ t_player	player_default(void)
 				0,
 				0
 			},
-			NULL,
+			safe_anew(NULL, 0, sizeof(t_img), "components"),
 			1
 		},
 		90,
@@ -90,8 +90,8 @@ t_entity	entity_default(void)
 			0,
 			0
 		},
-	safe_anew(NULL, 1, sizeof(t_img), "components"),
-	0});
+		safe_anew(NULL, 1, sizeof(t_img), "components"),
+		0});
 }
 
 t_game	default_map(void)

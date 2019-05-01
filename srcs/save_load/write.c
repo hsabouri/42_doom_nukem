@@ -37,16 +37,12 @@ static void		write_player(t_player player, int fd, t_mat *materials)
 	res.my_entity.spawn.gravity = f_from_float(player.my_entity.spawn.gravity);
 	res.my_entity.spawn.height = f_from_float(player.my_entity.spawn.height);
 	res.my_entity.spawn.radius = f_from_float(player.my_entity.spawn.radius);
+	res.my_entity.spawn.rad_inter = f_from_float(player.my_entity.spawn.rad_inter);
 	res.my_entity.spawn.pos = vec3_to_fvec3(player.my_entity.spawn.pos);
 	res.my_entity.spawn.speed_max = vec3_to_fvec3(player.my_entity.spawn.speed_max);
 	res.my_entity.spawn.look.u = f_from_float(player.my_entity.physic.look_h);
 	res.my_entity.spawn.look.v = player.my_entity.spawn.look_v;
 	res.my_entity.spawn.sector_id = player.my_entity.spawn.sector_id;
-	res.life = player.life;
-	res.weapons[0] = player.weapons[0];
-	res.weapons[1] = player.weapons[1];
-	res.secondary = player.secondary;
-	res.equiped = player.equiped;
 	j = 0;
 	while ((mat = (t_mat **)ashift(&player.my_entity.mat)))
 	{
@@ -60,6 +56,11 @@ static void		write_player(t_player player, int fd, t_mat *materials)
 		j++;
 	}
 	res.my_entity.damage = player.my_entity.damage;
+	res.life = player.life;
+	res.weapons[0] = player.weapons[0];
+	res.weapons[1] = player.weapons[1];
+	res.secondary = player.secondary;
+	res.equiped = player.equiped;
 	write_struct(&res, fd, sizeof(t_c_player));
 }
 
@@ -77,9 +78,9 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 {
 	game_s.ninventory = game.player.inventory.len;
 	game_s.loc_inventory = sizeof(t_c_game);
+	game_s.loc_player = game_s.loc_inventory + sizeof(size_t) * game_s.ninventory;
 	game_s.nmaterials = game.nmaterials;
-	game_s.loc_mats = sizeof(t_c_game) + sizeof(size_t) * game_s.ninventory;
-	game_s.loc_player = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
+	game_s.loc_mats = game_s.loc_player + sizeof(t_c_player);
 	game_s.npoints = game.npoints;
 	game_s.loc_points = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.nwalls = game.nwalls;
@@ -96,16 +97,18 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 	game_s.nweapons = game.nweapons;
 	game_s.loc_weapons = game_s.loc_entities + sizeof(t_c_entity)\
 		* game.nentities;
-	game_s.ntextures = game.ntextures;
-	game_s.loc_textures = game_s.loc_weapons + sizeof(t_c_weapon)\
+	game_s.nevents = game.waiting_events.len;
+	game_s.loc_events = game_s.loc_weapons + sizeof(t_c_weapon)\
 		* game.nweapons;
+	game_s.ntextures = game.ntextures;
+	game_s.loc_textures = game_s.loc_events + sizeof(t_c_game_event)\
+		* game_s.nevents;
 	game_s.nmusic = game.music.len;
 	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)\
 		* game.ntextures;
 	game_s.nsounds = game.sounds.len;
 	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music) *\
 		game.music.len;
-	printf("n_sound: %zu\n", game.sounds.len);
 	return (game_s);
 }
 
@@ -124,6 +127,7 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	write_portals(fd, game.portals, game.nportals, game.materials);
 	write_entities(fd, game.entities, game.nentities, game.materials);
 	write_weapons(fd, game.weapons, game.nweapons, game.textures);
+	write_events(fd, game.waiting_events);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);
 	loc_sound = write_audio(fd, loc_music, MUSIC);
@@ -149,8 +153,8 @@ void				save(const char *filename, t_game game)
 		game.textures[i].height * game.textures[i].width);
 		i++;
 	}
-	// write_music(fd, MUSIC);
-	// write_music(fd, SOUND);
+	write_music(fd, MUSIC);
+	write_music(fd, SOUND);
 	console_log("FileLoader3030", "Successfully saved file.");
 	close(fd);
 }

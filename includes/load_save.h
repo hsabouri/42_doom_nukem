@@ -76,6 +76,7 @@ void			write_entities(int fd, t_entity *entities, size_t nentities,\
 t_mat *mats);
 void			write_weapons(int fd, t_weapon *weapons, size_t nentities,\
 t_img *textures);
+void			write_events(int fd, t_plist event);
 size_t			write_textures(int fd, t_img *textures, size_t ntextures,\
 int index);
 size_t			write_audio(int fd, int index, t_audio type);
@@ -95,6 +96,8 @@ t_entity		*parse_entities(void *buf, t_save save, t_mat *mats,\
 size_t n_entities);
 t_weapon		*parse_weapons(void *buf, t_save save, t_img *textures,\
 size_t n_entities);
+t_plist			parse_events(void *buf, t_save save, size_t n_events,\
+t_game game, t_player player);
 void			parse_audio(void *buf, t_save save, size_t n_entities,\
 t_audio);
 

@@ -25,6 +25,7 @@
 # define MUSIC_MAGIC	0xDEFEC8ED
 # define SOUND_MAGIC	0xDEADBEEF
 # define GUN_MAGIC		0xD1ED1ED1
+# define EVENT_MAGIC	0xD0D0CACA
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -73,6 +74,7 @@ typedef struct		s_c_ph
 	t_fixed		gravity;
 	t_fixed		height;
 	t_fixed		radius;
+	t_fixed		rad_inter;
 	t_fvec3		pos;
 	t_fvec3		speed_max;
 	t_fvec2		look;
@@ -82,7 +84,7 @@ typedef struct		s_c_ph
 typedef struct		s_c_entity
 {
 	size_t		magic;
-	u_int32_t	id;
+	int			id;
 	t_c_ph		spawn;
 	ssize_t		mat[16];
 	//float life;
@@ -90,6 +92,21 @@ typedef struct		s_c_entity
 	//t_weapon weapons;
 	int 		damage;
 }					t_c_entity;
+
+typedef struct		s_c_trigger
+{
+	int32_t		e_actif;
+	size_t		condi;
+	int32_t		e_passif;
+}					t_c_trigger;
+
+typedef struct		s_c_game_event
+{
+	size_t		magic;
+	t_c_trigger	trigger;
+	// int			is_trigger;
+	// t_action	 action;
+}					t_c_game_event;
 
 typedef struct		s_c_player
 {
@@ -128,6 +145,8 @@ typedef struct		s_c_wall
 	u_int32_t	a;
 	u_int32_t	b;
 	ssize_t		mat;
+	t_fvec2		left_z;
+	t_fvec2		right_z;
 }					t_c_wall;
 
 typedef struct		s_c_sector
@@ -136,12 +155,13 @@ typedef struct		s_c_sector
 	u_int32_t	start;
 	u_int32_t	number;
 	size_t		sector_id;
-	t_fixed		floor;
-	t_fixed		ceiling;
+	t_fvec3		floor;
+	t_fvec3		ceiling;
 	t_color		ambient;
 	ssize_t		ceiling_mat;
 	ssize_t		floor_mat;
 	t_fvec2		tex_pos;
+	t_fvec2		center;
 }					t_c_sector;
 
 typedef struct		s_c_music
@@ -156,9 +176,9 @@ typedef struct		s_c_game
 	size_t		magic;
 	size_t		ninventory;
 	size_t		loc_inventory;
-	size_t		loc_player;
 	size_t		nmaterials;
 	size_t		loc_mats;
+	size_t		loc_player;
 	size_t		npoints;
 	size_t		loc_points;
 	size_t		nwalls;
@@ -172,6 +192,8 @@ typedef struct		s_c_game
 	size_t		loc_entities;
 	size_t		nweapons;
 	size_t		loc_weapons;
+	size_t		nevents;
+	size_t		loc_events;
 	size_t		ntextures;
 	size_t		loc_textures;
 	size_t		nmusic;

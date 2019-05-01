@@ -65,14 +65,13 @@ t_save save)
 	t_mat		*mat;
 	size_t		j;
 
-	res = player_default();
-	struc_p = *(t_c_player *)dump_struct(buf, save.index +
-			sizeof(t_c_player), sizeof(t_c_player), save.max);
+	struc_p = *(t_c_player *)dump_struct(buf, save.index, sizeof(t_c_player), save.max);
 	verify_magic(&struc_p, PLAYER_MAGIC, 0);
 	current = player_default();
 	current.my_entity.physic.gravity = f_to_float(struc_p.my_entity.spawn.gravity);
 	current.my_entity.physic.height = f_to_float(struc_p.my_entity.spawn.height);
 	current.my_entity.physic.radius = f_to_float(struc_p.my_entity.spawn.radius);
+	current.my_entity.physic.rad_inter = f_to_float(struc_p.my_entity.spawn.rad_inter);
 	current.my_entity.physic.pos = fvec3_to_vec3(struc_p.my_entity.spawn.pos);
 	current.my_entity.physic.speed_max = fvec3_to_vec3(struc_p.my_entity.spawn.speed_max);
 	current.my_entity.physic.look_v = struc_p.my_entity.spawn.look.v;
@@ -136,6 +135,9 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	res.nweapons = game.nweapons;
 	save.index = game.loc_player;
 	res.player = parse_player(game, res, buf, save);
+	save.index = game.loc_events;
+	res.waiting_events = parse_events(buf, save, game.nevents, res,
+		res.player);
 	return (res);
 }
 
@@ -159,6 +161,7 @@ t_game			load(const char *filename, int edit_mode)
 		parse_audio(buf, save, game.nmusic, MUSIC);
 		save.index = game.loc_sounds;
 		parse_audio(buf, save, game.nsounds, SOUND);
+		res.log = safe_anew(NULL, 100, sizeof(t_trigger), "loader");
 		// debug(res);
 	}
 	return (res);

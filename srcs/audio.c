@@ -27,6 +27,7 @@ t_game	init_audio(t_game game)
 		== -1)
 	{
 		console_error("doom_nukem", "Could not initialize SDL_Mixer.");
+		printf("%s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
 	Mix_AllocateChannels(10);

@@ -605,41 +605,40 @@ t_game	generate_map(void)
 		inventory
 	};
 
-	// t_game_event *g_e = (t_game_event *)malloc(2 * sizeof(t_game_event));
-
-	t_entity dummy = ((t_entity){
-		10,
-		(t_ph) {
-			0,
-			0,
-			0,
-			0,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			0,
-			0,
-			2,
-			0,
-			0
-		},
-		(t_ph) {
-			0,
-			0,
-			0,
-			0,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			0,
-			0,
-			2,
-			0,
-			0
-		},
-		multi,
-		0
-		});
+	//pabesoindelesauvgardé
+	// t_entity dummy = ((t_entity){
+	// 	10,
+	// 	(t_ph) {
+	// 		0,
+	// 		0,
+	// 		0,
+	// 		0,
+	// 		(t_vec3){0, 0, 0},
+	// 		(t_vec3){0, 0, 0},
+	// 		(t_vec3){0, 0, 0},
+	// 		0,
+	// 		0,
+	// 		2,
+	// 		0,
+	// 		0
+	// 	},
+	// 	(t_ph) {
+	// 		0,
+	// 		0,
+	// 		0,
+	// 		0,
+	// 		(t_vec3){0, 0, 0},
+	// 		(t_vec3){0, 0, 0},
+	// 		(t_vec3){0, 0, 0},
+	// 		0,
+	// 		0,
+	// 		2,
+	// 		0,
+	// 		0
+	// 	},
+	// 	multi,
+	// 	0
+	// 	});
 
 	t_array c_log = anew(NULL, 100, sizeof(t_trigger));
 
@@ -660,7 +659,7 @@ t_game	generate_map(void)
 			}
 		};
 
-			t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
+	t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*third_e = (t_game_event){
 		(t_pelem) {NULL},
 		(t_trigger){
@@ -668,24 +667,22 @@ t_game	generate_map(void)
 			}
 		};
 
-			t_game_event * kuadro_e = (t_game_event *)malloc(sizeof(t_game_event));
-	*kuadro_e = (t_game_event){
-		(t_pelem) {NULL},
-		(t_trigger){
-			dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
-			}
-		};
+	// 		t_game_event * kuadro_e = (t_game_event *)malloc(sizeof(t_game_event));
+	// *kuadro_e = (t_game_event){
+	// 	(t_pelem) {NULL},
+	// 	(t_trigger){
+	// 		dummy, TRIGGER_SECTOR, dummy // Game event : list event wanted
+	// 		}
+		// };
 
 	t_plist	g_e	= lpnew(first_e);
 	lppush(&g_e, secon_e);
 	lppush(&g_e, third_e);
-	lppush(&g_e, kuadro_e);
+	// lppush(&g_e, kuadro_e);
 
 	game.player = player;
 	game.log = c_log;
-	game.nlog = 10;
 	game.waiting_events = g_e;
-	game.nwaiting_events = 10;
 	game.entities = entities;
 	game.nentities = 4;
 	game.sectors = sectors;
@@ -704,8 +701,5 @@ t_game	generate_map(void)
 	game.weapons = gun;
 	game.nweapons = 7;
 	game.played_music = 0;
-	game.music = anew(NULL, 0, sizeof(t_music));
-	game.sounds = anew(NULL, 0, sizeof(t_sound));
-	game.chunks = anew(NULL, 0, sizeof(t_chunk));
 	return (game);
 }

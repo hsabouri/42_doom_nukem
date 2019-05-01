@@ -73,7 +73,6 @@ t_game		check_see(t_game game)
 {
 	t_game n_game;
 	t_trigger tmp_log;
-	    t_trigger       *c_log;
 
 	t_selected ren;
 

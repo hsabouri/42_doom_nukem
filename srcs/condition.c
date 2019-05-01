@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/04/06 17:17:29 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:53:26 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int    no_trigger(t_trigger trigger, t_trigger c_log)
 {
+    (void)trigger;
+    (void)c_log;
     return 1;
 }
 
@@ -55,10 +57,6 @@ int      sector_trigger(t_trigger trigger, t_trigger c_log)
         return 0;
 }
 
-
-
-// int    (* ft_trigger[5])(t_trigger trigger, t_trigger c_log) = {no_trigger, see_trigger,touch_trigger,interact_trigger,sector_trigger};
-
 t_env     init_conditions(t_env env)
 {
     t_env n_env;
@@ -91,8 +89,8 @@ t_game  general_conditions(t_game game, t_event events)
         j = 0;
         while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
         {
-            // if(c_log->condi == TRIGGER_TOUCH && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
-                //   n_game.chunks = stack_sounds(n_game.chunks, 1, 1);
+            if(c_log->condi == TRIGGER_TOUCH && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
+                  n_game.chunks = stack_sounds(n_game.chunks, 3, 1);
             if (events.mouse_click[SDL_BUTTON_LEFT] && c_log->condi == TRIGGER_SEE && n_game.player.my_entity.id == c_log->e_actif.id && c_log->e_passif.damage == 1)
                 n_game.chunks = stack_sounds(n_game.chunks, 2, 1);
             
@@ -109,12 +107,10 @@ t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
     int j = 0;
 
     game = general_conditions(game, events);
-    while ((current = (t_game_event *)lpnext(&game.waiting_events)) != NULL) {
-        
-
-        while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL) {
-
-            
+    while ((current = (t_game_event *)lpnext(&game.waiting_events)) != NULL)
+    {
+        while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
+        {
             if (triggers[current->trigger.condi] (current->trigger, *c_log) == 1)
             {
                 lremove(&game.waiting_events, current);

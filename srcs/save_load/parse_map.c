@@ -85,6 +85,8 @@ size_t nwalls)
 			current.mat = NULL;
 		else
 			current.mat = id_to_p(struc_w.mat, mats, sizeof(t_mat));
+		current.left_z = fvec2_to_vec2(struc_w.left_z);
+		current.right_z = fvec2_to_vec2(struc_w.right_z);
 		walls[i] = current;
 		i++;
 	}
@@ -109,13 +111,14 @@ size_t nsectors)
 		current = sectors[i];
 		current = (t_sector) {.start = struc_s.start, .number = struc_s.number,
 			.sector_id = struc_s.sector_id, .tex_pos = struc_s.tex_pos,
-			.floor = f_to_float(struc_s.floor),
-			.ceiling = f_to_float(struc_s.ceiling),
+			.floor = fvec3_to_vec3(struc_s.floor),
+			.ceiling = fvec3_to_vec3(struc_s.ceiling),
 			.ambient = struc_s.ambient,
 			.ceiling_mat = (struc_s.ceiling_mat == -1) ? NULL : 
 				id_to_p(struc_s.ceiling_mat, mats, sizeof(t_mat)),
 			.floor_mat = (struc_s.floor_mat == -1) ? NULL : 
 				id_to_p(struc_s.floor_mat, mats, sizeof(t_mat))};
+		current.center = fvec2_to_vec2(struc_s.center);			
 		sectors[i] = current;
 	}
 	return (sectors);

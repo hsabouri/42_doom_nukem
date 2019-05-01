@@ -27,9 +27,11 @@ t_mat *mats)
 	{
 		entity = entities[i];
 		res.magic = ENTITY_MAGIC + i;
+		res.id = entity.id;
 		res.spawn.gravity = f_from_float(entity.spawn.gravity);
 		res.spawn.height = f_from_float(entity.spawn.height);
 		res.spawn.radius = f_from_float(entity.spawn.radius);
+		res.spawn.rad_inter = f_from_float(entity.spawn.rad_inter);
 		res.spawn.pos = vec3_to_fvec3(entity.spawn.pos);
 		res.spawn.speed_max = vec3_to_fvec3(entity.spawn.speed_max);
 		res.spawn.look.u = f_from_float(entity.physic.look_h);
