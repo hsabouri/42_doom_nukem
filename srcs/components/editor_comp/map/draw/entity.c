@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 12:20:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 16:32:26 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:41:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		foreach_entity(void *entity, void *param, size_t i)
 	
 	size = (state->state.zoom < 10) ? 2 : 4;
 	size = (state->state.zoom > 60) ? 6 : size;
-	c = (e->damage) ? E_DAMAGE : E_PEACEFUL;
+	c = (e->damage) ? state->color : E_PEACEFUL;
 	if ((size_t)state->state.selected_entity == i ||
 		(size_t)state->state.selected_spawn == i)
 		c = (t_color) {c.r + 30, c.g + 30, c.b + 30, c.a};
