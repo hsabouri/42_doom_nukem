@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/27 12:18:54 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:52:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,18 +116,21 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 	state_buf = (t_state_buf) {state, buf, WHITE, 0};
 	tmp_array = anew(state.env->game.walls, state.env->game.nwalls, sizeof(t_wall));
 	state_buf.modifier = 0;
-	aforeachi_state(&tmp_array, &foreach_wall, (void *)&state_buf);
+	aforeachi_state(&tmp_array, &foreach_wall, &state_buf);
 	state_buf.color = ORANGE;
 	state_buf.modifier = 1;
 	tmp_array = anew(&state.env->game.walls[state.env->game.nwalls],
 		state.env->game.nuwalls, sizeof(t_wall));
-	aforeachi_state(&tmp_array, &foreach_wall, (void *)&state_buf);
+	aforeachi_state(&tmp_array, &foreach_wall, &state_buf);
 	state_buf.color = LIBERTY;
 	tmp_array = anew(state.env->game.points, state.env->game.npoints, sizeof(t_vec2));
-	aforeachi_state(&tmp_array, &foreach_point, (void *)&state_buf);
+	aforeachi_state(&tmp_array, &foreach_point, &state_buf);
 	tmp_array = anew(state.env->game.entities, state.env->game.nentities,
 		sizeof(t_entity));
-	aforeachi_state(&tmp_array, &foreach_entity, (void *)&state_buf);
+	state_buf.color = E_DAMAGE;
+	aforeachi_state(&tmp_array, &foreach_entity, &state_buf);
+	state_buf.color = E_PLAYER;
+	foreach_entity(&state_buf.state.env->game.player.my_entity, &state_buf, state_buf.state.env->game.nentities);
 	if (state.tool == CREATE_PORTAL)
 	{
 		tmp_array = anew(state.env->game.portals, state.env->game.nportals, sizeof(t_portal));

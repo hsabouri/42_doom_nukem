@@ -6,11 +6,22 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:58:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/25 18:29:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:58:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../map.h"
+
+static		check_player(t_editor_map_state editor, t_event events, int spawn,
+float min)
+{
+	const t_game	game = editor.env->game;
+	float			current;
+
+	return (circle(vec3_to_vec2((spawn) ? game.player.my_entity.spawn.pos :
+				game.player.my_entity.physic.pos),
+			point_from_mouse(editor, events, 0)));
+}
 
 ssize_t		select_entity(t_editor_map_state editor, ssize_t selected_entity,
 t_event events, int spawn)
@@ -37,5 +48,7 @@ t_event events, int spawn)
 		}
 		i++;
 	}
+	if ((current = check_player(editor, events, spawn, min)) <= min)
+		min_id = game.nentities;
 	return (min_id);
 }
