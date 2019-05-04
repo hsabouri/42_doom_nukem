@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/29 12:21:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/04 18:15:49 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_game			delete_sector(size_t sector, t_game game);
 t_game			delete_wall(size_t wall, t_game game);
 t_game			delete_point(size_t point, t_game game);
 t_game			delete_entity(size_t entity, t_game game);
+t_game			delete_material(size_t mat, t_game game);
 
 t_selected		world_selector(t_game game);
 
