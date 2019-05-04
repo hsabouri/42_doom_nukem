@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/27 16:09:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/04 17:14:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ t_sdl *sdl)
 
 	ret = safe_anew(NULL, 5, sizeof(t_component), "components");
 	current = init_editor_map(env, sdl);
+	apush(&ret, &current);
+	current = init_display_deco((t_display_deco_state) {
+		.to_look_at = (int *)&state->type,
+		.display_value = (int)MATERIAL,
+		.state = state,
+		.invert = 0
+	}, init_editor_mat(env, sdl));
 	apush(&ret, &current);
 	current = init_button((t_button) {
 		.pos = (t_pix) {WIDTH - 42, HEIGHT - 42},
