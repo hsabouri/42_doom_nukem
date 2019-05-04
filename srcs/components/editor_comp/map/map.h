@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/27 12:57:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/03 18:17:01 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ typedef struct	s_wall_tool
 	ssize_t		*unassigned_wall;
 	t_event		*events;
 }				t_wall_tool;
+
+typedef struct	s_assign_entity
+{
+	ssize_t		*selected_entity;
+	ssize_t		*selected_spawn;
+	ssize_t		*selected_wall;
+	ssize_t		*walls;
+	ssize_t		*entity;
+	ssize_t		*spawn;
+	t_event		*events;
+}				t_assign_entity;
 
 typedef struct	s_entity_tool
 {
@@ -44,6 +55,7 @@ typedef enum	e_editor_map_mode
 	ASSIGN_WALL,
 	CREATE_PORTAL,
 	TOOL_ENTITY,
+	ASSIGN_ENTITY,
 	MOVE
 	// More to come
 }				t_editor_map_mode;
@@ -63,6 +75,8 @@ typedef struct	s_editor_map_state
 	ssize_t				selected_walls[2];
 	ssize_t				selected_entity;
 	ssize_t				selected_spawn;
+	ssize_t				entity;
+	ssize_t				spawn;
 	size_t				n_buttons;
 }				t_editor_map_state;
 
@@ -105,6 +119,9 @@ t_sdl *sdl);
 t_component		init_entity_tool(t_env *env, ssize_t *entity,
 				ssize_t *spawn, t_sdl *sdl);
 
+t_component		init_assign_entity(t_env *env, t_assign_entity v,
+				t_sdl *sdl);
+
 t_vec2			screen_space(t_vec2 vec, t_editor_map_state state);
 t_vec2			point_from_mouse(t_editor_map_state state, t_event events,
 				int magnet);
@@ -122,6 +139,8 @@ ssize_t			select_unassigned_wall(t_editor_map_state editor,
 ssize_t			select_entity(t_editor_map_state editor, ssize_t selected_entity,
 t_event events, int spawn);
 void			select_multi(ssize_t curr, ssize_t *dual, t_event events);
+
+size_t			find_sector(size_t wall_id, t_game game);
 
 void			draw_look(t_vec2 sp_pos, float angle, t_color color,
 				t_state_buf state);

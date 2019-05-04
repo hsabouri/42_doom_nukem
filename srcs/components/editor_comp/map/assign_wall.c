@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 11:43:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/12 14:52:47 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/03 18:15:51 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,6 @@ t_event events)
 		else
 			dual[1] = -1;
 	}
-}
-
-static size_t	find_sector(size_t wall_id, t_game game)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < game.nsectors - 1)
-	{
-		if (game.sectors[i].start <= wall_id &&
-			game.sectors[i + 1].start > wall_id)
-		return (i);
-		++i;
-	}
-	return (game.nsectors - 1);
 }
 
 static int		self_update(t_component *self, void *parent)
