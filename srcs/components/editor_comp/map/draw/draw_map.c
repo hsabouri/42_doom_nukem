@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/29 16:52:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/03 18:06:01 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void			foreach_wall(void *wall, void *param, size_t i)
 	b_p.x = b.u;
 	b_p.y = b.v;
 	if (state.state.tool == ASSIGN_WALL || state.state.tool == CREATE_WALL ||
-		state.state.tool == CREATE_PORTAL)
+		state.state.tool == CREATE_PORTAL || state.state.tool == ASSIGN_ENTITY)
 	{
 		state.color.r /= 2;
 		state.color.g /= 2;

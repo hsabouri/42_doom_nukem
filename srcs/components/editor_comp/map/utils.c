@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:05:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/25 13:57:39 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/03 18:16:29 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,17 @@ float		circle(t_vec2 a, t_vec2 p)
 	return (1 / vec2_inv_size(vec2_sub(a, p)));
 }
 
-void		draw_look(t_vec2 sp_pos, float angle, t_color color,
-t_state_buf state)
+size_t		find_sector(size_t wall_id, t_game game)
 {
-	t_vec2		sp_pos2;
-	int			size;
-	t_pix		a;
-	t_pix		b;
+	size_t	i;
 
-
-	size = state.state.zoom / 2;
-	sp_pos2 = vec2_rot(vec2_new(0, -size), angle);
-	sp_pos2 = vec2_add(sp_pos, sp_pos2);
-	a = (t_pix) {sp_pos.u - 1, sp_pos.v - 1};
-	b = (t_pix) {sp_pos2.u - 1, sp_pos2.v - 1};
-	bresenham(state.buf, a, b, color);
+	i = 0;
+	while (i < game.nsectors - 1)
+	{
+		if (game.sectors[i].start <= wall_id &&
+			game.sectors[i + 1].start > wall_id)
+		return (i);
+		++i;
+	}
+	return (game.nsectors - 1);
 }
