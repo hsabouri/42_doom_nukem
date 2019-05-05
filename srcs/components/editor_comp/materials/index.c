@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/04 17:32:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/05 15:22:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int					self_update(t_component *self, void *parent)
 static t_editor_mat_state	*init_state(t_editor_mat_state *state, t_env *env)
 {
 	state->env = env;
+	state->selected = 0;
 	return (state);
 }
 
@@ -45,6 +46,8 @@ t_sdl *sdl)
 
 	ret = safe_anew(NULL, 1, sizeof(t_component), "commponents");
 	current = create_list_materials(env, sdl);
+	apush(&ret, &current);
+	current = init_preview(state, sdl);
 	apush(&ret, &current);
 	return (ret);
 }
