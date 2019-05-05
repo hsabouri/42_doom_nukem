@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/04 16:38:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/05 15:21:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y);
 t_color			get_wall_pixel(t_proj proj, int y);
 t_color			get_portal_pixel(t_proj proj, int y);
 t_color			get_entity_pixel(t_e_proj proj, int y);
+t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, char p, int y_s);
 
 t_fvec2			get_ray_dir(t_ph physic, int id);
 int				get_ray_id(t_fvec2 point, t_limit limit,

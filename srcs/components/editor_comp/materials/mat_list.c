@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/04 18:33:26 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/05 17:45:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_array		generator(void *parent)
 	while (i < nmats)
 	{
 		curr.img.content = NULL;
-		ft_strncpy(curr.text, "mat n'", 28);
+		ft_strncpy(curr.text, ft_itoa(nmats - i - 1), 28);
 		apush(&ret, &curr);
 		++i;
 	}
@@ -38,7 +38,7 @@ static int			on_del(void *parent, size_t i)
 	t_env	*env;
 	
 	env = ((t_editor_mat_state *)parent)->env;
-	//env->game = delete_material(i, env->game);
+	env->game = delete_material(i, env->game);
 	return (1);
 }
 
@@ -50,7 +50,10 @@ static int			on_add(void *parent)
 
 static int			on_click(void *parent, size_t i)
 {
-	printf("click mat : %zu\n", i);
+	t_editor_mat_state *state;
+
+	state = (t_editor_mat_state *)parent;
+	state->selected = i;
 	return (0);
 }
 

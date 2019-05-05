@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/18 14:31:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/05 15:21:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "./color.h"
 
 
-static t_color	get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, char p, int y_s)
+t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, char p, int y_s)
 {
 	int		x;
 	int		y;
