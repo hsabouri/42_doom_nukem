@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/05 15:22:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:32:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int					self_update(t_component *self, void *parent)
 	t_editor_mat_state		*state;
 
 	state = (t_editor_mat_state *)self->state;
-	(void *)parent;
+	(void)parent;
 	if (state->env->events.any)
 		return (1);
 	return (0);

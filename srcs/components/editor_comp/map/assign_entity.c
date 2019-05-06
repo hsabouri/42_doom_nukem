@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/04 14:35:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:10:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_sdl *sdl)
 	t_component		ret;
 	t_assign_entity	*state;
 
+	(void)env;
 	state = (t_assign_entity *)safe_malloc(sizeof(t_assign_entity), "component");
 	*state = v;
 	ret = default_component(state, (t_pix) {0, 0}, sdl);

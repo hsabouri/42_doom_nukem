@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   condition.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/04/27 14:53:26 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:09:19 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
         {
             if (triggers[current->trigger.condi] (current->trigger, *c_log) == 1)
             {
-                lremove(&game.waiting_events, current);
+                lpremove(&game.waiting_events, current);
             }
             j++;
         }

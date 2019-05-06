@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/29 16:04:33 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/06 16:58:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,6 +356,9 @@ t_game	generate_map(void)
 	yolo = &materials[15];
 	apush(&multi, &yolo);
 
+	t_array multi2 = anew(ft_memdup(multi.mem, 8 * sizeof(t_mat *)), 8, sizeof(t_mat *));
+	t_array multi3 = anew(ft_memdup(multi.mem, 8 * sizeof(t_mat *)), 8, sizeof(t_mat *));
+
 	t_array key_card = anew(NULL, 1, sizeof(t_mat *));
 	apush(&key_card, &key);
 
@@ -466,7 +469,7 @@ t_game	generate_map(void)
 			0,
 			0
 		},
-		multi,
+		multi2,
 		1
 	});
 	entities[2] = ((t_entity){
@@ -499,7 +502,7 @@ t_game	generate_map(void)
 			0,
 			0
 		},
-		multi,
+		multi3,
 		1
 	});
 	entities[3] = ((t_entity){

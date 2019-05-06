@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 12:19:02 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/27 12:59:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:10:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void			foreach_portal(void *port, void *param, size_t i)
 	t_vec2	a;
 	t_vec2	b;
 	
+	(void)i;
 	a = screen_space(portal_pos(portal.from_wall, game), state->state); 
 	b = screen_space(portal_pos(portal.to_wall, game), state->state); 
 	dotted(state->buf, (t_pix) {a.u, a.v}, (t_pix) {b.u, b.v}, LOW_R);

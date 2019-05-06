@@ -6,7 +6,7 @@
 #    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/04/11 12:57:29 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/05/06 12:24:58 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ INCLUDES = ./includes
 CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
 CFLAGS += -g -fPIC
-CFLAGS += -O3 -march=native
 
 ifeq ($(SAN), yes)
 ifeq ($(shell uname -s), Darwin) # remove _o
@@ -23,6 +22,10 @@ CFLAGS += -fsanitize=address
 else
 CFLAGS += -fsanitize=address
 endif
+endif
+
+ifeq ($(OPT), yes)
+CFLAGS += -O3 -march=native
 endif
 
 CC = gcc
