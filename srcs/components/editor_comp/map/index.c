@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/02 16:04:32 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/06 17:14:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 	state->selected_entity = -1;
 	state->entity = -1;
 	state->spawn = -1;
-	//state->n_buttons = 4; // Used to test lists
 	return (state);
 }
 
@@ -182,7 +181,7 @@ t_sdl *sdl)
 		&state->selected_entity,
 		&state->selected_spawn,
 		&state->selected_wall,
-		&state->selected_walls,
+		state->selected_walls,
 		&state->entity,
 		&state->spawn,
 		&env->events

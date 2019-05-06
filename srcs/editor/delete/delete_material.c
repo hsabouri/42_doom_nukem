@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 18:09:46 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/05 14:46:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/06 14:45:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 t_game	delete_material(size_t mat, t_game game)
 {
-	// Need to readdress every material in every object of the game gheee
+	const size_t	old = (size_t)game.materials;
+	t_mat			*new;
+
 	if (mat >= game.nmaterials)
 		return (game);
-	if (!(game.materials =\
-	array_close(game.materials, mat, game.nmaterials, sizeof(t_mat))))
+	new = array_close(game.materials, mat, game.nmaterials, sizeof(t_mat));
+	if (!new)
 		return (game);
+	game.materials = new;
 	game.nmaterials--;
-	del_update_materials(mat, game);
-	del_update_walls(-1, -1, mat, game);
-	del_update_sectors(-1, mat, -1, game);
-	del_update_portals(-1, -1, -1, mat, game);
+	game = del_mat_update_materials(mat, old, game);
+	game = del_mat_update_walls(mat, old, game);
+	game = del_mat_update_portals(mat, old, game);
+	game = del_mat_update_sectors(mat, old, game);
+	game = del_mat_update_entities(mat, old, game);
 	return (game);
 }

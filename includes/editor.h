@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/04 18:15:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/06 14:36:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,22 @@ t_game			delete_material(size_t mat, t_game game);
 
 t_selected		world_selector(t_game game);
 
-t_game			del_update_walls(ssize_t pts, ssize_t portal, ssize_t mat,\
+t_game			del_update_walls(ssize_t pts, ssize_t portal, ssize_t mat,
 				t_game game);
-t_game			del_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
+t_game			del_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,
 				t_game game);
 t_game			del_update_portals(ssize_t pts, ssize_t wall, ssize_t sector, ssize_t mat,
 				t_game game);
-t_game			new_update_portals(ssize_t point, ssize_t wall, ssize_t sector,\
+t_game			new_update_portals(ssize_t point, ssize_t wall, ssize_t sector,
 				t_game game);
-t_game			new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,\
+t_game			new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,
 				t_game game);
-t_game			new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,\
-				t_game game);
+
+t_game			del_mat_update_materials(size_t mat, size_t a_old, t_game game);
+t_game			del_mat_update_walls(size_t mat, size_t a_old, t_game game);
+t_game			del_mat_update_sectors(size_t mat, size_t a_old, t_game game);
+t_game			del_mat_update_portals(size_t mat, size_t a_old, t_game game);
+t_game			del_mat_update_entities(size_t mat, size_t a_old, t_game game);
 
 void			legend(t_color *buf, t_sdl *sdl);
 t_env			game_editing(t_env env, t_player player);

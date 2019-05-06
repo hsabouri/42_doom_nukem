@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 12:22:04 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:09:07 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void			*ft_memjoin(const void *s1, const void *s2, size_t len1,
 				size_t len2);
 size_t			ft_strlen(const char *s);
 char			*ft_strdup(const char *s1);
+char			*ft_memdup(const char *m, size_t size);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
 char			*ft_strcat(char *s1, const char *s2);
@@ -175,7 +176,7 @@ t_plist			*lpinsert(t_plist *list, t_pelem *elem);
 t_plist			*lpjoin(t_plist *begin, t_plist *end);
 t_pelem			*lpnext(t_plist *list);
 t_pelem			*lprevious(t_plist *list);
-t_elem 			*lremove(t_plist *list, t_pelem *del_elem);
+t_pelem			*lpremove(t_plist *list, t_pelem *del_elem);
 void			*lpfold(const t_plist *list, void *acc, void *(*f)(const t_pelem *elem, void *));
 void			*lpfoldi(const t_plist *list, void *acc, void *(*f)(const t_pelem *elem, void *,
 				size_t i));

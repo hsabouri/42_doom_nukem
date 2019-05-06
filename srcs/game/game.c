@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/24 19:58:57 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:31:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_game		check_see(t_game game)
 	return n_game;
 }
 
-t_env		game_loop(t_env env, size_t frame)
+void		game_loop(t_env *env, size_t frame)
 {
 	t_color			*content;
 	int				pitch;
@@ -97,30 +97,29 @@ t_env		game_loop(t_env env, size_t frame)
 	static float	old_timer = 1;
 
 	timer = start_timer();
-	if (env.editor.enabled)
-		env = game_editing(env, env.game.player);
-	env.game = player_properties(env.game, env.events);
-	//env.game = entities_properties(env.game, env.events);
-	env.game = check_see(env.game);
+	if (env->editor.enabled)
+		*env = game_editing(*env, env->game.player);
+	env->game = player_properties(env->game, env->events);
+	//env->game = entities_properties(env->game, env->events);
+	env->game = check_see(env->game);
 
-	env.game = physic(env.game, env.events, old_timer);
-	env.game.frame = frame;
-	env.game = check_conditions(env.game, env.events, env.condition);
+	env->game = physic(env->game, env->events, old_timer);
+	env->game.frame = frame;
+	env->game = check_conditions(env->game, env->events, env->condition);
 	content = NULL;
-	SDL_LockTexture(env.sdl.buf, NULL, (void **)&content, &pitch);
-	env.current_buffer = content;
-	render_multi_threaded(env, env.current_buffer);
-	SDL_UnlockTexture(env.sdl.buf);
-	SDL_RenderCopy(env.sdl.renderer, env.sdl.buf, NULL, NULL);
-	*env.component = trigger_component(&env, *env.component, &env.sdl);
-	display_component(*env.component, &env.sdl);
-	play_music(env.game, env.game.played_music, 0, frame);
-	env.game = play_sounds(env.game);
-	SDL_RenderPresent(env.sdl.renderer);
-	// find_center_sectors(env.game);
-	env.game = play_sounds(env.game);
+	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
+	env->current_buffer = content;
+	render_multi_threaded(*env, env->current_buffer);
+	SDL_UnlockTexture(env->sdl.buf);
+	SDL_RenderCopy(env->sdl.renderer, env->sdl.buf, NULL, NULL);
+	*env->component = trigger_component(env, *env->component, &env->sdl);
+	display_component(*env->component, &env->sdl);
+	play_music(env->game, env->game.played_music, 0, frame);
+	env->game = play_sounds(env->game);
+	SDL_RenderPresent(env->sdl.renderer);
+	// find_center_sectors(env->game);
+	env->game = play_sounds(env->game);
 	old_timer = end_timer(timer);
 		// printf("0");
 		// exit(0);
-	return (env);
 }

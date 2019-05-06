@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/03 18:17:01 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/06 17:15:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef struct	s_editor_map_state
 	ssize_t				selected_spawn;
 	ssize_t				entity;
 	ssize_t				spawn;
-	size_t				n_buttons;
 }				t_editor_map_state;
 
 typedef struct	s_assign_tool
@@ -125,8 +124,6 @@ t_component		init_assign_entity(t_env *env, t_assign_entity v,
 t_vec2			screen_space(t_vec2 vec, t_editor_map_state state);
 t_vec2			point_from_mouse(t_editor_map_state state, t_event events,
 				int magnet);
-
-t_component		create_list_sectors(t_env *env, t_sdl *sdl);
 
 float			capsule(t_vec2 a, t_vec2 b, t_vec2 p);
 float			circle(t_vec2 a, t_vec2 p);

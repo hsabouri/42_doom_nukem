@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/05 17:45:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:01:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int			on_del(void *parent, size_t i)
 	t_env	*env;
 	
 	env = ((t_editor_mat_state *)parent)->env;
+	if (env->game.nmaterials <= 1)
+		return (0);
 	env->game = delete_material(i, env->game);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/29 16:34:50 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:26:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,9 @@ int				main(int ac, char **av)
 		else if (env.game_mode == GAME_MODE)
 		{
 			if (!env.toggle_editor)
-			{
-
-				env = game_loop(env, frame);
-			}
+				game_loop(&env, frame);
 			else
-				env = editor_loop(env);
+				editor_loop(&env);
 		}
 		if (!env.sdl.win)
 		{

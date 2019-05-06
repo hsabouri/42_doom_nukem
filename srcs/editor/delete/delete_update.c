@@ -6,27 +6,11 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/05 14:35:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:00:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
-
-t_game	del_update_materials(size_t mat, t_game game)
-{
-	size_t	i;
-	t_mat	curr;
-
-	i = 0;
-	while (i < game.nmaterials)
-	{
-		if (curr.overlay > mat * sizeof(t_mat) + game.materials)
-			curr.overlay = curr.overlay - sizeof(t_mat);
-		else if (curr.overlay == mat * sizeof(t_mat) + game.materials)
-			curr.overlay = NULL;
-		i++;
-	}
-}
 
 t_game	del_update_portals(ssize_t pts, ssize_t wall, ssize_t sector,
 ssize_t mat, t_game game)
