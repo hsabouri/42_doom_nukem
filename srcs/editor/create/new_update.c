@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_update.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/28 11:16:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:19:57 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ t_game game)
 	return (game);
 }
 
-t_game	new_update_walls(ssize_t point, ssize_t mat, ssize_t portal,
-t_game game)
+t_game	new_update_walls(ssize_t point, ssize_t portal, t_game game)
 {
 	t_wall	curr;
 	size_t	i;
@@ -56,8 +55,6 @@ t_game game)
 			curr.b++;
 		if (portal >= 0 && curr.portal >= portal)
 			curr.portal++;
-		if (mat >= 0 && curr.mat >= &game.materials[mat])
-			curr.mat += sizeof(t_mat);
 		game.walls[i] = curr;
 		i++;
 	}
