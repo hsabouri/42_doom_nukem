@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 15:46:59 by fmerding          #+#    #+#             */
-/*   Updated: 2019/05/07 13:06:32 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:55:15 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	find_center_sectors(t_game game)
 
 	n = 0;
 	i = 0;
-	while (n < 1)
+	while (n < game.nsectors)
 	{
-		// reverse_walls(game, n);
+		reverse_walls(game, n);
 		find_center(game, n);
 		// reverse_walls(games,n);
 		sort_tab_z(n, i, game);
@@ -38,34 +38,52 @@ void reverse_walls(t_game game, size_t n)
 	unsigned int j;
 	unsigned int tmp;
 
-	i = game.sectors[n].start;
-	j = game.sectors[n].start+1;
-	while ( i < game.sectors[n].number + game.sectors[n].start)
+	i = game.sectors[n].number + game.sectors[n].start - 1;
+	j = game.sectors[n].number + game.sectors[n].start - 2;
+	// printf ( "clock = %d",game.sectors[n].clock);
+	// printf ("i = %d, game.sectors[n].start = %d",i,game.sectors[n].start);
+	while ( i > game.sectors[n].start)
 	{
+		// printf ( "clock = %d",game.sectors[n].clock);
 		if (game.sectors[n].clock == 0)
 		{
-			if (game.walls[i].a != game.walls[j].a && j < game.sectors[n].number + game.sectors[n].start)
-				j++;
-			if (game.walls[i].a == game.walls[j].a)
+			// printf("coucou");
+			while (game.walls[i].a != game.walls[j].a && j > game.sectors[n].start - 1 )
+				j--;
+			// printf("j = %d",j);
+			if (game.walls[i].a == game.walls[j].a && j != i)
 			{
+				printf("game.walls[%d].a = %d , game.walls[%d].a = %d\n",i,game.walls[i].a,j,game.walls[j].a);
+				printf("reverse");
+
 				tmp = game.walls[j].a;
 				game.walls[j].a = game.walls[j].b;
 				game.walls[j].b = tmp;
+				j = game.sectors[n].number + game.sectors[n].start - 1;
 			}
-			i++;
+
+			// printf("i = %d",j);
 		}
 		if (game.sectors[n].clock == 1)
 		{
-			if (game.walls[i].b != game.walls[j].b && j < game.sectors[n].number + game.sectors[n].start)
-				j++;
-			if (game.walls[i].b == game.walls[j].b)
+			// printf("coucou");
+			while (game.walls[i].a != game.walls[j].a && j > game.sectors[n].start - 1 )
+				j--;
+			// printf("j = %d",j);
+			if (game.walls[i].a == game.walls[j].a && j != i)
 			{
+				printf("game.walls[%d].a = %d , game.walls[%d].a = %d\n",i,game.walls[i].a,j,game.walls[j].a);
+				printf("reverse");
+
 				tmp = game.walls[j].a;
-				game.walls[j].b = game.walls[j].a;
-				game.walls[j].a = tmp;
+				game.walls[j].a = game.walls[j].b;
+				game.walls[j].b = tmp;
+				j = game.sectors[n].number + game.sectors[n].start - 1;
 			}
-			i++;
+
+			// printf("i = %d",j);
 		}
+		i--;
 	}
 }
 
@@ -128,6 +146,7 @@ void	sort_tab_z(size_t n, unsigned int i, t_game game)
 
 		game.sectors[n].sort_v[i] = j;
 		printf("game.walls[%d].a = %d\n",j,game.walls[j].a);
+		printf("game.walls[%d].b = %d\n\n",j,game.walls[j].b);
 		i++;
 		j++;
 	}
