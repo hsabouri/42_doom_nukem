@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 11:34:38 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/07 12:31:59 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ static int			on_del(void *parent, size_t i)
 
 static int			on_add(void *parent)
 {
-	printf("add mat\n");
+	t_env	*env;
+	
+	env = ((t_editor_mat_state *)parent)->env;
+	env->game = create_material(env->game);
 	return (1);
 }
 
