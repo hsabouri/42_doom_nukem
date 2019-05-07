@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 12:19:57 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/07 14:09:52 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ t_game	new_update_walls(ssize_t point, ssize_t portal, t_game game)
 	return (game);
 }
 
-t_game	new_update_sectors(ssize_t wall, ssize_t mat, ssize_t sector,
-t_game game)
+t_game	new_update_sectors(ssize_t wall, ssize_t sector, t_game game)
 {
 	t_sector	curr;
 	size_t		i;
@@ -75,10 +74,6 @@ t_game game)
 			curr.start++;
 		if (wall >= 0 && curr.start == (u_int32_t)wall)
 			curr.number++;
-		if (mat >= 0 && curr.ceiling_mat >= &game.materials[mat])
-			curr.ceiling_mat += sizeof(t_mat);
-		if (mat >= 0 && curr.floor_mat >= &game.materials[mat])
-			curr.floor_mat += sizeof(t_mat);
 		if (sector >= 0 && curr.sector_id >= (size_t)sector)
 			curr.sector_id++;
 		game.sectors[i] = curr;
