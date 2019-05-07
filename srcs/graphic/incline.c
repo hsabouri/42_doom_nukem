@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:14:28 by fmerding          #+#    #+#             */
-/*   Updated: 2019/05/07 12:25:12 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:43:07 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void rotate_floor(size_t n, int mode, t_game game)
 		newx = game.points[game.walls[game.sectors[n].sort_v[i]].a].u - game.sectors[n].center.u;
 		newy = game.points[game.walls[game.sectors[n].sort_v[i]].a].v - game.sectors[n].center.v;
 		game.walls[game.sectors[n].sort_v[i]].left_z.v = newx * game.sectors[n].floor.x + newy * game.sectors[n].floor.y + game.sectors[n].floor.z;
-		// if ((n % 2 == 0 && game.walls[game.sectors[n].sort_v[i]].left_z.v > game.walls[game.sectors[n].sort_v[i]].left_z.u) || (n % 2 == 1 && game.walls[game.sectors[n].sort_v[i]].right_z.v > game.walls[game.sectors[n].sort_v[i]].right_z.u))
-		// rip = 1;
-		printf("a = %d , b = %d\n",game.walls[game.sectors[n].sort_v[i]].a,
-		game.walls[game.sectors[n].sort_v[i]].b);
+		if ((game.walls[game.sectors[n].sort_v[i]].left_z.v > game.walls[game.sectors[n].sort_v[i]].left_z.u))
+		rip = 1;
+		// printf("a = %d , b = %d\n",game.walls[game.sectors[n].sort_v[i]].a,
+		// game.walls[game.sectors[n].sort_v[i]].b);
 		i++;
 
 	}
@@ -65,6 +65,8 @@ void rotate_floor(size_t n, int mode, t_game game)
 		newx = game.points[game.walls[game.sectors[n].sort_v[i]].b].u - game.sectors[n].center.u;
 		newy = game.points[game.walls[game.sectors[n].sort_v[i]].b].v - game.sectors[n].center.v;
 		game.walls[game.sectors[n].sort_v[i]].right_z.v = newx * game.sectors[n].floor.x + newy * game.sectors[n].floor.y + game.sectors[n].floor.z;
+		if ((game.walls[game.sectors[n].sort_v[i]].right_z.v > game.walls[game.sectors[n].sort_v[i]].right_z.u))
+		rip = 1;
 		// printf("left_z = %f, right_z = %f\n",game.walls[game.sectors[n].sort_v[i]].left_z.v,game.walls[game.sectors[n].sort_v[i]].right_z.v);
 		i++;
 	}
@@ -122,8 +124,8 @@ void rotate_ceiling(size_t n, int mode, t_game game)
 		// if (n % 2 == 0)
 		// {
 		game.walls[game.sectors[n].sort_v[i]].left_z.u = newx * game.sectors[n].ceiling.x + newy * game.sectors[n].ceiling.y + game.sectors[n].ceiling.z;
-		// if ((n % 2 == 0 && game.walls[game.sectors[n].sort_v[i]].left_z.v > game.walls[game.sectors[n].sort_v[i]].left_z.u) || (n % 2 == 1 && game.walls[game.sectors[n].sort_v[i]].right_z.v > game.walls[game.sectors[n].sort_v[i]].right_z.u))
-		// rip = 1;
+		if ((game.walls[game.sectors[n].sort_v[i]].left_z.v > game.walls[game.sectors[n].sort_v[i]].left_z.u))
+		rip = 1;
 		i++;
 	}
 	i = 0;
@@ -133,7 +135,8 @@ void rotate_ceiling(size_t n, int mode, t_game game)
 		newx = game.points[game.walls[game.sectors[n].sort_v[i]].b].u - game.sectors[n].center.u;
 		newy = game.points[game.walls[game.sectors[n].sort_v[i]].b].v - game.sectors[n].center.v;
 		game.walls[game.sectors[n].sort_v[i]].right_z.u = newx * game.sectors[n].ceiling.x + newy * game.sectors[n].ceiling.y + game.sectors[n].ceiling.z;
-
+		if ((game.walls[game.sectors[n].sort_v[i]].right_z.v > game.walls[game.sectors[n].sort_v[i]].right_z.u))
+		rip = 1;
 		// printf("left_z = %f, right_z = %f\n",game.walls[game.sectors[n].sort_v[i]].left_z.u,game.walls[game.sectors[n].sort_v[i]].right_z.u);
 		i++;
 	}
