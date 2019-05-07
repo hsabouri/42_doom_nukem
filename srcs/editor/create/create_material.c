@@ -6,13 +6,13 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 11:59:28 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/07 12:17:14 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/07 15:50:16 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
 
-t_game		create_material(t_game game)
+t_game		create_material(size_t selected, t_game game)
 {
 	const t_mat	*old = game.materials;
 
@@ -26,7 +26,7 @@ t_game		create_material(t_game game)
 	game = create_mat_update_portals((size_t)old, game);
 	game = create_mat_update_sectors((size_t)old, game);
 	game = create_mat_update_entities((size_t)old, game);
-	game.materials[game.nmaterials] = game.materials[0];
+	game.materials[game.nmaterials] = game.materials[selected];
 	game.nmaterials++;
 	return (game);
 }

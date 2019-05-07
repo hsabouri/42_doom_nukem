@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 15:32:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:44:52 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static t_editor_mat_state	*init_state(t_editor_mat_state *state, t_env *env)
 {
 	state->env = env;
 	state->selected = 0;
+	state->selected_color = &env->game.materials[state->selected].color;
+	state->selected_filter = &env->game.materials[state->selected].filter;
 	return (state);
 }
 
@@ -48,6 +50,12 @@ t_sdl *sdl)
 	current = create_list_materials(env, sdl);
 	apush(&ret, &current);
 	current = init_preview(state, sdl);
+	apush(&ret, &current);
+	current = init_color_chooser(state, &state->selected_color,
+		(t_pix) {505, 1}, sdl);
+	apush(&ret, &current);
+	current = init_color_chooser(state, &state->selected_filter,
+		(t_pix) {808, 1}, sdl);
 	apush(&ret, &current);
 	return (ret);
 }

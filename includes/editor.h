@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 14:25:47 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/07 15:50:31 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_game			create_point(t_vec2 pts, ssize_t index, t_game game);
 t_game			create_wall(size_t uwall, size_t sector, t_game game);
 t_game			create_portal(ssize_t wa, ssize_t wb, t_game game);
 t_game			create_sector(size_t start, size_t nwalls, t_game game);
-t_game			create_material(t_game game);
+t_game			create_material(size_t selected, t_game game);
 
 t_game			delete_portal(size_t portal, t_game game);
 t_game			delete_sector(size_t sector, t_game game);
