@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mat_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 17:01:40 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/07 11:34:38 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int			on_del(void *parent, size_t i)
 	env = ((t_editor_mat_state *)parent)->env;
 	if (env->game.nmaterials <= 1)
 		return (0);
+	((t_editor_mat_state *)parent)->selected = 0;
 	env->game = delete_material(i, env->game);
 	return (1);
 }
