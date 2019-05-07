@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 12:47:48 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 13:04:02 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,4 +253,5 @@ unsigned int	find_right(t_game game, int* tab, size_t n, int i);
 unsigned int	find_left(t_game game, int* tab, size_t n, int i);
 void			rotate_floor(size_t n, int mode, t_game game);
 void			rotate_ceiling(size_t n, int mode, t_game game);
+void			reverse_walls(t_game game, size_t n);
 #endif

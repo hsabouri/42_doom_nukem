@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 15:46:59 by fmerding          #+#    #+#             */
-/*   Updated: 2019/05/07 12:45:51 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 13:06:32 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	find_center_sectors(t_game game)
 	i = 0;
 	while (n < 1)
 	{
+		// reverse_walls(game, n);
 		find_center(game, n);
 		// reverse_walls(games,n);
 		sort_tab_z(n, i, game);
@@ -31,22 +32,42 @@ void	find_center_sectors(t_game game)
 }
 //
 
-// void reverse_walls(t_game game, size_t n)
-// {
-// 	i = game.sectors[n].start.a;
-// 	while ( i < game.sectors[n].number)
-// 	{
-// 		if (game.sectors[n].clock == 0)
-// 		{
-// 			while (i != )
-// 		}
-//
-// 		if (game.sectors[n].clock == 1)
-// 		{
-//
-// 		}
-// 	}
-// }
+void reverse_walls(t_game game, size_t n)
+{
+	unsigned int i;
+	unsigned int j;
+	unsigned int tmp;
+
+	i = game.sectors[n].start;
+	j = game.sectors[n].start+1;
+	while ( i < game.sectors[n].number + game.sectors[n].start)
+	{
+		if (game.sectors[n].clock == 0)
+		{
+			if (game.walls[i].a != game.walls[j].a && j < game.sectors[n].number + game.sectors[n].start)
+				j++;
+			if (game.walls[i].a == game.walls[j].a)
+			{
+				tmp = game.walls[j].a;
+				game.walls[j].a = game.walls[j].b;
+				game.walls[j].b = tmp;
+			}
+			i++;
+		}
+		if (game.sectors[n].clock == 1)
+		{
+			if (game.walls[i].b != game.walls[j].b && j < game.sectors[n].number + game.sectors[n].start)
+				j++;
+			if (game.walls[i].b == game.walls[j].b)
+			{
+				tmp = game.walls[j].a;
+				game.walls[j].b = game.walls[j].a;
+				game.walls[j].a = tmp;
+			}
+			i++;
+		}
+	}
+}
 
 void	find_center(t_game game, size_t n)
 {

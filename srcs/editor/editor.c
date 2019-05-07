@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:29:11 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 12:47:50 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:50:25 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void				editor_loop(t_env *env)
 	*env->component = trigger_component(env, *env->component, &env->sdl);
 	display_component(*env->component, &env->sdl);
 
-	SDL_RenderPresent(env->sdl.renderer);
 	find_center_sectors(env->game);
-	return (env);
+	SDL_RenderPresent(env->sdl.renderer);
+
 }
