@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/29 15:53:45 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:47:46 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,8 @@ typedef struct		s_sector
 	t_mat		*floor_mat;
 	t_fvec2		tex_pos;
 	t_vec2		center; // t_vec3 position
-	int			*sort_v;
+	int			clock;
+	int*		sort_v;
 }					t_sector;
 
 typedef struct		s_music
