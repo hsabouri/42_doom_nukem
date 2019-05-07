@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 12:31:59 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/07 15:49:30 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ static int			on_del(void *parent, size_t i)
 
 static int			on_add(void *parent)
 {
-	t_env	*env;
+	const t_editor_mat_state	*state = (t_editor_mat_state *)parent; 
+	t_env						*env;
 	
 	env = ((t_editor_mat_state *)parent)->env;
-	env->game = create_material(env->game);
+	env->game = create_material(state->selected, env->game);
 	return (1);
 }
 
@@ -60,6 +61,8 @@ static int			on_click(void *parent, size_t i)
 
 	state = (t_editor_mat_state *)parent;
 	state->selected = i;
+	state->selected_color = &state->env->game.materials[i].color;
+	state->selected_filter = &state->env->game.materials[i].filter;
 	return (0);
 }
 
