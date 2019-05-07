@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 15:46:59 by fmerding          #+#    #+#             */
-/*   Updated: 2019/05/07 15:55:15 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 18:25:35 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,74 +19,16 @@ void	find_center_sectors(t_game game)
 
 	n = 0;
 	i = 0;
-	while (n < game.nsectors)
+	while (n < 1)
 	{
-		reverse_walls(game, n);
 		find_center(game, n);
-		// reverse_walls(games,n);
-		sort_tab_z(n, i, game);
-		rotate_floor(n, 0, game);
-		rotate_ceiling(n, 0, game);
+		// sort_tab_z(n, i, game);
+		// rotate_floor(n, 0, game);
+		// rotate_ceiling(n, 0, game);
 		n++;
 	}
 }
 //
-
-void reverse_walls(t_game game, size_t n)
-{
-	unsigned int i;
-	unsigned int j;
-	unsigned int tmp;
-
-	i = game.sectors[n].number + game.sectors[n].start - 1;
-	j = game.sectors[n].number + game.sectors[n].start - 2;
-	// printf ( "clock = %d",game.sectors[n].clock);
-	// printf ("i = %d, game.sectors[n].start = %d",i,game.sectors[n].start);
-	while ( i > game.sectors[n].start)
-	{
-		// printf ( "clock = %d",game.sectors[n].clock);
-		if (game.sectors[n].clock == 0)
-		{
-			// printf("coucou");
-			while (game.walls[i].a != game.walls[j].a && j > game.sectors[n].start - 1 )
-				j--;
-			// printf("j = %d",j);
-			if (game.walls[i].a == game.walls[j].a && j != i)
-			{
-				printf("game.walls[%d].a = %d , game.walls[%d].a = %d\n",i,game.walls[i].a,j,game.walls[j].a);
-				printf("reverse");
-
-				tmp = game.walls[j].a;
-				game.walls[j].a = game.walls[j].b;
-				game.walls[j].b = tmp;
-				j = game.sectors[n].number + game.sectors[n].start - 1;
-			}
-
-			// printf("i = %d",j);
-		}
-		if (game.sectors[n].clock == 1)
-		{
-			// printf("coucou");
-			while (game.walls[i].a != game.walls[j].a && j > game.sectors[n].start - 1 )
-				j--;
-			// printf("j = %d",j);
-			if (game.walls[i].a == game.walls[j].a && j != i)
-			{
-				printf("game.walls[%d].a = %d , game.walls[%d].a = %d\n",i,game.walls[i].a,j,game.walls[j].a);
-				printf("reverse");
-
-				tmp = game.walls[j].a;
-				game.walls[j].a = game.walls[j].b;
-				game.walls[j].b = tmp;
-				j = game.sectors[n].number + game.sectors[n].start - 1;
-			}
-
-			// printf("i = %d",j);
-		}
-		i--;
-	}
-}
-
 void	find_center(t_game game, size_t n)
 {
 	t_vec2 res;
@@ -115,40 +57,5 @@ void	find_center(t_game game, size_t n)
 	res.v /= i;
 	game.sectors[n].center.u = res.u;
 	game.sectors[n].center.v = res.v;
-
-	// printf(" center %zu x = %f y = %f\n",n,game.sectors[n].center.u, game.sectors[n].center.v);
-}
-
-// void	apply_z(size_t n, unsigned int i, t_game game)
-// {
-// 	int i =
-// 	while (i < game.sectors[n].number)
-// 	{
-// 		newx = game.points[game.walls[game.sectors[n].sort_v[i]].a].u - game.sectors[n].center.u;
-// 		newy = game.points[game.walls[game.sectors[n].sort_v[i]].a].v - game.sectors[n].center.v;
-// 		game.walls[game.sectors[n].sort_v[i]].left_z.v = newx * game.sectors[n].floor.x + newy * game.sectors[n].floor.y + game.sectors[n].floor.z;
-// 	}
-// }
-
-
-void	sort_tab_z(size_t n, unsigned int i, t_game game)
-{
-	int *tab;
-	unsigned int j;
-
-	i = 0;
-	j = 0;
-	j = game.sectors[n].start;
-	tab = malloc(sizeof (int) * game.sectors[n].number);
-	game.sectors[n].sort_v = malloc(sizeof (int) * game.sectors[n].number);
-	while (i < game.sectors[n].number)
-	{
-
-		game.sectors[n].sort_v[i] = j;
-		printf("game.walls[%d].a = %d\n",j,game.walls[j].a);
-		printf("game.walls[%d].b = %d\n\n",j,game.walls[j].b);
-		i++;
-		j++;
-	}
 
 }

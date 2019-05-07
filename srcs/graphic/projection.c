@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/25 16:06:27 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 18:18:21 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,13 @@ t_section section)
 	float dis;
 	float dis2;
 
-	dis = section.wall.left_z.v - section.wall.right_z.v;
+	dis = find_z(context, section.wall.left_z, 1) - find_z(context, section.wall.right_z, 1);
 	dis *= f_to_float(hit.ratios.u);
-	dis2 = section.wall.left_z.u - section.wall.right_z.u;
+	dis2 = find_z(context, section.wall.left_z, 0) - find_z(context, section.wall.right_z, 0);
 	dis2 *= f_to_float(hit.ratios.u);
-	h.u = f_from_float((context.physic.pos.z + context.physic.height) -
-		section.wall.left_z.v + 1 * dis);
-	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
-	section.wall.left_z.u + 1 * dis2);
+	// printf("dif = %f, dif2 = %f\n",dis,dis2);
+	h.u = f_from_float((context.physic.pos.z + context.physic.height) - find_z(context, section.wall.left_z, 1) + dis);
+	h.v = f_from_float((context.physic.pos.z + context.physic.height) - find_z(context, section.wall.left_z, 0) + dis2);
 	if (hit.ratios.v < 10)
 		hit.ratios.v = 10;
 	res = projection(hit, context, h, section);
@@ -88,6 +87,7 @@ t_section section)
 	res.tex_wall.ambient = context.sector.ambient;
 	res.plane.tex_floor.ambient = context.sector.ambient;
 	res.plane.tex_roof.ambient = context.sector.ambient;
+	// exit(0);
 	return (res);
 }
 
@@ -103,14 +103,13 @@ t_section section)
 	float dis;
 	float dis2;
 
-	dis = section.wall.left_z.v - section.wall.right_z.v;
+	dis = find_z(context, section.wall.left_z, 1) - find_z(context, section.wall.right_z, 1);
 	dis *= f_to_float(hit.ratios.u);
-	dis2 = section.wall.left_z.u - section.wall.right_z.u;
+	dis2 = find_z(context, section.wall.left_z, 0) - find_z(context, section.wall.right_z, 0);
 	dis2 *= f_to_float(hit.ratios.u);
-	h.u = f_from_float((context.physic.pos.z + context.physic.height) -
-		section.wall.left_z.v + 1 * dis);
-	h.v = f_from_float((context.physic.pos.z + context.physic.height) -
-		section.wall.left_z.u + 1 * dis2);
+	// printf("dif = %f, dif2 = %f\n",dis,dis2);
+	h.u = f_from_float((context.physic.pos.z + context.physic.height) - find_z(context, section.wall.left_z, 1) + dis);
+	h.v = f_from_float((context.physic.pos.z + context.physic.height) - find_z(context, section.wall.left_z, 0) + dis2);
 	h2.u = f_from_float((context.physic.pos.z + context.physic.height) -
 		section.next.floor.z);
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height) -

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 14:54:02 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 15:49:45 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/07 18:29:10 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_game		create_sector(size_t start, size_t nwalls, t_game game)
 		WHITE,
 		game.materials,
 		game.materials,
-		fvec2_new(0, 0)
+		fvec2_new(0, 0),
+		vec2_new(0, 0)
 	};
 	game.nsectors++;
 	return (game);
