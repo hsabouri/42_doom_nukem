@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 15:44:52 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/08 16:06:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static t_editor_mat_state	*init_state(t_editor_mat_state *state, t_env *env)
 	state->selected = 0;
 	state->selected_color = &env->game.materials[state->selected].color;
 	state->selected_filter = &env->game.materials[state->selected].filter;
+	state->selected_mode = &env->game.materials[state->selected].mode;
 	return (state);
 }
 
@@ -49,13 +50,48 @@ t_sdl *sdl)
 	ret = safe_anew(NULL, 1, sizeof(t_component), "commponents");
 	current = create_list_materials(env, sdl);
 	apush(&ret, &current);
-	current = init_preview(state, sdl);
+	current = init_simple_text("PREVIEW", (t_pix) {206, 3}, sdl);
 	apush(&ret, &current);
-	current = init_color_chooser(state, &state->selected_color,
-		(t_pix) {505, 1}, sdl);
+	current = init_preview(state, (t_pix) {204, 30}, sdl);
 	apush(&ret, &current);
-	current = init_color_chooser(state, &state->selected_filter,
-		(t_pix) {808, 1}, sdl);
+	current = init_simple_text("COLOR", (t_pix) {507, 3}, sdl);
+	apush(&ret, &current);
+	current = init_color_chooser(&state->selected_color,
+		(t_pix) {505, 29}, sdl);
+	apush(&ret, &current);
+	current = init_simple_text("FILTER", (t_pix) {810, 3}, sdl);
+	apush(&ret, &current);
+	current = init_color_chooser(&state->selected_filter,
+		(t_pix) {808, 29}, sdl);
+	apush(&ret, &current);
+	current = init_simple_text("TEXTURE MODE", (t_pix) {204, 343}, sdl);
+	apush(&ret, &current);
+	current = init_button_ft((t_button_ft) {
+		.pos = (t_pix) {204, 369},
+		.background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events,
+		.place_holder = "TILING",
+		.to_activate = (int **)&state->selected_mode,
+		.scancode = SDL_SCANCODE_UNKNOWN,
+		.active_value = TILING}, sdl);
+	apush(&ret, &current);
+	current = init_button_ft((t_button_ft) {
+		.pos = (t_pix) {current.pos.x + current.size.x + 2, 369},
+		.background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events,
+		.place_holder = "NO TILING",
+		.to_activate = (int **)&state->selected_mode,
+		.scancode = SDL_SCANCODE_UNKNOWN,
+		.active_value = NO_TILING}, sdl);
+	apush(&ret, &current);
+	current = init_button_ft((t_button_ft) {
+		.pos = (t_pix) {current.pos.x + current.size.x + 2, 369},
+		.background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events,
+		.place_holder = "SKYBOX",
+		.to_activate = (int **)&state->selected_mode,
+		.scancode = SDL_SCANCODE_UNKNOWN,
+		.active_value = SKYBOX}, sdl);
 	apush(&ret, &current);
 	return (ret);
 }

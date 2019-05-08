@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mat_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 15:49:30 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/08 15:06:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ static t_array		generator(void *parent)
 	return (ret);
 }
 
-static int			on_del(void *parent, size_t i)
+static int			on_click(void *parent, size_t i)
 {
-	t_env	*env;
-	
-	env = ((t_editor_mat_state *)parent)->env;
-	if (env->game.nmaterials <= 1)
-		return (0);
-	((t_editor_mat_state *)parent)->selected = 0;
-	env->game = delete_material(i, env->game);
-	return (1);
+	t_editor_mat_state *state;
+
+	state = (t_editor_mat_state *)parent;
+	state->selected = i;
+	state->selected_color = &state->env->game.materials[i].color;
+	state->selected_filter = &state->env->game.materials[i].filter;
+	state->selected_mode = &state->env->game.materials[i].mode;
+	return (0);
 }
 
 static int			on_add(void *parent)
@@ -52,18 +52,20 @@ static int			on_add(void *parent)
 	
 	env = ((t_editor_mat_state *)parent)->env;
 	env->game = create_material(state->selected, env->game);
+	on_click(parent, env->game.nmaterials - 1);
 	return (1);
 }
 
-static int			on_click(void *parent, size_t i)
+static int			on_del(void *parent, size_t i)
 {
-	t_editor_mat_state *state;
-
-	state = (t_editor_mat_state *)parent;
-	state->selected = i;
-	state->selected_color = &state->env->game.materials[i].color;
-	state->selected_filter = &state->env->game.materials[i].filter;
-	return (0);
+	t_env	*env;
+	
+	env = ((t_editor_mat_state *)parent)->env;
+	if (env->game.nmaterials <= 1)
+		return (0);
+	on_click(parent, 0);
+	env->game = delete_material(i, env->game);
+	return (1);
 }
 
 t_component			create_list_materials(t_env *env, t_sdl *sdl)
