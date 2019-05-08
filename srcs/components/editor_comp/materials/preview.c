@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preview.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 15:07:29 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/05 16:21:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:03:20 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,14 @@ static void		self_render(const t_component self, t_color *buf)
 		300, 300, buf);
 }
 
-t_component		init_preview(t_editor_mat_state *parent, t_sdl *sdl)
+t_component		init_preview(t_editor_mat_state *parent, t_pix pos, t_sdl *sdl)
 {
 	t_component			ret;
 	t_editor_mat_state	*state;
 
 	ret = default_component(parent, (t_pix) {300, 300}, sdl);
 	ret.state = parent;
-	ret.pos.x = 204;
-	ret.pos.y = 2;
+	ret.pos = pos;
 	ret.display = 1;
 	ret.update = NULL;
 	ret.destroy = &no_destroy;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_chooser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 15:45:44 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/08 15:33:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		self_update(t_component *self, void *parent)
 	return (0);
 }
 
-t_component		init_color_chooser(t_env *env, t_color **to_change,
+t_component		init_color_chooser(t_color **to_change,
 t_pix pos, t_sdl *sdl)
 {
 	t_component			ret;

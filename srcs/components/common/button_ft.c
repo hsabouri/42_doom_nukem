@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   switch_button.c                                    :+:      :+:    :+:   */
+/*   button_ft.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/08 14:58:51 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/08 16:04:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,74 @@
 
 static int					self_update(t_component *self, void *parent)
 {
-	t_sw_button_state	*state;
-	static int			last_clicked_on = 0;
-	int					clicked;
-	int					ret;
+	t_button_ft_state	*state;
+	int				ret;
 
 	(void)parent;
 	ret = 0;
-	state = (t_sw_button_state *)self->state;
-	clicked = is_clicked_on(*self, *state->events);
-	if ((clicked || state->events->keys[state->scancode]) &&
-		last_clicked_on == 0)
+	state = (t_button_ft_state *)self->state;
+	if (((state->scancode != SDL_SCANCODE_UNKNOWN &&
+		state->events->keys[state->scancode]) ||
+		(is_clicked_on(*self, *state->events) &&
+		state->active_value != **state->to_activate)))
 	{
-		if (*state->to_activate == state->enable_value)
-			*state->to_activate = state->disable_value;
-		else
-			*state->to_activate = state->enable_value;
-		(*state->events).keys[state->scancode] = 0;
-		last_clicked_on = 1;
+		state->is_active = 1;
 		ret = 1;
 	}
-	else if (!clicked && !state->events->keys[state->scancode])
-		last_clicked_on = 0;
+	else if (!(is_clicked_on(*self, *state->events)) &&
+		state->active_value != **state->to_activate && state->is_active)
+	{
+		**state->to_activate = state->active_value;
+		(*state->events).keys[state->scancode] = 0;
+		state->is_active = 0;
+		ret = 1;
+	}
+	else if (is_over(*self, *state->events))
+		ret = 1;
+	else if (!(is_over(*self, *state->events)))
+		ret = 1;
 	return (ret);
 }
 
-static void					self_render(const t_component self, t_color *buf)
+static void					self_render(t_component self, t_color *buf)
 {
-	const t_sw_button_state	*state = (t_sw_button_state *)self.state;
+	const t_button_ft_state	*state = (t_button_ft_state *)self.state;
 	t_color					bg;
+	t_img					img;
 
 	bg = state->background;
-	if (state->enable_value == *state->to_activate)
+	img = self.img;
+	if (is_over(self, *state->events) && state->img_active.content)
+		img = state->img_active;
+	if (state->active_value == **state->to_activate)
 	{
 		bg.r = bg.r - 30;
 		bg.g = bg.g - 30;
 		bg.b = bg.b - 30;
 	}
 	background(buf, bg, self.size);
-	if (self.img.content)
-		component_image(self.img, (t_pix) {5, 5}, self.size, buf);
+	if (img.content)
+		component_image(img, (t_pix) {5, 5}, self.size, buf);
 }
 
-static t_sw_button_state	*init_state(t_sw_button button)
+static t_button_ft_state		*init_state(t_button_ft button)
 {
-	t_sw_button_state	*ret;
+	t_button_ft_state	*ret;
 
-	ret = (t_sw_button_state *)malloc(sizeof(t_sw_button_state));
-	ret->enable_value = button.enable_value;
-	ret->disable_value = button.disable_value;
+	ret = (t_button_ft_state *)safe_malloc(sizeof(t_button_ft_state), "components");
+	ret->active_value = button.active_value;
 	ret->background = button.background;
 	ret->events = button.events;
 	ret->to_activate = button.to_activate;
+	ret->is_active = 0;
 	ret->scancode = button.scancode;
+	ret->img_active.content = NULL;
+	if (button.img_active.content)
+		ret->img_active = button.img_active;
 	return (ret);
 }
 
-t_component					init_sw_button(t_sw_button button, t_sdl *sdl)
+t_component					init_button_ft(t_button_ft button, t_sdl *sdl)
 {
 	t_component ret;
 
@@ -81,9 +92,9 @@ t_component					init_sw_button(t_sw_button button, t_sdl *sdl)
 		ret.img = button.img;
 	else if (button.place_holder)
 	{
-		ret.text = component_text(button.place_holder, (t_pix) {5, 5}, sdl);
-		ret.size.x = ret.text.w + 6;
-		ret.size.y = ret.text.h + 6;
+		ret.text = component_text(button.place_holder, (t_pix) {8, 3}, sdl);
+		ret.size.x = ret.text.w + 16;
+		ret.size.y = ret.text.h + 8;
 	}
 	ret.pos = button.pos;
 	ret.display = 1;
@@ -95,6 +106,6 @@ t_component					init_sw_button(t_sw_button button, t_sdl *sdl)
 	ret.render = &self_render;
 	ret.complete_render = NULL;
 	ret.destroy = NULL;
-	ret.childs = anew(NULL, 0, 1);
+	ret.childs = safe_anew(NULL, 0, 1, "components");
 	return (ret);
 }
