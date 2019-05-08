@@ -56,7 +56,7 @@ typedef struct s_save_music
 
 
 void			save(const char *filename, t_game game);
-t_game			load(const char *filename, int edit_mode);
+t_game			*load(const char *filename, int edit_mode);
 
 t_game			default_map(void);
 void			*dump_struct(void *buf, size_t start, size_t size, size_t max);

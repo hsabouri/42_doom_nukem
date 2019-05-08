@@ -151,6 +151,7 @@ typedef struct	s_editor
 typedef struct			s_env
 {
 	char		*file;
+	int			fd;
 	t_game		game;
 	int			toggle_editor;
 	t_game_mode	game_mode;

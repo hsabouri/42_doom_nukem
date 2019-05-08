@@ -141,28 +141,27 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	return (res);
 }
 
-t_game			load(const char *filename, int edit_mode)
+t_game			*load(const char *filename, int edit_mode)
 {
 	void		*buf;
 	size_t		max;
 	t_c_game	game;
-	t_game		res;
+	t_game		*res;
 	t_save		save;
 
+	res = NULL;
 	if (!(buf = dump_file(filename, edit_mode, &max)))
-		res = generate_map();
-	else
-	{
-		game = *(t_c_game *)dump_struct(buf, 0, sizeof(t_c_game), max);
-		verify_magic(&game, GAME_MAGIC, 0);
-		save.max = max;
-		res = parse_1(buf, game, save);
-		save.index = game.loc_music;
-		parse_audio(buf, save, game.nmusic, MUSIC);
-		save.index = game.loc_sounds;
-		parse_audio(buf, save, game.nsounds, SOUND);
-		res.log = safe_anew(NULL, 100, sizeof(t_trigger), "loader");
-		// debug(res);
-	}
+		return (NULL);
+	game = *(t_c_game *)dump_struct(buf, 0, sizeof(t_c_game), max);
+	verify_magic(&game, GAME_MAGIC, 0);
+	save.max = max;
+	res = (t_game *)safe_malloc(sizeof(t_game), "loader");
+	*res = parse_1(buf, game, save);
+	save.index = game.loc_music;
+	parse_audio(buf, save, game.nmusic, MUSIC);
+	save.index = game.loc_sounds;
+	parse_audio(buf, save, game.nsounds, SOUND);
+	res->log = safe_anew(NULL, 100, sizeof(t_trigger), "loader");
+	// debug(res);
 	return (res);
 }

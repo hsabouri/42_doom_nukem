@@ -68,6 +68,7 @@ int				main(int ac, char **av)
 {
 	t_env		env;
 	size_t		frame;
+	t_game		*ret_load;
 
 	env = init_conditions(env);
 	env.sdl = init_sdl();
@@ -89,8 +90,17 @@ int				main(int ac, char **av)
 		{
 			if (ac == 2)
 			{
-				env.file = av[1];
-				env.game = load(av[1], 0);
+				if ((ret_load = load(av[1], env.editor.enabled)) != NULL)
+				{
+					env.game = *ret_load;
+					free(ret_load);
+					env.file = av[1];
+				}
+				else
+				{
+					env.file = av[1];
+					env.game = generate_map();
+				}
 			}
 			else
 			{
