@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/06 16:58:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:47:59 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -401,11 +401,11 @@ t_game	generate_map(void)
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
 	sectors[0] = ((t_sector){0, 10, 0, (t_vec3){0, 0, 0}, (t_vec3){0, 0, 2.50}, (t_color) {125, 125, 125, 255},
-	tiles, tiles, fvec2_new(0, 0)});
-	sectors[1] = ((t_sector){10, 4, 1, (t_vec3){0, 0, 0.4}, (t_vec3){0, 0, 2.9}, WHITE, tiles, tiles, fvec2_new(0, 0)});
-	sectors[2] = ((t_sector){14, 4, 2, (t_vec3){0, 0, 0.8}, (t_vec3){0, 0, 3.3}, WHITE, tiles, tiles, fvec2_new(0, 0)});
-	sectors[3] = ((t_sector){18, 4, 3, (t_vec3){0, 0, 1.2}, (t_vec3){0, 0, 3.7}, WHITE, tiles, tiles, fvec2_new(0, 0)});
-	sectors[4] = ((t_sector){22, 6, 4, (t_vec3){0, 0, -30}, (t_vec3){0, 0, 4.1}, WHITE, tiles, tiles, fvec2_new(0, 0)});
+	tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
+	sectors[1] = ((t_sector){10, 4, 1, (t_vec3){0, 0, 0.4}, (t_vec3){0, 0, 2.9}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},1});
+	sectors[2] = ((t_sector){14, 4, 2, (t_vec3){0, 0, 0.8}, (t_vec3){0, 0, 3.3}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
+	sectors[3] = ((t_sector){18, 4, 3, (t_vec3){0, 0, 1.2}, (t_vec3){0, 0, 3.7}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},1});
+	sectors[4] = ((t_sector){22, 6, 4, (t_vec3){0, 0, -30}, (t_vec3){0, 0, 4.1}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
 		0,
