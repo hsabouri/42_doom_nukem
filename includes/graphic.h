@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 18:28:17 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:55:13 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,9 +245,10 @@ t_sector		teleport_sector(t_game game, t_context context, t_section section);
 t_context		teleport(t_game game, t_context context, t_section section);
 void			find_center_sectors(t_game game);
 void			find_center(t_game game, size_t i);
-int				wall_from_point(size_t n, int point, t_game game, int i);
 void			rotate_floor(size_t n, int mode, t_game game);
 void			rotate_ceiling(size_t n, int mode, t_game game);
-void			reverse_walls(t_game game, size_t n);
 float			find_z(t_context game, t_vec2 point, int mode);
+t_cache_wall	switch_points(t_cache_wall current, t_game game, size_t i);
+int				check_z_limits(size_t n, t_game game);
+int				check_z_game(size_t n, int i, t_game game);
 #endif

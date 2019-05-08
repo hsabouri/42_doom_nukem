@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 18:21:07 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:42:30 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ t_bunch	build_bunch(const t_game game, const t_context context, const t_limit li
 			current.tex_pos = game.walls[i].tex_pos;
 			current.open = (current.portal >= 0) ? game.portals[current.portal].mat : NULL;
 			current.mat = *game.walls[i].mat;
-			current.left_z = game.points[game.walls[i].b];
-			current.right_z = game.points[game.walls[i].a];
-
+			current.left_z = game.points[game.walls[i].a];
+			current.right_z = game.points[game.walls[i].b];
+			current = switch_points(current,game,i);
 			ret.walls[ret.nwalls] = current;
 			++ret.nwalls;
 		}
