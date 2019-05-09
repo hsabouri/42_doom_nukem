@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/08 15:06:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:41:12 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ static t_array		generator(void *parent)
 	i = 0;
 	while (i < nmats)
 	{
-		curr.img.content = NULL;
-		ft_strncpy(curr.text, ft_itoa(nmats - i - 1), 28);
+		curr.text[0] = 0;
+		if (mats[nmats - i - 1].texture)
+			curr.img = *mats[nmats - i - 1].texture;
+		else
+			ft_strncpy(curr.text, ft_itoa(nmats - i - 1), 28);
 		apush(&ret, &curr);
 		++i;
 	}
@@ -63,8 +66,8 @@ static int			on_del(void *parent, size_t i)
 	env = ((t_editor_mat_state *)parent)->env;
 	if (env->game.nmaterials <= 1)
 		return (0);
-	on_click(parent, 0);
 	env->game = delete_material(i, env->game);
+	on_click(parent, 0);
 	return (1);
 }
 
@@ -81,7 +84,8 @@ t_component			create_list_materials(t_env *env, t_sdl *sdl)
 		&env->events,
 		(t_color) {70, 70, 70, 255},
 		(t_pix) {2, 2},
-		(t_pix) {200, HEIGHT}
+		(t_pix) {200, HEIGHT},
+		0
 	}, sdl);
 	return (ret);
 }
