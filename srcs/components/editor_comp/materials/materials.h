@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/08 15:34:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:29:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void			render_preview(t_mat mat, int width, int height, t_color *buf);
 
 t_component		init_editor_mat(t_env *env, t_sdl *sdl);
 t_component		create_list_materials(t_env *env, t_sdl *sdl);
+t_component		create_list_textures(t_env *env, t_pix pos, t_pix size,
+				t_sdl *sdl);
 t_component		init_preview(t_editor_mat_state *parent, t_pix pos, t_sdl *sdl);
 
 t_component		init_color_chooser(t_color **to_change,
-t_pix pos, t_sdl *sdl);
+				t_pix pos, t_sdl *sdl);
 
 #endif

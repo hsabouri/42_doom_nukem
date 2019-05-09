@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:23:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 16:22:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 12:06:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_list_state
 	int			need_update;
 	void		*parent;
 	t_sdl		*sdl;
+	int			y_scroll;
 }				t_list_state;
 
 typedef struct	s_list_comp
@@ -57,6 +58,8 @@ typedef struct	s_list_button_state
 	void			*parent;
 	t_list_state 	*list;
 	t_color			bg;
+	t_pix			d_pos;
+	int				*y_scroll;
 }				t_list_button_state;
 
 typedef struct	s_list_button
@@ -67,6 +70,7 @@ typedef struct	s_list_button
 	t_pix		size;
 	t_img		img;
 	char		text[28];
+	int			*y_scroll;
 }				t_list_button;
 
 t_component		init_list_comp(t_list_comp list, t_sdl *sdl);
