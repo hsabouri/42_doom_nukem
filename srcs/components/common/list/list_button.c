@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:54:32 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 12:15:12 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:45:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static t_list_button_state	*init_state(t_list_button button, t_list_state state)
 	ret->bg = state.bg;
 	ret->d_pos = button.pos;
 	ret->y_scroll = button.y_scroll;
+	ret->destroy_image = state.destroy_image;
 	return (ret);
 }
 
@@ -114,6 +115,15 @@ t_sdl *sdl)
 	return (childs);
 }
 
+void				self_destroy(t_component *component)
+{
+	const t_list_button_state	*state =
+		(t_list_button_state *)component->state;
+
+	if (!state->destroy_image)
+		component->img.content = NULL;
+}
+
 t_component					init_list_button(t_list_button button,
 t_list_state state, t_sdl *sdl)
 {
@@ -132,7 +142,7 @@ t_list_state state, t_sdl *sdl)
 	ret.update = &self_update;
 	ret.render = &self_render;
 	ret.complete_render = NULL;
-	ret.destroy = NULL;
+	ret.destroy = &self_destroy;
 	ret.childs = init_childs(&ret, state, sdl);
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, ret.size.x, ret.size.y);

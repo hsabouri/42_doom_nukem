@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:36:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 12:14:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:41:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void *parent, t_sdl *sdl)
 		button = (t_list_button) {.i = i, .parent = parent,
 			.pos = (t_pix) {self->pos.x + 1, self->pos.y + 41 + 31 * i},
 			.size = (t_pix) {self->size.x - 2, 30}, .img = current->img,
-			.y_scroll = &state->y_scroll};
+			.y_scroll = &state->y_scroll, .destroy_image = state->destroy_image};
 		strncpy(button.text, current->text, 28);
 		current_comp = init_list_button(button, *state, sdl);
 		render_all(current_comp, sdl);
@@ -123,6 +123,7 @@ static t_list_state	*init_state(t_list_state *state, t_list_comp list, t_sdl *sd
 	state->events = list.events;
 	state->sdl = sdl;
 	state->y_scroll = 0;
+	state->destroy_image = list.destroy_image;
 	return (state);
 }
 
