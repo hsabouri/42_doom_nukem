@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:54:32 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 16:56:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 12:15:12 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static int					self_update(t_component *self, void* parent)
 	list_state = (t_list_state *)parent;
 	state->parent = list_state->parent;
 	state->list = list_state;
+	self->pos.y = state->d_pos.y - *state->y_scroll;
+	if (self->childs.len)
+		((t_component *)self->childs.first)->pos.y =
+			state->d_pos.y - *state->y_scroll + 1;
 	clicked = is_clicked_on(*self, *state->events);
 	if (clicked && state->is_active == 0 && state->select)
 	{
@@ -82,6 +86,8 @@ static t_list_button_state	*init_state(t_list_button button, t_list_state state)
 	ret->events = state.events;
 	ret->parent = button.parent;
 	ret->bg = state.bg;
+	ret->d_pos = button.pos;
+	ret->y_scroll = button.y_scroll;
 	return (ret);
 }
 
@@ -96,7 +102,7 @@ t_sdl *sdl)
 		p->size.x -= 30;
 		childs = safe_anew(NULL, 1, sizeof(t_component), "components");
 		current = init_cb_button((t_cb_button) {
-			.pos = (t_pix) {p->pos.x + p->size.x, p->pos.y + 1},
+			.pos = (t_pix) {p->pos.x + p->size.x, p->pos.y + 1 - state.y_scroll},
 			.size = (t_pix) {30, 29}, .background = state.bg,
 			.events = state.events, .place_holder = NULL,
 			.callback = &self_del, .scancode = SDL_SCANCODE_UNKNOWN,

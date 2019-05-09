@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/08 16:06:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:32:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ t_sdl *sdl)
 		.to_activate = (int **)&state->selected_mode,
 		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = SKYBOX}, sdl);
+	apush(&ret, &current);
+	current = create_list_textures(env, (t_pix) {WIDTH - 167, 2}, (t_pix) {165, HEIGHT - 4}, sdl);
 	apush(&ret, &current);
 	return (ret);
 }

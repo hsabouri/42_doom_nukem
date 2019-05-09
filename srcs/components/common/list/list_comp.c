@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:36:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/03 15:10:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/09 12:14:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void *parent, t_sdl *sdl)
 	{
 		button = (t_list_button) {.i = i, .parent = parent,
 			.pos = (t_pix) {self->pos.x + 1, self->pos.y + 41 + 31 * i},
-			.size = (t_pix) {self->size.x - 2, 30}, .img = current->img };
+			.size = (t_pix) {self->size.x - 2, 30}, .img = current->img,
+			.y_scroll = &state->y_scroll};
 		strncpy(button.text, current->text, 28);
 		current_comp = init_list_button(button, *state, sdl);
 		render_all(current_comp, sdl);
@@ -72,6 +73,8 @@ static int			self_update(t_component *self, void *parent)
 	ret = 0;
 	state = (t_list_state *)self->state;
 	state->parent = parent;
+	if (is_over(*self, *state->events) && (state->y_scroll > 0 || state->events->wheel > 0))
+		state->y_scroll += state->events->wheel * 100;
 	if (state->need_update)
 	{
 		self->childs = build_childs(self, state, parent, state->sdl);
@@ -119,6 +122,7 @@ static t_list_state	*init_state(t_list_state *state, t_list_comp list, t_sdl *sd
 	state->bg = list.bg;
 	state->events = list.events;
 	state->sdl = sdl;
+	state->y_scroll = 0;
 	return (state);
 }
 
