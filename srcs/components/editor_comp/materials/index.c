@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 11:32:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:50:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static t_editor_mat_state	*init_state(t_editor_mat_state *state, t_env *env)
 	state->selected_color = &env->game.materials[state->selected].color;
 	state->selected_filter = &env->game.materials[state->selected].filter;
 	state->selected_mode = &env->game.materials[state->selected].mode;
+	state->display_overlay = 0;
+	state->update_overlay = 0;
 	return (state);
 }
 
@@ -93,7 +95,21 @@ t_sdl *sdl)
 		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = SKYBOX}, sdl);
 	apush(&ret, &current);
+	current = init_cb_button((t_cb_button) {
+		.pos = (t_pix) {204, current.pos.y + current.size.y + 10},
+		.background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events,
+		.place_holder = "LINK OVERLAY",
+		.callback = &enable_change_overlay
+	}, sdl);
+	apush(&ret, &current);
 	current = create_list_textures(env, (t_pix) {WIDTH - 167, 2}, (t_pix) {165, HEIGHT - 4}, sdl);
+	apush(&ret, &current);
+	current = init_display_deco((t_display_deco_state) {
+		.to_look_at = &state->display_overlay,
+		.display_value = 1,
+		.state = state
+	}, create_list_overlay(env, &state->update_overlay, sdl));
 	apush(&ret, &current);
 	return (ret);
 }

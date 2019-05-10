@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:21:19 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 15:41:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:28:58 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ t_component			create_list_textures(t_env *env, t_pix pos, t_pix size, t_sdl *sdl
 		(t_color) {70, 70, 70, 255},
 		pos,
 		size,
-		0
+		0,
+		NULL
 	}, sdl);
 	return (ret);
 }

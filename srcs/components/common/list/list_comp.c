@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:36:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 15:41:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:40:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,16 @@ static int			self_update(t_component *self, void *parent)
 	ret = 0;
 	state = (t_list_state *)self->state;
 	state->parent = parent;
-	if (is_over(*self, *state->events) && (state->y_scroll > 0 || state->events->wheel > 0))
+	if (is_over(*self, *state->events) &&
+		(state->y_scroll > 0 || state->events->wheel > 0))
 		state->y_scroll += state->events->wheel * 100;
-	if (state->need_update)
+	if (state->need_update ||
+		(state->extern_need_update && *state->extern_need_update))
 	{
 		self->childs = build_childs(self, state, parent, state->sdl);
 		state->need_update = 0;
+		if (state->extern_need_update)
+			*state->extern_need_update = 0;
 		ret = 1;
 	}
 	if (state->events->any)
@@ -119,6 +123,7 @@ static t_list_state	*init_state(t_list_state *state, t_list_comp list, t_sdl *sd
 	state->add = list.add;
 	state->del = list.del;
 	state->need_update = 1;
+	state->extern_need_update = list.extern_need_update;
 	state->bg = list.bg;
 	state->events = list.events;
 	state->sdl = sdl;

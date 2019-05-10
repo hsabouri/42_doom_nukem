@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_material.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 11:59:28 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/07 15:50:16 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/10 14:16:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ t_game		create_material(size_t selected, t_game game)
 		(game.nmaterials + 1))) == NULL)
 		return (game);
 	if (game.materials == old)
+	{
+		game.materials[game.nmaterials] = game.materials[selected];
+		game.nmaterials++;
 		return (game);
+	}
 	game = create_mat_update_materials((size_t)old, game);
 	game = create_mat_update_walls((size_t)old, game);
 	game = create_mat_update_portals((size_t)old, game);
