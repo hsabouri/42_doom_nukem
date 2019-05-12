@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/18 14:54:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/12 15:16:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ u_int32_t *id_buf)
 	}
 }
 
-void	render(const t_game game, const t_context context, t_color *buf, u_int32_t *id_buf)
+void	render(const t_game game, t_context context, t_color *buf, u_int32_t *id_buf)
 {
 	const t_limit	limit_rays = build_limits(context);
 	const t_bunch	bunch = build_bunch(game, context, limit_rays);
@@ -99,6 +99,9 @@ void	render(const t_game game, const t_context context, t_color *buf, u_int32_t 
 	t_section		current;
 	int				i;
 	
+	if (context.stack_id >= 30)
+		return ;
+	context.stack_id++;
 	i = 0;
 	r = build_sections(context, bunch, limit_rays);
 	r = build_sections_portals(r);
@@ -115,10 +118,15 @@ void	render(const t_game game, const t_context context, t_color *buf, u_int32_t 
 		}
 		++i;
 	}
+	free(bunch.entities);
+	free(bunch.walls);
+	free(r.entities);
+	free(r.sections);
 	i = 0;
 	while (i < r.nportals)
 	{
 		render(game, teleport(game, context, r.portals[i]), buf, id_buf);
 		++i;
 	}
+	free(r.portals);
 }
