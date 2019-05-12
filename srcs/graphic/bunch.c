@@ -6,25 +6,29 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/08 15:42:30 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/12 15:09:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
+#include <doom.h>
 #include "srcs/graphic/multi_sprite.h"
 
-t_bunch	build_entity_bunch(const t_game game, const t_context context, const t_limit limit,
-t_fvec2 pos)
+t_bunch	build_entity_bunch(const t_game game, const t_context context,
+const t_limit limit, t_fvec2 pos)
 {
-	volatile t_bunch	ret;
-	t_cache_entity		current;
-	const size_t		sector = context.sector.sector_id;
-	size_t				i;
-	t_fvec2				tmp;
+	t_bunch			ret;
+	t_cache_entity	current;
+	const size_t	sector = context.sector.sector_id;
+	size_t			i;
+	t_fvec2			tmp;
+
+	t_cache_entity	entities[NCACHEENTITY];
 
 	i = -1;
 	ret.nentities = 0;
 	while (++i != (size_t)-1 && i < game.nentities)
+	{
 		if (game.entities[i].physic.sector_id == sector)
 		{
 			tmp = vec2_to_fvec2(vec2_rot(vec2_new(game.entities[i].physic.radius, 0), context.physic.look_h));
@@ -39,20 +43,31 @@ t_fvec2 pos)
 				current.h = f_from_float(game.entities[i].physic.pos.z);
 				current.physic = game.entities[i].physic;
 				current.mat = choose_entity_material(game.entities[i], vec3_to_vec2(context.physic.pos));
-				ret.entities[ret.nentities] = current;
+				entities[ret.nentities] = current;
 				++ret.nentities;
 			}
 		}
+	}
+	if (ret.nentities)
+	{
+		ret.entities = (t_cache_entity *)safe_malloc(ret.nentities * sizeof(t_cache_entity), "rendering");
+		memmove(ret.entities, entities, ret.nentities * sizeof(t_cache_entity));
+	}
+	else
+		ret.entities = NULL;
 	return (ret);
 }
 
-t_bunch	build_bunch(const t_game game, const t_context context, const t_limit limit)
+t_bunch	build_bunch(const t_game game, const t_context context,
+const t_limit limit)
 {
 	t_bunch			ret;
 	t_cache_wall	current;
 	const t_sector	sector = game.sectors[context.sector.sector_id];
 	const t_fvec2	pos = vec2_to_fvec2(vec3_to_vec2(context.physic.pos));
 	size_t			i;
+
+	t_cache_wall	walls[NCACHEWALL];
 
 	ret = build_entity_bunch(game, context, limit, pos);
 	ret.nwalls = 0;
@@ -74,11 +89,18 @@ t_bunch	build_bunch(const t_game game, const t_context context, const t_limit li
 			current.left_z = game.points[game.walls[i].a];
 			current.right_z = game.points[game.walls[i].b];
 			current = switch_points(current,game,i);
-			ret.walls[ret.nwalls] = current;
+			walls[ret.nwalls] = current;
 			++ret.nwalls;
 		}
 		++i;
 	}
+	if (ret.nwalls)
+	{
+		ret.walls = (t_cache_wall *)safe_malloc(ret.nwalls * sizeof(t_cache_wall), "rendering");
+		memmove(ret.walls, walls, ret.nwalls * sizeof(t_cache_wall));
+	}
+	else
+		ret.walls = NULL;
 	return (ret);
 }
 
@@ -86,6 +108,7 @@ t_render		build_sections_entities(const t_context context, const t_bunch bunch, 
 {
 	t_cache_entity		current;
 	t_section_entity	current_section;
+	t_section_entity	entities[NCACHEENTITY];
 	t_render			render;
 
 	render.nentities = 0;
@@ -97,9 +120,16 @@ t_render		build_sections_entities(const t_context context, const t_bunch bunch, 
 			take_left(current.a, current.b), limits, context, context.left);
 		current_section.end = get_ray_id(
 			take_right(current.a, current.b), limits, context, context.right);
-		render.entities[render.nentities] = current_section;
+		entities[render.nentities] = current_section;
 		++render.nentities;
 	}
+	if (render.nentities)
+	{
+		render.entities = (t_section_entity *)safe_malloc(render.nentities * sizeof(t_section_entity), "rendering");
+		memmove(render.entities, entities, render.nentities * sizeof(t_section_entity));
+	}
+	else
+		render.entities = NULL;
 	return (render);
 }
 
@@ -107,6 +137,7 @@ t_render		build_sections(const t_context context, const t_bunch bunch, const t_l
 {
 	t_cache_wall	current;
 	t_section		current_section;
+	t_section		sections[NCACHEWALL];
 	t_render		render;
 
 	render = build_sections_entities(context, bunch, limits);
@@ -119,15 +150,23 @@ t_render		build_sections(const t_context context, const t_bunch bunch, const t_l
 			limits, context, context.left);
 		current_section.end = get_ray_id(take_right(current.a, current.b),
 			limits, context, context.right);
-		render.sections[render.nsections] = current_section;
+		sections[render.nsections] = current_section;
 		++render.nsections;
 	}
+	if (render.nsections)
+	{
+		render.sections = (t_section *)safe_malloc(render.nsections * sizeof(t_section), "rendering");
+		memmove(render.sections, sections, render.nsections * sizeof(t_section));
+	}
+	else
+		render.sections = NULL;
 	return (render);
 }
 
 t_render		build_sections_portals(t_render render)
 {
-	int	i;
+	t_section	portals[NCACHEWALL];
+	int			i;
 
 	i = 0;
 	render.nportals = 0;
@@ -135,10 +174,17 @@ t_render		build_sections_portals(t_render render)
 	{
 		if (render.sections[i].wall.portal >= 0)
 		{
-			render.portals[render.nportals] = render.sections[i];
+			portals[render.nportals] = render.sections[i];
 			++render.nportals;
 		}
 		++i;
 	}
+	if (render.nportals)
+	{
+		render.portals = (t_section *)safe_malloc(render.nsections * sizeof(t_section), "rendering");
+		memmove(render.portals, portals, render.nportals * sizeof(t_section));
+	}
+	else
+		render.portals = NULL;
 	return (render);
 }

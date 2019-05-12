@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_thread.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 16:05:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/01 15:31:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/12 15:15:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	render_single_threaded(const t_env env, t_color *buf)
 			WIDTH,
 			env.game.player.my_entity.physic,
 			-1,
-			env.game.sectors[env.game.player.my_entity.physic.sector_id]
+			env.game.sectors[env.game.player.my_entity.physic.sector_id],
+			0
 		},
 		env.current_buffer, env.game.id_buf
 	);
@@ -87,7 +88,8 @@ void	render_multi_threaded(const t_env env, t_color *buf)
 				i * (WIDTH / N_THREADS),
 				(i + 1) * (WIDTH / N_THREADS),
 				env.game.player.my_entity.physic, -1,
-				env.game.sectors[env.game.player.my_entity.physic.sector_id]
+				env.game.sectors[env.game.player.my_entity.physic.sector_id],
+				0
 			}, buf, env.game.id_buf};
 		i++;
 	}

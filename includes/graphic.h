@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/08 15:55:13 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/12 15:14:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_pix
 }				t_pix;
 
 # define NCACHEWALL 20
+# define NCACHEENTITY 100
 
 typedef struct	s_hit
 {
@@ -69,6 +70,7 @@ typedef struct	s_context
 	t_ph		physic;
 	ssize_t		mask;
 	t_sector	sector;
+	int			stack_id;
 }				t_context;
 
 typedef struct	s_cache_wall
@@ -100,8 +102,8 @@ typedef struct	s_bunch
 {
 	int				nwalls;
 	int				nentities;
-	t_cache_wall	walls[NCACHEWALL];
-	t_cache_entity	entities[NCACHEWALL];
+	t_cache_wall	*walls;
+	t_cache_entity	*entities;
 }				t_bunch;
 
 typedef struct	s_section
@@ -179,12 +181,12 @@ typedef struct	s_e_proj
 
 typedef struct	s_render
 {
-	int			nentities;
-	int			nsections;
-	int			nportals;
-	t_section	sections[NCACHEWALL];
-	t_section_entity	entities[NCACHEWALL];
-	t_section	portals[NCACHEWALL]; //probably need to change type
+	int					nentities;
+	int					nsections;
+	int					nportals;
+	t_section			*sections;
+	t_section_entity	*entities;
+	t_section			*portals;
 }				t_render;
 
 void			render(const t_game game, const t_context context, t_color *buf, u_int32_t *id_buf);
