@@ -39,13 +39,15 @@ static void					render_inventoty(t_inventory_state *state,\
 t_component self, t_color *buf)
 {
 	t_entity	**entity;
+	t_array		inventory;
 	t_mat		*mat;
 	u_int32_t	decal_x;
 	u_int32_t	decal_y;
 
 	decal_x = 0;
 	decal_y = 0;
-	while ((entity = (t_entity **)apop(state->inventory_state)))
+	inventory = *state->inventory_state;
+	while ((entity = (t_entity **)apop(&inventory)))
 	{
 		mat = *(t_mat **)anth(&(*entity)->mat, 0);
 		if ((decal_x + mat->texture->width) >= WIDTH)
