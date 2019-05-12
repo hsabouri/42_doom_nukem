@@ -57,23 +57,19 @@ int      sector_trigger(t_trigger trigger, t_trigger c_log)
         return 0;
 }
 
-t_env     init_conditions(t_env env)
+t_env     init_conditions(void)
 {
     t_env n_env;
-
-    n_env = env;
-
-    ft_trigger *pouet = malloc(sizeof(ft_trigger) * 5);
-    pouet[0] = no_trigger;
-    pouet[1] = see_trigger;
-    pouet[2] = touch_trigger;
-    pouet[3] = interact_trigger;
-    pouet[4] = sector_trigger; 
-
-    n_env.condition = pouet;
-
-    return n_env;
-
+    
+    n_env;
+    ft_trigger *condi = malloc(sizeof(ft_trigger) * 5);
+    condi[0] = no_trigger;
+    condi[1] = see_trigger;
+    condi[2] = touch_trigger;
+    condi[3] = interact_trigger;
+    condi[4] = sector_trigger; 
+    n_env.condition = condi;
+    return (n_env);
 }
 
 

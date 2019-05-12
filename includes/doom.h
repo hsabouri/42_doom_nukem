@@ -204,7 +204,7 @@ t_text					text(const char *str, t_pix pos, t_sdl *sdl);
 ** CONDITION
 */
 
-t_env	init_conditions(t_env env);
+t_env	init_conditions(void);
 t_game  check_conditions(t_game game, t_event events, ft_trigger *triggers);
 t_game 	ft_reset_log(t_game game);
 
@@ -234,7 +234,8 @@ void					clean_game(t_game game);
 void					clean_texture(t_env env);
 
 t_component				*init_menu(t_env *env, t_sdl *sdl);
-t_env					menu_loop(t_env env);
+void					menu_loop(t_env *env);
+t_sdl					init_sdl(void);
 
 void					minimap(t_game game, t_color *buf);
 
