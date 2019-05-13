@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 15:50:31 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/11 15:20:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ t_game			del_mat_update_materials(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_walls(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_sectors(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_portals(size_t mat, size_t a_old, t_game game);
-t_game			del_mat_update_entities(size_t mat, size_t a_old, t_game game);
+t_game			del_mat_update_multi_mats(size_t mat, size_t a_old, t_game game);
 
 t_game			create_mat_update_materials(size_t a_old, t_game game);
 t_game			create_mat_update_walls(size_t a_old, t_game game);
 t_game			create_mat_update_sectors(size_t a_old, t_game game);
 t_game			create_mat_update_portals(size_t a_old, t_game game);
-t_game			create_mat_update_entities(size_t a_old, t_game game);
+t_game			create_mat_update_multi_mats(size_t a_old, t_game game);
 
 void			legend(t_color *buf, t_sdl *sdl);
 t_env			game_editing(t_env env, t_player player);

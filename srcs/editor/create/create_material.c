@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 11:59:28 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/10 14:16:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/11 15:20:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_game		create_material(size_t selected, t_game game)
 	game = create_mat_update_walls((size_t)old, game);
 	game = create_mat_update_portals((size_t)old, game);
 	game = create_mat_update_sectors((size_t)old, game);
-	game = create_mat_update_entities((size_t)old, game);
+	game = create_mat_update_multi_mats((size_t)old, game);
 	game.materials[game.nmaterials] = game.materials[selected];
 	game.nmaterials++;
 	return (game);

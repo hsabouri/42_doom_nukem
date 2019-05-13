@@ -12,10 +12,40 @@
 
 #include <doom.h>
 
+void				write_multi_sprite(int fd, t_array *multi_mats,\
+size_t nmulti_mats, t_mat *mats)
+{
+	size_t			i;
+	size_t			j;
+	u_int32_t		index;
+	t_c_multi_mats	s_multi;
+	t_mat			**material;
+
+	i = 0;
+	while (i < nmulti_mats)
+	{
+		j = 0;
+		s_multi.magic = MULTI_MAGIC + i;
+		while ((material = (t_mat **)ashift(&multi_mats[i])))
+		{
+			index = id_from_p(*material, mats, sizeof(t_mat));
+			s_multi.mat[j] = (ssize_t)index;
+			j++;
+		}
+		while (j < 16)
+		{
+			s_multi.mat[j] = -1;
+			j++;
+		}
+		write_struct(&s_multi, fd, sizeof(t_c_multi_mats));
+		i++;
+	}
+}
+
 size_t				write_textures(int fd, t_img *textures, size_t ntextures,\
 int index)
 {
-	t_c_img	ftextures;
+	t_c_img	s_textures;
 	size_t	i;
 	size_t	loc_content;
 
@@ -23,16 +53,16 @@ int index)
 	loc_content = 0;
 	while (i < ntextures)
 	{
-		ftextures.magic = TEXT_MAGIC + i;
-		ftextures.width = textures[i].width;
-		ftextures.height = textures[i].height;
+		s_textures.magic = TEXT_MAGIC + i;
+		s_textures.width = textures[i].width;
+		s_textures.height = textures[i].height;
 		if (i == 0)
 			loc_content = (size_t)index;
 		else
 			loc_content += (size_t)(textures[i - 1].width *
 				textures[i - 1].height) * sizeof(t_color);
-		ftextures.content = loc_content;
-		write_struct(&ftextures, fd, sizeof(t_c_img));
+		s_textures.content = loc_content;
+		write_struct(&s_textures, fd, sizeof(t_c_img));
 		i++;
 	}
 	loc_content += (size_t)(textures[i - 1].width * textures[i - 1].height) *

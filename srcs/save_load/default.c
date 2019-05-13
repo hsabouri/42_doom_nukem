@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 13:48:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/11 15:24:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_player	player_default(void)
 				0,
 				0
 			},
-			safe_anew(NULL, 0, sizeof(t_img), "components"),
+			NULL,
 			1
 		},
 		90,
@@ -90,7 +90,7 @@ t_entity	entity_default(void)
 			0,
 			0
 		},
-		safe_anew(NULL, 1, sizeof(t_img), "components"),
+		NULL,
 		0});
 }
 

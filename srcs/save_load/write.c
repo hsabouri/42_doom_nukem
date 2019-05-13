@@ -26,12 +26,10 @@ int fd)
 	}
 }
 
-static void		write_player(t_player player, int fd, t_mat *materials)
+static void		write_player(t_player player, int fd, t_array *multi_mats)
 {
 	t_c_player	res;
 	u_int32_t	index;
-	t_mat		**mat;
-	size_t		j;
 
 	res.magic = PLAYER_MAGIC;
 	res.my_entity.spawn.gravity = f_from_float(player.my_entity.spawn.gravity);
@@ -43,18 +41,8 @@ static void		write_player(t_player player, int fd, t_mat *materials)
 	res.my_entity.spawn.look.u = f_from_float(player.my_entity.physic.look_h);
 	res.my_entity.spawn.look.v = player.my_entity.spawn.look_v;
 	res.my_entity.spawn.sector_id = player.my_entity.spawn.sector_id;
-	j = 0;
-	while ((mat = (t_mat **)ashift(&player.my_entity.mat)))
-	{
-		index = id_from_p(*mat, materials, sizeof(t_mat));
-		res.my_entity.mat[j] = (ssize_t)index;
-		j++;
-	}
-	while (j < 16)
-	{
-		res.my_entity.mat[j] = -1;
-		j++;
-	}
+	index = id_from_p(player.my_entity.mat, multi_mats, sizeof(t_array));
+	res.my_entity.mats = (ssize_t)index;
 	res.my_entity.damage = player.my_entity.damage;
 	res.life = player.life;
 	res.weapons[0] = player.weapons[0];
@@ -78,37 +66,41 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 {
 	game_s.ninventory = game.player.inventory.len;
 	game_s.loc_inventory = sizeof(t_c_game);
-	game_s.loc_player = game_s.loc_inventory + sizeof(size_t) * game_s.ninventory;
+	game_s.loc_player = game_s.loc_inventory + sizeof(size_t)
+		* game_s.ninventory;
 	game_s.nmaterials = game.nmaterials;
 	game_s.loc_mats = game_s.loc_player + sizeof(t_c_player);
+	game_s.nmulti_sprite = game.nmulti_mats;
+	game_s.loc_multi_sprite = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.npoints = game.npoints;
-	game_s.loc_points = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
+	game_s.loc_points = game_s.loc_multi_sprite + sizeof(t_c_multi_mats)
+		* game.nmulti_mats;
 	game_s.nwalls = game.nwalls;
 	game_s.nuwalls = game.nuwalls;
 	game_s.loc_walls = game_s.loc_points + sizeof(t_c_point) * game.npoints;
 	game_s.nsectors = game.nsectors;
 	game_s.loc_sectors = game_s.loc_walls + sizeof(t_c_wall) * game.nwalls;
 	game_s.nportals = game.nportals;
-	game_s.loc_portals = game_s.loc_sectors + sizeof(t_c_sector)\
+	game_s.loc_portals = game_s.loc_sectors + sizeof(t_c_sector)
 		* game.nsectors;
 	game_s.nentities = game.nentities;
-	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal)\
+	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal)
 		* game.nportals;
 	game_s.nweapons = game.nweapons;
-	game_s.loc_weapons = game_s.loc_entities + sizeof(t_c_entity)\
+	game_s.loc_weapons = game_s.loc_entities + sizeof(t_c_entity)
 		* game.nentities;
 	game_s.nevents = game.waiting_events.len;
-	game_s.loc_events = game_s.loc_weapons + sizeof(t_c_weapon)\
+	game_s.loc_events = game_s.loc_weapons + sizeof(t_c_weapon)
 		* game.nweapons;
 	game_s.ntextures = game.ntextures;
-	game_s.loc_textures = game_s.loc_events + sizeof(t_c_game_event)\
+	game_s.loc_textures = game_s.loc_events + sizeof(t_c_game_event)
 		* game_s.nevents;
 	game_s.nmusic = game.music.len;
-	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)\
+	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)
 		* game.ntextures;
 	game_s.nsounds = game.sounds.len;
-	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music) *\
-		game.music.len;
+	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music)
+		* game.music.len;
 	return (game_s);
 }
 
@@ -119,13 +111,14 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	size_t	loc_sound;
 
 	write_inventory(game.player, game.entities,fd);
-	write_player(game.player, fd, game.materials);
+	write_player(game.player, fd, game.multi_mats);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
+	write_multi_sprite(fd, game.multi_mats, game.nmulti_mats, game.materials);
 	write_points(fd, game.points, game.npoints);
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
-	write_entities(fd, game.entities, game.nentities, game.materials);
+	write_entities(fd, game.entities, game.nentities, game.multi_mats);
 	write_weapons(fd, game.weapons, game.nweapons, game.textures);
 	write_events(fd, game.waiting_events);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;

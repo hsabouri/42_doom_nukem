@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_material_update.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:59:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 12:29:14 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/11 15:17:07 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,17 @@ t_game	create_mat_update_portals(size_t a_old, t_game game)
 	return (game);
 }
 
-t_game	create_mat_update_entities(size_t a_old, t_game game)
+t_game	create_mat_update_multi_mats(size_t a_old, t_game game)
 {
 	size_t		i;
 	size_t		j;
 	t_mat		**curr;
 
 	i = 0;
-	while (i < game.nentities)
+	while (i < game.nmulti_mats)
 	{
 		j = 0;
-		while ((curr = (t_mat **)anth(&game.entities[i].mat, j)) != NULL)
+		while ((curr = (t_array **)anth(&game.multi_mats[i], j)) != NULL)
 		{
 			*curr = &game.materials[ID(*curr, a_old)];
 			j++;

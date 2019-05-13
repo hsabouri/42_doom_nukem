@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 18:22:50 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/11 15:06:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct		s_mat
 	struct s_mat	*overlay;
 }					t_mat;
 
-
 typedef struct		s_ph
 {
 	float		gravity;
@@ -89,7 +88,7 @@ typedef struct		s_entity
 	int			id;
 	t_ph		physic;
 	t_ph		spawn;
-	t_array		mat;
+	t_array		*mat;
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
@@ -196,6 +195,8 @@ typedef struct		s_game
 	size_t			nmaterials;
 	t_img			*textures;
 	size_t			ntextures;
+	t_array			*multi_mats;
+	size_t			nmulti_mats;
 	t_weapon		*weapons;
 	size_t			nweapons;
 	t_array			music;

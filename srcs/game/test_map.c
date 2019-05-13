@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/07 12:47:59 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/11 15:23:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,29 +338,28 @@ t_game	generate_map(void)
 		NULL
 	};
 
-	t_array	multi = anew(NULL, 8, sizeof(t_mat *));
+	t_array	*multi_mats = (t_array *)safe_malloc(sizeof(t_array) * 2, "init");
+	multi_mats[0] = anew(NULL, 8, sizeof(t_mat *));
+
 	t_mat	*yolo = &materials[8];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 	yolo = &materials[9];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 	yolo = &materials[10];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 	yolo = &materials[11];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 	yolo = &materials[12];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 	yolo = &materials[13];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 	yolo = &materials[14];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 	yolo = &materials[15];
-	apush(&multi, &yolo);
+	apush(&multi_mats[0], &yolo);
 
-	t_array multi2 = anew(ft_memdup(multi.mem, 8 * sizeof(t_mat *)), 8, sizeof(t_mat *));
-	t_array multi3 = anew(ft_memdup(multi.mem, 8 * sizeof(t_mat *)), 8, sizeof(t_mat *));
-
-	t_array key_card = anew(NULL, 1, sizeof(t_mat *));
-	apush(&key_card, &key);
+	multi_mats[1] = anew(NULL, 1, sizeof(t_mat *));
+	apush(&multi_mats[1], &key);
 
 	t_wall *walls = (t_wall *)malloc(29 * sizeof(t_wall));
 	walls[0] =  ((t_wall){fvec2_new(0, 0), -1, 9, 0, bricks,(t_vec2){0, 2.5},(t_vec2){0, 2.5}});
@@ -406,6 +405,7 @@ t_game	generate_map(void)
 	sectors[2] = ((t_sector){14, 4, 2, (t_vec3){0, 0, 0.8}, (t_vec3){0, 0, 3.3}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
 	sectors[3] = ((t_sector){18, 4, 3, (t_vec3){0, 0, 1.2}, (t_vec3){0, 0, 3.7}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},1});
 	sectors[4] = ((t_sector){22, 6, 4, (t_vec3){0, 0, -30}, (t_vec3){0, 0, 4.1}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
+	
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = ((t_entity){
 		0,
@@ -437,7 +437,7 @@ t_game	generate_map(void)
 			0,
 			0
 		},
-		multi,
+		&multi_mats[0],
 		0
 	});
 	entities[1] = ((t_entity){
@@ -469,7 +469,7 @@ t_game	generate_map(void)
 			0,
 			0
 		},
-		multi2,
+		&multi_mats[0],
 		1
 	});
 	entities[2] = ((t_entity){
@@ -502,7 +502,7 @@ t_game	generate_map(void)
 			0,
 			0
 		},
-		multi3,
+		&multi_mats[0],
 		1
 	});
 	entities[3] = ((t_entity){
@@ -535,7 +535,7 @@ t_game	generate_map(void)
 			0,
 			0
 		},
-		key_card,
+		&multi_mats[1],
 		1
 	});
 
@@ -600,7 +600,7 @@ t_game	generate_map(void)
 				0,
 				0
 			},
-			multi,
+			&multi_mats[0],
 			1
 		},
 		90,
@@ -703,6 +703,8 @@ t_game	generate_map(void)
 	game.nmaterials = 16;
 	game.textures = textures;
 	game.ntextures = 52;
+	game.multi_mats = multi_mats;
+	game.nmulti_mats = 2;
 	game.weapons = gun;
 	game.nweapons = 7;
 	game.played_music = 0;

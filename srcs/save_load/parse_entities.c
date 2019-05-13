@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-t_entity		*parse_entities(void *buf, t_save save, t_mat *mats,\
+t_entity		*parse_entities(void *buf, t_save save, t_array *multi_mats,\
 size_t n_entities)
 {
 	t_c_entity	struc_e;
@@ -42,18 +42,11 @@ size_t n_entities)
 		if (current.physic.look_h > M_PI / 2 && current.physic.look_h < -M_PI / 2)
 			current.physic.look_h = 0;
 		current.physic.sector_id = struc_e.spawn.sector_id;
-		current.mat = safe_anew(NULL, 1, sizeof(t_mat *), "loader");
-		j = 0;
-		while (j < 16)
-		{
-			mat = (struc_e.mat[j] == -1) ? NULL : 
-				id_to_p(struc_e.mat[j], mats, sizeof(t_mat));
-			if (!mat)
-				break;
-			else
-				apush(&current.mat, &mat);
-			j++;
-		}
+		if (struc_e.mats != -1)
+			current.mat = (t_array *)id_to_p(struc_e.mats, multi_mats,
+				sizeof(t_array));
+		else
+			current.mat = NULL;
 		current.damage = struc_e.damage;
 		entities[i] = current;
 		i++;
