@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/10 12:50:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/11 14:30:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,13 @@ t_sdl *sdl)
 		.callback = &enable_change_overlay
 	}, sdl);
 	apush(&ret, &current);
-	current = create_list_textures(env, (t_pix) {WIDTH - 167, 2}, (t_pix) {165, HEIGHT - 4}, sdl);
+	current = create_list_textures(env, (t_pix) {WIDTH - 167, 44}, (t_pix) {165, HEIGHT - 54}, sdl);
+	apush(&ret, &current);
+	current = init_display_deco((t_display_deco_state) {
+		.to_look_at = &state->display_overlay,
+		.display_value = 1,
+		.state = state
+	}, init_simple_rectangle((t_pix) {0, 0}, (t_pix) {WIDTH, HEIGHT}, (t_color) {0, 0, 0, 128}, sdl));
 	apush(&ret, &current);
 	current = init_display_deco((t_display_deco_state) {
 		.to_look_at = &state->display_overlay,

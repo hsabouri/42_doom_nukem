@@ -79,18 +79,7 @@ t_save save)
 	if (current.my_entity.physic.look_h > M_PI / 2 && current.my_entity.physic.look_h < -M_PI / 2)
 		current.my_entity.physic.look_h = 0;
 	current.my_entity.physic.sector_id = struc_p.my_entity.spawn.sector_id;
-	current.my_entity.mat = safe_anew(NULL, 1, sizeof(t_mat *), "loader");
-	j = 0;
-	while (j < 16)
-	{
-		mat = (struc_p.my_entity.mat[j] == -1) ? NULL : 
-			id_to_p(struc_p.my_entity.mat[j], new_game.materials, sizeof(t_mat));
-		if (!mat)
-			break;
-		else
-			apush(&current.my_entity.mat, &mat);
-		j++;
-	}
+	//parse mats
 	current.life = struc_p.life;
 	current.weapons[0] = struc_p.weapons[0];
 	current.weapons[1] = struc_p.weapons[1];
@@ -114,6 +103,9 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_mats;
 	res.materials = parse_mats(buf, save, res.textures, game.nmaterials);
 	res.nmaterials = game.nmaterials;
+	save.index = game.loc_multi_sprite;
+	res.multi_mats = parse_multi_sprite(buf, save, game.nmulti_sprite, res.materials);
+	res.nmulti_mats = game.nmulti_sprite;
 	save.index = game.loc_points;
 	res.points = parse_points(buf, save, game.npoints);
 	res.npoints = game.npoints;
@@ -128,7 +120,7 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	res.portals = parse_portals(buf, save, game.nportals, res.materials);
 	res.nportals = game.nportals;
 	save.index = game.loc_entities;
-	res.entities = parse_entities(buf, save, res.materials, game.nentities);
+	res.entities = parse_entities(buf, save, res.multi_mats, game.nentities);
 	res.nentities = game.nentities;
 	save.index = game.loc_weapons;
 	res.weapons = parse_weapons(buf, save, res.textures, game.nweapons);

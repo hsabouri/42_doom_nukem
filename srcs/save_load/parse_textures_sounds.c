@@ -12,6 +12,40 @@
 
 #include <doom.h>
 
+t_array		*parse_multi_sprite(void *buf, t_save save, size_t n_multi,\
+t_mat *materials)
+{
+	t_c_multi_mats	struc_m;
+	t_array			*multi_sprite;
+	t_mat			*mat;
+
+	size_t			i;
+	size_t			j;
+
+	i = 0;
+	multi_sprite = (t_array *)safe_malloc(sizeof(t_array) * n_multi, "loader");
+	while (i < n_multi)
+	{
+		struc_m = *(t_c_multi_mats *)dump_struct(buf, save.index + i
+			* sizeof(t_c_multi_mats), sizeof(t_c_multi_mats), save.max);
+		verify_magic(&struc_m, MULTI_MAGIC, i);
+		multi_sprite[i] = safe_anew(NULL, 1, sizeof(t_mat *), "loader");
+		j = 0;
+		while (j < 16)
+		{
+			mat = (struc_m.mat[j] == -1) ? NULL : 
+				(t_mat *)(id_to_p(struc_m.mat[j], materials, sizeof(t_mat)));
+			if (!mat)
+				break ;
+			else
+				apush(&multi_sprite[i], &mat);
+			j++;
+		}
+		i++;
+	}
+	return(multi_sprite);
+}
+
 t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 {
 	t_c_img		struc_i;

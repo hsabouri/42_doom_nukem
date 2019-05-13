@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 14:29:01 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/20 14:25:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/11 15:23:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_mat	*choose_entity_material(t_entity entity, t_vec2 pos)
 	sinus = vec2_cross(pos, perp).z;
 	int img;
 	if (sinus >= 0)
-		img = (entity.mat.len / 4) + cosin * (entity.mat.len / 4);
+		img = (entity.mat->len / 4) + cosin * (entity.mat->len / 4);
 	else
-		img = (3 * entity.mat.len / 4) - cosin * (entity.mat.len / 4);
-	mat = *(t_mat **)anth(&entity.mat, img);
+		img = (3 * entity.mat->len / 4) - cosin * (entity.mat->len / 4);
+	mat = *(t_mat **)anth(entity.mat, img % entity.mat->len);
 	return (mat);
 }

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 12:36:35 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/11 14:29:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ t_sdl *sdl)
 		.invert = 0
 	}, init_editor_mat(env, sdl));
 	apush(&ret, &current);
-	current = init_simple_rectangle((t_pix) {WIDTH - 43, HEIGHT - 169},
-		(t_pix) {42, 168}, RICH_BLACK, sdl);
+	current = init_simple_rectangle((t_pix) {WIDTH - 169, 1},
+		(t_pix) {168, 42}, RICH_BLACK, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 42, HEIGHT - 42},
+		.pos = (t_pix) {WIDTH - 168, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
@@ -46,7 +46,7 @@ t_sdl *sdl)
 		.active_value = MAP}, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 42, HEIGHT - 84},
+		.pos = (t_pix) {WIDTH - 126, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
@@ -56,7 +56,7 @@ t_sdl *sdl)
 		.active_value = ACTION_EVENT}, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 42, HEIGHT - 126},
+		.pos = (t_pix) {WIDTH - 84, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
@@ -66,7 +66,7 @@ t_sdl *sdl)
 		.active_value = MATERIAL}, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 42, HEIGHT - 168},
+		.pos = (t_pix) {WIDTH - 42, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
