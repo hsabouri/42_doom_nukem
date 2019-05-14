@@ -135,6 +135,7 @@ typedef struct		s_c_point
 typedef struct		s_c_portal
 {
 	size_t		magic;
+	ssize_t		blocking;
 	u_int32_t	from_sector;
 	u_int32_t	to_sector;
 	u_int32_t	from_wall;
