@@ -169,6 +169,7 @@ int						is_clicked_on(const t_component component, t_event events);
 int						is_over(const t_component component, t_event events);
 void					m_background(t_color *buf, t_color color, t_pix start, t_pix end);
 t_game					init_audio(t_game game);
+t_game					init_audio_tmp(t_game game);
 
 t_component				default_component(void *state_address, t_pix size, t_sdl *sdl);
 t_component     		*init_component(t_env *env, t_sdl *sdl);

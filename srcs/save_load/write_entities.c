@@ -17,7 +17,6 @@ t_array *multi_mats)
 {
 	t_c_entity	res;
 	t_entity	entity;
-	u_int32_t	index;
 	size_t		i;
 
 	i = 0;
