@@ -40,7 +40,6 @@ static t_vec3	wall_touch(t_touch touch, t_ph *physic, int wall, t_game game)
 	t_vec3	final_speed;
 	t_vec3	next_pos;
 
-	printf("buh\n");
 	next_pos = touch.pos;
 	next_pos = slide_wall(next_pos, game, game.walls[touch.wall]);
 	touch = collision(next_pos, *physic, game, wall);

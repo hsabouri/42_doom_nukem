@@ -96,7 +96,8 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	t_game res;
 
 	save.index = game.loc_textures;
-	res.textures = parse_textures(buf, save, game.ntextures);
+	// res.textures = parse_textures(buf, save, game.ntextures); a remettre a fin quand toutes les textures sont implementees
+	res.textures = load_all_textures(); //a enlever quand parse_texture remis
 	res.ntextures = game.ntextures;
 	save.index = game.loc_mats;
 	res.materials = parse_mats(buf, save, res.textures, game.nmaterials);
