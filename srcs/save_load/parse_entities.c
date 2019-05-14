@@ -18,9 +18,7 @@ size_t n_entities)
 	t_c_entity	struc_e;
 	t_entity	*entities;
 	t_entity	current;
-	t_mat		*mat;
 	size_t		i;
-	size_t		j;
 
 	entities = (t_entity *)safe_malloc((sizeof(t_entity) * n_entities), "loader");
 	i = 0;

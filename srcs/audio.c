@@ -33,6 +33,77 @@ t_game	init_audio(t_game game)
 	Mix_AllocateChannels(10);
 
 	i = 0;
+	if (!(drt = opendir("./audio/music")))
+	{
+		console_error("audio", "Could not open directory");
+		exit(EXIT_FAILURE);
+	}
+	game.music = safe_anew(NULL, 1, sizeof(t_music), "audio");
+	while ((read = readdir(drt)))
+	{
+		if (ft_strcmp(read->d_name, ".") != 0 && ft_strcmp(read->d_name, "..")
+			&& read->d_type == 8 && 
+			(ft_strcmp(ft_strrchr(read->d_name, '.'), ".ogg") == 0))
+		{
+			path = (char *)safe_malloc((15 + ft_strlen(read->d_name) * sizeof(char)), "audio");
+			path = ft_strcpy(path, "./audio/music/");
+			path = ft_strcat(path, read->d_name);
+			music.music = Mix_LoadMUS(path);
+			apush(&game.music, &music);
+			i++;
+			ft_strdel(&path);
+		}
+	}
+	closedir(drt);
+
+	i = 0;
+	if (!(drt = opendir("./audio/sound")))
+	{
+		console_error("audio", "Could not open directory");
+		exit(EXIT_FAILURE);
+	}
+	game.sounds = safe_anew(NULL, 1, sizeof(t_sound), "audio");
+	while ((read = readdir(drt)))
+	{
+		if (ft_strcmp(read->d_name, ".") != 0 && ft_strcmp(read->d_name, "..")
+			&& read->d_type == 8 &&
+			(ft_strcmp(ft_strrchr(read->d_name, '.'), ".ogg") == 0))
+		{
+			path = (char *)safe_malloc((15 + ft_strlen(read->d_name) * sizeof(char)), "audio");
+			path = ft_strcpy(path, "./audio/sound/");
+			path = ft_strcat(path, read->d_name);
+			sound.sound = Mix_LoadWAV(path);
+			apush(&game.sounds, &sound);
+			i++;
+			ft_strdel(&path);
+		}
+	}
+	closedir(drt);
+	
+	game.played_music = 0;
+	game.chunks = safe_anew(NULL, 10, sizeof(t_chunk), "audio");
+	return (game);
+}
+
+t_game	init_audio_tmp(t_game game)
+{
+	DIR			*drt;
+	t_dirent	*read;
+	char		*path;
+	t_music		music;
+	t_sound		sound;
+	size_t		i;
+
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)
+		== -1)
+	{
+		console_error("doom_nukem", "Could not initialize SDL_Mixer.");
+		printf("%s\n", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
+	Mix_AllocateChannels(10);
+
+	i = 0;
 	if (!(drt = opendir("./audio_tmp/music_tmp")))
 	{
 		console_error("audio", "Could not open directory");
@@ -134,6 +205,11 @@ t_game	play_sounds(t_game game)
 #else
 
 t_game	init_audio(t_game game)
+{
+	return (game);
+}
+
+t_game	init_audio_tmp(t_game game)
 {
 	return (game);
 }

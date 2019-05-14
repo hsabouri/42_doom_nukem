@@ -62,8 +62,6 @@ t_save save)
 	t_player	res;
 	t_player	current;
 	t_c_player  struc_p;
-	t_mat		*mat;
-	size_t		j;
 
 	struc_p = *(t_c_player *)dump_struct(buf, save.index, sizeof(t_c_player), save.max);
 	verify_magic(&struc_p, PLAYER_MAGIC, 0);
