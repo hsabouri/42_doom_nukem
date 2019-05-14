@@ -123,6 +123,7 @@ typedef struct		s_player
 
 typedef struct		s_portal
 {
+	ssize_t		blocking;
 	u_int32_t	from_sector;
 	u_int32_t	to_sector;
 	u_int32_t	from_wall;

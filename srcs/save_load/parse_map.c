@@ -140,6 +140,7 @@ t_mat *mats)
 			sizeof(t_c_portal) * i, sizeof(t_c_portal), save.max);
 		verify_magic(&struc_p, PORTAL_MAGIC, i);
 		current = portals[i];
+		current.blocking = struc_p.blocking;
 		current.from_sector = struc_p.from_sector;
 		current.to_sector = struc_p.to_sector;
 		current.from_wall = struc_p.from_wall;

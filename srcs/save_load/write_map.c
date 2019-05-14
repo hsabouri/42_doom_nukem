@@ -120,6 +120,7 @@ void	write_portals(int fd, t_portal *portals, size_t nportals, t_mat *mats)
 	while (i < nportals)
 	{
 		s_portals.magic = PORTAL_MAGIC + i;
+		s_portals.blocking = portals[i].blocking;
 		s_portals.from_sector = portals[i].from_sector;
 		s_portals.to_sector = portals[i].to_sector;
 		s_portals.from_wall = portals[i].from_wall;

@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*   Updated: 2019/04/15 11:36:34 by fmerding         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <doom.h>
 
 static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
@@ -44,6 +40,7 @@ static t_vec3	wall_touch(t_touch touch, t_ph *physic, int wall, t_game game)
 	t_vec3	final_speed;
 	t_vec3	next_pos;
 
+	printf("buh\n");
 	next_pos = touch.pos;
 	next_pos = slide_wall(next_pos, game, game.walls[touch.wall]);
 	touch = collision(next_pos, *physic, game, wall);
@@ -71,7 +68,9 @@ static t_vec3	move_entities(t_ph *physic, t_game *game, int wall, float old_time
 	if (touch.wall >= 0)
 	{
 		touch.pos = next_pos;
-		if ((*game).walls[touch.wall].portal == -1)
+		if (game->walls[touch.wall].portal == -1 ||
+			(game->walls[touch.wall].portal != -1 && 
+			game->portals[game->walls[touch.wall].portal].blocking == 1))
 			return (wall_touch(touch, physic, wall, *game));
 		else
 		{
