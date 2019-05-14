@@ -49,7 +49,7 @@ t_component self, t_color *buf)
 	inventory = *state->inventory_state;
 	while ((entity = (t_entity **)apop(&inventory)))
 	{
-		mat = *(t_mat **)anth(&(*entity)->mat, 0);
+		mat = *(t_mat **)anth((*entity)->mat, 0);
 		if ((decal_x + mat->texture->width) >= WIDTH)
 		{
 			decal_y += 70;

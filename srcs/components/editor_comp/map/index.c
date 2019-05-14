@@ -213,7 +213,7 @@ t_sdl *sdl)
 		.state = state,
 		.invert = 0
 	}, init_help_component((t_help_state) {
-			.img = env->game.textures[50]}, sdl));
+			.img = parse_tga("./textures/hud/map_editor.tga")}, sdl));
 	apush(&ret, &current);
 	//current = create_list_sectors(env, sdl);
 	//apush(&ret, &current); // Used to test lists

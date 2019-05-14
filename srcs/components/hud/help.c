@@ -69,7 +69,7 @@ static t_help_state	*init_help_state(void *parent_state)
 	hud = (t_hud_state *)parent_state;
 	state = (t_help_state *)safe_malloc(sizeof(t_help_state), "component");
 	state->help = hud->env->game.textures[16];
-	state->help_ig_edit = hud->env->game.textures[51];
+	state->help_ig_edit = hud->env->game.textures[50];
 	state->is_active = 0;
 	state->is_display = 0;
 	state->img_display = 0;

@@ -16,59 +16,8 @@ t_game	generate_map(void)
 {
 	t_game game;
 
-	t_img *textures = (t_img *)safe_malloc(52 * sizeof(t_img), "textures");
-	textures[0] = parse_tga("./textures/wall.tga");
-	textures[1] = parse_tga("./textures/floor.tga");
-	textures[2] = parse_tga("./textures/items/key_card.tga");
-	textures[3] = parse_tga("./textures/skybox.tga");
-	textures[4] = parse_tga("./textures/fence.tga");
-	textures[5] = parse_tga("./textures/multi_sprite/1.tga");
-	textures[6] = parse_tga("./textures/multi_sprite/2.tga");
-	textures[7] = parse_tga("./textures/multi_sprite/3.tga");
-	textures[8] = parse_tga("./textures/multi_sprite/4.tga");
-	textures[9] = parse_tga("./textures/multi_sprite/5.tga");
-	textures[10] = parse_tga("./textures/multi_sprite/6.tga");
-	textures[11] = parse_tga("./textures/multi_sprite/7.tga");
-	textures[12] = parse_tga("./textures/multi_sprite/8.tga");
-	textures[13] = parse_tga("./textures/hud/cross.tga");
-	textures[14] = parse_tga("./textures/hud/full_life.tga");
-	textures[15] = parse_tga("./textures/hud/empty_life.tga");
-	textures[16] = parse_tga("./textures/hud/help.tga");
-	textures[17] = parse_tga("./textures/weapons/gun/gun0.tga");
-	textures[18] = parse_tga("./textures/weapons/gun/gun1.tga");
-	textures[19] = parse_tga("./textures/weapons/gun/gun2.tga");
-	textures[20] = parse_tga("./textures/weapons/gun/gun3.tga");
-	textures[21] = parse_tga("./textures/weapons/gun/gun4.tga");
-	textures[22] = parse_tga("./textures/weapons/gun/gun5.tga");
-	textures[23] = parse_tga("./textures/weapons/smg/smg0.tga");
-	textures[24] = parse_tga("./textures/weapons/smg/smg1.tga");
-	textures[25] = parse_tga("./textures/weapons/smg/smg2.tga");
-	textures[26] = parse_tga("./textures/weapons/smg/smg3.tga");
-	textures[27] = parse_tga("./textures/weapons/shotgun/shotgun0.tga");
-	textures[28] = parse_tga("./textures/weapons/shotgun/shotgun1.tga");
-	textures[29] = parse_tga("./textures/weapons/shotgun/shotgun2.tga");
-	textures[30] = parse_tga("./textures/weapons/shotgun/shotgun3.tga");
-	textures[31] = parse_tga("./textures/weapons/shotgun/shotgun4.tga");
-	textures[32] = parse_tga("./textures/weapons/shotgun/shotgun5.tga");
-	textures[33] = parse_tga("./textures/weapons/shotgun/shotgun6.tga");
-	textures[34] = parse_tga("./textures/weapons/shotgun/shotgun7.tga");
-	textures[35] = parse_tga("./textures/weapons/revolver/revolver0.tga");
-	textures[36] = parse_tga("./textures/weapons/revolver/revolver1.tga");
-	textures[37] = parse_tga("./textures/weapons/revolver/revolver2.tga");
-	textures[38] = parse_tga("./textures/weapons/revolver/revolver3.tga");
-	textures[39] = parse_tga("./textures/weapons/revolver/revolver4.tga");
-	textures[40] = parse_tga("./textures/weapons/revolver/revolver5.tga");
-	textures[41] = parse_tga("./textures/weapons/nyan_gun/nyan_gun0.tga");
-	textures[42] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga");
-	textures[43] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga");
-	textures[44] = parse_tga("./textures/weapons/nyan_gun/nyan_gun3.tga");
-	textures[45] = parse_tga("./textures/weapons/nyan_gun/nyan_gun4.tga");
-	textures[46] = parse_tga("./textures/weapons/grenade/grenade0.tga");
-	textures[47] = parse_tga("./textures/weapons/grenade/grenade1.tga");
-	textures[48] = parse_tga("./textures/weapons/claymore/claymore0.tga");
-	textures[49] = parse_tga("./textures/weapons/claymore/claymore1.tga");
-	textures[50] = parse_tga("./textures/hud/map_editor.tga");
-	textures[51] = parse_tga("./textures/hud/in_game_editor.tga");
+	//a remettre a la fin pour charger toutes les textures au moment generation map
+	game.textures = load_all_textures();
 
 	t_vec2 *points = (t_vec2 *)malloc(sizeof(t_vec2) * 20);
 	points[0] = ((t_vec2){7, 6});
@@ -102,7 +51,7 @@ t_game	generate_map(void)
 		50,
 		(t_shot_type) HITSCAN,
 		-1,
-		init_sprite_gun(textures),
+		init_sprite_gun(game.textures),
 		200
 	});
 	gun[1] = ((t_weapon) {
@@ -114,7 +63,7 @@ t_game	generate_map(void)
 		100,
 		(t_shot_type) HITSCAN,
 		-1,
-		init_sprite_smg(textures),
+		init_sprite_smg(game.textures),
 		250
 	});
 	gun[2] = ((t_weapon) {
@@ -126,7 +75,7 @@ t_game	generate_map(void)
 		30,
 		(t_shot_type) SHOTS,
 		-1,
-		init_sprite_shotgun(textures),
+		init_sprite_shotgun(game.textures),
 		20
 	});
 	gun[3] = ((t_weapon) {
@@ -138,7 +87,7 @@ t_game	generate_map(void)
 		20,
 		(t_shot_type) HITSCAN,
 		-1,
-		init_sprite_revolver(textures),
+		init_sprite_revolver(game.textures),
 		250
 	});
 	gun[4] = ((t_weapon) {
@@ -150,7 +99,7 @@ t_game	generate_map(void)
 		30,
 		(t_shot_type) SHOTS,
 		-1,
-		init_sprite_nyan_gun(textures),
+		init_sprite_nyan_gun(game.textures),
 		15
 	});
 	gun[5] = ((t_weapon) {
@@ -162,7 +111,7 @@ t_game	generate_map(void)
 		20,
 		(t_shot_type) SHOTS,
 		1,
-		init_sprite_grenade(textures),
+		init_sprite_grenade(game.textures),
 		200
 	});
 	gun[6] = ((t_weapon) {
@@ -174,7 +123,7 @@ t_game	generate_map(void)
 		20,
 		(t_shot_type) STATIC,
 		2,
-		init_sprite_mine(textures),
+		init_sprite_mine(game.textures),
 		0
 	});
 
@@ -183,7 +132,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[1],
+		&game.textures[1],
 		TILING,
 		WHITE,
 		NULL
@@ -192,7 +141,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		textures,
+		game.textures,
 		TILING,
 		WHITE,
 		NULL
@@ -203,7 +152,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[1],
+		&game.textures[1],
 		TILING,
 		WHITE,
 		NULL
@@ -214,7 +163,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[2],
+		&game.textures[2],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -225,7 +174,7 @@ t_game	generate_map(void)
 		fvec2_new(0, f_from_int(1300)),
 		fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		NO_COLOR,
-		&textures[3],
+		&game.textures[3],
 		SKYBOX,
 		WHITE,
 		NULL,
@@ -236,7 +185,7 @@ t_game	generate_map(void)
 		fvec2_new(0, f_from_int(1300)),
 		fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		NO_COLOR,
-		&textures[3],
+		&game.textures[3],
 		SKYBOX,
 		WHITE,
 		&materials[7]
@@ -247,7 +196,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		textures,
+		game.textures,
 		TILING,
 		RED,
 		NULL
@@ -258,7 +207,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[4],
+		&game.textures[4],
 		TILING,
 		WHITE,
 		NULL
@@ -269,7 +218,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[5],
+		&game.textures[5],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -278,7 +227,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[6],
+		&game.textures[6],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -287,7 +236,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[7],
+		&game.textures[7],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -296,7 +245,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[8],
+		&game.textures[8],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -305,7 +254,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[9],
+		&game.textures[9],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -314,7 +263,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[10],
+		&game.textures[10],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -323,7 +272,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[11],
+		&game.textures[11],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -332,7 +281,7 @@ t_game	generate_map(void)
 		fvec2_new(0, 0),
 		fvec2_new(f_from_int(1), f_from_int(1)),
 		NO_COLOR,
-		&textures[12],
+		&game.textures[12],
 		NO_TILING,
 		WHITE,
 		NULL
@@ -701,8 +650,7 @@ t_game	generate_map(void)
 	game.npoints = 20;
 	game.materials = materials;
 	game.nmaterials = 16;
-	game.textures = textures;
-	game.ntextures = 52;
+	game.ntextures = 50;
 	game.multi_mats = multi_mats;
 	game.nmulti_mats = 2;
 	game.weapons = gun;
