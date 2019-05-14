@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 12:20:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/03 18:23:05 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/14 17:24:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_state_buf state)
 
 
 	size = state.state.zoom / 2;
-	sp_pos2 = vec2_rot(vec2_new(0, -size), angle);
+	sp_pos2 = vec2_rot(vec2_new(0, -size), -angle);
 	sp_pos2 = vec2_add(sp_pos, sp_pos2);
 	a = (t_pix) {sp_pos.u - 1, sp_pos.v - 1};
 	b = (t_pix) {sp_pos2.u - 1, sp_pos2.v - 1};
