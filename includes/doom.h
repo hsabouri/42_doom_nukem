@@ -170,7 +170,7 @@ int						is_over(const t_component component, t_event events);
 void					m_background(t_color *buf, t_color color, t_pix start, t_pix end);
 t_game					init_audio(t_game game);
 t_game					init_audio_tmp(t_game game);
-t_img					*load_all_textures(void);
+t_img					*load_all_textures(t_game *game);
 
 t_component				default_component(void *state_address, t_pix size, t_sdl *sdl);
 t_component     		*init_component(t_env *env, t_sdl *sdl);

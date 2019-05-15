@@ -56,7 +56,7 @@ t_game_tool	select_tool(t_env env)
 		res = MATERIAL_MOVE;
 	else if (env.events.keys[SDL_SCANCODE_U])
 		res = MATERIAL_SCALE;
-	else if (env.events.keys[SDL_SCANCODE_H])
+	else if (env.events.keys[SDL_SCANCODE_J])
 		res = SECTOR_HEIGHT;
 	else if (env.events.keys[SDL_SCANCODE_G])
 		res = MATERIAL_CHANGE;

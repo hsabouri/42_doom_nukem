@@ -17,7 +17,7 @@ t_game	generate_map(void)
 	t_game game;
 
 	//a remettre a la fin pour charger toutes les textures au moment generation map
-	game.textures = load_all_textures();
+	game.textures = load_all_textures(&game);
 
 	t_vec2 *points = (t_vec2 *)malloc(sizeof(t_vec2) * 20);
 	points[0] = ((t_vec2){7, 6});
@@ -416,6 +416,7 @@ t_game	generate_map(void)
 			0,
 			0,
 			0,
+			0,
 			0
 		},
 		&multi_mats[0],
@@ -629,9 +630,9 @@ t_game	generate_map(void)
 	// 		}
 		// };
 
-	t_plist	g_e	= lpnew(first_e);
-	lppush(&g_e, secon_e);
-	lppush(&g_e, third_e);
+	t_plist	g_e	= lpnew((t_pelem *)first_e);
+	lppush(&g_e, (t_pelem *)secon_e);
+	lppush(&g_e, (t_pelem *)third_e);
 	// lppush(&g_e, kuadro_e);
 
 	game.player = player;
@@ -650,7 +651,6 @@ t_game	generate_map(void)
 	game.npoints = 20;
 	game.materials = materials;
 	game.nmaterials = 16;
-	game.ntextures = 50;
 	game.multi_mats = multi_mats;
 	game.nmulti_mats = 2;
 	game.weapons = gun;

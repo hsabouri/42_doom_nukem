@@ -54,6 +54,7 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 	size_t		i;
 
 	i = 0;
+	printf("nyan\n");
 	textures = (t_img *)safe_malloc((sizeof(t_img) * ntextures), "loader");
 	while (i < ntextures)
 	{
