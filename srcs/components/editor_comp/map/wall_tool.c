@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_tool.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 11:34:13 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/23 17:21:18 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/15 11:56:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_game	create_unassigned(ssize_t pts[2], t_game game)
 {
 	
 	const t_wall	new = (t_wall) {fvec2_new(0, 0), -1, MIN(pts[0], pts[1]),
-		MAX(pts[0], pts[1]), game.materials};
+		MAX(pts[0], pts[1]), game.materials, vec2_new(0, 0), vec2_new(0, 0)};
 	
 	game.walls = (t_wall *)safe_realloc(game.walls, sizeof(t_wall) *
 	(game.nwalls + game.nuwalls + 1), "component");
