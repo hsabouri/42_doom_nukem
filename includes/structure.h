@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/11 15:06:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:48:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ typedef struct		s_player
 
 typedef struct		s_portal
 {
-	ssize_t		blocking;
 	u_int32_t	from_sector;
 	u_int32_t	to_sector;
 	u_int32_t	from_wall;
@@ -131,6 +130,7 @@ typedef struct		s_portal
 	u_int32_t	a;
 	u_int32_t	b;
 	t_mat		*mat;
+	int			blocking;
 }					t_portal;
 
 typedef struct		s_wall

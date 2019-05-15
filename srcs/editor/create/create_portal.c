@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 13:46:50 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/14 14:26:51 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:49:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,16 @@ t_game			create_portal(ssize_t wa, ssize_t wb, t_game game)
 		console_error("ALLOCATION", "Allocation error");
 		exit(EXIT_FAILURE);
 	}
-	game.portals[game.nportals] = (t_portal) { from_sector,
-		to_sector, wa, wb, game.walls[wa].a, game.walls[wa].b, NULL};
+	game.portals[game.nportals] = (t_portal) {
+		from_sector,
+		to_sector,
+		wa,
+		wb,
+		game.walls[wa].a,
+		game.walls[wa].b,
+		NULL,
+		0
+	};
 	game.walls[wa].portal = game.nportals;
 	game.walls[wb].portal = game.nportals;
 	game.nportals++;

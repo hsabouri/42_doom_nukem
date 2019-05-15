@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_events_actions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 15:22:28 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/27 15:22:29 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:59:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_game game, t_player player)
 			+ sizeof(t_c_game_event) * i, sizeof(t_c_game_event), save.max);
 		verify_magic(&struc_e, EVENT_MAGIC, i);
 		current = (t_game_event *)safe_malloc(sizeof(t_game_event), "loader");
-		current->elem = (t_pelem){NULL};
+		current->elem = (t_pelem){NULL, NULL};
 		if (struc_e.trigger.e_actif == -1)
 			current->trigger.e_actif = player.my_entity;
 		else

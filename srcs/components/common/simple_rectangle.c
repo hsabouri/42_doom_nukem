@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 12:24:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 12:30:44 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:57:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_color background, t_sdl *sdl)
 		size, sdl);
 	*(t_color *)ret.state = background;
 	ret.pos = pos;
+	ret.update = &self_update;
 	ret.render = &self_render;
 	ret.childs = anew(NULL, 0, sizeof(t_component));
 	return (ret);

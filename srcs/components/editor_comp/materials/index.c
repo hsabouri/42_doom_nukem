@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/11 14:30:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:57:44 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 static void					self_render(const t_component self, t_color *buf)
 {
-	const t_editor_mat_state	state = *(t_editor_mat_state *)self.state;
-
 	background(buf, RICH_BLACK, self.size);
 }
 

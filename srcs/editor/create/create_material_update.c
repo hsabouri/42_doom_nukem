@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:59:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/11 15:17:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:55:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_game	create_mat_update_multi_mats(size_t a_old, t_game game)
 	while (i < game.nmulti_mats)
 	{
 		j = 0;
-		while ((curr = (t_array **)anth(&game.multi_mats[i], j)) != NULL)
+		while ((curr = (t_mat **)anth(&game.multi_mats[i], j)) != NULL)
 		{
 			*curr = &game.materials[ID(*curr, a_old)];
 			j++;
@@ -104,4 +104,3 @@ t_game	create_mat_update_multi_mats(size_t a_old, t_game game)
 	}
 	return (game);
 }
-

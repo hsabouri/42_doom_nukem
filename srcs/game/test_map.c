@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/11 15:23:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 12:00:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,10 +342,10 @@ t_game	generate_map(void)
 	walls[28] = ((t_wall){fvec2_new(0, 0), -1, 19, 14, bricks,(t_vec2){-30, 4.1},(t_vec2){-30,  4.1}});
 
 	t_portal *portals = (t_portal *)malloc(4 * sizeof(t_portal));
-	portals[0] = ((t_portal){0, 0, 1, 9, 10, 8, 9, fence});
-	portals[1] = ((t_portal){0, 1, 2, 12, 14, 10, 11, NULL});
-	portals[2] = ((t_portal){0, 2, 3, 16, 18, 12, 13, NULL});
-	portals[3] = ((t_portal){0, 3, 4, 20, 22, 14, 15, NULL});
+	portals[0] = ((t_portal){0, 1, 9, 10, 8, 9, fence, 0});
+	portals[1] = ((t_portal){1, 2, 12, 14, 10, 11, NULL, 0});
+	portals[2] = ((t_portal){2, 3, 16, 18, 12, 13, NULL, 0});
+	portals[3] = ((t_portal){3, 4, 20, 22, 14, 15, NULL, 0});
 
 	t_sector *sectors = (t_sector *)malloc(5 * sizeof(t_sector));
 	sectors[0] = ((t_sector){0, 10, 0, (t_vec3){0, 0, 0}, (t_vec3){0, 0, 2.50}, (t_color) {125, 125, 125, 255},
