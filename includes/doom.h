@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/06 15:26:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:25:20 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ t_text					text(const char *str, t_pix pos, t_sdl *sdl);
 t_env	init_conditions(void);
 t_game  check_conditions(t_game game, t_event events, ft_trigger *triggers);
 t_game 	ft_reset_log(t_game game);
+void add_events(t_game * game, t_entity e_actif, t_condition condi , t_entity e_passif);
 
 // ssize_t					select_wall(t_game game, t_editor editor,\
 // 						t_event events);
