@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 11:48:16 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 12:54:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,9 +177,8 @@ typedef struct		s_chunk
 
 typedef struct		s_game
 {
-
 	t_player		player;
-	t_plist 		waiting_events;;
+	t_plist 		waiting_events;
 	t_array			log;
 	t_entity		*entities;
 	size_t			nentities;

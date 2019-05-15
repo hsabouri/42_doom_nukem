@@ -6,11 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/11 14:29:39 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/14 12:06:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../root.h"
+#include "./event_action/ev_ac.h"
 #include "./editor_comp.h"
 #include "./map/map.h"
 #include "./materials/materials.h"
@@ -34,6 +35,15 @@ t_sdl *sdl)
 	apush(&ret, &current);
 	current = init_simple_rectangle((t_pix) {WIDTH - 169, 1},
 		(t_pix) {168, 42}, RICH_BLACK, sdl);
+	current = init_display_deco((t_display_deco_state) {
+		.to_look_at = (int *)&state->type,
+		.display_value = (int)ACTION_EVENT,
+		.state = state,
+		.invert = 0
+	}, init_editor_ev_ac(env, sdl));
+	apush(&ret, &current);
+	current = init_simple_rectangle((t_pix) {WIDTH - 43, HEIGHT - 169},
+		(t_pix) {42, 168}, RICH_BLACK, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
 		.pos = (t_pix) {WIDTH - 168, 2},
