@@ -36,7 +36,7 @@ static void		launch_game(t_env *env, int ac, char **av)
 		env->game = generate_map();
 		env->game = init_audio(env->game);
 	}
-	launch_check(env->game);
+	// launch_check(env->game);
 	env->game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT * sizeof(int)), "doom_nukem");
 	if (env->component)
 		destroy_component(env->component);
@@ -54,7 +54,9 @@ static void		all_loops(t_env *env, size_t frame)
 		if (!env->toggle_editor)
 			game_loop(env, frame);
 		else
+		{
 			editor_loop(env);
+		}
 	}
 	if (!env->sdl.win)
 	{

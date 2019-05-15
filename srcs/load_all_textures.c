@@ -12,11 +12,11 @@
 
 #include <doom.h>
 
-t_img	*load_all_textures(void)
+t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	textures = (t_img *)safe_malloc(50 * sizeof(t_img), "textures");
+	textures = (t_img *)safe_malloc(52 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga");
 	textures[1] = parse_tga("./textures/floor.tga");
 	textures[2] = parse_tga("./textures/items/key_card.tga");
@@ -67,5 +67,8 @@ t_img	*load_all_textures(void)
 	textures[47] = parse_tga("./textures/weapons/grenade/grenade1.tga");
 	textures[48] = parse_tga("./textures/weapons/claymore/claymore0.tga");
 	textures[49] = parse_tga("./textures/weapons/claymore/claymore1.tga");
+	textures[50] = parse_tga("./textures/hud/in_game_editor.tga");
+	textures[51] = parse_tga("./textures/environment/parking.tga");
+	game->ntextures = 52;
 	return (textures);
 }

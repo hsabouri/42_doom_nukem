@@ -17,9 +17,9 @@ int			open_file(const char *file, int edit_mode, size_t *filesize)
 	int			fd;
 	struct stat	st;
 
-	if (edit_mode && ft_strcmp(file, "nyan_dukem") == 0)
-		fd = open("nyan_dukem_save", O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
-	else if (edit_mode)
+	// if (edit_mode && ft_strcmp(file, "nyan_dukem") == 0)
+	// 	fd = open("nyan_dukem_save", O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
+	if (edit_mode)
 		fd = open(file, O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
 	else
 		fd = open(file, O_RDONLY);

@@ -163,7 +163,7 @@ t_sdl *sdl)
 		.events = &env->events,
 		.img = parse_tga("./textures/ui/assign_entity.tga"),
 		.to_activate = (int *)&state->tool,
-		.scancode = SDL_SCANCODE_J,
+		.scancode = SDL_SCANCODE_B,
 		.active_value = ASSIGN_ENTITY}, sdl);
 	apush(&ret, &current);
 	current = init_point_tool(env, &state->selected_point, sdl);
