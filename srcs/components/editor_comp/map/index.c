@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 13:44:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/16 17:13:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ t_sdl *sdl)
 		.events = &env->events,
 		.img = parse_tga("./textures/ui/assign_entity.tga"),
 		.to_activate = (int *)&state->tool,
-		.scancode = SDL_SCANCODE_B,
+		.scancode = SDL_SCANCODE_J,
 		.active_value = ASSIGN_ENTITY}, sdl);
 	apush(&ret, &current);
 	current = init_point_tool(env, &state->selected_point, sdl);
