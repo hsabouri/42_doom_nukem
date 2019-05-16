@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/11 15:20:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/14 18:33:05 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_game			create_wall(size_t uwall, size_t sector, t_game game);
 t_game			create_portal(ssize_t wa, ssize_t wb, t_game game);
 t_game			create_sector(size_t start, size_t nwalls, t_game game);
 t_game			create_material(size_t selected, t_game game);
+t_game			create_entity(t_vec2 pos, size_t class_id, t_game game);
 
 t_game			delete_portal(size_t portal, t_game game);
 t_game			delete_sector(size_t sector, t_game game);

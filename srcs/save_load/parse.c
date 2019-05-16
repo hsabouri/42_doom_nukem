@@ -121,6 +121,7 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_entities;
 	res.entities = parse_entities(buf, save, res.multi_mats, game.nentities);
 	res.nentities = game.nentities;
+	res.unique_e_id = game.unique_e_id;
 	save.index = game.loc_weapons;
 	res.weapons = parse_weapons(buf, save, res.textures, game.nweapons);
 	res.nweapons = game.nweapons;

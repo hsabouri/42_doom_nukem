@@ -62,7 +62,7 @@ void				write_struct(void *struc, int fd, size_t size)
 	}
 }
 
-static t_c_game		save_entities(t_c_game game_s, t_game game)
+static t_c_game		save_game(t_c_game game_s, t_game game)
 {
 	game_s.ninventory = game.player.inventory.len;
 	game_s.loc_inventory = sizeof(t_c_game);
@@ -86,6 +86,7 @@ static t_c_game		save_entities(t_c_game game_s, t_game game)
 	game_s.nentities = game.nentities;
 	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal)
 		* game.nportals;
+	game_s.unique_e_id = game.unique_e_id;
 	game_s.nweapons = game.nweapons;
 	game_s.loc_weapons = game_s.loc_entities + sizeof(t_c_entity)
 		* game.nentities;
@@ -136,7 +137,7 @@ void				save(const char *filename, t_game game)
 
 	i = 0;
 	game_save.magic = GAME_MAGIC;
-	game_save = save_entities(game_save, game);
+	game_save = save_game(game_save, game);
 	fd = open_file(filename, 1, &size);
 	write_struct(&game_save, fd, sizeof(t_c_game));
 	write_map(fd, game_save, game);

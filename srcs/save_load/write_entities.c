@@ -34,6 +34,8 @@ t_array *multi_mats)
 		res.spawn.look.u = f_from_float(entity.physic.look_h);
 		res.spawn.look.v = entity.spawn.look_v;
 		res.spawn.sector_id = entity.spawn.sector_id;
+		ft_strcpy(res.type, entity.type);
+		printf("res.type: %s\n", res.type);
 		if (entity.mat != NULL)
 			res.mats = (ssize_t)id_from_p(entity.mat, multi_mats,
 				sizeof(t_array));

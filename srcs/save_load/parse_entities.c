@@ -46,6 +46,7 @@ size_t n_entities)
 		else
 			current.mat = NULL;
 		current.damage = struc_e.damage;
+		ft_strcpy(current.type, struc_e.type);
 		entities[i] = current;
 		i++;
 	}

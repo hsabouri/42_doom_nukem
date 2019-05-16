@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_textures_musics.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:46 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/26 13:59:50 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/16 15:58:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t nmulti_mats, t_mat *mats)
 	{
 		j = 0;
 		s_multi.magic = MULTI_MAGIC + i;
-		while ((material = (t_mat **)ashift(&multi_mats[i])))
+		while ((material = (t_mat **)anth(&multi_mats[i], j)))
 		{
 			index = id_from_p(*material, mats, sizeof(t_mat));
 			s_multi.mat[j] = (ssize_t)index;
