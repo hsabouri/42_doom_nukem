@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_game.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:01:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/01 15:04:19 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/16 17:28:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ t_game_tool	select_tool(t_env env)
 	else
 		res = env.editor.game_tool;
 	env.events.keys[SDL_SCANCODE_T] = 0;
+	env.events.keys[SDL_SCANCODE_Y] = 0;
+	env.events.keys[SDL_SCANCODE_U] = 0;
+	env.events.keys[SDL_SCANCODE_J] = 0;
+	env.events.keys[SDL_SCANCODE_G] = 0;
 	return (res);
 }
 
@@ -71,6 +75,8 @@ t_env		game_editing(t_env env, t_player player)
 	t_sector	*sector;
 	t_game_tool	last;
 	t_selected	sel;
+	t_portal	*portal;
+
 
 	sector = &env.game.sectors[player.my_entity.physic.sector_id];
 	sel = world_selector(env.game);
@@ -81,5 +87,11 @@ t_env		game_editing(t_env env, t_player player)
 		env.editor.depth = 0;
 	if (env.editor.game_tool != TOOL_NO)
 		env = env.editor.game_tools[env.editor.game_tool](env, sel);
+	if (env.events.keys[SDL_SCANCODE_KP_ENTER] && sel.type == PART_PORTAL)
+	{
+		portal = &env.game.portals[env.game.walls[sel.id].portal];
+		env.events.keys[SDL_SCANCODE_KP_ENTER] = 0;
+		portal->blocking = !portal->blocking;
+	}
 	return (env);
 }
