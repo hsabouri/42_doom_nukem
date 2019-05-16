@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/12 15:09:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:44:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ const t_limit limit, t_fvec2 pos)
 
 	i = -1;
 	ret.nentities = 0;
-	while (++i != (size_t)-1 && i < game.nentities)
+	while (++i != (size_t)-1 && i < game.nentities && i < NCACHEENTITY)
 	{
 		if (game.entities[i].physic.sector_id == sector)
 		{

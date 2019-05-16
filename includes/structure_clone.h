@@ -94,6 +94,7 @@ typedef struct		s_c_entity
 	int			id;
 	t_c_ph		spawn;
 	ssize_t		mats;
+	char		type[28];
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
@@ -200,6 +201,7 @@ typedef struct		s_c_game
 	size_t		loc_portals;
 	size_t		nentities;
 	size_t		loc_entities;
+	size_t		unique_e_id;
 	size_t		nweapons;
 	size_t		loc_weapons;
 	size_t		nevents;

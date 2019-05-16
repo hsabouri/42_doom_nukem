@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 17:14:48 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 13:44:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 	state->selected_entity = -1;
 	state->entity = -1;
 	state->spawn = -1;
+	state->selected_class = -1;
 	return (state);
 }
 
@@ -174,8 +175,14 @@ t_sdl *sdl)
 	apush(&ret, &current);
 	current = init_assign_portal_tool(env, state, sdl);
 	apush(&ret, &current);
-	current = init_entity_tool(env, &state->selected_entity,
-		&state->selected_spawn, sdl);
+	current = init_display_deco((t_display_deco_state) {
+		.to_look_at = (int *)&state->tool,
+		.display_value = TOOL_ENTITY,
+		.state = state,
+		.invert = 0
+	}, create_list_class(env, sdl));
+	apush(&ret, &current);
+	current = init_entity_tool(env, state, sdl);
 	apush(&ret, &current);
 	current = init_assign_entity(env, (t_assign_entity) {
 		&state->selected_entity,

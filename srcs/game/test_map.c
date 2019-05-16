@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/15 12:53:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/16 16:00:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,16 +354,16 @@ t_game	generate_map(void)
 	sectors[2] = ((t_sector){14, 4, 2, (t_vec3){0, 0, 0.8}, (t_vec3){0, 0, 3.3}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
 	sectors[3] = ((t_sector){18, 4, 3, (t_vec3){0, 0, 1.2}, (t_vec3){0, 0, 3.7}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},1});
 	sectors[4] = ((t_sector){22, 6, 4, (t_vec3){0, 0, -30}, (t_vec3){0, 0, 4.1}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
-	
-	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
-	entities[0] = ((t_entity){
+
+	t_entity *classes = (t_entity *)malloc(2 * sizeof(t_entity));
+	classes[0] = ((t_entity){
 		0,
 		(t_ph) {
 			0.02,
 			1.50,
 			0.5,
 			3,
-			(t_vec3){6, 9, 0},
+			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -377,7 +377,7 @@ t_game	generate_map(void)
 			1.50,
 			0.5,
 			3,
-			(t_vec3){6, 9, 0},
+			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -387,82 +387,17 @@ t_game	generate_map(void)
 			0
 		},
 		&multi_mats[0],
+		"Grosse dame",
 		0
 	});
-	entities[1] = ((t_entity){
-		1,
+	classes[1] = ((t_entity){
+		0,
 		(t_ph) {
 			0.02,
 			1.50,
 			0.5,
 			3,
-			(t_vec3){6, 8, 0},
 			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			3,
-			(t_vec3){6, 8, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		&multi_mats[0],
-		1
-	});
-	entities[2] = ((t_entity){
-		2,
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			2,
-			(t_vec3){5, 8.5, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			2,
-			(t_vec3){5, 8.5, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		&multi_mats[0],
-		1
-	});
-	entities[3] = ((t_entity){
-		3,
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			3,
-			(t_vec3){5, 8.5, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -476,7 +411,7 @@ t_game	generate_map(void)
 			1.50,
 			0.5,
 			3,
-			(t_vec3){5, 8.5, 0},
+			(t_vec3){0, 0, 0},
 			(t_vec3){0, 0, 0},
 			(t_vec3){1, 1, 1},
 			0,
@@ -486,8 +421,31 @@ t_game	generate_map(void)
 			0
 		},
 		&multi_mats[1],
+		"Carte d'acces",
 		1
 	});
+	
+	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
+	entities[0] = classes[0];
+	entities[0].id = 0;
+	entities[0].physic.pos = (t_vec3){6, 9, 0};
+	entities[0].spawn.pos = (t_vec3){6, 9, 0};
+	ft_strncpy(entities[0].type, classes[0].type, 28);
+	entities[1] = classes[0];
+	entities[1].id = 1;
+	entities[1].physic.pos = (t_vec3){6, 8, 0};
+	entities[1].spawn.pos = (t_vec3){6, 8, 0};
+	ft_strncpy(entities[1].type, classes[0].type, 28);
+	entities[2] = classes[0];
+	entities[2].id = 2;
+	entities[2].physic.pos = (t_vec3){5, 8.5, 0};
+	entities[2].spawn.pos = (t_vec3){5, 8.5, 0};
+	ft_strncpy(entities[2].type, classes[0].type, 28);
+	entities[3] = classes[1];
+	entities[3].id = 3;
+	entities[3].physic.pos = (t_vec3){4, 8.5, 0};
+	entities[3].spawn.pos = (t_vec3){4, 8.5, 0};
+	ft_strncpy(entities[3].type, classes[1].type, 28);
 
 	t_array inventory = safe_anew(NULL, 1, sizeof(t_entity *), "generate_map");
 	t_entity *ent = &entities[3];
@@ -551,6 +509,7 @@ t_game	generate_map(void)
 				0
 			},
 			&multi_mats[0],
+			"player",
 			1
 		},
 		90,
@@ -600,7 +559,7 @@ t_game	generate_map(void)
 	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
 
 	*first_e = (t_game_event){
-		(t_pelem) {NULL},
+		(t_pelem) {NULL, NULL},
 		(t_trigger){
 			player.my_entity, TRIGGER_INTERACT, entities[2] // Game event : list event wanted
 			}
@@ -608,7 +567,7 @@ t_game	generate_map(void)
 
 	t_game_event * secon_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*secon_e = (t_game_event){
-		(t_pelem) {NULL},
+		(t_pelem) {NULL, NULL},
 		(t_trigger){
 			player.my_entity, TRIGGER_TOUCH, entities[1] // Game event : list event wanted
 			}
@@ -616,7 +575,7 @@ t_game	generate_map(void)
 
 	t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*third_e = (t_game_event){
-		(t_pelem) {NULL},
+		(t_pelem) {NULL, NULL},
 		(t_trigger){
 			player.my_entity, TRIGGER_SEE, entities[0] // Game event : list event wanted
 			}
@@ -640,6 +599,9 @@ t_game	generate_map(void)
 	game.waiting_events = g_e;
 	game.entities = entities;
 	game.nentities = 4;
+	game.unique_e_id = 4;
+	game.classes = classes;
+	game.nclasses = 2;
 	game.sectors = sectors;
 	game.nsectors = 5;
 	game.walls = walls;

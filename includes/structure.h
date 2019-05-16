@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 12:54:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 17:52:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct		s_entity
 	t_ph		physic;
 	t_ph		spawn;
 	t_array		*mat;
+	char		type[28];
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
@@ -182,6 +183,9 @@ typedef struct		s_game
 	t_array			log;
 	t_entity		*entities;
 	size_t			nentities;
+	size_t			unique_e_id;
+	t_entity		*classes;
+	size_t			nclasses;
 	t_sector		*sectors;
 	size_t			nsectors;
 	t_wall			*walls;

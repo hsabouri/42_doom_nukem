@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/14 15:44:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 13:42:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_array		generator(void *parent)
 	curr.img.content = NULL;
 	while (i < game.nentities)
 	{
-		ft_strncpy(curr.text, ft_itoa(game.nentities - i - 1), 28);
+		ft_strncpy(curr.text, game.entities[game.nentities - i - 1].type, 28);
 		apush(&ret, &curr);
 		++i;
 	}

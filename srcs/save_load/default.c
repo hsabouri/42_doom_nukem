@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/11 15:24:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/16 15:57:38 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_player	player_default(void)
 				0
 			},
 			NULL,
+			"player",
 			1
 		},
 		90,
@@ -91,6 +92,7 @@ t_entity	entity_default(void)
 			0
 		},
 		NULL,
+		"null",
 		0});
 }
 

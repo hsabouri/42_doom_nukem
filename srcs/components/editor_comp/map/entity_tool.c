@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:50:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/02 10:30:54 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 14:38:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,15 @@ static int		self_update(t_component *self, void *parent)
 		game = move_entity(parent_state, state, game);
 	else if (*state->selected_entity > -1 && events.mouse_click[SDL_BUTTON_RIGHT])
 		game = delete_entity(*state->selected_entity, game);
+	else if (*state->selected_class >= 0 && events.mouse_click[SDL_BUTTON_RIGHT])
+		game = create_entity(point_from_mouse(*parent_state, *state->events,
+		parent_state->magnetisme), *state->selected_class, game);
 	parent_state->env->game = game;
 	return (1);
 }
 
-t_component		init_entity_tool(t_env *env, ssize_t *entity,
-ssize_t *spawn, t_sdl *sdl)
+t_component		init_entity_tool(t_env *env, t_editor_map_state *parent,
+t_sdl *sdl)
 {
 	t_component		ret;
 	t_entity_tool	*state;
@@ -78,8 +81,9 @@ ssize_t *spawn, t_sdl *sdl)
 	state = (t_entity_tool *)safe_malloc(sizeof(t_entity_tool), "component");
 	ret = default_component(state, (t_pix) {0, 0}, sdl);
 	state->events = &env->events;
-	state->selected_entity = entity;
-	state->selected_spawn = spawn;
+	state->selected_entity = &parent->selected_entity;
+	state->selected_spawn = &parent->selected_spawn;
+	state->selected_class = &parent->selected_class;
 	ret.update = &self_update;
 	ret.complete_render = &empty_render;
 	ret.childs = anew(NULL, 0, 0);

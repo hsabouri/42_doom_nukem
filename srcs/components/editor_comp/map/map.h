@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 17:15:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/15 13:40:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_entity_tool
 {
 	ssize_t		*selected_entity;
 	ssize_t		*selected_spawn;
+	ssize_t		*selected_class;
 	t_event		*events;
 }				t_entity_tool;
 
@@ -77,6 +78,7 @@ typedef struct	s_editor_map_state
 	ssize_t				selected_spawn;
 	ssize_t				entity;
 	ssize_t				spawn;
+	ssize_t				selected_class;
 }				t_editor_map_state;
 
 typedef struct	s_assign_tool
@@ -113,10 +115,10 @@ t_component		init_wall_tool(t_env *env, t_editor_map_state *parent,
 t_component		init_assign_tool(t_env *env, t_editor_map_state *parent,
 				t_sdl *sdl);
 t_component		init_assign_portal_tool(t_env *env, t_editor_map_state *parent,
-t_sdl *sdl);
+				t_sdl *sdl);
 
-t_component		init_entity_tool(t_env *env, ssize_t *entity,
-				ssize_t *spawn, t_sdl *sdl);
+t_component		init_entity_tool(t_env *env, t_editor_map_state *parent,
+				t_sdl *sdl);
 
 t_component		init_assign_entity(t_env *env, t_assign_entity v,
 				t_sdl *sdl);
@@ -134,7 +136,7 @@ ssize_t			select_wall(t_editor_map_state editor, ssize_t selected_wall,
 ssize_t			select_unassigned_wall(t_editor_map_state editor,
 				ssize_t selected_wall, t_event events);
 ssize_t			select_entity(t_editor_map_state editor, ssize_t selected_entity,
-t_event events, int spawn);
+				t_event events, int spawn);
 void			select_multi(ssize_t curr, ssize_t *dual, t_event events);
 
 size_t			find_sector(size_t wall_id, t_game game);
@@ -144,5 +146,7 @@ void			draw_look(t_vec2 sp_pos, float angle, t_color color,
 
 void			foreach_entity(void *entity, void *param, size_t i);
 void			foreach_portal(void *port, void *param, size_t i);
+
+t_component		create_list_class(t_env *env, t_sdl *sdl);
 
 #endif
