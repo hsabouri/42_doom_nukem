@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:05:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/03 18:16:29 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/18 17:12:49 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_vec2		screen_space(t_vec2 vec, t_editor_map_state state)
 	vec = vec2_scale(vec, state.zoom);
 	vec = vec2_mult(vec, vec2_new(1, -1));
 	vec = vec2_add(vec, state.offset);
+	vec = vec2_add(vec, vec2_new(WIDTH / 2, -HEIGHT / 2));
 	vec.v += HEIGHT;
 	return (vec);
 }
@@ -28,6 +29,7 @@ int magnet)
 
 	new_point = (t_vec2) {events.x, events.y};
 	new_point = vec2_sub(new_point, state.offset);
+	new_point = vec2_sub(new_point, vec2_new(WIDTH / 2, -HEIGHT / 2));
 	new_point.v -= HEIGHT;
 	new_point.v *= -1;
 	new_point = vec2_scale(new_point, 1 / state.zoom);

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/16 17:13:40 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/18 17:19:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,21 @@
 
 static t_editor_map_state	zoom_move(t_editor_map_state state, t_event events)
 {
+	const float	factor = 1 + ZOOM_SPEED * events.wheel;
+
 	state.offset.u -= events.keys[SDL_SCANCODE_D] * MOVE_SPEED;
 	state.offset.u += events.keys[SDL_SCANCODE_A] * MOVE_SPEED;
 	state.offset.v -= events.keys[SDL_SCANCODE_S] * MOVE_SPEED;
 	state.offset.v += events.keys[SDL_SCANCODE_W] * MOVE_SPEED;
-	state.zoom *= 1 + ZOOM_SPEED * events.wheel;
+	state.zoom *= factor;
 	if (state.zoom <= 0.1)
 		state.zoom = 0.1;
+	else
+	{
+		state.offset.u = state.offset.u * factor - (events.x - WIDTH / 2) * (factor - 1);
+		state.offset.v = state.offset.v * factor - (events.y - HEIGHT / 2) * (factor - 1);
+	}
+	printf("state.offset = (%f, %f)\n     .zoom = %f\n", state.offset.u, state.offset.v, state.zoom);
 	return (state);
 }
 
