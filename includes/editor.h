@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/14 18:33:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/18 16:52:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define MOVE_SPEED 5
 # define ZOOM_SPEED 0.2
 # define INITIAL_ZOOM 30
-# define INITIAL_OFFSET_X 100
-# define INITIAL_OFFSET_Y -100
+# define INITIAL_OFFSET_X 0
+# define INITIAL_OFFSET_Y 0
 
 # define POINT_SIZE 4
 # define ENTITY_SIZE 3

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/03 18:06:01 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/18 17:12:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void			grid(t_editor_map_state state, t_color *buf)
 		while (y < n)
 		{
 			current = vec2_new(
-				(int)(x - (state.offset.u / state.zoom) * state.grid_size) - 1,
-				(int)(y + (state.offset.v / state.zoom) * state.grid_size));
+				(int)(x - ((state.offset.u + WIDTH / 2) / state.zoom) * state.grid_size) - 1,
+				(int)(y + ((state.offset.v - HEIGHT / 2) / state.zoom) * state.grid_size));
 			current = vec2_scale(current, grid);
 			current = screen_space(current, state);
 			draw_point(vec2_to_fvec2(current), 1, buf, GREY);
