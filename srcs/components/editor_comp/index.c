@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/14 12:06:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/18 13:00:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ t_sdl *sdl)
 		.state = state,
 		.invert = 0
 	}, init_editor_ev_ac(env, sdl));
-	apush(&ret, &current);
-	current = init_simple_rectangle((t_pix) {WIDTH - 43, HEIGHT - 169},
-		(t_pix) {42, 168}, RICH_BLACK, sdl);
 	apush(&ret, &current);
 	current = init_button((t_button) {
 		.pos = (t_pix) {WIDTH - 168, 2},
