@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:02:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:57:19 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct		s_trigger
 typedef struct		s_game_event
 {
 	t_pelem		elem;
-	t_trigger	trigger;
+	t_trigger	trigger 
 	// int			is_trigger;
 	// t_action	 action;
 }					t_game_event;

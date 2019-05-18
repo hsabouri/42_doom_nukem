@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 17:03:54 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:03:48 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,15 @@ static t_game			assign_entity(t_assign_entity *state, t_game game)
 	else if ((size_t)*state->spawn == game.nentities)
 		game.player.my_entity.spawn.sector_id = sector;
 	else if (*state->entity >= 0)
+	{
 		game.entities[*state->entity].physic.sector_id = sector;
+		game.entities[*state->entity].physic.pos.z = game.sectors[sector].floor;
+	}
 	else if (*state->spawn >= 0)
+	{
 		game.entities[*state->spawn].spawn.sector_id = sector;
+		game.entities[*state->entity].spawn.pos.z = game.sectors[sector].floor;
+	}
 	*state->entity = -1;
 	*state->spawn = -1;
 	state->walls[1] = -1;
