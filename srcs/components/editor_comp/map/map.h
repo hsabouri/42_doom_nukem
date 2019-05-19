@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 13:40:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:28:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,8 @@ void			foreach_entity(void *entity, void *param, size_t i);
 void			foreach_portal(void *port, void *param, size_t i);
 
 t_component		create_list_class(t_env *env, t_sdl *sdl);
+
+void			on_pointer(t_editor_map_state state, t_event events,
+				t_color *buf);
 
 #endif

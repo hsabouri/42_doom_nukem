@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/18 17:19:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/19 12:18:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,6 @@ t_sdl *sdl)
 	}, init_help_component((t_help_state) {
 			.img = parse_tga("./textures/hud/map_editor.tga")}, sdl));
 	apush(&ret, &current);
-	//current = create_list_sectors(env, sdl);
-	//apush(&ret, &current); // Used to test lists
 	return (ret);
 }
 

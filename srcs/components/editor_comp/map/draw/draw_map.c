@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/18 17:12:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/19 13:26:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ static void			grid(t_editor_map_state state, t_color *buf)
 		y = 0;
 		while (y < n)
 		{
-			current = vec2_new(
-				(int)(x - ((state.offset.u + WIDTH / 2) / state.zoom) * state.grid_size) - 1,
-				(int)(y + ((state.offset.v - HEIGHT / 2) / state.zoom) * state.grid_size));
+			current = vec2_new((int)(x - ((state.offset.u + WIDTH / 2) /
+				state.zoom) * state.grid_size), (int)(y + ((state.offset.v -
+				HEIGHT / 2) / state.zoom) * state.grid_size));
 			current = vec2_scale(current, grid);
 			current = screen_space(current, state);
+			current = vec2_add(current, vec2_new(1, 1));
 			draw_point(vec2_to_fvec2(current), 1, buf, GREY);
 			y++;
 		}
@@ -93,6 +94,7 @@ static void			foreach_point(void *point, void *param, size_t i)
 	size = (state->state.zoom > 60) ? 6 : size;
 	p = *(t_vec2 *)point;
 	p = screen_space(p, state->state);
+	p = vec2_add(p, vec2_new(1, 1));
 	color = state->color;
 	if ((size_t)state->state.selected_point == i)
 	{
@@ -136,4 +138,5 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 		tmp_array = anew(state.env->game.portals, state.env->game.nportals, sizeof(t_portal));
 		aforeachi_state(&tmp_array, &foreach_portal, (void *)&state_buf);
 	}
+	on_pointer(state, state.env->events, buf);
 }
