@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 10:57:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:57:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ typedef enum		s_entity_type
 	MEDIPACK,
 	AMMO
 }					t_entity_type;
+typedef struct s_list_anim
+{
+	t_pelem		elem;
+	t_anim_element a_elem;
+}			   t_list_anim;
+
+typedef struct s_anim_element
+{
+    t_vec3 * moveTo;
+    t_vec3 moveGoal;
+}              t_anim_element;
 
 typedef struct		s_mat
 {
@@ -167,8 +178,12 @@ typedef struct		s_sector
 	u_int32_t	start;
 	u_int32_t	number;
 	size_t		sector_id;
+	// float		floor_a;
+	// float		floor_b;
 	t_vec3		floor;
 	t_vec3		ceiling;
+	// float		ceiling_a;
+	// float		ceiling_b;
 	t_color		ambient;
 	t_mat		*ceiling_mat;
 	t_mat		*floor_mat;
