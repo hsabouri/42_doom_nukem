@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 10:57:40 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:57:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # ifndef LOAD_SAVE_H
 #	include <SDL2/SDL_mixer.h>
 # endif
+
+# define ANIMATION_SPEED 1.0
+# define ABS(v) ((v >= 0) ? v : -v)
 
 typedef enum		e_mode
 {
@@ -58,6 +61,8 @@ typedef enum		s_entity_type
 	MEDIPACK,
 	AMMO
 }					t_entity_type;
+/*
+
 typedef struct s_list_anim
 {
 	t_pelem		elem;
@@ -69,6 +74,7 @@ typedef struct s_anim_element
     t_vec3 * moveTo;
     t_vec3 moveGoal;
 }              t_anim_element;
+*/
 
 typedef struct		s_mat
 {
@@ -136,7 +142,7 @@ typedef struct		s_trigger
 typedef struct		s_game_event
 {
 	t_pelem		elem;
-	t_trigger	trigger 
+	t_trigger	trigger;
 	// int			is_trigger;
 	// t_action	 action;
 }					t_game_event;
@@ -192,6 +198,12 @@ typedef struct		s_sector
 	int			clock;
 }					t_sector;
 
+typedef struct		s_animation
+{
+	float	*to_animate;
+	float	target;
+}					t_animation;
+
 typedef struct		s_music
 {
 	Mix_Music	*music;
@@ -235,6 +247,7 @@ typedef struct		s_game
 	size_t			nmulti_mats;
 	t_weapon		*weapons;
 	size_t			nweapons;
+	t_array			animations;
 	t_array			music;
 	size_t			played_music;
 	t_array			sounds;

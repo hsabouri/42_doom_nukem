@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/08 16:03:48 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:05:20 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ static t_game			assign_entity(t_assign_entity *state, t_game game)
 	else if (*state->entity >= 0)
 	{
 		game.entities[*state->entity].physic.sector_id = sector;
-		game.entities[*state->entity].physic.pos.z = game.sectors[sector].floor;
+		game.entities[*state->entity].physic.pos.z = game.sectors[sector].floor.z;
 	}
 	else if (*state->spawn >= 0)
 	{
 		game.entities[*state->spawn].spawn.sector_id = sector;
-		game.entities[*state->entity].spawn.pos.z = game.sectors[sector].floor;
+		game.entities[*state->entity].spawn.pos.z = game.sectors[sector].floor.z;
 	}
 	*state->entity = -1;
 	*state->spawn = -1;

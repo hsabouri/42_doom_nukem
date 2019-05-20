@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/26 16:31:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:05:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void		launch_game(t_env *env, int ac, char **av)
 	launch_check(env, env->game);
 	env->game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT
 		* sizeof(int)), "doom_nukem");
+	env->game.animations = anew(NULL, 10, sizeof(t_animation));
 	if (env->component)
 		destroy_component(env->component);
 	find_center_sectors(env->game);

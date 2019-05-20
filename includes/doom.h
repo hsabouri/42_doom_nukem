@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/16 18:00:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:54:44 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ void					no_destroy(t_component *self);
 
 void					game_loop(t_env *env, size_t frame);
 void					editor_loop(t_env *env);
+t_game					animate(t_game game, float old_timer);
 
 t_event					capture_events(t_event events, t_env *env);
 t_event					init_events(void);
