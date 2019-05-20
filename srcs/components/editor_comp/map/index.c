@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/19 12:18:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/20 15:51:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 	state->offset = vec2_new(INITIAL_OFFSET_X, INITIAL_OFFSET_Y);
 	state->zoom = INITIAL_ZOOM;
 	state->grid_size = 1;
-	state->magnetisme = 0;
+	state->magnetisme = 1;
 	state->tool = MOVE;
 	state->selected_point = -1;
 	state->selected_wall = -1;
@@ -175,6 +175,16 @@ t_sdl *sdl)
 		.scancode = SDL_SCANCODE_J,
 		.active_value = ASSIGN_ENTITY}, sdl);
 	apush(&ret, &current);
+	current = init_button((t_button) {
+		.pos = (t_pix) {258, 2},
+		.size = (t_pix) {40, 40},
+		.background = (t_color) {70, 70, 70, 255},
+		.events = &env->events,
+		.img = parse_tga("./textures/ui/sector_color.tga"),
+		.to_activate = (int *)&state->tool,
+		.scancode = SDL_SCANCODE_Y,
+		.active_value = SECTOR_COLOR}, sdl);
+	apush(&ret, &current);
 	current = init_point_tool(env, &state->selected_point, sdl);
 	apush(&ret, &current);
 	current = init_wall_tool(env, state, sdl);
@@ -182,6 +192,8 @@ t_sdl *sdl)
 	current = init_assign_tool(env, state, sdl);
 	apush(&ret, &current);
 	current = init_assign_portal_tool(env, state, sdl);
+	apush(&ret, &current);
+	current = init_sector_color_tool(env, state, sdl);
 	apush(&ret, &current);
 	current = init_display_deco((t_display_deco_state) {
 		.to_look_at = (int *)&state->tool,
@@ -203,7 +215,7 @@ t_sdl *sdl)
 	}, sdl);
 	apush(&ret, &current);
 	current = init_sw_button((t_sw_button) {
-		.pos = (t_pix) {258, 2},
+		.pos = (t_pix) {302, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
@@ -214,7 +226,7 @@ t_sdl *sdl)
 		.disable_value = 0}, sdl);
 	apush(&ret, &current);
 	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {300, 2},
+		.pos = (t_pix) {344, 2},
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,

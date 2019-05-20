@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/18 19:28:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:12:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define MAP_H
 
 # include "../editor_comp.h"
+
+typedef struct	s_sector_color_tool
+{
+	t_env		*env; //Tricky little hack to make color_chooser work
+	t_event		*events;
+	ssize_t		*selected_wall;
+	ssize_t		sector;
+	t_color		*color;
+}				t_sector_color_tool;
 
 typedef struct	s_wall_tool
 {
@@ -57,8 +66,8 @@ typedef enum	e_editor_map_mode
 	CREATE_PORTAL,
 	TOOL_ENTITY,
 	ASSIGN_ENTITY,
-	MOVE
-	// More to come
+	MOVE,
+	SECTOR_COLOR
 }				t_editor_map_mode;
 
 typedef struct	s_editor_map_state
@@ -122,6 +131,9 @@ t_component		init_entity_tool(t_env *env, t_editor_map_state *parent,
 
 t_component		init_assign_entity(t_env *env, t_assign_entity v,
 				t_sdl *sdl);
+
+t_component		init_sector_color_tool(t_env *env, t_editor_map_state *parent,
+t_sdl *sdl);
 
 t_vec2			screen_space(t_vec2 vec, t_editor_map_state state);
 t_vec2			point_from_mouse(t_editor_map_state state, t_event events,
