@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 10:22:33 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:05:24 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void		game_loop(t_env *env, size_t frame)
 	timer = start_timer();
 	if (env->editor.enabled)
 		*env = game_editing(*env, env->game.player);
+	env->game = animate(env->game, old_timer);
 	env->game = player_properties(env->game, env->events);
 	//env->game = entities_properties(env->game, env->events);
 	env->game = check_see(env->game);
