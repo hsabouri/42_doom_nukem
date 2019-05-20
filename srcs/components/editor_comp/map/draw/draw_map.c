@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/19 13:26:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/20 15:52:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static void			foreach_wall(void *wall, void *param, size_t i)
 	b_p.x = b.u;
 	b_p.y = b.v;
 	if (state.state.tool == ASSIGN_WALL || state.state.tool == CREATE_WALL ||
-		state.state.tool == CREATE_PORTAL || state.state.tool == ASSIGN_ENTITY)
+		state.state.tool == CREATE_PORTAL || state.state.tool == ASSIGN_ENTITY ||
+		state.state.tool == SECTOR_COLOR)
 	{
 		state.color.r /= 2;
 		state.color.g /= 2;

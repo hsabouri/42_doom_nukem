@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/08 15:33:35 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:13:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_pix pos, t_sdl *sdl)
 {
 	t_component			ret;
 
-	ret = default_component(NULL, (t_pix) {302, 302}, sdl);
+	ret = default_component(NULL, (t_pix) {302, 322}, sdl);
 	ret.img = parse_tga("./textures/ui/mire.tga");
 	ret.state = to_change;
 	ret.pos = pos;
