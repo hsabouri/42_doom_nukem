@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 17:10:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:22:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ t_sdl *sdl)
 	state = (t_assign_entity *)safe_malloc(sizeof(t_assign_entity), "component");
 	*state = v;
 	ret = default_component(state, (t_pix) {0, 0}, sdl);
-	ret.update = &self_update;
-	ret.update = &self_update;
 	ret.update = &self_update;
 	ret.complete_render = &empty_render;
 	ret.childs = anew(NULL, 0, 0);
