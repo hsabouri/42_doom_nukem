@@ -48,7 +48,7 @@ t_player	player_default(void)
 				0
 			},
 			NULL,
-			"player",
+			(t_entity_type)PLAYER,
 			1
 		},
 		90,
@@ -92,7 +92,7 @@ t_entity	entity_default(void)
 			0
 		},
 		NULL,
-		"null",
+		-1,
 		0});
 }
 

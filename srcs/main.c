@@ -36,7 +36,8 @@ static void		launch_game(t_env *env, int ac, char **av)
 		env->game = generate_map();
 		env->game = init_audio(env->game);
 	}
-	// launch_check(env->game);
+	env->game.weapons = init_weapons(&env->game);
+	launch_check(env, env->game);
 	env->game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT * sizeof(int)), "doom_nukem");
 	if (env->component)
 		destroy_component(env->component);

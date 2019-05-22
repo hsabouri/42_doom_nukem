@@ -12,36 +12,6 @@
 
 #include <doom.h>
 
-void				write_multi_sprite(int fd, t_array *multi_mats,\
-size_t nmulti_mats, t_mat *mats)
-{
-	size_t			i;
-	size_t			j;
-	u_int32_t		index;
-	t_c_multi_mats	s_multi;
-	t_mat			**material;
-
-	i = 0;
-	while (i < nmulti_mats)
-	{
-		j = 0;
-		s_multi.magic = MULTI_MAGIC + i;
-		while ((material = (t_mat **)anth(&multi_mats[i], j)))
-		{
-			index = id_from_p(*material, mats, sizeof(t_mat));
-			s_multi.mat[j] = (ssize_t)index;
-			j++;
-		}
-		while (j < 16)
-		{
-			s_multi.mat[j] = -1;
-			j++;
-		}
-		write_struct(&s_multi, fd, sizeof(t_c_multi_mats));
-		i++;
-	}
-}
-
 size_t				write_textures(int fd, t_img *textures, size_t ntextures,\
 int index)
 {

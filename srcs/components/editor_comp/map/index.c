@@ -29,7 +29,6 @@ static t_editor_map_state	zoom_move(t_editor_map_state state, t_event events)
 		state.offset.u = state.offset.u * factor - (events.x - WIDTH / 2) * (factor - 1);
 		state.offset.v = state.offset.v * factor - (events.y - HEIGHT / 2) * (factor - 1);
 	}
-	printf("state.offset = (%f, %f)\n     .zoom = %f\n", state.offset.u, state.offset.v, state.zoom);
 	return (state);
 }
 

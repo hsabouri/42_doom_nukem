@@ -24,9 +24,7 @@
 # define TEXT_MAGIC		0xFEE1DEAD
 # define MUSIC_MAGIC	0xDEFEC8ED
 # define SOUND_MAGIC	0xDEADBEEF
-# define GUN_MAGIC		0xD1ED1ED1
 # define EVENT_MAGIC	0xD0D0CACA
-# define MULTI_MAGIC	0xBA0BAB
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -94,7 +92,7 @@ typedef struct		s_c_entity
 	int			id;
 	t_c_ph		spawn;
 	ssize_t		mats;
-	char		type[28];
+	int32_t		type;
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
@@ -187,8 +185,6 @@ typedef struct		s_c_game
 	size_t		loc_inventory;
 	size_t		nmaterials;
 	size_t		loc_mats;
-	size_t		nmulti_sprite;
-	size_t		loc_multi_sprite;
 	size_t		loc_player;
 	size_t		npoints;
 	size_t		loc_points;
@@ -202,8 +198,6 @@ typedef struct		s_c_game
 	size_t		nentities;
 	size_t		loc_entities;
 	size_t		unique_e_id;
-	size_t		nweapons;
-	size_t		loc_weapons;
 	size_t		nevents;
 	size_t		loc_events;
 	size_t		ntextures;

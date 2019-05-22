@@ -70,11 +70,8 @@ static t_c_game		save_game(t_c_game game_s, t_game game)
 		* game_s.ninventory;
 	game_s.nmaterials = game.nmaterials;
 	game_s.loc_mats = game_s.loc_player + sizeof(t_c_player);
-	game_s.nmulti_sprite = game.nmulti_mats;
-	game_s.loc_multi_sprite = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.npoints = game.npoints;
-	game_s.loc_points = game_s.loc_multi_sprite + sizeof(t_c_multi_mats)
-		* game.nmulti_mats;
+	game_s.loc_points = game_s.loc_mats + sizeof(t_c_mat) * game.nmaterials;
 	game_s.nwalls = game.nwalls;
 	game_s.nuwalls = game.nuwalls;
 	game_s.loc_walls = game_s.loc_points + sizeof(t_c_point) * game.npoints;
@@ -87,12 +84,9 @@ static t_c_game		save_game(t_c_game game_s, t_game game)
 	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal)
 		* game.nportals;
 	game_s.unique_e_id = game.unique_e_id;
-	game_s.nweapons = game.nweapons;
-	game_s.loc_weapons = game_s.loc_entities + sizeof(t_c_entity)
-		* game.nentities;
 	game_s.nevents = game.waiting_events.len;
-	game_s.loc_events = game_s.loc_weapons + sizeof(t_c_weapon)
-		* game.nweapons;
+	game_s.loc_events = game_s.loc_entities + sizeof(t_c_entity)
+		* game.nentities;
 	game_s.ntextures = game.ntextures;
 	game_s.loc_textures = game_s.loc_events + sizeof(t_c_game_event)
 		* game_s.nevents;
@@ -114,13 +108,11 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	write_inventory(game.player, game.entities,fd);
 	write_player(game.player, fd, game.multi_mats);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
-	write_multi_sprite(fd, game.multi_mats, game.nmulti_mats, game.materials);
 	write_points(fd, game.points, game.npoints);
 	write_walls(fd, game.walls, game.nwalls, game.materials);
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
 	write_entities(fd, game.entities, game.nentities, game.multi_mats);
-	write_weapons(fd, game.weapons, game.nweapons, game.textures);
 	write_events(fd, game.waiting_events);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);
@@ -152,4 +144,3 @@ void				save(const char *filename, t_game game)
 	console_log("FileLoader3030", "Successfully saved file.");
 	close(fd);
 }
-// 

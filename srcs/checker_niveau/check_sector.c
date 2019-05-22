@@ -71,7 +71,7 @@ size_t nsectors, t_check_mat mats)
 	{
 		index = id_from_p(sectors[cpt].floor_mat, mats.materials,
 			sizeof(t_mat));
-		if (index > mats.nmaterials)
+		if (index >= mats.nmaterials)
 		{
 			error.error_type = MATS_FLOOR_SECTOR;
 			error.sector = cpt;
@@ -93,7 +93,7 @@ size_t nsectors, t_check_mat mats)
 	{
 		index = id_from_p(sectors[cpt].ceiling_mat, mats.materials,
 			sizeof(t_mat));
-		if (index > mats.nmaterials)
+		if (index >= mats.nmaterials)
 		{
 			error.error_type = MATS_CEIL_SECTOR;
 			error.sector = cpt;
@@ -105,32 +105,32 @@ size_t nsectors, t_check_mat mats)
 }
 
 u_int32_t	launch_check_sector(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats)
+char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env)
 {
 	error = check_wall_sector(game.sectors, error, game.nsectors, game.nwalls);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %zu, wall %zu\n", errors_text[error.error_type],
+		printf("%s: sector %d, wall %d\n", errors_text[error.error_type],
 			error.sector, error.wall);
-		return (0);
+		return (check_editor(env));
 	}
 	error = check_sector_id(game.sectors, error, game.nsectors);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %zu\n", errors_text[error.error_type], error.sector);
-		return (0);
+		printf("%s: sector %d\n", errors_text[error.error_type], error.sector);
+		return (check_editor(env));
 	}
 	error = check_sector_floor(game.sectors, error, game.nsectors, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %zu\n", errors_text[error.error_type], error.sector);
-		return (0);
+		printf("%s: sector %d\n", errors_text[error.error_type], error.sector);
+		return (check_editor(env));
 	}
 	error = check_sector_ceil(game.sectors, error, game.nsectors, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %zu\n", errors_text[error.error_type], error.sector);
-		return (0);
+		printf("%s: sector %d\n", errors_text[error.error_type], error.sector);
+		return (check_editor(env));
 	}
 	return (1);
 }

@@ -66,8 +66,6 @@ t_entity		entity_default(void);
 
 void			write_struct(void *struc, int fd, size_t size);
 void			write_mats(int fd, t_mat *mats, size_t nmats, t_img *textures);
-void			write_multi_sprite(int fd, t_array *multi_mats,\
-size_t nmulti_mats, t_mat *mats);
 void			write_points(int fd, t_vec2 *points, size_t npoints);
 void			write_walls(int fd, t_wall *walls, size_t nwalls, t_mat	*mats);
 void			write_sectors(int fd, t_sector *sectors, size_t nsectors,\
@@ -76,8 +74,6 @@ void			write_portals(int fd, t_portal *portals, size_t nportals,\
 t_mat *mats);
 void			write_entities(int fd, t_entity *entities, size_t nentities,\
 t_array *multi_mats);
-void			write_weapons(int fd, t_weapon *weapons, size_t nentities,\
-t_img *textures);
 void			write_events(int fd, t_plist event);
 size_t			write_textures(int fd, t_img *textures, size_t ntextures,\
 int index);
@@ -87,8 +83,6 @@ void			write_music(int fd, t_audio type);
 t_img			*parse_textures(void *buf, t_save save, size_t n_entities);
 t_mat			*parse_mats(void *buf, t_save save, t_img *texture,\
 size_t n_entities);
-t_array			*parse_multi_sprite(void *buf, t_save save, size_t n_multi,\
-t_mat *materials);
 t_vec2			*parse_points(void *buf, t_save save, size_t n_entities);
 t_wall			*parse_walls(void *buf, t_save save, t_mat *mats,\
 size_t n_entities);
@@ -97,8 +91,6 @@ size_t n_entities);
 t_portal		*parse_portals(void *buf, t_save save, size_t n_entities,\
 t_mat *mats);
 t_entity		*parse_entities(void *buf, t_save save, t_array *multi_mats,\
-size_t n_entities);
-t_weapon		*parse_weapons(void *buf, t_save save, t_img *textures,\
 size_t n_entities);
 t_plist			parse_events(void *buf, t_save save, size_t n_events,\
 t_game game, t_player player);

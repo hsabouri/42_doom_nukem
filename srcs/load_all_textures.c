@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	textures = (t_img *)safe_malloc(52 * sizeof(t_img), "textures");
+	textures = (t_img *)safe_malloc(50 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga");
 	textures[1] = parse_tga("./textures/floor.tga");
 	textures[2] = parse_tga("./textures/items/key_card.tga");
@@ -50,25 +50,23 @@ t_img	*load_all_textures(t_game *game)
 	textures[30] = parse_tga("./textures/weapons/shotgun/shotgun3.tga");
 	textures[31] = parse_tga("./textures/weapons/shotgun/shotgun4.tga");
 	textures[32] = parse_tga("./textures/weapons/shotgun/shotgun5.tga");
-	textures[33] = parse_tga("./textures/weapons/shotgun/shotgun6.tga");
-	textures[34] = parse_tga("./textures/weapons/shotgun/shotgun7.tga");
-	textures[35] = parse_tga("./textures/weapons/revolver/revolver0.tga");
-	textures[36] = parse_tga("./textures/weapons/revolver/revolver1.tga");
-	textures[37] = parse_tga("./textures/weapons/revolver/revolver2.tga");
-	textures[38] = parse_tga("./textures/weapons/revolver/revolver3.tga");
-	textures[39] = parse_tga("./textures/weapons/revolver/revolver4.tga");
-	textures[40] = parse_tga("./textures/weapons/revolver/revolver5.tga");
-	textures[41] = parse_tga("./textures/weapons/nyan_gun/nyan_gun0.tga");
-	textures[42] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga");
-	textures[43] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga");
-	textures[44] = parse_tga("./textures/weapons/nyan_gun/nyan_gun3.tga");
-	textures[45] = parse_tga("./textures/weapons/nyan_gun/nyan_gun4.tga");
-	textures[46] = parse_tga("./textures/weapons/grenade/grenade0.tga");
-	textures[47] = parse_tga("./textures/weapons/grenade/grenade1.tga");
-	textures[48] = parse_tga("./textures/weapons/claymore/claymore0.tga");
-	textures[49] = parse_tga("./textures/weapons/claymore/claymore1.tga");
-	textures[50] = parse_tga("./textures/hud/in_game_editor.tga");
-	textures[51] = parse_tga("./textures/environment/parking.tga");
-	game->ntextures = 52;
+	textures[33] = parse_tga("./textures/weapons/revolver/revolver0.tga");
+	textures[34] = parse_tga("./textures/weapons/revolver/revolver1.tga");
+	textures[35] = parse_tga("./textures/weapons/revolver/revolver2.tga");
+	textures[36] = parse_tga("./textures/weapons/revolver/revolver3.tga");
+	textures[37] = parse_tga("./textures/weapons/revolver/revolver4.tga");
+	textures[38] = parse_tga("./textures/weapons/revolver/revolver5.tga");
+	textures[39] = parse_tga("./textures/weapons/nyan_gun/nyan_gun0.tga");
+	textures[40] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga");
+	textures[41] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga");
+	textures[42] = parse_tga("./textures/weapons/nyan_gun/nyan_gun3.tga");
+	textures[43] = parse_tga("./textures/weapons/nyan_gun/nyan_gun4.tga");
+	textures[44] = parse_tga("./textures/weapons/grenade/grenade0.tga");
+	textures[45] = parse_tga("./textures/weapons/grenade/grenade1.tga");
+	textures[46] = parse_tga("./textures/weapons/claymore/claymore0.tga");
+	textures[47] = parse_tga("./textures/weapons/claymore/claymore1.tga");
+	textures[48] = parse_tga("./textures/hud/in_game_editor.tga");
+	textures[49] = parse_tga("./textures/environment/parking.tga");
+	game->ntextures = 50;
 	return (textures);
 }

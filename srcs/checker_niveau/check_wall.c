@@ -12,29 +12,6 @@
 
 #include <doom.h>
 
-t_list		check_max_wall(t_sector *sectors, size_t nsectors)
-{
-	t_list		error;
-	t_lvl_error *elem;
-	size_t		cpt;
-
-	error = lnew(NULL);
-	cpt = 0;
-	while (cpt < nsectors)
-	{
-		if (sectors[cpt].number > 14)
-		{
-			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
-			elem->elem.next = NULL;
-			elem->error_type = MAX_WALL;
-			elem->sector = cpt;
-			lpush(&error, (t_elem *)elem);
-		}
-		cpt++;
-	}
-	return (error);
-}
-
 t_lvl_error	check_point_wall(t_wall *walls, t_lvl_error error, size_t nwalls,\
 size_t npoints)
 {
@@ -88,7 +65,7 @@ t_check_mat mats)
 	while (cpt < nwalls)
 	{
 		index = id_from_p(walls[cpt].mat, mats.materials, sizeof(t_mat));
-		if (index > mats.nmaterials)
+		if (index >= mats.nmaterials)
 		{
 			error.error_type = MATS_WALL;
 			error.wall = cpt;
@@ -100,27 +77,27 @@ t_check_mat mats)
 }
 
 u_int32_t	launch_check_wall(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats)
+char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env)
 {
 	error = check_point_wall(game.walls, error, game.nwalls, game.npoints);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: wall %zu, point %zu\n", errors_text[error.error_type],
+		printf("%s: wall %d, point %d\n", errors_text[error.error_type],
 			error.wall, error.point);
-		return (0);
+		return (check_editor(env));
 	}
 	error = check_portal_wall(game.walls, error, game.nwalls, game.nportals);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: wall %zu, portal %d\n", errors_text[error.error_type],
+		printf("%s: wall %d, portal %d\n", errors_text[error.error_type],
 			error.wall, error.portal);
-		return (0);
+		return (check_editor(env));
 	}
 	error = check_mats_wall(game.walls, error, game.nwalls, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: wall %zu\n", errors_text[error.error_type], error.wall);
-		return (0);
+		printf("%s: wall %d\n", errors_text[error.error_type], error.wall);
+		return (check_editor(env));
 	}
 	return (1);
 }

@@ -19,114 +19,6 @@ t_game	generate_map(void)
 	//a remettre a la fin pour charger toutes les textures au moment generation map
 	game.textures = load_all_textures(&game);
 
-	t_vec2 *points = (t_vec2 *)malloc(sizeof(t_vec2) * 20);
-	points[0] = ((t_vec2){7, 6});
-	points[1] = ((t_vec2){8, 7});
-	points[2] = ((t_vec2){8, 11});
-	points[3] = ((t_vec2){5, 12});
-	points[4] = ((t_vec2){4, 12});
-	points[5] = ((t_vec2){1, 11});
-	points[6] = ((t_vec2){1, 7});
-	points[7] = ((t_vec2){2, 6});
-	points[8] = ((t_vec2){4, 6});
-	points[9] = ((t_vec2){5, 6});
-	points[10] = ((t_vec2){5, 4.5});
-	points[11] = ((t_vec2){4, 4});
-	points[12] = ((t_vec2){6, 2});
-	points[13] = ((t_vec2){6.5, 3});
-	points[14] = ((t_vec2){7, 3});
-	points[15] = ((t_vec2){7, 2});
-	points[16] = ((t_vec2){8, 0});
-	points[17] = ((t_vec2){9, 0});
-	points[18] = ((t_vec2){9, 5});
-	points[19] = ((t_vec2){8, 5});
-
-	t_weapon *gun = (t_weapon *)safe_malloc(sizeof(t_weapon) * 7, "generate_map");
-	gun[0] = ((t_weapon) {
-		(t_weapon_type) GUN,
-		1,
-		15,
-		20,
-		20,
-		50,
-		(t_shot_type) HITSCAN,
-		-1,
-		init_sprite_gun(game.textures),
-		200
-	});
-	gun[1] = ((t_weapon) {
-		(t_weapon_type) SMG,
-		1,
-		80,
-		80,
-		30,
-		100,
-		(t_shot_type) HITSCAN,
-		-1,
-		init_sprite_smg(game.textures),
-		250
-	});
-	gun[2] = ((t_weapon) {
-		(t_weapon_type) SHOTGUN,
-		1,
-		10,
-		10,
-		70,
-		30,
-		(t_shot_type) SHOTS,
-		-1,
-		init_sprite_shotgun(game.textures),
-		20
-	});
-	gun[3] = ((t_weapon) {
-		(t_weapon_type) REVOLVER,
-		1,
-		6,
-		6,
-		90,
-		20,
-		(t_shot_type) HITSCAN,
-		-1,
-		init_sprite_revolver(game.textures),
-		250
-	});
-	gun[4] = ((t_weapon) {
-		(t_weapon_type) NYAN_GUN,
-		1,
-		10,
-		10,
-		10000,
-		30,
-		(t_shot_type) SHOTS,
-		-1,
-		init_sprite_nyan_gun(game.textures),
-		15
-	});
-	gun[5] = ((t_weapon) {
-		(t_weapon_type) GRENADE,
-		2,
-		5,
-		5,
-		50,
-		20,
-		(t_shot_type) SHOTS,
-		1,
-		init_sprite_grenade(game.textures),
-		200
-	});
-	gun[6] = ((t_weapon) {
-		(t_weapon_type) MINE,
-		2,
-		5,
-		5,
-		50,
-		20,
-		(t_shot_type) STATIC,
-		2,
-		init_sprite_mine(game.textures),
-		0
-	});
-
 	t_mat *materials = (t_mat *)malloc(16 * sizeof(t_mat));
 	materials[0] = (t_mat) { // White tiles
 		fvec2_new(0, 0),
@@ -168,7 +60,6 @@ t_game	generate_map(void)
 		WHITE,
 		NULL
 	};
-	t_mat *key = &materials[3];
 
 	materials[4] = (t_mat) { // Skybox
 		fvec2_new(0, f_from_int(1300)),
@@ -179,7 +70,6 @@ t_game	generate_map(void)
 		WHITE,
 		NULL,
 	};
-	t_mat *skybox = &materials[4];
 
 	materials[5] = (t_mat) { // Fence + skybox
 		fvec2_new(0, f_from_int(1300)),
@@ -286,29 +176,31 @@ t_game	generate_map(void)
 		WHITE,
 		NULL
 	};
+	game.materials = materials;
+	game.nmaterials = 16;
+	game.multi_mats = init_multi_sprite(&game, game.materials);
 
-	t_array	*multi_mats = (t_array *)safe_malloc(sizeof(t_array) * 2, "init");
-	multi_mats[0] = anew(NULL, 8, sizeof(t_mat *));
-
-	t_mat	*yolo = &materials[8];
-	apush(&multi_mats[0], &yolo);
-	yolo = &materials[9];
-	apush(&multi_mats[0], &yolo);
-	yolo = &materials[10];
-	apush(&multi_mats[0], &yolo);
-	yolo = &materials[11];
-	apush(&multi_mats[0], &yolo);
-	yolo = &materials[12];
-	apush(&multi_mats[0], &yolo);
-	yolo = &materials[13];
-	apush(&multi_mats[0], &yolo);
-	yolo = &materials[14];
-	apush(&multi_mats[0], &yolo);
-	yolo = &materials[15];
-	apush(&multi_mats[0], &yolo);
-
-	multi_mats[1] = anew(NULL, 1, sizeof(t_mat *));
-	apush(&multi_mats[1], &key);
+	t_vec2 *points = (t_vec2 *)malloc(sizeof(t_vec2) * 20);
+	points[0] = ((t_vec2){7, 6});
+	points[1] = ((t_vec2){8, 7});
+	points[2] = ((t_vec2){8, 11});
+	points[3] = ((t_vec2){5, 12});
+	points[4] = ((t_vec2){4, 12});
+	points[5] = ((t_vec2){1, 11});
+	points[6] = ((t_vec2){1, 7});
+	points[7] = ((t_vec2){2, 6});
+	points[8] = ((t_vec2){4, 6});
+	points[9] = ((t_vec2){5, 6});
+	points[10] = ((t_vec2){5, 4.5});
+	points[11] = ((t_vec2){4, 4});
+	points[12] = ((t_vec2){6, 2});
+	points[13] = ((t_vec2){6.5, 3});
+	points[14] = ((t_vec2){7, 3});
+	points[15] = ((t_vec2){7, 2});
+	points[16] = ((t_vec2){8, 0});
+	points[17] = ((t_vec2){9, 0});
+	points[18] = ((t_vec2){9, 5});
+	points[19] = ((t_vec2){8, 5});
 
 	t_wall *walls = (t_wall *)malloc(29 * sizeof(t_wall));
 	walls[0] =  ((t_wall){fvec2_new(0, 0), -1, 9, 0, bricks,(t_vec2){0, 2.5},(t_vec2){0, 2.5}});
@@ -355,97 +247,25 @@ t_game	generate_map(void)
 	sectors[3] = ((t_sector){18, 4, 3, (t_vec3){0, 0, 1.2}, (t_vec3){0, 0, 3.7}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},1});
 	sectors[4] = ((t_sector){22, 6, 4, (t_vec3){0, 0, -30}, (t_vec3){0, 0, 4.1}, WHITE, tiles, tiles, fvec2_new(0, 0), (t_vec2){0, 0},0});
 
-	t_entity *classes = (t_entity *)malloc(2 * sizeof(t_entity));
-	classes[0] = ((t_entity){
-		0,
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			3,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			3,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		&multi_mats[0],
-		"Grosse dame",
-		0
-	});
-	classes[1] = ((t_entity){
-		0,
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			3,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		(t_ph) {
-			0.02,
-			1.50,
-			0.5,
-			3,
-			(t_vec3){0, 0, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
-		},
-		&multi_mats[1],
-		"Carte d'acces",
-		1
-	});
+	game.classes = init_classe(&game, game.multi_mats);
 	
 	t_entity *entities = (t_entity *)malloc(4 * sizeof(t_entity));
-	entities[0] = classes[0];
+	entities[0] = game.classes[0];
 	entities[0].id = 0;
 	entities[0].physic.pos = (t_vec3){6, 9, 0};
 	entities[0].spawn.pos = (t_vec3){6, 9, 0};
-	ft_strncpy(entities[0].type, classes[0].type, 28);
-	entities[1] = classes[0];
+	entities[1] = game.classes[0];
 	entities[1].id = 1;
 	entities[1].physic.pos = (t_vec3){6, 8, 0};
 	entities[1].spawn.pos = (t_vec3){6, 8, 0};
-	ft_strncpy(entities[1].type, classes[0].type, 28);
-	entities[2] = classes[0];
+	entities[2] = game.classes[0];
 	entities[2].id = 2;
 	entities[2].physic.pos = (t_vec3){5, 8.5, 0};
 	entities[2].spawn.pos = (t_vec3){5, 8.5, 0};
-	ft_strncpy(entities[2].type, classes[0].type, 28);
-	entities[3] = classes[1];
+	entities[3] = game.classes[1];
 	entities[3].id = 3;
 	entities[3].physic.pos = (t_vec3){4, 8.5, 0};
 	entities[3].spawn.pos = (t_vec3){4, 8.5, 0};
-	ft_strncpy(entities[3].type, classes[1].type, 28);
 
 	t_array inventory = safe_anew(NULL, 1, sizeof(t_entity *), "generate_map");
 	t_entity *ent = &entities[3];
@@ -508,8 +328,8 @@ t_game	generate_map(void)
 				0,
 				0
 			},
-			&multi_mats[0],
-			"player",
+			&game.multi_mats[0],
+			(t_entity_type)PLAYER,
 			1
 		},
 		90,
@@ -600,8 +420,6 @@ t_game	generate_map(void)
 	game.entities = entities;
 	game.nentities = 4;
 	game.unique_e_id = 4;
-	game.classes = classes;
-	game.nclasses = 2;
 	game.sectors = sectors;
 	game.nsectors = 5;
 	game.walls = walls;
@@ -611,12 +429,6 @@ t_game	generate_map(void)
 	game.nportals = 4;
 	game.points = points;
 	game.npoints = 20;
-	game.materials = materials;
-	game.nmaterials = 16;
-	game.multi_mats = multi_mats;
-	game.nmulti_mats = 2;
-	game.weapons = gun;
-	game.nweapons = 7;
 	game.played_music = 0;
 	return (game);
 }

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:26:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/16 15:27:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/22 12:14:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ t_game		create_entity(t_vec2 pos, size_t class_id, t_game game)
 	game.entities[game.nentities].spawn.pos = vec3_new(pos.u, pos.v, 0);
 	game.entities[game.nentities].spawn.pos = vec3_new(pos.u, pos.v, 0);
 	game.entities[game.nentities].id = game.unique_e_id;
-	ft_strncpy(game.entities[game.nentities].type,
-		game.classes[class_id].type, 28);
+	game.entities[game.nentities].type = game.classes[class_id].type;
 	game.nentities++;
 	game.unique_e_id++;
 	return (game);

@@ -13,10 +13,23 @@
 #include <doom.h>
 
 t_lvl_error	check_mat_entities(t_entity *entities, t_lvl_error error,\
-size_t nentities, t_check_mat mats)
+size_t nentities, t_array *multi_mats, size_t nmulti)
 {
-	// Ne plus checker les materiaux mais juste si le t_array * est dans le tableau de multisprite :D
-	// A voir si on check les multi-sprite (je pense que oui)
+	u_int32_t	index;
+	size_t		cpt;
+
+	cpt = 0;
+	while (cpt < nentities)
+	{
+		index = id_from_p(entities[cpt].mat, multi_mats, sizeof(t_array));
+		if (entities[cpt].mat && index >= nmulti)
+		{
+			error.error_type = MATS_ENTITIES;
+			error.entities = cpt;
+			return (error);
+		}
+		cpt++;
+	}
 	return (error);
 }
 
@@ -33,7 +46,8 @@ t_list		sector_entity(t_entity *entities, size_t nentities, t_game game)
 		if (is_in_sector(entities[cpt].physic, game,
 			entities[cpt].physic.sector_id) % 2 == 0)
 		{
-			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level checker");
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");
+			init_error(elem);
 			elem->elem.next = NULL;
 			elem->error_type = BAD_SECTOR;
 			elem->entities = cpt;
@@ -45,13 +59,14 @@ t_list		sector_entity(t_entity *entities, size_t nentities, t_game game)
 }
 
 u_int32_t	launch_check_entities(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats)
+char *errors_text[NBR_ERROR], t_env *env)
 {
-	error = check_mat_entities(game.entities, error, game.nentities, mats);
+	error = check_mat_entities(game.entities, error, game.nentities, game.multi_mats,
+		game.nmulti_mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: entities %zu\n", errors_text[error.error_type], error.entities);
-		return (0);
+		printf("%s: entities %d\n", errors_text[error.error_type], error.entities);
+		return (check_editor(env));
 	}
 	return (1);
 }

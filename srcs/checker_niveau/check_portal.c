@@ -83,29 +83,30 @@ size_t nportals, size_t nwalls)
 }
 
 u_int32_t	launch_check_portal(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR])
+char *errors_text[NBR_ERROR], t_env *env)
 {
 	error = check_point_portal(game.portals, error, game.nportals,
 		game.npoints);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: portal %d, point %zu\n", errors_text[error.error_type],
+		printf("%s: portal %d, point %d\n", errors_text[error.error_type],
 			error.portal, error.point);
-		return (0);
+		return (check_editor(env));
 	}
 	error = sector_portal(game.portals, error, game.nportals, game.nsectors);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: portal %d, sector %zu\n", errors_text[error.error_type],
+		printf("%s: portal %d, sector %d\n", errors_text[error.error_type],
 			error.portal, error.sector);
-		return (0);
+		return (check_editor(env));
+
 	}
 	error = wall_portal(game.portals, error, game.nportals, game.nwalls);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: portal %d, wall %zu\n", errors_text[error.error_type],
+		printf("%s: portal %d, wall %d\n", errors_text[error.error_type],
 			error.portal, error.wall);
-		return (0);
+		return (check_editor(env));
 	}
 	return (1);
 }

@@ -6,12 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:44:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 13:43:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/22 12:15:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ev_ac.h"
 #include "../../common/common.h"
+#include "../../../common/entity_type_to_text.h"
 
 static t_array		generator(void *parent)
 {
@@ -34,7 +35,7 @@ static t_array		generator(void *parent)
 		if (state->selected_entity == (ssize_t)(game.nentities - i))
 			ft_strncpy(curr.text, "unavailable", 28);
 		else
-			ft_strncpy(curr.text, game.entities[game.nentities - i - 1].type, 28);
+			type_to_text(game.entities[game.nentities - i - 1].type, curr.text);
 		apush(&ret, &curr);
 		++i;
 	}

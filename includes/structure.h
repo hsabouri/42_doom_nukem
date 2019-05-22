@@ -41,6 +41,13 @@ typedef enum		s_col_mode
 	COL_INTERACT
 }					t_col_mode;
 
+typedef enum		s_entity_type
+{
+	PLAYER,
+	GROSSE_DAME,
+	KEY_CARD
+}					t_entity_type;
+
 typedef struct		s_mat
 {
 	t_fvec2			pos;
@@ -85,11 +92,11 @@ typedef enum	e_action
 
 typedef struct		s_entity
 {
-	int			id;
-	t_ph		physic;
-	t_ph		spawn;
-	t_array		*mat;
-	char		type[28];
+	int				id;
+	t_ph			physic;
+	t_ph			spawn;
+	t_array			*mat;
+	t_entity_type	type;
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
