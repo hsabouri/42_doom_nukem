@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dangling_portal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:39:36 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/08 16:49:33 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/22 13:54:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ size_t nportals, t_list *error)
 			game.sectors[portals[cpt].to_sector].number;
 		if ((portals[cpt].to_wall < game.sectors[portals[cpt].from_sector].start
 			|| portals[cpt].to_wall >= end_wall_from) && (portals[cpt].to_wall
-			< game.sectors[portals[cpt].from_sector].start ||
+			< game.sectors[portals[cpt].to_sector].start ||
 			portals[cpt].to_wall >= end_wall_to))
 		{
 			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");
@@ -93,7 +93,7 @@ size_t nportals, t_list *error)
 		if ((portals[i].from_wall <
 			game.sectors[portals[i].from_sector].start ||
 			portals[i].from_wall >= end_wall_from) && (portals[i].from_wall
-			< game.sectors[portals[i].from_sector].start ||
+			< game.sectors[portals[i].to_sector].start ||
 			portals[i].from_wall >= end_wall_to))
 		{
 			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");

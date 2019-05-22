@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   delete_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 12:05:28 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/22 14:07:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
 
-t_game	del_update_portals(ssize_t pts, ssize_t wall, ssize_t sector,
-t_game game)
+t_game	del_update_portals(ssize_t wall, ssize_t sector, t_game game)
 {
 	size_t		i;
 	t_portal	curr;
@@ -27,10 +26,6 @@ t_game game)
 			game = delete_portal(i--, game);
 		else
 		{
-			if (pts >= 0 && curr.a > pts)
-				curr.a--;
-			if (pts >= 0 && curr.b > pts)
-				curr.b--;
 			if (wall >= 0 && curr.from_wall > wall)
 				curr.from_wall--;
 			if (wall >= 0 && curr.to_wall > wall)

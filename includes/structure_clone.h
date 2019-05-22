@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 11:47:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:09:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,6 @@ typedef struct		s_c_portal
 	u_int32_t	to_sector;
 	u_int32_t	from_wall;
 	u_int32_t	to_wall;
-	u_int32_t	a;
-	u_int32_t	b;
 	ssize_t		mat;
 }					t_c_portal;
 

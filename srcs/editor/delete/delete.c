@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 13:34:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 12:08:20 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/22 14:08:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_game	delete_sector(size_t sector, t_game game)
 	array_close(game.sectors, sector, game.nsectors, sizeof(t_sector))))
 		return (game);
 	game.nsectors--;
-	game = del_update_portals(-1, -1, sector, game);
+	game = del_update_portals(-1, sector, game);
 	game = del_update_sectors(-1, sector, game);
 	return (game);
 }
@@ -39,7 +39,7 @@ t_game	delete_wall(size_t wall, t_game game)
 	array_close(game.walls, wall, game.nwalls + game.nuwalls, sizeof(t_wall))))
 		return (game);
 	game.nwalls--;
-	game = del_update_portals(-1, wall, -1, game);
+	game = del_update_portals(wall, -1, game);
 	game = del_update_sectors(wall, -1, game);
 	return (game);
 }
