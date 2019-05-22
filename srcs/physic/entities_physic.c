@@ -82,11 +82,6 @@ static t_vec3	move_entities(t_ph *physic, t_game *game, int wall, float old_time
 	return (next_pos);
 }
 
-			// tmp_log.e_actif = game->player.my_entity;
-			// tmp_log.condi = TRIGGER_TOUCH;
-			// tmp_log.e_passif = game->entities[i];
-			// apush(&game->log, &tmp_log);
-
 static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 {
 	t_trigger tmp_log;

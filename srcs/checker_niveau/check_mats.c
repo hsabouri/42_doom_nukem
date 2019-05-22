@@ -12,54 +12,30 @@
 
 #include <doom.h>
 
-static int	lievre_tortue(struct s_mat *tortue, struct s_mat *lievre,\
-t_mat *materials, size_t cpt)
-{	
-	ssize_t id_1;
-	ssize_t id_2;
-
-	tortue = &materials[cpt];
-	id_1 = id_from_p(tortue, materials, sizeof(t_mat));
-	lievre = (materials[cpt].overlay->overlay) ?
-		materials[cpt].overlay->overlay : NULL;
-	id_2 = (!lievre) ? -1 : id_from_p(lievre, materials, sizeof(t_mat));
-	while (tortue)
-	{
-		if (lievre == tortue)
-			return (1);
-		else if (materials[id_1].overlay && id_2 != -1 && materials[id_2].overlay->overlay)
-		{
-			tortue = materials[id_1].overlay;
-			id_1 = id_from_p(tortue, materials, sizeof(t_mat));
-			lievre = materials[id_2].overlay->overlay;
-			id_2 = id_from_p(lievre, materials, sizeof(t_mat));
-		}
-		else
-			return (0);
-	}
-	return (0);
-}
-
-t_lvl_error	check_boucle_mat(t_lvl_error error, t_mat *materials,\
-size_t nmaterials)
+t_lvl_error	check_multi_sprite(t_lvl_error error, size_t nmulti, t_array *multi_sprite,\
+t_mat *mats, size_t nmaterials)
 {
-	size_t			cpt;
-	struct s_mat	*tortue;
-	struct s_mat	*lievre;
-
+	size_t		cpt;
+	t_mat		**material;
+	size_t		i;
+	u_int32_t	index;
+	
 	cpt = 0;
-	while (cpt < nmaterials)
+	while (cpt < nmulti)
 	{
-		if (materials[cpt].overlay)
+		i = 0;
+		while (i < multi_sprite[cpt].len)
 		{
-			tortue = NULL;
-			lievre = NULL;
-			if (lievre_tortue(tortue, lievre, materials, cpt) == 1)
+			material = anth(&multi_sprite[cpt], i);
+			index = id_from_p(*material, mats, sizeof(t_mat));
+			if (material != NULL && index >= nmaterials)
 			{
-				error.error_type = LOOP_OVERLAY;
-				error.mats = cpt;
+				error.error_type = MULTI_SPRITE;
+				error.mats = i;
+				error.multi_mats = cpt;
 				return (error);
 			}
+			i++;
 		}
 		cpt++;
 	}
@@ -76,7 +52,7 @@ t_check_mat mats)
 	while (cpt < mats.nmaterials)
 	{
 		index = id_from_p(mats.materials[cpt].texture, textures, sizeof(t_img));
-		if (index > ntextures && mats.materials[cpt].texture != NULL)
+		if (index >= ntextures && mats.materials[cpt].texture != NULL)
 		{
 			error.error_type = TEXTURES_MAT;
 			error.mats = cpt;
@@ -97,7 +73,7 @@ size_t nmaterials)
 	while (cpt < nmaterials)
 	{
 		index = id_from_p(materials[cpt].overlay, materials, sizeof(t_mat));
-		if (index > nmaterials && materials[cpt].overlay != NULL)
+		if (index >= nmaterials && materials[cpt].overlay != NULL)
 		{
 			error.error_type = OVERLAY_MAT;
 			error.mats = cpt;
@@ -109,28 +85,29 @@ size_t nmaterials)
 }
 
 u_int32_t	launch_check_mats(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats)
+char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env)
 {
 	error = check_texture(error, game.ntextures, game.textures, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: material %zu\n", errors_text[error.error_type],
+		printf("%s: material %d\n", errors_text[error.error_type],
 			error.mats);
-		return (0);
+		return (check_editor(env));
 	}
 	error = check_overlay(game.materials, error, game.nmaterials);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: material %zu\n", errors_text[error.error_type],
+		printf("%s: material %d\n", errors_text[error.error_type],
 			error.mats);
-		return (0);
+		return (check_editor(env));
 	}
-	error = check_boucle_mat(error, game.materials, game.nmaterials);
+	error = check_multi_sprite(error, game.nmulti_mats, game.multi_mats,\
+		game.materials, game.nmaterials);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: material %zu\n", errors_text[error.error_type],
-			error.mats);
-		return (0);
+		printf("%s: %d, material %d\n", errors_text[error.error_type],
+			error.multi_mats, error.mats);
+		return (check_editor(env));
 	}
 	return (1);
 }

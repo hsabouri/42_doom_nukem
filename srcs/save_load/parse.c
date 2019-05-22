@@ -102,9 +102,8 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_mats;
 	res.materials = parse_mats(buf, save, res.textures, game.nmaterials);
 	res.nmaterials = game.nmaterials;
-	save.index = game.loc_multi_sprite;
-	res.multi_mats = parse_multi_sprite(buf, save, game.nmulti_sprite, res.materials);
-	res.nmulti_mats = game.nmulti_sprite;
+	res.multi_mats = init_multi_sprite(&res, res.materials);
+	res.classes = init_classe(&res, res.multi_mats);
 	save.index = game.loc_points;
 	res.points = parse_points(buf, save, game.npoints);
 	res.npoints = game.npoints;
@@ -122,9 +121,6 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	res.entities = parse_entities(buf, save, res.multi_mats, game.nentities);
 	res.nentities = game.nentities;
 	res.unique_e_id = game.unique_e_id;
-	save.index = game.loc_weapons;
-	res.weapons = parse_weapons(buf, save, res.textures, game.nweapons);
-	res.nweapons = game.nweapons;
 	save.index = game.loc_player;
 	res.player = parse_player(game, res, buf, save);
 	save.index = game.loc_events;

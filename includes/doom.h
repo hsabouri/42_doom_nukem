@@ -27,9 +27,8 @@
 # include <physic.h>
 
 # include <load_save.h>
-// # include <structure_clone.h>
 
-# include <checker.h>
+# include <srcs/checker_niveau/checker.h>
 
 # include "srcs/common/translate_id.h"
 
@@ -162,7 +161,6 @@ typedef struct			s_env
 	t_sdl		sdl;
 	ft_trigger	*condition;
 	t_event		events; //must be last
-	
 }						t_env;
 
 int						is_clicked_on(const t_component component, t_event events);
@@ -239,16 +237,26 @@ void					clean_texture(t_env env);
 t_component				*init_menu(t_env *env, t_sdl *sdl);
 void					menu_loop(t_env *env);
 t_sdl					init_sdl(void);
+t_weapon				*init_weapons(t_game *game);
+t_weapon				init_nyan_gun(t_img *textures);
+t_weapon				init_grenade(t_img *textures);
+t_weapon				init_mine(t_img *textures);
+t_array					*init_multi_sprite(t_game *game, t_mat *mats);
+t_entity				*init_classe(t_game *game, t_array *multi_mats);
+
+int32_t					launch_check(t_env *env, t_game game);
+int						check_editor(t_env *env);
+u_int32_t				launch_check_wall(t_lvl_error error, t_game game,\
+char *errors_text[18], t_check_mat mats, t_env *env);
+u_int32_t				launch_check_portal(t_lvl_error error, t_game game,\
+char *errors_text[NBR_ERROR], t_env *env);
+u_int32_t				launch_check_sector(t_lvl_error error, t_game game,\
+char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env);
+u_int32_t				launch_check_mats(t_lvl_error error, t_game game,\
+char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env);
+u_int32_t		launch_check_entities(t_lvl_error error, t_game game,\
+char *errors_text[NBR_ERROR], t_env *env);
 
 void					minimap(t_game game, t_color *buf);
-
-// a enlever a fin projet
-t_array					init_sprite_gun();
-t_array					init_sprite_smg();
-t_array					init_sprite_shotgun();
-t_array					init_sprite_revolver();
-t_array					init_sprite_nyan_gun();
-t_array					init_sprite_grenade();
-t_array					init_sprite_mine();
 
 #endif
