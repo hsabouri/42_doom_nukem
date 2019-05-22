@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 13:46:50 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 11:49:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:04:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ t_game			create_portal(ssize_t wa, ssize_t wb, t_game game)
 		to_sector,
 		wa,
 		wb,
-		game.walls[wa].a,
-		game.walls[wa].b,
 		NULL,
 		0
 	};

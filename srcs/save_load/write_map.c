@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:32:17 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/15 11:38:05 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:21:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,6 @@ void	write_portals(int fd, t_portal *portals, size_t nportals, t_mat *mats)
 		s_portals.to_sector = portals[i].to_sector;
 		s_portals.from_wall = portals[i].from_wall;
 		s_portals.to_wall = portals[i].to_wall;
-		s_portals.a = portals[i].a;
-		s_portals.b = portals[i].b;
 		if (portals[i].mat != NULL)
 			s_portals.mat = id_from_p(portals[i].mat, mats, sizeof(t_mat));
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 16:57:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/23 16:57:47 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:03:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ size_t nwalls, size_t nportals);
 t_lvl_error		check_mats_wall(t_wall *walls, t_lvl_error error,\
 size_t nwalls, t_check_mat materials);
 
-t_lvl_error		check_point_portal (t_portal *portals, t_lvl_error error,\
-size_t nportals, size_t npoints);
 t_lvl_error		sector_portal(t_portal *portals, t_lvl_error error,\
 size_t nportals, size_t nsectors);
 t_lvl_error		wall_portal(t_portal *portals, t_lvl_error error,\

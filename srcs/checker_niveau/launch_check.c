@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 16:20:52 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/23 16:20:53 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/22 13:58:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ int32_t	launch_check(t_env *env, t_game game)
 		return (0);
 	printf("no blocking errors\n");
 	check_no_blocking(errors_text, game);
+	printf("\n");
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:06:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/01 16:23:17 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:21:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,6 @@ t_mat *mats)
 		current.to_sector = struc_p.to_sector;
 		current.from_wall = struc_p.from_wall;
 		current.to_wall = struc_p.to_wall;
-		current.a = struc_p.a;
-		current.b = struc_p.b;
 		current.mat = (struc_p.mat == -1) ? NULL : 
 			id_to_p(struc_p.mat, mats, sizeof(t_mat));
 		portals[i] = current;

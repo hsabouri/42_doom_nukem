@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_portal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 16:04:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/02/24 16:04:58 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:03:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
-
-t_lvl_error	check_point_portal(t_portal *portals, t_lvl_error error,\
-size_t nportals, size_t npoints)
-{
-	size_t	cpt;
-
-	cpt = 0;
-	while (cpt < nportals)
-	{
-		if (portals[cpt].a > npoints || portals[cpt].b > npoints)
-		{
-			error.error_type = POINTS_PORTAL;
-			error.portal = cpt;
-			if (portals[cpt].a > npoints)
-				error.point = portals[cpt].a;
-			else
-				error.point = portals[cpt].b;
-			return (error);
-		}
-		cpt++;
-	}
-	return (error);
-}
 
 t_lvl_error	sector_portal(t_portal *portals, t_lvl_error error,\
 size_t nportals, size_t nsectors)
@@ -85,14 +62,6 @@ size_t nportals, size_t nwalls)
 u_int32_t	launch_check_portal(t_lvl_error error, t_game game,\
 char *errors_text[NBR_ERROR], t_env *env)
 {
-	error = check_point_portal(game.portals, error, game.nportals,
-		game.npoints);
-	if (error.error_type != NO_ERROR)
-	{
-		printf("%s: portal %d, point %d\n", errors_text[error.error_type],
-			error.portal, error.point);
-		return (check_editor(env));
-	}
 	error = sector_portal(game.portals, error, game.nportals, game.nsectors);
 	if (error.error_type != NO_ERROR)
 	{

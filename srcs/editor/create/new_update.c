@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   new_update.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/07 14:09:52 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/22 14:05:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <editor.h>
 
-t_game	new_update_portals(ssize_t point, ssize_t wall, ssize_t sector,
-t_game game)
+t_game	new_update_portals(ssize_t wall, ssize_t sector, t_game game)
 {
 	t_portal	curr;
 	size_t		i;
@@ -30,10 +29,6 @@ t_game game)
 			curr.from_sector++;
 		if (sector >= 0 && curr.from_sector >= sector)
 			curr.from_sector++;
-		if (point >= 0 && curr.a >= point)
-			curr.a++;
-		if (point >= 0 && curr.b >= point)
-			curr.b++;
 		game.portals[i] = curr;
 		i++;
 	}
