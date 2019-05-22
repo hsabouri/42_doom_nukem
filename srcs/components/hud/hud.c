@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:23:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 15:37:44 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/22 18:03:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./hud.h"
+#include "./in_game_editor/in_game_editor.h"
 
 static int			self_update(t_component *self, void *parent)
 {
@@ -66,5 +67,6 @@ t_component			init_hud_root(t_env *env, t_sdl *sdl)
 	ret.childs = init_mini_map(ret.childs, ret.state, sdl);
 	ret.childs = init_inventory(ret.childs, ret.state, sdl);
 	ret.childs = init_help(ret.childs, ret.state, sdl);
+	ret.childs = init_in_game_editor(ret.childs, env, sdl);
 	return (ret);
 }
