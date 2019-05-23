@@ -40,6 +40,7 @@ typedef struct		s_c_img
 	u_int32_t	width;
 	u_int32_t	height;
 	size_t		content;
+	u_int32_t	edit;
 }					t_c_img;
 
 typedef struct		s_c_mat

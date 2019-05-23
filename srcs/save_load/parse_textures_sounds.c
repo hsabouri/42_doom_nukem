@@ -33,6 +33,7 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 			current.width * current.height), "loader");
 		ft_memmove(current.content, buf + struc_i.content, sizeof(t_color) *
 			current.width * current.height);
+		current.edit = struc_i.edit;
 		textures[i] = current;
 		i++;
 	}
