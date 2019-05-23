@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 11:57:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 12:11:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,6 @@ typedef enum		e_action_type
 	ACTION_NO = 0x0
 }					t_action_type;
 
-typedef struct		s_action
-{
-	t_action_type	type;
-	t_entity		target;
-}					t_action;
-
 typedef struct		s_entity
 {
 	int				id;
@@ -129,6 +123,12 @@ typedef struct		s_entity
 	//t_weapon weapons;
 	int 			damage;
 }					t_entity;
+
+typedef struct		s_action
+{
+	t_action_type	type;
+	t_entity		target;
+}					t_action;
 
 typedef struct		s_trigger
 {
