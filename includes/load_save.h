@@ -61,7 +61,7 @@ t_game			*load(const char *filename, int edit_mode);
 t_game			default_map(void);
 void			*dump_struct(void *buf, size_t start, size_t size, size_t max);
 void			verify_magic(void *t_c_struct, size_t magic, size_t index);
-t_player		player_default(void);
+t_player		player_default(t_game game);
 t_entity		entity_default(void);
 
 void			write_struct(void *struc, int fd, size_t size);

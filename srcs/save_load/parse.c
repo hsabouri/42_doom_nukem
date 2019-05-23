@@ -65,7 +65,7 @@ t_save save)
 
 	struc_p = *(t_c_player *)dump_struct(buf, save.index, sizeof(t_c_player), save.max);
 	verify_magic(&struc_p, PLAYER_MAGIC, 0);
-	current = player_default();
+	current = player_default(new_game);
 	current.my_entity.physic.gravity = f_to_float(struc_p.my_entity.spawn.gravity);
 	current.my_entity.physic.height = f_to_float(struc_p.my_entity.spawn.height);
 	current.my_entity.physic.radius = f_to_float(struc_p.my_entity.spawn.radius);

@@ -19,6 +19,12 @@ static t_array	sprite_1(t_mat *mats)
 
 	material = NULL;
 	sprite = safe_anew(NULL, 8, sizeof(t_mat *), "init_multi_sprite");
+	material = &mats[5];
+	apush(&sprite, &material);
+	material = &mats[6];
+	apush(&sprite, &material);
+	material = &mats[7];
+	apush(&sprite, &material);
 	material = &mats[8];
 	apush(&sprite, &material);
 	material = &mats[9];
@@ -28,12 +34,6 @@ static t_array	sprite_1(t_mat *mats)
 	material = &mats[11];
 	apush(&sprite, &material);
 	material = &mats[12];
-	apush(&sprite, &material);
-	material = &mats[13];
-	apush(&sprite, &material);
-	material = &mats[14];
-	apush(&sprite, &material);
-	material = &mats[15];
 	apush(&sprite, &material);
 	return (sprite);
 }
