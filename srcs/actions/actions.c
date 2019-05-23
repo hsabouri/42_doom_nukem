@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/20 17:41:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:24:44 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,3 @@
 //     //         lpremove(&game.anim, (t_pelem *)current);
 //     // }   
 // }
-
-// t_vec3      move_anim(t_list_anim c_anim)
-// {
-//     // if (c_anim.a_elem.moveTo < c_anim.a_elem.moveGoal)
-//     // {
-//     //     c_anim.a_elem.moveTo += 0.1;
-//     // }
-//     // else if (c_anim.a_elem.moveTo > c_anim.a_elem.moveGoal)
-//     // {
-//     //     c_anim.a_elem.moveTo -= 0.1;
-//     // }
-//     // return (c_anim.a_elem.moveTo);
-// }
-

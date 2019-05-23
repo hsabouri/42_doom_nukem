@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 17:20:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/20 17:57:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:23:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_game		animate(t_game game, float old_timer)
 	size_t		i;
 
 	i = 0;
-	new_array = anew(NULL, game.animations.len, sizeof(t_animation));
+	if (game.animations.len == 0)
+		return (game);
+	new_array = anew(NULL, ((game.animations.len > 10) ?
+		game.animations.len : 10), sizeof(t_animation));
 	while ((current = (t_animation *)anth(&game.animations, i)))
 	{
 		if (ABS(current->target - *current->to_animate) < ANIMATION_SPEED * span)
