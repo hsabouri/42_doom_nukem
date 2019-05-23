@@ -50,7 +50,7 @@ t_player	player_default(t_game game)
 			1
 		},
 		100,
-		{0, 1},
+		{2, 3},
 		6,
 		0,
 		safe_anew(NULL, 1, sizeof(t_entity *), "generate_map")});
