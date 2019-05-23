@@ -83,7 +83,7 @@ t_component					init_editor_ev_ac(t_env *env, t_sdl *sdl)
 	state = (t_editor_ev_ac_state *)safe_malloc(sizeof(t_editor_ev_ac_state), "components");
 	ret = default_component(state, (t_pix) {WIDTH, HEIGHT}, sdl);
 	ret.state = init_state(ret.state, env);
-	ret.img = parse_tga("./textures/ui/arrow-right.tga");
+	ret.img = parse_tga("./textures/ui/arrow-right.tga", 0);
 	ret.pos.x = 0;
 	ret.pos.y = 0;
 	ret.display = 1;

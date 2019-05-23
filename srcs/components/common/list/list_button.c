@@ -107,7 +107,7 @@ t_sdl *sdl)
 			.size = (t_pix) {30, 29}, .background = state.bg,
 			.events = state.events, .place_holder = NULL,
 			.callback = &self_del, .scancode = SDL_SCANCODE_UNKNOWN,
-			.img = parse_tga("./textures/ui/cross.tga")}, sdl);
+			.img = parse_tga("./textures/ui/cross.tga", 0)}, sdl);
 		apush(&childs, &current);
 	}
 	else

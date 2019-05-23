@@ -109,7 +109,7 @@ static t_array		init_childs (t_list_comp list, t_sdl *sdl)
 		.background = list.bg,
 		.events = list.events,
 		.callback = &self_add,
-		.img = parse_tga("./textures/ui/plus.tga"),
+		.img = parse_tga("./textures/ui/plus.tga", 0),
 		.scancode = SDL_SCANCODE_UNKNOWN,
 	}, sdl);
 	apush(&childs, &current);

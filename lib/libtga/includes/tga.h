@@ -38,8 +38,9 @@ typedef struct	s_img
 	unsigned int	width;
 	unsigned int	height;
 	t_color			*content;
+	unsigned int	edit;			
 }				t_img;
 
-t_img			parse_tga(const char *path);
+t_img			parse_tga(const char *path, unsigned int edit);
 
 #endif

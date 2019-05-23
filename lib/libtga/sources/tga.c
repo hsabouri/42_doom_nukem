@@ -50,7 +50,7 @@ unsigned int height, unsigned int bpp)
 	return (res);
 }
 
-t_img			parse_tga(const char *path)
+t_img			parse_tga(const char *path, unsigned int edit)
 {
 	const int		fd = open(path, O_RDONLY);
 	unsigned char	header[18];
@@ -68,9 +68,11 @@ t_img			parse_tga(const char *path)
 	read(fd, raw, info.st_size - 18);
 	res.content = tga_expend(raw,\
 	((short *)header)[T_WIDTH], ((short *)header)[T_HEIGHT], header[BPP]);
+	res.edit = edit;
 	return ((t_img) {
 		((short *)header)[T_WIDTH],
 		((short *)header)[T_HEIGHT],
-		res.content
+		res.content,
+		res.edit
 	});
 }

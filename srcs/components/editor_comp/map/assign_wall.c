@@ -101,7 +101,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
 		.events = &env->events, .scancode = SDL_SCANCODE_N, .place_holder = NULL,
 		.callback = &callback_new_sector,
-		.img = parse_tga("./textures/ui/plus.tga")}, sdl));
+		.img = parse_tga("./textures/ui/plus.tga", 0)}, sdl));
 	apush(&ret.childs, &child);
 	return (ret);
 }

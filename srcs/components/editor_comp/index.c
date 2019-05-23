@@ -47,7 +47,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/map_mode.tga"),
+		.img = parse_tga("./textures/ui/map_mode.tga", 0),
 		.to_activate = (int *)&state->type,
 		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = MAP}, sdl);
@@ -57,7 +57,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/event_mode.tga"),
+		.img = parse_tga("./textures/ui/event_mode.tga", 0),
 		.to_activate = (int *)&state->type,
 		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = ACTION_EVENT}, sdl);
@@ -67,7 +67,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/material_mode.tga"),
+		.img = parse_tga("./textures/ui/material_mode.tga", 0),
 		.to_activate = (int *)&state->type,
 		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = MATERIAL}, sdl);
@@ -77,7 +77,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/entity_mode.tga"),
+		.img = parse_tga("./textures/ui/entity_mode.tga", 0),
 		.to_activate = (int *)&state->type,
 		.scancode = SDL_SCANCODE_UNKNOWN,
 		.active_value = ENTITY}, sdl);

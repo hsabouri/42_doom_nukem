@@ -42,7 +42,7 @@ t_pix pos, t_sdl *sdl)
 	t_component			ret;
 
 	ret = default_component(NULL, (t_pix) {302, 322}, sdl);
-	ret.img = parse_tga("./textures/ui/mire.tga");
+	ret.img = parse_tga("./textures/ui/mire.tga", 0);
 	ret.state = to_change;
 	ret.pos = pos;
 	ret.display = 1;

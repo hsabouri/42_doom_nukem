@@ -52,7 +52,7 @@ t_component			*init_menu(t_env *env, t_sdl *sdl)
 	ret->size.x = WIDTH;
 	ret->size.y = HEIGHT;
 	ret->text.text_texture = NULL;
-	ret->img = parse_tga("./textures/menu/menu_background.tga");
+	ret->img = parse_tga("./textures/menu/menu_background.tga", 0);
 	ret->state = init_state(env);
 	ret->render = &self_render;
 	ret->complete_render = NULL;
