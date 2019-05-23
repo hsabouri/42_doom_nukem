@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 10:57:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:57:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,12 @@ typedef enum		s_entity_type
 	MEDIPACK,
 	AMMO
 }					t_entity_type;
-/*
 
-typedef struct s_list_anim
+typedef struct		s_animation
 {
-	t_pelem		elem;
-	t_anim_element a_elem;
-}			   t_list_anim;
-
-typedef struct s_anim_element
-{
-    t_vec3 * moveTo;
-    t_vec3 moveGoal;
-}              t_anim_element;
-*/
+	float		*to_animate;
+	float		target;
+}					t_animation;
 
 typedef struct		s_mat
 {
@@ -104,20 +96,26 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
-typedef enum	e_condition
+typedef enum		e_condition
 {
 	TRIGGER_SEE = 0x1,
 	TRIGGER_TOUCH = 0x2,
 	TRIGGER_INTERACT = 0x3,
 	TRIGGER_SECTOR = 0x4,
 	TRIGGER_NO = 0x0
-}				t_condition;
+}					t_condition;
 
-typedef enum	e_action
+typedef enum		e_action_type
 {
 	ACTION_SPAWN = 0x1,
 	ACTION_NO = 0x0
-}				t_action;
+}					t_action_type;
+
+typedef struct		s_action
+{
+	t_action_type	type;
+	t_entity		target;
+}					t_action;
 
 typedef struct		s_entity
 {
@@ -129,7 +127,7 @@ typedef struct		s_entity
 	//float life;
 	//float  armor;
 	//t_weapon weapons;
-	int 		damage;
+	int 			damage;
 }					t_entity;
 
 typedef struct		s_trigger
@@ -197,12 +195,6 @@ typedef struct		s_sector
 	t_vec2		center; // t_vec3 position
 	int			clock;
 }					t_sector;
-
-typedef struct		s_animation
-{
-	float	*to_animate;
-	float	target;
-}					t_animation;
 
 typedef struct		s_music
 {
