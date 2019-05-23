@@ -243,6 +243,10 @@ t_weapon				init_grenade(t_img *textures);
 t_weapon				init_mine(t_img *textures);
 t_array					*init_multi_sprite(t_game *game, t_mat *mats);
 t_entity				*init_classe(t_game *game, t_array *multi_mats);
+t_vec2					*init_points(t_game *game);
+t_wall					*init_walls(t_game *game);
+t_sector				*init_sector(t_game *game);
+t_entity				*init_entities(t_game *game);
 
 int32_t					launch_check(t_env *env, t_game game);
 int						check_editor(t_env *env);
@@ -254,7 +258,7 @@ u_int32_t				launch_check_sector(t_lvl_error error, t_game game,\
 char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env);
 u_int32_t				launch_check_mats(t_lvl_error error, t_game game,\
 char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env);
-u_int32_t		launch_check_entities(t_lvl_error error, t_game game,\
+u_int32_t				launch_check_entities(t_lvl_error error, t_game game,\
 char *errors_text[NBR_ERROR], t_env *env);
 
 void					minimap(t_game game, t_color *buf);

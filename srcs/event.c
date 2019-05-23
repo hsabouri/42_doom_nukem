@@ -96,7 +96,7 @@ static void		keyactions(int scancode, t_env *env)
 	if (env->editor.enabled && scancode == SDL_SCANCODE_Z)
 	{
 		if (env->file == NULL)
-			env->file = "default";
+			env->file = "simple_map";
 		save(env->file, env->game);
 	}
 	if (scancode == SDL_SCANCODE_TAB)
