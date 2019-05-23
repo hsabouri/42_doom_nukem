@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:13:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 18:12:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/23 12:17:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_array		init_in_game_editor(t_array childs, t_env *env, t_sdl *sdl)
 	button.active_value = SECTOR_HEIGHT;
 	curr = init_button(button, sdl);
 	apush(&comp.childs, &curr);
-	apush(&childs, &comp);
+	curr = init_display_deco((t_display_deco_state) {&env->editor.enabled, 1,
+		NULL, 0}, comp);
+	apush(&childs, &curr);
 	return (childs);
 }
