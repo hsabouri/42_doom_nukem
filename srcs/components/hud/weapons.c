@@ -35,6 +35,12 @@ static int				self_update(t_component *self, void *parent_state)
 	}
 	if (self_state->last_secondary != hud->env->game.player.secondary)
 		self_state->last_secondary = hud->env->game.player.secondary;
+	if (self->shot)
+	{
+		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
+			[hud->env->game.player.equiped]].sprite, 4);
+		self->img = **sprite;
+	}
 	return (1);
 }
 
@@ -58,6 +64,7 @@ static t_weapons_state	*init_weapon_state(void *parent_state)
 	state->last_equiped = hud->env->game.player.weapons
 		[hud->env->game.player.weapons[hud->env->game.player.equiped]];
 	state->last_secondary = hud->env->game.player.secondary;
+	state->shot = 0;
 	return (state);
 }
 

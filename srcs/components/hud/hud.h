@@ -29,6 +29,7 @@ typedef struct	s_weapons_state
 	t_player	*player;
 	u_int32_t	last_equiped;
 	u_int32_t	last_secondary;
+	int			shot;
 }				t_weapons_state;
 
 typedef struct	s_mini_weapon
