@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:16:55 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/27 16:16:56 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:34:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,12 @@ void		clean_game(t_game game)
 {
 	size_t	cpt;
 
+	free(game.entities);
+	free(game.classes);
 	free(game.sectors);
 	free(game.walls);
 	free(game.portals);
 	free(game.points);
-	cpt = 0;
-	// while (cpt < game.nentities)
-	// {
-	// 	if (game.entities[cpt].mat.mem)
-	// 		free(game.entities[cpt].mat.mem);
-	// 	cpt++;
-	// }
-	free(game.entities);
 	free(game.materials);
 	cpt = 0;
 	while (cpt < game.ntextures)
@@ -54,6 +48,14 @@ void		clean_game(t_game game)
 		free(game.textures[cpt].content);
 		cpt++;
 	}
+	free(game.textures);
+	cpt = 0;
+	while (cpt < game.nmulti_mats)
+	{
+		free(game.multi_mats[cpt].mem);
+		cpt++;
+	}
+	free(game.multi_mats);
 	clean_music(game);
 	free(game.chunks.mem);
 	free(game.id_buf);
