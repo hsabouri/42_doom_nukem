@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/26 15:49:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:10:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ t_component					init_button(t_button button, t_sdl *sdl)
 		ret.text = component_text(button.place_holder, (t_pix) {8, 3}, sdl);
 		ret.size.x = ret.text.w + 16;
 		ret.size.y = ret.text.h + 8;
-		free(button.place_holder);
 	}
 	ret.pos = button.pos;
 	ret.display = 1;

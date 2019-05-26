@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:54:32 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/09 15:45:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:11:05 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ t_list_state state, t_sdl *sdl)
 	ret.size = button.size;
 	if (button.img.content)
 		ret.img = button.img;
-	else if (button.text[0])
+	if (button.text[0])
 		ret.text = component_text(button.text, (t_pix) {5, 5}, sdl);
 	ret.pos = button.pos;
 	ret.display = 1;
