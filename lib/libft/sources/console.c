@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   console.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:58:43 by hsabouri          #+#    #+#             */
-/*   Updated: 2018/12/27 18:03:50 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/24 14:36:10 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	console_log(const char *service, const char *log)
 	ft_putendl_fd(log, STDERR_FILENO);
 }
 
-void			perror_quit(void)
+void	perror_quit(void)
 {
 	perror("System error");
 	exit(EXIT_FAILURE);

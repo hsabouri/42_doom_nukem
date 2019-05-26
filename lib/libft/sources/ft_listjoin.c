@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 13:20:35 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/13 15:15:56 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/24 14:26:40 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@
 ** - this function is not checking for cycles
 */
 
-t_list  *ljoin(t_list *begin, t_list *end)
+t_list	*ljoin(t_list *begin, t_list *end)
 {
-    if (!begin)
-        return (end);
-    else if (!end || !end->first ||
-    (begin->first == end->first && end->len <= begin->len))
-        return (begin);
-    else if (!begin->first ||
-    (begin->first == end->first && end->len > begin->len))
-        *begin = *end;
-    else
-    {
-        begin->last->next = end->first;
-        begin->last = end->last;
-        begin->len += end->len;
-    }
-    return (begin);
+	if (!begin)
+		return (end);
+	else if (!end || !end->first ||
+		(begin->first == end->first && end->len <= begin->len))
+		return (begin);
+	else if (!begin->first ||
+		(begin->first == end->first && end->len > begin->len))
+		*begin = *end;
+	else
+	{
+		begin->last->next = end->first;
+		begin->last = end->last;
+		begin->len += end->len;
+	}
+	return (begin);
 }
 
 /*
@@ -56,22 +56,22 @@ t_list  *ljoin(t_list *begin, t_list *end)
 ** - this function is not checking for cycles
 */
 
-t_plist  *lpjoin(t_plist *begin, t_plist *end)
+t_plist	*lpjoin(t_plist *begin, t_plist *end)
 {
-    if (!begin)
-        return (end);
-    else if (!end || !end->first ||
-    (begin->first == end->first && end->len <= begin->len))
-        return (begin);
-    else if (!begin->first ||
-    (begin->first == end->first && end->len > begin->len))
-        *begin = *end;
-    else
-    {
-        begin->last->next = end->first;
-        end->first->prev = begin->last;
-        begin->last = end->last;
-        begin->len += end->len;
-    }
-    return (begin);
+	if (!begin)
+		return (end);
+	else if (!end || !end->first ||
+		(begin->first == end->first && end->len <= begin->len))
+		return (begin);
+	else if (!begin->first ||
+		(begin->first == end->first && end->len > begin->len))
+		*begin = *end;
+	else
+	{
+		begin->last->next = end->first;
+		end->first->prev = begin->last;
+		begin->last = end->last;
+		begin->len += end->len;
+	}
+	return (begin);
 }

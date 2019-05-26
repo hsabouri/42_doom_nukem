@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/05 15:21:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 20:00:23 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,75 @@ t_color			get_portal_pixel(t_proj proj, int y)
 	return (get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, 9, y));
 }
 
+t_pl_proj	find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio)
+{
+	t_fvec2 vec;
+	t_fixed diffx;
+	t_fixed diffy;
+	diffx = plane.v_b.u - plane.v_a.u;
+	diffy = plane.v_b.v - plane.v_a.v;
+	//(need coordonnee collision mur / rayon)
+	// printf("leftu = %f  = %f\n",f_to_float(plane.v_a.u) ,f_to_float(plane.v_a.v) );
+	// printf("right  = %f = %f\n",f_to_float(plane.v_b.u) ,f_to_float(plane.v_b.v) );
+	vec.u = plane.v_a.u + f_mul(ratio, diffx); // vecteur x;
+	vec.v = plane.v_a.v + f_mul(ratio, diffy); // vecteur y;
+	plane.line.x.v = vec.u;
+	plane.line.y.v = vec.v;
+	plane.line.x.u = plane.pos.u - center.u;
+	plane.line.y.u = plane.pos.v - center.v;
+
+	// plane.line.x.v = point.u - plane.pos.u;
+	// plane.line.y.v = point.v - plane.pos.v;
+	// if (f_to_float(ratio) < 0.02)
+	// printf("gauche p.u =%f, p.v = %f\n",f_to_float(plane.line.x.u), f_to_float(plane.line.y.u));
+	// if (f_to_float(ratio) > 0.49 && f_to_float(ratio) < 0.51)
+	// printf("droite p.u =%f, p.v = %f\n",f_to_float(plane.line.x.u), f_to_float(plane.line.y.u));
+// printf("ratio = %f\n",f_to_float(ratio));
+// if (ratio > f_from_float(0.499) && ratio < f_from_float(0.501));
+// {
+// printf("ratio = %f x =  %f + %f * t  y =  %f + %f t \n",f_to_float(ratio),f_to_float(plane.line.x.u),f_to_float(plane.line.x.v),f_to_float(plane.line.y.u), f_to_float(plane.line.y.v));
+// }
+	// dif = f_div(plane.line.x, plane.line.y);
+
+	// plane.line.y = f_div(plane.line.x, dif);
+	// plane.line.x = 1;
+	// if (plane.line.x < 0)
+	// plane.line.x = -1;
+	return (plane);
+}
+
 t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 {
 	t_fixed	z;
 	t_fvec2	pix;
+	t_fixed t;
+	// proj.line.z.u = proj.height + find_z(); // FIND Z
+	proj.line.z.v = f_from_float((1.0 - 2.0 / HEIGHT * y) + (proj.look_v / 1000.0));
+	// proj.line.z.v = f_from_float(0.5);
 
-	z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
-	if (z == 0)
-		return (NO_COLOR);
-	pix = fvec2_scale(proj.ray, f_div(proj.wr.u, z));
-	pix = fvec2_add(pix, proj.pos);
+	t = (f_mul(proj.ceiling.x, proj.line.x.v) + f_mul(proj.ceiling.y, proj.line.y.v) + f_mul(f_from_float(-1),proj.line.z.v));
+	// printf("t =%d",t);
+	if (t == 0)
+			return (NO_COLOR);
+	if (proj.ceiling.x == 0 && proj.ceiling.y == 0)
+	{
+		z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
+		// printf("proj.look_v = %d y = %d z = %f\n",proj.look_v,y,f_to_float(z));
+		if (z == 0)
+				return (NO_COLOR);
+		pix = fvec2_scale(proj.ray, f_div(proj.wr.u, z));
+		pix = fvec2_add(pix, proj.pos);
+		return (get_mat_pixel(tex.mat, tex, pix, 0, y));
+	}
+	if (t == 0)
+		return(NO_COLOR);
+		// t = f_from_float(0.001);
+	t = f_div((- proj.ceiling.z - f_mul(proj.ceiling.x, proj.line.x.u) - f_mul(proj.ceiling.y,proj.line.y.u) - f_mul(f_from_float(-1),proj.line.z.u)), ((f_mul(proj.ceiling.x, proj.line.x.v) + f_mul(proj.ceiling.y, proj.line.y.v) + f_mul(f_from_float(-1),proj.line.z.v))));
+	pix.u = (proj.line.x.u + f_mul(t, proj.line.x.v));
+	pix.v = (proj.line.y.u + f_mul(t, proj.line.y.v));
+
+	printf("t = %f pix.x = %f pix.y = %f\n",f_to_float(t), f_to_float(pix.u),f_to_float(pix.v));
+
 	return (get_mat_pixel(tex.mat, tex, pix, 0, y));
 }
 

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 16:05:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/12 15:15:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 18:37:09 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	render_single_threaded(const t_env env, t_color *buf)
 			env.game.player.my_entity.physic,
 			-1,
 			env.game.sectors[env.game.player.my_entity.physic.sector_id],
-			0
+			0,
+			get_ray_dir(env.game.player.my_entity.physic, 0),
+			get_ray_dir(env.game.player.my_entity.physic, WIDTH - 1),
+			f_from_float(env.game.player.my_entity.physic.height),
 		},
 		env.current_buffer, env.game.id_buf
 	);
@@ -89,7 +92,10 @@ void	render_multi_threaded(const t_env env, t_color *buf)
 				(i + 1) * (WIDTH / N_THREADS),
 				env.game.player.my_entity.physic, -1,
 				env.game.sectors[env.game.player.my_entity.physic.sector_id],
-				0
+				0,
+				get_ray_dir(env.game.player.my_entity.physic, 0),
+				get_ray_dir(env.game.player.my_entity.physic, WIDTH - 1),
+				f_from_float(env.game.player.my_entity.physic.height),
 			}, buf, env.game.id_buf};
 		i++;
 	}

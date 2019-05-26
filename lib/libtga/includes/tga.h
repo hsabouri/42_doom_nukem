@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2019/01/16 18:53:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:15:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ typedef struct		s_color
 	u_int8_t	a;
 }					t_color;
 
-typedef struct	s_img
+typedef struct		s_img
 {
 	unsigned int	width;
 	unsigned int	height;
 	t_color			*content;
-	unsigned int	edit;			
+	unsigned int	edit;
 }				t_img;
 
 t_img			parse_tga(const char *path, unsigned int edit);

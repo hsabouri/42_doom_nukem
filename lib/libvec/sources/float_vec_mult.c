@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   float_vec_mult.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 19:09:00 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/22 13:31:53 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:42:12 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 inline t_vec3	vec3_scale(t_vec3 vec, float s)
 {
-	return ((t_vec3) {
+	return ((t_vec3)
+	{
 		vec.x * s,
 		vec.y * s,
 		vec.z * s
@@ -23,7 +24,8 @@ inline t_vec3	vec3_scale(t_vec3 vec, float s)
 
 inline t_vec2	vec2_scale(t_vec2 vec, float s)
 {
-	return ((t_vec2) {
+	return ((t_vec2)
+	{
 		vec.u * s,
 		vec.v * s
 	});

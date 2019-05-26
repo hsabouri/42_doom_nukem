@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/12 15:14:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 19:22:40 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@
 
 # define TEXT_MAX	256
 
+typedef struct	s_line
+{
+	t_fvec2 x;
+	t_fvec2 y;
+	t_fvec2 z;
+}				t_line;
+
 typedef struct	s_pix
 {
 	int32_t	x;
@@ -71,6 +78,9 @@ typedef struct	s_context
 	ssize_t		mask;
 	t_sector	sector;
 	int			stack_id;
+	t_fvec2		v_a;
+	t_fvec2		v_b;
+	t_fixed		height;
 }				t_context;
 
 typedef struct	s_cache_wall
@@ -145,6 +155,13 @@ typedef struct	s_pl_proj
 	t_fvec2		pos;
 	t_tex_proj	tex_floor;
 	t_tex_proj	tex_roof;
+	t_fvec2		center;
+	t_fvec3		floor;
+	t_fvec3		ceiling;
+	t_line		line;
+	t_fixed		height;
+	t_fvec2		v_a;
+	t_fvec2		v_b;
 }				t_pl_proj;
 
 typedef struct	s_proj
@@ -249,8 +266,9 @@ void			find_center_sectors(t_game game);
 void			find_center(t_game game, size_t i);
 void			rotate_floor(size_t n, int mode, t_game game);
 void			rotate_ceiling(size_t n, int mode, t_game game);
-float			find_z(t_context game, t_vec2 point, int mode);
+t_fixed			find_z(t_sector sector, t_vec2 point, int mode);
 t_cache_wall	switch_points(t_cache_wall current, t_game game, size_t i);
 int				check_z_limits(size_t n, t_game game);
 int				check_z_game(size_t n, int i, t_game game);
+t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio);
 #endif
