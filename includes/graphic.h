@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/27 16:05:34 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:16:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ typedef struct	s_pl_proj
 	t_fvec2		v_b;
 	t_fixed		z_zero;
 	t_fixed		z_diff;
-
 }				t_pl_proj;
 
 typedef struct	s_proj
@@ -274,4 +273,5 @@ t_cache_wall	switch_points(t_cache_wall current, t_game game, size_t i);
 int				check_z_limits(size_t n, t_game game);
 int				check_z_game(size_t n, int i, t_game game);
 t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio, t_sector sector);
+
 #endif
