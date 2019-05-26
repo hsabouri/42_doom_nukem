@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+         #
+#    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/04/26 12:27:00 by lbougero         ###   ########.fr        #
+#    Updated: 2019/05/26 15:55:10 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ CC = gcc
 
 ifeq ($(SAN), yes)
 ifeq ($(shell uname -s), Darwin) # remove _o
-CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=leak
 else
-CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=leak
 endif
 endif
 

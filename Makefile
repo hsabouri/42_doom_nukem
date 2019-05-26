@@ -63,11 +63,11 @@ CFLAGS += -g
 
 ifeq ($(SAN), yes)
 ifeq ($(shell uname -s), Darwin) # remove _o
-LDFLAGS = -fsanitize=address
-CFLAGS += -fsanitize=address
+LDFLAGS = -fsanitize=leak
+CFLAGS += -fsanitize=leak
 else
 LDFLAGS = -lasan
-CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=leak
 endif
 endif
 
