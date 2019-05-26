@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 15:26:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:31:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ int				main(int ac, char **av)
 		env.events = reset_clicks(env.events);
 		frame++;
 	}
+	if (env.game_mode != 0)
+		clean_game(env.game);
 	return (0);
 }

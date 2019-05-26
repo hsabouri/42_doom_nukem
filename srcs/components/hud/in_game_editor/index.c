@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:13:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 12:17:02 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:12:58 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,31 @@ t_array		init_in_game_editor(t_array childs, t_env *env, t_sdl *sdl)
 		.place_holder = ft_strdup("[T] WALL TEXTURE POSITION"),
 		.to_activate = (int *)&env->editor.game_tool, .active_value = TEXTURE_MOVE };
 	curr = init_button(button, sdl);
+	free(button.place_holder);
 	apush(&comp.childs, &curr);
 	button.place_holder = ft_strdup("[Y] MAT TEXTURE POSITION");
 	button.pos = (t_pix) {curr.pos.x, curr.pos.y + curr.size.y + 2};
 	button.active_value = MATERIAL_MOVE;
 	curr = init_button(button, sdl);
+	free(button.place_holder);
 	apush(&comp.childs, &curr);
 	button.place_holder = ft_strdup("[U] MAT TEXTURE SCALE");
 	button.pos = (t_pix) {curr.pos.x, curr.pos.y + curr.size.y + 2};
 	button.active_value = MATERIAL_SCALE;
 	curr = init_button(button, sdl);
+	free(button.place_holder);
 	apush(&comp.childs, &curr);
 	button.place_holder = ft_strdup("[G] MATERIAL CHANGE");
 	button.pos = (t_pix) {curr.pos.x, curr.pos.y + curr.size.y + 2};
 	button.active_value = MATERIAL_CHANGE;
 	curr = init_button(button, sdl);
+	free(button.place_holder);
 	apush(&comp.childs, &curr);
 	button.place_holder = ft_strdup("[J] SECTOR HEIGHT");
 	button.pos = (t_pix) {curr.pos.x, curr.pos.y + curr.size.y + 2};
 	button.active_value = SECTOR_HEIGHT;
 	curr = init_button(button, sdl);
+	free(button.place_holder);
 	apush(&comp.childs, &curr);
 	curr = init_display_deco((t_display_deco_state) {&env->editor.enabled, 1,
 		NULL, 0}, comp);
