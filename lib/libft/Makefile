@@ -6,7 +6,7 @@
 #    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/05/26 15:55:15 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/05/26 18:24:24 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ CFLAGS += -g -fPIC
 
 ifeq ($(SAN), yes)
 ifeq ($(shell uname -s), Darwin) # remove _o
-CFLAGS += -fsanitize=leak
+CFLAGS += -fsanitize=address
 else
-CFLAGS += -fsanitize=leak
+CFLAGS += -fsanitize=address
 endif
 endif
 
