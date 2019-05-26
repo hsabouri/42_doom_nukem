@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:04:24 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/03/28 14:04:26 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:24:38 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int			self_update(t_component *self, void *parent)
 
 static void			self_render(const t_component self, t_color *buf)
 {
-	// background(buf, RED, self.size);
 	component_image(self.img, (t_pix) {0, 0}, self.size, buf);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/28 17:30:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:27:07 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void				destroy_component(t_component *component)
 		free(component->img.content);
 	if (component->last_render)
 		SDL_DestroyTexture(component->last_render);
+	if (component->childs.mem)
+		free(component->childs.mem);
 }
 
 t_component			render_all(t_component component, t_sdl *sdl)
