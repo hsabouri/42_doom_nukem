@@ -102,10 +102,10 @@ int32_t	launch_check(t_env *env, t_game game)
 	mats.nmaterials = game.nmaterials;
 	mats.materials = game.materials;
 	if (launch_check_wall(error, game, errors_text, mats, env) == 0 ||
-		launch_check_portal(error, game, errors_text, env) == 0 ||
-		launch_check_sector(error, game, errors_text, mats, env) == 0 ||
-		launch_check_mats(error, game, errors_text, mats, env) == 0 ||
-		launch_check_entities(error, game, errors_text, env) == 0)
+		launch_check_portal(game, env, errors_text) == 0 ||
+		launch_check_sector(game, mats, env, errors_text) == 0 ||
+		launch_check_mats(game, mats, env, errors_text) == 0 ||
+		launch_check_entities(game, env, errors_text) == 0)
 		return (0);
 	printf("no blocking errors\n");
 	check_no_blocking(errors_text, game);

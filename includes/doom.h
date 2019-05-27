@@ -250,16 +250,16 @@ t_entity				*init_entities(t_game *game);
 
 int32_t					launch_check(t_env *env, t_game game);
 int						check_editor(t_env *env);
-u_int32_t				launch_check_wall(t_lvl_error error, t_game game,\
-char *errors_text[18], t_check_mat mats, t_env *env);
-u_int32_t				launch_check_portal(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_env *env);
-u_int32_t				launch_check_sector(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env);
-u_int32_t				launch_check_mats(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env);
-u_int32_t				launch_check_entities(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_env *env);
+u_int32_t				launch_check_wall(t_lvl_error error, t_game game,
+						char *errors_text[18], t_check_mat mats, t_env *env);
+u_int32_t				launch_check_portal(t_game game, t_env *env,
+						char *errors_text[NBR_ERROR]);
+u_int32_t				launch_check_sector(t_game game, t_check_mat mats,
+						t_env *env, char *errors_text[NBR_ERROR]);
+u_int32_t				launch_check_mats(t_game game, t_check_mat mats,
+						t_env *env, char *errors_text[NBR_ERROR]);
+u_int32_t				launch_check_entities(t_game game, t_env *env,
+						char *errors_text[NBR_ERROR]);
 
 void					minimap(t_game game, t_color *buf);
 

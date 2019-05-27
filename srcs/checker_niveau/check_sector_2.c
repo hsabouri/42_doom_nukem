@@ -12,6 +12,35 @@
 
 #include <doom.h>
 
+t_lvl_error	check_wall_sector(t_sector *sectors, size_t nsectors, size_t nwalls)
+{
+	t_lvl_error	error;
+	size_t		cpt;
+	size_t		nbr_walls;
+
+	cpt = -1;
+	init_error(&error);
+	while (++cpt < nsectors)
+	{
+		nbr_walls = sectors[cpt].start + sectors[cpt].number;
+		if (sectors[cpt].start > nwalls || sectors[cpt].number > nwalls ||
+			nbr_walls > nwalls)
+		{
+			error.sector = cpt;
+			if (sectors[cpt].start > nwalls)
+				error = (t_lvl_error) {.error_type = WALL_START_SECTOR,
+				.wall = sectors[cpt].start};
+			else
+				error = (t_lvl_error) {.error_type =
+					(sectors[cpt].number > nwalls) ?
+					WALL_END_SECTOR : NUMBER_WALLS_SECTOR,
+					.wall = (ssize_t)(sectors[cpt].number)};
+			return (error);
+		}
+	}
+	return (error);
+}
+
 t_list			height_sector(t_sector *sectors, size_t nsectors)
 {
 	t_list		error;

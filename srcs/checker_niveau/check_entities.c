@@ -12,13 +12,15 @@
 
 #include <doom.h>
 
-t_lvl_error	check_mat_entities(t_entity *entities, t_lvl_error error,\
-size_t nentities, t_array *multi_mats, size_t nmulti)
+t_lvl_error	check_mat_entities(t_entity *entities, size_t nentities,
+t_array *multi_mats, size_t nmulti)
 {
+	t_lvl_error	error;
 	u_int32_t	index;
 	size_t		cpt;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < nentities)
 	{
 		index = id_from_p(entities[cpt].mat, multi_mats, sizeof(t_array));
@@ -46,7 +48,8 @@ t_list		sector_entity(t_entity *entities, size_t nentities, t_game game)
 		if (is_in_sector(entities[cpt].physic, game,
 			entities[cpt].physic.sector_id) % 2 == 0)
 		{
-			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error),
+				"level_checker");
 			init_error(elem);
 			elem->elem.next = NULL;
 			elem->error_type = BAD_SECTOR;
@@ -58,14 +61,17 @@ t_list		sector_entity(t_entity *entities, size_t nentities, t_game game)
 	return (error);
 }
 
-u_int32_t	launch_check_entities(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_env *env)
+u_int32_t	launch_check_entities(t_game game, t_env *env,
+char *errors_text[NBR_ERROR])
 {
-	error = check_mat_entities(game.entities, error, game.nentities, game.multi_mats,
+	t_lvl_error error;
+
+	error = check_mat_entities(game.entities, game.nentities, game.multi_mats,
 		game.nmulti_mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: entities %d\n", errors_text[error.error_type], error.entities);
+		printf("%s: entities %d\n", errors_text[error.error_type],
+			error.entities);
 		return (check_editor(env));
 	}
 	return (1);
