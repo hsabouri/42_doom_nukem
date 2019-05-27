@@ -19,15 +19,11 @@ t_weapon	init_nyan_gun(t_img *textures)
 	t_img		*material;
 
 	sprite = safe_anew(NULL, 1, sizeof(t_img *), "generate_map");
-	material = &textures[39];
+	material = &textures[29];
 	apush(&sprite, &material);
-	material = &textures[40];
+	material = &textures[30];
 	apush(&sprite, &material);
-	material = &textures[41];
-	apush(&sprite, &material);
-	material = &textures[42];
-	apush(&sprite, &material);
-	material = &textures[43];
+	material = &textures[31];
 	apush(&sprite, &material);
 	nyan_gun = ((t_weapon) {
 		.name = (t_weapon_type)NYAN_GUN, .type = 1, .ammo = 100,
@@ -45,9 +41,9 @@ t_weapon	init_grenade(t_img *textures)
 	t_img		*material;
 
 	sprite = safe_anew(NULL, 1, sizeof(t_img *), "generate_map");
-	material = &textures[44];
+	material = &textures[32];
 	apush(&sprite, &material);
-	material = &textures[45];
+	material = &textures[33];
 	apush(&sprite, &material);
 	grenade = ((t_weapon) {
 		.name = (t_weapon_type)GRENADE,	.type = 2, .ammo = 5, .ammo_max = 5,
@@ -64,9 +60,9 @@ t_weapon	init_mine(t_img *textures)
 	t_img		*material;
 
 	sprite = safe_anew(NULL, 1, sizeof(t_img *), "generate_map");
-	material = &textures[46];
+	material = &textures[34];
 	apush(&sprite, &material);
-	material = &textures[47];
+	material = &textures[35];
 	apush(&sprite, &material);
 	mine = ((t_weapon) {
 		.name = (t_weapon_type)MINE, .type = 2, .ammo = 5, .ammo_max = 5,

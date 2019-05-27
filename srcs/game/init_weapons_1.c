@@ -27,12 +27,6 @@ static t_weapon	init_gun(t_img *textures)
 	apush(&sprite, &material);
 	material = &textures[19];
 	apush(&sprite, &material);
-	material = &textures[20];
-	apush(&sprite, &material);
-	material = &textures[21];
-	apush(&sprite, &material);
-	material = &textures[22];
-	apush(&sprite, &material);
 	gun = (t_weapon) {
 		.name = (t_weapon_type)GUN, .type = 1, .ammo = 20, .ammo_max = 20,
 		.damage = 20, .cadence = 50, .type_shot = (t_shot_type)HITSCAN,
@@ -48,13 +42,11 @@ static t_weapon	init_smg(t_img *textures)
 	t_img		*material;
 
 	sprite = safe_anew(NULL, 1, sizeof(t_img *), "generate_map");
-	material = &textures[23];
+	material = &textures[20];
 	apush(&sprite, &material);
-	material = &textures[24];
+	material = &textures[21];
 	apush(&sprite, &material);
-	material = &textures[25];
-	apush(&sprite, &material);
-	material = &textures[26];
+	material = &textures[22];
 	apush(&sprite, &material);
 	smg = ((t_weapon) {
 		.name = (t_weapon_type)SMG, .type = 1, .ammo = 80, .ammo_max = 80,
@@ -71,17 +63,11 @@ static t_weapon	init_shotgun(t_img *textures)
 	t_img		*material;
 
 	sprite = safe_anew(NULL, 1, sizeof(t_img *), "generate_map");
-	material = &textures[27];
+	material = &textures[23];
 	apush(&sprite, &material);
-	material = &textures[28];
+	material = &textures[24];
 	apush(&sprite, &material);
-	material = &textures[29];
-	apush(&sprite, &material);
-	material = &textures[30];
-	apush(&sprite, &material);
-	material = &textures[31];
-	apush(&sprite, &material);
-	material = &textures[32];
+	material = &textures[25];
 	apush(&sprite, &material);
 	shotgun = ((t_weapon) {
 		.name = (t_weapon_type)SHOTGUN, .type = 1,	.ammo = 10, .ammo_max = 10,
@@ -98,17 +84,11 @@ static t_weapon	init_revolver(t_img *textures)
 	t_img		*material;
 
 	sprite = safe_anew(NULL, 1, sizeof(t_img *), "generate_map");
-	material = &textures[33];
+	material = &textures[26];
 	apush(&sprite, &material);
-	material = &textures[34];
+	material = &textures[27];
 	apush(&sprite, &material);
-	material = &textures[35];
-	apush(&sprite, &material);
-	material = &textures[36];
-	apush(&sprite, &material);
-	material = &textures[37];
-	apush(&sprite, &material);
-	material = &textures[38];
+	material = &textures[28];
 	apush(&sprite, &material);
 	revolver = ((t_weapon) {
 		.name = (t_weapon_type)REVOLVER, .type = 1, .ammo = 6, .ammo_max = 6,

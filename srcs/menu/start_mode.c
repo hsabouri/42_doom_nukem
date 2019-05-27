@@ -31,8 +31,8 @@ t_menu_state *state)
 		.size = (t_pix) {256, 56},
 		.background = NO_COLOR,
 		.events = &state->env->events,
-		.img = parse_tga("./textures/menu/start_game.tga"),
-		.img_active = parse_tga("./textures/menu/start_game_active.tga"),
+		.img = parse_tga("./textures/menu/start_game.tga", 0),
+		.img_active = parse_tga("./textures/menu/start_game_active.tga", 0),
 		.to_activate = (int *)&state->type,
 		.active_value = NEW_GAME,
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
@@ -42,8 +42,8 @@ t_menu_state *state)
 		.size = (t_pix) {256, 56},
 		.background = NO_COLOR,
 		.events = &state->env->events,
-		.img = parse_tga("./textures/menu/start_editor.tga"),
-		.img_active = parse_tga("./textures/menu/start_editor_active.tga"),
+		.img = parse_tga("./textures/menu/start_editor.tga", 0),
+		.img_active = parse_tga("./textures/menu/start_editor_active.tga", 0),
 		.to_activate = (int *)&state->type,
 		.active_value = NEW_MAP,
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl),
@@ -54,8 +54,8 @@ t_menu_state *state)
 		.background = NO_COLOR,
 		.events = &state->env->events,
 		.callback = &quit_game,
-		.img = parse_tga("./textures/menu/quit_game.tga"),
-		.img_active = parse_tga("./textures/menu/quit_game_active.tga"),
+		.img = parse_tga("./textures/menu/quit_game.tga", 0),
+		.img_active = parse_tga("./textures/menu/quit_game_active.tga", 0),
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl),
 	apush(&childs, &current);
 	return (childs);

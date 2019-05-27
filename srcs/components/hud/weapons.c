@@ -35,6 +35,23 @@ static int				self_update(t_component *self, void *parent_state)
 	}
 	if (self_state->last_secondary != hud->env->game.player.secondary)
 		self_state->last_secondary = hud->env->game.player.secondary;
+	if (hud->env->events.mouse[SDL_BUTTON_LEFT])
+	{
+		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
+			[hud->env->game.player.equiped]].sprite, 2);
+		if (hud->env->game.weapons[self_state->last_equiped].ammo > 0)
+			hud->env->game.weapons[self_state->last_equiped].ammo -= 1;
+		else
+			hud->env->game.weapons[self_state->last_equiped].ammo
+				= hud->env->game.weapons[self_state->last_equiped].ammo_max;
+		self->img = **sprite;
+	}
+	else
+	{
+		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
+			[hud->env->game.player.equiped]].sprite, 1);
+		self->img = **sprite;
+	}
 	return (1);
 }
 
@@ -58,6 +75,7 @@ static t_weapons_state	*init_weapon_state(void *parent_state)
 	state->last_equiped = hud->env->game.player.weapons
 		[hud->env->game.player.weapons[hud->env->game.player.equiped]];
 	state->last_secondary = hud->env->game.player.secondary;
+	state->shot = 0;
 	return (state);
 }
 

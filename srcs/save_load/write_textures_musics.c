@@ -32,6 +32,7 @@ int index)
 			loc_content += (size_t)(textures[i - 1].width *
 				textures[i - 1].height) * sizeof(t_color);
 		s_textures.content = loc_content;
+		s_textures.edit = textures[i].edit;
 		write_struct(&s_textures, fd, sizeof(t_c_img));
 		i++;
 	}

@@ -119,7 +119,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/create_point.tga"),
+		.img = parse_tga("./textures/ui/create_point.tga", 0),
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_P,
 		.active_value = CREATE_POINT}, sdl);
@@ -129,7 +129,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/create_wall.tga"),
+		.img = parse_tga("./textures/ui/create_wall.tga", 0),
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_O,
 		.active_value = CREATE_WALL}, sdl);
@@ -139,7 +139,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/assign_wall.tga"),
+		.img = parse_tga("./textures/ui/assign_wall.tga", 0),
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_L,
 		.active_value = ASSIGN_WALL}, sdl);
@@ -149,7 +149,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/create_portal.tga"),
+		.img = parse_tga("./textures/ui/create_portal.tga", 0),
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_I,
 		.active_value = CREATE_PORTAL}, sdl);
@@ -159,7 +159,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/entity_tool.tga"),
+		.img = parse_tga("./textures/ui/entity_tool.tga", 0),
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_U,
 		.active_value = TOOL_ENTITY}, sdl);
@@ -169,7 +169,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/assign_entity.tga"),
+		.img = parse_tga("./textures/ui/assign_entity.tga", 0),
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_J,
 		.active_value = ASSIGN_ENTITY}, sdl);
@@ -179,7 +179,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/sector_color.tga"),
+		.img = parse_tga("./textures/ui/sector_color.tga", 0),
 		.to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_Y,
 		.active_value = SECTOR_COLOR}, sdl);
@@ -218,7 +218,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/magnetisme.tga"),
+		.img = parse_tga("./textures/ui/magnetisme.tga", 0),
 		.to_activate = (int *)&state->magnetisme,
 		.scancode = SDL_SCANCODE_LCTRL,
 		.enable_value = 1,
@@ -229,7 +229,7 @@ t_sdl *sdl)
 		.size = (t_pix) {40, 40},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &env->events,
-		.img = parse_tga("./textures/ui/grid_size.tga"),
+		.img = parse_tga("./textures/ui/grid_size.tga", 0),
 		.callback = &grid_size,
 		.scancode = SDL_SCANCODE_SPACE}, sdl);
 	apush(&ret, &current);
@@ -239,7 +239,7 @@ t_sdl *sdl)
 		.state = state,
 		.invert = 0
 	}, init_help_component((t_help_state) {
-			.img = parse_tga("./textures/hud/map_editor.tga")}, sdl));
+			.img = parse_tga("./textures/hud/map_editor.tga", 0)}, sdl));
 	apush(&ret, &current);
 	return (ret);
 }
