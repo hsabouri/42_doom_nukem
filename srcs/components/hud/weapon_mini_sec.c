@@ -14,12 +14,15 @@
 
 static void				self_render(const t_component self, t_color *buf)
 {
-	const t_mini_weapon		mini = *(t_mini_weapon *)self.state;
-	const t_weapons_state	parent_state = *(t_weapons_state *)mini.parent;
-	const uint32_t			equiped = parent_state.player->secondary;
-	const t_img				sprite = **(t_img **)anth(
-		&parent_state.weapons[equiped].sprite, 0);
+	t_mini_weapon	mini;
+	t_weapons_state	parent_state;
+	uint32_t		equiped;
+	t_img			sprite;
 
+	mini = *(t_mini_weapon *)self.state;
+	parent_state = *(t_weapons_state *)mini.parent;
+	equiped = parent_state.player->secondary;
+	sprite = **(t_img **)anth(&parent_state.weapons[equiped].sprite, 0);
 	background(buf, NO_COLOR, self.size);
 	if (parent_state.weapons[equiped].ammo == 0)
 	{
@@ -76,24 +79,11 @@ static t_mini_weapon	*init_state(void *parent_state)
 	return (mini_state);
 }
 
-t_array					mini_weapon_s(t_array array, void *parent_state,
-t_sdl *sdl)
+static char				*init_str(t_weapons_state *weapon_state)
 {
-	t_component		component;
-	t_img			**sprite;
-	t_weapons_state	*weapon_state;
-	char			*str;
-	char			*tmp;
+	char	*str;
+	char	*tmp;
 
-	weapon_state = (t_weapons_state *)parent_state;
-	sprite = anth(&weapon_state->weapons[weapon_state->last_secondary].sprite,
-		0);
-	component.display = 1;
-	component.img = **sprite;
-	component.size.x = WIDTH;
-	component.size.y = HEIGHT;
-	component.pos.x = 0;
-	component.pos.y = 0;
 	str = ft_strdup(ft_itoa(weapon_state->weapons
 		[weapon_state->last_secondary].ammo));
 	tmp = str;
@@ -103,15 +93,29 @@ t_sdl *sdl)
 	str = ft_strjoin(str, ft_itoa(weapon_state->weapons
 		[weapon_state->last_secondary].ammo_max));
 	ft_strdel(&tmp);
+	return (str);
+}
+
+t_array					mini_weapon_s(t_array array, void *parent_state,
+t_sdl *sdl)
+{
+	t_component		component;
+	t_img			**sprite;
+	t_weapons_state	*weapon_state;
+	char			*str;
+
+	weapon_state = (t_weapons_state *)parent_state;
+	sprite = anth(&weapon_state->weapons[weapon_state->last_secondary].sprite,
+		0);
+	component = (t_component) {.display = 1, .img = **sprite, .size.x = WIDTH,
+		.size.y = HEIGHT, .pos.x = 0, .pos.y = 0, .update = &self_update,
+		.state = init_state(parent_state), .destroy = &no_destroy,
+		.render = &self_render, .complete_render = NULL,
+		.childs = safe_anew(NULL, 1, sizeof(t_component), "component")};
+	str = init_str(weapon_state);
 	component.text = component_text(str, (t_pix) {component.img.width * 3 + 15,
 		HEIGHT - component.img.height + 15}, sdl);
 	ft_strdel(&str);
-	component.state = init_state(parent_state);
-	component.update = &self_update;
-	component.destroy = &no_destroy;
-	component.render = &self_render;
-	component.childs = safe_anew(NULL, 1, sizeof(t_component), "component");
-	component.complete_render = NULL;
 	component.last_render = SDL_CreateTexture(sdl->renderer,
 		SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, component.size.x,
 		component.size.y);

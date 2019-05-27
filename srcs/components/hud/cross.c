@@ -17,7 +17,7 @@ static void			self_render(const t_component self, t_color *buf)
 	component_image(self.img, (t_pix) {0, 0}, self.size, buf);
 }
 
-t_array				init_cross(t_array array, void *parent_state,\
+t_array				init_cross(t_array array, void *parent_state,
 t_sdl *sdl)
 {
 	t_component	component;

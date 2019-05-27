@@ -226,7 +226,7 @@ void					render_single_threaded(const t_env env, t_color *buf);
 
 void					*safe_malloc(size_t size, char *location);
 void					*safe_realloc(void *ptr, size_t size, char *location);
-t_array					safe_anew(void *first, size_t len, size_t elem_size,\
+t_array					safe_anew(void *first, size_t len, size_t elem_size,
 						char *location);
 
 void					clean_music(t_game game);
