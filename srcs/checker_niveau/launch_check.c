@@ -12,7 +12,8 @@
 
 #include <doom.h>
 
-static void	display_no_blocking_error(t_list error_list, char *errors_text[NBR_ERROR])
+static void	display_no_blocking_error(t_list error_list,
+char *errors_text[NBR_ERROR])
 {
 	t_lvl_error	*display;
 
@@ -69,10 +70,10 @@ static void	init_errors_text(char *errors_text[NBR_ERROR])
 	errors_text[24] = "missing mat in multi_mat";
 }
 
-static void check_no_blocking(char *errors_text[NBR_ERROR], t_game game)
+static void	check_no_blocking(char *errors_text[NBR_ERROR], t_game game)
 {
-	t_list		error_list;
-	t_list		current;
+	t_list	error_list;
+	t_list	current;
 
 	error_list = lnew(NULL);
 	current = dangling_portal_wall(game.portals, game.nportals, game);
@@ -90,22 +91,21 @@ static void check_no_blocking(char *errors_text[NBR_ERROR], t_game game)
 	display_no_blocking_error(error_list, errors_text);
 }
 
-int32_t	launch_check(t_env *env, t_game game)
+int32_t		launch_check(t_env *env, t_game game)
 {
 	t_lvl_error	error;
 	char		*errors_text[NBR_ERROR];
-
 	t_check_mat	mats;
 
 	init_error(&error);
 	init_errors_text(errors_text);
 	mats.nmaterials = game.nmaterials;
 	mats.materials = game.materials;
-	if (launch_check_wall(game, mats, env, errors_text) == 0 ||
-		launch_check_portal(game, env, errors_text) == 0 ||
-		launch_check_sector(game, mats, env, errors_text) == 0 ||
-		launch_check_mats(game, mats, env, errors_text) == 0 ||
-		launch_check_entities(game, env, errors_text) == 0)
+	if (launch_check_wall(game, mats, env, errors_text) == 0
+		|| launch_check_portal(game, env, errors_text) == 0
+		|| launch_check_sector(game, mats, env, errors_text) == 0
+		|| launch_check_mats(game, mats, env, errors_text) == 0
+		|| launch_check_entities(game, env, errors_text) == 0)
 		return (0);
 	printf("no blocking errors\n");
 	check_no_blocking(errors_text, game);

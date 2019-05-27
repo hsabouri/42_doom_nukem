@@ -32,8 +32,8 @@ static t_lvl_error	check_sector_id(t_sector *sectors, size_t nsectors)
 	return (error);
 }
 
-static t_lvl_error	check_sector_floor(t_sector *sectors,
-size_t nsectors, t_check_mat mats)
+static t_lvl_error	check_sector_floor(t_sector *sectors, size_t nsectors,
+t_check_mat mats)
 {
 	t_lvl_error	error;
 	size_t		cpt;
@@ -56,8 +56,8 @@ size_t nsectors, t_check_mat mats)
 	return (error);
 }
 
-static t_lvl_error	check_sector_ceil(t_sector *sectors,
-size_t nsectors, t_check_mat mats)
+static t_lvl_error	check_sector_ceil(t_sector *sectors, size_t nsectors,
+t_check_mat mats)
 {
 	t_lvl_error	error;
 	size_t		cpt;

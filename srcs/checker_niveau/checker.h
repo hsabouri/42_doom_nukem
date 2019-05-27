@@ -76,7 +76,6 @@ typedef struct	s_check_mat
 }				t_check_mat;
 
 void			init_error(t_lvl_error *error);
-
 t_lvl_error		check_wall_sector(t_sector *sectors, size_t nsectors,
 				size_t nwalls);
 t_list			dangling_portal_wall(t_portal *portals, size_t nportals,

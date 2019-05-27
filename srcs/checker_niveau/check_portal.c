@@ -22,8 +22,8 @@ size_t nsectors)
 	init_error(&error);
 	while (cpt < nportals)
 	{
-		if (portals[cpt].from_sector > nsectors ||
-			portals[cpt].to_sector > nsectors)
+		if (portals[cpt].from_sector > nsectors
+			|| portals[cpt].to_sector > nsectors)
 		{
 			error.error_type = SECTOR_PORTAL;
 			error.portal = cpt;
