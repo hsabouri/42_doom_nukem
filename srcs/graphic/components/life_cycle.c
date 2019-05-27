@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/26 16:27:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/27 10:54:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ SDL_Texture			*render_component(const t_component self, t_sdl *sdl)
 	return (texture);
 }
 
-t_component			trigger_component(void *parent, t_component component, t_sdl *sdl)
+t_component			trigger_component(void *parent, t_component component,
+t_sdl *sdl)
 {
 	t_component *child;
 	size_t		i;
 
-    if (!component.update || component.update(&component, parent))
+	if (!component.update || component.update(&component, parent))
 	{
 		i = 0;
 		if (component.complete_render)
@@ -46,7 +47,7 @@ t_component			trigger_component(void *parent, t_component component, t_sdl *sdl)
 			component.last_render = render_component(component, sdl);
 		while ((child = (t_component *)anth(&component.childs, i)) != NULL)
 		{
-    		*child = trigger_component(component.state, *child, sdl);
+			*child = trigger_component(component.state, *child, sdl);
 			i++;
 		}
 	}
@@ -72,37 +73,15 @@ void				display_component(const t_component component, t_sdl *sdl)
 				component.text.h}));
 	while ((child = (t_component *)anth(&component.childs, i)) != NULL)
 	{
-    	display_component(*child, sdl);
+		display_component(*child, sdl);
 		i++;
 	}
 }
 
-void				destroy_component(t_component *component)
-{
-	t_component	*current;
-
-	if (!component)
-		return ;
-	while ((current = (t_component *)apop(&component->childs)))
-		destroy_component(current);
-	if (!component->destroy)
-		free(component->state);
-	else
-		component->destroy(component);
-	if (component->text.text_texture)
-		SDL_DestroyTexture(component->text.text_texture);
-	if (component->img.content)
-		free(component->img.content);
-	if (component->last_render)
-		SDL_DestroyTexture(component->last_render);
-	if (component->childs.mem)
-		free(component->childs.mem);
-}
-
 t_component			render_all(t_component component, t_sdl *sdl)
 {
-	t_component *child;
-	size_t i;
+	t_component	*child;
+	size_t		i;
 
 	i = 0;
 	if (component.complete_render)

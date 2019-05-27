@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:23:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/10 11:27:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/27 12:13:38 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ typedef struct	s_list_button_state
 	int				is_active;
 	t_event			*events;
 	void			*parent;
-	t_list_state 	*list;
+	t_list_state	*list;
 	t_color			bg;
 	t_pix			d_pos;
 	int				*y_scroll;
-	int			destroy_image;
+	int				destroy_image;
 }				t_list_button_state;
 
 typedef struct	s_list_button
@@ -82,5 +82,14 @@ typedef struct	s_list_button
 t_component		init_list_comp(t_list_comp list, t_sdl *sdl);
 t_component		init_list_button(t_list_button button, t_list_state state,
 				t_sdl *sdl);
+
+int				update_list_button(t_component *self, void *parent);
+void			render_list_button(const t_component self, t_color *buf);
+
+t_array			clean_old(t_component *self, t_list_state *state,
+				t_array built);
+t_array			build_childs(t_component *self, t_list_state *state,
+				void *parent, t_sdl *sdl);
+t_array			list_init_childs(t_list_comp list, t_sdl *sdl);
 
 #endif

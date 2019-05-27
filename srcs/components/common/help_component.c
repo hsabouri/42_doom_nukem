@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   help_component.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 16:44:18 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/01 16:44:20 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/27 11:36:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./common.h"
 
-static void			self_render(const t_component self, t_color *buf)
+static void	self_render(const t_component self, t_color *buf)
 {
 	t_help_state	*state;
 	t_color			bg;
