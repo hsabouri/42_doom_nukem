@@ -12,7 +12,8 @@
 
 #include <doom.h>
 
-t_lvl_error	check_wall_sector(t_sector *sectors, size_t nsectors, size_t nwalls)
+t_lvl_error		check_wall_sector(t_sector *sectors, size_t nsectors,
+size_t nwalls)
 {
 	t_lvl_error	error;
 	size_t		cpt;
@@ -23,17 +24,16 @@ t_lvl_error	check_wall_sector(t_sector *sectors, size_t nsectors, size_t nwalls)
 	while (++cpt < nsectors)
 	{
 		nbr_walls = sectors[cpt].start + sectors[cpt].number;
-		if (sectors[cpt].start > nwalls || sectors[cpt].number > nwalls ||
-			nbr_walls > nwalls)
+		if (sectors[cpt].start > nwalls || sectors[cpt].number > nwalls
+			|| nbr_walls > nwalls)
 		{
 			error.sector = cpt;
 			if (sectors[cpt].start > nwalls)
 				error = (t_lvl_error) {.error_type = WALL_START_SECTOR,
 				.wall = sectors[cpt].start};
 			else
-				error = (t_lvl_error) {.error_type =
-					(sectors[cpt].number > nwalls) ?
-					WALL_END_SECTOR : NUMBER_WALLS_SECTOR,
+				error = (t_lvl_error) {.error_type = (sectors[cpt].number
+					> nwalls) ? WALL_END_SECTOR : NUMBER_WALLS_SECTOR,
 					.wall = (ssize_t)(sectors[cpt].number)};
 			return (error);
 		}
@@ -53,7 +53,8 @@ t_list			height_sector(t_sector *sectors, size_t nsectors)
 	{
 		if ((sectors[cpt].ceiling.z - sectors[cpt].floor.z) < 0.1)
 		{
-			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error),
+				"level_checker");
 			init_error(elem);
 			elem->elem.next = NULL;
 			elem->error_type = HEIGHT_SECTOR;
@@ -65,15 +66,15 @@ t_list			height_sector(t_sector *sectors, size_t nsectors)
 	return (error);
 }
 
-static t_list	*browse_next_sector(size_t cpt, size_t start, t_game game,\
+static t_list	*browse_next_sector(size_t cpt, size_t start, t_game game,
 t_list *error)
 {
 	t_lvl_error	*elem;
 	size_t		sector_out;
 
-	sector_out = (game.portals[game.walls[start].portal].from_sector == cpt) ?\
-		game.portals[game.walls[start].portal].to_sector :
-		game.portals[game.walls[start].portal].from_sector;
+	sector_out = (game.portals[game.walls[start].portal].from_sector == cpt)
+		? game.portals[game.walls[start].portal].to_sector
+		: game.portals[game.walls[start].portal].from_sector;
 	if (game.sectors[sector_out].ceiling.z - game.sectors[cpt].floor.z < 0.1)
 	{
 		elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");
@@ -86,7 +87,7 @@ t_list *error)
 	return (error);
 }
 
-t_list			height_next_sector(t_sector *sectors, size_t nsectors,\
+t_list			height_next_sector(t_sector *sectors, size_t nsectors,
 t_game game)
 {
 	t_list	error;

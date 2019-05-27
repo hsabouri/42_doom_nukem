@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-t_lvl_error	check_multi_sprite(size_t nmulti, t_array *multi_sprite,
+static t_lvl_error	check_multi_sprite(size_t nmulti, t_array *multi_sprite,
 t_mat *mats, size_t nmaterials)
 {
 	t_lvl_error	error;
@@ -42,7 +42,8 @@ t_mat *mats, size_t nmaterials)
 	return (error);
 }
 
-t_lvl_error	check_texture(size_t ntextures, t_img *textures, t_check_mat mats)
+static t_lvl_error	check_texture(size_t ntextures, t_img *textures,
+t_check_mat mats)
 {
 	t_lvl_error	error;
 	size_t		cpt;
@@ -64,7 +65,7 @@ t_lvl_error	check_texture(size_t ntextures, t_img *textures, t_check_mat mats)
 	return (error);
 }
 
-t_lvl_error	check_overlay(t_mat *materials, size_t nmaterials)
+static t_lvl_error	check_overlay(t_mat *materials, size_t nmaterials)
 {
 	t_lvl_error	error;
 	size_t		cpt;
@@ -86,7 +87,7 @@ t_lvl_error	check_overlay(t_mat *materials, size_t nmaterials)
 	return (error);
 }
 
-u_int32_t	launch_check_mats(t_game game, t_check_mat mats, t_env *env,
+u_int32_t			launch_check_mats(t_game game, t_check_mat mats, t_env *env,
 char *errors_text[NBR_ERROR])
 {
 	t_lvl_error error;

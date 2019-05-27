@@ -101,7 +101,7 @@ int32_t	launch_check(t_env *env, t_game game)
 	init_errors_text(errors_text);
 	mats.nmaterials = game.nmaterials;
 	mats.materials = game.materials;
-	if (launch_check_wall(error, game, errors_text, mats, env) == 0 ||
+	if (launch_check_wall(game, mats, env, errors_text) == 0 ||
 		launch_check_portal(game, env, errors_text) == 0 ||
 		launch_check_sector(game, mats, env, errors_text) == 0 ||
 		launch_check_mats(game, mats, env, errors_text) == 0 ||

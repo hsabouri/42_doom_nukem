@@ -12,7 +12,8 @@
 
 #include <doom.h>
 
-t_lvl_error	sector_portal(t_portal *portals, size_t nportals, size_t nsectors)
+static t_lvl_error	sector_portal(t_portal *portals, size_t nportals,
+size_t nsectors)
 {
 	t_lvl_error	error;
 	size_t		cpt;
@@ -37,7 +38,8 @@ t_lvl_error	sector_portal(t_portal *portals, size_t nportals, size_t nsectors)
 	return (error);
 }
 
-t_lvl_error	wall_portal(t_portal *portals, size_t nportals, size_t nwalls)
+static t_lvl_error	wall_portal(t_portal *portals, size_t nportals,
+size_t nwalls)
 {
 	t_lvl_error	error;
 	size_t		cpt;
@@ -61,7 +63,7 @@ t_lvl_error	wall_portal(t_portal *portals, size_t nportals, size_t nwalls)
 	return (error);
 }
 
-u_int32_t	launch_check_portal(t_game game, t_env *env,
+u_int32_t			launch_check_portal(t_game game, t_env *env,
 char *errors_text[NBR_ERROR])
 {
 	t_lvl_error	error;

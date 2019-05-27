@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-t_lvl_error	check_mat_entities(t_entity *entities, size_t nentities,
+static t_lvl_error	check_mat_entities(t_entity *entities, size_t nentities,
 t_array *multi_mats, size_t nmulti)
 {
 	t_lvl_error	error;
@@ -35,7 +35,8 @@ t_array *multi_mats, size_t nmulti)
 	return (error);
 }
 
-t_list		sector_entity(t_entity *entities, size_t nentities, t_game game)
+t_list				sector_entity(t_entity *entities, size_t nentities,
+t_game game)
 {
 	t_list		error;
 	t_lvl_error	*elem;
@@ -61,7 +62,7 @@ t_list		sector_entity(t_entity *entities, size_t nentities, t_game game)
 	return (error);
 }
 
-u_int32_t	launch_check_entities(t_game game, t_env *env,
+u_int32_t			launch_check_entities(t_game game, t_env *env,
 char *errors_text[NBR_ERROR])
 {
 	t_lvl_error error;
