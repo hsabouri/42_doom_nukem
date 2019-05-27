@@ -14,7 +14,7 @@
 
 int			new_map(void *parent_state)
 {
-	t_menu_state 			*menu;
+	t_menu_state			*menu;
 	t_display_deco_state	*deco;
 
 	deco = (t_display_deco_state *)parent_state;
@@ -26,7 +26,7 @@ int			new_map(void *parent_state)
 
 int			new_game(void *parent_state)
 {
-	t_menu_state 			*menu;
+	t_menu_state			*menu;
 	t_display_deco_state	*deco;
 
 	deco = (t_display_deco_state *)parent_state;
@@ -38,7 +38,7 @@ int			new_game(void *parent_state)
 
 int			level_1(void *parent_state)
 {
-	t_menu_state 			*menu;
+	t_menu_state *menu;
 
 	menu = (t_menu_state *)parent_state;
 	menu->env->game_mode = GAME_MODE;
@@ -48,7 +48,7 @@ int			level_1(void *parent_state)
 
 int			level_2(void *parent_state)
 {
-	t_menu_state 			*menu;
+	t_menu_state *menu;
 
 	menu = (t_menu_state *)parent_state;
 	menu->env->game_mode = GAME_MODE;
@@ -58,7 +58,7 @@ int			level_2(void *parent_state)
 
 int			level_3(void *parent_state)
 {
-	t_menu_state 			*menu;
+	t_menu_state *menu;
 
 	menu = (t_menu_state *)parent_state;
 	menu->env->game_mode = GAME_MODE;
