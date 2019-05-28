@@ -12,83 +12,66 @@
 
 #include "./menu.h"
 
-static t_array 		init_start_button(t_array childs, t_sdl *sdl,\
+static t_array		init_start_button_2(t_array childs, t_sdl *sdl,
 t_menu_state *state)
 {
 	t_component	current;
 
-	current = init_display_deco((t_display_deco_state) {
-		.to_look_at = (int *)&state->type,
-		.display_value = NEW_GAME,
-		.state = state,
-		.invert = 0
-	}, init_cb_button((t_cb_button) {
-		.pos = (t_pix) {96, 365},
-		.size = (t_pix) {256, 56},
-		.background = NO_COLOR,
-		.events = &state->env->events,
-		.callback = &new_game,
+	current = init_cb_button((t_cb_button) {.pos = (t_pix) {96, 416},
+		.size = (t_pix) {256, 56}, .background = NO_COLOR,
+		.events = &state->env->events, .callback = &level_1,
+		.img = parse_tga("./textures/menu/level_1.tga", 0),
+		.img_active = parse_tga("./textures/menu/level_1_active.tga", 0),
+		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
+	apush(&childs, &current);
+	current = init_cb_button((t_cb_button) {.pos = (t_pix) {96, 467},
+		.size = (t_pix) {256, 56}, .background = NO_COLOR,
+		.events = &state->env->events, .callback = &level_2,
+		.img = parse_tga("./textures/menu/level_2.tga", 0),
+		.img_active = parse_tga("./textures/menu/level_2_active.tga", 0),
+		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
+	apush(&childs, &current);
+	current = init_cb_button((t_cb_button) {.pos = (t_pix) {96, 518},
+		.size = (t_pix) {256, 56}, .background = NO_COLOR,
+		.events = &state->env->events, .callback = &level_3,
+		.img = parse_tga("./textures/menu/level_3.tga", 0),
+		.img_active = parse_tga("./textures/menu/level_3_active.tga", 0),
+		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
+	apush(&childs, &current);
+	return (childs);
+}
+
+static t_array		init_start_button(t_array childs, t_sdl *sdl,
+t_menu_state *state)
+{
+	t_component	current;
+
+	current = init_display_deco((t_display_deco_state) {.invert = 0,
+		.to_look_at = (int *)&state->type, .display_value = NEW_GAME,
+		.state = state}, init_cb_button((t_cb_button) {.pos = (t_pix) {96, 365},
+		.size = (t_pix) {256, 56}, .background = NO_COLOR,
+		.events = &state->env->events, .callback = &new_game,		
 		.img = parse_tga("./textures/menu/new_game.tga", 0),
 		.img_active = parse_tga("./textures/menu/new_game_active.tga", 0),
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl));
 	apush(&childs, &current);
-	current = init_display_deco((t_display_deco_state) {
-		.to_look_at = (int *)&state->type,
-		.display_value = NEW_MAP,
-		.state = state,
-		.invert = 0
-	}, init_cb_button((t_cb_button) {
-		.pos = (t_pix) {96, 365},
-		.size = (t_pix) {256, 56},
-		.background = NO_COLOR,
-		.events = &state->env->events,
-		.callback = &new_map,
+	current = init_display_deco((t_display_deco_state) {.invert = 0,
+		.to_look_at = (int *)&state->type, .display_value = NEW_MAP,
+		.state = state}, init_cb_button((t_cb_button) {.pos = (t_pix) {96, 365},
+		.size = (t_pix) {256, 56}, .background = NO_COLOR,
+		.events = &state->env->events, .callback = &new_map,
 		.img = parse_tga("./textures/menu/new_level.tga", 0),
 		.img_active = parse_tga("./textures/menu/new_level_active.tga", 0),
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl));
 	apush(&childs, &current);
 	if (state->env->file && ft_strcmp(state->env->file, "nyan_dukem") == 0)
-	{
-		current = init_cb_button((t_cb_button) {
-			.pos = (t_pix) {96, 416},
-			.size = (t_pix) {256, 56},
-			.background = NO_COLOR,
-			.events = &state->env->events,
-			.callback = &level_1,
-			.img = parse_tga("./textures/menu/level_1.tga", 0),
-			.img_active = parse_tga("./textures/menu/level_1_active.tga", 0),
-			.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
-		apush(&childs, &current);
-		current = init_cb_button((t_cb_button) {
-			.pos = (t_pix) {96, 467},
-			.size = (t_pix) {256, 56},
-			.background = NO_COLOR,
-			.events = &state->env->events,
-			.callback = &level_2,
-			.img = parse_tga("./textures/menu/level_2.tga", 0),
-			.img_active = parse_tga("./textures/menu/level_2_active.tga", 0),
-			.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
-		apush(&childs, &current);
-		current = init_cb_button((t_cb_button) {
-			.pos = (t_pix) {96, 518},
-			.size = (t_pix) {256, 56},
-			.background = NO_COLOR,
-			.events = &state->env->events,
-			.callback = &level_3,
-			.img = parse_tga("./textures/menu/level_3.tga", 0),
-			.img_active = parse_tga("./textures/menu/level_3_active.tga", 0),
-			.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
-		apush(&childs, &current);
-	}
-	current = init_button((t_button) {
-		.pos = (t_pix) {96, 664},
-		.size = (t_pix) {256, 56},
-		.background = NO_COLOR,
-		.events = &state->env->events,
+		init_start_button_2(childs, sdl, state);
+	current = init_button((t_button) {.pos = (t_pix) {96, 664},
+		.size = (t_pix) {256, 56}, .background = NO_COLOR,
+		.events = &state->env->events, .active_value = START_MODE,
 		.img = parse_tga("./textures/menu/return.tga", 0),
 		.img_active = parse_tga("./textures/menu/return_active.tga", 0),
 		.to_activate = (int *)&state->type,
-		.active_value = START_MODE,
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	return (childs);

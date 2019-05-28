@@ -16,6 +16,5 @@ void	menu_loop(t_env *env)
 {
 	*env->component = trigger_component(env, *env->component, &env->sdl);
 	display_component(*env->component, &env->sdl);
-
 	SDL_RenderPresent(env->sdl.renderer);
 }
