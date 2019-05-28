@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/28 14:28:15 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/28 14:49:29 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include <graphic.h>
 #include "srcs/common/translate_id.h"
 
-static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h, const t_section section)
+static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h, const t_section section, int id)
 {
 	t_proj	res;
 	int		span;
-	float	range;
+	// float	range;
 	t_fixed ratio;
-	range = (context.right - context.left) * f_to_float(hit.ratios.u);
-	range += context.left;
+	// range = (context.right - context.left) * f_to_float(hit.ratios.u);
+	// range += context.left;
 
-	ratio = f_div(f_from_float(range),f_from_int(WIDTH));
+	ratio = f_div(f_from_int(id),f_from_int(WIDTH));
 
 	printf( "left = %d right = %d ratio section %f ,  ratio total%f\n", context.left, context.right,f_to_float(hit.ratios.u),f_to_float(ratio));
 	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) +
@@ -97,7 +97,7 @@ t_section section)
 	h.v = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(context.sector, section.wall.left_z, 0) + dis2;
 	if (hit.ratios.v < 10)
 		hit.ratios.v = 10;
-	res = projection(hit, context, h, section);
+	res = projection(hit, context, h, section, id);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_WALL, MOD_NO, section.wall.id, 0);
 	res.is_portal_tex = 0;
@@ -135,7 +135,7 @@ t_section section)
 	dis2 = f_mul(dis2, hit.ratios.u);
 	h2.u = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.left_z, 1) + dis;
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.left_z, 0) + dis2;
-	res = projection(hit, context, h, section);
+	res = projection(hit, context, h, section, id);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);
 	res.uid_step = translate_in(PART_PORTAL, MOD_STEP, section.wall.id, 0);
