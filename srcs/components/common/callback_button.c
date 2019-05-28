@@ -6,17 +6,17 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:13:01 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/26 16:10:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/27 11:04:07 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./common.h"
 
-static int				self_update(t_component *self, void* parent)
+static int					self_update(t_component *self, void *parent)
 {
 	t_cb_button_state	*state;
 	int					ret;
-	
+
 	(void)parent;
 	ret = 0;
 	state = (t_cb_button_state *)self->state;
@@ -39,7 +39,7 @@ static int				self_update(t_component *self, void* parent)
 	return (ret);
 }
 
-static void				self_render(const t_component self, t_color *buf)
+static void					self_render(const t_component self, t_color *buf)
 {
 	const t_cb_button_state	*state = (t_cb_button_state *)self.state;
 	t_color					bg;
@@ -77,7 +77,7 @@ static t_cb_button_state	*init_stat(t_cb_button button)
 	return (ret);
 }
 
-t_component				init_cb_button(t_cb_button button, t_sdl *sdl)
+t_component					init_cb_button(t_cb_button button, t_sdl *sdl)
 {
 	t_component	ret;
 

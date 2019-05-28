@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:54:32 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/26 16:11:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/27 12:03:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,59 +21,8 @@ static int					self_del(void *button)
 	return (0);
 }
 
-static int					self_update(t_component *self, void* parent)
-{
-	t_list_state		*list_state;
-	t_list_button_state	*state;
-	int					ret;
-	int					clicked;
-	
-	ret = 0;
-	state = (t_list_button_state *)self->state;
-	list_state = (t_list_state *)parent;
-	state->parent = list_state->parent;
-	state->list = list_state;
-	self->pos.y = state->d_pos.y - *state->y_scroll;
-	if (self->childs.len)
-		((t_component *)self->childs.first)->pos.y =
-			state->d_pos.y - *state->y_scroll + 1;
-	clicked = is_clicked_on(*self, *state->events);
-	if (clicked && state->is_active == 0 && state->select)
-	{
-		state->is_active = 1;
-		ret = 1;
-	}
-	if (!clicked && state->is_active && state->select)
-	{
-		list_state->need_update = state->select(list_state->parent, state->i);
-		state->is_active = 0;
-		ret = 1;
-	}
-	if (!clicked && state->events->any)
-		ret = 1;
-	return (ret);
-}
-
-static void					self_render(const t_component self, t_color *buf)
-{
-	const t_list_button_state	*state = (t_list_button_state *)self.state;
-	t_color						bg;
-	t_color						outline;
-
-	bg = state->bg;
-	outline.r = bg.r - 30;
-	outline.g = bg.g - 30;
-	outline.b = bg.b - 30;
-	outline.a = 255;
-	if (state->is_active)
-		bg = outline;
-	background(buf, bg, self.size);
-	background(buf, outline, (t_pix) {self.size.x, 1});
-	if (self.img.content)
-		component_image(self.img, (t_pix) {5, 5}, self.size, buf);
-}
-
-static t_list_button_state	*init_state(t_list_button button, t_list_state state)
+static t_list_button_state	*init_state(t_list_button button,
+t_list_state state)
 {
 	t_list_button_state	*ret;
 
@@ -103,7 +52,8 @@ t_sdl *sdl)
 		p->size.x -= 30;
 		childs = safe_anew(NULL, 1, sizeof(t_component), "components");
 		current = init_cb_button((t_cb_button) {
-			.pos = (t_pix) {p->pos.x + p->size.x, p->pos.y + 1 - state.y_scroll},
+			.pos = (t_pix) {p->pos.x + p->size.x,
+				p->pos.y + 1 - state.y_scroll},
 			.size = (t_pix) {30, 29}, .background = state.bg,
 			.events = state.events, .place_holder = NULL,
 			.callback = &self_del, .scancode = SDL_SCANCODE_UNKNOWN,
@@ -115,11 +65,11 @@ t_sdl *sdl)
 	return (childs);
 }
 
-void				self_destroy(t_component *component)
+void						self_destroy(t_component *component)
 {
-	const t_list_button_state	*state =
-		(t_list_button_state *)component->state;
+	t_list_button_state	*state;
 
+	state = (t_list_button_state *)component->state;
 	if (!state->destroy_image)
 		component->img.content = NULL;
 }
@@ -139,8 +89,8 @@ t_list_state state, t_sdl *sdl)
 	ret.pos = button.pos;
 	ret.display = 1;
 	ret.state = init_state(button, state);
-	ret.update = &self_update;
-	ret.render = &self_render;
+	ret.update = &update_list_button;
+	ret.render = &render_list_button;
 	ret.complete_render = NULL;
 	ret.destroy = &self_destroy;
 	ret.childs = init_childs(&ret, state, sdl);

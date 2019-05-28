@@ -6,12 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 12:05:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 12:12:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/27 10:59:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENTITY_TYPE_TO_TEXT
-# define ENTITY_TYPE_TO_TEXT
+#ifndef ENTITY_TYPE_TO_TEXT_H
+# define ENTITY_TYPE_TO_TEXT_H
 
 # include <structure.h>
 

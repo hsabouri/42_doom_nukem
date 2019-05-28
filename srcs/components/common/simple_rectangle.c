@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 12:24:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 11:57:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/27 11:38:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./common.h"
 
-static int		self_update(t_component *self, void* parent)
+static int		self_update(t_component *self, void *parent)
 {
 	(void)self;
 	(void)parent;
@@ -29,7 +29,8 @@ t_color background, t_sdl *sdl)
 {
 	t_component ret;
 
-	ret = default_component((t_color *)safe_malloc(sizeof(t_color), "component"),
+	ret = default_component((t_color *)safe_malloc(sizeof(t_color),
+		"component"),
 		size, sdl);
 	*(t_color *)ret.state = background;
 	ret.pos = pos;
