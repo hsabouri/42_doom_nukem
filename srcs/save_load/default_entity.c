@@ -14,86 +14,48 @@
 
 t_player	player_default(t_game game)
 {
-	return ((t_player) {
-		(t_entity) {
+	t_player	player;
+
+	player = (t_player) {
+			(t_entity) {
 			-1,
-			(t_ph) {
-				0.02,
-				1.50,
-				0.5,
-				0,
-				(t_vec3){6.5, 11, 0},
-				(t_vec3){0, 0, 0},
-				(t_vec3){1, 1, 1},
-				0,
-				0,
-				0,
-				0,
-				0
+			(t_ph) {.gravity = 0.02, .height = 1.50, .radius = 0.5,
+				.pos = (t_vec3){6.5, 11, 0}, .speed_max = (t_vec3){1, 1, 1},
 			},
-			(t_ph) {
-				0.02,
-				1.50,
-				0.5,
-				0,
-				(t_vec3){6.5, 11, 0},
-				(t_vec3){0, 0, 0},
-				(t_vec3){1, 1, 1},
-				0,
-				0,
-				0,
-				0,
-				0
+			(t_ph) {.gravity = 0.02, .height = 1.50, .radius = 0.5,
+				.pos = (t_vec3){6.5, 11, 0}, .speed_max = (t_vec3){1, 1, 1},
 			},
 			&game.multi_mats[0],
 			(t_entity_type)PLAYER,
-			1
+			0
 		},
 		100,
-		{2, 3},
+		{0, 1},
 		6,
 		0,
-		safe_anew(NULL, 1, sizeof(t_entity *), "generate_map")});
+		safe_anew(NULL, 1, sizeof(t_entity *), "generate_map")};
+	return (player);
 }
 
 t_entity	entity_default(void)
 {
-	return ((t_entity) {
+	t_entity entity;
+
+	entity = ((t_entity) {
 		1,
-		(t_ph) {
-			0.02,
-			1.25,
-			0.5,
-			3,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
+		(t_ph) {.gravity = 0.02, .height = 1.25, .radius = 0.5, .rad_inter = 3,
+			.pos = (t_vec3){7, 9, 0}, .speed_max = (t_vec3){1, 1, 1},
 		},
-		(t_ph) {
-			0.02,
-			1.25,
-			0.5,
-			3,
-			(t_vec3){7, 9, 0},
-			(t_vec3){0, 0, 0},
-			(t_vec3){1, 1, 1},
-			0,
-			0,
-			0,
-			0,
-			0
+		(t_ph) {.gravity = 0.02, .height = 1.25, .radius = 0.5, .rad_inter = 3,
+			.pos = (t_vec3){7, 9, 0}, .speed_max = (t_vec3){1, 1, 1},
 		},
 		NULL,
 		-1,
 		0});
+	return (entity);
 }
 
-t_game	default_map(void)
+t_game		default_map(void)
 {
 	t_game game;
 

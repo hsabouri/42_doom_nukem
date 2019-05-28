@@ -35,59 +35,21 @@ void			verify_magic(void *t_c_struct, size_t magic, size_t index)
 	}
 }
 
-t_array			parse_inventory(void *buf, t_save save, t_entity *entities,\
-size_t n_inventory)
+static t_game	parse_2(void *buf, t_c_game game, t_save save, t_game res)
 {
-	t_array		res;
-	size_t		index;
-	t_entity	*entity;
-	size_t		i;
+	t_parse_event	event;
 
-	res = safe_anew(NULL, 1, sizeof(t_entity *), "loader");
-	i = 0;
-	while (i < n_inventory)
-	{
-		index = *(size_t *)dump_struct(buf, save.index + sizeof(size_t) * i,
-			sizeof(size_t), save.max);
-		entity = id_to_p(index, entities, sizeof(t_entity));
-		apush(&res, &entity);
-		i++;
-	}
-	return (res);
-}
-
-t_player		parse_player(t_c_game game, t_game new_game, void *buf,\
-t_save save)
-{
-	t_player	res;
-	t_player	current;
-	t_c_player  struc_p;
-
-	struc_p = *(t_c_player *)dump_struct(buf, save.index, sizeof(t_c_player), save.max);
-	verify_magic(&struc_p, PLAYER_MAGIC, 0);
-	current = player_default(new_game);
-	current.my_entity.physic.gravity = f_to_float(struc_p.my_entity.spawn.gravity);
-	current.my_entity.physic.height = f_to_float(struc_p.my_entity.spawn.height);
-	current.my_entity.physic.radius = f_to_float(struc_p.my_entity.spawn.radius);
-	current.my_entity.physic.rad_inter = f_to_float(struc_p.my_entity.spawn.rad_inter);
-	current.my_entity.physic.pos = fvec3_to_vec3(struc_p.my_entity.spawn.pos);
-	current.my_entity.physic.speed_max = fvec3_to_vec3(struc_p.my_entity.spawn.speed_max);
-	current.my_entity.physic.look_v = struc_p.my_entity.spawn.look.v;
-	current.my_entity.physic.look_h = f_to_float(struc_p.my_entity.spawn.look.u);
-	if (current.my_entity.physic.look_h > M_PI / 2 && current.my_entity.physic.look_h < -M_PI / 2)
-		current.my_entity.physic.look_h = 0;
-	current.my_entity.physic.sector_id = struc_p.my_entity.spawn.sector_id;
-	//parse mats
-	current.life = struc_p.life;
-	current.weapons[0] = struc_p.weapons[0];
-	current.weapons[1] = struc_p.weapons[1];
-	current.secondary = struc_p.secondary;
-	current.equiped = struc_p.equiped;
-	save.index = game.loc_inventory;
-	current.inventory = parse_inventory(buf, save, new_game.entities,
-		game.ninventory);
-	current.my_entity.damage = struc_p.my_entity.damage;
-	res = current;
+	res.nportals = game.nportals;
+	save.index = game.loc_entities;
+	res.entities = parse_entities(buf, save, res.multi_mats, game.nentities);
+	res.nentities = game.nentities;
+	res.unique_e_id = game.unique_e_id;
+	save.index = game.loc_player;
+	res.player = parse_player(game, res, buf, save);
+	save.index = game.loc_events;
+	event.buf = buf;
+	event.n_event = game.nevents;
+	res.waiting_events = parse_events(event, save, res, res.player);
 	return (res);
 }
 
@@ -116,16 +78,6 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	res.nsectors = game.nsectors;
 	save.index = game.loc_portals;
 	res.portals = parse_portals(buf, save, game.nportals, res.materials);
-	res.nportals = game.nportals;
-	save.index = game.loc_entities;
-	res.entities = parse_entities(buf, save, res.multi_mats, game.nentities);
-	res.nentities = game.nentities;
-	res.unique_e_id = game.unique_e_id;
-	save.index = game.loc_player;
-	res.player = parse_player(game, res, buf, save);
-	save.index = game.loc_events;
-	res.waiting_events = parse_events(buf, save, game.nevents, res,
-		res.player);
 	return (res);
 }
 
@@ -145,11 +97,11 @@ t_game			*load(const char *filename, int edit_mode)
 	save.max = max;
 	res = (t_game *)safe_malloc(sizeof(t_game), "loader");
 	*res = parse_1(buf, game, save);
+	*res = parse_2(buf, game, save, *res);
 	save.index = game.loc_music;
 	parse_audio(buf, save, game.nmusic, MUSIC);
 	save.index = game.loc_sounds;
 	parse_audio(buf, save, game.nsounds, SOUND);
 	res->log = safe_anew(NULL, 100, sizeof(t_trigger), "loader");
-	// debug(res);
 	return (res);
 }
