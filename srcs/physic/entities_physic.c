@@ -82,44 +82,6 @@ static t_vec3	move_entities(t_ph *physic, t_game *game, int wall, float old_time
 	return (next_pos);
 }
 
-static t_vec3	col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
-{
-	t_trigger tmp_log;
-
-	t_vec3	pos;
-	size_t	i;
-	float	d;
-
-	i = -1;
-	pos = n_physic.pos;
-
-	while (++i < game->nentities)
-	{
-
-		d = circle_circle(n_physic, game->entities[i].physic, COL_ENTITY);
-		if (d != -1 && i != id)
-		{
-			tmp_log.e_actif = game->player.my_entity;
-			tmp_log.condi = TRIGGER_TOUCH;
-			tmp_log.e_passif = game->entities[i];
-			apush(&game->log, &tmp_log);
-
-			if (n_physic.pos.x > game->entities[i].physic.pos.x)
-			{
-				physic.pos.x += (game->entities[i].physic.radius - d);
-				physic.pos.y += (game->entities[i].physic.radius - d);
-			}
-			else
-			{
-				physic.pos.x -= (game->entities[i].physic.radius - d);
-				physic.pos.y -= (game->entities[i].physic.radius - d);
-			}
-			pos = vec3_add(physic.pos, physic.speed);
-		}
-	}
-	return (pos);
-}
-
 int		is_here(t_game game, t_trigger trigger)
 {
 	int j;
@@ -134,30 +96,6 @@ int		is_here(t_game game, t_trigger trigger)
 	}
 	return 0;
 } // wtf ??
-
-void		col_interact(t_ph n_physic, t_game *game, size_t id)
-{
-	t_trigger tmp_log;
-
-	size_t	cpt;
-	size_t	log_inter;
-
-	cpt = 0;
-	log_inter = 0;
-	while (cpt < game->nentities)
-	{
-
-		if (interact(n_physic, game->entities[cpt].physic) == 1 && cpt != id) {
-
-			tmp_log.e_actif = game->player.my_entity;
-			tmp_log.condi = TRIGGER_INTERACT;
-			tmp_log.e_passif = game->entities[cpt];
-
-			apush(&game->log, &tmp_log);
-		}
-		cpt++;
-	}
-}
 
 t_ph			entities_physic(t_ph physic, t_game *game, size_t id, float old_timer)
 {

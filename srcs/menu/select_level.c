@@ -96,7 +96,7 @@ static void		self_render(const t_component self, t_color *buf)
 	component_image(self.img, (t_pix) {0, 0}, self.size, buf);
 }
 
-t_array			init_level_menu(t_array childs, t_sdl *sdl,\
+t_array			init_level_menu(t_array childs, t_sdl *sdl,
 t_menu_state *state)
 {
 	t_component	current;
