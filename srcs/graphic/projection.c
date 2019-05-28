@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:18:08 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:18:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,9 @@ static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h, co
 {
 	t_proj	res;
 	int		span;
-	// float	range;
 	t_fixed ratio;
-	// range = (context.right - context.left) * f_to_float(hit.ratios.u);
-	// range += context.left;
 
 	ratio = f_div(f_from_int(id),f_from_int(WIDTH));
-
-	printf( "left = %d right = %d ratio section %f ,  ratio total%f\n", context.left, context.right,f_to_float(hit.ratios.u),f_to_float(ratio));
 	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v) +
 		context.physic.look_v * 100);
 	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v) +
@@ -56,17 +51,11 @@ static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h, co
 	res.plane.ceiling.z = f_from_float(context.sector.ceiling.z);
 	res.plane.center.u = f_from_float(context.sector.center.u);
 	res.plane.center.v = f_from_float(context.sector.center.v);
-	res.plane.height = context.height;//pas bon
+	res.plane.height = context.height;
 	res.plane.v_a = context.v_a;
 	res.plane.v_b = context.v_b;
-	res.plane.line.z.u =  (res.plane.height + find_z(context.sector, vec3_to_vec2(context.physic.pos), 1));
+	res.plane.line.z.u =  (res.plane.height);
 	res.plane = find_line(res.plane.center, res.plane,ratio,context.sector);
-
-	// printf("x = %f y = %f d = %f\n", f_to_float(res.plane.ceiling.x),f_to_float(res.plane.ceiling.y),f_to_float(res.plane.ceiling.z));
-	// t_vec2 p = ((t_vec2){context.sector.center.u,3+context.sector.center.v});
-	// printf("z = %f\n",find_z(context.sector, p, 0));
-	// printf("look = %d\n",res.plane.look_v);
-	// printf("height = %f",f_to_float(res.plane.line.z.u));
 	return (res);
 }
 
