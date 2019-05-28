@@ -90,10 +90,9 @@ t_pl_proj	find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio, t_sector sec
 	plane.line.y.v = vec.v;
 	plane.line.x.u = plane.pos.u - center.u;
 	plane.line.y.u = plane.pos.v - center.v;
-	res = f_from_float(0.703125);
-	// dis = 0.703125;
+	res = f_from_float((HEIGHT / 2.0) * (PWIDTH / WIDTH));
 
-	plane.z_zero = res + plane.line.z.u;
+	plane.z_zero = res + f_from_int(plane.look_v) * (PWIDTH / WIDTH);
 	// dis = sqrtf(f_to_float(f_mul(diffx,diffx) + f_mul(diffy,diffy)));
 	// printf("dis = %f",dis);
 	// point.u = f_to_float(plane.pos.u + vec.u);
@@ -130,7 +129,7 @@ t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 	t_fvec2	pix;
 	t_fixed t;
 	// proj.line.z.u = proj.height + find_z(); // FIND Z
-	proj.line.z.v = f_from_float(0.703125) - proj.z_diff * y;
+	proj.line.z.v = proj.z_zero - proj.z_diff * y;
 	// proj.line.z.v = f_from_float(0.5);
 
 	t = (f_mul(proj.ceiling.x, proj.line.x.v) + f_mul(proj.ceiling.y, proj.line.y.v) - proj.line.z.v);

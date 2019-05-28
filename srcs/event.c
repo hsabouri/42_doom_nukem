@@ -111,42 +111,42 @@ static void		keyactions(int scancode, t_env *env)
 	if (!env->toggle_editor &&
 		(scancode == SDL_SCANCODE_MINUS || scancode == SDL_SCANCODE_KP_MINUS))
 		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
-	if (scancode == SDL_SCANCODE_KP_6)
+	if (scancode == SDL_SCANCODE_KP_6 || scancode == SDL_SCANCODE_6)
 	{
 		find_center_sectors(env->game);
 		rotate_floor(env->game.player.my_entity.physic.sector_id, 1, env->game);
 	}
-	if (scancode == SDL_SCANCODE_KP_4)
+	if (scancode == SDL_SCANCODE_KP_4 || scancode == SDL_SCANCODE_4)
 	{
 		find_center_sectors(env->game);
 		rotate_floor(env->game.player.my_entity.physic.sector_id, 2, env->game);
 	}
-	if (scancode == SDL_SCANCODE_KP_8)
+	if (scancode == SDL_SCANCODE_KP_8 || scancode == SDL_SCANCODE_8)
 	{
 		find_center_sectors(env->game);
 		rotate_floor(env->game.player.my_entity.physic.sector_id, 3, env->game);
 	}
-	if (scancode == SDL_SCANCODE_KP_2)
+	if (scancode == SDL_SCANCODE_KP_2 || scancode == SDL_SCANCODE_2)
 	{
 		find_center_sectors(env->game);
 		rotate_floor(env->game.player.my_entity.physic.sector_id, 4, env->game);
 	}
-	if (scancode == SDL_SCANCODE_KP_7)
+	if (scancode == SDL_SCANCODE_KP_7 || scancode == SDL_SCANCODE_7)
 	{
 		find_center_sectors(env->game);
 		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 1, env->game);
 	}
-	if (scancode == SDL_SCANCODE_KP_9)
+	if (scancode == SDL_SCANCODE_KP_9 || scancode == SDL_SCANCODE_9)
 	{
 		find_center_sectors(env->game);
 		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 2, env->game);
 	}
-	if (scancode == SDL_SCANCODE_KP_1)
+	if (scancode == SDL_SCANCODE_KP_1 || scancode == SDL_SCANCODE_1)
 	{
 		find_center_sectors(env->game);
 		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 3, env->game);
 	}
-	if (scancode == SDL_SCANCODE_KP_3)
+	if (scancode == SDL_SCANCODE_KP_3 || scancode == SDL_SCANCODE_3)
 	{
 		find_center_sectors(env->game);
 		rotate_ceiling(env->game.player.my_entity.physic.sector_id, 4, env->game);
