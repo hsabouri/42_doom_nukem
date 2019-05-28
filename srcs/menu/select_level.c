@@ -12,7 +12,7 @@
 
 #include "./menu.h"
 
-static t_array		init_start_button_2(t_array childs, t_sdl *sdl,
+static t_array	init_start_button_2(t_array childs, t_sdl *sdl,
 t_menu_state *state)
 {
 	t_component	current;
@@ -41,7 +41,7 @@ t_menu_state *state)
 	return (childs);
 }
 
-static t_array		init_start_button(t_array childs, t_sdl *sdl,
+static t_array	init_start_button(t_array childs, t_sdl *sdl,
 t_menu_state *state)
 {
 	t_component	current;
@@ -50,7 +50,7 @@ t_menu_state *state)
 		.to_look_at = (int *)&state->type, .display_value = NEW_GAME,
 		.state = state}, init_cb_button((t_cb_button) {.pos = (t_pix) {96, 365},
 		.size = (t_pix) {256, 56}, .background = NO_COLOR,
-		.events = &state->env->events, .callback = &new_game,		
+		.events = &state->env->events, .callback = &new_game,
 		.img = parse_tga("./textures/menu/new_game.tga", 0),
 		.img_active = parse_tga("./textures/menu/new_game_active.tga", 0),
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl));
@@ -65,19 +65,12 @@ t_menu_state *state)
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl));
 	apush(&childs, &current);
 	if (state->env->file && ft_strcmp(state->env->file, "nyan_dukem") == 0)
-		init_start_button_2(childs, sdl, state);
-	current = init_button((t_button) {.pos = (t_pix) {96, 664},
-		.size = (t_pix) {256, 56}, .background = NO_COLOR,
-		.events = &state->env->events, .active_value = START_MODE,
-		.img = parse_tga("./textures/menu/return.tga", 0),
-		.img_active = parse_tga("./textures/menu/return_active.tga", 0),
-		.to_activate = (int *)&state->type,
-		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
-	apush(&childs, &current);
+		childs = init_start_button_2(childs, sdl, state);
+	childs = init_start_button_3(childs, sdl, state);
 	return (childs);
 }
 
-static int			self_update(t_component *self, void *parent)
+static int		self_update(t_component *self, void *parent)
 {
 	const t_menu_state	*parent_state = (t_menu_state *)parent;
 
@@ -98,7 +91,7 @@ static int			self_update(t_component *self, void *parent)
 	return (0);
 }
 
-static void			self_render(const t_component self, t_color *buf)
+static void		self_render(const t_component self, t_color *buf)
 {
 	component_image(self.img, (t_pix) {0, 0}, self.size, buf);
 }

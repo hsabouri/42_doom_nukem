@@ -31,6 +31,8 @@ typedef struct	s_menu_state
 
 t_array			init_start_menu(t_array childs, t_sdl *sdl,
 				t_menu_state *state);
+t_array			init_start_button_3(t_array childs, t_sdl *sdl,
+				t_menu_state *state);
 t_array			init_level_menu(t_array childs, t_sdl *sdl,
 				t_menu_state *state);
 int				new_map(void *parent_state);
