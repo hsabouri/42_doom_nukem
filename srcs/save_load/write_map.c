@@ -25,7 +25,8 @@ void	write_mats(int fd, t_mat *mats, size_t nmats, t_img *textures)
 		s_mats.sca = mats[i].sca;
 		s_mats.color = mats[i].color;
 		if (mats[i].texture != NULL)
-			s_mats.texture = id_from_p(mats[i].texture, textures, sizeof(t_img));
+			s_mats.texture = id_from_p(mats[i].texture, textures,
+				sizeof(t_img));
 		else
 			s_mats.texture = -1;
 		s_mats.mode = mats[i].mode;
@@ -78,8 +79,7 @@ void	write_walls(int fd, t_wall *walls, size_t nwalls, t_mat *mats)
 	}
 }
 
-void	write_sectors(int fd, t_sector *sectors, size_t nsectors, \
-t_mat *mats)
+void	write_sectors(int fd, t_sector *sectors, size_t nsectors, t_mat *mats)
 {
 	t_c_sector	s_sectors;
 	size_t		i;
@@ -94,18 +94,15 @@ t_mat *mats)
 		s_sectors.floor = vec3_to_fvec3(sectors[i].floor);
 		s_sectors.ceiling = vec3_to_fvec3(sectors[i].ceiling);
 		s_sectors.ambient = sectors[i].ambient;
-		if (sectors[i].ceiling_mat != NULL)
-			s_sectors.ceiling_mat = id_from_p(sectors[i].ceiling_mat, mats,\
-				sizeof(t_mat));
-		else
-			s_sectors.ceiling_mat = -1;
+		s_sectors.ceiling_mat = (sectors[i].ceiling_mat != NULL)
+			? id_from_p(sectors[i].ceiling_mat, mats, sizeof(t_mat)) : -1;
 		if (sectors[i].floor_mat != NULL)
-			s_sectors.floor_mat = id_from_p(sectors[i].floor_mat, mats, \
+			s_sectors.floor_mat = id_from_p(sectors[i].floor_mat, mats,
 				sizeof(t_mat));
 		else
 			s_sectors.floor_mat = -1;
 		s_sectors.tex_pos = sectors[i].tex_pos;
-		s_sectors.center = vec2_to_fvec2(sectors[i].center);		
+		s_sectors.center = vec2_to_fvec2(sectors[i].center);
 		write_struct(&s_sectors, fd, sizeof(t_c_sector));
 		i++;
 	}

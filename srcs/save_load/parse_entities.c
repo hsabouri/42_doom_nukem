@@ -52,8 +52,8 @@ size_t n_entities)
 	i = 0;
 	while (i < n_entities)
 	{
-		struc_e = *(t_c_entity *)dump_struct(buf, save.index +
-			sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
+		struc_e = *(t_c_entity *)dump_struct(buf, save.index
+			+ sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
 		verify_magic(&struc_e, ENTITY_MAGIC, i);
 		current = parse_entities_2(struc_e, multi_mats);
 		entities[i] = current;

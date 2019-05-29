@@ -23,16 +23,16 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 	textures = (t_img *)safe_malloc((sizeof(t_img) * ntextures), "loader");
 	while (i < ntextures)
 	{
-		struc_i = *(t_c_img *)dump_struct(buf, save.index + i *
-			sizeof(t_c_img), sizeof(t_c_img), save.max);
+		struc_i = *(t_c_img *)dump_struct(buf, save.index + i
+			* sizeof(t_c_img), sizeof(t_c_img), save.max);
 		verify_magic(&struc_i, TEXT_MAGIC, i);
 		current = textures[i];
 		current.width = struc_i.width;
 		current.height = struc_i.height;
-		current.content = (t_color *)safe_malloc((sizeof(t_color) *
-			current.width * current.height), "loader");
-		ft_memmove(current.content, buf + struc_i.content, sizeof(t_color) *
-			current.width * current.height);
+		current.content = (t_color *)safe_malloc((sizeof(t_color)
+			* current.width * current.height), "loader");
+		ft_memmove(current.content, buf + struc_i.content, sizeof(t_color)
+			* current.width * current.height);
 		current.edit = struc_i.edit;
 		textures[i] = current;
 		i++;
@@ -40,19 +40,20 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 	return (textures);
 }
 
-static void	parse_music(t_save_music music, void *buf, t_save save,\
+static void	parse_music(t_save_music music, void *buf, t_save save,
 size_t i)
 {
 	t_c_music	struc_m;
 	int			fd;
 
-	struc_m = *(t_c_music *)dump_struct(buf, save.index + i *
-		sizeof(t_c_music), sizeof(t_c_music), save.max);
+	struc_m = *(t_c_music *)dump_struct(buf, save.index + i
+		* sizeof(t_c_music), sizeof(t_c_music), save.max);
 	if (music.type == MUSIC)
 		verify_magic(&struc_m, MUSIC_MAGIC, i);
 	else
 		verify_magic(&struc_m, SOUND_MAGIC, i);
-	music.path = (char *)safe_malloc((sizeof(char) * (33 + ft_strlen(ft_itoa(i)))), "loader");
+	music.path = (char *)safe_malloc((sizeof(char) * (33
+		+ ft_strlen(ft_itoa(i)))), "loader");
 	music.path = (music.type == MUSIC) ? ft_strcpy(music.path,
 		"./audio_tmp/music_tmp/music_") : ft_strcpy(music.path,
 		"./audio_tmp/sound_tmp/sound_");

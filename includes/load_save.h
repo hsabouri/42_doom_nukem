@@ -78,6 +78,9 @@ void			write_portals(int fd, t_portal *portals, size_t nportals,
 				t_mat *mats);
 void			write_entities(int fd, t_entity *entities, size_t nentities,
 				t_array *multi_mats);
+void			write_player(t_player player, int fd, t_array *multi_mats);
+void			write_inventory(t_player player, t_entity *entities,
+				int fd);
 void			write_events(int fd, t_plist event);
 size_t			write_textures(int fd, t_img *textures, size_t ntextures,
 				int index);
