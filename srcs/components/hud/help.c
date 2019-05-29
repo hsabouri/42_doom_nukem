@@ -55,8 +55,8 @@ static void			self_render(const t_component self, t_color *buf)
 				/ 2), (HEIGHT / 2 - state->help.height / 2)}, self.size, buf);
 		else
 			component_image(state->help_ig_edit, (t_pix) {(WIDTH / 2
-				- state->help.width / 2), (HEIGHT / 2 - state->help.height / 2)},
-				self.size, buf);
+				- state->help.width / 2), (HEIGHT / 2 - state->help.height
+				/ 2)}, self.size, buf);
 		state->is_display = 1;
 	}
 }

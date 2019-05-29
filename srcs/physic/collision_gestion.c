@@ -1,16 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision.c                                        :+:      :+:    :+:   */
+/*   collision_gestion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:22:20 by iporsenn          #+#    #+#             */
 /*   Updated: 2019/04/29 16:00:43 by fmerding         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/*   Updated: 2019/04/15 11:33:00 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +19,22 @@ int			seg_seg(t_vec3 next_pos, t_ph physic, t_touch *touch, t_game game)
 	float	denom;
 	float	dist[2];
 
-	ab = vec2_new(game.points[game.walls[touch->wall].b].u -
-		game.points[game.walls[touch->wall].a].u,
-		game.points[game.walls[touch->wall].b].v -
-		game.points[game.walls[touch->wall].a].v);
+	ab = vec2_new(game.points[game.walls[touch->wall].b].u
+		- game.points[game.walls[touch->wall].a].u,
+		game.points[game.walls[touch->wall].b].v
+		- game.points[game.walls[touch->wall].a].v);
 	cd = vec2_new(next_pos.x - physic.pos.x, next_pos.y - physic.pos.y);
 	denom = vec2_cross(ab, cd).z;
 	if (denom < -0.0001 && denom > 0.0001)
 		return (-1);
-	dist[0] = -(game.points[game.walls[touch->wall].a].u * cd.v -
-		physic.pos.x * cd.v - cd.u * game.points[game.walls[touch->wall].a].v
+	dist[0] = -(game.points[game.walls[touch->wall].a].u * cd.v
+		- physic.pos.x * cd.v - cd.u * game.points[game.walls[touch->wall].a].v
 		+ cd.u * physic.pos.y) / denom;
 	if (dist[0] < 0 || dist[0] > 1)
 		return (0);
-	dist[1] = -(-ab.u * game.points[game.walls[touch->wall].a].v + ab.u *
-		physic.pos.y + ab.v * game.points[game.walls[touch->wall].a].u -
-		ab.v * physic.pos.x) / denom;
+	dist[1] = -(-ab.u * game.points[game.walls[touch->wall].a].v + ab.u
+		* physic.pos.y + ab.v * game.points[game.walls[touch->wall].a].u
+		- ab.v * physic.pos.x) / denom;
 	if (dist[1] < 0 || dist[1] > 1)
 		return (0);
 	touch->dist = dist[1];
@@ -50,8 +46,8 @@ t_touch		collision(t_vec3 next_pos, t_ph physic, t_game game, int wall)
 	int		end;
 	t_touch	touch;
 
-	end = game.sectors[physic.sector_id].start +
-		game.sectors[physic.sector_id].number;
+	end = game.sectors[physic.sector_id].start
+		+ game.sectors[physic.sector_id].number;
 	touch.wall = game.sectors[physic.sector_id].start;
 	touch.dist = 0;
 	while (touch.wall < end)

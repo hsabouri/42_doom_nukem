@@ -12,7 +12,23 @@
 
 #include <doom.h>
 
-t_list			parallel_portal(t_portal *portals, size_t nportals, t_game game)
+static t_check_sect	init_vector(t_game game, t_portal *portals, size_t cpt)
+{
+	t_check_sect data;
+
+	data.ab = vec2_new(game.points[game.walls[portals[cpt].from_wall].b].u
+		- game.points[game.walls[portals[cpt].from_wall].a].u,
+		game.points[game.walls[portals[cpt].from_wall].b].v
+		- game.points[game.walls[portals[cpt].from_wall].a].v);
+	data.cd = vec2_new(game.points[game.walls[portals[cpt].to_wall].b].u
+		- game.points[game.walls[portals[cpt].to_wall].a].u,
+		game.points[game.walls[portals[cpt].to_wall].b].v
+		- game.points[game.walls[portals[cpt].to_wall].a].v);
+	return (data);
+}
+
+t_list				parallel_portal(t_portal *portals, size_t nportals,
+t_game game)
 {
 	t_list			error;
 	t_lvl_error		*elem;
@@ -23,20 +39,14 @@ t_list			parallel_portal(t_portal *portals, size_t nportals, t_game game)
 	error = lnew(NULL);
 	while (++cpt < nportals)
 	{
-		data.ab = vec2_new(game.points[game.walls[portals[cpt].from_wall].b].u -
-			game.points[game.walls[portals[cpt].from_wall].a].u,
-			game.points[game.walls[portals[cpt].from_wall].b].v -
-			game.points[game.walls[portals[cpt].from_wall].a].v);
-		data.cd = vec2_new(game.points[game.walls[portals[cpt].to_wall].b].u -
-			game.points[game.walls[portals[cpt].to_wall].a].u,
-			game.points[game.walls[portals[cpt].to_wall].b].v -
-			game.points[game.walls[portals[cpt].to_wall].a].v);
+		data = init_vector(game, portals, cpt);
 		if ((data.ab.u * data.cd.v) - (data.cd.u * data.ab.v) != 0)
 		{
-			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");
+			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error),
+				"level_checker");
 			init_error(elem);
-			elem->elem.next = NULL, 
-			elem->portal = cpt,
+			elem->elem.next = NULL;
+			elem->portal = cpt;
 			elem->error_type = PARALLEL_PORTAL;
 			lpush(&error, (t_elem *)elem);
 		}

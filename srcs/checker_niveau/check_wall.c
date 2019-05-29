@@ -12,12 +12,14 @@
 
 #include <doom.h>
 
-t_lvl_error	check_point_wall(t_wall *walls, t_lvl_error error, size_t nwalls,\
+static t_lvl_error	check_point_wall(t_wall *walls, size_t nwalls,
 size_t npoints)
 {
-	size_t	cpt;
+	t_lvl_error	error;
+	size_t		cpt;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < nwalls)
 	{
 		if (walls[cpt].a > npoints || walls[cpt].b > npoints)
@@ -35,12 +37,14 @@ size_t npoints)
 	return (error);
 }
 
-t_lvl_error	check_portal_wall(t_wall *walls, t_lvl_error error, size_t nwalls,\
+static t_lvl_error	check_portal_wall(t_wall *walls, size_t nwalls,
 size_t nportals)
 {
-	size_t	cpt;
+	t_lvl_error	error;
+	size_t		cpt;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < nwalls)
 	{
 		if (walls[cpt].portal > (int32_t)nportals || walls[cpt].portal < -1)
@@ -55,13 +59,15 @@ size_t nportals)
 	return (error);
 }
 
-t_lvl_error	check_mats_wall(t_wall *walls, t_lvl_error error, size_t nwalls,\
+static t_lvl_error	check_mats_wall(t_wall *walls, size_t nwalls,
 t_check_mat mats)
 {
+	t_lvl_error	error;
 	size_t		cpt;
 	u_int32_t	index;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < nwalls)
 	{
 		index = id_from_p(walls[cpt].mat, mats.materials, sizeof(t_mat));
@@ -76,24 +82,26 @@ t_check_mat mats)
 	return (error);
 }
 
-u_int32_t	launch_check_wall(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env)
+u_int32_t			launch_check_wall(t_game game, t_check_mat mats, t_env *env,
+char *errors_text[NBR_ERROR])
 {
-	error = check_point_wall(game.walls, error, game.nwalls, game.npoints);
+	t_lvl_error	error;
+
+	error = check_point_wall(game.walls, game.nwalls, game.npoints);
 	if (error.error_type != NO_ERROR)
 	{
 		printf("%s: wall %d, point %d\n", errors_text[error.error_type],
 			error.wall, error.point);
 		return (check_editor(env));
 	}
-	error = check_portal_wall(game.walls, error, game.nwalls, game.nportals);
+	error = check_portal_wall(game.walls, game.nwalls, game.nportals);
 	if (error.error_type != NO_ERROR)
 	{
 		printf("%s: wall %d, portal %d\n", errors_text[error.error_type],
 			error.wall, error.portal);
 		return (check_editor(env));
 	}
-	error = check_mats_wall(game.walls, error, game.nwalls, mats);
+	error = check_mats_wall(game.walls, game.nwalls, mats);
 	if (error.error_type != NO_ERROR)
 	{
 		printf("%s: wall %d\n", errors_text[error.error_type], error.wall);

@@ -45,18 +45,10 @@ t_component			init_hud_root(t_env *env, t_sdl *sdl)
 {
 	t_component ret;
 
-	ret.img.content = NULL;
-	ret.text.text_texture = NULL;
-	ret.size.x = WIDTH;
-	ret.size.y = HEIGHT;
-	ret.pos.x = 0;
-	ret.pos.y = 0;
-	ret.display = 0;
-	ret.state = init_state(env);
-	ret.update = &self_update;
-	ret.destroy = NULL;
-	ret.render = NULL;
-	ret.complete_render = &empty_render;
+	ret = (t_component) {.img.content = NULL, .text.text_texture = NULL,
+		.size.x = WIDTH, .size.y = HEIGHT, .pos.x = 0, .pos.y = 0,
+		.display = 0, .state = init_state(env), .update = &self_update,
+		.destroy = NULL, .render = NULL, .complete_render = &empty_render};
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, ret.size.x, ret.size.y);
 	SDL_SetTextureBlendMode(ret.last_render, SDL_BLENDMODE_BLEND);

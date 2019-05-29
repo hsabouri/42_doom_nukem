@@ -12,47 +12,7 @@
 
 #include <doom.h>
 
-void			write_inventory(t_player player, t_entity *entities,\
-int fd)
-{
-	t_entity **entity;
-	size_t	index;
-
-	index = 0;
-	while ((entity = (t_entity **)ashift(&player.inventory)))
-	{
-		index = id_from_p(*entity, entities, sizeof(t_entity));
-		write_struct(&index, fd, sizeof(size_t));
-	}
-}
-
-static void		write_player(t_player player, int fd, t_array *multi_mats)
-{
-	t_c_player	res;
-	u_int32_t	index;
-
-	res.magic = PLAYER_MAGIC;
-	res.my_entity.spawn.gravity = f_from_float(player.my_entity.spawn.gravity);
-	res.my_entity.spawn.height = f_from_float(player.my_entity.spawn.height);
-	res.my_entity.spawn.radius = f_from_float(player.my_entity.spawn.radius);
-	res.my_entity.spawn.rad_inter = f_from_float(player.my_entity.spawn.rad_inter);
-	res.my_entity.spawn.pos = vec3_to_fvec3(player.my_entity.spawn.pos);
-	res.my_entity.spawn.speed_max = vec3_to_fvec3(player.my_entity.spawn.speed_max);
-	res.my_entity.spawn.look.u = f_from_float(player.my_entity.physic.look_h);
-	res.my_entity.spawn.look.v = player.my_entity.spawn.look_v;
-	res.my_entity.spawn.sector_id = player.my_entity.spawn.sector_id;
-	index = id_from_p(player.my_entity.mat, multi_mats, sizeof(t_array));
-	res.my_entity.mats = (ssize_t)index;
-	res.my_entity.damage = player.my_entity.damage;
-	res.life = player.life;
-	res.weapons[0] = player.weapons[0];
-	res.weapons[1] = player.weapons[1];
-	res.secondary = player.secondary;
-	res.equiped = player.equiped;
-	write_struct(&res, fd, sizeof(t_c_player));
-}
-
-void				write_struct(void *struc, int fd, size_t size)
+void			write_struct(void *struc, int fd, size_t size)
 {
 	if (write(fd, struc, size) < 0)
 	{
@@ -62,7 +22,24 @@ void				write_struct(void *struc, int fd, size_t size)
 	}
 }
 
-static t_c_game		save_game(t_c_game game_s, t_game game)
+static t_c_game	save_game_2(t_c_game game_s, t_game game)
+{
+	game_s.nevents = game.waiting_events.len;
+	game_s.loc_events = game_s.loc_entities + sizeof(t_c_entity)
+		* game.nentities;
+	game_s.ntextures = game.ntextures;
+	game_s.loc_textures = game_s.loc_events + sizeof(t_c_game_event)
+		* game_s.nevents;
+	game_s.nmusic = game.music.len;
+	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)
+		* game.ntextures;
+	game_s.nsounds = game.sounds.len;
+	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music)
+		* game.music.len;
+	return (game_s);
+}
+
+static t_c_game	save_game(t_c_game game_s, t_game game)
 {
 	game_s.ninventory = game.player.inventory.len;
 	game_s.loc_inventory = sizeof(t_c_game);
@@ -84,28 +61,16 @@ static t_c_game		save_game(t_c_game game_s, t_game game)
 	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal)
 		* game.nportals;
 	game_s.unique_e_id = game.unique_e_id;
-	game_s.nevents = game.waiting_events.len;
-	game_s.loc_events = game_s.loc_entities + sizeof(t_c_entity)
-		* game.nentities;
-	game_s.ntextures = game.ntextures;
-	game_s.loc_textures = game_s.loc_events + sizeof(t_c_game_event)
-		* game_s.nevents;
-	game_s.nmusic = game.music.len;
-	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)
-		* game.ntextures;
-	game_s.nsounds = game.sounds.len;
-	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music)
-		* game.music.len;
 	return (game_s);
 }
 
-static void			write_map(int fd, t_c_game game_save, t_game game)
+static void		write_map(int fd, t_c_game game_save, t_game game)
 {
 	size_t	loc_imgs;
 	size_t	loc_music;
 	size_t	loc_sound;
 
-	write_inventory(game.player, game.entities,fd);
+	write_inventory(game.player, game.entities, fd);
 	write_player(game.player, fd, game.multi_mats);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
 	write_points(fd, game.points, game.npoints);
@@ -120,7 +85,7 @@ static void			write_map(int fd, t_c_game game_save, t_game game)
 	write_audio(fd, loc_sound, SOUND);
 }
 
-void				save(const char *filename, t_game game)
+void			save(const char *filename, t_game game)
 {
 	t_c_game	game_save;
 	int			fd;
@@ -130,6 +95,7 @@ void				save(const char *filename, t_game game)
 	i = 0;
 	game_save.magic = GAME_MAGIC;
 	game_save = save_game(game_save, game);
+	game_save = save_game_2(game_save, game);
 	fd = open_file(filename, 1, &size);
 	write_struct(&game_save, fd, sizeof(t_c_game));
 	write_map(fd, game_save, game);

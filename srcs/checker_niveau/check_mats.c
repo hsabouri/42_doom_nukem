@@ -12,19 +12,21 @@
 
 #include <doom.h>
 
-t_lvl_error	check_multi_sprite(t_lvl_error error, size_t nmulti, t_array *multi_sprite,\
+static t_lvl_error	check_multi_sprite(size_t nmulti, t_array *multi_sprite,
 t_mat *mats, size_t nmaterials)
 {
+	t_lvl_error	error;
 	size_t		cpt;
 	t_mat		**material;
 	size_t		i;
 	u_int32_t	index;
-	
-	cpt = 0;
-	while (cpt < nmulti)
+
+	cpt = -1;
+	init_error(&error);
+	while (++cpt < nmulti)
 	{
-		i = 0;
-		while (i < multi_sprite[cpt].len)
+		i = -1;
+		while (++i < multi_sprite[cpt].len)
 		{
 			material = anth(&multi_sprite[cpt], i);
 			index = id_from_p(*material, mats, sizeof(t_mat));
@@ -35,20 +37,20 @@ t_mat *mats, size_t nmaterials)
 				error.multi_mats = cpt;
 				return (error);
 			}
-			i++;
 		}
-		cpt++;
 	}
 	return (error);
 }
 
-t_lvl_error	check_texture(t_lvl_error error, size_t ntextures, t_img *textures,\
+static t_lvl_error	check_texture(size_t ntextures, t_img *textures,
 t_check_mat mats)
 {
+	t_lvl_error	error;
 	size_t		cpt;
 	u_int32_t	index;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < mats.nmaterials)
 	{
 		index = id_from_p(mats.materials[cpt].texture, textures, sizeof(t_img));
@@ -63,13 +65,14 @@ t_check_mat mats)
 	return (error);
 }
 
-t_lvl_error	check_overlay(t_mat *materials, t_lvl_error error,\
-size_t nmaterials)
+static t_lvl_error	check_overlay(t_mat *materials, size_t nmaterials)
 {
+	t_lvl_error	error;
 	size_t		cpt;
 	u_int32_t	index;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < nmaterials)
 	{
 		index = id_from_p(materials[cpt].overlay, materials, sizeof(t_mat));
@@ -84,24 +87,26 @@ size_t nmaterials)
 	return (error);
 }
 
-u_int32_t	launch_check_mats(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_check_mat mats, t_env *env)
+u_int32_t			launch_check_mats(t_game game, t_check_mat mats, t_env *env,
+char *errors_text[NBR_ERROR])
 {
-	error = check_texture(error, game.ntextures, game.textures, mats);
+	t_lvl_error error;
+
+	error = check_texture(game.ntextures, game.textures, mats);
 	if (error.error_type != NO_ERROR)
 	{
 		printf("%s: material %d\n", errors_text[error.error_type],
 			error.mats);
 		return (check_editor(env));
 	}
-	error = check_overlay(game.materials, error, game.nmaterials);
+	error = check_overlay(game.materials, game.nmaterials);
 	if (error.error_type != NO_ERROR)
 	{
 		printf("%s: material %d\n", errors_text[error.error_type],
 			error.mats);
 		return (check_editor(env));
 	}
-	error = check_multi_sprite(error, game.nmulti_mats, game.multi_mats,\
+	error = check_multi_sprite(game.nmulti_mats, game.multi_mats,\
 		game.materials, game.nmaterials);
 	if (error.error_type != NO_ERROR)
 	{

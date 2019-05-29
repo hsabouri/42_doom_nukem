@@ -12,16 +12,18 @@
 
 #include <doom.h>
 
-t_lvl_error	sector_portal(t_portal *portals, t_lvl_error error,\
-size_t nportals, size_t nsectors)
+static t_lvl_error	sector_portal(t_portal *portals, size_t nportals,
+size_t nsectors)
 {
-	size_t	cpt;
+	t_lvl_error	error;
+	size_t		cpt;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < nportals)
 	{
-		if (portals[cpt].from_sector > nsectors ||
-			portals[cpt].to_sector > nsectors)
+		if (portals[cpt].from_sector > nsectors
+			|| portals[cpt].to_sector > nsectors)
 		{
 			error.error_type = SECTOR_PORTAL;
 			error.portal = cpt;
@@ -36,12 +38,14 @@ size_t nportals, size_t nsectors)
 	return (error);
 }
 
-t_lvl_error	wall_portal(t_portal *portals, t_lvl_error error,\
-size_t nportals, size_t nwalls)
+static t_lvl_error	wall_portal(t_portal *portals, size_t nportals,
+size_t nwalls)
 {
-	size_t	cpt;
+	t_lvl_error	error;
+	size_t		cpt;
 
 	cpt = 0;
+	init_error(&error);
 	while (cpt < nportals)
 	{
 		if (portals[cpt].from_wall > nwalls || portals[cpt].to_wall > nwalls)
@@ -59,18 +63,19 @@ size_t nportals, size_t nwalls)
 	return (error);
 }
 
-u_int32_t	launch_check_portal(t_lvl_error error, t_game game,\
-char *errors_text[NBR_ERROR], t_env *env)
+u_int32_t			launch_check_portal(t_game game, t_env *env,
+char *errors_text[NBR_ERROR])
 {
-	error = sector_portal(game.portals, error, game.nportals, game.nsectors);
+	t_lvl_error	error;
+
+	error = sector_portal(game.portals, game.nportals, game.nsectors);
 	if (error.error_type != NO_ERROR)
 	{
 		printf("%s: portal %d, sector %d\n", errors_text[error.error_type],
 			error.portal, error.sector);
 		return (check_editor(env));
-
 	}
-	error = wall_portal(game.portals, error, game.nportals, game.nwalls);
+	error = wall_portal(game.portals, game.nportals, game.nwalls);
 	if (error.error_type != NO_ERROR)
 	{
 		printf("%s: portal %d, wall %d\n", errors_text[error.error_type],

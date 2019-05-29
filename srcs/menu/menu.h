@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	MENU_H
+#ifndef MENU_H
 # define MENU_H
 
 # include <doom.h>
@@ -25,19 +25,20 @@ typedef	enum	e_menu_mode
 
 typedef struct	s_menu_state
 {
-	t_env 		*env;
+	t_env		*env;
 	t_menu_mode	type;
 }				t_menu_state;
 
-t_array					init_start_menu(t_array childs, t_sdl *sdl,\
-t_menu_state *state);
-t_array					init_level_menu(t_array childs, t_sdl *sdl,\
-t_menu_state *state);
-
-int						new_map(void *parent_state);
-int						new_game(void *parent_state);
-int						level_1(void *parent_state);
-int						level_2(void *parent_state);
-int						level_3(void *parent_state);
+t_array			init_start_menu(t_array childs, t_sdl *sdl,
+				t_menu_state *state);
+t_array			init_start_button_3(t_array childs, t_sdl *sdl,
+				t_menu_state *state);
+t_array			init_level_menu(t_array childs, t_sdl *sdl,
+				t_menu_state *state);
+int				new_map(void *parent_state);
+int				new_game(void *parent_state);
+int				level_1(void *parent_state);
+int				level_2(void *parent_state);
+int				level_3(void *parent_state);
 
 #endif

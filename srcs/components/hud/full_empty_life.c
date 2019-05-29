@@ -42,7 +42,7 @@ static void				render_empty(const t_component self, t_color *buf)
 	component_image(self.img, life->pos, self.size, buf);
 }
 
-t_array					init_empty_life(t_array array, void *parent_state,\
+t_array					init_empty_life(t_array array, void *parent_state,
 t_sdl *sdl)
 {
 	t_component		component;
@@ -51,29 +51,24 @@ t_sdl *sdl)
 	char			*tmp;
 
 	life = (t_life_state *)parent_state;
-	component.img = life->env->game.textures[15];
-	component.size.x = component.img.width;
-	component.size.y = component.img.height;
 	str = ft_strdup(ft_itoa(life->player->life));
 	tmp = str;
 	str = ft_strjoin(str, "/100");
 	ft_strdel(&tmp);
-	component.text = component_text(str, (t_pix) {120, -2}, sdl);
-	ft_strdel(&str);
-	component.pos.x = 10;
-	component.pos.y = 600;
-	component.display = 1;
-	component.state = parent_state;
-	component.update = &update_empty;
-	component.destroy = &no_destroy;
-	component.render = &render_empty;
-	component.childs = safe_anew(NULL, 1, sizeof(t_component), "component");
-	component.complete_render = NULL;
+	component = (t_component) {.img = life->env->game.textures[15],
+		.pos.x = 10, .pos.y = 600, .display = 1, .state = parent_state,
+		.update = &update_empty, .destroy = &no_destroy,
+		.render = &render_empty, .complete_render = NULL,
+		.childs = safe_anew(NULL, 1, sizeof(t_component), "component"),
+		.text = component_text(str, (t_pix) {120, -2}, sdl)};
+	component.size.x = component.img.width;
+	component.size.y = component.img.height;
 	component.last_render = SDL_CreateTexture(sdl->renderer,
 		SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, component.size.x,
 		component.size.y);
 	SDL_SetTextureBlendMode(component.last_render, SDL_BLENDMODE_BLEND);
 	apush(&array, &component);
+	ft_strdel(&str);
 	return (array);
 }
 

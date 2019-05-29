@@ -12,6 +12,31 @@
 
 #include "./hud.h"
 
+static void				animation(t_hud_state *hud, t_component *self,
+t_weapons_state *self_state)
+{
+	t_img	**sprite;
+
+	if (hud->env->events.mouse[SDL_BUTTON_LEFT])
+	{
+		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
+			[hud->env->game.player.equiped]].sprite, 2);
+		if (hud->env->game.weapons[self_state->last_equiped].ammo > 0)
+			hud->env->game.weapons[self_state->last_equiped].ammo -= 1;
+		else
+			hud->env->game.weapons
+				[self_state->last_equiped].ammo = hud->env->game.weapons
+				[self_state->last_equiped].ammo_max;
+		self->img = **sprite;
+	}
+	else
+	{
+		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
+			[hud->env->game.player.equiped]].sprite, 1);
+		self->img = **sprite;
+	}
+}
+
 static int				self_update(t_component *self, void *parent_state)
 {
 	t_hud_state		*hud;
@@ -35,23 +60,7 @@ static int				self_update(t_component *self, void *parent_state)
 	}
 	if (self_state->last_secondary != hud->env->game.player.secondary)
 		self_state->last_secondary = hud->env->game.player.secondary;
-	if (hud->env->events.mouse[SDL_BUTTON_LEFT])
-	{
-		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
-			[hud->env->game.player.equiped]].sprite, 2);
-		if (hud->env->game.weapons[self_state->last_equiped].ammo > 0)
-			hud->env->game.weapons[self_state->last_equiped].ammo -= 1;
-		else
-			hud->env->game.weapons[self_state->last_equiped].ammo
-				= hud->env->game.weapons[self_state->last_equiped].ammo_max;
-		self->img = **sprite;
-	}
-	else
-	{
-		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
-			[hud->env->game.player.equiped]].sprite, 1);
-		self->img = **sprite;
-	}
+	animation(hud, self, self_state);
 	return (1);
 }
 
@@ -87,19 +96,14 @@ t_sdl *sdl)
 	t_img		**sprite;
 
 	hud = (t_hud_state *)parent_state;
-	res.state = init_weapon_state(hud);
 	sprite = anth(&hud->env->game.weapons[hud->env->game.player.weapons
 		[hud->env->game.player.equiped]].sprite, 1);
-	res.img = **sprite;
-	res.text.text_texture = NULL;
-	res.size.x = 500;
-	res.size.y = 500;
+	res = (t_component) {.state = init_weapon_state(hud), .img = **sprite,
+		.text.text_texture = NULL, .size.x = 500, .size.y = 500,
+		.display = 1, .update = &self_update, .destroy = &no_destroy,
+		.render = &self_render};
 	res.pos.x = WIDTH / 2 - res.img.width / 2 + 300;
 	res.pos.y = HEIGHT - res.img.height;
-	res.display = 1;
-	res.update = &self_update;
-	res.destroy = &no_destroy;
-	res.render = &self_render;
 	res.childs = safe_anew(NULL, 1, sizeof(t_component), "components");
 	res.childs = mini_weapon(res.childs, res.state, sdl);
 	res.childs = mini_weapon_s(res.childs, res.state, sdl);

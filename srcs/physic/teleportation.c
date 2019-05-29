@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-void		set_tp(t_tp *teleport, t_touch touch, t_game game)
+void			set_tp(t_tp *teleport, t_touch touch, t_game game)
 {
 	teleport->portal = game.portals[game.walls[touch.wall].portal];
 	teleport->portal_in = touch.wall;
@@ -24,7 +24,20 @@ void		set_tp(t_tp *teleport, t_touch touch, t_game game)
 		teleport->portal.to_wall : teleport->portal.from_wall;
 }
 
-static void	if_not_tp(t_ph *physic, t_tp teleport)
+static t_vec3	if_tp(t_vec3 pos, t_game *game, t_tp teleport)
+{
+	t_vec3	next_pos;
+	t_vec2	diff;
+
+	next_pos = pos;
+	diff = vec2_sub(game->points[teleport.to_wall.a],
+	game->points[teleport.from_wall.a]);
+	next_pos.x = pos.x + diff.u;
+	next_pos.y = pos.y + diff.v;
+	return (next_pos);
+}
+
+static void		if_not_tp(t_ph *physic, t_tp teleport)
 {
 	physic->sector_id = ((int)teleport.portal.from_wall == teleport.portal_in)
 		? teleport.portal.from_sector : teleport.portal.to_sector;
@@ -32,13 +45,13 @@ static void	if_not_tp(t_ph *physic, t_tp teleport)
 	physic->speed.y = 0;
 }
 
-t_vec3		teleportation(t_vec3 pos, t_game *game, t_tp teleport, t_ph *physic)
+t_vec3			teleportation(t_vec3 pos, t_game *game, t_tp teleport,
+t_ph *physic)
 {
-	t_vec2	diff;
-	t_vec3	next_pos;
-	t_trigger tmp_log;
-	float	delta_floor;
-	float	delta_ceil;
+	t_vec3		next_pos;
+	t_trigger	tmp_log;
+	float		delta_floor;
+	float		delta_ceil;
 
 	physic->sector_id = ((int)teleport.portal.from_wall == teleport.portal_in)
 		? teleport.portal.to_sector : teleport.portal.from_sector;
@@ -48,18 +61,12 @@ t_vec3		teleportation(t_vec3 pos, t_game *game, t_tp teleport, t_ph *physic)
 		if_not_tp(physic, teleport);
 	else
 	{
-
 		tmp_log.e_actif = game->player.my_entity;
 		tmp_log.e_actif.physic.sector_id = physic->sector_id;
 		tmp_log.condi = TRIGGER_SECTOR;
 		tmp_log.e_passif = tmp_log.e_actif;
 		apush(&game->log, &tmp_log);
-
-		next_pos = pos;
-		diff = vec2_sub(game->points[teleport.to_wall.a],
-		game->points[teleport.from_wall.a]);
-		next_pos.x = pos.x + diff.u;
-		next_pos.y = pos.y + diff.v;
+		next_pos = if_tp(pos, game, teleport);
 		if (delta_floor >= 0 || delta_floor > -0.5)
 			next_pos.z = pos.z + delta_floor;
 		return (next_pos);
