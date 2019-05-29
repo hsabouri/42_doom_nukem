@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:18:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:18:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ t_section section)
 	dis = f_mul(dis, hit.ratios.u);
 	dis2 = find_z(section.next, section.wall.left_z, 0) - find_z(section.next, section.wall.right_z, 0);
 	dis2 = f_mul(dis2, hit.ratios.u);
+	//context2 = teleport (context)
+	// h2.u = f_from_float((context2.physic.pos.z + context2.physic.height)) - find_z(section.next, section.wall.left_z, 1) + dis;
+	// h2.v = f_from_float((context2.physic.pos.z + context2.physic.height)) - find_z(section.next, section.wall.left_z, 0) + dis2;
 	h2.u = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.left_z, 1) + dis;
 	h2.v = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.left_z, 0) + dis2;
 	res = projection(hit, context, h, section, id);
