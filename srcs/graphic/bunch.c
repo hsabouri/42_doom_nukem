@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 16:44:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:27:21 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,42 @@ const t_limit limit, t_fvec2 pos)
 	return (ret);
 }
 
+size_t		find_wall_portal(t_game game, size_t wall)
+{
+	size_t i;
+	i = 0;
+	while (game.portals[i].from_wall != wall && game.portals[i].to_wall != wall)
+		i++;
+	if (game.portals[i].from_wall == wall)
+	{
+		printf("wallfrom = %d\n",game.portals[i].from_wall);
+		printf("wallto = %d\n",game.portals[i].to_wall);
+		return (game.portals[i].to_wall);
+	}
+	printf("wallfrom = %d\n",game.portals[i].from_wall);
+
+		printf("wallto = %d\n",game.portals[i].to_wall);
+		return (game.portals[i].from_wall);
+
+	// return i;
+}
+
+size_t		find_wall_order(t_game game, size_t wall)
+{
+	size_t i;
+	i = 0;
+	while (game.portals[i].from_wall != wall || game.portals[i].to_wall != wall)
+		i++;
+	if (game.portals[i].from_wall == wall)
+	{
+		// printf("wall = %d\n",game.portals[i].from_wall);
+		return (0);
+	}
+	if (game.portals[i].to_wall == wall)
+		return (1);
+	// return i;
+}
+
 t_bunch	build_bunch(const t_game game, const t_context context,
 const t_limit limit)
 {
@@ -66,7 +102,6 @@ const t_limit limit)
 	const t_sector	sector = game.sectors[context.sector.sector_id];
 	const t_fvec2	pos = vec2_to_fvec2(vec3_to_vec2(context.physic.pos));
 	size_t			i;
-
 	t_cache_wall	walls[NCACHEWALL];
 
 	ret = build_entity_bunch(game, context, limit, pos);
@@ -88,6 +123,21 @@ const t_limit limit)
 			current.mat = *game.walls[i].mat;
 			current.left_z = game.points[game.walls[i].a];
 			current.right_z = game.points[game.walls[i].b];
+			printf ( "portal = %d  nportal = %zu \n",current.portal,game.nportals);
+			if (current.portal != -1)
+			{
+				if (find_wall_order(game,i) == 1)
+				{
+					current.left_p = game.points[game.walls[find_wall_portal(game,i)].a];
+					current.right_p = game.points[game.walls[find_wall_portal(game,i)].b];
+				}
+				else
+				{
+					current.left_p = game.points[game.walls[find_wall_portal(game,i)].b];
+					current.right_p = game.points[game.walls[find_wall_portal(game,i)].a];
+				}
+				printf ( " leftb = %d right = %d lefta = %d right a = %d \n",game.walls[i].a,game.walls[i].b,game.walls[find_wall_portal(game, i)].a,game.walls[find_wall_portal(game, i)].b);
+			}
 			current = switch_points(current,game,i);
 			walls[ret.nwalls] = current;
 			++ret.nwalls;

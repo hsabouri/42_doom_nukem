@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:18:36 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:19:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ typedef struct	s_cache_wall
 	t_mat	*open;
 	t_vec2	left_z;
 	t_vec2	right_z;
+	t_vec2	left_p;
+	t_vec2	right_p;
 }				t_cache_wall;
 
 typedef struct	s_cache_entity
@@ -275,5 +277,7 @@ t_cache_wall	switch_points(t_cache_wall current, t_game game, size_t i);
 int				check_z_limits(size_t n, t_game game);
 int				check_z_game(size_t n, int i, t_game game);
 t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio, t_sector sector);
+size_t			find_wall_portal(t_game game, size_t wall);
+size_t			find_wall_order(t_game game, size_t wall);
 
 #endif
