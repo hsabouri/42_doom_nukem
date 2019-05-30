@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/02 16:40:13 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:44:08 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_point(t_fvec2 point, int s, t_color *buf, t_color c)
 	while (i < f_to_int(point.v) + s - 1 && i < HEIGHT)
 	{
 		j = s_j;
-		while (j < f_to_int(point.u) + s  - 1 && j < WIDTH)
+		while (j < f_to_int(point.u) + s - 1 && j < WIDTH)
 		{
 			buf[i * WIDTH + j] = c;
 			j++;
@@ -67,7 +67,7 @@ void	m_background(t_color *buf, t_color color, t_pix start, t_pix end)
 	}
 }
 
-t_text				text(const char *str, t_pix pos, t_sdl *sdl)
+t_text	text(const char *str, t_pix pos, t_sdl *sdl)
 {
 	SDL_Surface	*text_surface;
 	t_text		text;

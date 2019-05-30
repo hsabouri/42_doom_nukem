@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:23:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:24:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,6 @@ typedef struct	s_section
 	int				end;
 	t_fvec2			a;
 	t_fvec2			b;
-	// int				is_portal;
-	// t_context		context2;
 }				t_section;
 
 typedef struct	s_section_entity
@@ -212,19 +210,16 @@ typedef struct	s_render
 	t_section			*portals;
 }				t_render;
 
-void			render(const t_game game, const t_context context, t_color *buf, u_int32_t *id_buf);
-
 # include "srcs/graphic/bresenham.h"
 
+void			render(const t_game game, const t_context context, t_color *buf,
+				u_int32_t *id_buf);
 int				is_left(t_fvec2 a, t_fvec2 b);
 t_fvec2			take_left(t_fvec2 a, t_fvec2 b);
 t_fvec2			take_right(t_fvec2 a, t_fvec2 b);
-
 void			background(t_color *buf, t_color color, t_pix size);
 void			draw_point(t_fvec2 point, int s, t_color *buf, t_color c);
-
 t_vec2			player_space(t_vec2 vec, t_ph physic);
-
 void			draw_wall(int id, t_proj proj, t_color *buf,
 				u_int32_t *ids);
 void			draw_portal(int id, t_proj proj, t_color *buf,
@@ -242,41 +237,43 @@ t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
 t_render		build_sections(t_context context, t_bunch bunch,
 				t_limit limits);
 t_render		build_sections_portals(t_render render);
-
 t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y);
 t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y);
 t_color			get_wall_pixel(t_proj proj, int y);
 t_color			get_portal_pixel(t_proj proj, int y);
 t_color			get_entity_pixel(t_e_proj proj, int y);
-t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, char p, int y_s);
-
+t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix,
+				char p, int y_s);
 t_fvec2			get_ray_dir(t_ph physic, int id);
 int				get_ray_id(t_fvec2 point, t_limit limit,
 				t_context context, int max);
 t_limit			build_limits(t_context context);
 int				is_in_limit(t_limit limit, t_fvec2 a, t_fvec2 b);
-
 t_hit			ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d);
-
 void			render_wall(t_context context, t_section section,
 				t_color *buf, u_int32_t *ids);
-
 void			render_portal(t_context context, t_section section,
 				t_color *buf, u_int32_t *ids);
 void			render(t_game game, t_context context,
 				t_color *buf, u_int32_t *id_buf);
-
-t_sector		teleport_sector(t_game game, t_context context, t_section section);
+t_sector		teleport_sector(t_game game, t_context context,
+				t_section section);
 t_context		teleport(t_game game, t_context context, t_section section);
 void			find_center_sectors(t_game game);
 void			find_center(t_game game, size_t i);
 void			rotate_floor(size_t n, int mode, t_game game);
+void			rotate_floor2(size_t n, int mode, t_game game);
 void			rotate_ceiling(size_t n, int mode, t_game game);
+void			rotate_ceiling2(size_t n, int mode, t_game game);
 t_fixed			find_z(t_sector sector, t_vec2 point, int mode);
-t_cache_wall	switch_points(t_cache_wall current, t_game game, size_t i);
+t_cache_wall	switch_points(t_cache_wall current, t_game game, size_t i,
+				t_context context);
 int				check_z_limits(size_t n, t_game game);
 int				check_z_game(size_t n, int i, t_game game);
-t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio, t_sector sector);
+t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio,
+				t_sector sector);
 size_t			find_wall_portal(t_game game, size_t wall);
 size_t			find_wall_order(t_game game, size_t wall);
+size_t			find_sector_portals(t_game game, size_t wall);
+t_cache_wall	switch_portals(t_cache_wall current, t_game game, size_t wall);
 #endif

@@ -6,15 +6,17 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:51:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/18 14:56:33 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:32:00 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 
-inline t_sector	teleport_sector(t_game game, t_context context, t_section section)
+inline t_sector	teleport_sector(t_game game, t_context context,
+t_section section)
 {
-	if (game.portals[section.wall.portal].from_sector == context.sector.sector_id)
+	if (game.portals[section.wall.portal].from_sector
+	== context.sector.sector_id)
 		return (game.sectors[game.portals[section.wall.portal].to_sector]);
 	else
 		return (game.sectors[game.portals[section.wall.portal].from_sector]);
@@ -42,7 +44,9 @@ t_context		teleport(t_game game, t_context context, t_section section)
 		from_wall = game.walls[portal.to_wall];
 		to_wall = game.walls[portal.from_wall];
 	}
-	context.physic.pos.x += game.points[to_wall.a].u - game.points[from_wall.a].u;
-	context.physic.pos.y += game.points[to_wall.a].v - game.points[from_wall.a].v;
+	context.physic.pos.x += game.points[to_wall.a].u
+	- game.points[from_wall.a].u;
+	context.physic.pos.y += game.points[to_wall.a].v
+	- game.points[from_wall.a].v;
 	return (context);
 }

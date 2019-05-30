@@ -6,16 +6,15 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:23:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:24:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
 #include "./color.h"
 
-
-t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, char p,
-int y_s)
+t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix,
+char p, int y_s)
 {
 	int		x;
 	int		y;
@@ -76,7 +75,7 @@ t_color			get_portal_pixel(t_proj proj, int y)
 	return (get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, 9, y));
 }
 
-t_pl_proj	find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio,
+t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio,
 t_sector sector)
 {
 	t_fvec2 vec;

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:23:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:24:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,12 @@ t_proj			portal_projection(int id, t_hit hit, const t_context context,
 t_section section)
 {
 	t_proj		res;
-	t_fvec2			h;
-	t_fvec2			h2;
-	t_wall			wall;
-
+	t_fvec2		h;
+	t_fvec2		h2;
+	t_fixed		dis;
+	t_fixed		dis2;
 	if (hit.ratios.v < 10)
 		hit.ratios.v = 10;
-		t_fixed	dis;
-		t_fixed	dis2;
 
 	dis = find_z(context.sector, section.wall.left_z, 1) - find_z(context.sector, section.wall.right_z, 1);
 	dis = f_mul(dis, hit.ratios.u);
@@ -122,10 +120,8 @@ t_section section)
 	dis = f_mul(dis, hit.ratios.u);
 	dis2 = find_z(section.next, section.wall.left_p, 0) - find_z(section.next, section.wall.right_p, 0);
 	dis2 = f_mul(dis2, hit.ratios.u);
-	// h2.u = f_from_float((context2.physic.pos.z + context2.physic.height)) - find_z(section.next, section.wall.left_z, 1) + dis;
-	// h2.v = f_from_float((context2.physic.pos.z + context2.physic.height)) - find_z(section.next, section.wall.left_z, 0) + dis2;
-	h2.u = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.right_p, 1) + dis;
-	h2.v = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.right_p, 0) + dis2;
+	h2.u = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.left_p, 1) + dis;
+	h2.v = f_from_float((context.physic.pos.z + context.physic.height)) - find_z(section.next, section.wall.left_p, 0) + dis2;
 	res = projection(hit, context, h, section, id);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);

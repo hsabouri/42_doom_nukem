@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 14:34:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/26 16:33:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:45:29 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int dot)
 	}
 }
 
-void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
+void			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
 {
 	t_bres		bres;
 	t_pix_fixed	dst;
@@ -79,7 +79,7 @@ void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
 		draw_vertical(bres, buff, color, 1);
 }
 
-void 			dotted(t_color *buff, t_pix a, t_pix b, t_color color)
+void			dotted(t_color *buff, t_pix a, t_pix b, t_color color)
 {
 	t_bres		bres;
 	t_pix_fixed	dst;
@@ -99,4 +99,3 @@ void 			dotted(t_color *buff, t_pix a, t_pix b, t_color color)
 	else
 		draw_vertical(bres, buff, color, 4);
 }
-

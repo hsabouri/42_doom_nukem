@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:16:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/13 17:09:11 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/30 14:50:52 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		draw_portal(int id, t_proj proj, t_color *buf, u_int32_t *ids)
 	int				i;
 
 	i = draw_roof(id, proj, buf, ids);
+	draw_floor(id, proj, buf, ids);
 	while (i < proj.ceil && i < HEIGHT)
 	{
 		if (buf[i * WIDTH + id].a == 0)
@@ -99,7 +100,6 @@ void		draw_portal(int id, t_proj proj, t_color *buf, u_int32_t *ids)
 			++i;
 		}
 	}
-	draw_floor(id, proj, buf, ids);
 }
 
 void		draw_entity(int id, t_e_proj proj, t_color *buf, u_int32_t *ids)
