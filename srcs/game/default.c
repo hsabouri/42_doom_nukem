@@ -24,6 +24,11 @@ static t_mat	*init_mat_4(t_mat *materials, t_game *game)
 		.color = NO_COLOR, .texture = &game->textures[12], .mode = NO_TILING,
 		.filter = WHITE, .overlay = NULL
 	};
+	materials[13] = (t_mat) {
+		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
+		.color = NO_COLOR, .texture = &game->textures[2], .mode = NO_TILING,
+		.filter = WHITE, .overlay = NULL
+	};
 	return (materials);
 }
 
@@ -82,7 +87,7 @@ static t_mat	*init_mats(t_game *game)
 {
 	t_mat *materials;
 
-	materials = (t_mat *)safe_malloc(13 * sizeof(t_mat), "generate_map");
+	materials = (t_mat *)safe_malloc(14 * sizeof(t_mat), "generate_map");
 	materials[0] = (t_mat) {
 		.pos = fvec2_new(0, 0),	.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = game->textures, .mode = TILING,
@@ -102,7 +107,7 @@ static t_mat	*init_mats(t_game *game)
 	materials = init_mat_2(materials, game);
 	materials = init_mat_3(materials, game);
 	materials = init_mat_4(materials, game);
-	game->nmaterials = 13;
+	game->nmaterials = 14;
 	return (materials);
 }
 
@@ -112,6 +117,7 @@ t_game	generate_map(void)
 
 	game.textures = load_all_textures(&game);
 	game.materials = init_mats(&game);
+	printf("buh\n");
 	game.multi_mats = init_multi_sprite(&game, game.materials);
 	game.points = init_points(&game);
 	game.walls = init_walls(&game);

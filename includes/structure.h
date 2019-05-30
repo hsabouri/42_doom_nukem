@@ -44,7 +44,7 @@ typedef enum		s_col_mode
 typedef enum		s_entity_type
 {
 	PLAYER,
-	GROSSE_DAME,
+	GUN_MARINE,
 	KEY_CARD
 }					t_entity_type;
 

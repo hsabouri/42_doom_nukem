@@ -16,8 +16,8 @@ char	*type_to_text(t_entity_type type, char *dst)
 {
 	if (type == PLAYER)
 		return (ft_strcpy(dst, "player"));
-	else if (type == GROSSE_DAME)
-		return (ft_strcpy(dst, "grosse dame"));
+	else if (type == GUN_MARINE)
+		return (ft_strcpy(dst, "gun marine"));
 	else if (type == KEY_CARD)
 		return (ft_strcpy(dst, "key card"));
 	else

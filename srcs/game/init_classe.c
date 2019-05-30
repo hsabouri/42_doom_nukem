@@ -27,9 +27,8 @@ static t_entity	classe_1(t_array *multi_mats)
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
-		}, .mat = &multi_mats[0], .type = (t_entity_type)GROSSE_DAME,
-		.damage = 10
-	});
+		}, .mat = &multi_mats[0], .type = (t_entity_type)GUN_MARINE,
+		.damage = 10});
 	return (classe);
 }
 
@@ -48,8 +47,8 @@ static t_entity	classe_2(t_array *multi_mats)
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
-		}, .mat = &multi_mats[1], .type = (t_entity_type)KEY_CARD, .damage = 0
-	});
+		}, .mat = &multi_mats[1], .type = (t_entity_type)KEY_CARD,
+		.damage = 0});
 	return (classe);
 }
 
