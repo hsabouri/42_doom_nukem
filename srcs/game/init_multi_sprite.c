@@ -76,15 +76,43 @@ static t_array	sprite_3(t_mat *mats)
 	return (sprite);
 }
 
-t_array		*init_multi_sprite(t_game *game, t_mat *mats)
+static t_array	sprite_4(t_mat *mats)
+{
+	t_array	sprite;
+	t_mat	*material;
+
+	material = NULL;
+	sprite = safe_anew(NULL, 8, sizeof(t_mat *), "init_multi_sprite");
+	material = &mats[22];
+	apush(&sprite, &material);
+	material = &mats[23];
+	apush(&sprite, &material);
+	material = &mats[24];
+	apush(&sprite, &material);
+	material = &mats[25];
+	apush(&sprite, &material);
+	material = &mats[26];
+	apush(&sprite, &material);
+	material = &mats[27];
+	apush(&sprite, &material);
+	material = &mats[28];
+	apush(&sprite, &material);
+	material = &mats[29];
+	apush(&sprite, &material);
+	return (sprite);
+}
+
+t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 {
 	t_array *multi_sprite;
 
-	multi_sprite = (t_array *)safe_malloc(sizeof(t_array) * 3,
+	multi_sprite = (t_array *)safe_malloc(sizeof(t_array) * 5,
 		"init_multi_sprite");
 	multi_sprite[0] = sprite_1(mats);
 	multi_sprite[1] = sprite_2(mats);
 	multi_sprite[2] = sprite_3(mats);
-	game->nmulti_mats = 3;
+	multi_sprite[3] = sprite_4(mats);
+	multi_sprite[4] = sprite_5(mats);
+	game->nmulti_mats = 5;
 	return (multi_sprite);
 }

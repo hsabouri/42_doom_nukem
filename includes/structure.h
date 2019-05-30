@@ -46,6 +46,8 @@ typedef enum		s_entity_type
 	PLAYER,
 	GUN_MARINE,
 	SMG_MARINE,
+	BLACK_MARINE,
+	RED_MARINE,
 	KEY_CARD
 }					t_entity_type;
 

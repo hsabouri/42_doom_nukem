@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	textures = (t_img *)safe_malloc(46 * sizeof(t_img), "textures");
+	textures = (t_img *)safe_malloc(62 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
 	textures[2] = parse_tga("./textures/items/key_card.tga", 0);
@@ -63,6 +63,22 @@ t_img	*load_all_textures(t_game *game)
 	textures[43] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine5.tga", 0);
 	textures[44] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine6.tga", 0);
 	textures[45] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine7.tga", 0);
-	game->ntextures = 46;
+	textures[46] = parse_tga("./textures/multi_sprite/black_marine/black_marine0.tga", 0);
+	textures[47] = parse_tga("./textures/multi_sprite/black_marine/black_marine1.tga", 0);
+	textures[48] = parse_tga("./textures/multi_sprite/black_marine/black_marine2.tga", 0);
+	textures[49] = parse_tga("./textures/multi_sprite/black_marine/black_marine3.tga", 0);
+	textures[50] = parse_tga("./textures/multi_sprite/black_marine/black_marine4.tga", 0);
+	textures[51] = parse_tga("./textures/multi_sprite/black_marine/black_marine5.tga", 0);
+	textures[52] = parse_tga("./textures/multi_sprite/black_marine/black_marine6.tga", 0);
+	textures[53] = parse_tga("./textures/multi_sprite/black_marine/black_marine7.tga", 0);
+	textures[54] = parse_tga("./textures/multi_sprite/red_marine/red_marine0.tga", 0);
+	textures[55] = parse_tga("./textures/multi_sprite/red_marine/red_marine1.tga", 0);
+	textures[56] = parse_tga("./textures/multi_sprite/red_marine/red_marine2.tga", 0);
+	textures[57] = parse_tga("./textures/multi_sprite/red_marine/red_marine3.tga", 0);
+	textures[58] = parse_tga("./textures/multi_sprite/red_marine/red_marine4.tga", 0);
+	textures[59] = parse_tga("./textures/multi_sprite/red_marine/red_marine5.tga", 0);
+	textures[60] = parse_tga("./textures/multi_sprite/red_marine/red_marine6.tga", 0);
+	textures[61] = parse_tga("./textures/multi_sprite/red_marine/red_marine7.tga", 0);
+	game->ntextures = 62;
 	return (textures);
 }

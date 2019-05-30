@@ -76,11 +76,11 @@ t_entity		*init_entities(t_game *game)
 	entities[0].id = 0;
 	entities[0].physic.pos = (t_vec3){8, 12, 0};
 	entities[0].spawn.pos = (t_vec3){8, 12, 0};
-	entities[1] = game->classes[0];
+	entities[1] = game->classes[3];
 	entities[1].id = 1;
 	entities[1].physic.pos = (t_vec3){5, 12, 0};
 	entities[1].spawn.pos = (t_vec3){5, 12, 0};
-	entities[2] = game->classes[0];
+	entities[2] = game->classes[4];
 	entities[2].id = 2;
 	entities[2].physic.pos = (t_vec3){8, 10, 0};
 	entities[2].spawn.pos = (t_vec3){8, 10, 0};

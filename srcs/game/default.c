@@ -12,18 +12,39 @@
 
 #include <doom.h>
 
-// static t_mat	*init_mat_3(t_mat *materials, t_game *game)
-// {
+static t_mat	*init_mat_4(t_mat *materials, t_game *game)
+{
+	t_mat tmp;
 
-// 	return (materials);
-// }
+	tmp = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
+		.color = NO_COLOR, .texture = &game->textures[43], .mode = NO_TILING,
+		.filter = WHITE, .overlay =	NULL};
+		tmp.texture = &game->textures[44];
+	materials[19] = tmp;
+	tmp.texture = &game->textures[44];
+	materials[20] = tmp;
+	tmp.texture = &game->textures[45];
+	materials[21] = tmp;
+	tmp.texture = &game->textures[46];
+	materials[22] = tmp;
+	tmp.texture = &game->textures[47];
+	materials[23] = tmp;
+	tmp.texture = &game->textures[48];
+	materials[24] = tmp;
+	tmp.texture = &game->textures[49];
+	materials[25] = tmp;
+	tmp.texture = &game->textures[50];
+	materials[26] = tmp;
+	return (materials);
+}
 
 static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 {
 	t_mat tmp;
 
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
-		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[10], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
 	materials[10] = tmp;
@@ -43,12 +64,6 @@ static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 	materials[17] = tmp;
 	tmp.texture = &game->textures[42];
 	materials[18] = tmp;
-	tmp.texture = &game->textures[43];
-	materials[19] = tmp;
-	tmp.texture = &game->textures[44];
-	materials[20] = tmp;
-	tmp.texture = &game->textures[45];
-	materials[21] = tmp;
 	return (materials);
 }
 
@@ -65,10 +80,11 @@ static t_mat	*init_mat_2(t_mat *materials, t_game *game)
 		.color = NO_COLOR, .texture = &game->textures[4], .mode = TILING,
 		.filter = WHITE, .overlay = NULL};
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
-		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
+		.sca = fvec2_new(f_from_int(3), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[5], .mode = NO_TILING,
 		.filter = WHITE, .overlay = NULL};
 	materials[5] = tmp;
+	tmp.sca.u = f_from_int(2);
 	tmp.texture = &game->textures[6];
 	materials[6] = tmp;
 	tmp.texture = &game->textures[7];
@@ -85,7 +101,7 @@ static t_mat	*init_mats(t_game *game)
 	t_mat	*materials;
 	t_mat	tmp;
 
-	materials = (t_mat *)safe_malloc(22 * sizeof(t_mat), "generate_map");
+	materials = (t_mat *)safe_malloc(38 * sizeof(t_mat), "generate_map");
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = game->textures, .mode = TILING,
@@ -99,8 +115,10 @@ static t_mat	*init_mats(t_game *game)
 		.filter = WHITE, .overlay = NULL};
 	materials = init_mat_2(materials, game);
 	materials = init_mat_3(materials, game);
-	// materials = init_mat_4(materials, game);
-	game->nmaterials = 22;
+	materials = init_mat_4(materials, game);
+	materials = init_mat_5(materials, game);
+	materials = init_mat_6(materials, game);
+	game->nmaterials = 38;
 	return (materials);
 }
 
