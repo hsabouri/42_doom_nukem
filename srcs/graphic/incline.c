@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:14:28 by fmerding          #+#    #+#             */
-/*   Updated: 2019/05/31 14:24:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:24:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ t_fixed	find_z(t_sector sector, t_vec2 point, int mode)
 		newx = f_from_float(point.u - sector.center.u);
 		newy = f_from_float(point.v - sector.center.v);
 		z = f_mul(newx, f_from_float(sector.floor.x)) + f_mul(newy,
-		f_from_float(sector.floor.y)) + f_from_float(sector.floor.z);
+			f_from_float(sector.floor.y)) + f_from_float(sector.floor.z);
 	}
 	if (mode == 0)
 	{
 		newx = f_from_float(point.u - sector.center.u);
 		newy = f_from_float(point.v - sector.center.v);
 		z = f_mul(newx, f_from_float(sector.ceiling.x)) + f_mul(newy,
-		f_from_float(sector.ceiling.y)) + f_from_float(sector.ceiling.z);
+			f_from_float(sector.ceiling.y)) + f_from_float(sector.ceiling.z);
 	}
 	return (z);
 }

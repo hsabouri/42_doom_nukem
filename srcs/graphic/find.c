@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 15:46:59 by fmerding          #+#    #+#             */
-/*   Updated: 2019/05/30 16:11:11 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:15:15 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ size_t		find_sector_portals(t_game game, size_t wall)
 
 	res = 0;
 	i = 0;
-	while (game.portals[i].from_wall != wall && game.portals[i].to_wall != wall)
+	while (game.portals[i].from_wall != wall && game.portals[i].to_wall
+		!= wall)
 		i++;
 	if (game.portals[i].from_wall == wall)
 		res = game.portals[i].from_sector;
@@ -88,7 +89,7 @@ size_t		find_wall_order(t_game game, size_t wall)
 
 	i = 0;
 	while ((game.portals[i].from_wall != wall && game.portals[i].to_wall
-	!= wall) && i < game.nportals)
+		!= wall) && i < game.nportals)
 		i++;
 	if (game.portals[i].from_wall == wall)
 		return (0);

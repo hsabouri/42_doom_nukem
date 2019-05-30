@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:43:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/30 16:02:03 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:12:07 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 #include <doom.h>
 #include "srcs/graphic/multi_sprite.h"
 
-t_bunch	build_entity_bunch(const t_game game, const t_context context,
-const t_limit limit, t_fvec2 pos)
+t_bunch		build_entity_bunch(const t_game game, const t_context context,
+	const t_limit limit, t_fvec2 pos)
 {
 	t_bunch			ret;
 	t_cache_entity	current;
 	const size_t	sector = context.sector.sector_id;
 	size_t			i;
 	t_fvec2			tmp;
-
 	t_cache_entity	entities[NCACHEENTITY];
 
 	i = -1;
@@ -31,18 +30,21 @@ const t_limit limit, t_fvec2 pos)
 	{
 		if (game.entities[i].physic.sector_id == sector)
 		{
-			tmp = vec2_to_fvec2(vec2_rot(vec2_new(game.entities[i].physic.radius, 0), context.physic.look_h));
-			current.a = fvec2_sub(vec2_to_fvec2(vec3_to_vec2(game.entities[i].physic.pos)), pos);
+			tmp = vec2_to_fvec2(vec2_rot(vec2_new(
+				game.entities[i].physic.radius, 0), context.physic.look_h));
+			current.a = fvec2_sub(vec2_to_fvec2(
+				vec3_to_vec2(game.entities[i].physic.pos)), pos);
 			current.dis = fvec2_ssize(current.a);
 			current.b = fvec2_add(current.a, tmp);
 			current.a = fvec2_sub(current.a, tmp);
 			if (is_in_limit(limit, take_left(current.a, current.b),
-				take_right(current.a, current.b)))
+			take_right(current.a, current.b)))
 			{
 				current.id = i;
 				current.h = f_from_float(game.entities[i].physic.pos.z);
 				current.physic = game.entities[i].physic;
-				current.mat = choose_entity_material(game.entities[i], vec3_to_vec2(context.physic.pos));
+				current.mat = choose_entity_material(game.entities[i],
+					vec3_to_vec2(context.physic.pos));
 				entities[ret.nentities] = current;
 				++ret.nentities;
 			}
@@ -50,7 +52,8 @@ const t_limit limit, t_fvec2 pos)
 	}
 	if (ret.nentities)
 	{
-		ret.entities = (t_cache_entity *)safe_malloc(ret.nentities * sizeof(t_cache_entity), "rendering");
+		ret.entities = (t_cache_entity *)safe_malloc(ret.nentities
+			* sizeof(t_cache_entity), "rendering");
 		memmove(ret.entities, entities, ret.nentities * sizeof(t_cache_entity));
 	}
 	else
@@ -58,8 +61,8 @@ const t_limit limit, t_fvec2 pos)
 	return (ret);
 }
 
-t_bunch	build_bunch(const t_game game, const t_context context,
-const t_limit limit)
+t_bunch		build_bunch(const t_game game, const t_context context,
+	const t_limit limit)
 {
 	t_bunch			ret;
 	t_cache_wall	current;
@@ -75,45 +78,43 @@ const t_limit limit)
 	{
 		current.a = fvec2_sub(vec2_to_fvec2(game.points[game.walls[i].a]), pos);
 		current.b = fvec2_sub(vec2_to_fvec2(game.points[game.walls[i].b]), pos);
-		if ((size_t)context.mask != i &&
-			is_in_limit(limit, current.a, current.b))
+		if ((size_t)context.mask != i
+		&& is_in_limit(limit, current.a, current.b))
 		{
 			current.id = i;
 			current.size = f_from_float(1 / vec2_inv_size(vec2_sub(
 				game.points[game.walls[i].b], game.points[game.walls[i].a])));
 			current.portal = game.walls[i].portal;
 			current.tex_pos = game.walls[i].tex_pos;
-			current.open = (current.portal >= 0) ? game.portals[current.portal].mat : NULL;
+			current.open = (current.portal >= 0)
+			? game.portals[current.portal].mat : NULL;
 			current.mat = *game.walls[i].mat;
 			current.left_z = game.points[game.walls[i].a];
 			current.right_z = game.points[game.walls[i].b];
 			if (current.portal != -1)
 			{
-				if (find_wall_order(game,i) == 1)
+				if (find_wall_order(game, i) < 2)
 				{
-					current.left_p = game.points[game.walls[find_wall_portal(game,i)].a];
-					current.right_p = game.points[game.walls[find_wall_portal(game,i)].b];
+					current.left_p = game.points
+					[game.walls[find_wall_portal(game, i)].a];
+					current.right_p = game.points
+					[game.walls[find_wall_portal(game, i)].b];
 				}
-				if (find_wall_order(game,i) == 0)
-				{
-					current.left_p = game.points[game.walls[find_wall_portal(game,i)].a];
-					current.right_p = game.points[game.walls[find_wall_portal(game,i)].b];
-
-				}
-				if (find_wall_order(game,i) == 2)
+				if (find_wall_order(game, i) == 2)
 					ft_putstr("error portals \n");
-				current = switch_portals(current,game,find_wall_portal(game,i));
+				current = switch_portals(current, game,
+					find_wall_portal(game, i));
 			}
-			current = switch_points(current,game,i,context);
+			current = switch_points(current, game, i, context);
 			walls[ret.nwalls] = current;
 			++ret.nwalls;
 		}
-
 		++i;
 	}
 	if (ret.nwalls)
 	{
-		ret.walls = (t_cache_wall *)safe_malloc(ret.nwalls * sizeof(t_cache_wall), "rendering");
+		ret.walls = (t_cache_wall *)safe_malloc(ret.nwalls
+			* sizeof(t_cache_wall), "rendering");
 		memmove(ret.walls, walls, ret.nwalls * sizeof(t_cache_wall));
 	}
 	else
@@ -121,7 +122,8 @@ const t_limit limit)
 	return (ret);
 }
 
-t_render		build_sections_entities(const t_context context, const t_bunch bunch, const t_limit limits)
+t_render		build_sections_entities(const t_context context,
+	const t_bunch bunch, const t_limit limits)
 {
 	t_cache_entity		current;
 	t_section_entity	current_section;
@@ -142,15 +144,18 @@ t_render		build_sections_entities(const t_context context, const t_bunch bunch, 
 	}
 	if (render.nentities)
 	{
-		render.entities = (t_section_entity *)safe_malloc(render.nentities * sizeof(t_section_entity), "rendering");
-		memmove(render.entities, entities, render.nentities * sizeof(t_section_entity));
+		render.entities = (t_section_entity *)safe_malloc(render.nentities
+			* sizeof(t_section_entity), "rendering");
+		memmove(render.entities, entities, render.nentities
+			* sizeof(t_section_entity));
 	}
 	else
 		render.entities = NULL;
 	return (render);
 }
 
-t_render		build_sections(const t_context context, const t_bunch bunch, const t_limit limits)
+t_render		build_sections(const t_context context, const t_bunch bunch,
+	const t_limit limits)
 {
 	t_cache_wall	current;
 	t_section		current_section;
@@ -172,8 +177,10 @@ t_render		build_sections(const t_context context, const t_bunch bunch, const t_l
 	}
 	if (render.nsections)
 	{
-		render.sections = (t_section *)safe_malloc(render.nsections * sizeof(t_section), "rendering");
-		memmove(render.sections, sections, render.nsections * sizeof(t_section));
+		render.sections = (t_section *)safe_malloc(render.nsections
+			* sizeof(t_section), "rendering");
+		memmove(render.sections, sections, render.nsections
+			* sizeof(t_section));
 	}
 	else
 		render.sections = NULL;
@@ -198,8 +205,10 @@ t_render		build_sections_portals(t_render render)
 	}
 	if (render.nportals)
 	{
-		render.portals = (t_section *)safe_malloc(render.nsections * sizeof(t_section), "rendering");
-		memmove(render.portals, portals, render.nportals * sizeof(t_section));
+		render.portals = (t_section *)safe_malloc(render.nsections
+			* sizeof(t_section), "rendering");
+		memmove(render.portals, portals, render.nportals
+			* sizeof(t_section));
 	}
 	else
 		render.portals = NULL;

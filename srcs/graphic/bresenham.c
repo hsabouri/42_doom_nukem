@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 14:34:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/30 16:45:29 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:09:58 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int dot)
 			cumul -= bres.diff[1];
 			bres.src.x += f_from_int(bres.inc[0]);
 		}
-		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT &&
-		bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
+		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT
+		&& bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
 			buff[f_to_int(bres.src.x) + f_to_int(bres.src.y) * WIDTH] = color;
 	}
 }
@@ -52,8 +52,8 @@ int dot)
 			cumul -= bres.diff[0];
 			bres.src.y += f_from_int(bres.inc[1]);
 		}
-		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT &&
-		bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
+		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT
+		&& bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
 			buff[f_to_int(bres.src.x) + f_to_int(bres.src.y) * WIDTH] = color;
 	}
 }

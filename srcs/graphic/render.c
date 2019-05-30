@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/30 16:34:33 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:19:23 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "./sort.h"
 
 void	render_wall(const t_context context, const t_section section,
-t_color *buf, u_int32_t *ids)
+	t_color *buf, u_int32_t *ids)
 {
 	int		id;
 	t_hit	hit;
@@ -35,7 +35,7 @@ t_color *buf, u_int32_t *ids)
 }
 
 void	render_portal(const t_context context, const t_section section,
-t_color *buf, u_int32_t *ids)
+	t_color *buf, u_int32_t *ids)
 {
 	int			id;
 	t_hit		hit;
@@ -56,7 +56,7 @@ t_color *buf, u_int32_t *ids)
 }
 
 void	render_entity(const t_context context, const t_section_entity section,
-t_color *buf, u_int32_t *ids)
+	t_color *buf, u_int32_t *ids)
 {
 	int			id;
 	t_hit		hit;
@@ -74,7 +74,7 @@ t_color *buf, u_int32_t *ids)
 }
 
 void	sections_entities(t_render render, const t_context context,
-t_color *buf, u_int32_t *id_buf)
+	t_color *buf, u_int32_t *id_buf)
 {
 	t_section_entity	current;
 	int					i;
@@ -90,7 +90,7 @@ t_color *buf, u_int32_t *id_buf)
 }
 
 void	render(const t_game game, t_context context, t_color *buf,
-u_int32_t *id_buf)
+	u_int32_t *id_buf)
 {
 	const t_limit	limit_rays = build_limits(context);
 	const t_bunch	bunch = build_bunch(game, context, limit_rays);
