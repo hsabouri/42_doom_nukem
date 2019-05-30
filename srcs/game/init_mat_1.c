@@ -12,6 +12,32 @@
 
 #include <doom.h>
 
+t_mat	*init_mat_7(t_mat *materials, t_game *game)
+{
+	t_mat tmp;
+
+	tmp = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
+		.color = NO_COLOR, .texture = &game->textures[67], .mode = NO_TILING,
+		.filter = WHITE, .overlay =	NULL};
+	materials[43] = tmp;
+	tmp.texture = &game->textures[68];
+	materials[44] = tmp;
+	tmp.texture = &game->textures[69];
+	materials[45] = tmp;
+	// tmp.texture = &game->textures[54];
+	// materials[30] = tmp;
+	// tmp.texture = &game->textures[55];
+	// materials[31] = tmp;
+	// tmp.texture = &game->textures[56];
+	// materials[32] = tmp;
+	// tmp.texture = &game->textures[57];
+	// materials[33] = tmp;
+	// tmp.texture = &game->textures[58];
+	// materials[34] = tmp;
+	return (materials);
+}
+
 t_mat	*init_mat_6(t_mat *materials, t_game *game)
 {
 	t_mat tmp;
@@ -26,16 +52,16 @@ t_mat	*init_mat_6(t_mat *materials, t_game *game)
 	materials[36] = tmp;
 	tmp.texture = &game->textures[61];
 	materials[37] = tmp;
-	// tmp.texture = &game->textures[54];
-	// materials[30] = tmp;
-	// tmp.texture = &game->textures[55];
-	// materials[31] = tmp;
-	// tmp.texture = &game->textures[56];
-	// materials[32] = tmp;
-	// tmp.texture = &game->textures[57];
-	// materials[33] = tmp;
-	// tmp.texture = &game->textures[58];
-	// materials[34] = tmp;
+	tmp.texture = &game->textures[62];
+	materials[38] = tmp;
+	tmp.texture = &game->textures[63];
+	materials[39] = tmp;
+	tmp.texture = &game->textures[64];
+	materials[40] = tmp;
+	tmp.texture = &game->textures[65];
+	materials[41] = tmp;
+	tmp.texture = &game->textures[66];
+	materials[42] = tmp;
 	return (materials);
 }
 
@@ -45,9 +71,8 @@ t_mat	*init_mat_5(t_mat *materials, t_game *game)
 
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[43], .mode = NO_TILING,
+		.color = NO_COLOR, .texture = &game->textures[51], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
-		tmp.texture = &game->textures[51];
 	materials[27] = tmp;
 	tmp.texture = &game->textures[52];
 	materials[28] = tmp;

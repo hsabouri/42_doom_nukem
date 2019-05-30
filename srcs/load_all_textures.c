@@ -16,10 +16,10 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	textures = (t_img *)safe_malloc(62 * sizeof(t_img), "textures");
+	textures = (t_img *)safe_malloc(70 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
-	textures[2] = parse_tga("./textures/items/key_card.tga", 0);
+	textures[2] = parse_tga("./textures/items/key_card_green.tga", 0);
 	textures[3] = parse_tga("./textures/skybox.tga", 1);
 	textures[4] = parse_tga("./textures/fence.tga", 1);
 	textures[5] = parse_tga("./textures/multi_sprite/gun_marine/gun_marine0.tga", 0);
@@ -79,6 +79,14 @@ t_img	*load_all_textures(t_game *game)
 	textures[59] = parse_tga("./textures/multi_sprite/red_marine/red_marine5.tga", 0);
 	textures[60] = parse_tga("./textures/multi_sprite/red_marine/red_marine6.tga", 0);
 	textures[61] = parse_tga("./textures/multi_sprite/red_marine/red_marine7.tga", 0);
-	game->ntextures = 62;
+	textures[62] = parse_tga("./textures/items/key_card_blue.tga", 0);
+	textures[63] = parse_tga("./textures/items/key_card_red.tga", 0);
+	textures[64] = parse_tga("./textures/items/key_card_purple.tga", 0);
+	textures[65] = parse_tga("./textures/items/apple", 0);
+	textures[66] = parse_tga("./textures/items/fish", 0);
+	textures[67] = parse_tga("./textures/items/meat", 0);
+	textures[68] = parse_tga("./textures/items/medipack", 0);
+	textures[69] = parse_tga("./textures/items/ammo", 0);
+	game->ntextures = 70;
 	return (textures);
 }

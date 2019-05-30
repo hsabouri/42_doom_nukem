@@ -101,7 +101,7 @@ static t_mat	*init_mats(t_game *game)
 	t_mat	*materials;
 	t_mat	tmp;
 
-	materials = (t_mat *)safe_malloc(38 * sizeof(t_mat), "generate_map");
+	materials = (t_mat *)safe_malloc(45 * sizeof(t_mat), "generate_map");
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = game->textures, .mode = TILING,
@@ -118,7 +118,7 @@ static t_mat	*init_mats(t_game *game)
 	materials = init_mat_4(materials, game);
 	materials = init_mat_5(materials, game);
 	materials = init_mat_6(materials, game);
-	game->nmaterials = 38;
+	game->nmaterials = 45;
 	return (materials);
 }
 

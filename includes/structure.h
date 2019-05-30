@@ -48,7 +48,15 @@ typedef enum		s_entity_type
 	SMG_MARINE,
 	BLACK_MARINE,
 	RED_MARINE,
-	KEY_CARD
+	GREEN_KEY_CARD,
+	BLUE_KEY_CARD,
+	RED_KEY_CARD,
+	PURPLE_KEY_CARD,
+	APPLE,
+	FISH,
+	MEAT,
+	MEDIPACK,
+	AMMO
 }					t_entity_type;
 
 typedef struct		s_mat
