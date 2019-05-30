@@ -18,6 +18,8 @@ char	*type_to_text(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "player"));
 	else if (type == GUN_MARINE)
 		return (ft_strcpy(dst, "gun marine"));
+	else if (type == SMG_MARINE)
+		return (ft_strcpy(dst, "smg marine"));
 	else if (type == KEY_CARD)
 		return (ft_strcpy(dst, "key card"));
 	else

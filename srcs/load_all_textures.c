@@ -16,10 +16,10 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	textures = (t_img *)safe_malloc(38 * sizeof(t_img), "textures");
+	textures = (t_img *)safe_malloc(46 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
-	textures[2] = parse_tga("./textures/items/key_card.tga", 1);
+	textures[2] = parse_tga("./textures/items/key_card.tga", 0);
 	textures[3] = parse_tga("./textures/skybox.tga", 1);
 	textures[4] = parse_tga("./textures/fence.tga", 1);
 	textures[5] = parse_tga("./textures/multi_sprite/gun_marine/gun_marine0.tga", 0);
@@ -55,6 +55,14 @@ t_img	*load_all_textures(t_game *game)
 	textures[35] = parse_tga("./textures/weapons/claymore/claymore1.tga", 0);
 	textures[36] = parse_tga("./textures/hud/in_game_editor.tga", 1);
 	textures[37] = parse_tga("./textures/environment/parking.tga", 0);
-	game->ntextures = 38;
+	textures[38] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine0.tga", 0);
+	textures[39] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine1.tga", 0);
+	textures[40] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine2.tga", 0);
+	textures[41] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine3.tga", 0);
+	textures[42] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine4.tga", 0);
+	textures[43] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine5.tga", 0);
+	textures[44] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine6.tga", 0);
+	textures[45] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine7.tga", 0);
+	game->ntextures = 46;
 	return (textures);
 }
