@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/26 18:47:58 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:28:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,15 @@ t_entity		*init_entities(t_game *game)
 	entities[0].id = 0;
 	entities[0].physic.pos = (t_vec3){8, 12, 0};
 	entities[0].spawn.pos = (t_vec3){8, 12, 0};
-	entities[1] = game->classes[0];
+	entities[1] = game->classes[2];
 	entities[1].id = 1;
 	entities[1].physic.pos = (t_vec3){5, 12, 0};
 	entities[1].spawn.pos = (t_vec3){5, 12, 0};
-	entities[2] = game->classes[0];
+	entities[2] = game->classes[3];
 	entities[2].id = 2;
 	entities[2].physic.pos = (t_vec3){8, 10, 0};
 	entities[2].spawn.pos = (t_vec3){8, 10, 0};
-	entities[3] = game->classes[1];
+	entities[3] = game->classes[4];
 	entities[3].id = 3;
 	entities[3].physic.pos = (t_vec3){5, 10, 0};
 	entities[3].spawn.pos = (t_vec3){5, 10, 0};

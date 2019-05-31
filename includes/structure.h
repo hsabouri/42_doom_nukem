@@ -44,8 +44,19 @@ typedef enum		s_col_mode
 typedef enum		s_entity_type
 {
 	PLAYER,
-	GROSSE_DAME,
-	KEY_CARD
+	GUN_MARINE,
+	SMG_MARINE,
+	BLACK_MARINE,
+	RED_MARINE,
+	GREEN_KEY_CARD,
+	BLUE_KEY_CARD,
+	RED_KEY_CARD,
+	PURPLE_KEY_CARD,
+	APPLE,
+	FISH,
+	MEAT,
+	MEDIPACK,
+	AMMO
 }					t_entity_type;
 
 typedef struct		s_mat

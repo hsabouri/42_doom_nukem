@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/22 14:08:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:26:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,95 +14,114 @@
 
 static t_mat	*init_mat_4(t_mat *materials, t_game *game)
 {
-	materials[11] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[11], .mode = NO_TILING,
-		.filter = WHITE, .overlay =	NULL
-	};
-	materials[12] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[12], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL
-	};
+	t_mat tmp;
+
+	tmp = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
+		.color = NO_COLOR, .texture = &game->textures[43], .mode = NO_TILING,
+		.filter = WHITE, .overlay =	NULL};
+		tmp.texture = &game->textures[44];
+	materials[19] = tmp;
+	tmp.texture = &game->textures[44];
+	materials[20] = tmp;
+	tmp.texture = &game->textures[45];
+	materials[21] = tmp;
+	tmp.sca.u = f_from_int(2);
+	tmp.texture = &game->textures[46];
+	materials[22] = tmp;
+	tmp.texture = &game->textures[47];
+	materials[23] = tmp;
+	tmp.texture = &game->textures[48];
+	materials[24] = tmp;
+	tmp.texture = &game->textures[49];
+	materials[25] = tmp;
+	tmp.texture = &game->textures[50];
+	materials[26] = tmp;
 	return (materials);
 }
 
 static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 {
-	materials[7] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[7], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL
-	};
-	materials[8] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[8], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL
-	};
-	materials[9] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[9], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL
-	};
-	materials[10] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
+	t_mat tmp;
+
+	tmp = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[10], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL
-	};
+		.filter = WHITE, .overlay =	NULL};
+	materials[10] = tmp;
+	tmp.texture = &game->textures[11];
+	materials[11] = tmp;
+	tmp.texture = &game->textures[12];
+	materials[12] = tmp;
+	tmp.texture = &game->textures[39];
+	materials[15] = tmp;
+	tmp.texture = &game->textures[40];
+	materials[16] = tmp;
+	tmp.texture = &game->textures[41];
+	materials[17] = tmp;
+	tmp.texture = &game->textures[42];
+	materials[18] = tmp;
+	tmp.sca.u = f_from_int(3);
+	tmp.texture = &game->textures[2];
+	materials[13] = tmp;
+	tmp.texture = &game->textures[38];
+	materials[14] = tmp;
 	return (materials);
 }
 
 static t_mat	*init_mat_2(t_mat *materials, t_game *game)
 {
-	materials[3] = (t_mat) {
-		.pos = fvec2_new(0, f_from_int(1300)),
+	t_mat tmp;
+
+	materials[3] = (t_mat) {.pos = fvec2_new(0, f_from_int(1300)),
 		.sca = fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		.color = NO_COLOR, .texture = &game->textures[3], .mode = SKYBOX,
-		.filter = WHITE, .overlay = &materials[4]
-	};
-	materials[4] = (t_mat) {
-		.pos = fvec2_new(0, 0),	.sca = fvec2_new(f_from_int(1), f_from_int(1)),
+		.filter = WHITE, .overlay = &materials[4]};
+	materials[4] = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[4], .mode = TILING,
-		.filter = WHITE, .overlay = NULL
-	};
-	materials[5] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
+		.filter = WHITE, .overlay = NULL};
+	tmp = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(3), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[5], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL
-	};
-	materials[6] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[6], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL
-	};
+		.filter = WHITE, .overlay = NULL};
+	materials[5] = tmp;
+	tmp.sca.u = f_from_int(2);
+	tmp.texture = &game->textures[6];
+	materials[6] = tmp;
+	tmp.texture = &game->textures[7];
+	materials[7] = tmp;
+	tmp.texture = &game->textures[8];
+	materials[8] = tmp;
+	tmp.texture = &game->textures[9];
+	materials[9] = tmp;
 	return (materials);
 }
 
 static t_mat	*init_mats(t_game *game)
 {
-	t_mat *materials;
+	t_mat	*materials;
+	t_mat	tmp;
 
-	materials = (t_mat *)safe_malloc(13 * sizeof(t_mat), "generate_map");
-	materials[0] = (t_mat) {
-		.pos = fvec2_new(0, 0),	.sca = fvec2_new(f_from_int(1), f_from_int(1)),
+	materials = (t_mat *)safe_malloc(46 * sizeof(t_mat), "generate_map");
+	tmp = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = game->textures, .mode = TILING,
-		.filter = WHITE, .overlay = NULL
-	};
-	materials[1] = (t_mat) {
-		.pos = fvec2_new(0, 0), .sca = fvec2_new(f_from_int(1), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[1], .mode = TILING,
-		.filter = WHITE, .overlay = NULL
-		};
-	materials[2] = (t_mat) {
-		.pos = fvec2_new(0, f_from_int(1300)),
+		.filter = WHITE, .overlay = NULL};
+	materials[0] = tmp;
+	tmp.texture = &game->textures[1];
+	materials[1] = tmp;
+	materials[2] = (t_mat) {.pos = fvec2_new(0, f_from_int(1300)),
 		.sca = fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		.color = NO_COLOR, .texture = &game->textures[3], .mode = SKYBOX,
-		.filter = WHITE, .overlay = NULL
-	};
+		.filter = WHITE, .overlay = NULL};
 	materials = init_mat_2(materials, game);
 	materials = init_mat_3(materials, game);
 	materials = init_mat_4(materials, game);
-	game->nmaterials = 13;
+	materials = init_mat_5(materials, game);
+	materials = init_mat_6(materials, game);
+	materials = init_mat_7(materials, game);
+	game->nmaterials = 46;
 	return (materials);
 }
 
@@ -148,7 +167,7 @@ t_game	generate_map(void)
 	t_plist	g_e	= lpnew((t_pelem *)first_e);
 	lppush(&g_e, (t_pelem *)secon_e);
 	lppush(&g_e, (t_pelem *)third_e);
-	
+
 	game.log = c_log;
 	game.waiting_events = g_e;
 	game.unique_e_id = 4;

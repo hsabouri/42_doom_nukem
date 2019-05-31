@@ -29,7 +29,7 @@ static t_array		generator(void *parent)
 	curr.img.content = NULL;
 	while (i < game.nclasses)
 	{
-		type_to_text(game.entities[game.nentities - i - 1].type, curr.text);
+		type_to_text(game.classes[game.nclasses - i - 1].type, curr.text);
 		apush(&ret, &curr);
 		++i;
 	}
