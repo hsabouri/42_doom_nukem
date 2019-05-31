@@ -17,7 +17,7 @@ static t_mat	*init_mat_4(t_mat *materials, t_game *game)
 	t_mat tmp;
 
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
-		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
+		.sca = fvec2_new(f_from_int(3), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[43], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
 		tmp.texture = &game->textures[44];
@@ -44,7 +44,7 @@ static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 	t_mat tmp;
 
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
-		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
+		.sca = fvec2_new(f_from_int(3), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[10], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
 	materials[10] = tmp;
@@ -101,7 +101,7 @@ static t_mat	*init_mats(t_game *game)
 	t_mat	*materials;
 	t_mat	tmp;
 
-	materials = (t_mat *)safe_malloc(45 * sizeof(t_mat), "generate_map");
+	materials = (t_mat *)safe_malloc(46 * sizeof(t_mat), "generate_map");
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = game->textures, .mode = TILING,
@@ -118,7 +118,8 @@ static t_mat	*init_mats(t_game *game)
 	materials = init_mat_4(materials, game);
 	materials = init_mat_5(materials, game);
 	materials = init_mat_6(materials, game);
-	game->nmaterials = 45;
+	materials = init_mat_7(materials, game);
+	game->nmaterials = 46;
 	return (materials);
 }
 

@@ -82,11 +82,11 @@ t_img	*load_all_textures(t_game *game)
 	textures[62] = parse_tga("./textures/items/key_card_blue.tga", 0);
 	textures[63] = parse_tga("./textures/items/key_card_red.tga", 0);
 	textures[64] = parse_tga("./textures/items/key_card_purple.tga", 0);
-	textures[65] = parse_tga("./textures/items/apple", 0);
-	textures[66] = parse_tga("./textures/items/fish", 0);
-	textures[67] = parse_tga("./textures/items/meat", 0);
-	textures[68] = parse_tga("./textures/items/medipack", 0);
-	textures[69] = parse_tga("./textures/items/ammo", 0);
+	textures[65] = parse_tga("./textures/items/apple.tga", 0);
+	textures[66] = parse_tga("./textures/items/fish.tga", 0);
+	textures[67] = parse_tga("./textures/items/meat.tga", 0);
+	textures[68] = parse_tga("./textures/items/medipack.tga", 0);
+	textures[69] = parse_tga("./textures/items/ammo.tga", 0);
 	game->ntextures = 70;
 	return (textures);
 }
