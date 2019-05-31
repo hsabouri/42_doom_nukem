@@ -86,7 +86,7 @@ t_game			physic(t_game game, t_event events, float old_timer)
 {
 	t_game		new_game;
 	t_ph		new_physic;
-	size_t		i;
+	// size_t		i;
 
 	i = 0;
 	new_game = game;
@@ -106,7 +106,14 @@ t_game			physic(t_game game, t_event events, float old_timer)
 		old_timer);
 	new_game.player.my_entity.physic = entities_physic(new_physic, &game, -1,
 		old_timer);
+	// i = 0;
+	// while (i < game.nentities)
+	// {
+	// 	new_physic = game.entities[i].physic;
+	// 	game.entities[i].physic = entities_physic(new_physic, &game, i,
+	// 		old_timer);
+	// 	i++;
+	// }
 	new_game.log = game.log;
-
 	return (new_game);
 }
