@@ -3,13 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 17:09:10 by fmerding         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+/*   Updated: 2019/05/31 17:37:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,45 +57,27 @@ static t_vec3	set_entity_speed(t_ph physic, t_ph player, float old_timer)
 static t_ph		entities_look_at(t_ph physic, t_ph player)
 {
 	t_vec2	vec;
-	t_vec2	diff;
-	float	tan;
+	t_vec2	abs_vec;
+	float	tang;
 	float	dis;
 
-	diff = vec2_sub(vec3_to_vec2(player.pos), vec3_to_vec2(physic.pos));
-	dis = vec2_sq_size(diff);
-	vec.u = player.pos.x - physic.pos.x;
-	vec.v = player.pos.y - physic.pos.y;
-	if (dis < physic.rad_inter * physic.rad_inter
-		&& dis > physic.radius * physic.radius)
+	vec = vec2_sub(vec3_to_vec2(player.pos), vec3_to_vec2(physic.pos));
+	dis = vec2_sq_size(vec);
+	if (dis < physic.rad_inter * physic.rad_inter)
 	{
+		abs_vec = vec2_new(fabs(vec.u), fabs(vec.v));
+		if ((vec.u > 0 && vec.v > 0) || (vec.u < 0 && vec.v < 0))
+			tang = abs_vec.u / abs_vec.v;
+		else
+			tang = abs_vec.v / abs_vec.u;
 		if (vec.u > 0 && vec.v > 0)
-		{
-			vec.u = fabs(vec.u);
-			vec.v = fabs(vec.v);
-			tan = vec.u / vec.v;
-			physic.look_h = - (atan(tan));
-		}
-		if (vec.u > 0 && vec.v < 0)
-		{
-			vec.u = fabs(vec.u);
-			vec.v = fabs(vec.v);
-			tan = vec.v / vec.u;
-			physic.look_h = - (atan(tan) + 0.5 * M_PI);
-		}
-		if (vec.u < 0 && vec.v < 0)
-		{
-			vec.u = fabs(vec.u);
-			vec.v = fabs(vec.v);
-			tan = vec.u / vec.v;
-			physic.look_h = - (atan(tan) + M_PI);
-		}
-		if (vec.u < 0 && vec.v > 0)
-		{
-			vec.u = fabs(vec.u);
-			vec.v = fabs(vec.v);
-			tan = vec.v / vec.u;
-			physic.look_h = - (atan(tan) + 1.5 * M_PI);
-		}
+			physic.look_h = - (atan(tang)) + 0.2;
+		else if (vec.u > 0 && vec.v < 0)
+			physic.look_h = - (atan(tang) + 0.5 * M_PI) + 0.2;
+		else if (vec.u < 0 && vec.v < 0)
+			physic.look_h = - (atan(tang) + M_PI) + 0.2;
+		else
+			physic.look_h = - (atan(tang) + 1.5 * M_PI) + 0.2;
 	}
 	return (physic);
 }
