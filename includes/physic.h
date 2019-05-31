@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 17:07:20 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/06 17:23:13 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:40:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_vec3	    	floor_col(float pos_z, t_sector sector, t_vec3 speed);
 t_vec3	    	ceil_col(float pos_z, t_sector sector, t_vec3 speed);
 t_vec3	    	slide_wall(t_vec3 next_pos, t_game game, t_wall wall);
 u_int32_t		is_in_sector(t_ph physic, t_game game, u_int32_t sector_id);
-t_ph		    entities_physic(t_ph physic, t_game *game, size_t id,
+t_ph		    entities_physic(t_ph physic, t_game *game, ssize_t id,
                 float old_timer);
 t_ph            entities_track(t_ph physic, t_game game, t_last_pos last_pos);
 void			set_tp(t_tp *teleport, t_touch touch, t_game game);

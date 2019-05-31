@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities_physic.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/29 16:01:41 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:44:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int				is_here(t_game game, t_trigger trigger)
 	return (0);
 }// wtf ??
 
-t_ph			entities_physic(t_ph physic, t_game *game, size_t id,
+t_ph			entities_physic(t_ph physic, t_game *game, ssize_t id,
 float old_timer)
 {
 	t_ph		n_physic;
@@ -119,8 +119,10 @@ float old_timer)
 	}
 	last_pos.pos = game->player.my_entity.physic.pos;
 	last_pos.sector_id = game->player.my_entity.physic.sector_id;
-	n_physic.pos = col_entities(n_physic, physic, game, id);
+	if (id < 0)
+		n_physic.pos = col_entities(n_physic, physic, game, id);
 	n_physic = entities_track(n_physic, *game, last_pos);
-	col_interact(n_physic, game, id);
+	if (id < 0)
+		col_interact(n_physic, game, id);
 	return (n_physic);
 }

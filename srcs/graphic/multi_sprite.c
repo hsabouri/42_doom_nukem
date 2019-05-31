@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 14:29:01 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/30 16:42:23 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:36:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_mat	*choose_entity_material(t_entity entity, t_vec2 pos)
 	int		img;
 
 	pos = vec2_normalize(vec2_sub(vec3_to_vec2(entity.physic.pos), pos));
-	look = vec2_rot(vec2_new(0, 1), entity.physic.look_v);
-	perp = vec2_rot(vec2_new(1, 0), entity.physic.look_v);
+	look = vec2_rot(vec2_new(0, 1), entity.physic.look_h);
+	perp = vec2_rot(vec2_new(1, 0), entity.physic.look_h);
 	cosin = vec2_cross(pos, look).z;
 	sinus = vec2_cross(pos, perp).z;
 	if (sinus >= 0)
