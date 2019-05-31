@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 13:45:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:31:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,6 @@ static t_vec3	set_entity_speed(t_ph physic, t_ph player, float old_timer)
 
 static t_ph		entities_look_at(t_ph physic, t_ph player)
 {
-	t_vec2	diff;
-	float	dis;
-	float	sinus;
-	float	cosin;
-
-	diff = vec2_sub(vec3_to_vec2(player.pos), vec3_to_vec2(physic.pos));
-	dis = vec2_sq_size(diff);
-	if (dis < physic.rad_inter * physic.rad_inter)
-	{
-		diff = vec2_scale(diff, vec2_inv_size(diff));
-		sinus = vec2_cross(diff, vec2_new(1, 0)).z;
-		cosin = vec2_cross(diff, vec2_new(0, 1)).z;
-		if (sinus >= 0)
-			physic.look_h = atan(diff.v / diff.u);
-		else
-			physic.look_h = -1 + atan(diff.v / diff.u);
-	}
 	return (physic);
 }
 
@@ -87,10 +70,10 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	while (i < 1)
 	{
 		new_physic = game.entities[i].physic;
-		// if (game.entities[i].damage >= 1)
-		// 	new_physic.speed = set_entity_speed(new_physic,
-		// 		game.player.my_entity.physic, old_timer);
-		new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
+		if (game.entities[i].damage >= 1)
+			new_physic.speed = set_entity_speed(new_physic,
+				game.player.my_entity.physic, old_timer);
+		//new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
 		new_game.entities[i].physic = entities_physic(new_physic, &game, i,
 		old_timer);
 		i++;
