@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:24:45 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:25:08 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 		z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
 		if (z == 0)
 			return (NO_COLOR);
-		pix = fvec2_scale(proj.ray, f_div(proj.wr.u, z));
-		pix = fvec2_add(pix, proj.pos);
+		pix = fvec2_add(fvec2_scale(proj.ray, f_div(proj.wr.u, z)), proj.pos);
 		return (get_mat_pixel(tex.mat, tex, pix, 0, y));
 	}
 	t = f_div((-proj.ceiling.z - f_mul(proj.ceiling.x, proj.line.x.u)
@@ -142,12 +141,9 @@ t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 		z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
 		if (z == 0)
 			return (NO_COLOR);
-		pix = fvec2_scale(proj.ray, f_div(proj.wr.v, z));
-		pix = fvec2_add(pix, proj.pos);
+		pix = fvec2_add(fvec2_scale(proj.ray, f_div(proj.wr.v, z)), proj.pos);
 		return (get_mat_pixel(tex.mat, tex, pix, 0, y));
 	}
-	if (t == 0)
-		return (NO_COLOR);
 	t = f_div((-proj.floor.z - f_mul(proj.floor.x, proj.line.x.u)
 	- f_mul(proj.floor.y, proj.line.y.u) + proj.line.z.u),
 	(f_mul(proj.floor.x, proj.line.x.v) + f_mul(proj.floor.y,
