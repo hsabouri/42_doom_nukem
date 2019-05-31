@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/22 14:08:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:26:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_mat	*init_mat_4(t_mat *materials, t_game *game)
 	t_mat tmp;
 
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
-		.sca = fvec2_new(f_from_int(3), f_from_int(1)),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[43], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
 		tmp.texture = &game->textures[44];
@@ -26,6 +26,7 @@ static t_mat	*init_mat_4(t_mat *materials, t_game *game)
 	materials[20] = tmp;
 	tmp.texture = &game->textures[45];
 	materials[21] = tmp;
+	tmp.sca.u = f_from_int(2);
 	tmp.texture = &game->textures[46];
 	materials[22] = tmp;
 	tmp.texture = &game->textures[47];
@@ -44,7 +45,7 @@ static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 	t_mat tmp;
 
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
-		.sca = fvec2_new(f_from_int(3), f_from_int(1)),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[10], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
 	materials[10] = tmp;
@@ -52,10 +53,6 @@ static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 	materials[11] = tmp;
 	tmp.texture = &game->textures[12];
 	materials[12] = tmp;
-	tmp.texture = &game->textures[2];
-	materials[13] = tmp;
-	tmp.texture = &game->textures[38];
-	materials[14] = tmp;
 	tmp.texture = &game->textures[39];
 	materials[15] = tmp;
 	tmp.texture = &game->textures[40];
@@ -64,6 +61,11 @@ static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 	materials[17] = tmp;
 	tmp.texture = &game->textures[42];
 	materials[18] = tmp;
+	tmp.sca.u = f_from_int(3);
+	tmp.texture = &game->textures[2];
+	materials[13] = tmp;
+	tmp.texture = &game->textures[38];
+	materials[14] = tmp;
 	return (materials);
 }
 
@@ -165,7 +167,7 @@ t_game	generate_map(void)
 	t_plist	g_e	= lpnew((t_pelem *)first_e);
 	lppush(&g_e, (t_pelem *)secon_e);
 	lppush(&g_e, (t_pelem *)third_e);
-	
+
 	game.log = c_log;
 	game.waiting_events = g_e;
 	game.unique_e_id = 4;
