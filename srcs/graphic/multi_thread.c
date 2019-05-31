@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 16:05:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/12 15:15:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 13:32:16 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 typedef struct	s_thread_info
 {
-	t_game game;
-	t_context context;
-	t_color *buf;
-	u_int32_t *id_buf;
+	t_game		game;
+	t_context	context;
+	t_color		*buf;
+	u_int32_t	*id_buf;
 }				t_thread_info;
 
 static void	*start_render(void *info)
@@ -33,7 +33,7 @@ static void	*start_render(void *info)
 	return (NULL);
 }
 
-void	render_single_threaded(const t_env env, t_color *buf)
+void		render_single_threaded(const t_env env, t_color *buf)
 {
 	background(buf, NO_COLOR, (t_pix){WIDTH, HEIGHT});
 	render(env.game,
@@ -43,10 +43,13 @@ void	render_single_threaded(const t_env env, t_color *buf)
 			env.game.player.my_entity.physic,
 			-1,
 			env.game.sectors[env.game.player.my_entity.physic.sector_id],
-			0
+			0,
+			get_ray_dir(env.game.player.my_entity.physic, 0),
+			get_ray_dir(env.game.player.my_entity.physic, WIDTH - 1),
+			f_from_float(env.game.player.my_entity.physic.height
+				+ env.game.player.my_entity.physic.pos.z),
 		},
-		env.current_buffer, env.game.id_buf
-	);
+		env.current_buffer, env.game.id_buf);
 }
 
 static int	manage_threads(t_thread_info infos[N_THREADS])
@@ -75,7 +78,7 @@ static int	manage_threads(t_thread_info infos[N_THREADS])
 	return (ret);
 }
 
-void	render_multi_threaded(const t_env env, t_color *buf)
+void		render_multi_threaded(const t_env env, t_color *buf)
 {
 	t_thread_info	infos[N_THREADS];
 	int				i;
@@ -89,7 +92,11 @@ void	render_multi_threaded(const t_env env, t_color *buf)
 				(i + 1) * (WIDTH / N_THREADS),
 				env.game.player.my_entity.physic, -1,
 				env.game.sectors[env.game.player.my_entity.physic.sector_id],
-				0
+				0,
+				get_ray_dir(env.game.player.my_entity.physic, 0),
+				get_ray_dir(env.game.player.my_entity.physic, WIDTH - 1),
+				f_from_float(env.game.player.my_entity.physic.height
+					+ env.game.player.my_entity.physic.pos.z),
 			}, buf, env.game.id_buf};
 		i++;
 	}

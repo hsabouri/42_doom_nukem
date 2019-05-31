@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 13:12:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/07 13:56:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:32:30 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ t_render		sort_entities(t_render render)
 		swap_id = -1;
 		while (s_id < render.nentities)
 		{
-			s_dis = render.entities[s_id].entity.dis; 
+			s_dis = render.entities[s_id].entity.dis;
 			if (s_dis <= current_dis)
 				swap_id = s_id;
 			++s_id;
 		}
 		if (swap_id >= 0)
-			swap_entities(&render.entities[current_id], &render.entities[swap_id]);
+			swap_entities(&render.entities[current_id],
+			&render.entities[swap_id]);
 		++current_id;
 	}
 	return (render);

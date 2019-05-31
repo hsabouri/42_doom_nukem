@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:26:34 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/09 16:39:51 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/24 14:29:06 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,35 @@
 **  previous is in the other way
 */
 
-t_elem  *lnext(t_list *list)
+t_elem	*lnext(t_list *list)
 {
-    if (list->current)
-    {
-        list->current = list->current->next;
-        return (list->current);
-    }
-    else
-    {
-        list->current = list->first;
-        return (list->current);
-    }
+	if (list->current)
+	{
+		list->current = list->current->next;
+		return (list->current);
+	}
+	else
+	{
+		list->current = list->first;
+		return (list->current);
+	}
 }
 
-t_pelem  *lpnext(t_plist *list)
+t_pelem	*lpnext(t_plist *list)
 {
-    return (t_pelem *)lnext((t_list *)list);
+	return (t_pelem *)lnext((t_list *)list);
 }
 
-t_pelem  *lprevious(t_plist *list)
+t_pelem	*lprevious(t_plist *list)
 {
-    if (list->current)
-    {
-        list->current = list->current->prev;
-        return (list->current);
-    }
-    else
-    {
-        list->current = list->last;
-        return (list->current);
-    }
+	if (list->current)
+	{
+		list->current = list->current->prev;
+		return (list->current);
+	}
+	else
+	{
+		list->current = list->last;
+		return (list->current);
+	}
 }

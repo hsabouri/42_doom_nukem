@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:47:42 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/27 10:54:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:08:14 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void				display_component(const t_component component, t_sdl *sdl)
 	if (component.last_render)
 		SDL_RenderCopy(sdl->renderer, component.last_render, NULL,
 			&((SDL_Rect) {component.pos.x, component.pos.y, component.size.x,
-			component.size.y}));
+				component.size.y}));
 	if (component.text.text_texture)
 		SDL_RenderCopy(sdl->renderer, component.text.text_texture, NULL,
 			&((SDL_Rect){component.text.x + component.pos.x,

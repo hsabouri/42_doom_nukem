@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ashift.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 13:07:08 by hugo              #+#    #+#             */
-/*   Updated: 2018/12/02 20:41:38 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/24 14:36:18 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	*ashift(t_array *array)
 		return (NULL);
 	if (array->len < 1)
 		return (NULL);
-	
 	elem = array->first;
 	if (array->len == 1)
 		array->first = array->mem;

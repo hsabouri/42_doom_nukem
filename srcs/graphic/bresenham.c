@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 14:34:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/26 16:33:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:09:58 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int dot)
 			cumul -= bres.diff[1];
 			bres.src.x += f_from_int(bres.inc[0]);
 		}
-		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT &&
-		bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
+		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT
+		&& bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
 			buff[f_to_int(bres.src.x) + f_to_int(bres.src.y) * WIDTH] = color;
 	}
 }
@@ -52,13 +52,13 @@ int dot)
 			cumul -= bres.diff[0];
 			bres.src.y += f_from_int(bres.inc[1]);
 		}
-		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT &&
-		bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
+		if (bres.src.y > 0 && f_to_int(bres.src.y) < HEIGHT
+		&& bres.src.x > 0 && f_to_int(bres.src.x) < WIDTH && (i / 2) % dot == 0)
 			buff[f_to_int(bres.src.x) + f_to_int(bres.src.y) * WIDTH] = color;
 	}
 }
 
-void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
+void			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
 {
 	t_bres		bres;
 	t_pix_fixed	dst;
@@ -79,7 +79,7 @@ void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color)
 		draw_vertical(bres, buff, color, 1);
 }
 
-void 			dotted(t_color *buff, t_pix a, t_pix b, t_color color)
+void			dotted(t_color *buff, t_pix a, t_pix b, t_color color)
 {
 	t_bres		bres;
 	t_pix_fixed	dst;
@@ -99,4 +99,3 @@ void 			dotted(t_color *buff, t_pix a, t_pix b, t_color color)
 	else
 		draw_vertical(bres, buff, color, 4);
 }
-

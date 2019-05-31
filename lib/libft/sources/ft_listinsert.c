@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:27:43 by hugo              #+#    #+#             */
-/*   Updated: 2018/11/12 10:34:45 by hugo             ###   ########.fr       */
+/*   Updated: 2019/05/24 14:28:18 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@
 ** - 'elem->next' will be overwritten
 */
 
-t_list  *linsert(t_list *list, t_elem *elem)
+t_list	*linsert(t_list *list, t_elem *elem)
 {
-    t_elem *current;
+	t_elem *current;
 
-    if (list == NULL || elem == NULL)
-        return (list);
-    list->len += 1;
-    current = elem;
-    while(current->next)
-    {
-        current = current->next;
-        list->len += 1;
-    }
-    current->next = list->first;
-    list->first = elem;
-    if (list->last == NULL)
-        list->last = current;
-    return (list);
+	if (list == NULL || elem == NULL)
+		return (list);
+	list->len += 1;
+	current = elem;
+	while (current->next)
+	{
+		current = current->next;
+		list->len += 1;
+	}
+	current->next = list->first;
+	list->first = elem;
+	if (list->last == NULL)
+		list->last = current;
+	return (list);
 }
 
 /*
@@ -48,24 +48,24 @@ t_list  *linsert(t_list *list, t_elem *elem)
 ** - 'elem->next' will be overwritten
 */
 
-t_plist *lpinsert(t_plist *list, t_pelem *elem)
+t_plist	*lpinsert(t_plist *list, t_pelem *elem)
 {
-    t_pelem *current;
+	t_pelem *current;
 
-    if (list == NULL || elem == NULL)
-        return (list);
-    list->len += 1;
-    current = elem;
-    while(current->next)
-    {
-        current = current->next;
-        list->len += 1;
-    }
-    current->next = list->first;
-    if (list->first)
-        list->first->prev = current;
-    list->first = elem;
-    if (list->last == NULL)
-        list->last = current;
-    return (list);
+	if (list == NULL || elem == NULL)
+		return (list);
+	list->len += 1;
+	current = elem;
+	while (current->next)
+	{
+		current = current->next;
+		list->len += 1;
+	}
+	current->next = list->first;
+	if (list->first)
+		list->first->prev = current;
+	list->first = elem;
+	if (list->last == NULL)
+		list->last = current;
+	return (list);
 }

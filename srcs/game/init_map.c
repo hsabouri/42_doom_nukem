@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/23 12:06:04 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/26 18:47:58 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_vec2	*init_points(t_game *game)
 {
 	t_vec2 *points;
-	
+
 	points = (t_vec2 *)safe_malloc(sizeof(t_vec2) * 8, "generate_map");
 	points[0] = ((t_vec2){5, 14});
 	points[1] = ((t_vec2){8, 14});
@@ -32,7 +32,7 @@ t_vec2	*init_points(t_game *game)
 t_wall		*init_walls(t_game *game)
 {
 	t_wall *walls;
-	
+
 	walls = (t_wall *)safe_malloc(8 * sizeof(t_wall), "generate_map");
 	walls[0] =  ((t_wall){fvec2_new(0, 0), -1, 0, 1, &game->materials[3],
 		(t_vec2){0, 2.5},(t_vec2){0, 2.5}});
@@ -58,10 +58,10 @@ t_wall		*init_walls(t_game *game)
 t_sector		*init_sector(t_game *game)
 {
 	t_sector *sectors;
-	
+
 	sectors = (t_sector *)safe_malloc(1 * sizeof(t_sector), "generate_map");
 	sectors[0] = ((t_sector){0, 8, 0, (t_vec3){0, 0, 0}, (t_vec3){0, 0, 2.50},
-		(t_color) {125, 125, 125, 255}, &game->materials[2], &game->materials[1],
+		(t_color) {125, 125, 125, 255}, &game->materials[1], &game->materials[1],
 		fvec2_new(0, 0), (t_vec2){0, 0},0});
 	game->nsectors = 1;
 	return (sectors);
@@ -70,7 +70,7 @@ t_sector		*init_sector(t_game *game)
 t_entity		*init_entities(t_game *game)
 {
 	t_entity *entities;
-	
+
 	entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = game->classes[0];
 	entities[0].id = 0;

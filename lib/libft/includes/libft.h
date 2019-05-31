@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 17:09:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:08:21 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ typedef struct	s_list
 	struct s_list	*(*push)(struct s_list *, t_elem *);
 	struct s_list	*(*insert)(struct s_list *, t_elem *);
 	struct s_list	(*map)(const struct s_list *, t_elem *(*)(const t_elem *));
-	struct s_list	(*mapi)(const struct s_list *, t_elem *(*)(const t_elem *, size_t i));
+	struct s_list	(*mapi)(const struct s_list *, t_elem *(*)(const t_elem *,
+	size_t i));
 	struct s_list	*(*foreach)(struct s_list *, void (*)(t_elem *));
 	struct s_list	*(*foreachi)(struct s_list *, void (*)(t_elem *, size_t i));
 	struct s_list	*(*join)(struct s_list *, struct s_list *);
-	void			*(*fold)(const struct s_list *, void *, void *(*)(const t_elem *, void *));
-	void			*(*foldi)(const struct s_list *,  void *, void *(*)(const t_elem *, void *, size_t));
+	void			*(*fold)(const struct s_list *, void *,
+	void *(*)(const t_elem *, void *));
+	void			*(*foldi)(const struct s_list *, void *,
+	void *(*)(const t_elem *, void *, size_t));
 	t_elem			*(*pop)(struct s_list *);
 	t_elem			*(*shift)(struct s_list *);
 	t_elem			*(*next)(struct s_list *);
@@ -70,13 +73,18 @@ typedef struct	s_plist
 	t_pelem			*current;
 	struct s_plist	*(*push)(struct s_plist *, t_pelem *);
 	struct s_plist	*(*insert)(struct s_plist *, t_pelem *);
-	struct s_plist	(*map)(const struct s_plist *, t_pelem *(*)(const t_pelem *));
-	struct s_plist	(*mapi)(const struct s_plist *, t_pelem *(*)(const t_pelem *, size_t i));
+	struct s_plist	(*map)(const struct s_plist *,
+	t_pelem *(*)(const t_pelem *));
+	struct s_plist	(*mapi)(const struct s_plist *,
+	t_pelem *(*)(const t_pelem *, size_t i));
 	struct s_plist	*(*foreach)(struct s_plist *, void (*)(t_pelem *));
-	struct s_plist	*(*foreachi)(struct s_plist *, void (*)(t_pelem *, size_t i));
+	struct s_plist	*(*foreachi)(struct s_plist *,
+	void (*)(t_pelem *, size_t i));
 	struct s_plist	*(*join)(struct s_plist *, struct s_plist *);
-	void			*(*fold)(const struct s_plist *, void *, void *(*)(const t_pelem *, void *));
-	void			*(*foldi)(const struct s_plist *, void *, void *(*)(const t_pelem *, void *, size_t));
+	void			*(*fold)(const struct s_plist *, void *,
+	void *(*)(const t_pelem *, void *));
+	void			*(*foldi)(const struct s_plist *, void *,
+	void *(*)(const t_pelem *, void *, size_t));
 	t_pelem			*(*pop)(struct s_plist *);
 	t_pelem			*(*shift)(struct s_plist *);
 	t_pelem			*(*next)(struct s_plist *);
@@ -160,14 +168,17 @@ t_list			*lpush(t_list *list, t_elem *elem);
 t_list			*linsert(t_list *list, t_elem *elem);
 t_list			*ljoin(t_list *begin, t_list *end);
 t_elem			*lnext(t_list *list);
-void			*lfold(const t_list *list, void *acc, void *(*f)(const t_elem *elem, void *));
-void			*lfoldi(const t_list *list, void *acc, void *(*f)(const t_elem *elem, void *,
+void			*lfold(const t_list *list, void *acc,
+void *(*f)(const t_elem *elem, void *));
+void			*lfoldi(const t_list *list, void *acc,
+void *(*f)(const t_elem *elem, void *,
 				size_t i));
 t_list			*lforeach(t_list *list, void (*f)(t_elem *elem));
 t_list			*lforeachi(t_list *list, void (*f)(t_elem *elem, size_t i));
 t_list			lmap(const t_list *list, t_elem *(*f)(const t_elem *elem));
-t_list			lmapi(const t_list *list, t_elem *(*f)(const t_elem *elem, size_t i));
-t_elem 			*lshift(t_list *list);
+t_list			lmapi(const t_list *list,
+t_elem *(*f)(const t_elem *elem, size_t i));
+t_elem			*lshift(t_list *list);
 t_elem			*lpop(t_list *list);
 
 t_plist			lpnew(t_pelem *first);
@@ -177,14 +188,18 @@ t_plist			*lpjoin(t_plist *begin, t_plist *end);
 t_pelem			*lpnext(t_plist *list);
 t_pelem			*lprevious(t_plist *list);
 t_pelem			*lpremove(t_plist *list, t_pelem *del_elem);
-void			*lpfold(const t_plist *list, void *acc, void *(*f)(const t_pelem *elem, void *));
-void			*lpfoldi(const t_plist *list, void *acc, void *(*f)(const t_pelem *elem, void *,
+void			*lpfold(const t_plist *list, void *acc,
+void *(*f)(const t_pelem *elem, void *));
+void			*lpfoldi(const t_plist *list, void *acc,
+void *(*f)(const t_pelem *elem, void *,
 				size_t i));
 t_plist			*lpforeach(t_plist *plist, void (*f)(t_pelem *pelem));
-t_plist			*lpforeachi(t_plist *plist, void (*f)(t_pelem *pelem, size_t i));
+t_plist			*lpforeachi(t_plist *plist, void (*f)(t_pelem *pelem,
+size_t i));
 t_plist			lpmap(const t_plist *list, t_pelem *(*f)(const t_pelem *elem));
-t_plist			lpmapi(const t_plist *list, t_pelem *(*f)(const t_pelem *elem, size_t i));
-t_pelem 		*lpshift(t_plist *list);
+t_plist			lpmapi(const t_plist *list,
+t_pelem *(*f)(const t_pelem *elem, size_t i));
+t_pelem			*lpshift(t_plist *list);
 t_pelem			*lppop(t_plist *list);
 
 t_array			anew(void *first, size_t len, size_t elem_size);
@@ -194,15 +209,19 @@ void			*ashift(t_array *array);
 t_array			*apush(t_array *array, void *element);
 t_array			*ainsert(t_array *array, void *element);
 t_array			*aforeach(t_array *array, void (*f)(void *));
-t_array			*aforeach_state(t_array *array, void (*f)(void *, void *), void *state);
+t_array			*aforeach_state(t_array *array,
+void (*f)(void *, void *), void *state);
 t_array			*aforeachi(t_array *array, void (*f)(void *, size_t i));
-t_array			*aforeachi_state(t_array *array, void (*f)(void *, void *, size_t),
+t_array			*aforeachi_state(t_array *array, void (*f)(void *,
+void *, size_t),
 				void *state);
 t_array			amapi_state(t_array *array, void *(*f)(void *, void *, size_t),
 void *state, size_t new_elem_size);
 
-void			*array_open(void *ptr, size_t loc, size_t size, size_t elem_size);
-void			*array_close(void *ptr, size_t loc, size_t size, size_t elem_size);
+void			*array_open(void *ptr, size_t loc, size_t size,
+size_t elem_size);
+void			*array_close(void *ptr, size_t loc, size_t size,
+size_t elem_size);
 void			*array_open_swap(void *ptr, size_t loc1, size_t loc2,
 				size_t elem_size);
 

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:23:25 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/03/17 15:18:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:18:50 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ int			get_ray_id(t_fvec2 point, t_limit limit, t_context context, int max)
 {
 	t_hit	col;
 	int		id;
-	
+
 	col = ray_seg(fvec2_new(0, 0), point, limit.left.dir, limit.right.dir);
 	if (col.ratios.v < 0 || col.ratios.v > f_from_int(1) || col.ratios.u < 0)
 		id = max;
 	else
-		id = context.left + f_to_int(col.ratios.v * (context.right - context.left));
+		id = context.left + f_to_int(col.ratios.v
+			* (context.right - context.left));
 	return (id);
 }
 
@@ -68,8 +69,8 @@ int			is_in_limit(t_limit limit, t_fvec2 a, t_fvec2 b)
 	const t_fvec2	left = limit.left.dir;
 	const t_fvec2	right = limit.right.dir;
 
-	if ((is_left(limit.left.dir, a) && !is_left(right, b)) ||
-		(is_left(left, b) && !is_left(right, a)))
+	if ((is_left(limit.left.dir, a) && !is_left(right, b))
+	|| (is_left(left, b) && !is_left(right, a)))
 	{
 		r_l = ray_seg(a, b, fvec2_new(0, 0), left).ratios;
 		r_r = ray_seg(a, b, fvec2_new(0, 0), right).ratios;
@@ -77,8 +78,8 @@ int			is_in_limit(t_limit limit, t_fvec2 a, t_fvec2 b)
 			return (1);
 		return (0);
 	}
-	else if (!((is_left(left, a) && is_left(left, b)) ||
-		(!is_left(right, a) && !is_left(right, b))))
+	else if (!((is_left(left, a) && is_left(left, b))
+	|| (!is_left(right, a) && !is_left(right, b))))
 		return (1);
 	return (0);
 }

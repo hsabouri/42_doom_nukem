@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 11:21:46 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 16:30:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:44:55 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_bres
 
 # include <graphic.h>
 
-void 			bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
-void 			dotted(t_color *buff, t_pix a, t_pix b, t_color color);
+void			bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
+void			dotted(t_color *buff, t_pix a, t_pix b, t_color color);
 
 #endif

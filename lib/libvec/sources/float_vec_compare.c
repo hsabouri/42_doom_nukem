@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:19:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/14 14:22:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:41:35 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 int		vec2_equal(t_vec2 a, t_vec2 b, float eps)
 {
 	return (a.u >= b.u - eps && a.u <= b.u + eps &&
-		a.v >= b.v - eps && a.v <= b.v + eps);
+	a.v >= b.v - eps && a.v <= b.v + eps);
 }
