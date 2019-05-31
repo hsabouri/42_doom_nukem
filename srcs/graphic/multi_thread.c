@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 16:05:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/30 16:41:11 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/05/31 13:32:16 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void		render_single_threaded(const t_env env, t_color *buf)
 			0,
 			get_ray_dir(env.game.player.my_entity.physic, 0),
 			get_ray_dir(env.game.player.my_entity.physic, WIDTH - 1),
-			f_from_float(env.game.player.my_entity.physic.height),
+			f_from_float(env.game.player.my_entity.physic.height
+				+ env.game.player.my_entity.physic.pos.z),
 		},
 		env.current_buffer, env.game.id_buf);
 }
@@ -94,7 +95,8 @@ void		render_multi_threaded(const t_env env, t_color *buf)
 				0,
 				get_ray_dir(env.game.player.my_entity.physic, 0),
 				get_ray_dir(env.game.player.my_entity.physic, WIDTH - 1),
-				f_from_float(env.game.player.my_entity.physic.height),
+				f_from_float(env.game.player.my_entity.physic.height
+					+ env.game.player.my_entity.physic.pos.z),
 			}, buf, env.game.id_buf};
 		i++;
 	}

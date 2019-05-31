@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:24:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:24:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct	s_section
 	int				end;
 	t_fvec2			a;
 	t_fvec2			b;
+	int				id;
 }				t_section;
 
 typedef struct	s_section_entity
