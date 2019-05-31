@@ -107,5 +107,6 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	new_game.player.my_entity.physic = entities_physic(new_physic, &game, -1,
 		old_timer);
 	new_game.log = game.log;
+
 	return (new_game);
 }

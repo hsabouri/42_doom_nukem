@@ -44,14 +44,12 @@ t_vec3		col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 		d = circle_circle(n_physic, game->entities[i].physic, COL_ENTITY);
 		if (d != -1 && i != id)
 		{
-			printf("1 pos.x: %f, pos.y: %f\n", pos.x, pos.y);
 			tmp_log.e_actif = game->player.my_entity;
 			tmp_log.condi = TRIGGER_TOUCH;
 			tmp_log.e_passif = game->entities[i];
 			apush(&game->log, &tmp_log);
 			physic = slide_entity(n_physic, game, physic, i);
 			pos = vec3_add(physic.pos, physic.speed);
-			printf("2 pos.x: %f, pos.y: %f\n", pos.x, pos.y);
 		}
 	}
 	return (pos);
