@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 13:45:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:08:24 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,46 @@ static t_vec3	set_entity_speed(t_ph physic, t_ph player, float old_timer)
 
 static t_ph		entities_look_at(t_ph physic, t_ph player)
 {
+	t_vec2	vec;
 	t_vec2	diff;
+	float	tan;
 	float	dis;
-	float	sinus;
-	float	cosin;
 
 	diff = vec2_sub(vec3_to_vec2(player.pos), vec3_to_vec2(physic.pos));
 	dis = vec2_sq_size(diff);
-	if (dis < physic.rad_inter * physic.rad_inter)
+	vec.u = player.pos.x - physic.pos.x;
+	vec.v = player.pos.y - physic.pos.y;
+	if (dis < physic.rad_inter * physic.rad_inter
+		&& dis > physic.radius * physic.radius)
 	{
-		diff = vec2_scale(diff, vec2_inv_size(diff));
-		sinus = vec2_cross(diff, vec2_new(1, 0)).z;
-		cosin = vec2_cross(diff, vec2_new(0, 1)).z;
-		if (sinus >= 0)
-			physic.look_h = atan(diff.v / diff.u);
-		else
-			physic.look_h = -1 + atan(diff.v / diff.u);
+		if (vec.u > 0 && vec.v > 0)
+		{
+			vec.u = fabs(vec.u);
+			vec.v = fabs(vec.v);
+			tan = vec.u / vec.v;
+			physic.look_h = - (atan(tan));
+		}
+		if (vec.u > 0 && vec.v < 0)
+		{
+			vec.u = fabs(vec.u);
+			vec.v = fabs(vec.v);
+			tan = vec.v / vec.u;
+			physic.look_h = - (atan(tan) + 0.5 * M_PI);
+		}
+		if (vec.u < 0 && vec.v < 0)
+		{
+			vec.u = fabs(vec.u);
+			vec.v = fabs(vec.v);
+			tan = vec.u / vec.v;
+			physic.look_h = - (atan(tan) + M_PI);
+		}
+		if (vec.u < 0 && vec.v > 0)
+		{
+			vec.u = fabs(vec.u);
+			vec.v = fabs(vec.v);
+			tan = vec.v / vec.u;
+			physic.look_h = - (atan(tan) + 1.5 * M_PI);
+		}
 	}
 	return (physic);
 }
@@ -87,10 +111,11 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	while (i < 1)
 	{
 		new_physic = game.entities[i].physic;
-		// if (game.entities[i].damage >= 1)
-		// 	new_physic.speed = set_entity_speed(new_physic,
-		// 		game.player.my_entity.physic, old_timer);
+		if (game.entities[i].damage >= 1)
+			new_physic.speed = set_entity_speed(new_physic,
+				game.player.my_entity.physic, old_timer);
 		new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
+		printf("look.h = %f\n",new_physic.look_h);
 		new_game.entities[i].physic = entities_physic(new_physic, &game, i,
 		old_timer);
 		i++;
