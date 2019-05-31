@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:16:54 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/14 14:23:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:10:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_vec3			vec3_scale(t_vec3 a, float s);
 t_vec3			vec3_add(t_vec3 a, t_vec3 b);
 t_vec3			vec3_sub(t_vec3 a, t_vec3 b);
 float			vec3_inv_size(t_vec3 a);
+float			vec2_sq_size(t_vec2 a);
 float			vec3_dot(t_vec3 a, t_vec3 b);
 t_vec3			vec3_cross(t_vec3 a, t_vec3 b);
 t_vec3			vec3_mult(t_vec3 a, t_vec3 b);
@@ -49,6 +50,7 @@ t_vec2			vec2_scale(t_vec2 a, float s);
 t_vec2			vec2_add(t_vec2 a, t_vec2 b);
 t_vec2			vec2_sub(t_vec2 a, t_vec2 b);
 float			vec2_inv_size(t_vec2 a);
+float			vec2_sq_size(t_vec2 a);
 t_vec2			vec2_normalize(t_vec2 a);
 float			vec2_dot(t_vec2 a, t_vec2 b);
 t_vec3			vec2_cross(t_vec2 a, t_vec2 b);
