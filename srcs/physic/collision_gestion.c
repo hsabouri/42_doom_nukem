@@ -60,7 +60,7 @@ t_touch		collision(t_vec3 next_pos, t_ph physic, t_game game, int wall)
 	return (touch);
 }
 
-t_vec3		floor_col(t_vec3 pos, t_sector sector, t_vec3 speed, int fly)
+t_vec3		floor_col(t_vec3 pos, t_sector sector, t_vec3 speed)
 {
 	t_vec3	final_speed;
 	float	z;
@@ -85,10 +85,12 @@ t_vec3		floor_col(t_vec3 pos, t_sector sector, t_vec3 speed, int fly)
 t_vec3		ceil_col(t_vec3 pos, t_sector sector, t_vec3 speed)
 {
 	t_vec3	final_speed;
+	float	z;
 	float	delta;
 
 	final_speed = speed;
-	delta = sector.ceiling.z - pos.z;
+	z = z_entity(sector, pos, 0);
+	delta = z - pos.z;
 	if (delta < -0.05)
 	{
 		final_speed.z = speed.z + (delta - 0.05);
