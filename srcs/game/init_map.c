@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 15:28:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/01 16:04:43 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,28 @@ t_entity	*init_entities(t_game *game)
 	entities[3].spawn.pos = (t_vec3){5, 10, 0};
 	game->nentities = 4;
 	return (entities);
+}
+
+void	entities_event(t_entity	*entity, t_game *game)
+{
+	t_plist	g_e	= lpnew(NULL);
+	if (entity->type == GUN_MARINE && entity->type == SMG_MARINE && entity->type == BLACK_MARINE &&
+	entity->type == RED_MARINE)
+	{
+		t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
+		*first_e = (t_game_event){
+		(t_pelem) {NULL, NULL},
+		(t_trigger){
+			game->player.my_entity, TRIGGER_SHOT, game.entities[entity->id] // Game event : list event wanted
+			},
+		(t_action){
+			NULL ,&game.entities[entity->id], ACTION_H_DOWN
+			}
+		};
+		lppush(&g_e, (t_pelem *)first_e)
+	}
+	else if () {
+		
+	}
+	entity->self_events = g_e;
 }

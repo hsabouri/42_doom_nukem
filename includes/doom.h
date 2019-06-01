@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/20 17:55:47 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/01 15:24:48 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef	enum	e_game_mode
 }				t_game_mode;
 
 typedef int (*ft_trigger)(t_trigger trigger, t_trigger c_log);
+typedef int (*ft_actions)(t_vec2 pos, t_entity *target, t_game *game);
 
 typedef struct			s_event
 {
@@ -160,6 +161,7 @@ typedef struct			s_env
 	t_component	*component;
 	t_sdl		sdl;
 	ft_trigger	*condition;
+	ft_actions	*actions;
 	t_event		events; //must be last
 }						t_env;
 

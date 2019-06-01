@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/01 11:54:30 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/01 16:52:22 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <editor.h>
 
 //
-typedef int (*ft_actions)(t_vec2 pos, t_entity *target, t_game *game); // Wat ?
+ // Wat ?
 
 t_env     init_actions(void)
 {
@@ -27,7 +27,7 @@ t_env     init_actions(void)
 	actions[3] = health_up;
     actions[4] = add_inventory;
 
-	// env.actions = actions;
+	env.actions = actions;
 	return (env);
 }
 
@@ -39,8 +39,6 @@ void        spawn_entity(t_vec2 pos, t_entity *target, t_game *game) // action
 
 void        kill_entity(t_vec2 pos, t_entity *target, t_game *game) // action
 {
-    //entity
-    
     int i;
 
     i = 0; 
@@ -48,7 +46,8 @@ void        kill_entity(t_vec2 pos, t_entity *target, t_game *game) // action
     {
         i++;
     }
-    delete_entity(i, game)
+    // delete_entity(i, game)
+    // null_entity();
 }
 
 void        health_down(t_vec2 pos,t_entity *target, t_game *game) // action
