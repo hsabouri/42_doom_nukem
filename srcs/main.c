@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/08 16:05:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:07:47 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void		all_loops(t_env *env, size_t frame)
 static void		first_init(t_env *env, int ac, char **av)
 {
 	*env = init_conditions();
+	*env = init_actions();
 	if (ac == 2)
 		env->file = av[1];
 	else

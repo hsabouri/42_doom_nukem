@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:26:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 12:14:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/01 16:06:35 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_game		create_entity(t_vec2 pos, size_t class_id, t_game game)
 	game.entities[game.nentities].spawn.pos = vec3_new(pos.u, pos.v, 0);
 	game.entities[game.nentities].id = game.unique_e_id;
 	game.entities[game.nentities].type = game.classes[class_id].type;
+	entities_event(&game.entities[game.nentities], &game)
 	game.nentities++;
 	game.unique_e_id++;
 	return (game);

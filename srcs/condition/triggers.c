@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   triggers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:58:01 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 16:58:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:07:33 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-int	no_trigger(t_trigger trigger, t_trigger c_log)
+int    shot_trigger(t_trigger trigger, t_trigger c_log)
 {
-	(void)trigger;
-	(void)c_log;
-	return (1);
+	// (void)trigger;
+	// (void)c_log;
+	return 1;
 }
 
 int	see_trigger(t_trigger trigger, t_trigger c_log)
