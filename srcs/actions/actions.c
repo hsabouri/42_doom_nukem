@@ -3,66 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 11:24:44 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:51:18 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 #include <editor.h>
 
-// void        spawn_entity(t_vec2 pos, size_t class_type, t_game game)
-// {
-//     // create_entity(pos, 0, game);
-//     // assign_entity(t_assign_entity *state, t_game game)
-// }
+//
+typedef int (*ft_actions)(t_vec2 pos, t_entity *target, t_game *game); // Wat ?
 
-// void        kill_entity(int entity_id, t_game * game)
-// {
-//     /*
-//     int i;
+t_env     init_actions(void)
+{
+	t_env env;
+	
+	ft_actions *actions = malloc(sizeof(ft_trigger) * 5);
+	actions[0] = spawn_entity; 
+	actions[1] = kill_entity;
+	actions[2] = health_down;
+	actions[3] = health_up;
+    actions[4] = add_inventory;
 
-//     i = 0; 
-//     while(game.entity[i] != entity_id)
-//     {
-//         i++;
-//     }
-//     delete_entity(i, game)
+	// env.actions = actions;
+	return (env);
+}
 
-//     */
-// }
+void        spawn_entity(t_vec2 pos, t_entity *target, t_game *game) // action
+{
+    // create_entity(pos, 0, game);
+    // assign_entity(t_assign_entity *state, t_game game)
+}
 
-// void        animate_sector(t_sector * move_sector)
-// {
-//     /*
-//         if (is_animate == false)
-//             if(move_sector.floor == move_sector.floor_a))
-//                 add_animate(&move_sector.floor, move_sector.floor_b)
-//             if(move_sector.ceiling == move_sector.ceiling_a)
-//                 add_animate(&move_sector.ceiling, move_sector.ceiling_b)
-//             if(move_sector.floor == move_sector.ceiling_b)
-//                 add_animate(&move_sector.floor, move_sector.floor_a)
-//             if(move_sector.ceiling == move_sector.floor_b)
-//                 add_animate(&move_sector.ceiling, move_sector.ceiling_a)
-//         }
-//     */
-// }
+void        kill_entity(t_vec2 pos, t_entity *target, t_game *game) // action
+{
+    //entity
+    
+    int i;
 
-// void        health_down(t_entity * entity, int oof, t_game * game)
-// {
-//     // entity->life -= oof;
-//     // if (entity->life <= 0)
-//     //      kill_entity(entity->id, game);
-// }
+    i = 0; 
+    while(target[i] != target.id)
+    {
+        i++;
+    }
+    delete_entity(i, game)
+}
 
-// void        health_up(t_entity * entity, int health)
-// {
-//     // entity->life += oof;
-//     // if (entity->life > 100)
-//         // entity->life = 100;
-// }
+void        health_down(t_vec2 pos,t_entity *target, t_game *game) // action
+{
+    target->life = 1;
+    if (target->life <= 0)
+         kill_entity(target);
+}
+
+void        health_up(t_vec2 pos, t_entity *target, t_game *game) // action
+{
+    target->life = 1;
+    if (target->life > 100)
+        target->life = 100;
+}
+
+void        add_inventory(t_vec2 pos, t_entity *target, t_game *game) 
+{
+    lppush(&game->player.inventory, target);
+}
+
+void        remove_inventory(t_vec2 pos, t_entity *target, t_game *game)
+{
+    lpremove(&game->player.inventory, target);
+}
 
 // void add_animate(t_vec3 * moveTo, t_vec3 moveGoal, t_game *game)
 // {
@@ -83,13 +94,7 @@
 //  */
 // }
 
-// void    loading_anim(t_game game) // APPELER TOUTE LES (X A DETERMINER) SECONDES
-// {
-//     // t_list_anim    *current;
-//     // while ((current = (t_list_anim *)lpnext(&game.anim)) != NULL)
-//     // {
-//     //     current->a_elem.moveTo = move_anim(current);
-//     //     if (current->a_elem.moveTo == current->a_elem.moveGoal)
-//     //         lpremove(&game.anim, (t_pelem *)current);
-//     // }   
-// }
+/*
+ADD INFINITY GAME EVENT
+    create_entity  
+*/

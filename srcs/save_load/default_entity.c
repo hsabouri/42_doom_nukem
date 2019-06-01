@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default_entity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/16 15:57:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/01 11:47:53 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ t_player	player_default(t_game game)
 		{0, 1},
 		6,
 		0,
-		safe_anew(NULL, 1, sizeof(t_entity *), "generate_map")};
-	return (player);
+		lpnew(NULL);
 }
 
 t_entity	entity_default(void)

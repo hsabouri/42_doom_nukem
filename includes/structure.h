@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 12:11:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:35:19 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,15 @@ typedef enum		e_condition
 	TRIGGER_NO = 0x0
 }					t_condition;
 
-typedef enum		e_action_type
+typedef enum		e_action_c
 {
-	ACTION_SPAWN = 0x1,
 	ACTION_NO = 0x0
-}					t_action_type;
+	ACTION_SPAWN = 0x1
+	ACTION_KILL = 0x2
+	ACTION_H_UP = 0x3
+	ACTION_H_DOWN = 0x4
+	ACTION_ADD_INV = 0x5
+}					t_action_c;
 
 typedef struct		s_entity
 {
@@ -118,16 +122,17 @@ typedef struct		s_entity
 	t_ph			spawn;
 	t_array			*mat;
 	t_entity_type	type;
-	//float life;
-	//float  armor;
-	//t_weapon weapons;
+	// float life;
+	// float  armor;
+	// t_weapon weapons;
 	int 			damage;
 }					t_entity;
 
 typedef struct		s_action
 {
-	t_action_type	type;
-	t_entity		target;
+	t_vec2			*pos;
+	t_entity		*target;
+	t_action_c		action_type;
 }					t_action;
 
 typedef struct		s_trigger
@@ -141,8 +146,7 @@ typedef struct		s_game_event
 {
 	t_pelem		elem;
 	t_trigger	trigger;
-	// int			is_trigger;
-	// t_action	 action;
+	t_action	 action;
 }					t_game_event;
 
 typedef struct		s_player
@@ -152,7 +156,7 @@ typedef struct		s_player
 	u_int32_t	weapons[2];
 	u_int32_t	secondary;
 	u_int32_t	equiped;
-	t_array		inventory;
+	t_plist		inventory;
 	// float		armor;
 }					t_player;
 

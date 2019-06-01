@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapons.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:12:07 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/03 17:12:09 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:54:32 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef enum		e_weapon_type
 	SHOTGUN,
 	REVOLVER,
 	NYAN_GUN,
-	KNIFE,
 	GRENADE,
 	MINE,
 }					t_weapon_type;

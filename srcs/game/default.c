@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/06 10:19:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:06:06 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@ t_game			generate_map(void)
 		(t_pelem) {NULL, NULL},
 		(t_trigger){
 			game.player.my_entity, TRIGGER_INTERACT, game.entities[2] // Game event : list event wanted
+			},
+		(t_action){
+			NULL ,&game.entities[1], ACTION_H_DOWN
 			}
 		};
 	t_game_event * secon_e = (t_game_event *)malloc(sizeof(t_game_event));
@@ -152,6 +155,9 @@ t_game			generate_map(void)
 		(t_pelem) {NULL, NULL},
 		(t_trigger){
 			game.player.my_entity, TRIGGER_TOUCH, game.entities[1] // Game event : list event wanted
+			},
+		(t_action){
+			NULL ,&game.entities[1], ACTION_H_DOWN
 			}
 		};
 	t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
