@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/30 18:51:18 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/01 11:54:30 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_env     init_actions(void)
 
 void        spawn_entity(t_vec2 pos, t_entity *target, t_game *game) // action
 {
-    // create_entity(pos, 0, game);
+    create_entity(pos, target.type, game);
     // assign_entity(t_assign_entity *state, t_game game)
 }
 
