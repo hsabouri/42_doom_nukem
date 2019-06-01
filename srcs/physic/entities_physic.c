@@ -16,25 +16,34 @@ static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
 {
 	t_vec3	new_speed;
 	float	delta;
+	float	z_floor;
+	float	z_ceil;
 	t_vec3	tmp;
 
 	new_speed = physic->speed;
-	if (!physic->fly)
-		physic->pos.z = z_entity(game.sectors[physic->sector_id], physic->pos, 1);
-	delta = game.sectors[physic->sector_id].floor.z - physic->pos.z;
-	// if (physic->jump && (physic->pos.z > game.sectors[physic->sector_id].floor.z
-	// 	- 0.1 && physic->pos.z < game.sectors[physic->sector_id].floor.z + 0.1))
-	// {
-	// 	new_speed.z = 0.1;
-	// 	physic->jump = 0;
-	// }
-	if (delta < 0 && !physic->fly && new_speed.z > MAX_FALL)
+	z_floor = z_entity(game.sectors[physic->sector_id], physic->pos, 1);
+	z_ceil = z_entity(game.sectors[physic->sector_id], physic->pos, 0);
+	if (!physic->fly && !physic->jump)
+		physic->pos.z = z_floor;
+	delta = z_floor - physic->pos.z;
+	// printf("z_floor: %f, pos_z: %f, delta: %f\n", z_floor, physic->pos.z, delta);
+	if (physic->jump && (physic->pos.z > z_floor - 0.1 && physic->pos.z
+		< z_floor + 0.1))
+	{
+		new_speed.z = 0.5;
+	}
+	else if (delta < 0 && !physic->fly && new_speed.z > MAX_FALL)
+	{
+		// printf("nyan\n");
 		new_speed.z -= physic->gravity * old_timer * FALL_MULTIPLY;
+	}
 	tmp = vec3_add(physic->pos, new_speed);
-	new_speed = floor_col(tmp, game.sectors[physic->sector_id], new_speed);
+	new_speed = floor_col(tmp, game.sectors[physic->sector_id], new_speed, 
+		&physic->jump);
 	tmp = vec3_add (physic->pos, new_speed);
-	tmp.z += physic->height;
+	tmp.z = tmp.z + physic->height;
 	new_speed = ceil_col(tmp, game.sectors[physic->sector_id], new_speed);
+	// printf("new_speed.z: %f\n", new_speed.z);
 	return (new_speed);
 }
 
