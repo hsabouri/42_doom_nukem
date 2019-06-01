@@ -88,32 +88,24 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	t_ph		new_physic;
 	// size_t		i;
 
-	i = 0;
+	// i = 0;
 	new_game = game;
-	while (i < 1)
-	{
-		new_physic = game.entities[i].physic;
-		if (game.entities[i].damage >= 1)
-			new_physic.speed = set_entity_speed(new_physic,
-				game.player.my_entity.physic, old_timer);
-		new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
-		new_game.entities[i].physic = entities_physic(new_physic, &game, i,
-		old_timer);
-		i++;
-	}
+	// while (i < 1)
+	// {
+	// 	new_physic = game.entities[i].physic;
+	// 	if (game.entities[i].damage >= 1)
+	// 		new_physic.speed = set_entity_speed(new_physic,
+	// 			game.player.my_entity.physic, old_timer);
+	// 	new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
+	// 	new_game.entities[i].physic = entities_physic(new_physic, &game, i,
+	// 	old_timer);
+	// 	i++;
+	// }
 	new_physic = game.player.my_entity.physic;
 	new_physic.speed = set_speed(game.player.my_entity.physic, events,
 		old_timer);
 	new_game.player.my_entity.physic = entities_physic(new_physic, &game, -1,
 		old_timer);
-	// i = 0;
-	// while (i < game.nentities)
-	// {
-	// 	new_physic = game.entities[i].physic;
-	// 	game.entities[i].physic = entities_physic(new_physic, &game, i,
-	// 		old_timer);
-	// 	i++;
-	// }
 	new_game.log = game.log;
 	return (new_game);
 }

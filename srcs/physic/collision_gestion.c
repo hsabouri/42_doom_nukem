@@ -60,7 +60,7 @@ t_touch		collision(t_vec3 next_pos, t_ph physic, t_game game, int wall)
 	return (touch);
 }
 
-t_vec3		floor_col(t_vec3 pos, t_sector sector, t_vec3 speed)
+t_vec3		floor_col(t_vec3 pos, t_sector sector, t_vec3 speed, int fly)
 {
 	t_vec3	final_speed;
 	float	z;
@@ -68,13 +68,13 @@ t_vec3		floor_col(t_vec3 pos, t_sector sector, t_vec3 speed)
 
 	final_speed = speed;
 	z = z_entity(sector, pos, 1);
-	delta = pos.z - z;
-	printf("delta: %f\n", delta);
+	if (z <= 0)
+		delta = pos.z - z;
+	else
+		delta = z - pos.z;
 	if (delta < -0.0001)
 	{
-		printf("speed.z = %f\n", speed.z);
 		final_speed.z = speed.z - delta;
-		printf("final_speed.z: %f\n", final_speed.z);
 		final_speed.x = final_speed.z / speed.z * speed.x;
 		final_speed.y = final_speed.z / speed.z * speed.y;
 		return (final_speed);

@@ -20,7 +20,7 @@ static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
 
 	new_speed = physic->speed;
 	if (!physic->fly)
-		new_speed.z = z_entity(game.sectors[physic->sector_id], physic->pos, 1);
+		physic->pos.z = z_entity(game.sectors[physic->sector_id], physic->pos, 1);
 	delta = game.sectors[physic->sector_id].floor.z - physic->pos.z;
 	// if (physic->jump && (physic->pos.z > game.sectors[physic->sector_id].floor.z
 	// 	- 0.1 && physic->pos.z < game.sectors[physic->sector_id].floor.z + 0.1))
@@ -31,12 +31,11 @@ static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
 	if (delta < 0 && !physic->fly && new_speed.z > MAX_FALL)
 		new_speed.z -= physic->gravity * old_timer * FALL_MULTIPLY;
 	tmp = vec3_add(physic->pos, new_speed);
-	printf("z: %f\n", tmp.z);
-	new_speed = floor_col(tmp, game.sectors[physic->sector_id], new_speed);
-	// printf("new_speed.z = %f\n", new_speed.z);
-	// tmp = vec3_add (physic->pos, new_speed);
-	// tmp.z += physic->height;
-	// new_speed = ceil_col(tmp, game.sectors[physic->sector_id], new_speed);
+	new_speed = floor_col(tmp, game.sectors[physic->sector_id], new_speed,
+		physic->fly);
+	tmp = vec3_add (physic->pos, new_speed);
+	tmp.z += physic->height;
+	new_speed = ceil_col(tmp, game.sectors[physic->sector_id], new_speed);
 	return (new_speed);
 }
 
@@ -119,7 +118,6 @@ float old_timer)
 	z = z_entity(game->sectors[n_physic.sector_id], n_physic.pos, 1);
 	if ((n_physic.pos.z > z - 0.1 && n_physic.pos.z < z + 0.1) || n_physic.fly)
 	{
-		printf("buh\n");
 		n_physic.speed.z = 0;
 		n_physic.jump = 0;
 	}
