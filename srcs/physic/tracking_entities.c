@@ -35,7 +35,7 @@ u_int32_t			is_in_sector(t_ph physic, t_game game, u_int32_t sector_id)
 	return (nb_inter);
 }
 
-static t_ph			check_next_sector(t_ph physic, t_game game, u_int32_t cpt,\
+static t_ph			check_next_sector(t_ph physic, t_game game, u_int32_t cpt,
 t_last_pos last_pos)
 {
 	t_ph		n_physic;
@@ -65,10 +65,11 @@ t_last_pos last_pos)
 	return (n_physic);
 }
 
-t_ph				entities_track(t_ph physic, t_game game,\
+t_ph				entities_track(t_ph physic, t_game game,
 t_last_pos last_pos)
 {
 	u_int32_t	cpt;
+	float		z;
 
 	if ((is_in_sector(physic, game, physic.sector_id) % 2) != 0)
 		return (physic);

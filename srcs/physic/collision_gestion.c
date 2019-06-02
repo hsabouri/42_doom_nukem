@@ -78,8 +78,8 @@ u_int32_t *jump)
 		final_speed.z = speed.z - delta;
 		final_speed.x = final_speed.z / speed.z * speed.x;
 		final_speed.y = final_speed.z / speed.z * speed.y;
-		if (*jump)
-			*jump = 0;
+		if (jump)
+			jump = 0;
 		return (final_speed);
 	}
 	return (final_speed);
@@ -94,7 +94,11 @@ t_vec3		ceil_col(t_vec3 pos, t_sector sector, t_vec3 speed)
 	final_speed = speed;
 	z = z_entity(sector, pos, 0);
 	delta = z - pos.z;
-	printf("pos.z: %f, z: %f, delta: %f\n", pos.z, z, delta);
+	if (z <= 0)
+		delta = pos.z - z;
+	else
+		delta = z - pos.z;
+	// printf("pos.z: %f, z: %f, delta: %f\n", pos.z, z, delta);
 	if (delta < -0.05)
 	{
 		final_speed.z = speed.z + (delta - 0.05);

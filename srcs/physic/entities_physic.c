@@ -12,29 +12,28 @@
 
 #include <doom.h>
 
-static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
+static t_vec3	z_move(t_ph *physic, t_game game, float old_timer, float inter)
 {
 	t_vec3	new_speed;
 	float	delta;
 	float	z_floor;
-	float	z_ceil;
 	t_vec3	tmp;
 
 	new_speed = physic->speed;
-	z_floor = z_entity(game.sectors[physic->sector_id], physic->pos, 1);
-	z_ceil = z_entity(game.sectors[physic->sector_id], physic->pos, 0);
-	if (!physic->fly && !physic->jump)
-		physic->pos.z = z_floor;
+	tmp = vec3_add(physic->pos, new_speed);
+	z_floor = z_entity(game.sectors[physic->sector_id], tmp, 1);
 	delta = z_floor - physic->pos.z;
-	// printf("z_floor: %f, pos_z: %f, delta: %f\n", z_floor, physic->pos.z, delta);
-	if (physic->jump && (physic->pos.z > z_floor - 0.1 && physic->pos.z
-		< z_floor + 0.1))
+	if (!physic->fly && delta > 0)
 	{
-		new_speed.z = 0.5;
+		physic->pos.z = z_floor;
+		if (physic->jump)
+			physic->jump = 0;
 	}
-	else if (delta < 0 && !physic->fly && new_speed.z > MAX_FALL)
+	if (physic->jump && (physic->pos.z > z_floor - 0.1 && physic->pos.z
+		< z_floor + 0.1) && (inter > 1.5))
+		new_speed.z = 0.5;
+	if (delta < 0 && !physic->fly && new_speed.z > MAX_FALL)
 	{
-		// printf("nyan\n");
 		new_speed.z -= physic->gravity * old_timer * FALL_MULTIPLY;
 	}
 	tmp = vec3_add(physic->pos, new_speed);
@@ -42,7 +41,7 @@ static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
 		&physic->jump);
 	tmp = vec3_add (physic->pos, new_speed);
 	tmp.z = tmp.z + physic->height;
-	new_speed = ceil_col(tmp, game.sectors[physic->sector_id], new_speed);
+	// new_speed = ceil_col(tmp, game.sectors[physic->sector_id], new_speed);
 	// printf("new_speed.z: %f\n", new_speed.z);
 	return (new_speed);
 }
@@ -72,9 +71,15 @@ float old_timer)
 	t_vec3	next_pos;
 	t_touch	touch;
 	t_tp	teleport;
+	float	inter;
 
 	next_pos = vec3_add(physic->pos, physic->speed);
-	physic->speed = z_move(physic, *game, old_timer);
+	inter = (z_entity(game->sectors[physic->sector_id], next_pos, 0))
+		- (z_entity(game->sectors[physic->sector_id], next_pos, 1));
+		printf("inter: %f\n", inter);
+	if (inter < physic->height + 0.1)
+		return (physic->pos);
+	physic->speed = z_move(physic, *game, old_timer, inter);
 	next_pos = vec3_add(physic->pos, physic->speed);
 	touch = collision(next_pos, *physic, *game, wall);
 	if (touch.wall >= 0)

@@ -25,7 +25,7 @@
 # define EPSILON 0.5
 
 # define SPEED_MULTIPLY 2
-# define FALL_MULTIPLY 10
+# define FALL_MULTIPLY 2
 
 typedef struct  s_tp
 {
