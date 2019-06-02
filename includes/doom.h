@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/17 11:55:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:55:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef	enum	e_game_mode
 }				t_game_mode;
 
 typedef int (*ft_trigger)(t_trigger trigger, t_trigger c_log);
-typedef int (*ft_actions)(t_vec2 pos, t_entity *target, t_game *game);
+typedef void (*ft_actions)(t_vec2 pos, t_entity *target, t_game *game);
 
 typedef struct			s_event
 {

@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 12:28:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/01 13:56:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/02 15:41:49 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_weapons_state *self_state)
 				tmp_log.e_actif = hud->env->game.player.my_entity;
 				tmp_log.condi = TRIGGER_SEE;
 				tmp_log.e_passif = hud->env->game.entities[ren.id];
-				apush(hud->env->game.log, &tmp_log);
+				apush(&hud->env->game.log, &tmp_log);
 			}
 			//
 		else
