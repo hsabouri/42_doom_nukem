@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:58:01 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/08 16:07:33 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:08:23 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int    shot_trigger(t_trigger trigger, t_trigger c_log)
 {
-	// (void)trigger;
-	// (void)c_log;
-	return 1;
+	if (trigger.condi == TRIGGER_SHOT && trigger.condi == c_log.condi &&
+		trigger.e_actif.id == c_log.e_actif.id &&
+		trigger.e_passif.id == c_log.e_passif.id)
+		return 1;
+	return 0;
 }
 
 int	see_trigger(t_trigger trigger, t_trigger c_log)

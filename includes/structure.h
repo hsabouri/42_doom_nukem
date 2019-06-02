@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/01 14:04:57 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/02 15:58:29 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,21 @@ typedef enum		e_condition
 	TRIGGER_TOUCH = 0x2,
 	TRIGGER_INTERACT = 0x3,
 	TRIGGER_SECTOR = 0x4,
-	TRIGGER_NO = 0x0
+	TRIGGER_SHOT = 0x0
 }					t_condition;
 
 typedef enum		e_action_c
 {
-	ACTION_NO = 0x0
-	ACTION_SPAWN = 0x1
-	ACTION_KILL = 0x2
-	ACTION_H_UP = 0x3
-	ACTION_H_DOWN = 0x4
-	ACTION_ADD_INV = 0x5
+	ACTION_NO = 0x0,
+	ACTION_SPAWN = 0x1,
+	ACTION_KILL = 0x2,
+	ACTION_H_UP = 0x3,
+	ACTION_H_DOWN = 0x4,
+	ACTION_ADD_INV = 0x5,
 }					t_action_c;
+
+struct s_game_event;
+
 
 typedef struct		s_entity
 {
@@ -122,8 +125,8 @@ typedef struct		s_entity
 	t_ph			spawn;
 	t_array			*mat;
 	t_entity_type	type;
-	t_game_event	*self_events;
-	// float life;
+	struct s_game_event	*self_events;
+	float life;
 	// float  armor;
 	// t_weapon weapons;
 	int 			damage;
@@ -150,6 +153,7 @@ typedef struct		s_game_event
 	t_action	 action;
 }					t_game_event;
 
+
 typedef struct		s_player
 {
 	t_entity	my_entity;
@@ -157,7 +161,7 @@ typedef struct		s_player
 	u_int32_t	weapons[2];
 	u_int32_t	secondary;
 	u_int32_t	equiped;
-	t_plist		inventory;
+	t_array		inventory;
 	// float		armor;
 }					t_player;
 

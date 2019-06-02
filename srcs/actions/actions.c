@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/01 16:52:22 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/02 15:40:19 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,61 +16,60 @@
 //
  // Wat ?
 
-t_env     init_actions(void)
-{
-	t_env env;
-	
-	ft_actions *actions = malloc(sizeof(ft_trigger) * 5);
-	actions[0] = spawn_entity; 
-	actions[1] = kill_entity;
-	actions[2] = health_down;
-	actions[3] = health_up;
-    actions[4] = add_inventory;
-
-	env.actions = actions;
-	return (env);
-}
 
 void        spawn_entity(t_vec2 pos, t_entity *target, t_game *game) // action
 {
-    create_entity(pos, target.type, game);
+    create_entity(pos, target->type, *game);
     // assign_entity(t_assign_entity *state, t_game game)
 }
 
+
+
 void        kill_entity(t_vec2 pos, t_entity *target, t_game *game) // action
 {
+    (void)pos;
     int i;
 
     i = 0; 
-    while(target[i] != target.id)
+    while(game->entities[i].id != target->id)
     {
         i++;
     }
     // delete_entity(i, game)
+    
     // null_entity();
 }
 
 void        health_down(t_vec2 pos,t_entity *target, t_game *game) // action
 {
-    target->life = 1;
-    if (target->life <= 0)
-         kill_entity(target);
+    (void)pos;
+    (void)target;
+    (void)game;
+    // target->life = 1;
+    // if (target->life <= 0)
+    //      kill_entity(target);
 }
 
 void        health_up(t_vec2 pos, t_entity *target, t_game *game) // action
 {
-    target->life = 1;
-    if (target->life > 100)
-        target->life = 100;
+    (void)pos;
+    (void)target;
+    (void)game;
+    // if (target->life > 100)
+    //     target->life = 100;
+    // target->life = 1;
 }
 
 void        add_inventory(t_vec2 pos, t_entity *target, t_game *game) 
 {
-    lppush(&game->player.inventory, target);
+    (void)pos;
+    // lppush(&game->player.inventory, *target);
+    apush(&game->player.inventory, target);
 }
 
 void        remove_inventory(t_vec2 pos, t_entity *target, t_game *game)
 {
+    (void)pos;
     lpremove(&game->player.inventory, target);
 }
 
@@ -97,3 +96,19 @@ void        remove_inventory(t_vec2 pos, t_entity *target, t_game *game)
 ADD INFINITY GAME EVENT
     create_entity  
 */
+
+
+t_env     init_actions(void)
+{
+	t_env env;
+	
+	ft_actions *actions = malloc(sizeof(ft_trigger) * 5);
+	actions[0] = spawn_entity; 
+	actions[1] = kill_entity;
+	actions[2] = health_down;
+	actions[3] = health_up;
+    actions[4] = add_inventory;
+
+	env.actions = actions;
+	return (env);
+}
