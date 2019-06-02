@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/08 16:08:53 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:09:09 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	entities_event(t_entity	*entity, t_game *game)
 		};
 		lppush(&g_e, (t_pelem *)first_e);
 	}
-	entity->self_events = (struct s_game_event)* g_e;
+	entity->self_events = (struct s_game_event) g_e;
 }
 
 t_entity		*init_entities(t_game *game)
