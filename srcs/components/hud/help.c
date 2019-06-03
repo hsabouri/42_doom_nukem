@@ -6,19 +6,19 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:21:20 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/25 13:18:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:19:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./hud.h"
 
-static int			self_update(t_component *self, void *parent)
+static int				self_update(t_component *self, void *parent)
 {
 	t_hud_state		*hud;
-	t_help_state	*state;
+	t_help_comp_state	*state;
 
 	hud = (t_hud_state *)parent;
-	state = (t_help_state *)self->state;
+	state = (t_help_comp_state *)self->state;
 	if (hud->env->events.keys[SDL_SCANCODE_H])
 	{
 		state->is_active = 1;
@@ -39,12 +39,12 @@ static int			self_update(t_component *self, void *parent)
 	return (0);
 }
 
-static void			self_render(const t_component self, t_color *buf)
+static void				self_render(const t_component self, t_color *buf)
 {
-	t_help_state	*state;
+	t_help_comp_state	*state;
 	t_color			bg;
 
-	state = (t_help_state *)self.state;
+	state = (t_help_comp_state *)self.state;
 	bg = state->background;
 	if (state->is_active && !state->is_display)
 	{
@@ -61,13 +61,13 @@ static void			self_render(const t_component self, t_color *buf)
 	}
 }
 
-static t_help_state	*init_help_state(void *parent_state)
+static t_help_comp_state	*init_help_comp_state(void *parent_state)
 {
 	t_hud_state		*hud;
-	t_help_state	*state;
+	t_help_comp_state	*state;
 
 	hud = (t_hud_state *)parent_state;
-	state = (t_help_state *)safe_malloc(sizeof(t_help_state), "component");
+	state = (t_help_comp_state *)safe_malloc(sizeof(t_help_comp_state), "component");
 	state->help = hud->env->game.textures[16];
 	state->help_ig_edit = hud->env->game.textures[36];
 	state->is_active = 0;
@@ -77,7 +77,7 @@ static t_help_state	*init_help_state(void *parent_state)
 	return (state);
 }
 
-t_array				init_help(t_array array, void *parent_state,\
+t_array					init_help(t_array array, void *parent_state,\
 t_sdl *sdl)
 {
 	t_component	component;
@@ -91,7 +91,7 @@ t_sdl *sdl)
 	component.pos.x = 0;
 	component.pos.y = 0;
 	component.display = 0;
-	component.state = init_help_state(parent_state);
+	component.state = init_help_comp_state(parent_state);
 	component.update = &self_update;
 	component.destroy = &no_destroy;
 	component.render = &self_render;

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 14:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/14 18:24:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:01:33 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ t_game game)
 	cpt = 0;
 	while (cpt < (int)nentities)
 	{
-		if (is_in_sector(entities[cpt].physic, game,
+		if (game.nsectors <= entities[cpt].physic.sector_id
+			|| is_in_sector(entities[cpt].physic, game,
 			entities[cpt].physic.sector_id) % 2 == 0)
 		{
 			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error),
