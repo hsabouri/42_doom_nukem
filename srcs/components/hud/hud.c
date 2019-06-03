@@ -6,11 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:23:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/23 12:15:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:27:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./hud.h"
+#include "../common/common.h"
 #include "./in_game_editor/in_game_editor.h"
 
 static int			self_update(t_component *self, void *parent)
@@ -44,6 +45,7 @@ static t_hud_state	*init_state(t_env *env)
 t_component			init_hud_root(t_env *env, t_sdl *sdl)
 {
 	t_component ret;
+	t_component curr;
 
 	ret = (t_component) {.img.content = NULL, .text.text_texture = NULL,
 		.size.x = WIDTH, .size.y = HEIGHT, .pos.x = 0, .pos.y = 0,
@@ -60,5 +62,10 @@ t_component			init_hud_root(t_env *env, t_sdl *sdl)
 	ret.childs = init_inventory(ret.childs, ret.state, sdl);
 	ret.childs = init_help(ret.childs, ret.state, sdl);
 	ret.childs = init_in_game_editor(ret.childs, env, sdl);
+	curr = init_display_deco((t_display_deco_state){(int *)&env->game.nwalls,
+			0, NULL, 0},
+		init_simple_text("Cannot render: Press 'E' to enter the map editor",
+			(t_pix) {WIDTH / 2 - 150, HEIGHT / 2 - 20}, sdl));
+	apush(&ret.childs, &curr);
 	return (ret);
 }

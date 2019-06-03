@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:22:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 17:12:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:18:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct	s_inventory_state
 	t_color		background;
 }				t_inventory_state;
 
-typedef struct	s_help_state
+typedef struct	s_help_comp_state
 {
 	t_img		help;
 	t_img		help_ig_edit;
@@ -67,7 +67,7 @@ typedef struct	s_help_state
 	int			is_display;
 	int			img_display;
 	t_color		background;
-}				t_help_state;
+}				t_help_comp_state;
 
 t_array			init_weapon(t_array array, void *parent_state, t_sdl *sdl);
 t_array			mini_weapon(t_array array, void *parent_state, t_sdl *sdl);

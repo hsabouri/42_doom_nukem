@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 15:31:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:22:33 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,15 @@ void		game_loop(t_env *env, size_t frame)
 	//env->game = entities_properties(env->game, env->events);
 	env->game = check_see(env->game);
 
-	env->game = physic(env->game, env->events, old_timer);
+	if (env->game.nwalls > 0)
+		env->game = physic(env->game, env->events, old_timer);
 	env->game.frame = frame;
 	env->game = check_conditions(env->game, env->events, env->condition);
 	content = NULL;
 	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
 	env->current_buffer = content;
-	render_multi_threaded(*env, env->current_buffer);
+	if (env->game.nwalls > 0)
+		render_multi_threaded(*env, env->current_buffer);
 	SDL_UnlockTexture(env->sdl.buf);
 	SDL_RenderCopy(env->sdl.renderer, env->sdl.buf, NULL, NULL);
 	*env->component = trigger_component(env, *env->component, &env->sdl);
@@ -117,9 +119,6 @@ void		game_loop(t_env *env, size_t frame)
 	play_music(env->game, env->game.played_music, 0, frame);
 	env->game = play_sounds(env->game);
 	SDL_RenderPresent(env->sdl.renderer);
-	// find_center_sectors(env->game);
 	env->game = play_sounds(env->game);
 	old_timer = end_timer(timer);
-		// printf("0");
-		// exit(0);
 }
