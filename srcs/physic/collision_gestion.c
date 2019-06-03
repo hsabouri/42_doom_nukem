@@ -64,25 +64,48 @@ t_vec3		floor_col(t_vec3 pos, t_sector sector, t_vec3 speed,
 u_int32_t *jump)
 {
 	t_vec3	final_speed;
-	float	z;
+	float	z_floor;
 	float	delta;
+	t_vec3 z;
+	t_fixed t;
+	t_line line;
 
-	final_speed = speed;
-	z = z_entity(sector, pos, 1);
-	if (z <= 0)
-		delta = pos.z - z;
+	final_speed = pos;
+	z_floor = z_entity(sector, pos, 1);
+	if (z_floor <= 0)
+		delta = pos.z - z_floor;
 	else
-		delta = z - pos.z;
+		delta = z_floor - pos.z;
 	if (delta < -0.0001)
 	{
-		printf("delta: %f, pos.z: %f, z: %f), final_spped.z: %f - ", delta, pos.z, z, final_speed.z);
-		final_speed.z = speed.z - delta;
-		final_speed.x = final_speed.z / speed.z * speed.x;
-		final_speed.y = final_speed.z / speed.z * speed.y;
-		if (jump)
+	
+		z.x = pos.x + speed.x;
+		z.y = pos.y + speed.y;
+		z.z = pos.z;
+		line.x.v = f_from_float(speed.x);
+		line.y.v = f_from_float(speed.y);
+		line.z.v = f_from_float(speed.z);
+		line.x.u = f_from_float(pos.x - sector.center.u);
+		line.y.u = f_from_float(pos.y - sector.center.v);
+		line.z.u = f_from_float(pos.z);
+		// printf("| %f + %fx | %f + %fy | %f + %f z\n", f_to_float(line.x.u), f_to_float(line.x.v), f_to_float(line.y.u),
+	// f_to_float(line.y.v), f_to_float(line.z.u), f_to_float(line.z.v));
+		t = f_mul(sector.floor.x, line.x.v) + f_mul(sector.floor.y,
+			line.y.v) - line.z.v;
+		if ( t == 0 || (sector.floor.x == 0 && sector.floor.y == 0))
+			return(z);
+		t = f_div((-sector.floor.z - f_mul(sector.floor.x, line.x.u)
+		- f_mul(sector.floor.y, line.y.u) + line.z.u),
+		(f_mul(sector.floor.x, line.x.v) + f_mul(sector.floor.y,
+			line.y.v) - line.z.v));
+		z.x = f_to_float(line.x.u + f_mul(t, line.x.v));
+		z.y = f_to_float(line.y.u + f_mul(t, line.y.v));
+		z.z = f_to_float(line.z.u + f_mul(t, line.z.v));
+		if (*jump)
 			jump = 0;
-		printf("%f\n", final_speed.z);
-		return (final_speed);
+		printf("| Z | x = %f y = %f z = %f\n",z.x,z.y,z.z);
+		final_speed = z;
+		return(final_speed);
 	}
 	return (final_speed);
 }
