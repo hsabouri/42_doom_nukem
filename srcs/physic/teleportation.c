@@ -57,7 +57,9 @@ t_ph *physic)
 		? teleport.portal.to_sector : teleport.portal.from_sector;
 	delta_floor = game->sectors[physic->sector_id].floor.z - pos.z;
 	delta_ceil = game->sectors[physic->sector_id].ceiling.z - pos.z;
-	if (delta_floor >= 0.5 || delta_ceil < -0.0001)
+	if (delta_floor >= 0.5 || delta_ceil < -0.0001
+		|| game->sectors[physic->sector_id].floor.x != 0
+		|| game->sectors[physic->sector_id].floor.y != 0)
 		if_not_tp(physic, teleport);
 	else
 	{
