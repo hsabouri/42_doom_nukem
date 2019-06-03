@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   assign_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 11:43:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/03 18:15:51 by hugo             ###   ########.fr       */
+/*   Updated: 2019/06/03 17:10:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./map.h"
 #include "../../common/common.h"
 
-int			callback_new_sector(void *parent)
+int				callback_new_sector(void *parent)
 {
 	t_assign_tool	*state;
 	t_game			game;
@@ -28,8 +28,8 @@ int			callback_new_sector(void *parent)
 	return (1);
 }
 
-void		select_multi_unassigned(ssize_t wall, ssize_t u_wall, ssize_t *dual,
-t_event events)
+void			select_multi_unassigned(ssize_t wall, ssize_t u_wall,
+ssize_t *dual, t_event events)
 {
 	if (events.mouse_click[SDL_BUTTON_LEFT])
 	{
@@ -41,6 +41,25 @@ t_event events)
 			dual[1] = wall;
 		else
 			dual[1] = -1;
+	}
+}
+
+static void		self_update_selected(t_assign_tool *state, t_event events)
+{
+	if (state->walls[0] >= 0)
+		*state->selected_wall = select_wall(*state->parent,
+		*state->selected_wall, events);
+	select_multi_unassigned(*state->selected_wall, *state->unassigned_wall,
+		state->walls, *state->events);
+	if (state->walls[0] >= 0 && state->walls[1] >= 0)
+	{
+		state->parent->env->game = create_wall(state->walls[0],
+			find_sector(state->walls[1],
+			state->parent->env->game), state->parent->env->game);
+		state->walls[0] = -1;
+		state->walls[1] = -1;
+		*state->unassigned_wall = -1;
+		*state->selected_wall = -1;
 	}
 }
 
@@ -61,21 +80,7 @@ static int		self_update(t_component *self, void *parent)
 		self->display = 1;
 	*state->unassigned_wall = select_unassigned_wall(*state->parent,
 			*state->unassigned_wall, events);
-	if (state->walls[0] >= 0)
-		*state->selected_wall = select_wall(*state->parent,
-		*state->selected_wall, events);
-	select_multi_unassigned(*state->selected_wall, *state->unassigned_wall,
-		state->walls, *state->events);
-	if (state->walls[0] >= 0 && state->walls[1] >= 0)
-	{
-		state->parent->env->game = create_wall(state->walls[0],
-			find_sector(state->walls[1],
-			state->parent->env->game), state->parent->env->game);
-		state->walls[0] = -1;
-		state->walls[1] = -1;
-		*state->unassigned_wall = -1;
-		*state->selected_wall = -1;
-	}
+	self_update_selected(state, events);
 	return (1);
 }
 
@@ -99,8 +104,8 @@ t_sdl *sdl)
 		(int *)state->walls, -1, state, 1
 	}, init_cb_button((t_cb_button) { .pos = (t_pix) {2, 44},
 		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
-		.events = &env->events, .scancode = SDL_SCANCODE_N, .place_holder = NULL,
-		.callback = &callback_new_sector,
+		.events = &env->events, .scancode = SDL_SCANCODE_N,
+		.place_holder = NULL, .callback = &callback_new_sector,
 		.img = parse_tga("./textures/ui/plus.tga", 0)}, sdl));
 	apush(&ret.childs, &child);
 	return (ret);
