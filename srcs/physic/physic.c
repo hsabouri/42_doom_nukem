@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 17:37:59 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:02:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_game			physic(t_game game, t_event events, float old_timer)
 
 	i = 0;
 	new_game = game;
-	while (i < 1)
+	while (i < game.nentities)
 	{
 		new_physic = game.entities[i].physic;
 		if (game.entities[i].damage >= 1)

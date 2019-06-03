@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:51:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/30 17:20:49 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:36:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_context		teleport(t_game game, t_context context, t_section section)
 
 	context.left = section.start;
 	context.right = section.end;
-	if (portal.from_sector == context.sector.sector_id)
+	if (portal.from_wall == section.wall.id)
 	{
 		context.sector = game.sectors[portal.to_sector];
 		context.mask = portal.to_wall;
