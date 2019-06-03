@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:01:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 14:29:08 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 15:32:17 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,26 @@ t_game_tool	select_tool(t_env env)
 	return (res);
 }
 
-t_game		tilt_floor_ceil(t_game game, t_event events)
+t_game		tilt_floor_ceil(t_game game, t_event events, t_selected sel)
 {
+	int rotate;
+
+	rotate = 0;
+	if (sel.id < 0 || (sel.type != PART_FLOOR && sel.type != PART_CEILING))
+		return (game);
 	find_center_sectors(game);
 	if (events.keys[SDL_SCANCODE_KP_6] || events.keys[SDL_SCANCODE_6])
-		rotate_floor(game.player.my_entity.physic.sector_id, 1, game);
+		rotate = 1;
 	if (events.keys[SDL_SCANCODE_KP_4] || events.keys[SDL_SCANCODE_4])
-		rotate_floor(game.player.my_entity.physic.sector_id, 2, game);
+		rotate = 2;
 	if (events.keys[SDL_SCANCODE_KP_8] || events.keys[SDL_SCANCODE_8])
-		rotate_floor(game.player.my_entity.physic.sector_id, 3, game);
+		rotate = 3;
 	if (events.keys[SDL_SCANCODE_KP_2] || events.keys[SDL_SCANCODE_2])
-		rotate_floor(game.player.my_entity.physic.sector_id, 4, game);
-	if (events.keys[SDL_SCANCODE_KP_7] || events.keys[SDL_SCANCODE_7])
-		rotate_ceiling(game.player.my_entity.physic.sector_id, 1, game);
-	if (events.keys[SDL_SCANCODE_KP_9] || events.keys[SDL_SCANCODE_9])
-		rotate_ceiling(game.player.my_entity.physic.sector_id, 2, game);
-	if (events.keys[SDL_SCANCODE_KP_1] || events.keys[SDL_SCANCODE_1])
-		rotate_ceiling(game.player.my_entity.physic.sector_id, 3, game);
-	if (events.keys[SDL_SCANCODE_KP_3] || events.keys[SDL_SCANCODE_3])
-		rotate_ceiling(game.player.my_entity.physic.sector_id, 4, game);
+		rotate = 4;
+	if (sel.type == PART_CEILING && rotate)
+		rotate_ceiling(sel.id, rotate, game);
+	else if (rotate)
+		rotate_floor(sel.id, rotate, game);
 	return (game);
 }
 
@@ -73,7 +74,7 @@ t_env		game_editing(t_env env, t_player player)
 		env.editor.depth = 0;
 	if (env.editor.game_tool != TOOL_NO)
 		env = env.editor.game_tools[env.editor.game_tool](env, sel);
-	env.game = tilt_floor_ceil(env.game, env.events);
+	env.game = tilt_floor_ceil(env.game, env.events, sel);
 	if (env.events.keys[SDL_SCANCODE_KP_ENTER] && sel.type == PART_PORTAL)
 	{
 		portal = &env.game.portals[env.game.walls[sel.id].portal];
