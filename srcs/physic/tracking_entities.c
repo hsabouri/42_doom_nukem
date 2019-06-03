@@ -70,7 +70,16 @@ t_last_pos last_pos)
 {
 	u_int32_t	cpt;
 	float		z;
+	float		inter;
 
+	inter = (z_entity(game.sectors[physic.sector_id], physic.pos, 0))
+		- (z_entity(game.sectors[physic.sector_id], physic.pos, 1));
+	if (inter < physic.height - 0.1)
+	{
+		physic.pos = last_pos.pos;
+		physic.sector_id = last_pos.sector_id;
+		return (physic);
+	}
 	if ((is_in_sector(physic, game, physic.sector_id) % 2) != 0)
 		return (physic);
 	else

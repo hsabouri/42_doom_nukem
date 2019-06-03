@@ -76,8 +76,7 @@ float old_timer)
 	next_pos = vec3_add(physic->pos, physic->speed);
 	inter = (z_entity(game->sectors[physic->sector_id], next_pos, 0))
 		- (z_entity(game->sectors[physic->sector_id], next_pos, 1));
-		printf("inter: %f\n", inter);
-	if (inter < physic->height + 0.1)
+	if (inter < physic->height - 0.5)
 		return (physic->pos);
 	physic->speed = z_move(physic, *game, old_timer, inter);
 	next_pos = vec3_add(physic->pos, physic->speed);
