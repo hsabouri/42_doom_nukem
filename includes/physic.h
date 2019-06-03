@@ -51,6 +51,7 @@ typedef struct  s_last_pos
 
 int	        	seg_seg(t_vec3  next_pos, t_ph physic, t_touch *touch,
                 t_game game);
+float	        z_inter(t_sector sector, t_vec3 pos, int mode);
 t_touch			collision(t_vec3 next_pos, t_ph physic, t_game game, int wall);
 t_vec3	        col_entities(t_ph n_physic, t_ph physic, t_game *game,
                 size_t id);

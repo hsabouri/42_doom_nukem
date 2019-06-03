@@ -60,8 +60,13 @@ float old_timer)
 	t_vec3	next_pos;
 	t_touch	touch;
 	t_tp	teleport;
+	float	inter;
 
 	next_pos = vec3_add(physic->pos, physic->speed);
+	inter = (z_inter(game->sectors[physic->sector_id], next_pos, 0)
+		- z_inter(game->sectors[physic->sector_id], next_pos, 1));
+	if (inter < physic->height + 0.5)
+		return (physic->pos);
 	physic->speed = z_move(physic, *game, old_timer);
 	next_pos = vec3_add(physic->pos, physic->speed);
 	touch = collision(next_pos, *physic, *game, wall);
