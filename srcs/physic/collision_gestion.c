@@ -77,14 +77,15 @@ t_vec3		floor_col(float pos_z, t_sector sector, t_vec3 speed)
 	return (final_speed);
 }
 
-t_vec3		ceil_col(float pos_z, t_sector sector, t_vec3 speed)
+t_vec3		ceil_col(t_vec3 pos, t_sector sector, t_vec3 speed)
 {
 	t_vec3	final_speed;
 	float	delta;
 	float	z;
 
 	final_speed = speed;
-	delta = sector.ceiling.z - pos_z;
+	z = z_inter(sector, pos, 0);
+	delta = z - pos.z;
 	if (delta < -0.05)
 	{
 		final_speed.z = speed.z + (delta - 0.05);
