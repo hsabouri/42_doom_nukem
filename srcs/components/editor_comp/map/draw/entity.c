@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 12:20:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 11:49:02 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:42:36 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,17 @@ t_state_buf state)
 	sp_pos2 = vec2_add(sp_pos, sp_pos2);
 	a = (t_pix) {(int)sp_pos.u - 1, (int)sp_pos.v - 1};
 	b = (t_pix) {(int)sp_pos2.u - 1, (int)sp_pos2.v - 1};
-	if (b.x < 0)
-		b.x = 0;
-	if (b.y < 0)
-		b.y = 0;
 	bresenham(state.buf, a, b, color);
 }
 
 static void	display_pos(t_entity entity, int size, t_color c,
 const t_state_buf state)
 {
-	const t_vec2	pos = screen_space(vec3_to_vec2(entity.physic.pos),
-		state.state);
-	const t_vec2	spw = screen_space(vec3_to_vec2(entity.spawn.pos),
-		state.state);
+	t_vec2	pos;
+	t_vec2	spw;
 
+	pos = screen_space(vec3_to_vec2(entity.physic.pos), state.state);
+	spw = screen_space(vec3_to_vec2(entity.spawn.pos), state.state);
 	c = (t_color) {c.r + 64, c.g + 64, c.b + 64, c.a};
 	if (state.state.tool == TOOL_ENTITY || state.state.tool == ASSIGN_ENTITY)
 		dotted(state.buf, (t_pix) {pos.u, pos.v}, (t_pix) {spw.u, spw.v}, c);
@@ -62,10 +58,9 @@ void		foreach_entity(void *entity, void *param, size_t i)
 	size = (state->state.zoom < 10) ? 2 : 4;
 	size = (state->state.zoom > 60) ? 6 : size;
 	c = (e->damage) ? state->color : E_PEACEFUL;
-	if ((size_t)state->state.selected_entity == i ||
-		(size_t)state->state.selected_spawn == i ||
-		(size_t)state->state.entity == i ||
-		(size_t)state->state.spawn == i)
+	if ((size_t)state->state.selected_entity == i
+		|| (size_t)state->state.selected_spawn == i
+		|| (size_t)state->state.entity == i || (size_t)state->state.spawn == i)
 		c = (t_color) {c.r + 30, c.g + 30, c.b + 30, c.a};
 	display_pos(*e, size, c, *state);
 }

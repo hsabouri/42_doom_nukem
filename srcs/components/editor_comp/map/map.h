@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/20 16:12:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:30:08 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct	s_state_buf
 }				t_state_buf;
 
 void			draw_map(t_editor_map_state state, t_color *buf);
+void			foreach_wall(void *wall, void *param, size_t i);
 
 t_component		init_editor_map(t_env *env, t_sdl *sdl);
 t_component		init_point_tool(t_env *env, ssize_t *selected, t_sdl *sdl);
