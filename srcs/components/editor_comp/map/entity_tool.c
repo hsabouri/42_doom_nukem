@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:50:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 14:38:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 18:29:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 static t_game	move_entity(const t_editor_map_state *parent_state,
 t_entity_tool *state, t_game game)
 {
-	const t_vec2	pos = point_from_mouse(*parent_state, *state->events,
+	t_vec3	*to_change;
+	t_vec2	pos;
+
+	pos = point_from_mouse(*parent_state, *state->events,
 		parent_state->magnetisme);
-	t_vec3			*to_change;
-	
 	if (*state->selected_entity >= 0)
 	{
 		if ((size_t)*state->selected_entity == game.nentities)
@@ -38,12 +39,32 @@ t_entity_tool *state, t_game game)
 	return (game);
 }
 
+static t_game	self_update_selected(t_entity_tool *state,
+t_editor_map_state *parent_state, t_event events, t_game game)
+{
+	*state->selected_entity = select_entity(*parent_state,
+		*state->selected_entity, events, 0);
+	if (*state->selected_entity == -1)
+		*state->selected_spawn = select_entity(*parent_state,
+			*state->selected_spawn, events, 1);
+	if ((*state->selected_entity >= 0 || *state->selected_spawn >= 0) &&
+		state->events->mouse[SDL_BUTTON_LEFT])
+		game = move_entity(parent_state, state, game);
+	else if (*state->selected_entity > -1
+		&& events.mouse_click[SDL_BUTTON_RIGHT])
+		game = delete_entity(*state->selected_entity, game);
+	else if (*state->selected_class >= 0
+		&& events.mouse_click[SDL_BUTTON_RIGHT])
+		game = create_entity(point_from_mouse(*parent_state, *state->events,
+		parent_state->magnetisme), *state->selected_class, game);
+}
+
 static int		self_update(t_component *self, void *parent)
 {
 	t_entity_tool				*state;
-	const t_editor_map_state 	*parent_state = (t_editor_map_state *)parent;
 	t_event						events;
 	t_game						game;
+	const t_editor_map_state	*parent_state = (t_editor_map_state *)parent;
 
 	state = (t_entity_tool *)self->state;
 	events = *state->events;
@@ -55,20 +76,8 @@ static int		self_update(t_component *self, void *parent)
 	}
 	else
 		self->display = 1;
-	*state->selected_entity = select_entity(*parent_state,
-		*state->selected_entity, events, 0);
-	if (*state->selected_entity == -1)
-		*state->selected_spawn = select_entity(*parent_state,
-			*state->selected_spawn, events, 1);
-	if ((*state->selected_entity >= 0 || *state->selected_spawn >= 0) &&
-		state->events->mouse[SDL_BUTTON_LEFT])
-		game = move_entity(parent_state, state, game);
-	else if (*state->selected_entity > -1 && events.mouse_click[SDL_BUTTON_RIGHT])
-		game = delete_entity(*state->selected_entity, game);
-	else if (*state->selected_class >= 0 && events.mouse_click[SDL_BUTTON_RIGHT])
-		game = create_entity(point_from_mouse(*parent_state, *state->events,
-		parent_state->magnetisme), *state->selected_class, game);
-	parent_state->env->game = game;
+	parent_state->env->game = self_update_selected(state, parent_state,
+		events, game);
 	return (1);
 }
 
