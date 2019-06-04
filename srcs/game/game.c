@@ -73,9 +73,7 @@ t_game		check_see(t_game game)
 {
 	t_game n_game;
 	t_trigger tmp_log;
-
 	t_selected ren;
-
 	n_game = game;
 
 	ren = world_selector(n_game);
@@ -86,7 +84,7 @@ t_game		check_see(t_game game)
 		tmp_log.e_passif = n_game.entities[ren.id];
 		apush(&n_game.log, &tmp_log);
 	}
-	return n_game;
+	return (n_game);
 }
 
 void		game_loop(t_env *env, size_t frame)
@@ -102,7 +100,6 @@ void		game_loop(t_env *env, size_t frame)
 	env->game = player_properties(env->game, env->events);
 	//env->game = entities_properties(env->game, env->events);
 	env->game = check_see(env->game);
-
 	if (env->game.nwalls > 0)
 		env->game = physic(env->game, env->events, old_timer);
 	env->game.frame = frame;

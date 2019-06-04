@@ -35,9 +35,8 @@ t_mat	*init_mat_6(t_mat *materials, t_game *game)
 
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_float(1.5), f_from_int(1)),
-		.color = NO_COLOR, .texture = &game->textures[43], .mode = NO_TILING,
+		.color = NO_COLOR, .texture = &game->textures[59], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
-		tmp.texture = &game->textures[59];
 	materials[35] = tmp;
 	tmp.texture = &game->textures[60];
 	materials[36] = tmp;

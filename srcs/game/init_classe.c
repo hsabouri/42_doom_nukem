@@ -52,7 +52,7 @@ static t_entity	classe_2(t_entity_type type, t_array *mats)
 	return (classe);
 }
 
-static t_entity classe_3(t_entity_type type, t_array *mats, int damage)
+static t_entity	classe_3(t_entity_type type, t_array *mats, int damage)
 {
 	t_entity	classe;
 
