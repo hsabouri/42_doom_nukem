@@ -38,11 +38,11 @@ static t_env		link_unlink_opening(t_env env, t_selected selected)
 	t_portal portal;
 
 	portal = env.game.portals[env.game.walls[selected.id].portal];
-	if (portal.mat && (env.events.keys[SDL_SCANCODE_KP_0] ||
-		env.events.keys[SDL_SCANCODE_0]))
+	if (portal.mat && (env.events.keys[SDL_SCANCODE_KP_0]
+		|| env.events.keys[SDL_SCANCODE_0]))
 		portal.mat = NULL;
-	else if (env.events.keys[SDL_SCANCODE_KP_0] ||
-		env.events.keys[SDL_SCANCODE_0])
+	else if (env.events.keys[SDL_SCANCODE_KP_0]
+		|| env.events.keys[SDL_SCANCODE_0])
 		portal.mat = env.game.materials;
 	env.events.keys[SDL_SCANCODE_KP_0] = 0;
 	env.events.keys[SDL_SCANCODE_0] = 0;
@@ -67,12 +67,12 @@ t_env				change_material_tool(t_env env, t_selected selected)
 
 	m = NULL;
 	selected = change_or_not(env.events, selected);
-	if (selected.type == PART_WALL || (selected.type == PART_PORTAL &&
-		(selected.mod == MOD_STEP || selected.mod == MOD_CEIL)))
+	if (selected.type == PART_WALL || (selected.type == PART_PORTAL
+		&& (selected.mod == MOD_STEP || selected.mod == MOD_CEIL)))
 		m = &env.game.walls[selected.id].mat;
-	else if (selected.type == PART_PORTAL && selected.mod == MOD_OPEN &&
-		env.game.portals[env.game.walls[selected.id].portal].mat)
-			m = &env.game.portals[env.game.walls[selected.id].portal].mat;
+	else if (selected.type == PART_PORTAL && selected.mod == MOD_OPEN
+		&& env.game.portals[env.game.walls[selected.id].portal].mat)
+		m = &env.game.portals[env.game.walls[selected.id].portal].mat;
 	else if (selected.type == PART_FLOOR)
 		m = &env.game.sectors[selected.id].floor_mat;
 	else if (selected.type == PART_CEILING)

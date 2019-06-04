@@ -15,6 +15,7 @@
 t_editor		init_editor(void)
 {
 	t_editor res;
+
 	res = (t_editor) {
 		.zoom = 25.0,
 		.offset = (t_vec2) {0.0, 0.0},

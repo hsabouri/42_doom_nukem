@@ -45,7 +45,7 @@ static t_fvec2	move(t_fvec2 values, t_event events, int mult_x, int mult_y)
 	return (values);
 }
 
-t_env		scale_material_tool(t_env env, t_selected selected)
+t_env			scale_material_tool(t_env env, t_selected selected)
 {
 	t_mat	*p;
 
@@ -68,7 +68,7 @@ t_env		scale_material_tool(t_env env, t_selected selected)
 	return (env);
 }
 
-t_env		move_material_tool(t_env env, t_selected selected)
+t_env			move_material_tool(t_env env, t_selected selected)
 {
 	t_mat	*p;
 
@@ -93,7 +93,7 @@ t_env		move_material_tool(t_env env, t_selected selected)
 	return (env);
 }
 
-t_env		move_texture_tool(t_env env, t_selected selected)
+t_env			move_texture_tool(t_env env, t_selected selected)
 {
 	t_fvec2	*to_move;
 

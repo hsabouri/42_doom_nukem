@@ -101,10 +101,12 @@ static void		keyactions(int scancode, t_env *env)
 	}
 	if (scancode == SDL_SCANCODE_TAB)
 		env->game.player.equiped = (env->game.player.equiped == 0) ? 1 : 0;
-	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic.fly)
+	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic
+		.fly)
 		env->game.player.my_entity.physic.jump = 1;
 	if (scancode == SDL_SCANCODE_F)
-		env->game.player.my_entity.physic.fly = (env->game.player.my_entity.physic.fly) ? 0 : 1;
+		env->game.player.my_entity.physic.fly = (env->game.player.my_entity
+			.physic.fly) ? 0 : 1;
 	if (!env->toggle_editor &&
 		(scancode == SDL_SCANCODE_KP_PLUS || scancode == SDL_SCANCODE_EQUALS))
 		env->editor.depth += 1;
@@ -113,14 +115,13 @@ static void		keyactions(int scancode, t_env *env)
 		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
 }
 
-t_event			capture_events(t_event events, t_env *env)
+
+t_event			capture_events_loop(t_event events, t_env *env)
 {
 	SDL_Event	polled_event;
 	static int	any = 0;
 
-	events.wheel = 0;
 	events.any = any;
-	SDL_CaptureMouse(SDL_TRUE);
 	while (SDL_PollEvent(&polled_event))
 	{
 		events.any = 1;
@@ -139,6 +140,14 @@ t_event			capture_events(t_event events, t_env *env)
 			events.quit = 1;
 		events = mouse_event(events, polled_event, &any);
 	}
+	return (events);
+}
+
+t_event			capture_events(t_event events, t_env *env)
+{
+	events.wheel = 0;
+	SDL_CaptureMouse(SDL_TRUE);
+	events = capture_events_loop(events, env);
 	if (ON_LINUX && !env->toggle_editor && env->game_mode != 0)
 		SDL_WarpMouseInWindow(env->sdl.win, WIDTH / 2, HEIGHT / 2);
 	SDL_CaptureMouse(SDL_FALSE);
