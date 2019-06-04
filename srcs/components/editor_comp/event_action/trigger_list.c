@@ -37,7 +37,7 @@ static t_array		generator(void *parent)
 static int			on_click(void *parent, size_t i)
 {
 	t_editor_ev_ac_state	*state;
-	
+
 	state = ((t_editor_ev_ac_state *)(
 		((t_display_deco_state *)parent)->state));
 	state->selected_trigger = i;
