@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:05:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/18 17:12:49 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:34:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ size_t		find_sector(size_t wall_id, t_game game)
 	i = 0;
 	while (i < game.nsectors - 1)
 	{
-		if (game.sectors[i].start <= wall_id &&
-			game.sectors[i + 1].start > wall_id)
-		return (i);
+		if (game.sectors[i].start <= wall_id
+			&& game.sectors[i + 1].start > wall_id)
+			return (i);
 		++i;
 	}
 	return (game.nsectors - 1);

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 11:00:02 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:41:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static void			foreach_point(void *point, void *param, size_t i)
 	draw_point(vec2_to_fvec2(p), size, state->buf, color);
 }
 
-static void			draw_entities(t_editor_map_state *state, t_state_buf state_buf)
+static void			draw_entities(t_editor_map_state *state,
+t_state_buf state_buf)
 {
 	t_game				game;
 	t_array				tmp_array;
