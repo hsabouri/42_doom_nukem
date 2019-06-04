@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 11:21:46 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/30 16:44:55 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:54:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRESEMHAM_H
-# define BRESEMHAM_H
+#ifndef BRESENHAM_H
+# define BRESENHAM_H
 
 # include <vec.h>
-
-# ifndef GRAPHIC_H
+# include <graphic.h>
 
 typedef struct	s_pix_fixed
 {
@@ -29,10 +28,6 @@ typedef struct	s_bres
 	int			diff[2];
 	int			inc[2];
 }				t_bres;
-
-# endif
-
-# include <graphic.h>
 
 void			bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
 void			dotted(t_color *buff, t_pix a, t_pix b, t_color color);

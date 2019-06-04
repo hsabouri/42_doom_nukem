@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:24:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:11:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,10 @@ t_e_proj		entity_projection(t_hit hit, t_context context,
 				t_section_entity section);
 
 t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
+t_bunch			build_entity_bunch(const t_game game, const t_context context,
+				const t_limit limit, t_fvec2 pos);
+t_render		build_sections_entities(const t_context ctx,
+const t_bunch bunch, const t_limit lmts);
 t_render		build_sections(t_context context, t_bunch bunch,
 				t_limit limits);
 t_render		build_sections_portals(t_render render);
