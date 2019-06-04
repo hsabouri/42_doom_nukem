@@ -15,10 +15,10 @@
 
 void			render_preview(t_mat mat, int width, int height, t_color *buf)
 {
-	t_tex_proj					tex;
-	int							y;
-	int							x;
-	t_color						c;
+	t_tex_proj	tex;
+	int			y;
+	int			x;
+	t_color		c;
 
 	tex.mat = mat;
 	tex.angle = 0;
@@ -42,7 +42,7 @@ void			render_preview(t_mat mat, int width, int height, t_color *buf)
 static void		self_render(const t_component self, t_color *buf)
 {
 	const t_editor_mat_state	state = *(t_editor_mat_state *)self.state;
-	
+
 	render_preview(state.env->game.materials[state.selected],
 		300, 300, buf);
 }

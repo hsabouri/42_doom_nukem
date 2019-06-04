@@ -13,16 +13,11 @@
 #include "./materials.h"
 #include "../../common/common.h"
 
-static t_array		generator(void *parent)
+static t_array		generator_loop(t_game game, t_list_content curr,
+t_array ret, t_editor_mat_state *state)
 {
-	const t_editor_mat_state	*state = ((t_editor_mat_state *)(
-		((t_display_deco_state *)parent)->state));
-	const t_game				game = state->env->game;
-	t_list_content				curr;
-	t_array						ret;
-	size_t						i;
+	size_t	i;
 
-	ret = safe_anew(NULL, 0, sizeof(t_list_content), "component");
 	i = 0;
 	while (i < game.nmaterials)
 	{
@@ -41,6 +36,21 @@ static t_array		generator(void *parent)
 		apush(&ret, &curr);
 		++i;
 	}
+	return (ret);
+}
+
+static t_array		generator(void *parent)
+{
+	t_editor_mat_state	*state;
+	t_game				game;
+	t_list_content		curr;
+	t_array				ret;
+
+	state = ((t_editor_mat_state *)(((t_display_deco_state *)parent)->state));
+	game = state->env->game;
+	curr.img.content = NULL;
+	ret = safe_anew(NULL, 0, sizeof(t_list_content), "component");
+	ret = generator_loop(game, curr, ret, state);
 	curr.img.content = NULL;
 	ft_strncpy(curr.text, "no overlay", 28);
 	apush(&ret, &curr);
@@ -85,7 +95,8 @@ static int			on_click(void *parent, size_t i)
 	return (0);
 }
 
-t_component			create_list_overlay(t_env *env, int *update_list, t_sdl *sdl)
+t_component			create_list_overlay(t_env *env, int *update_list,
+t_sdl *sdl)
 {
 	t_component ret;
 

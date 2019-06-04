@@ -12,9 +12,9 @@
 
 #include "./hud.h"
 
-static int				self_update(t_component *self, void *parent)
+static int					self_update(t_component *self, void *parent)
 {
-	t_hud_state		*hud;
+	t_hud_state			*hud;
 	t_help_comp_state	*state;
 
 	hud = (t_hud_state *)parent;
@@ -39,10 +39,10 @@ static int				self_update(t_component *self, void *parent)
 	return (0);
 }
 
-static void				self_render(const t_component self, t_color *buf)
+static void					self_render(const t_component self, t_color *buf)
 {
 	t_help_comp_state	*state;
-	t_color			bg;
+	t_color				bg;
 
 	state = (t_help_comp_state *)self.state;
 	bg = state->background;
@@ -63,11 +63,12 @@ static void				self_render(const t_component self, t_color *buf)
 
 static t_help_comp_state	*init_help_comp_state(void *parent_state)
 {
-	t_hud_state		*hud;
+	t_hud_state			*hud;
 	t_help_comp_state	*state;
 
 	hud = (t_hud_state *)parent_state;
-	state = (t_help_comp_state *)safe_malloc(sizeof(t_help_comp_state), "component");
+	state = (t_help_comp_state *)safe_malloc(sizeof(t_help_comp_state),
+		"component");
 	state->help = hud->env->game.textures[16];
 	state->help_ig_edit = hud->env->game.textures[36];
 	state->is_active = 0;
@@ -77,7 +78,7 @@ static t_help_comp_state	*init_help_comp_state(void *parent_state)
 	return (state);
 }
 
-t_array					init_help(t_array array, void *parent_state,\
+t_array						init_help(t_array array, void *parent_state,\
 t_sdl *sdl)
 {
 	t_component	component;

@@ -19,56 +19,6 @@ t_vec2		player_space(t_vec2 vec, t_ph physic)
 	return (vec2_rot(vec2_sub(vec, vec3_to_vec2(physic.pos)), -physic.look_h));
 }
 
-void		minimap(t_game game, t_color *buf)
-{
-	t_vec2	a;
-	t_vec2	b;
-	t_wall	wall;
-	t_color color;
-	size_t	i;
-
-	i = 0;
-	while (i < game.nwalls)
-	{
-		wall = game.walls[i];
-		a = game.points[wall.a];
-		b = game.points[wall.b];
-		a = player_space(a, game.player.my_entity.physic);
-		b = player_space(b, game.player.my_entity.physic);
-		bresenham(buf, (t_pix) {(a.u + 10) * 10, HEIGHT - (a.v + 10) * 10},
-			(t_pix) {(b.u + 10) * 10, HEIGHT - (b.v + 10) * 10}, WHITE);
-		i++;
-	}
-	a = player_space((t_vec2) {0, 0}, game.player.my_entity.physic);
-	b = player_space((t_vec2) {250, 0}, game.player.my_entity.physic);
-	bresenham(buf, (t_pix) {(a.u + 10) * 10, HEIGHT - (a.v + 10) * 10},
-		(t_pix) {(b.u + 10) * 10, HEIGHT - (b.v + 10) * 10}, WHITE);
-	a = player_space((t_vec2) {0, 0}, game.player.my_entity.physic);
-	b = player_space((t_vec2) {0, 250}, game.player.my_entity.physic);
-	bresenham(buf, (t_pix) {(a.u + 10) * 10, HEIGHT - (a.v + 10) * 10},
-		(t_pix) {(b.u + 10) * 10, HEIGHT - (b.v + 10) * 10}, WHITE);
-	bresenham(buf, (t_pix) {100, HEIGHT - 100}, (t_pix) {100, HEIGHT - 110}, RED);
-	bresenham(buf, (t_pix) {95, HEIGHT - 100}, (t_pix) {105, HEIGHT - 100}, RED);
-	draw_point((t_fvec2) {f_from_int(WIDTH / 2), f_from_int(HEIGHT / 2)},\
-		1, buf, RED);
-	i = 0;
-	while (i < game.nentities)
-	{
-		a = vec3_to_vec2(game.entities[i].physic.pos);
-		a = player_space(a, game.player.my_entity.physic);
-		t_fvec2 a_f = vec2_to_fvec2(a);
-		if (game.entities[i].damage == 0)
-			color = BLUE;
-		else
-			color = RED;
-		a_f.u = f_add_int(a_f.u, 10) * 10;
-		a_f.v = f_from_int(HEIGHT) - f_add_int(a_f.v, 10) * 10;
-		draw_point(a_f, 2, buf, color);
-		i++;
-	}
-}
-
-
 t_game		check_see(t_game game)
 {
 	t_game n_game;
