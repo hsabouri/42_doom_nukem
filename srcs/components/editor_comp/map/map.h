@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 10:29:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 13:48:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,14 @@ t_component			init_editor_map(t_env *env, t_sdl *sdl);
 int					grid_size(void *map_state);
 int					map_editor_update(t_component *self, void *parent);
 void				map_editor_render(const t_component self, t_color *buf);
+t_array				index_childs_1(t_env *env, t_editor_map_state *state,
+					t_sdl *sdl);
+t_array				index_childs_2(t_env *env, t_editor_map_state *state,
+					t_sdl *sdl, t_array ret);
+t_array				index_childs_3(t_env *env, t_editor_map_state *state,
+					t_sdl *sdl, t_array ret);
+t_array				index_childs_4(t_env *env, t_editor_map_state *state,
+					t_sdl *sdl, t_array ret);
 
 t_component			init_point_tool(t_env *env, ssize_t *selected, t_sdl *sdl);
 t_component			init_wall_tool(t_env *env, t_editor_map_state *parent,

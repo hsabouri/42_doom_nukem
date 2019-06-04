@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:50:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 10:37:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 13:10:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ t_editor_map_state *parent_state, t_event events, t_game game)
 
 static int		self_update(t_component *self, void *parent)
 {
-	t_entity_tool				*state;
-	t_event						events;
-	t_game						game;
-	t_editor_map_state			*parent_state;
+	t_entity_tool			*state;
+	t_event					events;
+	t_game					game;
+	t_editor_map_state		*parent_state;
 
 	parent_state = (t_editor_map_state *)parent;
 	state = (t_entity_tool *)self->state;
