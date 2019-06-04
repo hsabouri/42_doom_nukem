@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 10:42:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 11:00:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,12 @@ static void			foreach_point(void *point, void *param, size_t i)
 	draw_point(vec2_to_fvec2(p), size, state->buf, color);
 }
 
-static void			draw_entities(t_editor_map_state state)
+static void			draw_entities(t_editor_map_state *state, t_state_buf state_buf)
 {
 	t_game				game;
-	t_state_buf			state_buf;
 	t_array				tmp_array;
 
-	game = state.env->game;
+	game = state->env->game;
 	tmp_array = anew(game.entities, game.nentities, sizeof(t_entity));
 	state_buf.color = E_DAMAGE;
 	aforeachi_state(&tmp_array, &foreach_entity, &state_buf);
@@ -100,7 +99,7 @@ void				draw_map(t_editor_map_state state, t_color *buf)
 	state_buf.color = LIBERTY;
 	tmp_array = anew(game.points, game.npoints, sizeof(t_vec2));
 	aforeachi_state(&tmp_array, &foreach_point, &state_buf);
-	draw_entities(state);
+	draw_entities(&state, state_buf);
 	if (state.tool == CREATE_PORTAL)
 	{
 		tmp_array = anew(game.portals, game.nportals, sizeof(t_portal));
