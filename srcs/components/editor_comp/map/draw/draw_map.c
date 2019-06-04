@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:12:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/20 15:52:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:41:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void			grid(t_editor_map_state state, t_color *buf)
 		y = 0;
 		while (y < n)
 		{
-			current = vec2_new((int)(x - ((state.offset.u + WIDTH / 2) /
-				state.zoom) * state.grid_size), (int)(y + ((state.offset.v -
-				HEIGHT / 2) / state.zoom) * state.grid_size));
+			current = vec2_new((int)(x - ((state.offset.u + WIDTH / 2)
+				/ state.zoom) * state.grid_size), (int)(y + ((state.offset.v
+				- HEIGHT / 2) / state.zoom) * state.grid_size));
 			current = vec2_scale(current, grid);
 			current = screen_space(current, state);
 			current = vec2_add(current, vec2_new(1, 1));
@@ -41,56 +41,13 @@ static void			grid(t_editor_map_state state, t_color *buf)
 	}
 }
 
-static void			foreach_wall(void *wall, void *param, size_t i)
-{
-	t_vec2				a;
-	t_vec2				b;
-	t_pix				a_p;
-	t_pix				b_p;
-	t_state_buf			state;
-
-	state = *((t_state_buf *)param);
-	a = state.state.env->game.points[((t_wall *)wall)->a];
-	b = state.state.env->game.points[((t_wall *)wall)->b];
-	a = screen_space(a, state.state);
-	b = screen_space(b, state.state);
-	a_p.x = a.u;
-	a_p.y = a.v;
-	b_p.x = b.u;
-	b_p.y = b.v;
-	if (state.state.tool == ASSIGN_WALL || state.state.tool == CREATE_WALL ||
-		state.state.tool == CREATE_PORTAL || state.state.tool == ASSIGN_ENTITY ||
-		state.state.tool == SECTOR_COLOR)
-	{
-		state.color.r /= 2;
-		state.color.g /= 2;
-		state.color.b /= 2;
-	}
-	if (state.state.tool == CREATE_PORTAL &&
-		i == (size_t)state.state.selected_walls[0])
-		bresenham(state.buf, a_p, b_p, PORTAL_B);
-	else if (state.state.tool == CREATE_PORTAL &&
-		i == (size_t)state.state.selected_walls[1])
-		bresenham(state.buf, a_p, b_p, PORTAL_O);
-	else if ((i == (size_t)state.state.selected_wall ||
-		i == (size_t)state.state.selected_walls[1]) && !state.modifier)
-		bresenham(state.buf, a_p, b_p, WHITE);
-	else if ((i == (size_t)state.state.unassigned_wall ||
-		i == (size_t)state.state.selected_walls[0]) && state.modifier)
-		bresenham(state.buf, a_p, b_p, MUSTARD);
-	else if (((t_wall *)wall)->portal >= 0)
-		bresenham(state.buf, a_p, b_p, RED);
-	else
-		bresenham(state.buf, a_p, b_p, state.color);
-}
-
 static void			foreach_point(void *point, void *param, size_t i)
 {
 	const t_state_buf	*state = ((t_state_buf *)param);
 	t_vec2				p;
 	int					size;
 	t_color				color;
-	
+
 	size = (state->state.zoom < 10) ? 2 : 4;
 	size = (state->state.zoom > 60) ? 6 : size;
 	p = *(t_vec2 *)point;
@@ -109,34 +66,44 @@ static void			foreach_point(void *point, void *param, size_t i)
 	draw_point(vec2_to_fvec2(p), size, state->buf, color);
 }
 
+static void			draw_entities(t_editor_map_state *state,
+t_state_buf state_buf)
+{
+	t_game				game;
+	t_array				tmp_array;
+
+	game = state->env->game;
+	tmp_array = anew(game.entities, game.nentities, sizeof(t_entity));
+	state_buf.color = E_DAMAGE;
+	aforeachi_state(&tmp_array, &foreach_entity, &state_buf);
+	state_buf.color = E_PLAYER;
+	foreach_entity(&game.player.my_entity, &state_buf, game.nentities);
+}
+
 void				draw_map(t_editor_map_state state, t_color *buf)
 {
+	t_game				game;
 	t_state_buf			state_buf;
 	t_array				tmp_array;
-	
+
+	game = state.env->game;
 	if (state.grid_size)
 		grid(state, buf);
 	state_buf = (t_state_buf) {state, buf, WHITE, 0};
-	tmp_array = anew(state.env->game.walls, state.env->game.nwalls, sizeof(t_wall));
+	tmp_array = anew(game.walls, game.nwalls, sizeof(t_wall));
 	state_buf.modifier = 0;
 	aforeachi_state(&tmp_array, &foreach_wall, &state_buf);
 	state_buf.color = ORANGE;
 	state_buf.modifier = 1;
-	tmp_array = anew(&state.env->game.walls[state.env->game.nwalls],
-		state.env->game.nuwalls, sizeof(t_wall));
+	tmp_array = anew(&game.walls[game.nwalls], game.nuwalls, sizeof(t_wall));
 	aforeachi_state(&tmp_array, &foreach_wall, &state_buf);
 	state_buf.color = LIBERTY;
-	tmp_array = anew(state.env->game.points, state.env->game.npoints, sizeof(t_vec2));
+	tmp_array = anew(game.points, game.npoints, sizeof(t_vec2));
 	aforeachi_state(&tmp_array, &foreach_point, &state_buf);
-	tmp_array = anew(state.env->game.entities, state.env->game.nentities,
-		sizeof(t_entity));
-	state_buf.color = E_DAMAGE;
-	aforeachi_state(&tmp_array, &foreach_entity, &state_buf);
-	state_buf.color = E_PLAYER;
-	foreach_entity(&state_buf.state.env->game.player.my_entity, &state_buf, state_buf.state.env->game.nentities);
+	draw_entities(&state, state_buf);
 	if (state.tool == CREATE_PORTAL)
 	{
-		tmp_array = anew(state.env->game.portals, state.env->game.nportals, sizeof(t_portal));
+		tmp_array = anew(game.portals, game.nportals, sizeof(t_portal));
 		aforeachi_state(&tmp_array, &foreach_portal, (void *)&state_buf);
 	}
 	on_pointer(state, state.env->events, buf);

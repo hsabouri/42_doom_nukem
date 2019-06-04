@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 14:29:40 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/20 16:14:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:32:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int		self_update(t_component *self, void *parent)
 {
 	t_sector_color_tool			*state;
-	const t_editor_map_state 	*parent_state = (t_editor_map_state *)parent;
+	const t_editor_map_state	*parent_state = (t_editor_map_state *)parent;
 	t_event						events;
 	t_game						game;
 
@@ -43,11 +43,12 @@ static int		self_update(t_component *self, void *parent)
 t_component		init_sector_color_tool(t_env *env, t_editor_map_state *parent,
 t_sdl *sdl)
 {
-	t_component		ret;
+	t_component			ret;
 	t_sector_color_tool	*state;
-	t_component		child;
+	t_component			child;
 
-	state = (t_sector_color_tool *)safe_malloc(sizeof(t_sector_color_tool), "component");
+	state = (t_sector_color_tool *)safe_malloc(sizeof(t_sector_color_tool),
+		"component");
 	ret = default_component(state, (t_pix) {0, 0}, sdl);
 	state->env = env;
 	state->events = &env->events;

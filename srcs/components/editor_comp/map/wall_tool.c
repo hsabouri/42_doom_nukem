@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 11:34:13 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 11:56:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:40:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static t_game	delete_unassigned(size_t uwall, t_game game)
 
 static t_game	create_unassigned(ssize_t pts[2], t_game game)
 {
-	
-	const t_wall	new = (t_wall) {fvec2_new(0, 0), -1, MIN(pts[0], pts[1]),
+	t_wall	new;
+
+	new = (t_wall) {fvec2_new(0, 0), -1, MIN(pts[0], pts[1]),
 		MAX(pts[0], pts[1]), game.materials, vec2_new(0, 0), vec2_new(0, 0)};
-	
 	game.walls = (t_wall *)safe_realloc(game.walls, sizeof(t_wall) *
 	(game.nwalls + game.nuwalls + 1), "component");
 	game.walls[game.nwalls + game.nuwalls] = new;
@@ -35,12 +35,32 @@ static t_game	create_unassigned(ssize_t pts[2], t_game game)
 	return (game);
 }
 
+static t_game	self_update_selected(t_wall_tool *state,
+t_editor_map_state *parent_state, t_event events, t_game game)
+{
+	if (*state->selected_point == -1 && *state->unassigned_wall == -1)
+		*state->selected_wall = select_wall(*parent_state,
+			*state->selected_wall, events);
+	else
+		*state->selected_wall = -1;
+	select_multi(*state->selected_point, state->wall_points, *state->events);
+	if (state->wall_points[0] > -1 && state->wall_points[1] > -1)
+		game = create_unassigned(state->wall_points, game);
+	if (*state->selected_wall > -1 && events.mouse_click[SDL_BUTTON_RIGHT])
+		game = delete_wall(*state->selected_wall, game);
+	else if (*state->unassigned_wall > -1
+		&& events.mouse_click[SDL_BUTTON_RIGHT])
+		game = delete_unassigned(*state->unassigned_wall, game);
+	return (game);
+}
+
 static int		self_update(t_component *self, void *parent)
 {
 	t_wall_tool			*state;
-	t_editor_map_state	*parent_state = (t_editor_map_state *)parent;
+	t_editor_map_state	*parent_state;
 	t_event				events;
 
+	parent_state = (t_editor_map_state *)parent;
 	state = (t_wall_tool *)self->state;
 	events = *state->events;
 	if (parent_state->tool != CREATE_WALL)
@@ -57,21 +77,8 @@ static int		self_update(t_component *self, void *parent)
 			*state->unassigned_wall, events);
 	else
 		*state->unassigned_wall = -1;
-	if (*state->selected_point == -1 && *state->unassigned_wall == -1)
-		*state->selected_wall = select_wall(*parent_state,
-			*state->selected_wall, events);
-	else
-		*state->selected_wall = -1;
-	select_multi(*state->selected_point, state->wall_points, *state->events);
-	if (state->wall_points[0] > -1 && state->wall_points[1] > -1)
-		parent_state->env->game = create_unassigned(state->wall_points,
-			parent_state->env->game);
-	if (*state->selected_wall > -1 && events.mouse_click[SDL_BUTTON_RIGHT])
-		parent_state->env->game = delete_wall(*state->selected_wall,
-			parent_state->env->game);
-	else if (*state->unassigned_wall > -1 && events.mouse_click[SDL_BUTTON_RIGHT])
-		parent_state->env->game = delete_unassigned(*state->unassigned_wall,
-			parent_state->env->game);
+	parent_state->env->game = self_update_selected(state, parent_state, events,
+		parent_state->env->game);
 	return (1);
 }
 

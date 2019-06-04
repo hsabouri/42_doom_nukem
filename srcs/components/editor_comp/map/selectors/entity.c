@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:58:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/06 17:14:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:57:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int spawn)
 			point_from_mouse(editor, events, 0)));
 }
 
-ssize_t			select_entity(t_editor_map_state editor, ssize_t selected_entity,
-t_event events, int spawn)
+ssize_t			select_entity(t_editor_map_state editor,
+ssize_t selected_entity, t_event events, int spawn)
 {
+	float			min;
+	ssize_t			min_id;
+	size_t			i;
+	float			current;
 	const t_game	game = editor.env->game;
-	float	min;
-	ssize_t	min_id;
-	size_t	i;
-	float	current;
 
 	if (events.mouse[SDL_BUTTON_LEFT] && selected_entity >= 0)
 		return (selected_entity);

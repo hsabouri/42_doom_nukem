@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 12:08:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/25 17:58:48 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:58:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void		select_multi(ssize_t curr, ssize_t *dual, t_event events)
 ssize_t		select_point(t_editor_map_state editor, ssize_t selected_point,
 t_event events)
 {
+	float			min;
+	ssize_t			min_id;
+	size_t			i;
+	float			current;
 	const t_game	game = editor.env->game;
-	float	min;
-	ssize_t	min_id;
-	size_t	i;
-	float	current;
 
 	if (events.mouse[SDL_BUTTON_LEFT] && selected_point >= 0)
 		return (selected_point);
@@ -57,11 +57,11 @@ t_event events)
 ssize_t		select_wall(t_editor_map_state editor, ssize_t selected_wall,
 t_event events)
 {
-	const t_game	game = editor.env->game;
 	float			min;
 	ssize_t			min_id;
 	size_t			i;
 	float			current;
+	const t_game	game = editor.env->game;
 
 	if (events.mouse[SDL_BUTTON_LEFT] && selected_wall >= 0)
 		return (selected_wall);
@@ -85,11 +85,11 @@ t_event events)
 ssize_t		select_unassigned_wall(t_editor_map_state editor,
 ssize_t selected_wall, t_event events)
 {
-	const t_game	game = editor.env->game;
 	float			min;
 	ssize_t			min_id;
 	size_t			i;
 	float			current;
+	const t_game	game = editor.env->game;
 
 	if (events.mouse[SDL_BUTTON_LEFT] && selected_wall >= 0)
 		return (selected_wall);
