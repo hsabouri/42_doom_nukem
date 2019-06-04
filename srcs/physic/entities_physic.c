@@ -16,21 +16,22 @@ static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
 {
 	t_vec3	new_speed;
 	float	delta;
-	float	tmp;
+	t_vec3	tmp;
 
 	new_speed = physic->speed;
 	delta = game.sectors[physic->sector_id].floor.z - physic->pos.z;
 	if (physic->jump && (physic->pos.z > game.sectors[physic->sector_id].floor.z
 		- 0.1 && physic->pos.z < game.sectors[physic->sector_id].floor.z + 0.1))
 	{
-		new_speed.z = 0.1;
-		physic->jump = 0;
+		new_speed.z = 0.13;
 	}
 	else if (delta < 0 && !physic->fly && new_speed.z > MAX_FALL)
 		new_speed.z -= physic->gravity * old_timer * FALL_MULTIPLY;
-	tmp = physic->pos.z + new_speed.z;
-	new_speed = floor_col(tmp, game.sectors[physic->sector_id], new_speed);
-	tmp = physic->pos.z + physic->height + new_speed.z;
+	tmp = vec3_add (physic->pos, new_speed);
+	new_speed = floor_col(tmp.z, game.sectors[physic->sector_id], new_speed,
+		&physic->jump);
+	tmp = vec3_add(physic->pos, new_speed);
+	tmp.z = tmp.z + physic->height;
 	new_speed = ceil_col(tmp, game.sectors[physic->sector_id], new_speed);
 	return (new_speed);
 }
@@ -60,8 +61,13 @@ float old_timer)
 	t_vec3	next_pos;
 	t_touch	touch;
 	t_tp	teleport;
+	float	inter;
 
 	next_pos = vec3_add(physic->pos, physic->speed);
+	inter = (z_inter(game->sectors[physic->sector_id], next_pos, 0)
+		- z_inter(game->sectors[physic->sector_id], next_pos, 1));
+	if (inter < physic->height + 0.5)
+		return (physic->pos);
 	physic->speed = z_move(physic, *game, old_timer);
 	next_pos = vec3_add(physic->pos, physic->speed);
 	touch = collision(next_pos, *physic, *game, wall);
