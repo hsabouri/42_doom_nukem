@@ -23,13 +23,13 @@ static t_vec3	z_move(t_ph *physic, t_game game, float old_timer)
 	if (physic->jump && (physic->pos.z > game.sectors[physic->sector_id].floor.z
 		- 0.1 && physic->pos.z < game.sectors[physic->sector_id].floor.z + 0.1))
 	{
-		new_speed.z = 0.1;
-		physic->jump = 0;
+		new_speed.z = 0.13;
 	}
 	else if (delta < 0 && !physic->fly && new_speed.z > MAX_FALL)
 		new_speed.z -= physic->gravity * old_timer * FALL_MULTIPLY;
 	tmp = vec3_add (physic->pos, new_speed);
-	new_speed = floor_col(tmp.z, game.sectors[physic->sector_id], new_speed);
+	new_speed = floor_col(tmp.z, game.sectors[physic->sector_id], new_speed,
+		&physic->jump);
 	tmp = vec3_add(physic->pos, new_speed);
 	tmp.z = tmp.z + physic->height;
 	new_speed = ceil_col(tmp, game.sectors[physic->sector_id], new_speed);
