@@ -6,84 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/20 15:51:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/04 10:38:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../common/common.h"
 #include "./map.h"
-
-static t_editor_map_state	zoom_move(t_editor_map_state state, t_event events)
-{
-	const float	factor = 1 + ZOOM_SPEED * events.wheel;
-
-	state.offset.u -= events.keys[SDL_SCANCODE_D] * MOVE_SPEED;
-	state.offset.u += events.keys[SDL_SCANCODE_A] * MOVE_SPEED;
-	state.offset.v -= events.keys[SDL_SCANCODE_S] * MOVE_SPEED;
-	state.offset.v += events.keys[SDL_SCANCODE_W] * MOVE_SPEED;
-	state.zoom *= factor;
-	if (state.zoom <= 0.1)
-		state.zoom = 0.1;
-	else
-	{
-		state.offset.u = state.offset.u * factor - (events.x - WIDTH / 2) * (factor - 1);
-		state.offset.v = state.offset.v * factor - (events.y - HEIGHT / 2) * (factor - 1);
-	}
-	return (state);
-}
-
-static int					grid_size(void *map_state)
-{
-	t_editor_map_state *state;
-
-	state = (t_editor_map_state *)map_state;
-	if (state->grid_size * 2 > 8)
-		state->grid_size = 0;
-	else if (state->grid_size > 0)
-		state->grid_size *= 2;
-	else
-		state->grid_size = 1;
-	return (1);
-}
-
-static void					self_render(const t_component self, t_color *buf)
-{
-	const t_editor_map_state	state = *(t_editor_map_state *)self.state;
-
-	background(buf, RICH_BLACK, self.size);
-	draw_map(state, buf);
-}
-
-static int					self_update(t_component *self, void *parent)
-{
-	t_editor_root_state		*parent_state;
-	t_editor_map_state		*state;
-	static t_editor_type	last = MAP;
-
-	parent_state = (t_editor_root_state *)parent;
-	state = (t_editor_map_state *)self->state;
-	state->env = parent_state->env;
-	if (parent_state->type != MAP)
-	{
-		last = parent_state->type;
-		self->display = 0;
-		return (0);
-	}
-	else if (parent_state->type == MAP)
-	{
-		*state = zoom_move(*state, parent_state->env->events);
-		if (last != MAP)
-		{
-			last = MAP;
-			self->display = 1;
-			return (1);
-		}
-		if (parent_state->env->events.any)
-			return (1);
-		return (0);
-	}
-	return (0);
-}
 
 static t_editor_map_state	*init_state(t_editor_map_state *state, t_env *env)
 {
@@ -257,9 +185,9 @@ t_component					init_editor_map(t_env *env, t_sdl *sdl)
 	ret.display = 1;
 	ret.state = init_state((t_editor_map_state *)safe_malloc(
 		sizeof(t_editor_map_state), "components"), env);
-	ret.update = &self_update;
+	ret.update = &map_editor_update;
 	ret.destroy = NULL;
-	ret.render = &self_render;
+	ret.render = &map_editor_render;
 	ret.complete_render = NULL;
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
