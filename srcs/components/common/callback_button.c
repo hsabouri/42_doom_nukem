@@ -20,9 +20,9 @@ static int					self_update(t_component *self, void *parent)
 	(void)parent;
 	ret = 0;
 	state = (t_cb_button_state *)self->state;
-	if ((state->scancode != SDL_SCANCODE_UNKNOWN &&
-		state->events->keys[state->scancode]) ||
-		is_clicked_on(*self, *state->events))
+	if ((state->scancode != SDL_SCANCODE_UNKNOWN
+		&& state->events->keys[state->scancode])
+		|| is_clicked_on(*self, *state->events))
 	{
 		state->is_active = 1;
 		ret = 1;

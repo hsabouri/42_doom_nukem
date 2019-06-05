@@ -14,6 +14,6 @@
 
 int		vec2_equal(t_vec2 a, t_vec2 b, float eps)
 {
-	return (a.u >= b.u - eps && a.u <= b.u + eps &&
-	a.v >= b.v - eps && a.v <= b.v + eps);
+	return (a.u >= b.u - eps && a.u <= b.u + eps
+		&& a.v >= b.v - eps && a.v <= b.v + eps);
 }

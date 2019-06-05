@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-size_t				write_textures(int fd, t_img *textures, size_t ntextures,\
+size_t				write_textures(int fd, t_img *textures, size_t ntextures,
 int index)
 {
 	t_c_img	s_textures;
@@ -29,15 +29,15 @@ int index)
 		if (i == 0)
 			loc_content = (size_t)index;
 		else
-			loc_content += (size_t)(textures[i - 1].width *
-				textures[i - 1].height) * sizeof(t_color);
+			loc_content += (size_t)(textures[i - 1].width
+				* textures[i - 1].height) * sizeof(t_color);
 		s_textures.content = loc_content;
 		s_textures.edit = textures[i].edit;
 		write_struct(&s_textures, fd, sizeof(t_c_img));
 		i++;
 	}
-	loc_content += (size_t)(textures[i - 1].width * textures[i - 1].height) *
-		sizeof(t_color);
+	loc_content += (size_t)(textures[i - 1].width * textures[i - 1].height)
+		* sizeof(t_color);
 	return (loc_content);
 }
 
@@ -45,10 +45,10 @@ static t_c_music	set_fmusic(t_save_music *music, size_t i, t_audio type)
 {
 	t_c_music fmusic;
 
-	music->path = (char *)safe_malloc((sizeof(char) * (15 +
-		ft_strlen(music->read->d_name))), "saver");
-	music->path = (type == MUSIC) ? ft_strcpy(music->path, "./audio/music/") :
-		ft_strcpy(music->path, "./audio/sound/");
+	music->path = (char *)safe_malloc((sizeof(char) * (15
+		+ ft_strlen(music->read->d_name))), "saver");
+	music->path = (type == MUSIC) ? ft_strcpy(music->path, "./audio/music/")
+		: ft_strcpy(music->path, "./audio/sound/");
 	music->path = ft_strcat(music->path, music->read->d_name);
 	music->file = dump_file(music->path, 0, &music->size);
 	music->loc_content += (i == 0) ? 0 : music->old_size;
@@ -70,13 +70,13 @@ size_t				write_audio(int fd, int index, t_audio type)
 	music.loc_content = (size_t)index;
 	music.old_size = 0;
 	music.size = 0;
-	music.drt = (type == MUSIC) ? opendir("./audio/music") :
-		opendir("./audio/sound");
+	music.drt = (type == MUSIC) ? opendir("./audio/music")
+		: opendir("./audio/sound");
 	while ((music.read = readdir(music.drt)))
 	{
-		if (ft_strcmp(music.read->d_name, ".") != 0 &&
-			ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8 &&
-			(ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
+		if (ft_strcmp(music.read->d_name, ".") != 0
+			&& ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8
+			&& (ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
 		{
 			fmusic = set_fmusic(&music, i, type);
 			write_struct(&fmusic, fd, sizeof(t_c_music));
@@ -96,12 +96,12 @@ void				write_music(int fd, t_audio type)
 		opendir("./audio/sound");
 	while ((music.read = readdir(music.drt)))
 	{
-		if (ft_strcmp(music.read->d_name, ".") != 0 &&
-			ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8 &&
-			(ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
+		if (ft_strcmp(music.read->d_name, ".") != 0
+			&& ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8
+			&& (ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
 		{
-			music.path = (char *)safe_malloc((sizeof(char) * (15 +
-				ft_strlen(music.read->d_name))), "saver");
+			music.path = (char *)safe_malloc((sizeof(char) * (15
+				+ ft_strlen(music.read->d_name))), "saver");
 			music.path = (type == MUSIC) ?
 				ft_strcpy(music.path, "./audio/music/") :
 				ft_strcpy(music.path, "./audio/sound/");

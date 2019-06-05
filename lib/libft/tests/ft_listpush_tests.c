@@ -7,7 +7,8 @@ size_t test_lpush(size_t *number_of_tests)
     *number_of_tests = 0;
 
     t_list  test1 = lnew(NULL);
-    t_lst_test test_elem_to_push1 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push1 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.push(&test1, (t_elem*) &test_elem_to_push1);
     t_list  test1_truth = lnew(NULL);
     test1_truth.len = 1;
@@ -30,8 +31,10 @@ size_t test_lpush(size_t *number_of_tests)
     }
 
     test1 = lnew(NULL);
-    t_lst_test test_elem_to_push2 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
-    test_elem_to_push1 = (t_lst_test) {(t_pelem) {(t_pelem *)&test_elem_to_push2, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push2 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
+    test_elem_to_push1 = (t_lst_test) {(t_pelem)
+        {(t_pelem *)&test_elem_to_push2, NULL}, 0xfeedbeef};
     test1.push(&test1, (t_elem*) &test_elem_to_push1);
     test1_truth.len = 2;
     test1_truth.first = (t_elem *)&test_elem_to_push1;
@@ -52,7 +55,8 @@ size_t test_lpush(size_t *number_of_tests)
     }
 
     
-    t_lst_test test_elem_to_push3 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push3 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.push(&test1, (t_elem *)& test_elem_to_push3);
     test1_truth.len = 3;
     test1_truth.last = (t_elem *)&test_elem_to_push3;
@@ -71,7 +75,8 @@ size_t test_lpush(size_t *number_of_tests)
         success("lpush(elem) in a list\n");
     }
     
-    t_lst_test test_elem_to_push4 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push4 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.push(&test1, (t_elem *)& test_elem_to_push4);
     test1_truth.len = 4;
     test1_truth.last = (t_elem *)&test_elem_to_push4;
@@ -108,10 +113,10 @@ size_t test_lpush(size_t *number_of_tests)
 
     *number_of_tests += 1;
 
-    if (test_elem_to_push1.listable.next == (t_pelem *)&test_elem_to_push2 &&
-    test_elem_to_push2.listable.next == (t_pelem *)&test_elem_to_push3 &&
-    test_elem_to_push3.listable.next == (t_pelem *)&test_elem_to_push4 &&
-    test_elem_to_push4.listable.next == NULL)
+    if (test_elem_to_push1.listable.next == (t_pelem *)&test_elem_to_push2
+        && test_elem_to_push2.listable.next == (t_pelem *)&test_elem_to_push3
+        && test_elem_to_push3.listable.next == (t_pelem *)&test_elem_to_push4
+        && test_elem_to_push4.listable.next == NULL)
     {
         success_count += 1;
         success("list linking tests\n");
@@ -136,7 +141,8 @@ size_t test_lppush(size_t *number_of_tests)
     *number_of_tests = 0;
 
     t_plist  test1 = lpnew(NULL);
-    t_lst_test test_elem_to_push1 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push1 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.push(&test1, (t_pelem*) &test_elem_to_push1);
     t_plist  test1_truth = lpnew(NULL);
     test1_truth.len = 1;
@@ -159,8 +165,10 @@ size_t test_lppush(size_t *number_of_tests)
     }
 
     test1 = lpnew(NULL);
-    t_lst_test test_elem_to_push2 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
-    test_elem_to_push1 = (t_lst_test) {(t_pelem) {(t_pelem *)&test_elem_to_push2, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push2 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
+    test_elem_to_push1 = (t_lst_test) {(t_pelem) {
+        (t_pelem *)&test_elem_to_push2, NULL}, 0xfeedbeef};
     test_elem_to_push2.listable.prev = (t_pelem *)&test_elem_to_push1;
     test1.push(&test1, (t_pelem*)&test_elem_to_push1);
     test1_truth.len = 2;
@@ -181,7 +189,8 @@ size_t test_lppush(size_t *number_of_tests)
         success("lppush(list) in an empty list\n");
     }
     
-    t_lst_test test_elem_to_push3 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push3 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.push(&test1, (t_pelem *)&test_elem_to_push3);
     test1_truth.len = 3;
     test1_truth.last = (t_pelem *)&test_elem_to_push3;
@@ -200,7 +209,8 @@ size_t test_lppush(size_t *number_of_tests)
         success("lppush(elem) in a list\n");
     }
     
-    t_lst_test test_elem_to_push4 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_push4 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.push(&test1, (t_pelem *)&test_elem_to_push4);
     test1_truth.len = 4;
     test1_truth.last = (t_pelem *)&test_elem_to_push4;
@@ -237,14 +247,14 @@ size_t test_lppush(size_t *number_of_tests)
 
     *number_of_tests += 1;
 
-    if (test_elem_to_push1.listable.next == (t_pelem *)&test_elem_to_push2 &&
-    test_elem_to_push2.listable.next == (t_pelem *)&test_elem_to_push3 &&
-    test_elem_to_push3.listable.next == (t_pelem *)&test_elem_to_push4 &&
-    test_elem_to_push4.listable.next == NULL &&
-    test_elem_to_push1.listable.prev == NULL &&
-    test_elem_to_push4.listable.prev == (t_pelem *)&test_elem_to_push3 &&
-    test_elem_to_push3.listable.prev == (t_pelem *)&test_elem_to_push2 &&
-    test_elem_to_push2.listable.prev == (t_pelem *)&test_elem_to_push1)
+    if (test_elem_to_push1.listable.next == (t_pelem *)&test_elem_to_push2
+        && test_elem_to_push2.listable.next == (t_pelem *)&test_elem_to_push3
+        && test_elem_to_push3.listable.next == (t_pelem *)&test_elem_to_push4
+        && test_elem_to_push4.listable.next == NULL
+        && test_elem_to_push1.listable.prev == NULL
+        && test_elem_to_push4.listable.prev == (t_pelem *)&test_elem_to_push3
+        && test_elem_to_push3.listable.prev == (t_pelem *)&test_elem_to_push2
+        && test_elem_to_push2.listable.prev == (t_pelem *)&test_elem_to_push1)
     {
         success_count += 1;
         success("list linking tests\n");

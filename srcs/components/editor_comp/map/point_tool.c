@@ -15,8 +15,8 @@
 static t_game	self_update_selected(t_point_tool *state,
 const t_editor_map_state *parent_state, t_event events, t_game game)
 {
-	if (*state->selected_point >= 0 && state->events->mouse[SDL_BUTTON_LEFT] &&
-		(size_t)*state->selected_point < parent_state->env->game.npoints)
+	if (*state->selected_point >= 0 && state->events->mouse[SDL_BUTTON_LEFT]
+		&& (size_t)*state->selected_point < parent_state->env->game.npoints)
 		game.points[*state->selected_point] = point_from_mouse(*parent_state,
 			*state->events, parent_state->magnetisme);
 	else if (*state->selected_point >= 0 && events.mouse_click[SDL_BUTTON_RIGHT]

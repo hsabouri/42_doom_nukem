@@ -14,13 +14,10 @@
 
 inline t_fixed	fvec3_ssize(t_fvec3 a)
 {
-	return (f_mul(a.x, a.x) +
-			f_mul(a.y, a.y) +
-			f_mul(a.z, a.z));
+	return (f_mul(a.x, a.x) + f_mul(a.y, a.y) + f_mul(a.z, a.z));
 }
 
 inline t_fixed	fvec2_ssize(t_fvec2 a)
 {
-	return (f_mul(a.u, a.u) +
-			f_mul(a.v, a.v));
+	return (f_mul(a.u, a.u) + f_mul(a.v, a.v));
 }

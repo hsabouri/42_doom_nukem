@@ -20,12 +20,12 @@ static int					self_update(t_component *self, void *parent)
 	(void)parent;
 	ret = 1;
 	state = (t_button_ft_state *)self->state;
-	if (((state->scancode != SDL_SCANCODE_UNKNOWN &&
-		state->events->keys[state->scancode]) || (is_clicked_on(*self,
+	if (((state->scancode != SDL_SCANCODE_UNKNOWN
+		&& state->events->keys[state->scancode]) || (is_clicked_on(*self,
 		*state->events) && state->active_value != **state->to_activate)))
 		state->is_active = 1;
-	else if (!(is_clicked_on(*self, *state->events)) &&
-		state->active_value != **state->to_activate && state->is_active)
+	else if (!(is_clicked_on(*self, *state->events))
+		&& state->active_value != **state->to_activate && state->is_active)
 	{
 		**state->to_activate = state->active_value;
 		(*state->events).keys[state->scancode] = 0;

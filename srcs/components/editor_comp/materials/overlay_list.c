@@ -22,8 +22,8 @@ t_array ret, t_editor_mat_state *state)
 	while (i < game.nmaterials)
 	{
 		curr.img.content = NULL;
-		if (!game.materials[game.nmaterials - i - 1].overlay &&
-			game.nmaterials - i - 1 != state->selected)
+		if (!game.materials[game.nmaterials - i - 1].overlay
+			&& game.nmaterials - i - 1 != state->selected)
 		{
 			curr.text[0] = 0;
 			if (game.materials[game.nmaterials - i - 1].texture)

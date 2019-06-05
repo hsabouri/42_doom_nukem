@@ -74,14 +74,14 @@ static int		self_update(t_component *self, void *parent)
 {
 	const t_menu_state	*parent_state = (t_menu_state *)parent;
 
-	if (self->display == 0 &&
-	(parent_state->type == NEW_GAME || parent_state->type == NEW_MAP))
+	if (self->display == 0
+		&& (parent_state->type == NEW_GAME || parent_state->type == NEW_MAP))
 	{
 		self->display = 1;
 		return (1);
 	}
-	else if (self->display == 1 &&
-	!(parent_state->type == NEW_GAME || parent_state->type == NEW_MAP))
+	else if (self->display == 1
+		&& !(parent_state->type == NEW_GAME || parent_state->type == NEW_MAP))
 	{
 		self->display = 0;
 		return (1);

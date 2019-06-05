@@ -19,10 +19,10 @@ t_text			component_text(const char *str, t_pix pos, t_sdl *sdl)
 
 	text.x = pos.x;
 	text.y = pos.y;
-	text_surface = TTF_RenderText_Shaded(sdl->font, str,\
+	text_surface = TTF_RenderText_Shaded(sdl->font, str,
 		(SDL_Color){255, 255, 255, 255}, (SDL_Color){70, 70, 70, 0});
 	SDL_SetColorKey(text_surface, SDL_TRUE, 0);
-	text.text_texture = SDL_CreateTextureFromSurface(sdl->renderer,\
+	text.text_texture = SDL_CreateTextureFromSurface(sdl->renderer,
 		text_surface);
 	SDL_QueryTexture(text.text_texture, NULL, NULL, &text.w, &text.h);
 	if (text_surface != NULL)
@@ -45,8 +45,8 @@ const t_pix buf_size, t_color *buf)
 			while (y < img.height + pos.y && y < (size_t)buf_size.y)
 			{
 				if (img.content[x - pos.x + (y - pos.y) * img.width].a > 0)
-					buf[x + y * buf_size.x] =
-						img.content[x - pos.x + (y - pos.y) * img.width];
+					buf[x + y * buf_size.x] = img.content[x - pos.x + (y
+					- pos.y) * img.width];
 				y++;
 			}
 			x++;

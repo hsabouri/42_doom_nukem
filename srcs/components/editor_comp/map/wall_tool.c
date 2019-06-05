@@ -26,8 +26,8 @@ static t_game	create_unassigned(ssize_t pts[2], t_game game)
 
 	new = (t_wall) {fvec2_new(0, 0), -1, MIN(pts[0], pts[1]),
 		MAX(pts[0], pts[1]), game.materials, vec2_new(0, 0), vec2_new(0, 0)};
-	game.walls = (t_wall *)safe_realloc(game.walls, sizeof(t_wall) *
-	(game.nwalls + game.nuwalls + 1), "component");
+	game.walls = (t_wall *)safe_realloc(game.walls, sizeof(t_wall)
+		* (game.nwalls + game.nuwalls + 1), "component");
 	game.walls[game.nwalls + game.nuwalls] = new;
 	game.nuwalls += 1;
 	pts[0] = pts[1];

@@ -18,16 +18,16 @@ static int					self_update(t_component *self, void *parent)
 
 	(void)parent;
 	deco = (t_display_deco_state *)self->state;
-	if (self->display != 1 && (
-			(!deco->invert && deco->display_value == *deco->to_look_at) ||
-			(deco->invert && deco->display_value != *deco->to_look_at)))
+	if (self->display != 1 && ((!deco->invert
+		&& deco->display_value == *deco->to_look_at) || (deco->invert
+		&& deco->display_value != *deco->to_look_at)))
 	{
 		self->display = 1;
 		return (1);
 	}
-	else if (self->display == 1 && !(
-			(!deco->invert && deco->display_value == *deco->to_look_at) ||
-			(deco->invert && deco->display_value != *deco->to_look_at)))
+	else if (self->display == 1 && !((!deco->invert
+		&& deco->display_value == *deco->to_look_at) || (deco->invert
+		&& deco->display_value != *deco->to_look_at)))
 	{
 		self->display = 0;
 		return (1);

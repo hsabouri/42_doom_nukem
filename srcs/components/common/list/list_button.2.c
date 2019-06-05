@@ -59,8 +59,8 @@ int					update_list_button(t_component *self, void *parent)
 	list_state = (t_list_state *)parent;
 	init_update(self, list_state, state);
 	if (self->childs.len)
-		((t_component *)self->childs.first)->pos.y =
-			state->d_pos.y - *state->y_scroll + 1;
+		((t_component *)self->childs.first)->pos.y = state->d_pos.y
+		- *state->y_scroll + 1;
 	clicked = is_clicked_on(*self, *state->events);
 	if (clicked && state->is_active == 0 && state->select)
 	{
