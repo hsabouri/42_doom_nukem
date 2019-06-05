@@ -53,4 +53,3 @@ t_pix pos, t_sdl *sdl)
 	ret.childs = anew(NULL, 0, sizeof(t_component));
 	return (ret);
 }
-

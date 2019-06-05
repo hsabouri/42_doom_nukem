@@ -14,6 +14,24 @@
 #include "../../common/common.h"
 #include "../../../common/entity_type_to_text.h"
 
+static t_array		generator_loop(t_game game, t_editor_ev_ac_state *state,
+t_list_content curr, t_array ret)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < game.nentities)
+	{
+		if (state->selected_entity == (ssize_t)(game.nentities - i))
+			ft_strncpy(curr.text, "unavailable", 28);
+		else
+			type_to_text(game.entities[game.nentities - i - 1].type, curr.text);
+		apush(&ret, &curr);
+		++i;
+	}
+	return (ret);
+}
+
 static t_array		generator(void *parent)
 {
 	t_editor_ev_ac_state	*state;
@@ -30,17 +48,9 @@ static t_array		generator(void *parent)
 		sizeof(t_list_content), "component test");
 	i = 0;
 	curr.img.content = NULL;
-	while (i < game.nentities)
-	{
-		if (state->selected_entity == (ssize_t)(game.nentities - i))
-			ft_strncpy(curr.text, "unavailable", 28);
-		else
-			type_to_text(game.entities[game.nentities - i - 1].type, curr.text);
-		apush(&ret, &curr);
-		++i;
-	}
+	ret = generator_loop(game, state, curr, ret);
 	if (state->selected_entity == (ssize_t)(game.nentities - i))
-			ft_strncpy(curr.text, "unavailable", 28);
+		ft_strncpy(curr.text, "unavailable", 28);
 	else
 		ft_strncpy(curr.text, "player", 28);
 	apush(&ret, &curr);
@@ -50,7 +60,7 @@ static t_array		generator(void *parent)
 static int			on_click(void *parent, size_t i)
 {
 	t_editor_ev_ac_state	*state;
-	
+
 	state = ((t_editor_ev_ac_state *)(
 		((t_display_deco_state *)parent)->state));
 	state->selected_entity_2 = i;

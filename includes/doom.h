@@ -264,7 +264,4 @@ u_int32_t				launch_check_mats(t_game game, t_check_mat mats,
 						t_env *env, char *errors_text[NBR_ERROR]);
 u_int32_t				launch_check_entities(t_game game, t_env *env,
 						char *errors_text[NBR_ERROR]);
-
-void					minimap(t_game game, t_color *buf);
-
 #endif

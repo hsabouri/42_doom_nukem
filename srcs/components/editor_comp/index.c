@@ -17,6 +17,32 @@
 #include "./materials/materials.h"
 #include "../common/common.h"
 
+static t_array				init_childs_2(t_editor_root_state *state,
+t_sdl *sdl, t_array ret)
+{
+	t_component	current;
+
+	current = init_button((t_button) {.pos = (t_pix) {WIDTH - 126, 2},
+		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events, .to_activate = (int *)&state->type,
+		.img = parse_tga("./textures/ui/event_mode.tga", 0),
+		.scancode = SDL_SCANCODE_UNKNOWN, .active_value = ACTION_EVENT}, sdl);
+	apush(&ret, &current);
+	current = init_button((t_button) {.pos = (t_pix) {WIDTH - 84, 2},
+		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events, .to_activate = (int *)&state->type,
+		.img = parse_tga("./textures/ui/material_mode.tga", 0),
+		.scancode = SDL_SCANCODE_UNKNOWN, .active_value = MATERIAL}, sdl);
+	apush(&ret, &current);
+	current = init_button((t_button) {.pos = (t_pix) {WIDTH - 42, 2},
+		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events, .to_activate = (int *)&state->type,
+		.img = parse_tga("./textures/ui/entity_mode.tga", 0),
+		.scancode = SDL_SCANCODE_UNKNOWN, .active_value = ENTITY}, sdl);
+	apush(&ret, &current);
+	return (ret);
+}
+
 static t_array				init_childs(t_editor_root_state *state, t_env *env,
 t_sdl *sdl)
 {
@@ -26,62 +52,23 @@ t_sdl *sdl)
 	ret = safe_anew(NULL, 5, sizeof(t_component), "components");
 	current = init_editor_map(env, sdl);
 	apush(&ret, &current);
-	current = init_display_deco((t_display_deco_state) {
-		.to_look_at = (int *)&state->type,
-		.display_value = (int)MATERIAL,
-		.state = state,
-		.invert = 0
-	}, init_editor_mat(env, sdl));
+	current = init_display_deco((t_display_deco_state) {.invert = 0,
+		.to_look_at = (int *)&state->type, .display_value = (int)MATERIAL,
+		.state = state}, init_editor_mat(env, sdl));
 	apush(&ret, &current);
 	current = init_simple_rectangle((t_pix) {WIDTH - 169, 1},
 		(t_pix) {168, 42}, RICH_BLACK, sdl);
-	current = init_display_deco((t_display_deco_state) {
-		.to_look_at = (int *)&state->type,
-		.display_value = (int)ACTION_EVENT,
-		.state = state,
-		.invert = 0
-	}, init_editor_ev_ac(env, sdl));
+	current = init_display_deco((t_display_deco_state) {.invert = 0,
+		.to_look_at = (int *)&state->type, .display_value = (int)ACTION_EVENT,
+		.state = state}, init_editor_ev_ac(env, sdl));
 	apush(&ret, &current);
-	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 168, 2},
-		.size = (t_pix) {40, 40},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
+	current = init_button((t_button) {.pos = (t_pix) {WIDTH - 168, 2},
+		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
+		.events = &state->env->events, .to_activate = (int *)&state->type,
 		.img = parse_tga("./textures/ui/map_mode.tga", 0),
-		.to_activate = (int *)&state->type,
-		.scancode = SDL_SCANCODE_UNKNOWN,
-		.active_value = MAP}, sdl);
+		.scancode = SDL_SCANCODE_UNKNOWN, .active_value = MAP}, sdl);
 	apush(&ret, &current);
-	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 126, 2},
-		.size = (t_pix) {40, 40},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/event_mode.tga", 0),
-		.to_activate = (int *)&state->type,
-		.scancode = SDL_SCANCODE_UNKNOWN,
-		.active_value = ACTION_EVENT}, sdl);
-	apush(&ret, &current);
-	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 84, 2},
-		.size = (t_pix) {40, 40},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/material_mode.tga", 0),
-		.to_activate = (int *)&state->type,
-		.scancode = SDL_SCANCODE_UNKNOWN,
-		.active_value = MATERIAL}, sdl);
-	apush(&ret, &current);
-	current = init_button((t_button) {
-		.pos = (t_pix) {WIDTH - 42, 2},
-		.size = (t_pix) {40, 40},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
-		.img = parse_tga("./textures/ui/entity_mode.tga", 0),
-		.to_activate = (int *)&state->type,
-		.scancode = SDL_SCANCODE_UNKNOWN,
-		.active_value = ENTITY}, sdl);
-	apush(&ret, &current);
+	ret = init_childs_2(state, sdl, ret);
 	return (ret);
 }
 

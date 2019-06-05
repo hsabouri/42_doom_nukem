@@ -154,8 +154,8 @@ size_t test_lpjoin(size_t *number_of_tests)
     }   
 
     *number_of_tests += 1;
-    if (test_elem_to_insert1.listable.next == (t_pelem *)&test_elem_to_insert2 &&
-    test_elem_to_insert2.listable.prev == (t_pelem *)&test_elem_to_insert1)
+    if (test_elem_to_insert1.listable.next == (t_pelem *)&test_elem_to_insert2
+        && test_elem_to_insert2.listable.prev == (t_pelem *)&test_elem_to_insert1)
     {
         success_count += 1;
         success("lpjoin(list, list) linking test\n");

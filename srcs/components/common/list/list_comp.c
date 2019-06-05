@@ -20,11 +20,11 @@ static int			self_update(t_component *self, void *parent)
 	ret = 0;
 	state = (t_list_state *)self->state;
 	state->parent = parent;
-	if (is_over(*self, *state->events) &&
-		(state->y_scroll > 0 || state->events->wheel > 0))
+	if (is_over(*self, *state->events)
+		&& (state->y_scroll > 0 || state->events->wheel > 0))
 		state->y_scroll += state->events->wheel * 100;
-	if (state->need_update ||
-		(state->extern_need_update && *state->extern_need_update))
+	if (state->need_update
+		|| (state->extern_need_update && *state->extern_need_update))
 	{
 		self->childs = build_childs(self, state, parent, state->sdl);
 		state->need_update = 0;

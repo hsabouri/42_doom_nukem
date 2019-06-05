@@ -44,12 +44,13 @@ static int			on_click(void *parent, size_t i)
 	if (i == 0)
 		state->env->game.materials[state->selected].texture = NULL;
 	else
-		state->env->game.materials[state->selected].texture = 
-			&state->env->game.textures[i - 1];
+		state->env->game.materials[state->selected]
+			.texture = &state->env->game.textures[i - 1];
 	return (0);
 }
 
-t_component			create_list_textures(t_env *env, t_pix pos, t_pix size, t_sdl *sdl)
+t_component			create_list_textures(t_env *env, t_pix pos, t_pix size,
+t_sdl *sdl)
 {
 	t_component ret;
 

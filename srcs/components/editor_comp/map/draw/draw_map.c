@@ -60,8 +60,8 @@ static void			foreach_point(void *point, void *param, size_t i)
 		color.g += 30;
 		color.b += 30;
 	}
-	if ((size_t)state->state.wall_points[0] == i ||
-		(size_t)state->state.wall_points[1] == i)
+	if ((size_t)state->state.wall_points[0] == i
+		|| (size_t)state->state.wall_points[1] == i)
 		color = ORANGE;
 	draw_point(vec2_to_fvec2(p), size, state->buf, color);
 }

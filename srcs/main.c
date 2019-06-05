@@ -100,8 +100,8 @@ int				main(int ac, char **av)
 			launch_game(&env, ac, av);
 		if (!env.toggle_editor)
 			env.game.player.my_entity.physic = update_mouse(&env.events, env.game.player.my_entity.physic);
-		if (env.events.quit || env.game_mode == QUIT ||
-			env.events.keys[SDL_SCANCODE_ESCAPE])
+		if (env.events.quit || env.game_mode == QUIT
+			|| env.events.keys[SDL_SCANCODE_ESCAPE])
 			break ;
 		all_loops(&env, frame);
 		env.events = reset_clicks(env.events);

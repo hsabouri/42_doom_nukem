@@ -66,55 +66,7 @@ t_sdl *sdl)
 	apush(&ret, &current);
 	current = init_simple_text("TEXTURE MODE", (t_pix) {204, 343}, sdl);
 	apush(&ret, &current);
-	current = init_button_ft((t_button_ft) {
-		.pos = (t_pix) {204, 369},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
-		.place_holder = "TILING",
-		.to_activate = (int **)&state->selected_mode,
-		.scancode = SDL_SCANCODE_UNKNOWN,
-		.active_value = TILING}, sdl);
-	apush(&ret, &current);
-	current = init_button_ft((t_button_ft) {
-		.pos = (t_pix) {current.pos.x + current.size.x + 2, 369},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
-		.place_holder = "NO TILING",
-		.to_activate = (int **)&state->selected_mode,
-		.scancode = SDL_SCANCODE_UNKNOWN,
-		.active_value = NO_TILING}, sdl);
-	apush(&ret, &current);
-	current = init_button_ft((t_button_ft) {
-		.pos = (t_pix) {current.pos.x + current.size.x + 2, 369},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
-		.place_holder = "SKYBOX",
-		.to_activate = (int **)&state->selected_mode,
-		.scancode = SDL_SCANCODE_UNKNOWN,
-		.active_value = SKYBOX}, sdl);
-	apush(&ret, &current);
-	current = init_cb_button((t_cb_button) {
-		.pos = (t_pix) {204, current.pos.y + current.size.y + 10},
-		.background = (t_color) {70, 70, 70, 255},
-		.events = &state->env->events,
-		.place_holder = "LINK OVERLAY",
-		.callback = &enable_change_overlay
-	}, sdl);
-	apush(&ret, &current);
-	current = create_list_textures(env, (t_pix) {WIDTH - 167, 44}, (t_pix) {165, HEIGHT - 54}, sdl);
-	apush(&ret, &current);
-	current = init_display_deco((t_display_deco_state) {
-		.to_look_at = &state->display_overlay,
-		.display_value = 1,
-		.state = state
-	}, init_simple_rectangle((t_pix) {0, 0}, (t_pix) {WIDTH, HEIGHT}, (t_color) {0, 0, 0, 128}, sdl));
-	apush(&ret, &current);
-	current = init_display_deco((t_display_deco_state) {
-		.to_look_at = &state->display_overlay,
-		.display_value = 1,
-		.state = state
-	}, create_list_overlay(env, &state->update_overlay, sdl));
-	apush(&ret, &current);
+	ret = init_child_2(env, state, sdl, ret);
 	return (ret);
 }
 
@@ -123,7 +75,8 @@ t_component					init_editor_mat(t_env *env, t_sdl *sdl)
 	t_component			ret;
 	t_editor_mat_state	*state;
 
-	state = (t_editor_mat_state *)safe_malloc(sizeof(t_editor_mat_state), "components");
+	state = (t_editor_mat_state *)safe_malloc(sizeof(t_editor_mat_state),
+		"components");
 	ret = default_component(state, (t_pix) {WIDTH, HEIGHT}, sdl);
 	ret.state = init_state(ret.state, env);
 	ret.pos.x = 0;

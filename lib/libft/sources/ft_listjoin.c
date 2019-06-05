@@ -30,11 +30,11 @@ t_list	*ljoin(t_list *begin, t_list *end)
 {
 	if (!begin)
 		return (end);
-	else if (!end || !end->first ||
-		(begin->first == end->first && end->len <= begin->len))
+	else if (!end || !end->first || (begin->first == end->first
+		&& end->len <= begin->len))
 		return (begin);
-	else if (!begin->first ||
-		(begin->first == end->first && end->len > begin->len))
+	else if (!begin->first || (begin->first == end->first
+		&& end->len > begin->len))
 		*begin = *end;
 	else
 	{
@@ -60,11 +60,11 @@ t_plist	*lpjoin(t_plist *begin, t_plist *end)
 {
 	if (!begin)
 		return (end);
-	else if (!end || !end->first ||
-		(begin->first == end->first && end->len <= begin->len))
+	else if (!end || !end->first || (begin->first == end->first
+		&& end->len <= begin->len))
 		return (begin);
-	else if (!begin->first ||
-		(begin->first == end->first && end->len > begin->len))
+	else if (!begin->first || (begin->first == end->first
+		&& end->len > begin->len))
 		*begin = *end;
 	else
 	{

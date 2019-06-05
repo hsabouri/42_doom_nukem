@@ -45,13 +45,13 @@ static t_fvec2	move(t_fvec2 values, t_event events, int mult_x, int mult_y)
 	return (values);
 }
 
-t_env		scale_material_tool(t_env env, t_selected selected)
+t_env			scale_material_tool(t_env env, t_selected selected)
 {
 	t_mat	*p;
 
 	p = NULL;
-	if (selected.type == PART_WALL || (selected.type == PART_PORTAL &&
-		(selected.mod == MOD_STEP || selected.mod == MOD_CEIL)))
+	if (selected.type == PART_WALL || (selected.type == PART_PORTAL
+		&& (selected.mod == MOD_STEP || selected.mod == MOD_CEIL)))
 		p = env.game.walls[selected.id].mat;
 	else if (selected.type == PART_PORTAL && selected.mod == MOD_OPEN)
 	{
@@ -68,13 +68,13 @@ t_env		scale_material_tool(t_env env, t_selected selected)
 	return (env);
 }
 
-t_env		move_material_tool(t_env env, t_selected selected)
+t_env			move_material_tool(t_env env, t_selected selected)
 {
 	t_mat	*p;
 
 	p = NULL;
-	if (selected.type == PART_WALL || (selected.type == PART_PORTAL &&
-		(selected.mod == MOD_STEP || selected.mod == MOD_CEIL)))
+	if (selected.type == PART_WALL || (selected.type == PART_PORTAL
+		&& (selected.mod == MOD_STEP || selected.mod == MOD_CEIL)))
 		p = env.game.walls[selected.id].mat;
 	else if (selected.type == PART_PORTAL && selected.mod == MOD_OPEN)
 	{
@@ -93,7 +93,7 @@ t_env		move_material_tool(t_env env, t_selected selected)
 	return (env);
 }
 
-t_env		move_texture_tool(t_env env, t_selected selected)
+t_env			move_texture_tool(t_env env, t_selected selected)
 {
 	t_fvec2	*to_move;
 

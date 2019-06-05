@@ -14,8 +14,8 @@
 
 t_game		create_entity(t_vec2 pos, size_t class_id, t_game game)
 {
-	if ((game.entities = (t_entity *)realloc(game.entities, sizeof(t_entity) *
-		(game.nentities + 1))) == NULL)
+	if ((game.entities = (t_entity *)realloc(game.entities, sizeof(t_entity)
+		* (game.nentities + 1))) == NULL)
 		return (game);
 	game.entities[game.nentities] = game.classes[class_id];
 	game.entities[game.nentities].physic.pos = vec3_new(pos.u, pos.v, 0);

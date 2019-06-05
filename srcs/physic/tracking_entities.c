@@ -43,15 +43,15 @@ t_last_pos last_pos)
 	u_int32_t	end;
 
 	n_physic = physic;
-	end = game.sectors[physic.sector_id].start +
-		game.sectors[physic.sector_id].number;
+	end = game.sectors[physic.sector_id].start
+		+ game.sectors[physic.sector_id].number;
 	while (cpt < end)
 	{
 		if (game.walls[cpt].portal != -1)
 		{
-			portal_out = (game.portals[game.walls[cpt].portal].to_wall ==
-				cpt) ? game.portals[game.walls[cpt].portal].from_sector :
-				game.portals[game.walls[cpt].portal].to_sector;
+			portal_out = (game.portals[game.walls[cpt].portal].to_wall == cpt)
+				? game.portals[game.walls[cpt].portal].from_sector
+				: game.portals[game.walls[cpt].portal].to_sector;
 			if ((is_in_sector(physic, game, portal_out) % 2) != 0)
 			{
 				n_physic.sector_id = portal_out;

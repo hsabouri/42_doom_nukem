@@ -16,7 +16,7 @@ void	add_events(t_game *game, t_entity e_actif, t_condition condi,
 t_entity e_passif)
 {
 	t_game_event *elem;
-	
+
 	elem = (t_game_event *)malloc(sizeof(t_game_event));
 	*elem = (t_game_event){
 		(t_pelem) {NULL, NULL},

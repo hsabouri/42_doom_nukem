@@ -33,8 +33,8 @@ float		circle_circle(t_ph entity_1, t_ph entity_2, t_col_mode col)
 
 	d = (entity_1.pos.x - entity_2.pos.x) * (entity_1.pos.x - entity_2.pos.x)
 		+ (entity_1.pos.y - entity_2.pos.y) * (entity_1.pos.y - entity_2.pos.y);
-	if ((d <= (entity_1.radius + entity_2.radius) * (entity_1.radius +
-		entity_2.radius)) && col == COL_ENTITY)
+	if ((d <= (entity_1.radius + entity_2.radius) * (entity_1.radius
+		+ entity_2.radius)) && col == COL_ENTITY)
 	{
 		if (entity_1.pos.z > entity_2.pos.z + entity_2.height)
 			return (-1);

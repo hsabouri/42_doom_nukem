@@ -49,12 +49,9 @@ void		clean_game(t_game game)
 		cpt++;
 	}
 	free(game.textures);
-	cpt = 0;
-	while (cpt < game.nmulti_mats)
-	{
+	cpt = -1;
+	while (++cpt < game.nmulti_mats)
 		free(game.multi_mats[cpt].mem);
-		cpt++;
-	}
 	free(game.multi_mats);
 	clean_music(game);
 	free(game.chunks.mem);

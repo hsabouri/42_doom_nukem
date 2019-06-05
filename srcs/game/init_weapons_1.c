@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//a supprimer a fin projet
-
 #include <doom.h>
 
 static t_weapon	init_gun(t_img *textures)
@@ -70,7 +68,7 @@ static t_weapon	init_shotgun(t_img *textures)
 	material = &textures[25];
 	apush(&sprite, &material);
 	shotgun = ((t_weapon) {
-		.name = (t_weapon_type)SHOTGUN, .type = 1,	.ammo = 10, .ammo_max = 10,
+		.name = (t_weapon_type)SHOTGUN, .type = 1, .ammo = 10, .ammo_max = 10,
 		.damage = 70, .cadence = 30, .type_shot = (t_shot_type)SHOTS,
 		.explosion = -1, .sprite = sprite, .decal = 20
 	});
@@ -80,7 +78,7 @@ static t_weapon	init_shotgun(t_img *textures)
 static t_weapon	init_revolver(t_img *textures)
 {
 	t_weapon	revolver;
-	t_array 	sprite;
+	t_array		sprite;
 	t_img		*material;
 
 	sprite = safe_anew(NULL, 1, sizeof(t_img *), "generate_map");
@@ -112,5 +110,4 @@ t_weapon		*init_weapons(t_game *game)
 	weapons[6] = init_mine(game->textures);
 	game->nweapons = 7;
 	return (weapons);
-	
 }

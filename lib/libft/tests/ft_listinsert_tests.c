@@ -83,10 +83,10 @@ size_t test_linsert(size_t *number_of_tests)
 
     *number_of_tests += 1;
 
-    if (test_elem_to_insert1.listable.next == (t_pelem *)&test_elem_to_insert2 &&
-    test_elem_to_insert2.listable.next == NULL &&
-    test_elem_to_insert3.listable.next == (t_pelem *)&test_elem_to_insert1 &&
-    test_elem_to_insert4.listable.next == (t_pelem *)&test_elem_to_insert3)
+    if (test_elem_to_insert1.listable.next == (t_pelem *)&test_elem_to_insert2
+        && test_elem_to_insert2.listable.next == NULL
+        && test_elem_to_insert3.listable.next == (t_pelem *)&test_elem_to_insert1
+        && test_elem_to_insert4.listable.next == (t_pelem *)&test_elem_to_insert3)
     {
         success_count += 1;
         success("list linking tests\n");
@@ -106,7 +106,8 @@ size_t test_lpinsert(size_t *number_of_tests)
     *number_of_tests = 0;
 
     t_plist  test1 = lpnew(NULL);
-    t_lst_test test_elem_to_insert1 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_insert1 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.insert(&test1, (t_pelem*)&test_elem_to_insert1);
     t_plist  test1_truth = lpnew(NULL);
     test1_truth.len = 1;
@@ -124,8 +125,10 @@ size_t test_lpinsert(size_t *number_of_tests)
     }
 
     test1 = lpnew(NULL);
-    t_lst_test test_elem_to_insert2 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
-    test_elem_to_insert1 = (t_lst_test) {(t_pelem) {(t_pelem *)&test_elem_to_insert2, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_insert2 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
+    test_elem_to_insert1 = (t_lst_test) {(t_pelem) {
+        (t_pelem *)&test_elem_to_insert2, NULL}, 0xfeedbeef};
     test_elem_to_insert2.listable.prev = (t_pelem *)&test_elem_to_insert1;
     test1.insert(&test1, (t_pelem*) &test_elem_to_insert1);
     test1_truth.len = 2;
@@ -141,7 +144,8 @@ size_t test_lpinsert(size_t *number_of_tests)
         success("lpinsert(list) in an empty list\n");
     }
     
-    t_lst_test test_elem_to_insert3 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_insert3 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.insert(&test1, (t_pelem *)& test_elem_to_insert3);
     test1_truth.len = 3;
     test1_truth.first = (t_pelem *)&test_elem_to_insert3;
@@ -155,7 +159,8 @@ size_t test_lpinsert(size_t *number_of_tests)
         success("lpinsert(elem) in a list\n");
     }
     
-    t_lst_test test_elem_to_insert4 = (t_lst_test) {(t_pelem) {NULL, NULL}, 0xfeedbeef};
+    t_lst_test test_elem_to_insert4 = (t_lst_test) {(t_pelem) {NULL, NULL},
+        0xfeedbeef};
     test1.insert(&test1, (t_pelem *)&test_elem_to_insert4);
     test1_truth.len = 4;
     test1_truth.first = (t_pelem *)&test_elem_to_insert4;
@@ -182,14 +187,14 @@ size_t test_lpinsert(size_t *number_of_tests)
 
     *number_of_tests += 1;
 
-    if (test_elem_to_insert1.listable.next == (t_pelem *)&test_elem_to_insert2 &&
-    test_elem_to_insert2.listable.next == NULL &&
-    test_elem_to_insert3.listable.next == (t_pelem *)&test_elem_to_insert1 &&
-    test_elem_to_insert4.listable.next == (t_pelem *)&test_elem_to_insert3 &&
-    test_elem_to_insert1.listable.prev == (t_pelem *)&test_elem_to_insert3 &&
-    test_elem_to_insert4.listable.prev == NULL &&
-    test_elem_to_insert3.listable.prev == (t_pelem *)&test_elem_to_insert4 &&
-    test_elem_to_insert2.listable.prev == (t_pelem *)&test_elem_to_insert1)
+    if (test_elem_to_insert1.listable.next == (t_pelem *)&test_elem_to_insert2
+        && test_elem_to_insert2.listable.next == NULL
+        && test_elem_to_insert3.listable.next == (t_pelem *)&test_elem_to_insert1
+        && test_elem_to_insert4.listable.next == (t_pelem *)&test_elem_to_insert3
+        && test_elem_to_insert1.listable.prev == (t_pelem *)&test_elem_to_insert3
+        && test_elem_to_insert4.listable.prev == NULL
+        && test_elem_to_insert3.listable.prev == (t_pelem *)&test_elem_to_insert4
+        && test_elem_to_insert2.listable.prev == (t_pelem *)&test_elem_to_insert1)
     {
         success_count += 1;
         success("list linking tests\n");

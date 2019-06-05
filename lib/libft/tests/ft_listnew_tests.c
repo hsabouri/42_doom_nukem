@@ -56,9 +56,9 @@ size_t test_lnew(size_t *number_of_tests)
     t_lst_test  test2_tmp2_cmp = (t_lst_test) {(t_pelem) {(t_pelem *)(&test2_tmp3), NULL}, 0xfeedbeef};
     t_lst_test  test2_tmp1_cmp = (t_lst_test) {(t_pelem) {(t_pelem *)(&test2_tmp2), NULL}, 0xfeedbeef};
     
-    if (memcmp(&test2_tmp1, &test2_tmp1_cmp, sizeof(t_lst_test)) ||
-        memcmp(&test2_tmp2, &test2_tmp2_cmp, sizeof(t_lst_test)) ||
-        memcmp(&test2_tmp3, &test2_tmp3_cmp, sizeof(t_lst_test)))
+    if (memcmp(&test2_tmp1, &test2_tmp1_cmp, sizeof(t_lst_test))
+        || memcmp(&test2_tmp2, &test2_tmp2_cmp, sizeof(t_lst_test))
+        || memcmp(&test2_tmp3, &test2_tmp3_cmp, sizeof(t_lst_test)))
         failed("memcmp on elements of created list\n");
     else
     {
@@ -129,9 +129,9 @@ size_t test_lpnew(size_t *number_of_tests)
     test2_tmp3_cmp.listable.prev = (t_pelem *)&test2_tmp2;
     test2_tmp2_cmp.listable.prev = (t_pelem *)&test2_tmp1;
     
-    if (memcmp(&test2_tmp1, &test2_tmp1_cmp, sizeof(t_lst_test)) ||
-    memcmp(&test2_tmp2, &test2_tmp2_cmp, sizeof(t_lst_test)) ||
-    memcmp(&test2_tmp3, &test2_tmp3_cmp, sizeof(t_lst_test)))
+    if (memcmp(&test2_tmp1, &test2_tmp1_cmp, sizeof(t_lst_test))
+        || memcmp(&test2_tmp2, &test2_tmp2_cmp, sizeof(t_lst_test))
+        || memcmp(&test2_tmp3, &test2_tmp3_cmp, sizeof(t_lst_test)))
         failed("memcmp on elements of created plist (and relinking)\n");
     else
     {

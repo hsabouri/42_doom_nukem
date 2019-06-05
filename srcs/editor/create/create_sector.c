@@ -14,8 +14,8 @@
 
 t_game		create_sector(size_t start, size_t nwalls, t_game game)
 {
-	if ((game.sectors = (t_sector *)realloc(game.sectors, (game.nsectors + 1) *
-		sizeof(t_sector))) == NULL)
+	if ((game.sectors = (t_sector *)realloc(game.sectors, (game.nsectors + 1)
+		* sizeof(t_sector))) == NULL)
 	{
 		console_error("ALLOCATION", "Allocation error");
 		exit(EXIT_FAILURE);

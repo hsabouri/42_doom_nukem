@@ -40,4 +40,7 @@ t_component		init_preview(t_editor_mat_state *parent, t_pix pos, t_sdl *sdl);
 t_component		init_color_chooser(t_color **to_change,
 				t_pix pos, t_sdl *sdl);
 
+t_array			init_child_2(t_env *env, t_editor_mat_state *state,
+				t_sdl *sdl, t_array ret);
+
 #endif

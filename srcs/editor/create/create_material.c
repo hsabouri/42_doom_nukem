@@ -16,8 +16,8 @@ t_game		create_material(size_t selected, t_game game)
 {
 	const t_mat	*old = game.materials;
 
-	if ((game.materials = (t_mat *)realloc(game.materials, sizeof(t_mat) *
-		(game.nmaterials + 1))) == NULL)
+	if ((game.materials = (t_mat *)realloc(game.materials, sizeof(t_mat)
+		* (game.nmaterials + 1))) == NULL)
 		return (game);
 	if (game.materials == old)
 	{

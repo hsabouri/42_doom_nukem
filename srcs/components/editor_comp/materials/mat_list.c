@@ -15,21 +15,21 @@
 
 static t_array		generator(void *parent)
 {
-	const size_t	nmats = ((t_editor_mat_state *)parent)->env->game.nmaterials;
-	const t_mat		*mats = ((t_editor_mat_state *)parent)->env->game.materials;
+	const size_t	nmat = ((t_editor_mat_state *)parent)->env->game.nmaterials;
+	const t_mat		*mat = ((t_editor_mat_state *)parent)->env->game.materials;
 	t_list_content	curr;
 	t_array			ret;
 	size_t			i;
 
-	ret = safe_anew(NULL, nmats, sizeof(t_list_content), "component test");
+	ret = safe_anew(NULL, nmat, sizeof(t_list_content), "component test");
 	i = 0;
-	while (i < nmats)
+	while (i < nmat)
 	{
 		curr.text[0] = 0;
-		if (mats[nmats - i - 1].texture)
-			curr.img = *mats[nmats - i - 1].texture;
+		if (mat[nmat - i - 1].texture)
+			curr.img = *mat[nmat - i - 1].texture;
 		else
-			ft_strncpy(curr.text, ft_itoa(nmats - i - 1), 28);
+			ft_strncpy(curr.text, ft_itoa(nmat - i - 1), 28);
 		apush(&ret, &curr);
 		++i;
 	}
@@ -42,7 +42,7 @@ static int			on_click(void *parent, size_t i)
 
 	state = (t_editor_mat_state *)parent;
 	if (state->display_overlay)
-		return(0);
+		return (0);
 	state->selected = i;
 	state->selected_color = &state->env->game.materials[i].color;
 	state->selected_filter = &state->env->game.materials[i].filter;
@@ -52,12 +52,12 @@ static int			on_click(void *parent, size_t i)
 
 static int			on_add(void *parent)
 {
-	t_editor_mat_state	*state; 
+	t_editor_mat_state	*state;
 	t_env				*env;
-	
+
 	state = (t_editor_mat_state *)parent;
 	if (state->display_overlay)
-		return(0);
+		return (0);
 	env = ((t_editor_mat_state *)parent)->env;
 	env->game = create_material(state->selected, env->game);
 	on_click(parent, env->game.nmaterials - 1);
@@ -66,11 +66,11 @@ static int			on_add(void *parent)
 
 static int			on_del(void *parent, size_t i)
 {
-	const t_editor_mat_state	*state = (t_editor_mat_state *)parent; 
+	const t_editor_mat_state	*state = (t_editor_mat_state *)parent;
 	t_env						*env;
-	
+
 	if (state->display_overlay)
-		return(0);
+		return (0);
 	env = ((t_editor_mat_state *)parent)->env;
 	if (env->game.nmaterials <= 1)
 		return (0);

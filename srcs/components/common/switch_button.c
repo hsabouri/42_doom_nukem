@@ -23,8 +23,8 @@ static int					self_update(t_component *self, void *parent)
 	ret = 0;
 	state = (t_sw_button_state *)self->state;
 	clicked = is_clicked_on(*self, *state->events);
-	if ((clicked || state->events->keys[state->scancode]) &&
-		last_clicked_on == 0)
+	if ((clicked || state->events->keys[state->scancode])
+		&& last_clicked_on == 0)
 	{
 		if (*state->to_activate == state->enable_value)
 			*state->to_activate = state->disable_value;

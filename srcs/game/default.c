@@ -20,7 +20,6 @@ static t_mat	*init_mat_4(t_mat *materials, t_game *game)
 		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[43], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL};
-		tmp.texture = &game->textures[44];
 	materials[19] = tmp;
 	tmp.texture = &game->textures[44];
 	materials[20] = tmp;
@@ -125,9 +124,9 @@ static t_mat	*init_mats(t_game *game)
 	return (materials);
 }
 
-t_game	generate_map(void)
+t_game			generate_map(void)
 {
-	t_game		game;
+	t_game	game;
 
 	game.textures = load_all_textures(&game);
 	game.materials = init_mats(&game);
@@ -140,7 +139,6 @@ t_game	generate_map(void)
 	game.classes = init_classe(&game, game.multi_mats);
 	game.player = player_default(game);
 	game.entities = init_entities(&game);
-
 	t_array c_log = anew(NULL, 100, sizeof(t_trigger));
 	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
 	*first_e = (t_game_event){
@@ -163,11 +161,9 @@ t_game	generate_map(void)
 			game.player.my_entity, TRIGGER_SEE, game.entities[0] // Game event : list event wanted
 			}
 		};
-
 	t_plist	g_e	= lpnew((t_pelem *)first_e);
 	lppush(&g_e, (t_pelem *)secon_e);
 	lppush(&g_e, (t_pelem *)third_e);
-
 	game.log = c_log;
 	game.waiting_events = g_e;
 	game.unique_e_id = 4;

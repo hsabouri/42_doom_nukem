@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRIGGER_H
-# define TRIGGER_H
+#ifndef TRIGGERS_H
+# define TRIGGERS_H
 
 # include <doom.h>
 

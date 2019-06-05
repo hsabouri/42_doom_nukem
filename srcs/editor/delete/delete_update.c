@@ -17,12 +17,13 @@ t_game	del_update_portals(ssize_t wall, ssize_t sector, t_game game)
 	size_t		i;
 	t_portal	curr;
 
-	i = 0;
-	while (i < game.nportals)
+	i = -1;
+	while (++i < game.nportals)
 	{
 		curr = game.portals[i];
-		if ((wall >= 0 && (wall == curr.from_wall || wall == curr.to_wall)) ||
-		(sector >= 0 && (sector == curr.from_sector || sector == curr.to_sector)))
+		if ((wall >= 0 && (wall == curr.from_wall || wall == curr.to_wall))
+		|| (sector >= 0 && (sector == curr.from_sector
+		|| sector == curr.to_sector)))
 			game = delete_portal(i--, game);
 		else
 		{
@@ -36,7 +37,6 @@ t_game	del_update_portals(ssize_t wall, ssize_t sector, t_game game)
 				curr.to_sector--;
 			game.portals[i] = curr;
 		}
-		i++;
 	}
 	return (game);
 }

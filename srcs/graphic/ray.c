@@ -41,10 +41,10 @@ t_hit		ray_seg(t_fvec2 a, t_fvec2 b, t_fvec2 c, t_fvec2 d)
 
 	if (denom == 0)
 		return ((t_hit) {0, d, fvec2_new(0, 0)});
-	ratios.u = -f_div(f_mul(a.u, q.v) - f_mul(c.u, q.v) -
-		f_mul(q.u, a.v) + f_mul(c.v, q.u), denom);
-	ratios.v = -f_div(-f_mul(a.v, p.u) + f_mul(c.v, p.u) +
-		f_mul(p.v, a.u) - f_mul(c.u, p.v), denom);
+	ratios.u = -f_div(f_mul(a.u, q.v) - f_mul(c.u, q.v)
+		- f_mul(q.u, a.v) + f_mul(c.v, q.u), denom);
+	ratios.v = -f_div(-f_mul(a.v, p.u) + f_mul(c.v, p.u)
+		+ f_mul(p.v, a.u) - f_mul(c.u, p.v), denom);
 	return ((t_hit) {1, d, ratios});
 }
 

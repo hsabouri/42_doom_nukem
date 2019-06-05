@@ -47,8 +47,8 @@ t_editor_map_state *parent_state, t_event events, t_game game)
 	if (*state->selected_entity == -1)
 		*state->selected_spawn = select_entity(*parent_state,
 			*state->selected_spawn, events, 1);
-	if ((*state->selected_entity >= 0 || *state->selected_spawn >= 0) &&
-		state->events->mouse[SDL_BUTTON_LEFT])
+	if ((*state->selected_entity >= 0 || *state->selected_spawn >= 0)
+		&& state->events->mouse[SDL_BUTTON_LEFT])
 		game = move_entity(parent_state, state, game);
 	else if (*state->selected_entity > -1
 		&& events.mouse_click[SDL_BUTTON_RIGHT])

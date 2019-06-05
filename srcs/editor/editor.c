@@ -20,14 +20,10 @@ void				editor_loop(t_env *env)
 	content = NULL;
 	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
 	env->current_buffer = content;
-
 	SDL_UnlockTexture(env->sdl.buf);
 	SDL_RenderCopy(env->sdl.renderer, env->sdl.buf, NULL, NULL);
-
 	*env->component = trigger_component(env, *env->component, &env->sdl);
 	display_component(*env->component, &env->sdl);
-
 	find_center_sectors(env->game);
 	SDL_RenderPresent(env->sdl.renderer);
-
 }

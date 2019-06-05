@@ -12,7 +12,19 @@
 
 #include <structure.h>
 
-char	*type_to_text(t_entity_type type, char *dst)
+static char	*type_to_text_2(t_entity_type type, char *dst)
+{
+	if (type == MEAT)
+		return (ft_strcpy(dst, "Meat"));
+	else if (type == MEDIPACK)
+		return (ft_strcpy(dst, "Medipack"));
+	else if (type == AMMO)
+		return (ft_strcpy(dst, "Ammo"));
+	else
+		return (ft_strcpy(dst, "Unknown"));
+}
+
+char		*type_to_text(t_entity_type type, char *dst)
 {
 	if (type == PLAYER)
 		return (ft_strcpy(dst, "Player"));
@@ -36,12 +48,6 @@ char	*type_to_text(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Apple"));
 	else if (type == FISH)
 		return (ft_strcpy(dst, "Fish"));
-	else if (type == MEAT)
-		return (ft_strcpy(dst, "Meat"));
-	else if (type == MEDIPACK)
-		return (ft_strcpy(dst, "Medipack"));
-	else if (type == AMMO)
-		return (ft_strcpy(dst, "Ammo"));
 	else
-		return (ft_strcpy(dst, "Unknown"));
+		return (type_to_text_2(type, dst));
 }

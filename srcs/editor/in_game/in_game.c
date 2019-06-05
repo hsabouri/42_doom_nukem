@@ -15,6 +15,7 @@
 t_game_tool	select_tool(t_env env)
 {
 	t_game_tool res;
+
 	if (env.events.keys[SDL_SCANCODE_T])
 		res = TEXTURE_MOVE;
 	else if (env.events.keys[SDL_SCANCODE_Y])
@@ -64,7 +65,6 @@ t_env		game_editing(t_env env, t_player player)
 	t_game_tool	last;
 	t_selected	sel;
 	t_portal	*portal;
-
 
 	sector = &env.game.sectors[player.my_entity.physic.sector_id];
 	sel = world_selector(env.game);

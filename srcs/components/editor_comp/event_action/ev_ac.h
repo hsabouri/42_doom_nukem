@@ -15,7 +15,7 @@
 
 # include "../editor_comp.h"
 
-typedef struct	s_editor_ev_ac_state 
+typedef struct	s_editor_ev_ac_state
 {
 	ssize_t	selected;
 	ssize_t	selected_entity;
