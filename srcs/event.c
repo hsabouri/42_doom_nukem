@@ -107,11 +107,11 @@ static void		keyactions(int scancode, t_env *env)
 	if (scancode == SDL_SCANCODE_F)
 		env->game.player.my_entity.physic.fly = (env->game.player.my_entity
 			.physic.fly) ? 0 : 1;
-	if (!env->toggle_editor &&
-		(scancode == SDL_SCANCODE_KP_PLUS || scancode == SDL_SCANCODE_EQUALS))
+	if (!env->toggle_editor && (scancode == SDL_SCANCODE_KP_PLUS
+		|| scancode == SDL_SCANCODE_EQUALS))
 		env->editor.depth += 1;
-	if (!env->toggle_editor &&
-		(scancode == SDL_SCANCODE_MINUS || scancode == SDL_SCANCODE_KP_MINUS))
+	if (!env->toggle_editor && (scancode == SDL_SCANCODE_MINUS
+		|| scancode == SDL_SCANCODE_KP_MINUS))
 		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
 }
 
