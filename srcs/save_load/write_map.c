@@ -31,6 +31,7 @@ void	write_mats(int fd, t_mat *mats, size_t nmats, t_img *textures)
 			s_mats.texture = -1;
 		s_mats.mode = mats[i].mode;
 		s_mats.filter = mats[i].filter;
+		s_mats.frozen = mats[i].frozen;
 		if (mats[i].overlay != NULL)
 			s_mats.overlay = id_from_p(mats[i].overlay, mats, sizeof(t_mat));
 		else
