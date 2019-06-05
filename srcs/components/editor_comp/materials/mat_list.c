@@ -72,7 +72,7 @@ static int			on_del(void *parent, size_t i)
 	if (state->display_overlay)
 		return (0);
 	env = ((t_editor_mat_state *)parent)->env;
-	if (env->game.nmaterials <= 1)
+	if (env->game.nmaterials <= 1 || env->game.materials[i].frozen)
 		return (0);
 	env->game = delete_material(i, env->game);
 	on_click(parent, 0);
