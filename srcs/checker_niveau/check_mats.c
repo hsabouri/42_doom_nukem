@@ -95,23 +95,29 @@ char *errors_text[NBR_ERROR])
 	error = check_texture(game.ntextures, game.textures, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: material %d\n", errors_text[error.error_type],
-			error.mats);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": material ");
+		ft_putnbr(error.mats);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = check_overlay(game.materials, game.nmaterials);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: material %d\n", errors_text[error.error_type],
-			error.mats);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": material ");
+		ft_putnbr(error.mats);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = check_multi_sprite(game.nmulti_mats, game.multi_mats,\
 		game.materials, game.nmaterials);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: %d, material %d\n", errors_text[error.error_type],
-			error.multi_mats, error.mats);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": material ");
+		ft_putnbr(error.multi_mats);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	return (1);

@@ -71,15 +71,23 @@ char *errors_text[NBR_ERROR])
 	error = sector_portal(game.portals, game.nportals, game.nsectors);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: portal %d, sector %d\n", errors_text[error.error_type],
-			error.portal, error.sector);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": portal ");
+		ft_putnbr(error.portal);
+		ft_putstr(", sector ");
+		ft_putnbr(error.sector);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = wall_portal(game.portals, game.nportals, game.nwalls);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: portal %d, wall %d\n", errors_text[error.error_type],
-			error.portal, error.wall);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": portal ");
+		ft_putnbr(error.portal);
+		ft_putstr(", wall ");
+		ft_putnbr(error.wall);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	return (1);

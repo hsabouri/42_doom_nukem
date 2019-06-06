@@ -21,23 +21,44 @@ char *errors_text[NBR_ERROR])
 	{
 		if (display->error_type != NO_ERROR)
 		{
-			printf("%s:", errors_text[display->error_type]);
+			ft_putstr(errors_text[display->error_type]);
 			if (display->point != -1)
-				printf(" point: %d", display->point);
+			{
+				ft_putstr(": point ");
+				ft_putnbr(display->point);
+			}
 			if (display->wall != -1)
-				printf(" wall: %d", display->wall);
+			{
+				ft_putstr(": wall ");
+				ft_putnbr(display->wall);
+			}
 			if (display->portal != -1)
-				printf(" portal: %d", display->portal);
+			{
+				ft_putstr(": portal ");
+				ft_putnbr(display->portal);
+			}
 			if (display->sector != -1)
-				printf(" sector: %d", display->sector);
+			{
+				ft_putstr(": sector ");
+				ft_putnbr(display->sector);
+			}
 			if (display->mats != -1)
-				printf(" mat: %d", display->mats);
+			{
+				ft_putstr(": material ");
+				ft_putnbr(display->mats);
+			}
 			if (display->multi_mats != -1)
-				printf(" multi_mats: %d", display->multi_mats);
+			{
+				ft_putstr(": multi_mats ");
+				ft_putnbr(display->multi_mats);
+			}
 			if (display->entities != -1)
-				printf(" entities: %d", display->entities);
+			{
+				ft_putstr(": entity ");
+				ft_putnbr(display->entities);
+			}
 		}
-		printf("\n");
+		ft_putchar('\n');
 	}
 }
 
@@ -107,8 +128,9 @@ int32_t		launch_check(t_env *env, t_game game)
 		|| launch_check_mats(game, mats, env, errors_text) == 0
 		|| launch_check_entities(game, env, errors_text) == 0)
 		return (0);
-	printf("no blocking errors\n");
+	ft_putstr("no blocking errors");
+	ft_putchar('\n');
 	check_no_blocking(errors_text, game);
-	printf("\n");
+	ft_putchar('\n');
 	return (1);
 }

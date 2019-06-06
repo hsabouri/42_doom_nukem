@@ -90,21 +90,32 @@ char *errors_text[NBR_ERROR])
 	error = check_point_wall(game.walls, game.nwalls, game.npoints);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: wall %d, point %d\n", errors_text[error.error_type],
-			error.wall, error.point);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": wall ");
+		ft_putnbr(error.wall);
+		ft_putstr(", point ");
+		ft_putnbr(error.point);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = check_portal_wall(game.walls, game.nwalls, game.nportals);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: wall %d, portal %d\n", errors_text[error.error_type],
-			error.wall, error.portal);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": wall ");
+		ft_putnbr(error.wall);
+		ft_putstr(", portal ");
+		ft_putnbr(error.portal);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = check_mats_wall(game.walls, game.nwalls, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: wall %d\n", errors_text[error.error_type], error.wall);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": wall ");
+		ft_putnbr(error.wall);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	return (1);
