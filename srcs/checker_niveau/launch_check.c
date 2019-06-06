@@ -12,6 +12,31 @@
 
 #include <doom.h>
 
+static void	display_2(t_lvl_error *display)
+{
+	if (display->sector != -1)
+	{
+		ft_putstr(": sector ");
+		ft_putnbr(display->sector);
+	}
+	if (display->mats != -1)
+	{
+		ft_putstr(": material ");
+		ft_putnbr(display->mats);
+	}
+	if (display->multi_mats != -1)
+	{
+		ft_putstr(": multi_mats ");
+		ft_putnbr(display->multi_mats);
+	}
+	if (display->entities != -1)
+	{
+		ft_putstr(": entity ");
+		ft_putnbr(display->entities);
+	}
+	ft_putchar('\n');
+}
+
 static void	display_no_blocking_error(t_list error_list,
 char *errors_text[NBR_ERROR])
 {
@@ -37,28 +62,8 @@ char *errors_text[NBR_ERROR])
 				ft_putstr(": portal ");
 				ft_putnbr(display->portal);
 			}
-			if (display->sector != -1)
-			{
-				ft_putstr(": sector ");
-				ft_putnbr(display->sector);
-			}
-			if (display->mats != -1)
-			{
-				ft_putstr(": material ");
-				ft_putnbr(display->mats);
-			}
-			if (display->multi_mats != -1)
-			{
-				ft_putstr(": multi_mats ");
-				ft_putnbr(display->multi_mats);
-			}
-			if (display->entities != -1)
-			{
-				ft_putstr(": entity ");
-				ft_putnbr(display->entities);
-			}
+			display_2(display);
 		}
-		ft_putchar('\n');
 	}
 }
 
