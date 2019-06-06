@@ -21,11 +21,11 @@ t_vec2		player_space(t_vec2 vec, t_ph physic)
 
 t_game		check_see(t_game game)
 {
-	t_game n_game;
-	t_trigger tmp_log;
-	t_selected ren;
-	n_game = game;
+	t_game		n_game;
+	t_trigger	tmp_log;
+	t_selected	ren;
 
+	n_game = game;
 	ren = world_selector(n_game);
 	if (ren.type == PART_ENTITY)
 	{

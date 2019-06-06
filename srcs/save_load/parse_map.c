@@ -27,7 +27,6 @@ size_t nmats)
 		struc_m = *(t_c_mat *)dump_struct(buf, save.index + sizeof(t_c_mat)
 			* i, sizeof(t_c_mat), save.max);
 		verify_magic(&struc_m, MAT_MAGIC, i);
-		current = materials[i];
 		current.pos = struc_m.pos;
 		current.sca = struc_m.sca;
 		current.color = struc_m.color;

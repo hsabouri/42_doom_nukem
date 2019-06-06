@@ -71,13 +71,13 @@ static t_ph		entities_look_at(t_ph physic, t_ph player)
 		else
 			tang = abs_vec.v / abs_vec.u;
 		if (vec.u > 0 && vec.v > 0)
-			physic.look_h = - (atan(tang)) + 0.2;
+			physic.look_h = -(atan(tang)) + 0.2;
 		else if (vec.u > 0 && vec.v < 0)
-			physic.look_h = - (atan(tang) + 0.5 * M_PI) + 0.2;
+			physic.look_h = -(atan(tang) + 0.5 * M_PI) + 0.2;
 		else if (vec.u < 0 && vec.v < 0)
-			physic.look_h = - (atan(tang) + M_PI) + 0.2;
+			physic.look_h = -(atan(tang) + M_PI) + 0.2;
 		else
-			physic.look_h = - (atan(tang) + 1.5 * M_PI) + 0.2;
+			physic.look_h = -(atan(tang) + 1.5 * M_PI) + 0.2;
 	}
 	return (physic);
 }
