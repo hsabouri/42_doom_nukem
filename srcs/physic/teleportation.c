@@ -36,7 +36,7 @@ float delta_floor)
 	next_pos.x = pos.x + diff.u;
 	next_pos.y = pos.y + diff.v;
 	if (delta_floor >= 0 || delta_floor > -0.5)
-			next_pos.z = pos.z + delta_floor;
+		next_pos.z = pos.z + delta_floor;
 	return (next_pos);
 }
 
@@ -69,9 +69,8 @@ t_ph *physic)
 	else
 	{
 		tmp_log = (t_trigger) {.e_actif = game->player.my_entity,
-			.condi = TRIGGER_SECTOR};
+			.condi = TRIGGER_SECTOR, .e_passif = tmp_log.e_actif};
 		tmp_log.e_actif.physic.sector_id = physic->sector_id;
-		tmp_log.e_passif = tmp_log.e_actif;
 		apush(&game->log, &tmp_log);
 		next_pos = if_tp(pos, game, teleport, delta_floor);
 		return (next_pos);
