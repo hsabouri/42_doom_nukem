@@ -38,7 +38,8 @@ void			clean(t_env env)
 		destroy_component(env.component);
 	exit(EXIT_SUCCESS);
 }
-t_sdl	init_sdl(void)
+
+t_sdl			init_sdl(void)
 {
 	SDL_Window		*win;
 	SDL_Texture		*buf;

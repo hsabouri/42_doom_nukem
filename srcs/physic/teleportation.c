@@ -24,7 +24,8 @@ void			set_tp(t_tp *teleport, t_touch touch, t_game game)
 		teleport->portal.to_wall : teleport->portal.from_wall;
 }
 
-static t_vec3	if_tp(t_vec3 pos, t_game *game, t_tp teleport)
+static t_vec3	if_tp(t_vec3 pos, t_game *game, t_tp teleport,
+float delta_floor)
 {
 	t_vec3	next_pos;
 	t_vec2	diff;
@@ -34,6 +35,8 @@ static t_vec3	if_tp(t_vec3 pos, t_game *game, t_tp teleport)
 	game->points[teleport.from_wall.a]);
 	next_pos.x = pos.x + diff.u;
 	next_pos.y = pos.y + diff.v;
+	if (delta_floor >= 0 || delta_floor > -0.5)
+			next_pos.z = pos.z + delta_floor;
 	return (next_pos);
 }
 
@@ -65,14 +68,12 @@ t_ph *physic)
 		if_not_tp(physic, teleport);
 	else
 	{
-		tmp_log.e_actif = game->player.my_entity;
+		tmp_log = (t_trigger) {.e_actif = game->player.my_entity,
+			.condi = TRIGGER_SECTOR};
 		tmp_log.e_actif.physic.sector_id = physic->sector_id;
-		tmp_log.condi = TRIGGER_SECTOR;
 		tmp_log.e_passif = tmp_log.e_actif;
 		apush(&game->log, &tmp_log);
-		next_pos = if_tp(pos, game, teleport);
-		if (delta_floor >= 0 || delta_floor > -0.5)
-			next_pos.z = pos.z + delta_floor;
+		next_pos = if_tp(pos, game, teleport, delta_floor);
 		return (next_pos);
 	}
 	return (pos);

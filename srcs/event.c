@@ -115,7 +115,6 @@ static void		keyactions(int scancode, t_env *env)
 		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
 }
 
-
 t_event			capture_events_loop(t_event events, t_env *env)
 {
 	SDL_Event	polled_event;

@@ -60,7 +60,8 @@ t_touch		collision(t_vec3 next_pos, t_ph physic, t_game game, int wall)
 	return (touch);
 }
 
-t_vec3		floor_col(float pos_z, t_sector sector, t_vec3 speed, u_int32_t *jump)
+t_vec3		floor_col(float pos_z, t_sector sector, t_vec3 speed,
+u_int32_t *jump)
 {
 	t_vec3	final_speed;
 	float	delta;
