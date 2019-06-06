@@ -87,6 +87,24 @@ static t_lvl_error	check_overlay(t_mat *materials, size_t nmaterials)
 	return (error);
 }
 
+static u_int32_t	launch_check_mats_2(t_game game, t_env *env,
+char *errors_text[NBR_ERROR])
+{
+	t_lvl_error error;
+
+	error = check_multi_sprite(game.nmulti_mats, game.multi_mats,
+		game.materials, game.nmaterials);
+	if (error.error_type != NO_ERROR)
+	{
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": material ");
+		ft_putnbr(error.multi_mats);
+		ft_putchar('\n');
+		return (check_editor(env));
+	}
+	return (1);
+}
+
 u_int32_t			launch_check_mats(t_game game, t_check_mat mats, t_env *env,
 char *errors_text[NBR_ERROR])
 {
@@ -95,24 +113,21 @@ char *errors_text[NBR_ERROR])
 	error = check_texture(game.ntextures, game.textures, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: material %d\n", errors_text[error.error_type],
-			error.mats);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": material ");
+		ft_putnbr(error.mats);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = check_overlay(game.materials, game.nmaterials);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: material %d\n", errors_text[error.error_type],
-			error.mats);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": material ");
+		ft_putnbr(error.mats);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
-	error = check_multi_sprite(game.nmulti_mats, game.multi_mats,\
-		game.materials, game.nmaterials);
-	if (error.error_type != NO_ERROR)
-	{
-		printf("%s: %d, material %d\n", errors_text[error.error_type],
-			error.multi_mats, error.mats);
-		return (check_editor(env));
-	}
+	launch_check_mats_2(game, env, errors_text);
 	return (1);
 }

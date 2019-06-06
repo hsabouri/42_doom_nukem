@@ -72,8 +72,10 @@ char *errors_text[NBR_ERROR])
 		game.nmulti_mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: entities %d\n", errors_text[error.error_type],
-			error.entities);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": entity ");
+		ft_putnbr(error.entities);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	return (1);

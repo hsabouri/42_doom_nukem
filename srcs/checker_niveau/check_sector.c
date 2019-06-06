@@ -88,13 +88,19 @@ t_env *env, char *errors_text[NBR_ERROR])
 	error = check_sector_floor(game.sectors, game.nsectors, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %d\n", errors_text[error.error_type], error.sector);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": sector ");
+		ft_putnbr(error.sector);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = check_sector_ceil(game.sectors, game.nsectors, mats);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %d\n", errors_text[error.error_type], error.sector);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": sector ");
+		ft_putnbr(error.sector);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	return (1);
@@ -108,14 +114,21 @@ t_env *env, char *errors_text[NBR_ERROR])
 	error = check_wall_sector(game.sectors, game.nsectors, game.nwalls);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %d, wall %d\n", errors_text[error.error_type],
-			error.sector, error.wall);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": sector ");
+		ft_putnbr(error.sector);
+		ft_putstr(", wall ");
+		ft_putnbr(error.wall);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	error = check_sector_id(game.sectors, game.nsectors);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: sector %d\n", errors_text[error.error_type], error.sector);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": sector ");
+		ft_putnbr(error.sector);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
 	launch_check_sector_2(game, mats, env, errors_text);

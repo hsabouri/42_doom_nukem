@@ -82,6 +82,34 @@ t_check_mat mats)
 	return (error);
 }
 
+static u_int32_t	launch_check_wall_2(t_game game, t_check_mat mats,
+t_env *env, char *errors_text[NBR_ERROR])
+{
+	t_lvl_error error;
+
+	error = check_portal_wall(game.walls, game.nwalls, game.nportals);
+	if (error.error_type != NO_ERROR)
+	{
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": wall ");
+		ft_putnbr(error.wall);
+		ft_putstr(", portal ");
+		ft_putnbr(error.portal);
+		ft_putchar('\n');
+		return (check_editor(env));
+	}
+	error = check_mats_wall(game.walls, game.nwalls, mats);
+	if (error.error_type != NO_ERROR)
+	{
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": wall ");
+		ft_putnbr(error.wall);
+		ft_putchar('\n');
+		return (check_editor(env));
+	}
+	return (1);
+}
+
 u_int32_t			launch_check_wall(t_game game, t_check_mat mats, t_env *env,
 char *errors_text[NBR_ERROR])
 {
@@ -90,22 +118,14 @@ char *errors_text[NBR_ERROR])
 	error = check_point_wall(game.walls, game.nwalls, game.npoints);
 	if (error.error_type != NO_ERROR)
 	{
-		printf("%s: wall %d, point %d\n", errors_text[error.error_type],
-			error.wall, error.point);
+		ft_putstr(errors_text[error.error_type]);
+		ft_putstr(": wall ");
+		ft_putnbr(error.wall);
+		ft_putstr(", point ");
+		ft_putnbr(error.point);
+		ft_putchar('\n');
 		return (check_editor(env));
 	}
-	error = check_portal_wall(game.walls, game.nwalls, game.nportals);
-	if (error.error_type != NO_ERROR)
-	{
-		printf("%s: wall %d, portal %d\n", errors_text[error.error_type],
-			error.wall, error.portal);
-		return (check_editor(env));
-	}
-	error = check_mats_wall(game.walls, game.nwalls, mats);
-	if (error.error_type != NO_ERROR)
-	{
-		printf("%s: wall %d\n", errors_text[error.error_type], error.wall);
-		return (check_editor(env));
-	}
+	launch_check_wall_2(game, mats, env, errors_text);
 	return (1);
 }
