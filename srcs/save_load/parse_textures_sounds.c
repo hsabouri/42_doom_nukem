@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures_sounds.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:10:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/02 18:03:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/06 12:52:05 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 	}
 	return (textures);
 }
+
+#ifndef __linux__
 
 static void	parse_music(t_save_music music, void *buf, t_save save,
 size_t i)
@@ -84,3 +86,15 @@ void		parse_audio(void *buf, t_save save, size_t naudios, t_audio type)
 		i++;
 	}
 }
+
+#else
+
+void		parse_audio(void *buf, t_save save, size_t naudios, t_audio type)
+{
+	(void)buf;
+	(void)save;
+	(void)naudios;
+	(void)type;
+}
+
+#endif
