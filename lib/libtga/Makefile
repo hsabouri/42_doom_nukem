@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra
 #CFLAGS += -Werror
 CFLAGS += -g -fPIC
 CFLAGS += -O3 -march=native
-CC = gcc
+CC = clang
 
 ifeq ($(SAN), yes)
 ifeq ($(shell uname -s), Darwin) # remove _o

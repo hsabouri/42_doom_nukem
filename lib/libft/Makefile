@@ -28,7 +28,7 @@ ifeq ($(OPT), yes)
 CFLAGS += -O3 -march=native
 endif
 
-CC = gcc
+CC = clang
 
 SRCDIR = sources
 OBJDIR = objs

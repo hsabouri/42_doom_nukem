@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure_clone.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:09:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:39:12 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct		s_c_mat
 	ssize_t			texture;
 	t_mode			mode;
 	t_color			filter;
+	int				frozen;
 	ssize_t			overlay;
 }					t_c_mat;
 

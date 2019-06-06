@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/31 15:26:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/06 10:19:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_mat	*init_mat_3(t_mat *materials, t_game *game)
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[10], .mode = NO_TILING,
-		.filter = WHITE, .overlay =	NULL};
+		.filter = WHITE, .overlay =	NULL, .frozen = 1};
 	materials[10] = tmp;
 	tmp.texture = &game->textures[11];
 	materials[11] = tmp;
@@ -75,15 +75,15 @@ static t_mat	*init_mat_2(t_mat *materials, t_game *game)
 	materials[3] = (t_mat) {.pos = fvec2_new(0, f_from_int(1300)),
 		.sca = fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		.color = NO_COLOR, .texture = &game->textures[3], .mode = SKYBOX,
-		.filter = WHITE, .overlay = &materials[4]};
+		.filter = WHITE, .overlay = &materials[4], .frozen = 1};
 	materials[4] = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[4], .mode = TILING,
-		.filter = WHITE, .overlay = NULL};
+		.filter = WHITE, .overlay = NULL, .frozen = 1};
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(3), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[5], .mode = NO_TILING,
-		.filter = WHITE, .overlay = NULL};
+		.filter = WHITE, .overlay = NULL, .frozen = 1};
 	materials[5] = tmp;
 	tmp.sca.u = f_from_int(2);
 	tmp.texture = &game->textures[6];
@@ -106,14 +106,14 @@ static t_mat	*init_mats(t_game *game)
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = game->textures, .mode = TILING,
-		.filter = WHITE, .overlay = NULL};
+		.filter = WHITE, .overlay = NULL, .frozen = 1};
 	materials[0] = tmp;
 	tmp.texture = &game->textures[1];
 	materials[1] = tmp;
 	materials[2] = (t_mat) {.pos = fvec2_new(0, f_from_int(1300)),
 		.sca = fvec2_new(f_from_float(0.7), f_from_float(0.7)),
 		.color = NO_COLOR, .texture = &game->textures[3], .mode = SKYBOX,
-		.filter = WHITE, .overlay = NULL};
+		.filter = WHITE, .overlay = NULL, .frozen = 1};
 	materials = init_mat_2(materials, game);
 	materials = init_mat_3(materials, game);
 	materials = init_mat_4(materials, game);

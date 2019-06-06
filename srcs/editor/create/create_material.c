@@ -22,6 +22,7 @@ t_game		create_material(size_t selected, t_game game)
 	if (game.materials == old)
 	{
 		game.materials[game.nmaterials] = game.materials[selected];
+		game.materials[game.nmaterials].frozen = 0;
 		game.nmaterials++;
 		return (game);
 	}
@@ -31,6 +32,7 @@ t_game		create_material(size_t selected, t_game game)
 	game = create_mat_update_sectors((size_t)old, game);
 	game = create_mat_update_multi_mats((size_t)old, game);
 	game.materials[game.nmaterials] = game.materials[selected];
+	game.materials[game.nmaterials].frozen = 0;
 	game.nmaterials++;
 	return (game);
 }

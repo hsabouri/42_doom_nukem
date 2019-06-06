@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:51:39 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 15:26:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/06 10:19:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_mat	*init_mat_7(t_mat *materials, t_game *game)
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_int(1), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[67], .mode = NO_TILING,
-		.filter = WHITE, .overlay =	NULL};
+		.filter = WHITE, .overlay =	NULL, .frozen = 1};
 	materials[43] = tmp;
 	tmp.texture = &game->textures[68];
 	materials[44] = tmp;
@@ -64,7 +64,7 @@ t_mat	*init_mat_5(t_mat *materials, t_game *game)
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
 		.sca = fvec2_new(f_from_float(1.5), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[51], .mode = NO_TILING,
-		.filter = WHITE, .overlay =	NULL};
+		.filter = WHITE, .overlay =	NULL, .frozen = 1};
 	materials[27] = tmp;
 	tmp.texture = &game->textures[52];
 	materials[28] = tmp;

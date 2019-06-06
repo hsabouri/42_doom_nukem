@@ -55,7 +55,7 @@ OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 # -----------------
 
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Iincludes
 CFLAGS += -g
 #CFLAGS += -O3 -march=native

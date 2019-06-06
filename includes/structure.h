@@ -67,6 +67,7 @@ typedef struct		s_mat
 	t_img			*texture;
 	t_mode			mode;
 	t_color			filter;
+	int				frozen;
 	struct s_mat	*overlay;
 }					t_mat;
 

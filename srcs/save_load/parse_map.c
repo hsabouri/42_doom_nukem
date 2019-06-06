@@ -33,6 +33,7 @@ size_t nmats)
 		current.color = struc_m.color;
 		current.mode = struc_m.mode;
 		current.filter = struc_m.filter;
+		current.frozen = struc_m.frozen;
 		current.texture = (struc_m.texture == -1) ? NULL
 			: id_to_p(struc_m.texture, texture, sizeof(t_img));
 		current.overlay = (struc_m.overlay == -1) ? NULL
