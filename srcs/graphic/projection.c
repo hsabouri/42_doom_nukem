@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:24:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:45:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "srcs/common/translate_id.h"
 
 static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h,
-	const t_section section)
+const t_section section)
 {
 	t_proj	res;
 	int		span;
@@ -29,6 +29,7 @@ static t_proj	projection(const t_hit hit, const t_context context, t_fvec2 h,
 	res.u = hit.ratios.u;
 	res.x = f_mul(section.wall.size, hit.ratios.u) + section.wall.tex_pos.u;
 	span = res.bot - res.top;
+	res.dis = hit.ratios.v;
 	res.y_start = section.wall.tex_pos.v * 200;
 	res.y_iter = ((h.u - h.v) << 9) / (span + !span);
 	res.plane.uid_floor = translate_in(PART_FLOOR, MOD_NO,
@@ -191,5 +192,6 @@ t_e_proj		entity_projection(t_hit hit, const t_context context,
 	res.x = hit.ratios.u;
 	res.tex.ambient = context.sector.ambient;
 	res.y_iter = f_from_int(1 << 8) / (span + !span);
+	res.dis = hit.ratios.v;
 	return (res);
 }

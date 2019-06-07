@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 14:25:08 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:06:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,38 @@ t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix,
 		return (res);
 }
 
+static t_color	fog(t_color color, t_fixed u)
+{
+	const int	min = 20;
+
+	if (u <= f_from_int(min))
+		return (color);
+	color.r = f_to_int(f_div(f_from_int(color.r * min), u));
+	color.g = f_to_int(f_div(f_from_int(color.g * min), u));
+	color.b = f_to_int(f_div(f_from_int(color.b * min), u));
+	return (color);
+}
+
 t_color			get_wall_pixel(t_proj proj, int y)
 {
-	t_fvec2 pix;
+	t_fvec2	pix;
+	t_color	res;
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
-	return (get_mat_pixel(proj.tex_wall.mat, proj.tex_wall, pix, 9, y));
+	res = get_mat_pixel(proj.tex_wall.mat, proj.tex_wall, pix, 9, y);
+	return (fog(res, proj.dis));
 }
 
 t_color			get_portal_pixel(t_proj proj, int y)
 {
-	t_fvec2 pix;
+	t_fvec2	pix;
+	t_color	res;
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
-	return (get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, 9, y));
+	res = get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, 9, y);
+	return (fog(res, proj.dis));
 }
 
 t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio,
@@ -161,5 +177,5 @@ t_color			get_entity_pixel(t_e_proj proj, int y)
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top);
 	res = get_mat_pixel(proj.mat, proj.tex, pix, 8, y);
-	return (res);
+	return (fog(res, proj.dis));
 }

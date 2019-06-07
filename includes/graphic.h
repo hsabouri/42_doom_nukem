@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 16:11:47 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:44:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ typedef struct	s_proj
 	int			step;
 	int			bot;
 	t_fixed		u;
+	t_fixed		dis;
 	t_fixed		x;
 	t_fixed		y_iter;
 	t_fixed		y_start;
@@ -196,6 +197,7 @@ typedef struct	s_e_proj
 	int			top;
 	int			bot;
 	t_fixed		y_start;
+	t_fixed		dis;
 	t_fixed		u;
 	t_fixed		x;
 	t_fixed		y_iter;
