@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triggers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:58:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 17:00:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/08 10:59:10 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <doom.h>
 
-int		no_trigger(t_trigger trigger, t_trigger c_log);
+int		shot_trigger(t_trigger trigger, t_trigger c_log);
 int		see_trigger(t_trigger trigger, t_trigger c_log);
 int		touch_trigger(t_trigger trigger, t_trigger c_log);
 int		interact_trigger(t_trigger trigger, t_trigger c_log);

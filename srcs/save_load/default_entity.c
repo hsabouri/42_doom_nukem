@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/02 15:42:30 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 11:42:37 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_player	player_default(t_game game)
 		0,
 		safe_anew(NULL, 1, sizeof(t_entity *), "generate_map")
 		};
+		return (player);
 }
 
 t_entity	entity_default(void)

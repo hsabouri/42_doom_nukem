@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/02 15:40:19 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 10:57:35 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,8 @@ ADD INFINITY GAME EVENT
 */
 
 
-t_env     init_actions(void)
+void     init_actions(t_env *env)
 {
-	t_env env;
-	
 	ft_actions *actions = malloc(sizeof(ft_trigger) * 5);
 	actions[0] = spawn_entity; 
 	actions[1] = kill_entity;
@@ -109,6 +107,5 @@ t_env     init_actions(void)
 	actions[3] = health_up;
     actions[4] = add_inventory;
 
-	env.actions = actions;
-	return (env);
+	env->actions = actions;
 }
