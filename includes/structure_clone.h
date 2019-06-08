@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure_clone.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/05 14:39:12 by hugo             ###   ########.fr       */
+/*   Updated: 2019/06/08 16:09:46 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct		s_c_player
 	u_int32_t		weapons[2];
 	u_int32_t		secondary;
 	u_int32_t		equiped;
+	t_array			inventory;
 	// float		armor;
 }					t_c_player;
 

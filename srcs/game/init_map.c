@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/08 16:09:09 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:10:52 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void	entities_event(t_entity	*entity, t_game *game)
 	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
 	first_e = (t_game_event *)malloc(sizeof(t_game_event));
 	g_e	= lpnew(NULL);
-	if (entity->type == GUN_MARINE && entity->type == SMG_MARINE && entity->type == BLACK_MARINE && entity->type == RED_MARINE)
+	if (entity->type == GUN_MARINE || entity->type == SMG_MARINE || entity->type == BLACK_MARINE || entity->type == RED_MARINE)
 	{
 		*first_e = (t_game_event){
 		(t_pelem) {NULL, NULL},
 		(t_trigger){
-			game->player.my_entity, TRIGGER_SHOT, game->entities[entity->id] // Game event : list event wanted
+			game->player.my_entity, TRIGGER_SHOT, entity->id // Game event : list event wanted
 			},
 		(t_action){
 			NULL ,&game->entities[entity->id], ACTION_H_DOWN
@@ -86,11 +86,11 @@ void	entities_event(t_entity	*entity, t_game *game)
 		};
 		lppush(&g_e, (t_pelem *)first_e);
 	}
-	else if (entity->type == GREEN_KEY_CARD && entity->type == BLUE_KEY_CARD && entity->type == RED_KEY_CARD &&	entity->type == PURPLE_KEY_CARD) {
+	else if (entity->type == GREEN_KEY_CARD || entity->type == BLUE_KEY_CARD || entity->type == RED_KEY_CARD ||	entity->type == PURPLE_KEY_CARD) {
 		*first_e = (t_game_event){
 		(t_pelem) {NULL, NULL},
 		(t_trigger){
-			game->player.my_entity, TRIGGER_INTERACT, game->entities[entity->id] // Game event : list event wanted
+			game->player.my_entity, TRIGGER_INTERACT, entity->id // Game event : list event wanted
 			},
 		(t_action){
 			NULL ,&game->entities[entity->id], ACTION_ADD_INV
@@ -98,11 +98,11 @@ void	entities_event(t_entity	*entity, t_game *game)
 		};
 		lppush(&g_e, (t_pelem *)first_e);
 	}
-	else if (entity->type == APPLE && entity->type == FISH && entity->type == MEAT && entity->type == MEDIPACK) {
+	else if (entity->type == APPLE || entity->type == FISH || entity->type == MEAT || entity->type == MEDIPACK) {
 		*first_e = (t_game_event){
 		(t_pelem) {NULL, NULL},
 		(t_trigger){
-			game->player.my_entity, TRIGGER_INTERACT, game->entities[entity->id] // Game event : list event wanted
+			game->player.my_entity, TRIGGER_INTERACT, entity->id // Game event : list event wanted
 			},
 		(t_action){
 			NULL ,&game->entities[entity->id], ACTION_H_UP
@@ -110,7 +110,8 @@ void	entities_event(t_entity	*entity, t_game *game)
 		};
 		lppush(&g_e, (t_pelem *)first_e);
 	}
-	entity->self_events = (struct s_game_event) g_e;
+
+	entity->self_events = g_e;
 }
 
 t_entity		*init_entities(t_game *game)
@@ -141,5 +142,6 @@ t_entity		*init_entities(t_game *game)
 	entities[3].spawn.pos = (t_vec3){5, 10, 0};
 	entities_event(&entities[3], game);
 	game->nentities = 4;
+
 	return (entities);
 }

@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/02 15:58:29 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/08 10:55:37 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct		s_entity
 	t_ph			spawn;
 	t_array			*mat;
 	t_entity_type	type;
-	struct s_game_event	*self_events;
+	t_plist	self_events;
 	float life;
 	// float  armor;
 	// t_weapon weapons;
