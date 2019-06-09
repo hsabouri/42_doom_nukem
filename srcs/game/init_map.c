@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/08 16:10:52 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/09 17:52:54 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,11 @@ void	entities_event(t_entity	*entity, t_game *game)
 			game->player.my_entity, TRIGGER_SHOT, entity->id // Game event : list event wanted
 			},
 		(t_action){
-			NULL ,&game->entities[entity->id], ACTION_H_DOWN
+			NULL ,&entity->id, ACTION_H_DOWN, 25
 			}
 		};
+		printf("WRWQR %d\n", first_e->action.target->id);
+		printf("LUUUL %d\n",entity->id);
 		lppush(&g_e, (t_pelem *)first_e);
 	}
 	else if (entity->type == GREEN_KEY_CARD || entity->type == BLUE_KEY_CARD || entity->type == RED_KEY_CARD ||	entity->type == PURPLE_KEY_CARD) {
@@ -93,9 +95,10 @@ void	entities_event(t_entity	*entity, t_game *game)
 			game->player.my_entity, TRIGGER_INTERACT, entity->id // Game event : list event wanted
 			},
 		(t_action){
-			NULL ,&game->entities[entity->id], ACTION_ADD_INV
+			NULL ,&game->entities[entity->id], ACTION_ADD_INV, 0
 			}
 		};
+		// printf("WRWQR %d\n", first_e->action.target->id;
 		lppush(&g_e, (t_pelem *)first_e);
 	}
 	else if (entity->type == APPLE || entity->type == FISH || entity->type == MEAT || entity->type == MEDIPACK) {
@@ -105,7 +108,7 @@ void	entities_event(t_entity	*entity, t_game *game)
 			game->player.my_entity, TRIGGER_INTERACT, entity->id // Game event : list event wanted
 			},
 		(t_action){
-			NULL ,&game->entities[entity->id], ACTION_H_UP
+			NULL ,&game->entities[entity->id], ACTION_H_UP, 20
 			}
 		};
 		lppush(&g_e, (t_pelem *)first_e);
@@ -121,27 +124,31 @@ t_entity		*init_entities(t_game *game)
 	entities = (t_entity *)malloc(4 * sizeof(t_entity));
 	entities[0] = game->classes[0];
 	entities[0].id = 0;
+	entities[0].life = 100;
 	entities[0].physic.pos = (t_vec3){8, 12, 0};
 	entities[0].spawn.pos = (t_vec3){8, 12, 0};
 	entities_event(&entities[0], game);
-	entities[1] = game->classes[2];
-	entities[1].id = 1;
-	entities[1].physic.pos = (t_vec3){5, 12, 0};
-	entities[1].spawn.pos = (t_vec3){5, 12, 0};
-	entities_event(&entities[1], game);
+	// entities[1] = game->classes[2];
+	// entities[1].id = 1;
+	// entities[1].life = 100;
+	// entities[1].physic.pos = (t_vec3){5, 12, 0};
+	// entities[1].spawn.pos = (t_vec3){5, 12, 0};
+	// entities_event(&entities[1], game);
 	
-	entities[2] = game->classes[3];
-	entities[2].id = 2;
-	entities[2].physic.pos = (t_vec3){8, 10, 0};
-	entities[2].spawn.pos = (t_vec3){8, 10, 0};
-	entities_event(&entities[2], game);
+	// entities[2] = game->classes[3];
+	// entities[2].id = 2;
+	// entities[2].life = 100;
+	// entities[2].physic.pos = (t_vec3){8, 10, 0};
+	// entities[2].spawn.pos = (t_vec3){8, 10, 0};
+	// entities_event(&entities[2], game);
 
-	entities[3] = game->classes[4];
-	entities[3].id = 3;
-	entities[3].physic.pos = (t_vec3){5, 10, 0};
-	entities[3].spawn.pos = (t_vec3){5, 10, 0};
-	entities_event(&entities[3], game);
-	game->nentities = 4;
+	// entities[3] = game->classes[4];
+	// entities[3].id = 3;
+	// entities[3].life = 100;
+	// entities[3].physic.pos = (t_vec3){5, 10, 0};
+	// entities[3].spawn.pos = (t_vec3){5, 10, 0};
+	// entities_event(&entities[3], game);
+	game->nentities = 1;
 
 	return (entities);
 }

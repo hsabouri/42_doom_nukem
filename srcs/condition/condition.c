@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/06/08 16:10:23 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/09 17:44:24 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_game	general_conditions(t_game game, t_event events)
 	return (game);
 }
 
-void	entities_conditions(t_game *game, ft_trigger *triggers)
+void	entities_conditions(t_game *game, ft_trigger *triggers, ft_actions *actions)
 {
 	t_game_event    *current;
 	t_entity		*check_entities;
@@ -63,47 +63,51 @@ void	entities_conditions(t_game *game, ft_trigger *triggers)
 
 	i = 0;
 	
-	printf("Debut\n");
+	// printf("Debut\n");
 	while (i < game->nentities)
 	{
-		printf("+ 1\n", i);
+		// printf("+ 1\n", i);
 		while ((current = (t_game_event *)lpnext(&check_entities[0].self_events)) != NULL)
 		{
-			printf("NEW ENTITY\n");
+			// printf("NEW ENTITY\n");
 			while ((c_log = (t_trigger *)anth(&game->log, j)) != NULL)
 			{
-				printf("LOG %d\n", j);
+				// printf("LOG %d\n", j);
 				if (triggers[current->trigger.condi](current->trigger, *c_log) == 1)
 				{
-					printf("OOF %d", current->trigger.e_actif.id);
+					printf("PRE OUF %d\n", current->trigger.e_passif.id);
+					printf("TARGET ENTITY %d\n",current->action.target->id);
+					actions[current->action.action_type]((t_vec2){0,0},current->action.target,game,current->action.num);
+					// printf("OOF %d\n", current->trigger.e_passif.id);
 					if (current->trigger.condi == TRIGGER_SEE)
 					{
-						printf(" -> SEE -> ");
+						// printf(" -> SEE -> ");
 					} 
 					else if (current->trigger.condi == TRIGGER_TOUCH)
 					{
-						printf(" -> TOUCH -> ");
+						// printf(" -> TOUCH -> ");
 					}
 					else if (current->trigger.condi == TRIGGER_INTERACT)
 					{
-						printf(" -> INTERACT -> ");
+						// printf(" -> INTERACT -> ");
 					}
 					else if (current->trigger.condi == TRIGGER_SECTOR)
 					{
-						printf(" -> SECTOR -> ");
+						// printf(" -> SECTOR -> ");
 					}
 					else if (current->trigger.condi == TRIGGER_SHOT)
 					{
-						printf(" -> SHOT -> ");
+						// printf(" -> SHOT -> ");
 					}
 					
 					// printf("");
 					
 					
 					// break;
-					printf("%d\n", current->trigger.e_passif.id);	
-					printf("PAN PAN PAN");
+					// printf("%d\n", current->trigger.e_passif.id);	
+					// printf("PAN PAN PAN");
 					game->chunks = stack_sounds(game->chunks, 5, 2);
+					
 					//DO ACTION ENTITY
 				}
 				j++;
@@ -115,7 +119,7 @@ void	entities_conditions(t_game *game, ft_trigger *triggers)
 	}
 }
 
-t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
+t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers, ft_actions *actions)
 {
 	t_game_event	*current;
 	t_trigger		*c_log;
@@ -123,7 +127,7 @@ t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers)
 
 	j = 0;
 	game = general_conditions(game, events);
-	entities_conditions(&game, triggers);
+	entities_conditions(&game, triggers, actions);
 	while ((current = (t_game_event *)lpnext(&game.waiting_events)) != NULL)
 	{
 		while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
