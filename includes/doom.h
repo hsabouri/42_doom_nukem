@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/02 13:38:46 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/09 17:27:22 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef	enum	e_game_mode
 }				t_game_mode;
 
 typedef int (*ft_trigger)(t_trigger trigger, t_trigger c_log);
-typedef void (*ft_actions)(t_vec2 pos, t_entity *target, t_game *game);
+typedef void (*ft_actions)(t_vec2 pos, t_entity *target, t_game *game, int num);
 
 typedef struct			s_event
 {
@@ -208,7 +208,7 @@ t_text					text(const char *str, t_pix pos, t_sdl *sdl);
 */
 
 t_env	init_conditions(void);
-t_game  check_conditions(t_game game, t_event events, ft_trigger *triggers);
+t_game  check_conditions(t_game game, t_event events, ft_trigger *triggers, ft_actions *actions);
 t_game 	ft_reset_log(t_game game);
 void add_events(t_game * game, t_entity e_actif, t_condition condi , t_entity e_passif);
 

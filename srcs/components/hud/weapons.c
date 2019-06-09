@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 12:28:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/08 15:38:24 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/09 17:34:00 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ t_weapons_state *self_state)
 			hud->env->game.weapons[self_state->last_equiped].ammo -= 1;
 			
 			// LOG WHEN SHOT AN ENTITY
-			printf("PAN PAN %d\n", ren.type);
+			// printf("PAN PAN %d\n", ren.type);
 			hud->env->game.chunks = stack_sounds(hud->env->game.chunks, 4, 1);
 			if (ren.type == PART_ENTITY)
 			{
-				printf("TOUCHE\n");
+				// printf("TOUCHE\n");
 				ren = world_selector(hud->env->game);
 				tmp_log.e_actif = hud->env->game.player.my_entity;
 				tmp_log.condi = TRIGGER_SHOT;

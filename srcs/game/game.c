@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/08 16:10:45 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/09 17:17:18 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		game_loop(t_env *env, size_t frame)
 	if (env->game.nwalls > 0)
 		env->game = physic(env->game, env->events, old_timer);
 	env->game.frame = frame;
-	env->game = check_conditions(env->game, env->events, env->condition);
+	env->game = check_conditions(env->game, env->events, env->condition, env->actions);
 	content = NULL;
 	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
 	env->current_buffer = content;
