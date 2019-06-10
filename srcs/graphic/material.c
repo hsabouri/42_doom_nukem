@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/07 16:06:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/10 15:27:52 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ t_color			get_portal_pixel(t_proj proj, int y)
 	return (fog(res, proj.dis));
 }
 
-t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio,
-	t_sector sector)
+t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio)
 {
 	t_fvec2 vec;
 	t_fixed diffx;
@@ -115,58 +114,48 @@ t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio,
 
 t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 {
-	t_fixed	z;
 	t_fvec2	pix;
-	t_fixed t;
+	t_fixed	t;
+	t_fvec3	dis;
 
 	proj.line.z.v = proj.z_zero - proj.z_diff * y;
 	t = (f_mul(proj.ceiling.x, proj.line.x.v) + f_mul(proj.ceiling.y,
 		proj.line.y.v) - proj.line.z.v);
 	if (t == 0)
 		return (NO_COLOR);
-	if (proj.ceiling.x == 0 && proj.ceiling.y == 0)
-	{
-		z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
-		if (z == 0)
-			return (NO_COLOR);
-		pix = fvec2_add(fvec2_scale(proj.ray, f_div(proj.wr.u, z)), proj.pos);
-		return (get_mat_pixel(tex.mat, tex, pix, 0, y));
-	}
 	t = f_div((-proj.ceiling.z - f_mul(proj.ceiling.x, proj.line.x.u)
 	- f_mul(proj.ceiling.y, proj.line.y.u) + proj.line.z.u),
 	(f_mul(proj.ceiling.x, proj.line.x.v) + f_mul(proj.ceiling.y,
 		proj.line.y.v) - proj.line.z.v));
 	pix.u = proj.line.x.u + f_mul(t, proj.line.x.v);
 	pix.v = proj.line.y.u + f_mul(t, proj.line.y.v);
-	return (get_mat_pixel(tex.mat, tex, pix, 0, y));
+	dis.x = f_to_float(pix.u + proj.center.u - proj.pos.u);
+	dis.y = f_to_float(pix.v + proj.center.v - proj.pos.v);
+	dis.z = fast_sqrt(dis.x * dis.x + dis.y * dis.y);
+	return (fog(get_mat_pixel(tex.mat, tex, pix, 0, y), f_from_float(dis.z)));
 }
 
 t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 {
-	t_fixed	z;
 	t_fvec2	pix;
-	t_fixed t;
+	t_fixed	t;
+	t_vec3	dis;
 
 	proj.line.z.v = proj.z_zero - proj.z_diff * y;
 	t = (f_mul(proj.floor.x, proj.line.x.v) + f_mul(proj.floor.y,
 		proj.line.y.v) - proj.line.z.v);
 	if (t == 0)
 		return (NO_COLOR);
-	if (proj.floor.x == 0 && proj.floor.y == 0)
-	{
-		z = f_from_int(HEIGHT / 2 - y + proj.look_v) / HEIGHT;
-		if (z == 0)
-			return (NO_COLOR);
-		pix = fvec2_add(fvec2_scale(proj.ray, f_div(proj.wr.v, z)), proj.pos);
-		return (get_mat_pixel(tex.mat, tex, pix, 0, y));
-	}
 	t = f_div((-proj.floor.z - f_mul(proj.floor.x, proj.line.x.u)
 	- f_mul(proj.floor.y, proj.line.y.u) + proj.line.z.u),
 	(f_mul(proj.floor.x, proj.line.x.v) + f_mul(proj.floor.y,
 		proj.line.y.v) - proj.line.z.v));
 	pix.u = proj.line.x.u + f_mul(t, proj.line.x.v);
 	pix.v = proj.line.y.u + f_mul(t, proj.line.y.v);
-	return (get_mat_pixel(tex.mat, tex, pix, 0, y));
+	dis.x = f_to_float(pix.u + proj.center.u - proj.pos.u);
+	dis.y = f_to_float(pix.v + proj.center.v - proj.pos.v);
+	dis.z = fast_sqrt(dis.x * dis.x + dis.y * dis.y);
+	return (fog(get_mat_pixel(tex.mat, tex, pix, 0, y), f_from_float(dis.z)));
 }
 
 t_color			get_entity_pixel(t_e_proj proj, int y)

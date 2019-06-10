@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/07 15:44:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:07:42 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
 t_bunch			build_entity_bunch(const t_game game, const t_context context,
 				const t_limit limit, t_fvec2 pos);
 t_render		build_sections_entities(const t_context ctx,
-const t_bunch bunch, const t_limit lmts);
+				const t_bunch bunch, const t_limit lmts);
 t_render		build_sections(t_context context, t_bunch bunch,
 				t_limit limits);
 t_render		build_sections_portals(t_render render);
@@ -277,10 +277,14 @@ t_cache_wall	switch_points(t_cache_wall current, t_game game, size_t i,
 				t_context context);
 int				check_z_limits(size_t n, t_game game);
 int				check_z_game(size_t n, int i, t_game game);
-t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio,
-				t_sector sector);
+t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio);
 size_t			find_wall_portal(t_game game, size_t wall);
 size_t			find_wall_order(t_game game, size_t wall);
 size_t			find_sector_portals(t_game game, size_t wall);
 t_cache_wall	switch_portals(t_cache_wall current, t_game game, size_t wall);
+t_proj			projection2(t_context context, t_proj res, t_fvec2 h);
+t_fvec2			proj_h(t_fixed ratio, t_sector sector, t_cache_wall wall,
+				t_ph physic);
+t_fvec2			proj_hp(t_fixed ratio, t_sector sector, t_cache_wall wall,
+				t_ph physic);
 #endif

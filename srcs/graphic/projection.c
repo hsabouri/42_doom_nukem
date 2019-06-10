@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/07 15:45:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:13:19 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,8 @@ const t_section section)
 	res.plane.h = h;
 	res.plane.pos = vec2_to_fvec2(vec3_to_vec2(context.physic.pos));
 	res.plane.ray = hit.ray;
-	res.plane.wr.u = f_div(-h.v, f_mul((f_from_int(HEIGHT) / WIDTH),
-		f_from_float(PWIDTH)));
-	res.plane.wr.v = f_div(-h.u, f_mul((f_from_int(HEIGHT) / WIDTH),
-		f_from_float(PWIDTH)));
-	res.plane.look_v = f_to_int(context.physic.look_v * 100);
-	res.tex_wall.ambient = context.sector.ambient;
-	res.plane.tex_floor.ambient = context.sector.ambient;
-	res.plane.tex_roof.ambient = context.sector.ambient;
-	res.plane.floor.x = f_from_float(context.sector.floor.x);
-	res.plane.floor.y = f_from_float(context.sector.floor.y);
-	res.plane.floor.z = f_from_float(context.sector.floor.z);
-	res.plane.ceiling.x = f_from_float(context.sector.ceiling.x);
-	res.plane.ceiling.y = f_from_float(context.sector.ceiling.y);
-	res.plane.ceiling.z = f_from_float(context.sector.ceiling.z);
-	res.plane.center.u = f_from_float(context.sector.center.u);
-	res.plane.center.v = f_from_float(context.sector.center.v);
-	res.plane.height = context.height;
-	res.plane.v_a = context.v_a;
-	res.plane.v_b = context.v_b;
-	res.plane.line.z.u = (res.plane.height);
-	res.plane = find_line(res.plane.center, res.plane, ratio, context.sector);
+	res = projection2(context, res, h);
+	res.plane = find_line(res.plane.center, res.plane, ratio);
 	return (res);
 }
 
@@ -79,22 +60,9 @@ t_proj			wall_projection(int id, t_hit hit, const t_context context,
 {
 	t_proj	res;
 	t_fvec2	h;
-	t_fixed	dis;
-	t_fixed	dis2;
 
 	section.id = id;
-	dis = find_z(context.sector, section.wall.left_z, 1)
-	- find_z(context.sector, section.wall.right_z, 1);
-	dis = f_mul(dis, hit.ratios.u);
-	dis2 = find_z(context.sector, section.wall.left_z, 0)
-	- find_z(context.sector, section.wall.right_z, 0);
-	dis2 = f_mul(dis2, hit.ratios.u);
-	h.u = f_from_float((context.physic.pos.z + context.physic.height))
-	- find_z(context.sector, section.wall.left_z, 1) + dis;
-	h.v = f_from_float((context.physic.pos.z + context.physic.height))
-	- find_z(context.sector, section.wall.left_z, 0) + dis2;
-	if (hit.ratios.v < 10)
-		hit.ratios.v = 10;
+	h = proj_h(hit.ratios.u, context.sector, section.wall, context.physic);
 	res = projection(hit, context, h, section);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_WALL, MOD_NO, section.wall.id, 0);
@@ -114,32 +82,10 @@ t_proj			portal_projection(int id, t_hit hit, const t_context context,
 	t_proj		res;
 	t_fvec2		h;
 	t_fvec2		h2;
-	t_fixed		dis;
-	t_fixed		dis2;
 
 	section.id = id;
-	if (hit.ratios.v < 10)
-		hit.ratios.v = 10;
-	dis = find_z(context.sector, section.wall.left_z, 1)
-	- find_z(context.sector, section.wall.right_z, 1);
-	dis = f_mul(dis, hit.ratios.u);
-	dis2 = find_z(context.sector, section.wall.left_z, 0)
-	- find_z(context.sector, section.wall.right_z, 0);
-	dis2 = f_mul(dis2, hit.ratios.u);
-	h.u = f_from_float((context.physic.pos.z + context.physic.height))
-	- find_z(context.sector, section.wall.left_z, 1) + dis;
-	h.v = f_from_float((context.physic.pos.z + context.physic.height))
-	- find_z(context.sector, section.wall.left_z, 0) + dis2;
-	dis = find_z(section.next, section.wall.left_p, 1)
-	- find_z(section.next, section.wall.right_p, 1);
-	dis = f_mul(dis, hit.ratios.u);
-	dis2 = find_z(section.next, section.wall.left_p, 0)
-	- find_z(section.next, section.wall.right_p, 0);
-	dis2 = f_mul(dis2, hit.ratios.u);
-	h2.u = f_from_float((context.physic.pos.z + context.physic.height))
-	- find_z(section.next, section.wall.left_p, 1) + dis;
-	h2.v = f_from_float((context.physic.pos.z + context.physic.height))
-	- find_z(section.next, section.wall.left_p, 0) + dis2;
+	h = proj_h(hit.ratios.u, context.sector, section.wall, context.physic);
+	h2 = proj_hp(hit.ratios.u, section.next, section.wall, context.physic);
 	res = projection(hit, context, h, section);
 	res = skybox(res, id, context);
 	res.uid = translate_in(PART_PORTAL, MOD_OPEN, section.wall.id, 0);
@@ -150,13 +96,12 @@ t_proj			portal_projection(int id, t_hit hit, const t_context context,
 	res.plane.tex_roof.mat = *context.sector.ceiling_mat;
 	res.plane.tex_floor.mat = *context.sector.floor_mat;
 	res.tex_open = res.tex_wall;
+	res.is_portal_tex = 0;
 	if (section.wall.open)
 	{
 		res.is_portal_tex = 1;
 		res.tex_open.mat = *section.wall.open;
 	}
-	else
-		res.is_portal_tex = 0;
 	res.tex_wall.mat = section.wall.mat;
 	return (res);
 }
@@ -169,8 +114,6 @@ t_e_proj		entity_projection(t_hit hit, const t_context context,
 	t_fvec2		sector_h;
 	int			span;
 
-	if (hit.ratios.v < 10)
-		hit.ratios.v = 10;
 	h.u = f_from_float((context.physic.pos.z + context.physic.height))
 	- section.entity.h;
 	h.v = h.u - f_from_float(section.entity.physic.height);
@@ -188,9 +131,6 @@ t_e_proj		entity_projection(t_hit hit, const t_context context,
 			hit.ratios.v) + context.physic.look_v * 100);
 	res.uid = translate_in(PART_ENTITY, MOD_NO, section.entity.id, 0);
 	res.mat = *section.entity.mat;
-	res.u = hit.ratios.u;
-	res.x = hit.ratios.u;
-	res.tex.ambient = context.sector.ambient;
 	res.y_iter = f_from_int(1 << 8) / (span + !span);
 	res.dis = hit.ratios.v;
 	return (res);

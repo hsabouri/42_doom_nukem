@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/30 17:19:23 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:13:45 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	render_wall(const t_context context, const t_section section,
 		take_right(section.wall.a, section.wall.b),
 		fvec2_new(0, 0),
 		get_ray_dir(context.physic, id));
+		if (hit.ratios.v < 10)
+			hit.ratios.v = 10;
 		proj = wall_projection(id, hit, context, section);
 		draw_wall(id, proj, buf, ids);
 		++id;
@@ -49,6 +51,8 @@ void	render_portal(const t_context context, const t_section section,
 		take_right(section.wall.a, section.wall.b),
 		fvec2_new(0, 0),
 		get_ray_dir(context.physic, id - 1));
+		if (hit.ratios.v < 10)
+			hit.ratios.v = 10;
 		proj = portal_projection(id, hit, context, section);
 		draw_portal(id, proj, buf, ids);
 		++id;
@@ -67,7 +71,12 @@ void	render_entity(const t_context context, const t_section_entity section,
 	{
 		hit = ray_seg(section.entity.a, section.entity.b,
 			fvec2_new(0, 0), get_ray_dir(context.physic, id));
+		if (hit.ratios.v < 10)
+			hit.ratios.v = 10;
 		proj = entity_projection(hit, context, section);
+		proj.u = hit.ratios.u;
+		proj.x = hit.ratios.u;
+		proj.tex.ambient = context.sector.ambient;
 		draw_entity(id, proj, buf, ids);
 		++id;
 	}
