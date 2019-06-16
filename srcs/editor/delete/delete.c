@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 13:34:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:08:26 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/16 16:03:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_game	delete_portal(size_t portal, t_game game)
 {
-	if (!(game.portals =\
+	if (!(game.portals =
 	array_close(game.portals, portal, game.nportals, sizeof(t_portal))))
 		return (game);
 	game.nportals--;
@@ -24,7 +24,7 @@ t_game	delete_portal(size_t portal, t_game game)
 
 t_game	delete_sector(size_t sector, t_game game)
 {
-	if (!(game.sectors =\
+	if (!(game.sectors =
 	array_close(game.sectors, sector, game.nsectors, sizeof(t_sector))))
 		return (game);
 	game.nsectors--;
@@ -35,7 +35,7 @@ t_game	delete_sector(size_t sector, t_game game)
 
 t_game	delete_wall(size_t wall, t_game game)
 {
-	if (!(game.walls =\
+	if (!(game.walls =
 	array_close(game.walls, wall, game.nwalls + game.nuwalls, sizeof(t_wall))))
 		return (game);
 	game.nwalls--;
@@ -46,7 +46,7 @@ t_game	delete_wall(size_t wall, t_game game)
 
 t_game	delete_point(size_t point, t_game game)
 {
-	if (!(game.points =\
+	if (!(game.points =
 	array_close(game.points, point, game.npoints, sizeof(t_vec2))))
 		return (game);
 	game.npoints--;
@@ -55,11 +55,17 @@ t_game	delete_point(size_t point, t_game game)
 
 t_game	delete_entity(size_t entity, t_game game)
 {
+	const size_t	old = (size_t)game.entities;
+
 	if (entity >= game.nentities)
 		return (game);
-	if (!(game.entities =\
+	ldel((t_list *)&game.entities[entity].self_events);
+	if (!(game.entities =
 	array_close(game.entities, entity, game.nentities, sizeof(t_entity))))
 		return (game);
 	game.nentities--;
+	game.waiting_events =
+		del_update_game_events(game, entity, old, game.waiting_events);
+	game = del_update_entities_game_events(game, entity, old);
 	return (game);
 }

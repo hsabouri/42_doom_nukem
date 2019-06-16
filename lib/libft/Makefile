@@ -6,7 +6,7 @@
 #    By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/19 10:32:42 by hsabouri          #+#    #+#              #
-#    Updated: 2019/05/26 18:24:24 by hsabouri         ###   ########.fr        #
+#    Updated: 2019/06/15 14:52:29 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,8 @@ SRCNAM	= ft_atoi.c\
 		  ft_listshift.c\
 		  ft_listpush.c\
 		  ft_listmap.c\
+		  ft_listmap.c\
+		  ft_ldel.c\
 		  ft_anew.c\
 		  ft_anth.c\
 		  ft_apop.c\
