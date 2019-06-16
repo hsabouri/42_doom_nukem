@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/24 14:08:21 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/15 12:57:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ t_list			lmapi(const t_list *list,
 t_elem *(*f)(const t_elem *elem, size_t i));
 t_elem			*lshift(t_list *list);
 t_elem			*lpop(t_list *list);
+void			ldel(t_list *list);
 
 t_plist			lpnew(t_pelem *first);
 t_plist			*lppush(t_plist *list, t_pelem *elem);

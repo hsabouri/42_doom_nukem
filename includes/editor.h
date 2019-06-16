@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:07:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/16 15:57:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ t_game			del_mat_update_walls(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_sectors(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_portals(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_multi_mats(size_t mat, size_t a_old, t_game game);
+
+t_plist			del_update_game_events(t_game game, size_t entity, size_t e_old,
+				t_plist game_events);
+t_game			del_update_entities_game_events(t_game game, size_t entity,
+				size_t e_old);
 
 t_game			create_mat_update_materials(size_t a_old, t_game game);
 t_game			create_mat_update_walls(size_t a_old, t_game game);
