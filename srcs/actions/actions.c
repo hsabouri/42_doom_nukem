@@ -6,84 +6,65 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/17 14:18:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:15:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 #include <editor.h>
 
-//
- // Wat ?
-
-
-void        spawn_entity(t_vec2 pos, t_entity *target, t_game *game, int num) // action
+void        spawn_entity(t_vec2 pos, t_entity *target, t_game *game, int num)
 {
     (void)num;
     create_entity(pos, target->type, *game);
     // assign_entity(t_assign_entity *state, t_game game)
 }
 
-
-
-void        kill_entity(t_vec2 pos, t_entity *target, t_game *game, int num) // action
+void        kill_entity(t_vec2 pos, t_entity *target, t_game *game, int num)
 {
-    (void)pos;
-    (void)num;
     int i;
 
     i = 0;
     while(game->entities[i].id != target->id)
-    {
         i++;
-    }
-    printf(" DIE ! ");
-    delete_entity(game->entities[i].id, *game);
-
-    // null_entity();
-}
-
-void        health_down(t_vec2 pos,t_entity *target, t_game *game, int num) // action
-{
+    printf("\x1b[31mentity n'%d (u_id: %d) : DIE\x1b[0m\n", i, game->entities[i].id);
+    *game = delete_entity(game->entities[i].id, *game);
     (void)pos;
-    // (void)target;
-    (void)game;
-    // (void)num;
-    printf(" LIFE1 %d : %f \n", target->id, target->life);
-    printf("PAF LA VIE\n");
-    target->life -= num;
-    printf(" LIFE2 %d : %f \n", target->id, target-> life);
-    if (target->life <= 0)
-         kill_entity(pos, target, game, num);
+    (void)num;
 }
 
-void        health_up(t_vec2 pos, t_entity *target, t_game *game, int num) // action
+void        health_down(t_vec2 pos, t_entity *target, t_game *game, int num)
 {
-     printf("PAF LA iiii\n");
+    printf("entity (u_id: %d) : HEALTH_DOWN (%f", target->id, target->life);
+    target->life -= num;
+    printf(" -> %f)\n", target->life);
+    if (target->life <= 0)
+	{
+		printf("	");
+		kill_entity(pos, target, game, num);
+	}
+    (void)pos;
+    (void)game;
+}
+
+void        health_up(t_vec2 pos, t_entity *target, t_game *game, int num)
+{
+    printf("entity (u_id: %d) : HEALTH_UP (%f", target->id, target->life);
+    target->life += num;
+    if (target->life > 100)
+        target->life = 100;
+    printf(" -> %f)\n", target->life);
     (void)pos;
     (void)target;
     (void)game;
-    if (target->life > 100)
-        target->life = 100;
-    target->life += num;
 }
 
 void        add_inventory(t_vec2 pos, t_entity *target, t_game *game, int num)
 {
-    (void)num;
-    (void)pos;
-    // lppush(&game->player.inventory, *target);
-    apush(&game->player.inventory, &target);
-     printf("PAF inventaire\n");
-}
-
-void        remove_inventory(t_vec2 pos, t_entity *target, t_game *game, int num)
-{
-    (void)num;
-    (void)pos;
-     printf("PAs inventaire\n");
-    lpremove(&game->player.inventory, target);
-
+	apush(&game->player.inventory, &target);
+    printf("entity (u_id: %d) : ADD TO PLAYER INVENTORY", target->id);
+	(void)num;
+	(void)pos;
 }
 
 // void add_animate(t_vec3 * moveTo, t_vec3 moveGoal, t_game *game)
@@ -114,7 +95,6 @@ ADD INFINITY GAME EVENT
 void     init_actions(t_env *env)
 {
 	ft_actions *actions = malloc(sizeof(ft_trigger) * 5);
-	actions[0] = spawn_entity;
 	actions[1] = kill_entity;
 	actions[2] = health_down;
 	actions[3] = health_up;

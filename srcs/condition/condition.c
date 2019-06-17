@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 15:34:30 by lbougero          #+#    #+#             */
-/*   Updated: 2019/06/17 14:19:12 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:13:36 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,16 @@ void	entities_conditions(t_game *game, ft_trigger *triggers, ft_actions *actions
 	t_game_event    *current;
 	t_entity		*check_entities;
 	t_trigger       *c_log;
-	int 		i;
-	int			j;
+	size_t 			i;
+	int				j;
 
 	i = 0;
-	j = 0;
 	check_entities = game->entities;
-
-	i = 0;
-
 	while (i < game->nentities)
 	{
-		while ((current = (t_game_event *)lpnext(&check_entities[0].self_events)) != NULL)
+		while ((current = (t_game_event *)lpnext(&check_entities[i].self_events)) != NULL)
 		{
+			j = 0;
 			while ((c_log = (t_trigger *)anth(&game->log, j)) != NULL)
 			{
 				printf("ACTIF LOG %d", c_log->e_actif.id);
@@ -84,8 +81,6 @@ void	entities_conditions(t_game *game, ft_trigger *triggers, ft_actions *actions
 				}
 				j++;
 			}
-
-			j = 0;
 		}
 		i++;
 	}
@@ -105,9 +100,7 @@ t_game    check_conditions(t_game game, t_event events, ft_trigger *triggers, ft
 		while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
 		{
 			if (triggers[current->trigger.condi](current->trigger, *c_log) == 1)
-			{
 				lpremove(&game.waiting_events, (t_pelem *)current);
-			}
 			j++;
 		}
 		j = 0;

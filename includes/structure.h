@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/17 14:18:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/17 14:36:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ typedef enum		e_condition
 
 typedef enum		e_action_c
 {
-	ACTION_SPAWN = 0x0,
 	ACTION_KILL = 0x1,
 	ACTION_H_DOWN = 0x2,
 	ACTION_H_UP = 0x3,
 	ACTION_ADD_INV = 0x4,
+	ACTION_ANIMATE = 0x5,
 }					t_action_c;
 
 struct s_game_event;
