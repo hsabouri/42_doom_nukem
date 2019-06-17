@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/09 17:41:25 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/17 14:18:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void        kill_entity(t_vec2 pos, t_entity *target, t_game *game, int num) // 
     (void)num;
     int i;
 
-    i = 0; 
+    i = 0;
     while(game->entities[i].id != target->id)
     {
         i++;
@@ -68,12 +68,12 @@ void        health_up(t_vec2 pos, t_entity *target, t_game *game, int num) // ac
     target->life += num;
 }
 
-void        add_inventory(t_vec2 pos, t_entity *target, t_game *game, int num) 
+void        add_inventory(t_vec2 pos, t_entity *target, t_game *game, int num)
 {
     (void)num;
     (void)pos;
     // lppush(&game->player.inventory, *target);
-    apush(&game->player.inventory, target);
+    apush(&game->player.inventory, &target);
      printf("PAF inventaire\n");
 }
 
@@ -107,14 +107,14 @@ void        remove_inventory(t_vec2 pos, t_entity *target, t_game *game, int num
 
 /*
 ADD INFINITY GAME EVENT
-    create_entity  
+    create_entity
 */
 
 
 void     init_actions(t_env *env)
 {
 	ft_actions *actions = malloc(sizeof(ft_trigger) * 5);
-	actions[0] = spawn_entity; 
+	actions[0] = spawn_entity;
 	actions[1] = kill_entity;
 	actions[2] = health_down;
 	actions[3] = health_up;

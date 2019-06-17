@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/09 17:52:54 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/17 14:20:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,24 +81,22 @@ void	entities_event(t_entity	*entity, t_game *game)
 			game->player.my_entity, TRIGGER_SHOT, entity->id // Game event : list event wanted
 			},
 		(t_action){
-			NULL ,&entity->id, ACTION_H_DOWN, 25
+			(t_vec2){0,0} ,&entity->id, ACTION_H_DOWN, 25
 			}
 		};
-		printf("WRWQR %d\n", first_e->action.target->id);
-		printf("LUUUL %d\n",entity->id);
 		lppush(&g_e, (t_pelem *)first_e);
 	}
 	else if (entity->type == GREEN_KEY_CARD || entity->type == BLUE_KEY_CARD || entity->type == RED_KEY_CARD ||	entity->type == PURPLE_KEY_CARD) {
+		printf("sweet\n");
 		*first_e = (t_game_event){
 		(t_pelem) {NULL, NULL},
 		(t_trigger){
-			game->player.my_entity, TRIGGER_INTERACT, entity->id // Game event : list event wanted
+			game->player.my_entity, TRIGGER_TOUCH, entity->id // Game event : list event wanted
 			},
 		(t_action){
-			NULL ,&game->entities[entity->id], ACTION_ADD_INV, 0
+			(t_vec2){0,0} ,&entity->id, ACTION_ADD_INV, 0
 			}
 		};
-		// printf("WRWQR %d\n", first_e->action.target->id;
 		lppush(&g_e, (t_pelem *)first_e);
 	}
 	else if (entity->type == APPLE || entity->type == FISH || entity->type == MEAT || entity->type == MEDIPACK) {
@@ -108,7 +106,7 @@ void	entities_event(t_entity	*entity, t_game *game)
 			game->player.my_entity, TRIGGER_INTERACT, entity->id // Game event : list event wanted
 			},
 		(t_action){
-			NULL ,&game->entities[entity->id], ACTION_H_UP, 20
+			(t_vec2){0,0} ,&entity->id, ACTION_H_UP, 20
 			}
 		};
 		lppush(&g_e, (t_pelem *)first_e);
@@ -134,7 +132,7 @@ t_entity		*init_entities(t_game *game)
 	// entities[1].physic.pos = (t_vec3){5, 12, 0};
 	// entities[1].spawn.pos = (t_vec3){5, 12, 0};
 	// entities_event(&entities[1], game);
-	
+
 	// entities[2] = game->classes[3];
 	// entities[2].id = 2;
 	// entities[2].life = 100;
