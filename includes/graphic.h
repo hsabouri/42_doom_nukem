@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/10 16:07:42 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:51:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct	s_tex_proj
 	t_mat		mat;
 	int			x;
 	int			angle;
+	int			p;
 }				t_tex_proj;
 
 typedef struct	s_pl_proj
@@ -187,6 +188,7 @@ typedef struct	s_proj
 	t_fixed		x;
 	t_fixed		y_iter;
 	t_fixed		y_start;
+	uint32_t	*ids;
 }				t_proj;
 
 typedef struct	s_e_proj
@@ -229,6 +231,8 @@ void			draw_portal(int id, t_proj proj, t_color *buf,
 				u_int32_t *ids);
 void			draw_entity(int id, t_e_proj proj, t_color *buf,
 				u_int32_t *ids);
+int				draw_roof(int id, t_proj proj, t_color *buf, u_int32_t *ids);
+void			draw_floor(int id, t_proj proj, t_color *buf, u_int32_t *ids);
 t_proj			wall_projection(int id, t_hit hit, t_context context,
 				t_section section);
 t_proj			portal_projection(int id, t_hit hit, t_context context,
@@ -236,6 +240,8 @@ t_proj			portal_projection(int id, t_hit hit, t_context context,
 t_e_proj		entity_projection(t_hit hit, t_context context,
 				t_section_entity section);
 
+void			sections_entities(t_render render, const t_context context,
+				t_color *buf, u_int32_t *id_buf);
 t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
 t_bunch			build_entity_bunch(const t_game game, const t_context context,
 				const t_limit limit, t_fvec2 pos);
@@ -249,8 +255,7 @@ t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y);
 t_color			get_wall_pixel(t_proj proj, int y);
 t_color			get_portal_pixel(t_proj proj, int y);
 t_color			get_entity_pixel(t_e_proj proj, int y);
-t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix,
-				char p, int y_s);
+t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix, int y_s);
 t_fvec2			get_ray_dir(t_ph physic, int id);
 int				get_ray_id(t_fvec2 point, t_limit limit,
 				t_context context, int max);
@@ -265,6 +270,8 @@ void			render(t_game game, t_context context,
 				t_color *buf, u_int32_t *id_buf);
 t_sector		teleport_sector(t_game game, t_context context,
 				t_section section);
+void			render_entity(const t_context context, const t_section_entity section,
+				t_color *buf, u_int32_t *ids);
 t_context		teleport(t_game game, t_context context, t_section section);
 void			find_center_sectors(t_game game);
 void			find_center(t_game game, size_t i);
@@ -287,4 +294,6 @@ t_fvec2			proj_h(t_fixed ratio, t_sector sector, t_cache_wall wall,
 				t_ph physic);
 t_fvec2			proj_hp(t_fixed ratio, t_sector sector, t_cache_wall wall,
 				t_ph physic);
+t_color			fog(t_color color, t_fixed u);
+
 #endif

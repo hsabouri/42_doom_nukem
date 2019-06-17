@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 15:07:29 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/15 11:58:12 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/16 18:22:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void			render_preview(t_mat mat, int width, int height, t_color *buf)
 		y = 0;
 		while (y < height)
 		{
+			tex.p = 0;
 			c = get_mat_pixel(tex.mat, tex, fvec2_new(
-				f_from_int(x) / width, f_from_int(y) / width), 0, 0);
+				f_from_int(x) / width, f_from_int(y) / width), 0);
 			buf[x + y * width] = (c.a > 0) ? c : GREEN;
 			y++;
 		}

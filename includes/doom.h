@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/05/10 14:25:20 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/16 18:00:58 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,16 @@ typedef struct			s_env
 	t_component	*component;
 	t_sdl		sdl;
 	ft_trigger	*condition;
-	t_event		events; //must be last
+	t_event		events;
 }						t_env;
+
+typedef struct	s_thread_info
+{
+	t_game		game;
+	t_context	context;
+	t_color		*buf;
+	u_int32_t	*id_buf;
+}				t_thread_info;
 
 int						is_clicked_on(const t_component component, t_event events);
 int						is_over(const t_component component, t_event events);
@@ -217,7 +225,7 @@ void					legend_text(t_sdl sdl);
 void					legend_graphic(t_color *buf);
 t_game					player_properties(t_game game, t_event events);
 
-void					play_music(t_game game, size_t id, size_t vol, size_t frame);	
+void					play_music(t_game game, size_t id, size_t vol, size_t frame);
 t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);
 t_game					play_sounds(t_game game);
 

@@ -1,73 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   material.c                                         :+:      :+:    :+:   */
+/*   get_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/15 16:06:36 by fmerding         ###   ########.fr       */
+/*   Created: 2019/06/16 18:05:00 by hsabouri          #+#    #+#             */
+/*   Updated: 2019/06/16 18:23:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
-#include "./color.h"
-
-t_color			get_mat_pixel(t_mat mat, t_tex_proj tex, t_fvec2 pix,
-	char p, int y_s)
-{
-	int		x;
-	int		y;
-	t_img	img;
-	t_color	res;
-
-	if (!mat.texture)
-		res = mat.color;
-	else
-	{
-		img = *mat.texture;
-		if (mat.mode == SKYBOX)
-		{
-			x = f_to_int((tex.x * mat.sca.u - mat.pos.u)) % img.width;
-			y = f_to_int((y_s - tex.angle) * mat.sca.v - mat.pos.v)
-			% img.height;
-		}
-		else
-		{
-			x = f_to_int((f_mul(pix.u, mat.sca.u) - mat.pos.u) * img.width);
-			y = f_to_int((f_mul(pix.v, mat.sca.v) - mat.pos.v) * img.height)
-			>> p;
-		}
-		if (mat.mode == TILING)
-		{
-			y = y % img.height;
-			x = x % img.width;
-		}
-		if ((uint)x >= img.width || x < 0 || (uint)y >= img.height || y < 0)
-			res = mat.color;
-		else
-			res = color_filter(img.content[x + y * img.width], mat.filter);
-	}
-	if (mat.overlay)
-		res = color_superpose(res, get_mat_pixel(*mat.overlay, tex, pix, p,
-			y_s));
-	if (mat.mode != SKYBOX)
-		return (color_filter(res, tex.ambient));
-	else
-		return (res);
-}
-
-static t_color	fog(t_color color, t_fixed u)
-{
-	const int	min = 300;
-
-	if (u <= f_from_int(min))
-		return (color);
-	color.r = f_to_int(f_div(f_from_int(color.r * min), u));
-	color.g = f_to_int(f_div(f_from_int(color.g * min), u));
-	color.b = f_to_int(f_div(f_from_int(color.b * min), u));
-	return (color);
-}
+#include "../color.h"
 
 t_color			get_wall_pixel(t_proj proj, int y)
 {
@@ -76,7 +20,8 @@ t_color			get_wall_pixel(t_proj proj, int y)
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
-	res = get_mat_pixel(proj.tex_wall.mat, proj.tex_wall, pix, 9, y);
+	proj.tex_wall.p = 9;
+	res = get_mat_pixel(proj.tex_wall.mat, proj.tex_wall, pix, y);
 	return (fog(res, f_mul(proj.dis, proj.dis)));
 }
 
@@ -87,29 +32,9 @@ t_color			get_portal_pixel(t_proj proj, int y)
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
-	res = get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, 9, y);
+	proj.tex_open.p = 9;
+	res = get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, y);
 	return (fog(res, f_mul(proj.dis, proj.dis)));
-}
-
-t_pl_proj		find_line(t_fvec2 center, t_pl_proj plane, t_fixed ratio)
-{
-	t_fvec2 vec;
-	t_fixed diffx;
-	t_fixed diffy;
-	t_fixed res;
-
-	diffx = plane.v_b.u - plane.v_a.u;
-	diffy = plane.v_b.v - plane.v_a.v;
-	vec.u = plane.v_a.u + f_mul(ratio, diffx);
-	vec.v = plane.v_a.v + f_mul(ratio, diffy);
-	plane.line.x.v = vec.u;
-	plane.line.y.v = vec.v;
-	plane.line.x.u = plane.pos.u - center.u;
-	plane.line.y.u = plane.pos.v - center.v;
-	res = f_from_float((HEIGHT / 2.0) * (PWIDTH / WIDTH));
-	plane.z_zero = res + f_from_int(plane.look_v) * (PWIDTH / WIDTH);
-	plane.z_diff = f_div(res, f_from_float(360.0));
-	return (plane);
 }
 
 t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
@@ -132,7 +57,8 @@ t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 	dis.x = pix.u + proj.center.u - proj.pos.u;
 	dis.y = pix.v + proj.center.v - proj.pos.v;
 	dis.z = f_mul(dis.x, dis.x) + f_mul(dis.y, dis.y);
-	return (fog(get_mat_pixel(tex.mat, tex, pix, 0, y), dis.z));
+	tex.p = 0;
+	return (fog(get_mat_pixel(tex.mat, tex, pix, y), dis.z));
 }
 
 t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y)
@@ -155,7 +81,8 @@ t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 	dis.x = pix.u + proj.center.u - proj.pos.u;
 	dis.y = pix.v + proj.center.v - proj.pos.v;
 	dis.z = f_mul(dis.x, dis.x) + f_mul(dis.y, dis.y);
-	return (fog(get_mat_pixel(tex.mat, tex, pix, 0, y), dis.z));
+	tex.p = 0;
+	return (fog(get_mat_pixel(tex.mat, tex, pix, y), dis.z));
 }
 
 t_color			get_entity_pixel(t_e_proj proj, int y)
@@ -165,6 +92,7 @@ t_color			get_entity_pixel(t_e_proj proj, int y)
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top);
-	res = get_mat_pixel(proj.mat, proj.tex, pix, 8, y);
+	proj.tex.p = 8;
+	res = get_mat_pixel(proj.mat, proj.tex, pix, y);
 	return (fog(res, f_mul(proj.dis, proj.dis)));
 }

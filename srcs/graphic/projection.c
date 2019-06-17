@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/10 16:13:19 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/16 17:50:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ const t_section section)
 
 	ratio = f_div(f_from_int(section.id), f_from_int(WIDTH));
 	res.bot = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.u, hit.ratios.v)
-	+ context.physic.look_v * 100);
+		+ context.physic.look_v * 100);
 	res.top = (HEIGHT >> 1) + f_to_int(f_div(RATIO * h.v, hit.ratios.v)
-	+ context.physic.look_v * 100);
+		+ context.physic.look_v * 100);
 	res.u = hit.ratios.u;
 	res.x = f_mul(section.wall.size, hit.ratios.u) + section.wall.tex_pos.u;
 	span = res.bot - res.top;

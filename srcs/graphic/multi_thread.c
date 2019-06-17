@@ -6,20 +6,12 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 16:05:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/31 13:32:16 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/16 18:02:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 #include <pthread.h>
-
-typedef struct	s_thread_info
-{
-	t_game		game;
-	t_context	context;
-	t_color		*buf;
-	u_int32_t	*id_buf;
-}				t_thread_info;
 
 static void	*start_render(void *info)
 {
