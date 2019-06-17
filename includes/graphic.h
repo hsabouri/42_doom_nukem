@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/16 18:21:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:51:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,8 @@ t_proj			portal_projection(int id, t_hit hit, t_context context,
 t_e_proj		entity_projection(t_hit hit, t_context context,
 				t_section_entity section);
 
+void			sections_entities(t_render render, const t_context context,
+				t_color *buf, u_int32_t *id_buf);
 t_bunch			build_bunch(t_game game, t_context context, t_limit limit);
 t_bunch			build_entity_bunch(const t_game game, const t_context context,
 				const t_limit limit, t_fvec2 pos);
@@ -268,6 +270,8 @@ void			render(t_game game, t_context context,
 				t_color *buf, u_int32_t *id_buf);
 t_sector		teleport_sector(t_game game, t_context context,
 				t_section section);
+void			render_entity(const t_context context, const t_section_entity section,
+				t_color *buf, u_int32_t *ids);
 t_context		teleport(t_game game, t_context context, t_section section);
 void			find_center_sectors(t_game game);
 void			find_center(t_game game, size_t i);

@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/21 16:49:30 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/10 16:13:45 by fmerding         ###   ########.fr       */
+/*   Created: 2019/06/17 11:33:45 by hsabouri          #+#    #+#             */
+/*   Updated: 2019/06/17 11:50:44 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphic.h>
-#include "./sort.h"
+#include "../sort.h"
+
+void	sections_entities(t_render render, const t_context context,
+t_color *buf, u_int32_t *id_buf)
+{
+	t_section_entity	current;
+	int					i;
+
+	i = 0;
+	render = sort_entities(render);
+	while (i < render.nentities)
+	{
+		current = render.entities[i];
+		render_entity(context, current, buf, id_buf);
+		++i;
+	}
+}
 
 void	render_wall(const t_context context, const t_section section,
-	t_color *buf, u_int32_t *ids)
+t_color *buf, u_int32_t *ids)
 {
 	int		id;
 	t_hit	hit;
@@ -37,7 +53,7 @@ void	render_wall(const t_context context, const t_section section,
 }
 
 void	render_portal(const t_context context, const t_section section,
-	t_color *buf, u_int32_t *ids)
+t_color *buf, u_int32_t *ids)
 {
 	int			id;
 	t_hit		hit;
@@ -60,7 +76,7 @@ void	render_portal(const t_context context, const t_section section,
 }
 
 void	render_entity(const t_context context, const t_section_entity section,
-	t_color *buf, u_int32_t *ids)
+t_color *buf, u_int32_t *ids)
 {
 	int			id;
 	t_hit		hit;
@@ -80,61 +96,4 @@ void	render_entity(const t_context context, const t_section_entity section,
 		draw_entity(id, proj, buf, ids);
 		++id;
 	}
-}
-
-void	sections_entities(t_render render, const t_context context,
-	t_color *buf, u_int32_t *id_buf)
-{
-	t_section_entity	current;
-	int					i;
-
-	i = 0;
-	render = sort_entities(render);
-	while (i < render.nentities)
-	{
-		current = render.entities[i];
-		render_entity(context, current, buf, id_buf);
-		++i;
-	}
-}
-
-void	render(const t_game game, t_context context, t_color *buf,
-	u_int32_t *id_buf)
-{
-	const t_limit	limit_rays = build_limits(context);
-	const t_bunch	bunch = build_bunch(game, context, limit_rays);
-	t_render		r;
-	t_section		current;
-	int				i;
-
-	if (context.stack_id >= 30)
-		return ;
-	context.stack_id++;
-	i = 0;
-	r = build_sections(context, bunch, limit_rays);
-	r = build_sections_portals(r);
-	sections_entities(r, context, buf, id_buf);
-	while (i < r.nsections)
-	{
-		current = r.sections[i];
-		if (current.wall.portal == -1)
-			render_wall(context, current, buf, id_buf);
-		else
-		{
-			current.next = teleport_sector(game, context, current);
-			render_portal(context, current, buf, id_buf);
-		}
-		++i;
-	}
-	free(bunch.entities);
-	free(bunch.walls);
-	free(r.entities);
-	free(r.sections);
-	i = 0;
-	while (i < r.nportals)
-	{
-		render(game, teleport(game, context, r.portals[i]), buf, id_buf);
-		++i;
-	}
-	free(r.portals);
 }
