@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 11:47:39 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/09 17:41:25 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:14:51 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void        add_inventory(t_vec2 pos, t_entity *target, t_game *game, int num)
     (void)num;
     (void)pos;
     // lppush(&game->player.inventory, *target);
-    apush(&game->player.inventory, target);
+    apush(&game->player.inventory, &target);
      printf("PAF inventaire\n");
 }
 
