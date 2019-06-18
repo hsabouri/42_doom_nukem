@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 15:00:11 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/18 13:49:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:36:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_array *multi_mats)
 			.spawn.look.u = f_from_float(entity.physic.look_h),
 			.spawn.look.v = entity.spawn.look_v,
 			.spawn.sector_id = entity.spawn.sector_id,
-			.type = entity.type, .damage = entity.damage};
+			.type = entity.type, .life = f_from_float(entity.life),
+			.damage = entity.damage};
 		res.mats = (entity.mat != NULL) ? (ssize_t)id_from_p(entity.mat,
 			multi_mats, sizeof(t_array)) : -1;
 		write_struct(&res, fd, sizeof(t_c_entity));
@@ -74,7 +75,6 @@ void	write_player(t_player player, int fd, t_array *multi_mats)
 	index = id_from_p(player.my_entity.mat, multi_mats, sizeof(t_array));
 	res.my_entity.mats = (ssize_t)index;
 	res.my_entity.damage = player.my_entity.damage;
-	res.life = player.life;
 	res.weapons[0] = player.weapons[0];
 	res.weapons[1] = player.weapons[1];
 	res.secondary = player.secondary;

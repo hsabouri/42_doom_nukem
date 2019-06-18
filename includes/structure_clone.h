@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 13:48:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:34:31 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ typedef struct		s_c_entity
 	t_c_ph		spawn;
 	ssize_t		mats;
 	int32_t		type;
-	//float life;
-	//float  armor;
-	//t_weapon weapons;
+	t_fixed		life;
 	int 		damage;
 }					t_c_entity;
 
@@ -120,7 +118,6 @@ typedef struct		s_c_player
 {
 	size_t			magic;
 	t_c_entity		my_entity;
-	t_fixed			life;
 	u_int32_t		weapons[2];
 	u_int32_t		secondary;
 	u_int32_t		equiped;

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:06:02 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 15:28:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:54:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_sector	*init_sector(t_game *game)
 
 	sectors = (t_sector *)safe_malloc(1 * sizeof(t_sector), "generate_map");
 	sectors[0] = ((t_sector){0, 8, 0, (t_vec3){0, 0, 0}, (t_vec3){0, 0, 2.50},
+		(t_vec3){0, 0, 0}, (t_vec3){0, 0, 2.50},
 		(t_color) {125, 125, 125, 255}, &game->materials[1],
 			&game->materials[1], fvec2_new(0, 0), (t_vec2){0, 0}, 0});
 	game->nsectors = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/01 16:23:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:35:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 	else
 		current.mat = NULL;
 	current.damage = struc_e.damage;
+	current.life = f_to_float(struc_e.life);
 	current.type = (t_entity_type)struc_e.type;
 	return (current);
 }
@@ -95,7 +96,6 @@ static t_player	parse_player_2(t_player current, t_c_player struc_p)
 		.look_h < -M_PI / 2)
 		current.my_entity.physic.look_h = 0;
 	current.my_entity.physic.sector_id = struc_p.my_entity.spawn.sector_id;
-	current.life = struc_p.life;
 	current.weapons[0] = struc_p.weapons[0];
 	current.weapons[1] = struc_p.weapons[1];
 	current.secondary = struc_p.secondary;

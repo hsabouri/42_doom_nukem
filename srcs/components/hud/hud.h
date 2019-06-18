@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:22:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 10:18:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:32:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct	s_life_state
 	t_env		*env;
 	t_color		background;
 	t_player	*player;
-	u_int32_t	last_life;
+	float		last_life;
 	t_img		empty_life;
 	t_pix		pos;
 	u_int32_t	display;

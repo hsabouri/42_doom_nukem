@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 12:13:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:56:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void		launch_game(t_env *env, int ac, char **av)
 		env->game = generate_map();
 		env->game = init_audio(env->game);
 	}
+	env->game.animations = safe_anew(NULL, 10, sizeof(t_animation), "init");
+	env->game.col_events = safe_anew(NULL, 10, sizeof(t_col_event), "init");
 	env->game.weapons = init_weapons(&env->game);
 	launch_check(env, env->game);
 	env->game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT
