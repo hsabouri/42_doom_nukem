@@ -66,7 +66,14 @@ typedef enum		s_entity_type
 	MEAT = 11,
 	MEDIPACK = 12,
 	AMMO = 13,
-	BUTTON = 14,
+	CLOSE_RED = 14,
+	CLOSE_BLUE = 15,
+	CLOSE_GREEN = 16,
+	CLOSE_PURPLE = 17,
+	OPEN_RED = 18,
+	OPEN_BLUE = 19,
+	OPEN_GREEN = 20,
+	OPEN_PURPLE = 21,
 }					t_entity_type;
 
 typedef struct		s_mat

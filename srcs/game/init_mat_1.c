@@ -12,6 +12,22 @@
 
 #include <doom.h>
 
+t_mat	*init_mat_8(t_mat *materials, t_game *game)
+{
+	t_mat tmp;
+
+	tmp = (t_mat) {.pos = fvec2_new(0, 0),
+		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
+		.color = NO_COLOR, .texture = &game->textures[75], .mode = NO_TILING,
+		.filter = WHITE, .overlay =	NULL, .frozen = 1};
+	materials[51] = tmp;
+	tmp.texture = &game->textures[76];
+	materials[52] = tmp;
+	tmp.texture = &game->textures[77];
+	materials[53] = tmp;
+	return (materials);
+}
+
 t_mat	*init_mat_7(t_mat *materials, t_game *game)
 {
 	t_mat tmp;
@@ -26,6 +42,17 @@ t_mat	*init_mat_7(t_mat *materials, t_game *game)
 	tmp.sca.u = f_from_float(1.5);
 	tmp.texture = &game->textures[69];
 	materials[45] = tmp;
+	tmp.sca.u = f_from_float(2);
+	tmp.texture = &game->textures[70];
+	materials[46] = tmp;
+	tmp.texture = &game->textures[71];
+	materials[47] = tmp;
+	tmp.texture = &game->textures[72];
+	materials[48] = tmp;
+	tmp.texture = &game->textures[73];
+	materials[49] = tmp;
+	tmp.texture = &game->textures[74];
+	materials[50] = tmp;
 	return (materials);
 }
 

@@ -233,6 +233,7 @@ t_sdl					init_sdl(void);
 t_mat					*init_mat_5(t_mat *materials, t_game *game);
 t_mat					*init_mat_6(t_mat *materials, t_game *game);
 t_mat					*init_mat_7(t_mat *materials, t_game *game);
+t_mat					*init_mat_8(t_mat *materials, t_game *game);
 t_weapon				*init_weapons(t_game *game);
 t_array					sprite_5(t_mat *mats);
 t_weapon				init_nyan_gun(t_img *textures);

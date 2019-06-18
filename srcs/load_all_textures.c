@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	textures = (t_img *)safe_malloc(70 * sizeof(t_img), "textures");
+	textures = (t_img *)safe_malloc(78 * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
 	textures[2] = parse_tga("./textures/items/key_card_green.tga", 0);
@@ -87,6 +87,14 @@ t_img	*load_all_textures(t_game *game)
 	textures[67] = parse_tga("./textures/items/meat.tga", 0);
 	textures[68] = parse_tga("./textures/items/medipack.tga", 0);
 	textures[69] = parse_tga("./textures/items/ammo.tga", 0);
-	game->ntextures = 70;
+	textures[70] = parse_tga("./textures/items/close_door_red.tga", 0);
+	textures[71] = parse_tga("./textures/items/close_door_blue.tga", 0);
+	textures[72] = parse_tga("./textures/items/close_door_green.tga", 0);
+	textures[73] = parse_tga("./textures/items/close_door_purple.tga", 0);
+	textures[74] = parse_tga("./textures/items/open_door_red.tga", 0);
+	textures[75] = parse_tga("./textures/items/open_door_blue.tga", 0);
+	textures[76] = parse_tga("./textures/items/open_door_green.tga", 0);
+	textures[77] = parse_tga("./textures/items/open_door_purple.tga", 0);
+	game->ntextures = 78;
 	return (textures);
 }

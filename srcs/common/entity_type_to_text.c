@@ -20,6 +20,22 @@ static char	*type_to_text_2(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Medipack"));
 	else if (type == AMMO)
 		return (ft_strcpy(dst, "Ammo"));
+	else if (type == CLOSE_RED)
+		return (ft_strcpy(dst, "Close red"));
+	else if (type == CLOSE_BLUE)
+		return (ft_strcpy(dst, "Close blue"));
+	else if (type == CLOSE_GREEN)
+		return (ft_strcpy(dst, "Close green"));
+	else if (type == CLOSE_PURPLE)
+		return (ft_strcpy(dst, "Close purple"));
+	else if (type == OPEN_RED)
+		return (ft_strcpy(dst, "Open red"));
+	else if (type == OPEN_BLUE)
+		return (ft_strcpy(dst, "Open blue"));
+	else if (type == OPEN_GREEN)
+		return (ft_strcpy(dst, "Open green"));
+	else if (type == OPEN_PURPLE)
+		return (ft_strcpy(dst, "Open purple"));
 	else
 		return (ft_strcpy(dst, "Unknown"));
 }
