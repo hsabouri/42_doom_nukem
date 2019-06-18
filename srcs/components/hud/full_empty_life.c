@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   full_empty_life.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:21:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/15 11:21:11 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:31:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static int				update_empty(t_component *self, void *parent)
 	char			*tmp;
 
 	life = (t_life_state *)parent;
-	if (life->last_life != life->player->life)
+	if (life->last_life != life->player->my_entity.life)
 	{
-		life->pos.x = life->player->life * self->size.x / 100;
-		str = ft_strdup(ft_itoa(life->player->life));
+		life->pos.x = life->player->my_entity.life * self->size.x / 100;
+		str = ft_strdup(ft_itoa(life->player->my_entity.life));
 		tmp = str;
 		str = ft_strjoin(str, "/100");
 		ft_strdel(&tmp);
 		self->text = component_text(str, (t_pix) {120, -2}, life->sdl);
 		ft_strdel(&str);
-		life->last_life = life->player->life;
+		life->last_life = life->player->my_entity.life;
 		return (1);
 	}
 	return (0);
@@ -51,7 +51,7 @@ t_sdl *sdl)
 	char			*tmp;
 
 	life = (t_life_state *)parent_state;
-	str = ft_strdup(ft_itoa(life->player->life));
+	str = ft_strdup(ft_itoa(life->player->my_entity.life));
 	tmp = str;
 	str = ft_strjoin(str, "/100");
 	ft_strdel(&tmp);

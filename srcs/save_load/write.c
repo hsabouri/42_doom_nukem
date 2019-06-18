@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:57:40 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:02:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ void			write_struct(void *struc, int fd, size_t size)
 
 static t_c_game	save_game_2(t_c_game game_s, t_game game)
 {
-	game_s.nevents = game.waiting_events.len;
-	game_s.loc_events = game_s.loc_entities + sizeof(t_c_entity)
-		* game.nentities;
 	game_s.ntextures = game.ntextures;
-	game_s.loc_textures = game_s.loc_events + sizeof(t_c_game_event)
-		* game_s.nevents;
+	game_s.loc_textures = game_s.loc_entities + sizeof(t_c_entity)
+		* game.nentities;
 	game_s.nmusic = game.music.len;
 	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)
 		* game.ntextures;
@@ -78,7 +75,6 @@ static void		write_map(int fd, t_c_game game_save, t_game game)
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
 	write_entities(fd, game.entities, game.nentities, game.multi_mats);
-	write_events(fd, game.waiting_events);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);
 	loc_sound = write_audio(fd, loc_music, MUSIC);

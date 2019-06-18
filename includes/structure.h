@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:02:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:48:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@
 #	include <SDL2/SDL_mixer.h>
 # endif
 
+# define ANIMATION_SPEED 1.0
+# define ABS(v) ((v >= 0) ? v : -v)
+
+typedef struct		s_animation
+{
+	float		*to_animate;
+	float		target;
+}					t_animation;
+
 typedef enum		e_mode
 {
 	SKYBOX,
@@ -43,20 +52,21 @@ typedef enum		s_col_mode
 
 typedef enum		s_entity_type
 {
-	PLAYER,
-	GUN_MARINE,
-	SMG_MARINE,
-	BLACK_MARINE,
-	RED_MARINE,
-	GREEN_KEY_CARD,
-	BLUE_KEY_CARD,
-	RED_KEY_CARD,
-	PURPLE_KEY_CARD,
-	APPLE,
-	FISH,
-	MEAT,
-	MEDIPACK,
-	AMMO
+	PLAYER = 0,
+	GUN_MARINE = 1,
+	SMG_MARINE = 2,
+	BLACK_MARINE = 3,
+	RED_MARINE = 4,
+	GREEN_KEY_CARD = 5,
+	BLUE_KEY_CARD = 6,
+	RED_KEY_CARD = 7,
+	PURPLE_KEY_CARD = 8,
+	APPLE = 9,
+	FISH = 10,
+	MEAT = 11,
+	MEDIPACK = 12,
+	AMMO = 13,
+	BUTTON = 14,
 }					t_entity_type;
 
 typedef struct		s_mat
@@ -87,21 +97,6 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
-typedef enum	e_condition
-{
-	TRIGGER_SEE = 0x1,
-	TRIGGER_TOUCH = 0x2,
-	TRIGGER_INTERACT = 0x3,
-	TRIGGER_SECTOR = 0x4,
-	TRIGGER_NO = 0x0
-}				t_condition;
-
-typedef enum	e_action
-{
-	ACTION_SPAWN = 0x1,
-	ACTION_NO = 0x0
-}				t_action;
-
 typedef struct		s_entity
 {
 	int				id;
@@ -109,36 +104,18 @@ typedef struct		s_entity
 	t_ph			spawn;
 	t_array			*mat;
 	t_entity_type	type;
-	//float life;
-	//float  armor;
-	//t_weapon weapons;
-	int 		damage;
+	float			life;
+	int 			damage;
 }					t_entity;
-
-typedef struct		s_trigger
-{
-	t_entity	e_actif;
-	t_condition	condi;
-	t_entity	e_passif;
-}					t_trigger;
-
-typedef struct		s_game_event
-{
-	t_pelem		elem;
-	t_trigger	trigger;
-	// int			is_trigger;
-	// t_action	 action;
-}					t_game_event;
 
 typedef struct		s_player
 {
 	t_entity	my_entity;
-	size_t		life;
 	u_int32_t	weapons[2];
 	u_int32_t	secondary;
-	u_int32_t	equiped;
+	u_int16_t	equiped;
+	u_int16_t	is_shooting;
 	t_array		inventory;
-	// float		armor;
 }					t_player;
 
 typedef struct		s_portal
@@ -169,11 +146,13 @@ typedef struct		s_sector
 	size_t		sector_id;
 	t_vec3		floor;
 	t_vec3		ceiling;
+	t_vec3		floor_b;
+	t_vec3		ceiling_b;
 	t_color		ambient;
 	t_mat		*ceiling_mat;
 	t_mat		*floor_mat;
 	t_fvec2		tex_pos;
-	t_vec2		center; // t_vec3 position
+	t_vec2		center;
 	int			clock;
 }					t_sector;
 
@@ -193,11 +172,22 @@ typedef struct		s_chunk
 	u_int32_t	volume;
 }					t_chunk;
 
+typedef enum		e_col_type
+{
+	INTERACT,
+	DIRECT
+}					t_col_type;
+
+typedef struct		s_col_event
+{
+	t_col_type		type;
+	size_t			e_id;
+}					t_col_event;
+
 typedef struct		s_game
 {
 	t_player		player;
-	t_plist 		waiting_events;
-	t_array			log;
+	t_array			col_events;
 	t_entity		*entities;
 	size_t			nentities;
 	size_t			unique_e_id;
@@ -223,6 +213,7 @@ typedef struct		s_game
 	t_array			music;
 	size_t			played_music;
 	t_array			sounds;
+	t_array			animations;
 	t_array			chunks;
 	size_t			frame;
 	u_int32_t		*id_buf;

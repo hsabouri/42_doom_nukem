@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/16 18:00:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:22:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef	enum	e_game_mode
 	QUIT
 }				t_game_mode;
 
-typedef int (*ft_trigger)(t_trigger trigger, t_trigger c_log);
-
 typedef struct			s_event
 {
 	int			any;
@@ -93,7 +91,6 @@ typedef struct			s_sdl
 typedef struct	s_component_event
 {
     int hover;
-    // potentiellement + plus tard
 }				t_component_event;
 
 typedef struct	s_component
@@ -159,7 +156,6 @@ typedef struct			s_env
 	t_color		*current_buffer;
 	t_component	*component;
 	t_sdl		sdl;
-	ft_trigger	*condition;
 	t_event		events;
 }						t_env;
 
@@ -208,17 +204,6 @@ t_game					physic(t_game game, t_event events, float old_timer);
 
 t_text					text(const char *str, t_pix pos, t_sdl *sdl);
 
-/*
-** CONDITION
-*/
-
-t_env	init_conditions(void);
-t_game  check_conditions(t_game game, t_event events, ft_trigger *triggers);
-t_game 	ft_reset_log(t_game game);
-void add_events(t_game * game, t_entity e_actif, t_condition condi , t_entity e_passif);
-
-// ssize_t					select_wall(t_game game, t_editor editor,\
-// 						t_event events);
 t_editor				select_multi_points(t_editor editor,\
 						t_event events, ssize_t point);
 void					legend_text(t_sdl sdl);
@@ -272,4 +257,7 @@ u_int32_t				launch_check_mats(t_game game, t_check_mat mats,
 						t_env *env, char *errors_text[NBR_ERROR]);
 u_int32_t				launch_check_entities(t_game game, t_env *env,
 						char *errors_text[NBR_ERROR]);
+
+t_env					*event_action(t_env *env, t_event events, u_int32_t *id_buf);
+
 #endif

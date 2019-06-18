@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 14:10:04 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/04 12:40:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:02:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_vec3			teleportation(t_vec3 pos, t_game *game, t_tp teleport,
 t_ph *physic)
 {
 	t_vec3		next_pos;
-	t_trigger	tmp_log;
 	float		delta_floor;
 	float		delta_ceil;
 
@@ -68,10 +67,6 @@ t_ph *physic)
 		if_not_tp(physic, teleport);
 	else
 	{
-		tmp_log = (t_trigger) {.e_actif = game->player.my_entity,
-			.condi = TRIGGER_SECTOR, .e_passif = tmp_log.e_actif};
-		tmp_log.e_actif.physic.sector_id = physic->sector_id;
-		apush(&game->log, &tmp_log);
 		next_pos = if_tp(pos, game, teleport, delta_floor);
 		return (next_pos);
 	}

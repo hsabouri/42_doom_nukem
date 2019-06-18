@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 10:22:33 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:22:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,6 @@
 t_vec2		player_space(t_vec2 vec, t_ph physic)
 {
 	return (vec2_rot(vec2_sub(vec, vec3_to_vec2(physic.pos)), -physic.look_h));
-}
-
-t_game		check_see(t_game game)
-{
-	t_game		n_game;
-	t_trigger	tmp_log;
-	t_selected	ren;
-
-	n_game = game;
-	ren = world_selector(n_game);
-	if (ren.type == PART_ENTITY)
-	{
-		tmp_log.e_actif = n_game.player.my_entity;
-		tmp_log.condi = TRIGGER_SEE;
-		tmp_log.e_passif = n_game.entities[ren.id];
-		apush(&n_game.log, &tmp_log);
-	}
-	return (n_game);
 }
 
 void		game_loop(t_env *env, size_t frame)
@@ -48,13 +30,10 @@ void		game_loop(t_env *env, size_t frame)
 	if (env->editor.enabled)
 		*env = game_editing(*env, env->game.player);
 	env->game = player_properties(env->game, env->events);
-	//env->game = entities_properties(env->game, env->events);
-	env->game = check_see(env->game);
 	if (env->game.nwalls > 0)
 		env->game = physic(env->game, env->events, old_timer);
 	env->game.frame = frame;
-	env->game = check_conditions(env->game, env->events, env->condition);
-	content = NULL;
+	env = event_action(env, env->events, env->game.id_buf);
 	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
 	env->current_buffer = content;
 	if (env->game.nwalls > 0)
