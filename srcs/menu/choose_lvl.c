@@ -35,33 +35,3 @@ int			new_game(void *parent_state)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	return (1);
 }
-
-int			level_1(void *parent_state)
-{
-	t_menu_state *menu;
-
-	menu = (t_menu_state *)parent_state;
-	menu->env->game_mode = GAME_MODE;
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-	return (1);
-}
-
-int			level_2(void *parent_state)
-{
-	t_menu_state *menu;
-
-	menu = (t_menu_state *)parent_state;
-	menu->env->game_mode = GAME_MODE;
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-	return (1);
-}
-
-int			level_3(void *parent_state)
-{
-	t_menu_state *menu;
-
-	menu = (t_menu_state *)parent_state;
-	menu->env->game_mode = GAME_MODE;
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-	return (1);
-}
