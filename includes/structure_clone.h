@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure_clone.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/05 14:39:12 by hugo             ###   ########.fr       */
+/*   Updated: 2019/06/18 13:48:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,6 @@ typedef struct		s_c_game
 	size_t		nentities;
 	size_t		loc_entities;
 	size_t		unique_e_id;
-	size_t		nevents;
-	size_t		loc_events;
 	size_t		ntextures;
 	size_t		loc_textures;
 	size_t		nmusic;
@@ -209,7 +207,7 @@ typedef struct		s_c_game
 }					t_c_game;
 
 int					open_file(const char *file, int edit_mode,\
-size_t *filesize);
+					size_t *filesize);
 void				*dump_file(const char *file, int edit_mode, size_t *size);
 
 size_t				id_from_p(void *p_objet, void *tab, size_t size);

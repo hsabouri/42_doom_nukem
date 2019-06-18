@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/26 16:31:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 12:13:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ static void		all_loops(t_env *env, size_t frame)
 		if (!env->toggle_editor)
 			game_loop(env, frame);
 		else
-		{
 			editor_loop(env);
-		}
 	}
 	if (!env->sdl.win)
 	{
@@ -69,7 +67,6 @@ static void		all_loops(t_env *env, size_t frame)
 
 static void		first_init(t_env *env, int ac, char **av)
 {
-	*env = init_conditions();
 	if (ac == 2)
 		env->file = av[1];
 	else

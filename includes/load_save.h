@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_save.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2019/04/26 13:34:53 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:19:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void			write_entities(int fd, t_entity *entities, size_t nentities,
 void			write_player(t_player player, int fd, t_array *multi_mats);
 void			write_inventory(t_player player, t_entity *entities,
 				int fd);
-void			write_events(int fd, t_plist event);
 size_t			write_textures(int fd, t_img *textures, size_t ntextures,
 				int index);
 size_t			write_audio(int fd, int index, t_audio type);
@@ -100,8 +99,6 @@ t_entity		*parse_entities(void *buf, t_save save, t_array *multi_mats,
 				size_t n_entities);
 t_player		parse_player(t_c_game game, t_game new_game, void *buf,
 				t_save save);
-t_plist			parse_events(t_parse_event event, t_save save, t_game game,
-				t_player player);
 void			parse_audio(void *buf, t_save save, size_t n_entities,
 				t_audio);
 int				main_save(char *name);

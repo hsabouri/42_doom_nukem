@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/06 10:19:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 12:15:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,33 +139,6 @@ t_game			generate_map(void)
 	game.classes = init_classe(&game, game.multi_mats);
 	game.player = player_default(game);
 	game.entities = init_entities(&game);
-	t_array c_log = anew(NULL, 100, sizeof(t_trigger));
-	t_game_event * first_e = (t_game_event *)malloc(sizeof(t_game_event));
-	*first_e = (t_game_event){
-		(t_pelem) {NULL, NULL},
-		(t_trigger){
-			game.player.my_entity, TRIGGER_INTERACT, game.entities[2] // Game event : list event wanted
-			}
-		};
-	t_game_event * secon_e = (t_game_event *)malloc(sizeof(t_game_event));
-	*secon_e = (t_game_event){
-		(t_pelem) {NULL, NULL},
-		(t_trigger){
-			game.player.my_entity, TRIGGER_TOUCH, game.entities[1] // Game event : list event wanted
-			}
-		};
-	t_game_event * third_e = (t_game_event *)malloc(sizeof(t_game_event));
-	*third_e = (t_game_event){
-		(t_pelem) {NULL, NULL},
-		(t_trigger){
-			game.player.my_entity, TRIGGER_SEE, game.entities[0] // Game event : list event wanted
-			}
-		};
-	t_plist	g_e	= lpnew((t_pelem *)first_e);
-	lppush(&g_e, (t_pelem *)secon_e);
-	lppush(&g_e, (t_pelem *)third_e);
-	game.log = c_log;
-	game.waiting_events = g_e;
 	game.unique_e_id = 4;
 	game.played_music = 0;
 	return (game);

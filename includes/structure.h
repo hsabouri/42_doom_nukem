@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:02:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 12:50:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef enum		s_entity_type
 	FISH,
 	MEAT,
 	MEDIPACK,
-	AMMO
+	AMMO,
+	BUTTON
 }					t_entity_type;
 
 typedef struct		s_mat
@@ -87,21 +88,6 @@ typedef struct		s_ph
     char		fly;
 }						t_ph;
 
-typedef enum	e_condition
-{
-	TRIGGER_SEE = 0x1,
-	TRIGGER_TOUCH = 0x2,
-	TRIGGER_INTERACT = 0x3,
-	TRIGGER_SECTOR = 0x4,
-	TRIGGER_NO = 0x0
-}				t_condition;
-
-typedef enum	e_action
-{
-	ACTION_SPAWN = 0x1,
-	ACTION_NO = 0x0
-}				t_action;
-
 typedef struct		s_entity
 {
 	int				id;
@@ -109,26 +95,9 @@ typedef struct		s_entity
 	t_ph			spawn;
 	t_array			*mat;
 	t_entity_type	type;
-	//float life;
-	//float  armor;
-	//t_weapon weapons;
-	int 		damage;
+	float			life;
+	int 			damage;
 }					t_entity;
-
-typedef struct		s_trigger
-{
-	t_entity	e_actif;
-	t_condition	condi;
-	t_entity	e_passif;
-}					t_trigger;
-
-typedef struct		s_game_event
-{
-	t_pelem		elem;
-	t_trigger	trigger;
-	// int			is_trigger;
-	// t_action	 action;
-}					t_game_event;
 
 typedef struct		s_player
 {
@@ -138,7 +107,6 @@ typedef struct		s_player
 	u_int32_t	secondary;
 	u_int32_t	equiped;
 	t_array		inventory;
-	// float		armor;
 }					t_player;
 
 typedef struct		s_portal
@@ -173,7 +141,7 @@ typedef struct		s_sector
 	t_mat		*ceiling_mat;
 	t_mat		*floor_mat;
 	t_fvec2		tex_pos;
-	t_vec2		center; // t_vec3 position
+	t_vec2		center;
 	int			clock;
 }					t_sector;
 
@@ -196,8 +164,6 @@ typedef struct		s_chunk
 typedef struct		s_game
 {
 	t_player		player;
-	t_plist 		waiting_events;
-	t_array			log;
 	t_entity		*entities;
 	size_t			nentities;
 	size_t			unique_e_id;

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/16 15:57:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:02:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_player	player_default(t_game game)
 			},
 			&game.multi_mats[0],
 			(t_entity_type)PLAYER,
+			0,
 			0
 		},
 		100,
@@ -51,6 +52,7 @@ t_entity	entity_default(void)
 		},
 		NULL,
 		-1,
+		0,
 		0});
 	return (entity);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/06 12:56:31 by hugo             ###   ########.fr       */
+/*   Updated: 2019/06/18 14:03:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void			verify_magic(void *t_c_struct, size_t magic, size_t index)
 
 static t_game	parse_2(void *buf, t_c_game game, t_save save, t_game res)
 {
-	t_parse_event	event;
-
 	res.nportals = game.nportals;
 	save.index = game.loc_entities;
 	res.entities = parse_entities(buf, save, res.multi_mats, game.nentities);
@@ -46,10 +44,6 @@ static t_game	parse_2(void *buf, t_c_game game, t_save save, t_game res)
 	res.unique_e_id = game.unique_e_id;
 	save.index = game.loc_player;
 	res.player = parse_player(game, res, buf, save);
-	save.index = game.loc_events;
-	event.buf = buf;
-	event.n_event = game.nevents;
-	res.waiting_events = parse_events(event, save, res, res.player);
 	return (res);
 }
 
@@ -102,6 +96,5 @@ t_game			*load(const char *filename, int edit_mode)
 	parse_audio(buf, save, game.nmusic, MUSIC);
 	save.index = game.loc_sounds;
 	parse_audio(buf, save, game.nsounds, SOUND);
-	res->log = safe_anew(NULL, 100, sizeof(t_trigger), "loader");
 	return (res);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_detec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:18:50 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/28 15:18:51 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:52:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	slide_entity(t_ph n_physic, t_game *game, t_ph physic, size_t i)
 
 t_vec3		col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 {
-	t_trigger	tmp_log;
 	t_vec3		pos;
 	size_t		i;
 	float		d;
@@ -43,10 +42,10 @@ t_vec3		col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 		d = circle_circle(n_physic, game->entities[i].physic, COL_ENTITY);
 		if (d != -1 && i != id)
 		{
-			tmp_log.e_actif = game->player.my_entity;
-			tmp_log.condi = TRIGGER_TOUCH;
-			tmp_log.e_passif = game->entities[i];
-			apush(&game->log, &tmp_log);
+			//tmp_log.e_actif = game->player.my_entity;
+			//tmp_log.condi = TRIGGER_TOUCH;
+			//tmp_log.e_passif = game->entities[i];
+			//apush(&game->log, &tmp_log); //TODO
 			slide_entity(n_physic, game, physic, i);
 			pos = vec3_add(physic.pos, physic.speed);
 		}
@@ -56,7 +55,6 @@ t_vec3		col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 
 void		col_interact(t_ph n_physic, t_game *game, size_t id)
 {
-	t_trigger	tmp_log;
 	size_t		cpt;
 	size_t		log_inter;
 
@@ -66,10 +64,10 @@ void		col_interact(t_ph n_physic, t_game *game, size_t id)
 	{
 		if (interact(n_physic, game->entities[cpt].physic) == 1 && cpt != id)
 		{
-			tmp_log.e_actif = game->player.my_entity;
-			tmp_log.condi = TRIGGER_INTERACT;
-			tmp_log.e_passif = game->entities[cpt];
-			apush(&game->log, &tmp_log);
+			//tmp_log.e_actif = game->player.my_entity;
+			//tmp_log.condi = TRIGGER_INTERACT;
+			//tmp_log.e_passif = game->entities[cpt];
+			//apush(&game->log, &tmp_log); //TODO
 		}
 		cpt++;
 	}

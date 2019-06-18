@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/30 18:44:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:51:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,22 +89,6 @@ float old_timer)
 	}
 	return (next_pos);
 }
-
-int				is_here(t_game game, t_trigger trigger)
-{
-	int			j;
-	t_trigger	*c_log;
-
-	j = 0;
-	while ((c_log = (t_trigger *)anth(&game.log, j)) != NULL)
-	{
-		if (c_log->e_actif.id == trigger.e_actif.id && c_log->e_passif.id
-			== trigger.e_passif.id && c_log->condi == trigger.condi)
-			return (1);
-		j++;
-	}
-	return (0);
-}// wtf ??
 
 t_ph			entities_physic(t_ph physic, t_game *game, ssize_t id,
 float old_timer)
