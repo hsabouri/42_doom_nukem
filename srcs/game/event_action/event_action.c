@@ -58,7 +58,7 @@ t_game			physic_interactions(t_game game, t_event events, t_player player)
 	while ((curr = (t_col_event *)apop(&game.col_events)))
 	{
 		if (events.keys[SDL_SCANCODE_E] &&
-			game.entities[curr->e_id].type >= BUTTON)
+			game.entities[curr->e_id].type >= CLOSE_RED)
 		{
 			anim.target = game.sectors[game.entities[curr->e_id].damage].floor_b.z;
 			anim.to_animate = &game.sectors[game.entities[curr->e_id].damage].floor.z;
