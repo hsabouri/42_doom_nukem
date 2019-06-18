@@ -17,7 +17,7 @@ t_weapons_state *self_state)
 {
 	t_img	**sprite;
 
-	if (hud->env->events.mouse[SDL_BUTTON_LEFT])
+	if (hud->env->game.player.is_shooting)
 	{
 		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
 			[hud->env->game.player.equiped]].sprite, 2);
