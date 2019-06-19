@@ -17,25 +17,12 @@ t_menu_state *state)
 {
 	t_component	current;
 
-	current = init_cb_button((t_cb_button) {.pos = (t_pix) {96, 416},
+	current = init_button((t_button) {.pos = (t_pix) {96, 664},
 		.size = (t_pix) {256, 56}, .background = NO_COLOR,
-		.events = &state->env->events, .callback = &level_1,
-		.img = parse_tga("./textures/menu/level_1.tga", 0),
-		.img_active = parse_tga("./textures/menu/level_1_active.tga", 0),
-		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
-	apush(&childs, &current);
-	current = init_cb_button((t_cb_button) {.pos = (t_pix) {96, 467},
-		.size = (t_pix) {256, 56}, .background = NO_COLOR,
-		.events = &state->env->events, .callback = &level_2,
-		.img = parse_tga("./textures/menu/level_2.tga", 0),
-		.img_active = parse_tga("./textures/menu/level_2_active.tga", 0),
-		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
-	apush(&childs, &current);
-	current = init_cb_button((t_cb_button) {.pos = (t_pix) {96, 518},
-		.size = (t_pix) {256, 56}, .background = NO_COLOR,
-		.events = &state->env->events, .callback = &level_3,
-		.img = parse_tga("./textures/menu/level_3.tga", 0),
-		.img_active = parse_tga("./textures/menu/level_3_active.tga", 0),
+		.events = &state->env->events, .active_value = START_MODE,
+		.img = parse_tga("./textures/menu/return.tga", 0),
+		.img_active = parse_tga("./textures/menu/return_active.tga", 0),
+		.to_activate = (int *)&state->type,
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl);
 	apush(&childs, &current);
 	return (childs);
@@ -64,9 +51,7 @@ t_menu_state *state)
 		.img_active = parse_tga("./textures/menu/new_level_active.tga", 0),
 		.scancode = SDL_SCANCODE_UNKNOWN}, sdl));
 	apush(&childs, &current);
-	if (state->env->file && ft_strcmp(state->env->file, "nyan_dukem") == 0)
-		childs = init_start_button_2(childs, sdl, state);
-	childs = init_start_button_3(childs, sdl, state);
+	childs = init_start_button_2(childs, sdl, state);
 	return (childs);
 }
 
