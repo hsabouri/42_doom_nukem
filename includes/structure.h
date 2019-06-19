@@ -75,6 +75,10 @@ typedef enum		s_entity_type
 	OPEN_PURPLE = 21,
 	LAMP = 22,
 	CEIL_LAMP = 23,
+	PLANT_1 = 24,
+	PLANT_2 = 25,
+	PLANT_3 = 26,
+	PLANT_4 = 27,
 }					t_entity_type;
 
 typedef struct		s_mat

@@ -70,5 +70,9 @@ t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 	multi_sprite[20] = sprite_2(mats, 53);
 	multi_sprite[21] = sprite_2(mats, 54);
 	multi_sprite[22] = sprite_2(mats, 55);
+	multi_sprite[23] = sprite_2(mats, 55);
+	multi_sprite[24] = sprite_2(mats, 55);
+	multi_sprite[25] = sprite_2(mats, 55);
+	multi_sprite[26] = sprite_2(mats, 55);
 	return (multi_sprite);
 }
