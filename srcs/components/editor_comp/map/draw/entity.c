@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 12:20:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 10:41:12 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 12:13:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ const t_state_buf state)
 	pos = screen_space(vec3_to_vec2(entity.physic.pos), state.state);
 	spw = screen_space(vec3_to_vec2(entity.spawn.pos), state.state);
 	c = (t_color) {c.r + 64, c.g + 64, c.b + 64, c.a};
-	if (state.state.tool == TOOL_ENTITY || state.state.tool == ASSIGN_ENTITY)
+	if (state.state.tool == TOOL_ENTITY || state.state.tool == ASSIGN_ENTITY
+		|| state.state.tool == ENTITY_DATA)
 		dotted(state.buf, (t_pix) {pos.u, pos.v}, (t_pix) {spw.u, spw.v}, c);
 	draw_look(spw, entity.spawn.look_h, c, state);
 	draw_point(vec2_to_fvec2(spw), size, state.buf, c);
@@ -57,7 +58,8 @@ void		foreach_entity(void *entity, void *param, size_t i)
 
 	size = (state->state.zoom < 10) ? 2 : 4;
 	size = (state->state.zoom > 60) ? 6 : size;
-	c = (e->damage) ? state->color : E_PEACEFUL;
+	c = (e->data) ? state->color : E_PEACEFUL;
+	c = (e->type >= 14) ? E_BUTTON : c;
 	if ((size_t)state->state.selected_entity == i
 		|| (size_t)state->state.selected_spawn == i
 		|| (size_t)state->state.entity == i || (size_t)state->state.spawn == i)

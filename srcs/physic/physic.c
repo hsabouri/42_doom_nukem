@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/18 13:59:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 13:30:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_game			physic(t_game game, t_event events, float old_timer)
 		if (game.entities[i].type < 14 || game.entities[i].type > 21)
 		{
 			new_physic = game.entities[i].physic;
-			if (game.entities[i].damage >= 1)
+			if (game.entities[i].data >= 1)
 				new_physic.speed = set_entity_speed(new_physic,
 					game.player.my_entity.physic, old_timer);
 			new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
@@ -109,5 +109,6 @@ t_game			physic(t_game game, t_event events, float old_timer)
 		old_timer);
 	new_game.player.my_entity.physic = entities_physic(new_physic, &game, -1,
 		old_timer);
+	new_game.col_events = game.col_events;
 	return (new_game);
 }

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 16:52:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 13:37:58 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,20 @@ t_game			physic_interactions(t_game game, t_event events, t_player player)
 
 	while ((curr = (t_col_event *)apop(&game.col_events)))
 	{
-		if (events.keys[SDL_SCANCODE_E] &&
+		if (events.keys[SDL_SCANCODE_Q] &&
 			game.entities[curr->e_id].type >= CLOSE_RED)
 		{
-			anim.target = game.sectors[game.entities[curr->e_id].damage].floor_b.z;
-			anim.to_animate = &game.sectors[game.entities[curr->e_id].damage].floor.z;
+			anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
+			anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
 			apush(&game.animations, &anim);
-			anim.target = game.sectors[game.entities[curr->e_id].damage].ceiling_b.z;
-			anim.to_animate = &game.sectors[game.entities[curr->e_id].damage].ceiling.z;
+			anim.target = game.sectors[game.entities[curr->e_id].data].ceiling_b.z;
+			anim.to_animate = &game.sectors[game.entities[curr->e_id].data].ceiling.z;
 			apush(&game.animations, &anim);
+			game.sectors[game.entities[curr->e_id].data].ceiling_b =
+				game.sectors[game.entities[curr->e_id].data].ceiling;
+			game.sectors[game.entities[curr->e_id].data].floor_b =
+				game.sectors[game.entities[curr->e_id].data].floor;
+			events.keys[SDL_SCANCODE_Q] = 0;
 		}
 	}
 	return (game);
@@ -80,7 +85,7 @@ t_env			*event_action(t_env *env, t_event events, u_int32_t *id_buf)
 	env->game.player.is_shooting = is_shooting(env->game, env->game.player,
 		events, env->game.frame);
 	if (target.type == PART_ENTITY && env->game.player.is_shooting
-		&& env->game.entities[target.id].damage > 0
+		&& env->game.entities[target.id].data > 0
 		&& env->game.entities[target.id].type < 14)
 		env->game = drop_entity_life(env->game, env->game.player, target.id);
 	env->game = physic_interactions(env->game, events, env->game.player);

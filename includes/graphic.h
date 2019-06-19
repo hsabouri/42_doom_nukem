@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/17 11:51:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 11:13:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define PORTAL_O	(t_color){233,131,31,255}
 # define E_DAMAGE	(t_color){222,62,65,255}
 # define E_PEACEFUL	(t_color){100,100,100,255}
+# define E_BUTTON	(t_color){50,200,50,255}
 # define E_PLAYER	(t_color){128,232,88,255}
 
 # define TEXT_MAX	256

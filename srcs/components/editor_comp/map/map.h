@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:53:47 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 13:48:14 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 12:00:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ typedef enum		e_editor_map_mode
 	TOOL_ENTITY,
 	ASSIGN_ENTITY,
 	MOVE,
-	SECTOR_COLOR
+	SECTOR_COLOR,
+	ENTITY_DATA,
 }					t_editor_map_mode;
 
 typedef struct		s_editor_map_state
@@ -130,6 +131,8 @@ t_array				index_childs_3(t_env *env, t_editor_map_state *state,
 					t_sdl *sdl, t_array ret);
 t_array				index_childs_4(t_env *env, t_editor_map_state *state,
 					t_sdl *sdl, t_array ret);
+t_array				index_childs_5(t_env *env, t_editor_map_state *state,
+					t_sdl *sdl, t_array ret);
 
 t_component			init_point_tool(t_env *env, ssize_t *selected, t_sdl *sdl);
 t_component			init_wall_tool(t_env *env, t_editor_map_state *parent,
@@ -141,8 +144,9 @@ t_component			init_assign_portal_tool(t_env *env,
 
 t_component			init_entity_tool(t_env *env, t_editor_map_state *parent,
 					t_sdl *sdl);
-
 t_component			init_assign_entity(t_env *env, t_assign_entity v,
+					t_sdl *sdl);
+t_component			init_entity_data(t_env *env, t_assign_entity v,
 					t_sdl *sdl);
 
 t_component			init_sector_color_tool(t_env *env,

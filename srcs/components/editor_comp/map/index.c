@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:35:58 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 13:48:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 11:58:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ t_component					init_editor_map(t_env *env, t_sdl *sdl)
 	ret.childs = index_childs_2(env, ret.state, sdl, ret.childs);
 	ret.childs = index_childs_3(env, ret.state, sdl, ret.childs);
 	ret.childs = index_childs_4(env, ret.state, sdl, ret.childs);
+	ret.childs = index_childs_5(env, ret.state, sdl, ret.childs);
 	return (ret);
 }

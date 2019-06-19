@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 13:45:59 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/04 13:48:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 11:59:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_sdl *sdl, t_array ret)
 {
 	t_component	current;
 
-	current = init_button((t_button) { .pos = (t_pix) {258, 2},
+	current = init_button((t_button) { .pos = (t_pix) {298, 2},
 		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
 		.img = parse_tga("./textures/ui/sector_color.tga", 0),
 		.events = &env->events, .to_activate = (int *)&state->tool,
@@ -106,13 +106,13 @@ t_sdl *sdl, t_array ret)
 {
 	t_component	current;
 
-	current = init_sw_button((t_sw_button) { .pos = (t_pix) {302, 2},
+	current = init_sw_button((t_sw_button) { .pos = (t_pix) {342, 2},
 		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
 		.img = parse_tga("./textures/ui/magnetisme.tga", 0), .enable_value = 1,
 		.events = &env->events, .to_activate = (int *)&state->magnetisme,
 		.scancode = SDL_SCANCODE_LCTRL, .disable_value = 0}, sdl);
 	apush(&ret, &current);
-	current = init_cb_button((t_cb_button) { .pos = (t_pix) {344, 2},
+	current = init_cb_button((t_cb_button) { .pos = (t_pix) {384, 2},
 		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
 		.img = parse_tga("./textures/ui/grid_size.tga", 0),
 		.events = &env->events, .callback = &grid_size,
@@ -122,6 +122,25 @@ t_sdl *sdl, t_array ret)
 		.to_look_at = (int *)&env->events.keys[SDL_SCANCODE_H],
 		.state = state, .invert = 0 }, init_help_component((t_help_state) {
 			.img = parse_tga("./textures/hud/map_editor.tga", 0)}, sdl));
+	apush(&ret, &current);
+	current = init_entity_data(env, (t_assign_entity) {
+		&state->selected_entity, &state->selected_spawn,
+		&state->selected_wall, state->selected_walls,
+		&state->entity, &state->spawn, &env->events }, sdl);
+	apush(&ret, &current);
+	return (ret);
+}
+
+t_array	index_childs_5(t_env *env, t_editor_map_state *state,
+t_sdl *sdl, t_array ret)
+{
+	t_component	current;
+
+	current = init_button((t_button) { .pos = (t_pix) {256, 2},
+		.size = (t_pix) {40, 40}, .background = (t_color) {70, 70, 70, 255},
+		.img = parse_tga("./textures/ui/entity_data.tga", 0),
+		.events = &env->events, .to_activate = (int *)&state->tool,
+		.scancode = SDL_SCANCODE_N, .active_value = ENTITY_DATA}, sdl);
 	apush(&ret, &current);
 	return (ret);
 }

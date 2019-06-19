@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:38:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 15:22:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 11:04:31 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-static t_entity	classe_1(t_entity_type type, t_array *mats, int damage)
+static t_entity	classe_1(t_entity_type type, t_array *mats, int data)
 {
 	t_entity	classe;
 
@@ -28,7 +28,7 @@ static t_entity	classe_1(t_entity_type type, t_array *mats, int damage)
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = damage});
+		.data = data});
 	return (classe);
 }
 
@@ -48,11 +48,11 @@ static t_entity	classe_2(t_entity_type type, t_array *mats)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = 0});
+		.data = 0});
 	return (classe);
 }
 
-static t_entity	classe_3(t_entity_type type, t_array *mats, int damage)
+static t_entity	classe_3(t_entity_type type, t_array *mats, int data)
 {
 	t_entity	classe;
 
@@ -68,11 +68,11 @@ static t_entity	classe_3(t_entity_type type, t_array *mats, int damage)
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = damage});
+		.data = data});
 	return (classe);
 }
 
-static t_entity	classe_4(t_entity_type type, t_array *mats, int damage)
+static t_entity	classe_4(t_entity_type type, t_array *mats, int data)
 {
 	t_entity	classe;
 
@@ -88,7 +88,7 @@ static t_entity	classe_4(t_entity_type type, t_array *mats, int damage)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = damage});
+		.data = data});
 	return (classe);
 }
 
@@ -108,7 +108,7 @@ static t_entity	classe_5(t_entity_type type, t_array *mats)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = 0});
+		.data = 0});
 	return (classe);
 }
 

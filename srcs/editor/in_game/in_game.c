@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:01:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 15:32:17 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 12:32:44 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,23 @@ t_game		tilt_floor_ceil(t_game game, t_event events, t_selected sel)
 	return (game);
 }
 
+t_game		swap_height_pos(t_game game, t_selected selected, t_event *events)
+{
+	t_vec3	tmp;
+
+	if (selected.type == PART_CEILING || selected.type == PART_FLOOR)
+	{
+		tmp = game.sectors[selected.id].ceiling_b;
+		game.sectors[selected.id].ceiling_b = game.sectors[selected.id].ceiling;
+		game.sectors[selected.id].ceiling = tmp;
+		tmp = game.sectors[selected.id].floor_b;
+		game.sectors[selected.id].floor_b = game.sectors[selected.id].floor;
+		game.sectors[selected.id].floor = tmp;
+		events->keys[SDL_SCANCODE_N] = 0;
+	}
+	return (game);
+}
+
 t_env		game_editing(t_env env, t_player player)
 {
 	t_sector	*sector;
@@ -74,6 +91,8 @@ t_env		game_editing(t_env env, t_player player)
 		env.editor.depth = 0;
 	if (env.editor.game_tool != TOOL_NO)
 		env = env.editor.game_tools[env.editor.game_tool](env, sel);
+	if (env.events.keys[SDL_SCANCODE_N])
+		env.game = swap_height_pos(env.game, sel, &env.events);
 	env.game = tilt_floor_ceil(env.game, env.events, sel);
 	if (env.events.keys[SDL_SCANCODE_KP_ENTER] && sel.type == PART_PORTAL)
 	{
