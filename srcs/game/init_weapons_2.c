@@ -27,7 +27,7 @@ t_weapon	init_nyan_gun(t_img *textures)
 	apush(&sprite, &material);
 	nyan_gun = ((t_weapon) {
 		.name = (t_weapon_type)NYAN_GUN, .type = 1, .ammo = 100,
-		.ammo_max = 100, .damage = 10000, .cadence = 30,
+		.ammo_max = 100, .damage = 10000, .cadence = 10,
 		.type_shot = (t_shot_type)SHOTS, .explosion = -1, .sprite = sprite,
 		.decal = 15
 	});
@@ -47,7 +47,7 @@ t_weapon	init_grenade(t_img *textures)
 	apush(&sprite, &material);
 	grenade = ((t_weapon) {
 		.name = (t_weapon_type)GRENADE, .type = 2, .ammo = 5, .ammo_max = 5,
-		.damage = 50, .cadence = 20, .type_shot = (t_shot_type)SHOTS,
+		.damage = 50, .cadence = 10, .type_shot = (t_shot_type)SHOTS,
 		.explosion = 1, .sprite = sprite, .decal = 200
 	});
 	return (grenade);
@@ -66,7 +66,7 @@ t_weapon	init_mine(t_img *textures)
 	apush(&sprite, &material);
 	mine = ((t_weapon) {
 		.name = (t_weapon_type)MINE, .type = 2, .ammo = 5, .ammo_max = 5,
-		.damage = 50, .cadence = 20, .type_shot = (t_shot_type)STATIC,
+		.damage = 50, .cadence = 10, .type_shot = (t_shot_type)STATIC,
 		.explosion = 2, .sprite = sprite, .decal = 0
 	});
 	return (mine);

@@ -27,7 +27,7 @@ static t_weapon	init_gun(t_img *textures)
 	apush(&sprite, &material);
 	gun = (t_weapon) {
 		.name = (t_weapon_type)GUN, .type = 1, .ammo = 20, .ammo_max = 20,
-		.damage = 70, .cadence = 20, .type_shot = (t_shot_type)HITSCAN,
+		.damage = 70, .cadence = 5, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 200
 	};
 	return (gun);
@@ -48,7 +48,7 @@ static t_weapon	init_smg(t_img *textures)
 	apush(&sprite, &material);
 	smg = ((t_weapon) {
 		.name = (t_weapon_type)SMG, .type = 1, .ammo = 80, .ammo_max = 80,
-		.damage = 30, .cadence = 5, .type_shot = (t_shot_type)HITSCAN,
+		.damage = 30, .cadence = 1, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 250
 	});
 	return (smg);
@@ -69,7 +69,7 @@ static t_weapon	init_shotgun(t_img *textures)
 	apush(&sprite, &material);
 	shotgun = ((t_weapon) {
 		.name = (t_weapon_type)SHOTGUN, .type = 1, .ammo = 10, .ammo_max = 10,
-		.damage = 100, .cadence = 40, .type_shot = (t_shot_type)SHOTS,
+		.damage = 100, .cadence = 12, .type_shot = (t_shot_type)SHOTS,
 		.explosion = -1, .sprite = sprite, .decal = 20
 	});
 	return (shotgun);
@@ -90,7 +90,7 @@ static t_weapon	init_revolver(t_img *textures)
 	apush(&sprite, &material);
 	revolver = ((t_weapon) {
 		.name = (t_weapon_type)REVOLVER, .type = 1, .ammo = 6, .ammo_max = 6,
-		.damage = 90, .cadence = 30, .type_shot = (t_shot_type)HITSCAN,
+		.damage = 90, .cadence = 10, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 250
 	});
 	return (revolver);
