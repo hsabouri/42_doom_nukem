@@ -37,6 +37,7 @@ t_mat	*init_mat_8(t_mat *materials, t_game *game)
 	materials[58] = tmp;
 	tmp.texture = &game->textures[83];
 	materials[59] = tmp;
+	tmp.sca.u = f_from_int(3);
 	tmp.texture = &game->textures[84];
 	materials[60] = tmp;
 	return (materials);

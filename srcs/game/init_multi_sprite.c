@@ -44,7 +44,7 @@ t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 {
 	t_array *multi_sprite;
 
-	game->nmulti_mats = 23;
+	game->nmulti_mats = 27;
 	multi_sprite = (t_array *)safe_malloc(sizeof(t_array)
 		* game->nmulti_mats, "init_multi_sprite");
 	multi_sprite[0] = sprite_1(mats, 5, 12);
@@ -70,9 +70,9 @@ t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 	multi_sprite[20] = sprite_2(mats, 53);
 	multi_sprite[21] = sprite_2(mats, 54);
 	multi_sprite[22] = sprite_2(mats, 55);
-	multi_sprite[23] = sprite_2(mats, 55);
-	multi_sprite[24] = sprite_2(mats, 55);
-	multi_sprite[25] = sprite_2(mats, 55);
-	multi_sprite[26] = sprite_2(mats, 55);
+	multi_sprite[23] = sprite_2(mats, 56);
+	multi_sprite[24] = sprite_1(mats, 57, 58);
+	multi_sprite[25] = sprite_2(mats, 59);
+	multi_sprite[26] = sprite_2(mats, 60);
 	return (multi_sprite);
 }

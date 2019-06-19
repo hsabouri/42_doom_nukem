@@ -123,9 +123,9 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 	classe[20] = classe_2(OPEN_PURPLE, &multi_mats[20], 3, 0.4);
 	classe[21] = classe_2(LAMP, &multi_mats[21], 0, 1.5);
 	classe[22] = classe_2(CEIL_LAMP, &multi_mats[22], 0, 0.4);
-	classe[23] = classe_2(PLANT_1, &multi_mats[22], 0, 0.4);
-	classe[24] = classe_2(PLANT_2, &multi_mats[22], 0, 0.4);
-	classe[25] = classe_2(PLANT_3, &multi_mats[22], 0, 0.4);
-	classe[26] = classe_2(PLANT_4, &multi_mats[22], 0, 0.4);
+	classe[23] = classe_2(PLANT_1, &multi_mats[23], 0, 1);
+	classe[24] = classe_2(PLANT_2, &multi_mats[24], 0, 0.5);
+	classe[25] = classe_2(PLANT_3, &multi_mats[25], 0, 0.9);
+	classe[26] = classe_2(PLANT_4, &multi_mats[26], 0, 0.4);
 	return (classe);
 }

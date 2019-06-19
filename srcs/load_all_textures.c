@@ -98,10 +98,10 @@ t_img	*load_all_textures(t_game *game)
 	textures[77] = parse_tga("./textures/items/open_door_purple.tga", 0);
 	textures[78] = parse_tga("./textures/items/lamp.tga", 0);
 	textures[79] = parse_tga("./textures/items/ceil_lamp.tga", 0);
-	textures[80] = parse_tga("./textures/items/ceil_lamp.tga", 0);
-	textures[81] = parse_tga("./textures/items/ceil_lamp.tga", 0);
-	textures[82] = parse_tga("./textures/items/ceil_lamp.tga", 0);
-	textures[83] = parse_tga("./textures/items/ceil_lamp.tga", 0);
-	textures[84] = parse_tga("./textures/items/ceil_lamp.tga", 0);
+	textures[80] = parse_tga("./textures/items/plant_1.tga", 0);
+	textures[81] = parse_tga("./textures/items/plant_2_0.tga", 0);
+	textures[82] = parse_tga("./textures/items/plant_2_1.tga", 0);
+	textures[83] = parse_tga("./textures/items/plant_3.tga", 0);
+	textures[84] = parse_tga("./textures/items/plant_4.tga", 0);
 	return (textures);
 }

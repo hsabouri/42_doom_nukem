@@ -40,6 +40,14 @@ static char	*type_to_text_2(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Lamp"));
 	else if (type == CEIL_LAMP)
 		return (ft_strcpy(dst, "Ceil lamp"));
+	else if (type == PLANT_1)
+		return (ft_strcpy(dst, "Plant 1"));
+	else if (type == PLANT_2)
+		return (ft_strcpy(dst, "Plant 2"));
+	else if (type == PLANT_3)
+		return (ft_strcpy(dst, "Plant 3"));
+	else if (type == PLANT_4)
+		return (ft_strcpy(dst, "Plant 4"));
 	else
 		return (ft_strcpy(dst, "Unknown"));
 }
