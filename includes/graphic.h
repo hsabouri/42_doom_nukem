@@ -270,8 +270,8 @@ void			render(t_game game, t_context context,
 				t_color *buf, u_int32_t *id_buf);
 t_sector		teleport_sector(t_game game, t_context context,
 				t_section section);
-void			render_entity(const t_context context, const t_section_entity section,
-				t_color *buf, u_int32_t *ids);
+void			render_entity(const t_context context, const t_section_entity
+	section, t_color *buf, u_int32_t *ids);
 t_context		teleport(t_game game, t_context context, t_section section);
 void			find_center_sectors(t_game game);
 void			find_center(t_game game, size_t i);
