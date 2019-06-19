@@ -28,8 +28,7 @@
 #  include <SDL2/SDL_mixer.h>
 # endif
 
-# define ANIMATION_SPEED 1.0
-# define ABS(v) ((v >= 0) ? v : -v)
+# define ANIMATION_SPEED 0.5
 
 typedef struct		s_animation
 {

@@ -50,15 +50,15 @@ size_t frame)
 
 }
 
-t_game			physic_interactions(t_game game, t_event events, t_player player)
+t_game			physic_interactions(t_game game, t_event *events, t_player player)
 {
 	t_col_event		*curr;
 	t_animation		anim;
 
 	while ((curr = (t_col_event *)apop(&game.col_events)))
 	{
-		if (events.keys[SDL_SCANCODE_Q] &&
-			game.entities[curr->e_id].type >= CLOSE_RED)
+		if (events->keys[SDL_SCANCODE_Q] &&
+			game.entities[curr->e_id].type >= CLOSE_RED && game.animations.len == 0)
 		{
 			anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
 			anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
@@ -70,20 +70,20 @@ t_game			physic_interactions(t_game game, t_event events, t_player player)
 				game.sectors[game.entities[curr->e_id].data].ceiling;
 			game.sectors[game.entities[curr->e_id].data].floor_b =
 				game.sectors[game.entities[curr->e_id].data].floor;
-			events.keys[SDL_SCANCODE_Q] = 0;
 		}
 	}
+	events->keys[SDL_SCANCODE_Q] = 0;
 	return (game);
 }
 
-t_env			*event_action(t_env *env, t_event events, u_int32_t *id_buf)
+t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 {
 	const t_selected	target = translate_out(
 		id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
 	t_entity	*curr;
 
 	env->game.player.is_shooting = is_shooting(env->game, env->game.player,
-		events, env->game.frame);
+		*events, env->game.frame);
 	if (target.type == PART_ENTITY && env->game.player.is_shooting
 		&& env->game.entities[target.id].data > 0
 		&& env->game.entities[target.id].type < 14)

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/20 11:45:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:46:29 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ u_int32_t				launch_check_mats(t_game game, t_check_mat mats,
 u_int32_t				launch_check_entities(t_game game, t_env *env,
 						char *errors_text[NBR_ERROR]);
 
-t_env					*event_action(t_env *env, t_event events,
-	u_int32_t *id_buf);
+t_env					*event_action(t_env *env, t_event *events,
+						u_int32_t *id_buf);
 
 #endif
