@@ -26,8 +26,8 @@
 # define BLACK		(t_color){0,0,0,255}
 # define NO_COLOR	(t_color){0,0,0,0}
 
-typedef	struct dirent t_dirent;
-typedef struct stat t_stat;
+typedef	struct dirent	t_dirent;
+typedef struct stat		t_stat;
 
 typedef	enum	e_audio
 {
@@ -37,11 +37,11 @@ typedef	enum	e_audio
 
 typedef struct	s_save
 {
-	size_t	index;
-	size_t	max;
+	size_t		index;
+	size_t		max;
 }				t_save;
 
-typedef struct s_save_music
+typedef struct	s_save_music
 {
 	DIR			*drt;
 	t_dirent	*read;
@@ -54,12 +54,11 @@ typedef struct s_save_music
 	t_audio		type;
 }				t_save_music;
 
-typedef struct s_parse_event
+typedef struct	s_parse_event
 {
-	void	*buf;
-	size_t	n_event;
+	void		*buf;
+	size_t		n_event;
 }				t_parse_event;
-
 
 void			save(const char *filename, t_game game);
 t_game			*load(const char *filename, int edit_mode);

@@ -134,7 +134,8 @@ t_game			generate_map(void)
 	game.multi_mats = init_multi_sprite(&game, game.materials);
 	game.points = init_points(&game);
 	game.walls = init_walls(&game);
-	game.portals = (t_portal *)safe_malloc(0 * sizeof(t_portal), "generate_map");
+	game.portals = (t_portal *)safe_malloc(0 * sizeof(t_portal),
+	"generate_map");
 	game.nportals = 0;
 	game.sectors = init_sector(&game);
 	game.classes = init_classe(&game, game.multi_mats);

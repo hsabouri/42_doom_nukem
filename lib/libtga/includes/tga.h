@@ -27,10 +27,10 @@
 
 typedef struct		s_color
 {
-	u_int8_t	r;
-	u_int8_t	g;
-	u_int8_t	b;
-	u_int8_t	a;
+	u_int8_t		r;
+	u_int8_t		g;
+	u_int8_t		b;
+	u_int8_t		a;
 }					t_color;
 
 typedef struct		s_img
@@ -39,8 +39,8 @@ typedef struct		s_img
 	unsigned int	height;
 	t_color			*content;
 	unsigned int	edit;
-}				t_img;
+}					t_img;
 
-t_img			parse_tga(const char *path, unsigned int edit);
+t_img				parse_tga(const char *path, unsigned int edit);
 
 #endif

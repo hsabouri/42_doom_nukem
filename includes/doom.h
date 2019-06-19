@@ -48,75 +48,76 @@
 #  define ON_LINUX 0
 # endif
 
-typedef	enum	e_game_mode
+typedef	enum			e_game_mode
 {
 	MENU_MODE,
 	GAME_MODE,
 	QUIT
-}				t_game_mode;
+}						t_game_mode;
 
 typedef struct			s_event
 {
-	int			any;
-	int16_t		x;
-	int16_t		y;
-	int16_t		old_x;
-	int16_t		old_y;
-	int16_t		wheel;
-	u_int8_t	quit;
-	u_int8_t	mouse[N_BUTTON];
-	u_int8_t	mouse_click[N_BUTTON];
-	u_int8_t	keys[N_KEY];
-	u_int8_t	key_click[N_KEY];
+	int					any;
+	int16_t				x;
+	int16_t				y;
+	int16_t				old_x;
+	int16_t				old_y;
+	int16_t				wheel;
+	u_int8_t			quit;
+	u_int8_t			mouse[N_BUTTON];
+	u_int8_t			mouse_click[N_BUTTON];
+	u_int8_t			keys[N_KEY];
+	u_int8_t			key_click[N_KEY];
 }						t_event;
 
-typedef struct	s_text
+typedef struct			s_text
 {
-	int16_t		x;
-	int16_t		y;
-	int32_t		w;
-	int32_t		h;
-	SDL_Texture	*text_texture;
-}				t_text;
+	int16_t				x;
+	int16_t				y;
+	int32_t				w;
+	int32_t				h;
+	SDL_Texture			*text_texture;
+}						t_text;
 
 typedef struct			s_sdl
 {
-	SDL_Window		*win;
-	SDL_Texture		*buf;
-	SDL_Renderer	*renderer;
-	TTF_Font		*font;
-	t_array			text;
+	SDL_Window			*win;
+	SDL_Texture			*buf;
+	SDL_Renderer		*renderer;
+	TTF_Font			*font;
+	t_array				text;
 }						t_sdl;
 
-typedef struct	s_component_event
+typedef struct			s_component_event
 {
-    int hover;
-}				t_component_event;
+	int hover;
+}						t_component_event;
 
-typedef struct	s_component
+typedef struct			s_component
 {
-	int				display;
-    t_pix 			pos;
-	t_pix			size;
-    t_text			text;
-    t_img			img;
-    void			*state;
-    void			(*render)(struct s_component self, t_color *buf);
-    SDL_Texture		*(*complete_render)(struct s_component self, t_sdl *sdl);
-    int				(*update)(struct s_component *self, void *state);
-	void			(*destroy)(struct s_component *self);
-    t_array			childs;
-	SDL_Texture		*last_render;
-}				t_component;
+	int					display;
+	t_pix				pos;
+	t_pix				size;
+	t_text				text;
+	t_img				img;
+	void				*state;
+	void				(*render)(struct s_component self, t_color *buf);
+	SDL_Texture			*(*complete_render)(struct s_component
+	self, t_sdl *sdl);
+	int					(*update)(struct s_component *self, void *state);
+	void				(*destroy)(struct s_component *self);
+	t_array				childs;
+	SDL_Texture			*last_render;
+}						t_component;
 
-typedef enum	e_tool
+typedef enum			e_tool
 {
 	POINT = 0,
 	WALL = 1,
 	PORTAL = 2
-}				t_tool;
+}						t_tool;
 
-typedef enum	e_game_tool
+typedef enum			e_game_tool
 {
 	TEXTURE_MOVE = 0,
 	MATERIAL_MOVE = 1,
@@ -124,60 +125,65 @@ typedef enum	e_game_tool
 	SECTOR_HEIGHT = 3,
 	MATERIAL_CHANGE = 4,
 	TOOL_NO
-}				t_game_tool;
+}						t_game_tool;
 
-struct			s_env;
+struct					s_env;
 
-typedef struct	s_editor
+typedef struct			s_editor
 {
-	int				enabled;
-	float			zoom;
-	t_vec2			offset;
-	t_tool			current_tool;
-	t_game_tool		game_tool;
-	struct s_env	(*tools[3])(struct s_env);
-	struct s_env	(*game_tools[10])(struct s_env, t_selected);
-	ssize_t			sel_point;
-	ssize_t			sel_wall;
-	ssize_t			points_wall[2];
-	uint8_t			depth;
-	int				selecting;
-}				t_editor;
+	int					enabled;
+	float				zoom;
+	t_vec2				offset;
+	t_tool				current_tool;
+	t_game_tool			game_tool;
+	struct s_env		(*tools[3])(struct s_env);
+	struct s_env		(*game_tools[10])(struct s_env, t_selected);
+	ssize_t				sel_point;
+	ssize_t				sel_wall;
+	ssize_t				points_wall[2];
+	uint8_t				depth;
+	int					selecting;
+}						t_editor;
 
 typedef struct			s_env
 {
-	char		*file;
-	int			fd;
-	t_game		game;
-	int			toggle_editor;
-	t_game_mode	game_mode;
-	int			init_game;
-	t_editor	editor;
-	t_color		*current_buffer;
-	t_component	*component;
-	t_sdl		sdl;
-	t_event		events;
+	char				*file;
+	int					fd;
+	t_game				game;
+	int					toggle_editor;
+	t_game_mode			game_mode;
+	int					init_game;
+	t_editor			editor;
+	t_color				*current_buffer;
+	t_component			*component;
+	t_sdl				sdl;
+	t_event				events;
 }						t_env;
 
-typedef struct	s_thread_info
+typedef struct			s_thread_info
 {
-	t_game		game;
-	t_context	context;
-	t_color		*buf;
-	u_int32_t	*id_buf;
-}				t_thread_info;
+	t_game				game;
+	t_context			context;
+	t_color				*buf;
+	u_int32_t			*id_buf;
+}						t_thread_info;
 
-int						is_clicked_on(const t_component component, t_event events);
+int						is_clicked_on(const t_component component,
+	t_event events);
 int						is_over(const t_component component, t_event events);
-void					m_background(t_color *buf, t_color color, t_pix start, t_pix end);
+void					m_background(t_color *buf, t_color color, t_pix start,
+	t_pix end);
 t_game					init_audio(t_game game);
 t_game					init_audio_tmp(t_game game);
 t_img					*load_all_textures(t_game *game);
 
-t_component				default_component(void *state_address, t_pix size, t_sdl *sdl);
-t_component     		*init_component(t_env *env, t_sdl *sdl);
-t_component				trigger_component(void *parent, t_component component, t_sdl *sdl);
-void					display_component(const t_component component, t_sdl *sdl);
+t_component				default_component(void *state_address, t_pix size,
+	t_sdl *sdl);
+t_component				*init_component(t_env *env, t_sdl *sdl);
+t_component				trigger_component(void *parent, t_component component,
+	t_sdl *sdl);
+void					display_component(const t_component component,
+	t_sdl *sdl);
 void					destroy_component(t_component *component);
 void					clean_childs(t_array childs);
 t_component				render_all(t_component component, t_sdl *sdl);
@@ -210,7 +216,8 @@ void					legend_text(t_sdl sdl);
 void					legend_graphic(t_color *buf);
 t_game					player_properties(t_game game, t_event events);
 
-void					play_music(t_game game, size_t id, size_t vol, size_t frame);
+void					play_music(t_game game, size_t id, size_t vol,
+	size_t frame);
 t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);
 t_game					play_sounds(t_game game);
 
@@ -259,6 +266,7 @@ u_int32_t				launch_check_mats(t_game game, t_check_mat mats,
 u_int32_t				launch_check_entities(t_game game, t_env *env,
 						char *errors_text[NBR_ERROR]);
 
-t_env					*event_action(t_env *env, t_event events, u_int32_t *id_buf);
+t_env					*event_action(t_env *env, t_event events,
+	u_int32_t *id_buf);
 
 #endif

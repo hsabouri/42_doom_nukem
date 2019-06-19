@@ -55,7 +55,8 @@ t_game			del_mat_update_materials(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_walls(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_sectors(size_t mat, size_t a_old, t_game game);
 t_game			del_mat_update_portals(size_t mat, size_t a_old, t_game game);
-t_game			del_mat_update_multi_mats(size_t mat, size_t a_old, t_game game);
+t_game			del_mat_update_multi_mats(size_t mat, size_t a_old,
+	t_game game);
 
 t_game			create_mat_update_materials(size_t a_old, t_game game);
 t_game			create_mat_update_walls(size_t a_old, t_game game);

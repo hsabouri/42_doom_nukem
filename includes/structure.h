@@ -25,7 +25,7 @@
 # include "./weapons.h"
 
 # ifndef LOAD_SAVE_H
-#	include <SDL2/SDL_mixer.h>
+#  include <SDL2/SDL_mixer.h>
 # endif
 
 # define ANIMATION_SPEED 1.0
@@ -101,8 +101,8 @@ typedef struct		s_ph
 	t_fixed		look_v;
 	u_int32_t	sector_id;
 	u_int32_t	jump;
-    char		fly;
-}						t_ph;
+	char		fly;
+}					t_ph;
 
 typedef struct		s_entity
 {
@@ -112,7 +112,7 @@ typedef struct		s_entity
 	t_array			*mat;
 	t_entity_type	type;
 	float			life;
-	int 			damage;
+	int				damage;
 }					t_entity;
 
 typedef struct		s_player
