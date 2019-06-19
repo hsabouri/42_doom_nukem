@@ -37,6 +37,7 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 	current.data = struc_e.data;
 	current.life = f_to_float(struc_e.life);
 	current.type = (t_entity_type)struc_e.type;
+	current.enable_ph = struc_e.enable_ph;
 	return (current);
 }
 

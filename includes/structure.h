@@ -73,6 +73,8 @@ typedef enum		s_entity_type
 	OPEN_BLUE = 19,
 	OPEN_GREEN = 20,
 	OPEN_PURPLE = 21,
+	LAMP = 22,
+	CEIL_LAMP = 23,
 }					t_entity_type;
 
 typedef struct		s_mat
@@ -106,6 +108,7 @@ typedef struct		s_ph
 typedef struct		s_entity
 {
 	int				id;
+	u_int32_t		enable_ph;
 	t_ph			physic;
 	t_ph			spawn;
 	t_array			*mat;

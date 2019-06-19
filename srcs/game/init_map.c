@@ -72,23 +72,11 @@ t_entity	*init_entities(t_game *game)
 {
 	t_entity *entities;
 
-	entities = (t_entity *)malloc(4 * sizeof(t_entity));
+	entities = (t_entity *)malloc(1 * sizeof(t_entity));
 	entities[0] = game->classes[0];
 	entities[0].id = 0;
 	entities[0].physic.pos = (t_vec3){8, 12, 0};
 	entities[0].spawn.pos = (t_vec3){8, 12, 0};
-	entities[1] = game->classes[2];
-	entities[1].id = 1;
-	entities[1].physic.pos = (t_vec3){5, 12, 0};
-	entities[1].spawn.pos = (t_vec3){5, 12, 0};
-	entities[2] = game->classes[3];
-	entities[2].id = 2;
-	entities[2].physic.pos = (t_vec3){8, 10, 0};
-	entities[2].spawn.pos = (t_vec3){8, 10, 0};
-	entities[3] = game->classes[4];
-	entities[3].id = 3;
-	entities[3].physic.pos = (t_vec3){5, 10, 0};
-	entities[3].spawn.pos = (t_vec3){5, 10, 0};
-	game->nentities = 4;
+	game->nentities = 1;
 	return (entities);
 }

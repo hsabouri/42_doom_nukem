@@ -19,6 +19,7 @@ t_player	player_default(t_game game)
 	player = (t_player) {
 			(t_entity) {
 			-1,
+			0,
 			(t_ph) {.gravity = 0.02, .height = 1.50, .radius = 0.5,
 				.pos = (t_vec3){6.5, 11, 0}, .speed_max = (t_vec3){1, 1, 1},
 			},
@@ -44,6 +45,7 @@ t_entity	entity_default(void)
 
 	entity = ((t_entity) {
 		1,
+		0,
 		(t_ph) {.gravity = 0.02, .height = 1.25, .radius = 0.5, .rad_inter = 3,
 			.pos = (t_vec3){7, 9, 0}, .speed_max = (t_vec3){1, 1, 1},
 		},

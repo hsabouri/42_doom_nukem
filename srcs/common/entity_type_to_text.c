@@ -36,6 +36,10 @@ static char	*type_to_text_2(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Open green"));
 	else if (type == OPEN_PURPLE)
 		return (ft_strcpy(dst, "Open purple"));
+	else if (type == LAMP)
+		return (ft_strcpy(dst, "Lamp"));
+	else if (type == CEIL_LAMP)
+		return (ft_strcpy(dst, "Ceil lamp"));
 	else
 		return (ft_strcpy(dst, "Unknown"));
 }

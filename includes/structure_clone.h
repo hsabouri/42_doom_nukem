@@ -92,6 +92,7 @@ typedef struct		s_c_entity
 {
 	size_t		magic;
 	int			id;
+	u_int32_t	enable_ph;
 	t_c_ph		spawn;
 	ssize_t		mats;
 	int32_t		type;

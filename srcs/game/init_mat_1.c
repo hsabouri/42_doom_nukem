@@ -25,6 +25,11 @@ t_mat	*init_mat_8(t_mat *materials, t_game *game)
 	materials[52] = tmp;
 	tmp.texture = &game->textures[77];
 	materials[53] = tmp;
+	tmp.sca.u = f_from_int(1);
+	tmp.texture = &game->textures[78]; // lamp
+	materials[54] = tmp;
+	tmp.texture = &game->textures[79]; // ceil_lamp
+	materials[55] = tmp;
 	return (materials);
 }
 
