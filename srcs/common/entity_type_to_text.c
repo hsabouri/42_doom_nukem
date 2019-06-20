@@ -48,6 +48,10 @@ static char	*type_to_text_2(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Plant 3"));
 	else if (type == PLANT_4)
 		return (ft_strcpy(dst, "Plant 4"));
+	else if (type == TRASH_1)
+		return (ft_strcpy(dst, "Trash 1"));
+	else if (type == TRASH_2)
+		return (ft_strcpy(dst, "Trash 2"));
 	else
 		return (ft_strcpy(dst, "Unknown"));
 }

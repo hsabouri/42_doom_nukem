@@ -79,6 +79,8 @@ typedef enum		s_entity_type
 	PLANT_2 = 25,
 	PLANT_3 = 26,
 	PLANT_4 = 27,
+	TRASH_1 = 28,
+	TRASH_2 = 29,
 }					t_entity_type;
 
 typedef struct		s_mat
@@ -112,7 +114,6 @@ typedef struct		s_ph
 typedef struct		s_entity
 {
 	int				id;
-	u_int32_t		enable_ph;
 	t_ph			physic;
 	t_ph			spawn;
 	t_array			*mat;

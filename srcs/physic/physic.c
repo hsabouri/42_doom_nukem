@@ -92,7 +92,7 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	new_game = game;
 	while (i < game.nentities)
 	{
-		if (game.entities[i].enable_ph)
+		if (!game.entities[i].physic.fly)
 		{
 			new_physic = game.entities[i].physic;
 			if (game.entities[i].data >= 1)

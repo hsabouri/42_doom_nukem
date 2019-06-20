@@ -17,7 +17,7 @@ static t_entity	classe_1(t_entity_type type, t_array *mats, int data)
 	t_entity	classe;
 
 	classe = ((t_entity){
-		.id = 0, .enable_ph = 1, .physic = (t_ph) {
+		.id = 0, .physic = (t_ph) {
 			.gravity = 0.02, .height = 1.30, .radius = 0.8, .rad_inter = 3,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
@@ -38,16 +38,16 @@ float height)
 	t_entity	classe;
 
 	classe = ((t_entity){
-		.id = 0, .enable_ph = 0, .physic = (t_ph) {
+		.id = 0, .physic = (t_ph) {
 			.gravity = 0.02, .height = height, .radius = 0.4, .rad_inter = rad_inter,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
-			.sector_id = 0, .jump = 0, .fly = 0
+			.sector_id = 0, .jump = 0, .fly = 1
 		}, .spawn = (t_ph) {
 			.gravity = 0.02, .height = 0.40, .radius = 0.4, .rad_inter = 3,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
-			.sector_id = 0, .jump = 0, .fly = 0
+			.sector_id = 0, .jump = 0, .fly = 1
 		}, .mat = mats, .type = type,
 		.data = 0});
 	return (classe);
@@ -78,16 +78,16 @@ static t_entity	classe_4(t_entity_type type, t_array *mats, int data)
 	t_entity	classe;
 
 	classe = ((t_entity){
-		.id = 0, .enable_ph = 1, .physic = (t_ph) {
+		.id = 0, .physic = (t_ph) {
 			.gravity = 0.02, .height = 0.40, .radius = 0.3, .rad_inter = 0,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
-			.sector_id = 0, .jump = 0, .fly = 0
+			.sector_id = 0, .jump = 0, .fly = 1
 		}, .spawn = (t_ph) {
 			.gravity = 0.02, .height = 0.40, .radius = 0.3, .rad_inter = 0,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
-			.sector_id = 0, .jump = 0, .fly = 0
+			.sector_id = 0, .jump = 0, .fly = 1
 		}, .mat = mats, .type = type,
 		.data = data});
 	return (classe);
@@ -97,7 +97,7 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 {
 	t_entity	*classe;
 
-	game->nclasses = 27;
+	game->nclasses = 29;
 	classe = (t_entity *)safe_malloc(game->nclasses * sizeof(t_entity),
 		"init_classe");
 	classe[0] = classe_1(GUN_MARINE, &multi_mats[0], 15);
@@ -127,5 +127,7 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 	classe[24] = classe_2(PLANT_2, &multi_mats[24], 0, 0.5);
 	classe[25] = classe_2(PLANT_3, &multi_mats[25], 0, 0.9);
 	classe[26] = classe_2(PLANT_4, &multi_mats[26], 0, 0.4);
+	classe[27] = classe_2(TRASH_1, &multi_mats[27], 0, 0.5);
+	classe[28] = classe_2(TRASH_2, &multi_mats[28], 0, 0.5);
 	return (classe);
 }
