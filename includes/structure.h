@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/20 11:45:22 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 14:36:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef enum		s_entity_type
 	SMG_MARINE = 2,
 	BLACK_MARINE = 3,
 	RED_MARINE = 4,
-	GREEN_KEY_CARD = 5,
+	RED_KEY_CARD = 5,
 	BLUE_KEY_CARD = 6,
-	RED_KEY_CARD = 7,
+	GREEN_KEY_CARD = 7,
 	PURPLE_KEY_CARD = 8,
 	APPLE = 9,
 	FISH = 10,

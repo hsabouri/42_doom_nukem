@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/19 13:37:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 14:35:43 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,14 @@ size_t frame)
 t_game			physic_interactions(t_game game, t_event *events, t_player player)
 {
 	t_col_event		*curr;
+	t_entity		sub;
 	t_animation		anim;
 
 	while ((curr = (t_col_event *)apop(&game.col_events)))
 	{
-		if (events->keys[SDL_SCANCODE_Q] &&
-			game.entities[curr->e_id].type >= CLOSE_RED && game.animations.len == 0)
+		sub = game.entities[curr->e_id];
+		if (events->keys[SDL_SCANCODE_Q] && sub.type >= CLOSE_RED
+			&& sub.type <= OPEN_PURPLE && game.animations.len == 0)
 		{
 			anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
 			anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
@@ -70,9 +72,12 @@ t_game			physic_interactions(t_game game, t_event *events, t_player player)
 				game.sectors[game.entities[curr->e_id].data].ceiling;
 			game.sectors[game.entities[curr->e_id].data].floor_b =
 				game.sectors[game.entities[curr->e_id].data].floor;
+			game = invert_button(game, curr);
 		}
+		else if (sub.type >= RED_KEY_CARD && sub.type <= AMMO
+			&& events->keys[SDL_SCANCODE_Q])
+			game = pickup_object(game, curr);
 	}
-	events->keys[SDL_SCANCODE_Q] = 0;
 	return (game);
 }
 
