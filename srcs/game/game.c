@@ -47,6 +47,5 @@ void		game_loop(t_env *env, size_t frame)
 	env->game = play_sounds(env->game);
 	SDL_RenderPresent(env->sdl.renderer);
 	env->game = play_sounds(env->game);
-	printf("%f\n", old_timer);
 	old_timer = end_timer(timer);
 }
