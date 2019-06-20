@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/19 13:38:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:28:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,9 @@ typedef struct		s_c_sector
 	u_int32_t	number;
 	size_t		sector_id;
 	t_fvec3		floor;
+	t_fvec3		floor_b;
 	t_fvec3		ceiling;
+	t_fvec3		ceiling_b;
 	t_color		ambient;
 	ssize_t		ceiling_mat;
 	ssize_t		floor_mat;

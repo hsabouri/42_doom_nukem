@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/19 11:01:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:25:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ size_t n_entities)
 			+ sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
 		verify_magic(&struc_e, ENTITY_MAGIC, i);
 		current = parse_entities_2(struc_e, multi_mats);
+		printf("radius: %f, height: %f\n", current.physic.radius,
+			current.physic.height);
 		entities[i] = current;
 		i++;
 	}
