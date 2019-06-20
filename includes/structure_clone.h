@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 15:34:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:28:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,8 @@ typedef struct		s_c_entity
 	ssize_t		mats;
 	int32_t		type;
 	t_fixed		life;
-	int 		damage;
+	int 		data;
 }					t_c_entity;
-
-typedef struct		s_c_trigger
-{
-	int32_t		e_actif;
-	size_t		condi;
-	int32_t		e_passif;
-}					t_c_trigger;
-
-typedef struct		s_c_game_event
-{
-	size_t		magic;
-	t_c_trigger	trigger;
-	// int			is_trigger;
-	// t_action	 action;
-}					t_c_game_event;
 
 typedef struct		s_c_player
 {
@@ -121,7 +106,6 @@ typedef struct		s_c_player
 	u_int32_t		weapons[2];
 	u_int32_t		secondary;
 	u_int32_t		equiped;
-	// float		armor;
 }					t_c_player;
 
 typedef struct		s_c_point
@@ -160,7 +144,9 @@ typedef struct		s_c_sector
 	u_int32_t	number;
 	size_t		sector_id;
 	t_fvec3		floor;
+	t_fvec3		floor_b;
 	t_fvec3		ceiling;
+	t_fvec3		ceiling_b;
 	t_color		ambient;
 	ssize_t		ceiling_mat;
 	ssize_t		floor_mat;

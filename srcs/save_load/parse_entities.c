@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/18 15:35:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:25:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 			sizeof(t_array));
 	else
 		current.mat = NULL;
-	current.damage = struc_e.damage;
+	current.data = struc_e.data;
 	current.life = f_to_float(struc_e.life);
 	current.type = (t_entity_type)struc_e.type;
 	return (current);
@@ -57,6 +57,8 @@ size_t n_entities)
 			+ sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
 		verify_magic(&struc_e, ENTITY_MAGIC, i);
 		current = parse_entities_2(struc_e, multi_mats);
+		printf("radius: %f, height: %f\n", current.physic.radius,
+			current.physic.height);
 		entities[i] = current;
 		i++;
 	}
@@ -100,7 +102,7 @@ static t_player	parse_player_2(t_player current, t_c_player struc_p)
 	current.weapons[1] = struc_p.weapons[1];
 	current.secondary = struc_p.secondary;
 	current.equiped = struc_p.equiped;
-	current.my_entity.damage = struc_p.my_entity.damage;
+	current.my_entity.data = struc_p.my_entity.data;
 	return (current);
 }
 

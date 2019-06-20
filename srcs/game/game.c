@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 14:22:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 13:20:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void		game_loop(t_env *env, size_t frame)
 	if (env->game.nwalls > 0)
 		env->game = physic(env->game, env->events, old_timer);
 	env->game.frame = frame;
-	env = event_action(env, env->events, env->game.id_buf);
+	env = event_action(env, &env->events, env->game.id_buf);
+	env->game = animate(env->game, old_timer);
 	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
 	env->current_buffer = content;
 	if (env->game.nwalls > 0)
@@ -46,5 +47,6 @@ void		game_loop(t_env *env, size_t frame)
 	env->game = play_sounds(env->game);
 	SDL_RenderPresent(env->sdl.renderer);
 	env->game = play_sounds(env->game);
+	printf("%f\n", old_timer);
 	old_timer = end_timer(timer);
 }

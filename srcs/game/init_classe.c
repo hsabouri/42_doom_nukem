@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:38:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/31 15:22:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:36:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-static t_entity	classe_1(t_entity_type type, t_array *mats, int damage)
+static t_entity	classe_1(t_entity_type type, t_array *mats, int data)
 {
 	t_entity	classe;
 
@@ -23,12 +23,12 @@ static t_entity	classe_1(t_entity_type type, t_array *mats, int damage)
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .spawn = (t_ph) {
-			.gravity = 0.02, .height = 1.30, .radius = 0.5, .rad_inter = 3,
+			.gravity = 0.02, .height = 1.30, .radius = 0.8, .rad_inter = 3,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = damage});
+		.data = data});
 	return (classe);
 }
 
@@ -43,16 +43,16 @@ static t_entity	classe_2(t_entity_type type, t_array *mats)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .spawn = (t_ph) {
-			.gravity = 0.02, .height = 0.50, .radius = 0, .rad_inter = 3,
+			.gravity = 0.02, .height = 0.40, .radius = 0.4, .rad_inter = 3,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = 0});
+		.data = 0});
 	return (classe);
 }
 
-static t_entity	classe_3(t_entity_type type, t_array *mats, int damage)
+static t_entity	classe_3(t_entity_type type, t_array *mats, int data)
 {
 	t_entity	classe;
 
@@ -63,16 +63,16 @@ static t_entity	classe_3(t_entity_type type, t_array *mats, int damage)
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .spawn = (t_ph) {
-			.gravity = 0.02, .height = 1.50, .radius = 0.5, .rad_inter = 3,
+			.gravity = 0.02, .height = 1.30, .radius = 0.6, .rad_inter = 3,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = damage});
+		.data = data});
 	return (classe);
 }
 
-static t_entity	classe_4(t_entity_type type, t_array *mats, int damage)
+static t_entity	classe_4(t_entity_type type, t_array *mats, int data)
 {
 	t_entity	classe;
 
@@ -83,12 +83,12 @@ static t_entity	classe_4(t_entity_type type, t_array *mats, int damage)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .spawn = (t_ph) {
-			.gravity = 0.02, .height = 0.50, .radius = 0, .rad_inter = 3,
+			.gravity = 0.02, .height = 0.40, .radius = 0.3, .rad_inter = 0,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = damage});
+		.data = data});
 	return (classe);
 }
 
@@ -103,12 +103,12 @@ static t_entity	classe_5(t_entity_type type, t_array *mats)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .spawn = (t_ph) {
-			.gravity = 0.02, .height = 0.50, .radius = 0, .rad_inter = 3,
+			.gravity = 0.02, .height = 0.40, .radius = 0.4, .rad_inter = 3,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.damage = 0});
+		.data = 0});
 	return (classe);
 }
 

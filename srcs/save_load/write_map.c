@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:32:17 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/22 14:21:26 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:32:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ void	write_sectors(int fd, t_sector *sectors, size_t nsectors, t_mat *mats)
 	i = 0;
 	while (i < nsectors)
 	{
-		s_sectors.magic = SECTOR_MAGIC + i;
-		s_sectors.start = sectors[i].start;
-		s_sectors.number = sectors[i].number;
-		s_sectors.sector_id = sectors[i].sector_id;
-		s_sectors.floor = vec3_to_fvec3(sectors[i].floor);
-		s_sectors.ceiling = vec3_to_fvec3(sectors[i].ceiling);
-		s_sectors.ambient = sectors[i].ambient;
-		s_sectors.ceiling_mat = (sectors[i].ceiling_mat != NULL)
-			? id_from_p(sectors[i].ceiling_mat, mats, sizeof(t_mat)) : -1;
+		s_sectors = (t_c_sector) {.magic = SECTOR_MAGIC + i,
+			.start = sectors[i].start, .number = sectors[i].number,
+			.sector_id = sectors[i].sector_id, .ambient = sectors[i].ambient,
+			.floor = vec3_to_fvec3(sectors[i].floor),
+			.ceiling = vec3_to_fvec3(sectors[i].ceiling),
+			.floor_b = vec3_to_fvec3(sectors[i].floor_b),
+			.ceiling_b = vec3_to_fvec3(sectors[i].ceiling_b),
+			.ceiling_mat = (sectors[i].ceiling_mat != NULL)
+				? id_from_p(sectors[i].ceiling_mat, mats, sizeof(t_mat)) : -1};
 		if (sectors[i].floor_mat != NULL)
 			s_sectors.floor_mat = id_from_p(sectors[i].floor_mat, mats,
 				sizeof(t_mat));

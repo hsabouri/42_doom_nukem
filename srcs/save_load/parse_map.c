@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:06:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/22 14:21:16 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:33:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ size_t nsectors)
 {
 	t_c_sector	struc_s;
 	t_sector	*sectors;
-	t_sector	current;
 	size_t		i;
 
 	sectors = (t_sector *)safe_malloc((sizeof(t_sector) * nsectors), "loader");
@@ -106,17 +105,17 @@ size_t nsectors)
 		struc_s = *(t_c_sector *)dump_struct(buf, save.index
 			+ sizeof(t_c_sector) * i, sizeof(t_c_sector), save.max);
 		verify_magic(&struc_s, SECTOR_MAGIC, i);
-		current = sectors[i];
-		current = (t_sector) {.start = struc_s.start, .number = struc_s.number,
+		sectors[i] = (t_sector) {.start = struc_s.start,
 			.sector_id = struc_s.sector_id, .tex_pos = struc_s.tex_pos,
 			.floor = fvec3_to_vec3(struc_s.floor), .ambient = struc_s.ambient,
-			.ceiling = fvec3_to_vec3(struc_s.ceiling),
+			.ceiling = fvec3_to_vec3(struc_s.ceiling), .number = struc_s.number,
+			.floor_b = fvec3_to_vec3(struc_s.floor_b),
+			.ceiling_b = fvec3_to_vec3(struc_s.ceiling_b),
 			.ceiling_mat = (struc_s.ceiling_mat == -1) ? NULL
 				: id_to_p(struc_s.ceiling_mat, mats, sizeof(t_mat)),
 			.floor_mat = (struc_s.floor_mat == -1) ? NULL
 				: id_to_p(struc_s.floor_mat, mats, sizeof(t_mat))};
-		current.center = fvec2_to_vec2(struc_s.center);
-		sectors[i] = current;
+		sectors[i].center = fvec2_to_vec2(struc_s.center);
 	}
 	return (sectors);
 }

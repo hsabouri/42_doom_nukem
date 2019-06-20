@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 16:29:34 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 16:52:33 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/19 12:14:56 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_state_buf state, t_wall wall)
 	t_color color;
 
 	if (tool == ASSIGN_WALL || tool == CREATE_PORTAL || tool == CREATE_WALL
-		|| tool == ASSIGN_ENTITY || tool == SECTOR_COLOR)
+		|| tool == ASSIGN_ENTITY || tool == SECTOR_COLOR || tool == ENTITY_DATA)
 		state.color = (t_color) {state.color.r / 2,
 			state.color.g / 2, state.color.b / 2, state.color.a};
 	if (state.state.tool == CREATE_PORTAL
