@@ -25,6 +25,26 @@ t_mat	*init_mat_8(t_mat *materials, t_game *game)
 	materials[52] = tmp;
 	tmp.texture = &game->textures[77];
 	materials[53] = tmp;
+	tmp.texture = &game->textures[78];
+	materials[54] = tmp;
+	tmp.texture = &game->textures[79];
+	materials[55] = tmp;
+	tmp.texture = &game->textures[80];
+	materials[56] = tmp;
+	tmp.texture = &game->textures[81];
+	materials[57] = tmp;
+	tmp.texture = &game->textures[82];
+	materials[58] = tmp;
+	tmp.texture = &game->textures[83];
+	materials[59] = tmp;
+	tmp.texture = &game->textures[85];
+	materials[61] = tmp;
+	tmp.sca.u = f_from_int(3);
+	tmp.texture = &game->textures[84];
+	materials[60] = tmp;
+	tmp.sca.u = f_from_int(1);
+	tmp.texture = &game->textures[86];
+	materials[62] = tmp;
 	return (materials);
 }
 
