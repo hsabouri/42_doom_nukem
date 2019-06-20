@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	game->ntextures = 87;
+	game->ntextures = 112;
 	textures = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
@@ -105,5 +105,30 @@ t_img	*load_all_textures(t_game *game)
 	textures[84] = parse_tga("./textures/items/plant_4.tga", 0);
 	textures[85] = parse_tga("./textures/items/trash_1.tga", 0);
 	textures[86] = parse_tga("./textures/items/trash_2.tga", 0);
+	textures[87] = parse_tga("./textures/environment/amordret.tga", 1);
+	textures[88] = parse_tga("./textures/environment/boite.tga", 1);
+	textures[89] = parse_tga("./textures/environment/building.tga", 1);
+	textures[90] = parse_tga("./textures/environment/casier.tga", 1);
+	textures[91] = parse_tga("./textures/environment/cross.tga", 1);
+	textures[92] = parse_tga("./textures/environment/fenetre_grillage.tga", 1);
+	textures[93] = parse_tga("./textures/environment/floor_accueil.tga", 1);
+	textures[94] = parse_tga("./textures/environment/fmerding.tga", 1);
+	textures[95] = parse_tga("./textures/environment/hsabouri.tga", 1);
+	textures[96] = parse_tga("./textures/environment/lbougero.tga", 1);
+	textures[97] = parse_tga("./textures/environment/iporsenn.tga", 1);
+	textures[98] = parse_tga("./textures/environment/library.tga", 1);
+	textures[99] = parse_tga("./textures/environment/moquette.tga", 1);
+	textures[100] = parse_tga("./textures/environment/mur_entrepot.tga", 1);
+	textures[101] = parse_tga("./textures/environment/mur_wc.tga", 1);
+	textures[102] = parse_tga("./textures/environment/nope_grumpy.tga", 1);
+	textures[103] = parse_tga("./textures/environment/road_1.tga", 1);
+	textures[104] = parse_tga("./textures/environment/road_2.tga", 1);
+	textures[105] = parse_tga("./textures/environment/sofa.tga", 1);
+	textures[106] = parse_tga("./textures/environment/sol_entrepot.tga", 1);
+	textures[107] = parse_tga("./textures/environment/sol_wc.tga", 1);
+	textures[108] = parse_tga("./textures/environment/street.tga", 1);
+	textures[109] = parse_tga("./textures/environment/wall_accueil.tga", 1);
+	textures[110] = parse_tga("./textures/environment/window.tga", 1);
+	textures[111] = parse_tga("./textures/environment/wood.tga", 1);
 	return (textures);
 }
