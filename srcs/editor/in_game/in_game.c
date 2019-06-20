@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:01:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/19 12:32:44 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 13:47:38 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,28 @@ t_game		swap_height_pos(t_game game, t_selected selected, t_event *events)
 	return (game);
 }
 
+t_game		entity_in_game_edit(t_game game, t_event events,
+t_selected selected, t_game_tool tool)
+{
+	static t_selected	last = (t_selected) {.type = PART_NO};
+	t_entity			*current;
+
+	if (events.keys[SDL_SCANCODE_LSHIFT])
+		selected = last;
+	else
+		last = selected;
+	if (tool == SECTOR_HEIGHT && selected.type == PART_ENTITY)
+	{
+		current = &game.entities[selected.id];
+		if (events.keys[SDL_SCANCODE_B])
+		{
+			current->physic.fly = !current->physic.fly;
+			current->spawn.fly = !current->spawn.fly;
+		}
+	}
+	return (game);
+}
+
 t_env		game_editing(t_env env, t_player player)
 {
 	t_sector	*sector;
@@ -94,6 +116,8 @@ t_env		game_editing(t_env env, t_player player)
 	if (env.events.keys[SDL_SCANCODE_N])
 		env.game = swap_height_pos(env.game, sel, &env.events);
 	env.game = tilt_floor_ceil(env.game, env.events, sel);
+	env.game = entity_in_game_edit(env.game, env.events, sel,
+		env.editor.game_tool);
 	if (env.events.keys[SDL_SCANCODE_KP_ENTER] && sel.type == PART_PORTAL)
 	{
 		portal = &env.game.portals[env.game.walls[sel.id].portal];
