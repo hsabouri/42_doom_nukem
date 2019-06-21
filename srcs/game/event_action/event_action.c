@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   event_action.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 14:21:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:06:09 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../common/translate_id.h"
 #include <doom.h>
 #include <editor.h>
+
+t_game			add_dying_entities(t_game game, t_entity *entity, size_t e_num)
+{
+	t_dying_entity d_entity;
+
+	d_entity.dying_entity = entity;
+	if (entity->type == GUN_MARINE)
+	{
+		d_entity.replace_entity = game.e
+	}
+
+}
 
 static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 {
@@ -22,6 +34,7 @@ static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 	entity = &game.entities[t_id];
 	if (entity->life <= weapon.damage)
 	{
+		//del
 		game = delete_entity((size_t)t_id, game);
 		game.chunks = stack_sounds(game.chunks, 0, 0.5);
 	}

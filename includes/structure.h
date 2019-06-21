@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 18:33:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 13:18:12 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,10 +202,17 @@ typedef struct		s_col_event
 	size_t			e_id;
 }					t_col_event;
 
+typedef struct		s_dying_entity
+{
+	t_entity		dying_entity;
+	t_entity		replace_entity;
+}					t_dying_entity;
+
 typedef struct		s_game
 {
 	t_player		player;
 	t_array			col_events;
+	t_array			dying_entities;
 	t_entity		*entities;
 	size_t			nentities;
 	size_t			unique_e_id;
