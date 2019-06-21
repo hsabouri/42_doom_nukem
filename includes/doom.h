@@ -270,8 +270,10 @@ int						is_shooting(t_game *game, t_player player, t_event events,
 						size_t frame);
 t_game					shooting_sound(t_game game);
 t_game					invert_button(t_game game, t_col_event *curr);
+t_game					invert_sprite(t_game game, t_entity *entity, size_t new_id);
 t_game					pickup_object(t_game game, t_col_event *curr);
 t_game					verify_card(t_game game, t_col_event *curr,
 						t_player player);
+t_game					loading_dying_entities(t_game game, float old_timer);
 
 #endif

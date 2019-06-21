@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 16:06:09 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:07:45 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ t_game			add_dying_entities(t_game game, t_entity *entity, size_t e_num)
 {
 	t_dying_entity d_entity;
 
-	d_entity.dying_entity = entity;
-	if (entity->type == GUN_MARINE)
-	{
-		d_entity.replace_entity = game.e
-	}
-
+	d_entity.target_dying_entity = e_num;
+	d_entity.time_left = 3;
+	game = invert_sprite(game, entity, e_num);
+	apush(&game.dying_entities, &d_entity);
+	
+	return game;
 }
+
 
 static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 {
@@ -35,8 +36,9 @@ static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 	if (entity->life <= weapon.damage)
 	{
 		//del
-		game = delete_entity((size_t)t_id, game);
 		game.chunks = stack_sounds(game.chunks, 0, 0.5);
+		game = add_dying_entities(game, entity, (size_t)t_id);
+		// push death sound
 	}
 	else
 	{
@@ -101,7 +103,7 @@ t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 	env->game = ammo_management(env->game, env->game.player, events);
 	if (target.type == PART_ENTITY && env->game.player.is_shooting
 		&& env->game.entities[target.id].data > 0
-		&& env->game.entities[target.id].type < 14)
+		&& env->game.entities[target.id].type <= RED_MARINE)
 		env->game = drop_entity_life(env->game, env->game.player, target.id);
 	env->game = physic_interactions(env->game, events, env->game.player);
 	return (env);

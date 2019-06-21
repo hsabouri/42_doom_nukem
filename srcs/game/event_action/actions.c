@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 14:30:46 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 14:30:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:06:55 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,48 @@
 #include <doom.h>
 #include <editor.h>
 
-t_game			invert_button(t_game game, t_col_event *curr)
+
+t_game	loading_dying_entities(t_game game, float old_timer)
+{
+	int i;
+	t_dying_entity	*curr;
+	t_array		new_array;
+
+	i = 0;
+	new_array = safe_anew(NULL, 100 , sizeof(t_dying_entity), "init");
+	while (curr = (t_dying_entity *)anth(&game.dying_entities, i))
+	{
+		curr->time_left -= old_timer;
+		if (curr->time_left <= 0)
+		{
+			game = delete_entity(curr->target_dying_entity, game);
+		}
+		else {
+			apush(&new_array,&curr);
+		}
+		i++;
+	}
+
+	free(game.dying_entities.mem);
+	game.dying_entities = new_array;
+	return (game);
+}
+
+
+t_game	invert_sprite(t_game game, t_entity *entity, size_t new_id)
+{
+	t_entity	tmp;
+
+	tmp = *entity;
+	*entity = game.classes[new_id];
+	entity->physic.pos = tmp.physic.pos;
+	entity->spawn.pos = tmp.spawn.pos;
+	//entity->data = tmp.data;
+
+	return (game);
+}
+
+t_game	invert_button(t_game game, t_col_event *curr)
 {
 	t_entity	tmp;
 

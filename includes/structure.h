@@ -204,8 +204,8 @@ typedef struct		s_col_event
 
 typedef struct		s_dying_entity
 {
-	t_entity		dying_entity;
-	t_entity		replace_entity;
+	size_t			target_dying_entity;
+	float			time_left;
 }					t_dying_entity;
 
 typedef struct		s_game

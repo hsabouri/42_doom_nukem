@@ -27,6 +27,7 @@ void		game_loop(t_env *env, size_t frame)
 	static float	old_timer = 1;
 
 	timer = start_timer();
+	env->game = loading_dying_entities(env->game, old_timer);
 	if (env->editor.enabled)
 		*env = game_editing(*env, env->game.player);
 	env->game = player_properties(env->game, env->events);
