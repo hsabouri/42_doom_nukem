@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 13:34:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:08:26 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 12:51:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_game	delete_entity(size_t entity, t_game game)
 	if (!(game.entities =\
 	array_close(game.entities, entity, game.nentities, sizeof(t_entity))))
 		return (game);
+	game = del_update_inventory(entity, game);
 	game.nentities--;
 	return (game);
 }

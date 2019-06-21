@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/20 14:35:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 11:30:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,28 @@ t_game			physic_interactions(t_game game, t_event *events, t_player player)
 
 	while ((curr = (t_col_event *)apop(&game.col_events)))
 	{
-		sub = game.entities[curr->e_id];
-		if (events->keys[SDL_SCANCODE_Q] && sub.type >= CLOSE_RED
-			&& sub.type <= OPEN_PURPLE && game.animations.len == 0)
+		if (curr->e_id < game.nentities)
 		{
-			anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
-			anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
-			apush(&game.animations, &anim);
-			anim.target = game.sectors[game.entities[curr->e_id].data].ceiling_b.z;
-			anim.to_animate = &game.sectors[game.entities[curr->e_id].data].ceiling.z;
-			apush(&game.animations, &anim);
-			game.sectors[game.entities[curr->e_id].data].ceiling_b =
-				game.sectors[game.entities[curr->e_id].data].ceiling;
-			game.sectors[game.entities[curr->e_id].data].floor_b =
-				game.sectors[game.entities[curr->e_id].data].floor;
-			game = invert_button(game, curr);
+			sub = game.entities[curr->e_id];
+			if (events->keys[SDL_SCANCODE_Q] && sub.type >= CLOSE_RED
+				&& sub.type <= OPEN_PURPLE && game.animations.len == 0)
+			{
+				anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
+				anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
+				apush(&game.animations, &anim);
+				anim.target = game.sectors[game.entities[curr->e_id].data].ceiling_b.z;
+				anim.to_animate = &game.sectors[game.entities[curr->e_id].data].ceiling.z;
+				apush(&game.animations, &anim);
+				game.sectors[game.entities[curr->e_id].data].ceiling_b =
+					game.sectors[game.entities[curr->e_id].data].ceiling;
+				game.sectors[game.entities[curr->e_id].data].floor_b =
+					game.sectors[game.entities[curr->e_id].data].floor;
+				game = invert_button(game, curr);
+			}
+			else if (sub.type >= RED_KEY_CARD && sub.type <= AMMO
+				&& events->keys[SDL_SCANCODE_Q])
+				game = pickup_object(game, curr);
 		}
-		else if (sub.type >= RED_KEY_CARD && sub.type <= AMMO
-			&& events->keys[SDL_SCANCODE_Q])
-			game = pickup_object(game, curr);
 	}
 	return (game);
 }

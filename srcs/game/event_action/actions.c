@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 14:30:46 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/20 14:58:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 12:44:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ t_game	pickup_object(t_game game, t_col_event *curr)
 
 	sub = game.entities[curr->e_id];
 	if (sub.type >= RED_KEY_CARD && sub.type <= PURPLE_KEY_CARD
-		&& sub.physic.radius > 0)
+		&& sub.physic.radius > 0 && game.player.inventory.len < 5)
 	{
 		sub_to_push = &game.entities[curr->e_id];
-		apush(&game.player.inventory, &sub_to_push);
+		apush(&game.player.inventory, &curr->e_id);
 		game.entities[curr->e_id].physic.radius = 0;
 		game.entities[curr->e_id].physic.rad_inter = 0;
 	}
