@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 14:03:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 11:15:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_walls;
 	res.walls = parse_walls(buf, save, res.materials, game.nwalls);
 	res.nwalls = game.nwalls;
-	res.nuwalls = game.nuwalls;
+	res.nuwalls = 0;
 	save.index = game.loc_sectors;
 	res.sectors = parse_sectors(buf, save, res.materials, game.nsectors);
 	res.nsectors = game.nsectors;
