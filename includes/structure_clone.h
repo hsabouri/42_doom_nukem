@@ -6,7 +6,6 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 15:58:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/20 10:28:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +95,7 @@ typedef struct		s_c_entity
 	ssize_t		mats;
 	int32_t		type;
 	t_fixed		life;
-	int 		data;
+	int			data;
 }					t_c_entity;
 
 typedef struct		s_c_player
@@ -156,7 +155,7 @@ typedef struct		s_c_sector
 
 typedef struct		s_c_music
 {
-	size_t 		magic;
+	size_t		magic;
 	size_t		length;
 	size_t		content;
 }					t_c_music;

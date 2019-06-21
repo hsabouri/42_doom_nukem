@@ -6,51 +6,10 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 14:17:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
-
-t_event			reset_clicks(t_event events)
-{
-	size_t key;
-
-	key = 0;
-	while (key < N_BUTTON)
-	{
-		events.mouse_click[key] = 0;
-		key++;
-	}
-	return (events);
-}
-
-t_event			init_events(void)
-{
-	t_event res;
-	size_t	key;
-
-	key = 0;
-	res.x = 0;
-	res.old_x = 0;
-	res.y = 0;
-	res.old_y = 0;
-	res.any = 0;
-	while (key < N_BUTTON)
-	{
-		res.mouse[key] = 0;
-		key++;
-	}
-	res = reset_clicks(res);
-	key = 0;
-	while (key < N_KEY)
-	{
-		res.keys[key] = 0;
-		key++;
-	}
-	res.quit = 0;
-	return (res);
-}
 
 static t_event	mouse_event(t_event events, SDL_Event polled_event, int *any)
 {
@@ -77,6 +36,24 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event, int *any)
 	return (events);
 }
 
+static void		keyactions_2(int scancode, t_env *env)
+{
+	if (scancode == SDL_SCANCODE_TAB)
+		env->game.player.equiped = (env->game.player.equiped == 0) ? 1 : 0;
+	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic
+		.fly)
+		env->game.player.my_entity.physic.jump = 1;
+	if (scancode == SDL_SCANCODE_F)
+		env->game.player.my_entity.physic.fly = (env->game.player.my_entity
+			.physic.fly) ? 0 : 1;
+	if (!env->toggle_editor && (scancode == SDL_SCANCODE_KP_PLUS
+		|| scancode == SDL_SCANCODE_EQUALS))
+		env->editor.depth += 1;
+	if (!env->toggle_editor && (scancode == SDL_SCANCODE_MINUS
+		|| scancode == SDL_SCANCODE_KP_MINUS))
+		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
+}
+
 static void		keyactions(int scancode, t_env *env)
 {
 	env->events.key_click[scancode] = 1;
@@ -99,20 +76,7 @@ static void		keyactions(int scancode, t_env *env)
 			env->file = "simple_map";
 		save(env->file, env->game);
 	}
-	if (scancode == SDL_SCANCODE_TAB)
-		env->game.player.equiped = (env->game.player.equiped == 0) ? 1 : 0;
-	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic
-		.fly)
-		env->game.player.my_entity.physic.jump = 1;
-	if (scancode == SDL_SCANCODE_F)
-		env->game.player.my_entity.physic.fly = (env->game.player.my_entity
-			.physic.fly) ? 0 : 1;
-	if (!env->toggle_editor && (scancode == SDL_SCANCODE_KP_PLUS
-		|| scancode == SDL_SCANCODE_EQUALS))
-		env->editor.depth += 1;
-	if (!env->toggle_editor && (scancode == SDL_SCANCODE_MINUS
-		|| scancode == SDL_SCANCODE_KP_MINUS))
-		env->editor.depth -= (env->editor.depth == 0) ? 0 : 1;
+	keyactions_2(scancode, env);
 }
 
 t_event			capture_events_loop(t_event events, t_env *env)

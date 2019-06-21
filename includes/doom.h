@@ -3,10 +3,8 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/20 14:35:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +125,7 @@ typedef enum			e_game_tool
 	TOOL_NO
 }						t_game_tool;
 
-struct					s_env;
+struct s_env;
 
 typedef struct			s_editor
 {

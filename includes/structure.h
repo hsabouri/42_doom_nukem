@@ -6,10 +6,8 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/20 14:36:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
@@ -119,7 +117,7 @@ typedef struct		s_entity
 	t_array			*mat;
 	t_entity_type	type;
 	float			life;
-	int 			data;
+	int				data;
 }					t_entity;
 
 typedef struct		s_player
