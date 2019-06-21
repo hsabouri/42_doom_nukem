@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:26 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/20 11:46:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 14:35:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,5 +269,7 @@ u_int32_t				launch_check_entities(t_game game, t_env *env,
 
 t_env					*event_action(t_env *env, t_event *events,
 						u_int32_t *id_buf);
+t_game					invert_button(t_game game, t_col_event *curr);
+t_game					pickup_object(t_game game, t_col_event *curr);
 
 #endif

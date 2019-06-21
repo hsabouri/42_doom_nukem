@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:26:57 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 12:14:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 12:42:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_game		create_entity(t_vec2 pos, size_t class_id, t_game game)
 {
+	const size_t	old = (size_t)game.entities;
+
 	if ((game.entities = (t_entity *)realloc(game.entities, sizeof(t_entity)
 		* (game.nentities + 1))) == NULL)
 		return (game);

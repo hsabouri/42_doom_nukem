@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 16:45:12 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/04 16:45:13 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/06/21 11:22:19 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ t_sdl *sdl, t_array ret)
 	t_component	current;
 
 	current = init_cb_button((t_cb_button) {.place_holder = "LINK OVERLAY",
-		.pos = (t_pix) {204, current.pos.y + current.size.y + 10},
+		.pos = (t_pix) {204, 404},
 		.background = (t_color) {70, 70, 70, 255},
 		.events = &state->env->events, .callback = &enable_change_overlay
 		}, sdl);
 	apush(&ret, &current);
+	printf("hello!\n");
 	current = create_list_textures(env, (t_pix) {WIDTH - 167, 44},
 		(t_pix) {165, HEIGHT - 54}, sdl);
 	apush(&ret, &current);

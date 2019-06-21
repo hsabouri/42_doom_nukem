@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:05:59 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/20 13:48:11 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/20 14:07:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,26 @@ static t_entity	entity_height(t_entity entity, float add)
 	return (entity);
 }
 
+static t_env	sector_height_tool_2(t_env env, t_selected selected)
+{
+	if (selected.type == PART_FLOOR
+		&& (env.events.keys[SDL_SCANCODE_MINUS]
+		|| env.events.keys[SDL_SCANCODE_KP_MINUS]))
+		env.game.sectors[selected.id] = sector_height(env.game,
+			env.game.sectors[selected.id], PART_FLOOR, -0.1);
+	else if (selected.type == PART_ENTITY
+		&& (env.events.keys[SDL_SCANCODE_MINUS]
+		|| env.events.keys[SDL_SCANCODE_KP_MINUS]))
+		env.game.entities[selected.id] = entity_height(
+			env.game.entities[selected.id], -0.1);
+	else if (selected.type == PART_ENTITY
+		&& (env.events.keys[SDL_SCANCODE_EQUALS]
+		|| env.events.keys[SDL_SCANCODE_KP_PLUS]))
+		env.game.entities[selected.id] = entity_height(
+			env.game.entities[selected.id], 0.1);
+	return (env);
+}
+
 t_env			sector_height_tool(t_env env, t_selected selected)
 {
 	static t_selected	last = (t_selected) {.type = PART_NO};
@@ -80,20 +100,7 @@ t_env			sector_height_tool(t_env env, t_selected selected)
 		|| env.events.keys[SDL_SCANCODE_KP_PLUS]))
 		env.game.sectors[selected.id] = sector_height(env.game,
 			env.game.sectors[selected.id], PART_FLOOR, 0.1);
-	else if (selected.type == PART_FLOOR
-		&& (env.events.keys[SDL_SCANCODE_MINUS]
-		|| env.events.keys[SDL_SCANCODE_KP_MINUS]))
-		env.game.sectors[selected.id] = sector_height(env.game,
-			env.game.sectors[selected.id], PART_FLOOR, -0.1);
-	else if (selected.type == PART_ENTITY
-		&& (env.events.keys[SDL_SCANCODE_MINUS]
-		|| env.events.keys[SDL_SCANCODE_KP_MINUS]))
-		env.game.entities[selected.id] = entity_height(
-			env.game.entities[selected.id], -0.1);
-	else if (selected.type == PART_ENTITY
-		&& (env.events.keys[SDL_SCANCODE_EQUALS]
-		|| env.events.keys[SDL_SCANCODE_KP_PLUS]))
-		env.game.entities[selected.id] = entity_height(
-			env.game.entities[selected.id], 0.1);
+	else
+		return (sector_height_tool_2(env, selected));
 	return (env);
 }

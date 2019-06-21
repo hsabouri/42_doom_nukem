@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inventory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:01:47 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/08 15:01:54 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/06/21 12:42:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int					self_update(t_component *self, void *parent)
 static void					render_inventoty(t_inventory_state *state,\
 t_component self, t_color *buf)
 {
-	t_entity	**entity;
+	size_t		*entity;
 	t_array		inventory;
 	t_mat		*mat;
 	u_int32_t	decal_x;
@@ -47,9 +47,9 @@ t_component self, t_color *buf)
 	decal_x = 0;
 	decal_y = 0;
 	inventory = *state->inventory_state;
-	while ((entity = (t_entity **)apop(&inventory)))
+	while ((entity = (size_t *)apop(&inventory)))
 	{
-		mat = *(t_mat **)anth((*entity)->mat, 0);
+		mat = *(t_mat **)anth(state->game->entities[*entity].mat, 0);
 		if ((decal_x + mat->texture->width) >= WIDTH)
 		{
 			decal_y += 70;
@@ -88,6 +88,7 @@ static t_inventory_state	*init_inventory_state(void *parent_state)
 	state->inventory_state = &parent->env->game.player.inventory;
 	state->is_active = 0;
 	state->is_display = 0;
+	state->game = &parent->env->game;
 	state->background = (t_color) {70, 70, 70, 0};
 	return (state);
 }

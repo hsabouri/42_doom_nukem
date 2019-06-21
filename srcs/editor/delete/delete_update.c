@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:07:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 12:54:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,31 @@ t_game	del_update_sectors(ssize_t wall, ssize_t sector, t_game game)
 		}
 		i++;
 	}
+	return (game);
+}
+
+t_game	del_update_inventory(ssize_t entity, t_game game)
+{
+	t_array		new_inventory;
+	size_t		i;
+	size_t		*curr;
+
+	new_inventory = safe_anew(NULL, game.player.inventory.len, sizeof(size_t),
+		"renew inventory");
+	i = 0;
+	while ((curr = (size_t *)anth(&game.player.inventory, i)))
+	{
+		if (*curr < (size_t)entity)
+			apush(&new_inventory, curr);
+		else if (*curr > (size_t)entity)
+		{
+			*curr -= 1;
+			apush(&new_inventory, curr);
+		}
+		i++;
+	}
+	if (game.player.inventory.mem)
+		free(game.player.inventory.mem);
+	game.player.inventory = new_inventory;
 	return (game);
 }

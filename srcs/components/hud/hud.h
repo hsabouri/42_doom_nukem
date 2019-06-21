@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:22:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 15:32:26 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 12:40:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_inventory_state
 	int			is_active;
 	int			is_display;
 	t_color		background;
+	t_game		*game;
 }				t_inventory_state;
 
 typedef struct	s_help_comp_state
