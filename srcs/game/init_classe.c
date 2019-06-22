@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:38:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/20 11:36:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 15:18:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_entity	classe_1(t_entity_type type, t_array *mats, int data)
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.data = data});
+		.data = data, .life = 100});
 	return (classe);
 }
 
@@ -49,7 +49,7 @@ float height)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 1
 		}, .mat = mats, .type = type,
-		.data = 0});
+		.data = 0, .life = 100});
 	return (classe);
 }
 
@@ -69,7 +69,7 @@ static t_entity	classe_3(t_entity_type type, t_array *mats, int data)
 			.speed_max = (t_vec3){1, 1, 1}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
-		.data = data});
+		.data = data, .life = 200});
 	return (classe);
 }
 
@@ -89,7 +89,7 @@ static t_entity	classe_4(t_entity_type type, t_array *mats, int data)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 1
 		}, .mat = mats, .type = type,
-		.data = data});
+		.data = data, .life = 100});
 	return (classe);
 }
 

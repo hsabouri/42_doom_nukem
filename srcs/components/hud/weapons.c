@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapons.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 12:28:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/26 14:06:34 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/22 13:58:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ t_weapons_state *self_state)
 	{
 		sprite = anth(&self_state->weapons[hud->env->game.player.weapons
 			[hud->env->game.player.equiped]].sprite, 2);
-		if (hud->env->game.weapons[self_state->last_equiped].ammo > 0)
-			hud->env->game.weapons[self_state->last_equiped].ammo -= 1;
-		else
-			hud->env->game.weapons
-				[self_state->last_equiped].ammo = hud->env->game.weapons
-				[self_state->last_equiped].ammo_max;
 		self->img = **sprite;
 	}
 	else

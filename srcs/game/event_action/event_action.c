@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/21 11:30:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 15:05:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 {
 	const t_weapon	weapon = game.weapons[player.weapons[player.equiped]];
 	t_entity		*entity;
+	t_chunk			chunk;
 
 	entity = &game.entities[t_id];
 	if (entity->life <= weapon.damage)
 	{
 		game = delete_entity((size_t)t_id, game);
-		// push death sound
+		chunk = (t_chunk) {0, 1.0};
+		apush(&game.chunks, &chunk);
 	}
 	else
 	{
 		entity->life -= weapon.damage;
-		// push hurt sound
+		chunk = (t_chunk) {1, 1.0};
+		apush(&game.chunks, &chunk);
 	}
 	return (game);
 }
@@ -39,9 +42,10 @@ size_t frame)
 	const t_weapon	weapon = game.weapons[player.weapons[player.equiped]];
 	static size_t	last = 0;
 
+	if (weapon.ammo == 0)
+		return (0);
 	if (frame - last > weapon.cadence && events.mouse[SDL_BUTTON_LEFT])
 	{
-		// push shooting sound
 		last = frame;
 		return (1);
 	}
@@ -50,11 +54,28 @@ size_t frame)
 
 }
 
+static t_player	ammo_management(t_game game, t_player player, t_event *events)
+{
+	t_weapon	*weapon;
+	t_weapon	*munitions;
+
+	weapon = &game.weapons[player.weapons[player.equiped]];
+	munitions = &game.weapons[player.secondary];
+	if (player.is_shooting)
+		weapon->ammo -= 1;
+	if (weapon->ammo < weapon->ammo_max && munitions->ammo > 0
+		&& events->keys[SDL_SCANCODE_R])
+	{
+		munitions->ammo -= 1;
+		weapon->ammo = weapon->ammo_max;
+	}
+	return (player);
+}
+
 t_game			physic_interactions(t_game game, t_event *events, t_player player)
 {
 	t_col_event		*curr;
 	t_entity		sub;
-	t_animation		anim;
 
 	while ((curr = (t_col_event *)apop(&game.col_events)))
 	{
@@ -63,19 +84,7 @@ t_game			physic_interactions(t_game game, t_event *events, t_player player)
 			sub = game.entities[curr->e_id];
 			if (events->keys[SDL_SCANCODE_Q] && sub.type >= CLOSE_RED
 				&& sub.type <= OPEN_PURPLE && game.animations.len == 0)
-			{
-				anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
-				anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
-				apush(&game.animations, &anim);
-				anim.target = game.sectors[game.entities[curr->e_id].data].ceiling_b.z;
-				anim.to_animate = &game.sectors[game.entities[curr->e_id].data].ceiling.z;
-				apush(&game.animations, &anim);
-				game.sectors[game.entities[curr->e_id].data].ceiling_b =
-					game.sectors[game.entities[curr->e_id].data].ceiling;
-				game.sectors[game.entities[curr->e_id].data].floor_b =
-					game.sectors[game.entities[curr->e_id].data].floor;
-				game = invert_button(game, curr);
-			}
+				game = verify_card(game, curr, player);
 			else if (sub.type >= RED_KEY_CARD && sub.type <= AMMO
 				&& events->keys[SDL_SCANCODE_Q])
 				game = pickup_object(game, curr);
@@ -88,10 +97,11 @@ t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 {
 	const t_selected	target = translate_out(
 		id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
-	t_entity	*curr;
 
 	env->game.player.is_shooting = is_shooting(env->game, env->game.player,
 		*events, env->game.frame);
+	// push shooting sound
+	env->game.player = ammo_management(env->game, env->game.player, events);
 	if (target.type == PART_ENTITY && env->game.player.is_shooting
 		&& env->game.entities[target.id].data > 0
 		&& env->game.entities[target.id].type < 14)

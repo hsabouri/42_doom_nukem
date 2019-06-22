@@ -6,6 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
+/*   Updated: 2019/06/22 15:06:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +182,7 @@ typedef	struct		s_sound
 typedef struct		s_chunk
 {
 	size_t		chunk_id;
-	u_int32_t	volume;
+	float		volume;
 }					t_chunk;
 
 typedef enum		e_col_type

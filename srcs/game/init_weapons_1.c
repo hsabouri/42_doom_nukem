@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 13:50:54 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/18 15:42:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 15:09:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static t_weapon	init_gun(t_img *textures)
 	material = &textures[19];
 	apush(&sprite, &material);
 	gun = (t_weapon) {
-		.name = (t_weapon_type)GUN, .type = 1, .ammo = 20, .ammo_max = 20,
-		.damage = 70, .cadence = 5, .type_shot = (t_shot_type)HITSCAN,
+		.name = (t_weapon_type)GUN, .type = 1, .ammo = 12, .ammo_max = 12,
+		.damage = 50, .cadence = 5, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 200
 	};
 	return (gun);
@@ -47,7 +47,7 @@ static t_weapon	init_smg(t_img *textures)
 	material = &textures[22];
 	apush(&sprite, &material);
 	smg = ((t_weapon) {
-		.name = (t_weapon_type)SMG, .type = 1, .ammo = 80, .ammo_max = 80,
+		.name = (t_weapon_type)SMG, .type = 1, .ammo = 30, .ammo_max = 30,
 		.damage = 30, .cadence = 1, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 250
 	});
@@ -90,7 +90,7 @@ static t_weapon	init_revolver(t_img *textures)
 	apush(&sprite, &material);
 	revolver = ((t_weapon) {
 		.name = (t_weapon_type)REVOLVER, .type = 1, .ammo = 6, .ammo_max = 6,
-		.damage = 90, .cadence = 10, .type_shot = (t_shot_type)HITSCAN,
+		.damage = 90, .cadence = 8, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 250
 	});
 	return (revolver);
