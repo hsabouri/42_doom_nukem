@@ -22,6 +22,7 @@ static void		launch_game2(t_env *env)
 	* sizeof(int)), "doom_nukem");
 	if (env->component)
 		destroy_component(env->component);
+	free(env->component);
 	find_center_sectors(env->game);
 	env->component = init_component(env, &env->sdl);
 	env->init_game = 0;
@@ -114,5 +115,6 @@ int				main(int ac, char **av)
 	}
 	if (env.game_mode != 0)
 		clean_game(env.game);
+	ft_putstr("coucou");
 	return (0);
 }
