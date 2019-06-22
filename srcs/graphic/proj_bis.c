@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:05:08 by fmerding          #+#    #+#             */
-/*   Updated: 2019/06/10 16:14:36 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:42:23 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_proj	projection2(t_context context, t_proj res, t_fvec2 h)
 	res.plane.v_a = context.v_a;
 	res.plane.v_b = context.v_b;
 	res.plane.line.z.u = (res.plane.height);
+	res.plane.tex_pos = context.sector.tex_pos;
 	return (res);
 }
 

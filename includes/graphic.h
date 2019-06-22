@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/19 11:13:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:42:40 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ typedef struct	s_pl_proj
 	t_fvec2		v_b;
 	t_fixed		z_zero;
 	t_fixed		z_diff;
+	t_fvec2		tex_pos;
 }				t_pl_proj;
 
 typedef struct	s_proj

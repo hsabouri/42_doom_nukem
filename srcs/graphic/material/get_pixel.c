@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:05:00 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/16 18:23:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:45:10 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ t_color			get_roof_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 	- f_mul(proj.ceiling.y, proj.line.y.u) + proj.line.z.u),
 	(f_mul(proj.ceiling.x, proj.line.x.v) + f_mul(proj.ceiling.y,
 		proj.line.y.v) - proj.line.z.v));
-	pix.u = proj.line.x.u + f_mul(t, proj.line.x.v);
-	pix.v = proj.line.y.u + f_mul(t, proj.line.y.v);
+	pix.u = proj.line.x.u + f_mul(t, proj.line.x.v) + proj.tex_pos.u;
+	pix.v = proj.line.y.u + f_mul(t, proj.line.y.v) + proj.tex_pos.v;
 	dis.x = pix.u + proj.center.u - proj.pos.u;
 	dis.y = pix.v + proj.center.v - proj.pos.v;
 	dis.z = f_mul(dis.x, dis.x) + f_mul(dis.y, dis.y);
@@ -76,8 +76,8 @@ t_color			get_floor_pixel(t_pl_proj proj, t_tex_proj tex, int y)
 	- f_mul(proj.floor.y, proj.line.y.u) + proj.line.z.u),
 	(f_mul(proj.floor.x, proj.line.x.v) + f_mul(proj.floor.y,
 		proj.line.y.v) - proj.line.z.v));
-	pix.u = proj.line.x.u + f_mul(t, proj.line.x.v);
-	pix.v = proj.line.y.u + f_mul(t, proj.line.y.v);
+	pix.u = proj.line.x.u + f_mul(t, proj.line.x.v) + proj.tex_pos.u;
+	pix.v = proj.line.y.u + f_mul(t, proj.line.y.v) + proj.tex_pos.v;
 	dis.x = pix.u + proj.center.u - proj.pos.u;
 	dis.y = pix.v + proj.center.v - proj.pos.v;
 	dis.z = f_mul(dis.x, dis.x) + f_mul(dis.y, dis.y);
