@@ -269,5 +269,7 @@ t_env					*event_action(t_env *env, t_event *events,
 						u_int32_t *id_buf);
 t_game					invert_button(t_game game, t_col_event *curr);
 t_game					pickup_object(t_game game, t_col_event *curr);
+t_game					verify_card(t_game game, t_col_event *curr,
+						t_player player);
 
 #endif
