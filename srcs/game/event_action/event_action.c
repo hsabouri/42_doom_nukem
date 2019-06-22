@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 14:09:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 15:05:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 {
 	const t_weapon	weapon = game.weapons[player.weapons[player.equiped]];
 	t_entity		*entity;
+	t_chunk			chunk;
 
 	entity = &game.entities[t_id];
 	if (entity->life <= weapon.damage)
 	{
 		game = delete_entity((size_t)t_id, game);
-		// push death sound
+		chunk = (t_chunk) {0, 1.0};
+		apush(&game.chunks, &chunk);
 	}
 	else
 	{
 		entity->life -= weapon.damage;
-		// push hurt sound
+		chunk = (t_chunk) {1, 1.0};
+		apush(&game.chunks, &chunk);
 	}
 	return (game);
 }
@@ -43,7 +46,6 @@ size_t frame)
 		return (0);
 	if (frame - last > weapon.cadence && events.mouse[SDL_BUTTON_LEFT])
 	{
-		// push shooting sound
 		last = frame;
 		return (1);
 	}
@@ -98,6 +100,7 @@ t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 
 	env->game.player.is_shooting = is_shooting(env->game, env->game.player,
 		*events, env->game.frame);
+	// push shooting sound
 	env->game.player = ammo_management(env->game, env->game.player, events);
 	if (target.type == PART_ENTITY && env->game.player.is_shooting
 		&& env->game.entities[target.id].data > 0
