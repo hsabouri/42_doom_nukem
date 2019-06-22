@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:42:38 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 17:06:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 17:54:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ t_event events, t_game *game)
 	{
 		if (state->walls[0] != state->walls[1])
 			state->parent->env->game = create_portal(state->walls[0],
-				state->walls[1], state->parent->env->game);
+				state->walls[1], state->parent->env->game,
+				events.keys[SDL_SCANCODE_V]);
 		state->walls[0] = -1;
 		state->walls[1] = -1;
 	}

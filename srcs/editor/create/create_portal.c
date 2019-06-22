@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 13:46:50 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 14:04:45 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:02:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,17 @@ const t_game game)
 	return (to_sector);
 }
 
-t_game			create_portal(ssize_t wa, ssize_t wb, t_game game)
+static t_game	equalize_sectors(size_t from_sector, size_t to_sector,
+t_game game)
+{
+	game.sectors[to_sector].ceiling = game.sectors[from_sector].ceiling;
+	game.sectors[to_sector].ceiling_b = game.sectors[from_sector].ceiling_b;
+	game.sectors[to_sector].floor = game.sectors[from_sector].floor;
+	game.sectors[to_sector].floor_b = game.sectors[from_sector].floor_b;
+	return (game);
+}
+
+t_game			create_portal(ssize_t wa, ssize_t wb, t_game game, int equalize)
 {
 	size_t		from_sector;
 	size_t		to_sector;
@@ -69,14 +79,10 @@ t_game			create_portal(ssize_t wa, ssize_t wb, t_game game)
 		console_error("ALLOCATION", "Allocation error");
 		exit(EXIT_FAILURE);
 	}
-	game.portals[game.nportals] = (t_portal) {
-		from_sector,
-		to_sector,
-		wa,
-		wb,
-		NULL,
-		0
-	};
+	if (equalize)
+		game = equalize_sectors(from_sector, to_sector, game);
+	game.portals[game.nportals] = (t_portal) {from_sector, to_sector, wa, wb,
+		NULL, 0};
 	game.walls[wa].portal = game.nportals;
 	game.walls[wb].portal = game.nportals;
 	game.nportals++;

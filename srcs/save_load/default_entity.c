@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 17:19:51 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/21 12:47:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:05:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_player	player_default(t_game game)
 			0
 		},
 		{0, 1},
-		6,
+		5,
 		0,
 		0,
 		safe_anew(NULL, 5, sizeof(size_t), "generate_map")};
