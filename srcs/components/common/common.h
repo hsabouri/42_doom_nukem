@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 17:46:52 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/27 12:08:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 16:10:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,9 @@ t_component		init_help_component(t_help_state state, t_sdl *sdl);
 t_component		init_simple_text(const char *s, t_pix pos, t_sdl *sdl);
 t_component		init_simple_rectangle(t_pix pos, t_pix size,
 				t_color background, t_sdl *sdl);
+
+void			destroy_button(t_component *self);
+void			destroy_button_ft(t_component *self);
+void			destroy_cb_button(t_component *self);
 
 #endif

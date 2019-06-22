@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:13:01 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/27 11:04:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 16:11:35 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_component					init_cb_button(t_cb_button button, t_sdl *sdl)
 	ret.update = &self_update;
 	ret.render = &self_render;
 	ret.complete_render = NULL;
-	ret.destroy = NULL;
+	ret.destroy = &destroy_cb_button;
 	ret.childs = safe_anew(NULL, 0, 1, "components");
 	ret.last_render = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, ret.size.x, ret.size.y);
