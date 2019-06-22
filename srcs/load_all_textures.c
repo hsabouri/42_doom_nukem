@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	game->ntextures = 112;
+	game->ntextures = 114;
 	textures = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
@@ -130,5 +130,7 @@ t_img	*load_all_textures(t_game *game)
 	textures[109] = parse_tga("./textures/environment/wall_accueil.tga", 1);
 	textures[110] = parse_tga("./textures/environment/window.tga", 1);
 	textures[111] = parse_tga("./textures/environment/wood.tga", 1);
+	textures[112] = parse_tga("./textures/environment/wood_2.tga", 1);
+	textures[113] = parse_tga("./textures/environment/ceil.tga", 1);
 	return (textures);
 }

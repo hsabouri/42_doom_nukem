@@ -82,7 +82,7 @@ t_selected selected, t_game_tool tool)
 	static t_selected	last = (t_selected) {.type = PART_NO};
 	t_entity			*current;
 
-	if (events.keys[SDL_SCANCODE_LSHIFT])
+	if (events.keys[SDL_SCANCODE_CAPSLOCK])
 		selected = last;
 	else
 		last = selected;
