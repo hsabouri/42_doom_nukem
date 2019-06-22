@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 14:03:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 21:13:47 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ t_game			*load(const char *filename, int edit_mode)
 	parse_audio(buf, save, game.nmusic, MUSIC);
 	save.index = game.loc_sounds;
 	parse_audio(buf, save, game.nsounds, SOUND);
+	free(buf);
 	return (res);
 }
