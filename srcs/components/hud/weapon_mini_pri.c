@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_mini_pri.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 15:22:57 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/04/13 15:22:59 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:55:27 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ static int				self_update(t_component *self, void *parent_state)
 	t_mini_weapon			*mini_state;
 	char					*str;
 	char					*tmp;
+	char					*str2;
 
+	str = NULL;
 	mini_state = (t_mini_weapon *)self->state;
 	if (mini_state->last_ammo != weapon->weapons[weapon->last_equiped].ammo)
 	{
-		str = ft_strdup(ft_itoa(weapon->weapons[weapon->last_equiped].ammo));
+		str = self_2(str, (weapon->weapons[weapon->last_equiped].ammo));
 		tmp = str;
-		str = ft_strjoin(str, "/");
-		ft_strdel(&tmp);
-		tmp = str;
-		str = ft_strjoin(str, ft_itoa(weapon->weapons
-			[weapon->last_equiped].ammo_max));
+		str2 = ft_itoa(weapon->weapons[weapon->last_equiped].ammo_max);
+		str = ft_strjoin(str, str2);
+		ft_strdel(&str2);
 		ft_strdel(&tmp);
 		self->text = component_text(str, (t_pix) {self->img.width + 20,
 			HEIGHT - self->img.height + 15}, weapon->sdl);
@@ -83,15 +83,18 @@ static char				*init_str(t_weapons_state *weapon_state)
 {
 	char	*str;
 	char	*tmp;
+	char	*str2;
 
-	str = ft_strdup(ft_itoa(weapon_state->weapons
-		[weapon_state->last_equiped].ammo));
+	str = ft_itoa(weapon_state->weapons
+		[weapon_state->last_equiped].ammo);
 	tmp = str;
 	str = ft_strjoin(str, "/");
 	ft_strdel(&tmp);
 	tmp = str;
-	str = ft_strjoin(str, ft_itoa(weapon_state->weapons
-		[weapon_state->last_equiped].ammo_max));
+	str2 = ft_itoa(weapon_state->weapons
+		[weapon_state->last_equiped].ammo_max);
+	str = ft_strjoin(str, str2);
+	ft_strdel(&str2);
 	ft_strdel(&tmp);
 	return (str);
 }

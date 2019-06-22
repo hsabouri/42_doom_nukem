@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   full_empty_life.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:21:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/18 15:31:20 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 17:55:41 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int				update_empty(t_component *self, void *parent)
 	if (life->last_life != life->player->my_entity.life)
 	{
 		life->pos.x = life->player->my_entity.life * self->size.x / 100;
-		str = ft_strdup(ft_itoa(life->player->my_entity.life));
+		str = ft_itoa(life->player->my_entity.life);
 		tmp = str;
 		str = ft_strjoin(str, "/100");
 		ft_strdel(&tmp);
@@ -51,7 +51,7 @@ t_sdl *sdl)
 	char			*tmp;
 
 	life = (t_life_state *)parent_state;
-	str = ft_strdup(ft_itoa(life->player->my_entity.life));
+	str = ft_itoa(life->player->my_entity.life);
 	tmp = str;
 	str = ft_strjoin(str, "/100");
 	ft_strdel(&tmp);
