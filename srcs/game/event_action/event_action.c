@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/21 11:30:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 13:46:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,45 @@ size_t frame)
 
 }
 
+static t_game	toggle_door(t_game game, t_col_event *curr)
+{
+	t_animation		anim;
+
+	anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
+	anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
+	apush(&game.animations, &anim);
+	anim.target = game.sectors[game.entities[curr->e_id].data].ceiling_b.z;
+	anim.to_animate = &game.sectors[game.entities[curr->e_id].data].ceiling.z;
+	apush(&game.animations, &anim);
+	game.sectors[game.entities[curr->e_id].data].ceiling_b =
+		game.sectors[game.entities[curr->e_id].data].ceiling;
+	game.sectors[game.entities[curr->e_id].data].floor_b =
+		game.sectors[game.entities[curr->e_id].data].floor;
+	game = invert_button(game, curr);
+	return (game);
+}
+
+static t_game	verify_card(t_game game, t_col_event *curr, t_player player)
+{
+	size_t			i;
+	size_t			*c_entity;
+	const t_entity	button = game.entities[curr->e_id];
+
+	i = 0;
+	while ((c_entity = (size_t *)anth(&player.inventory, i)))
+	{
+		if (game.entities[*c_entity].type == button.type - 9
+			|| game.entities[*c_entity].type == button.type - 13)
+			return (toggle_door(game, curr));
+		i++;
+	}
+	return (game);
+}
+
 t_game			physic_interactions(t_game game, t_event *events, t_player player)
 {
 	t_col_event		*curr;
 	t_entity		sub;
-	t_animation		anim;
 
 	while ((curr = (t_col_event *)apop(&game.col_events)))
 	{
@@ -63,19 +97,7 @@ t_game			physic_interactions(t_game game, t_event *events, t_player player)
 			sub = game.entities[curr->e_id];
 			if (events->keys[SDL_SCANCODE_Q] && sub.type >= CLOSE_RED
 				&& sub.type <= OPEN_PURPLE && game.animations.len == 0)
-			{
-				anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
-				anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
-				apush(&game.animations, &anim);
-				anim.target = game.sectors[game.entities[curr->e_id].data].ceiling_b.z;
-				anim.to_animate = &game.sectors[game.entities[curr->e_id].data].ceiling.z;
-				apush(&game.animations, &anim);
-				game.sectors[game.entities[curr->e_id].data].ceiling_b =
-					game.sectors[game.entities[curr->e_id].data].ceiling;
-				game.sectors[game.entities[curr->e_id].data].floor_b =
-					game.sectors[game.entities[curr->e_id].data].floor;
-				game = invert_button(game, curr);
-			}
+				game = verify_card(game, curr, player);
 			else if (sub.type >= RED_KEY_CARD && sub.type <= AMMO
 				&& events->keys[SDL_SCANCODE_Q])
 				game = pickup_object(game, curr);
@@ -88,7 +110,6 @@ t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 {
 	const t_selected	target = translate_out(
 		id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
-	t_entity	*curr;
 
 	env->game.player.is_shooting = is_shooting(env->game, env->game.player,
 		*events, env->game.frame);
