@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:04:16 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/27 11:03:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 16:11:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_component					init_button(t_button button, t_sdl *sdl)
 	ret.update = &self_update;
 	ret.render = &self_render;
 	ret.complete_render = NULL;
-	ret.destroy = NULL;
+	ret.destroy = &destroy_button;
 	ret.childs = safe_anew(NULL, 0, 1, "components");
 	return (ret);
 }
