@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 14:30:46 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 14:07:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 21:53:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ t_game			invert_button(t_game game, t_col_event *curr)
 	game.entities[curr->e_id].physic = tmp.physic;
 	game.entities[curr->e_id].spawn = tmp.spawn;
 	game.entities[curr->e_id].data = tmp.data;
+	return (game);
+}
+
+t_game			invert_weapon(t_game game, t_col_event *curr, t_entity sub)
+{
+	t_entity	tmp;
+
+	tmp = game.entities[curr->e_id];
+	game.entities[curr->e_id] = game.classes[game.player.weapons[game.player.equiped] + 29];
+	game.entities[curr->e_id].physic.pos = tmp.physic.pos;
+	game.entities[curr->e_id].physic.fly = tmp.physic.fly;
+	game.entities[curr->e_id].spawn.pos = tmp.spawn.pos;
+	game.entities[curr->e_id].spawn.fly = tmp.spawn.fly;
 	return (game);
 }
 
@@ -57,6 +70,11 @@ t_game			pickup_object(t_game game, t_col_event *curr)
 	{
 		munitions->ammo += 1;
 		game = delete_entity(curr->e_id, game);
+	}
+	else if (sub.type >= GUN && sub.type <= NYAN_GUN)
+	{
+		game = invert_weapon(game, curr, sub);
+		game.player.weapons[game.player.equiped] = sub.type - 30;
 	}
 	return (game);
 }

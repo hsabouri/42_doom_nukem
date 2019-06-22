@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:12:07 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 17:59:44 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:32:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 typedef enum		e_weapon_type
 {
-	GUN = 0,
-	SMG = 1,
-	SHOTGUN = 2,
-	REVOLVER = 3,
-	NYAN_GUN = 4,
+	W_GUN = 0,
+	W_SMG = 1,
+	W_SHOTGUN = 2,
+	W_REVOLVER = 3,
+	W_NYAN_GUN = 4,
 	W_AMMO = 5
 }					t_weapon_type;
 

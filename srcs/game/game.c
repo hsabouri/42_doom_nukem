@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/19 13:20:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 22:17:25 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ void		game_loop(t_env *env, size_t frame)
 	if (env->editor.enabled)
 		*env = game_editing(*env, env->game.player);
 	env->game = player_properties(env->game, env->events);
-	if (env->game.nwalls > 0)
+	if (env->game.nwalls > 0
+		&& env->game.nsectors > env->game.player.my_entity.physic.sector_id)
 		env->game = physic(env->game, env->events, old_timer);
 	env->game.frame = frame;
 	env = event_action(env, &env->events, env->game.id_buf);
 	env->game = animate(env->game, old_timer);
 	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
 	env->current_buffer = content;
-	if (env->game.nwalls > 0)
+	if (env->game.nwalls > 0
+		&& env->game.nsectors > env->game.player.my_entity.physic.sector_id)
 		render_multi_threaded(*env, env->current_buffer);
 	SDL_UnlockTexture(env->sdl.buf);
 	SDL_RenderCopy(env->sdl.renderer, env->sdl.buf, NULL, NULL);

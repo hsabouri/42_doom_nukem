@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 15:06:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:33:05 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ typedef enum		s_entity_type
 	PLANT_4 = 27,
 	TRASH_1 = 28,
 	TRASH_2 = 29,
+	GUN = 30,
+	SMG = 31,
+	SHOTGUN = 32,
+	REVOLVER = 33,
+	NYAN_GUN = 34
 }					t_entity_type;
 
 typedef struct		s_mat

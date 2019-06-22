@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 15:05:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 20:20:58 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ t_game			physic_interactions(t_game game, t_event *events, t_player player)
 			if (events->keys[SDL_SCANCODE_Q] && sub.type >= CLOSE_RED
 				&& sub.type <= OPEN_PURPLE && game.animations.len == 0)
 				game = verify_card(game, curr, player);
-			else if (sub.type >= RED_KEY_CARD && sub.type <= AMMO
-				&& events->keys[SDL_SCANCODE_Q])
+			else if (events->keys[SDL_SCANCODE_Q])
 				game = pickup_object(game, curr);
 		}
 	}
