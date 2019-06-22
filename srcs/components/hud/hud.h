@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:22:31 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/21 12:40:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:54:45 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ t_array			init_inventory(t_array array, void *parent_state, t_sdl *sdl);
 t_array			init_help(t_array array, void *parent_state, t_sdl *sdl);
 t_array			init_cross(t_array childs, void *parent_state, t_sdl *sdl);
 t_array			init_mini_map(t_array array, void *parent_state, t_sdl *sdl);
+char			*self_2(char *str, int ammo);
 
 #endif
