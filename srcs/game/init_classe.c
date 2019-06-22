@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:38:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 15:18:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 20:00:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 {
 	t_entity	*classe;
 
-	game->nclasses = 29;
+	game->nclasses = 34;
 	classe = (t_entity *)safe_malloc(game->nclasses * sizeof(t_entity),
 		"init_classe");
 	classe[0] = classe_1(GUN_MARINE, &multi_mats[0], 15);
@@ -129,5 +129,10 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 	classe[26] = classe_2(PLANT_4, &multi_mats[26], 0, 0.4, 0.4);
 	classe[27] = classe_2(TRASH_1, &multi_mats[27], 0, 0.4, 0.5);
 	classe[28] = classe_2(TRASH_2, &multi_mats[28], 0, 0.4, 0.8);
+	classe[29] = classe_2(GUN, &multi_mats[29], 0, 0.4, 0.8);
+	classe[30] = classe_2(SMG, &multi_mats[30], 0, 0.4, 0.8);
+	classe[31] = classe_2(SHOTGUN, &multi_mats[31], 0, 0.4, 0.8);
+	classe[32] = classe_2(REVOLVER, &multi_mats[32], 0, 0.4, 0.8);
+	classe[33] = classe_2(NYAN_GUN, &multi_mats[33], 0, 0.8, 0.8);
 	return (classe);
 }

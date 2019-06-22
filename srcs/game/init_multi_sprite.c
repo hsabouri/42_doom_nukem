@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_multi_sprite.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 11:30:22 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/21 11:30:23 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/06/22 19:57:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 {
 	t_array *multi_sprite;
 
-	game->nmulti_mats = 29;
+	game->nmulti_mats = 34;
 	multi_sprite = (t_array *)safe_malloc(sizeof(t_array)
 		* game->nmulti_mats, "init_multi_sprite");
 	multi_sprite[0] = sprite_1(mats, 5, 12);
@@ -76,5 +76,10 @@ t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 	multi_sprite[26] = sprite_2(mats, 60);
 	multi_sprite[27] = sprite_2(mats, 61);
 	multi_sprite[28] = sprite_2(mats, 62);
+	multi_sprite[29] = sprite_2(mats, 63);
+	multi_sprite[30] = sprite_2(mats, 64);
+	multi_sprite[31] = sprite_2(mats, 65);
+	multi_sprite[32] = sprite_2(mats, 66);
+	multi_sprite[33] = sprite_2(mats, 67);
 	return (multi_sprite);
 }

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 12:02:20 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/05/22 12:12:31 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:59:20 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,16 @@ static char	*type_to_text_2(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Trash 1"));
 	else if (type == TRASH_2)
 		return (ft_strcpy(dst, "Trash 2"));
+	else if (type == GUN)
+		return (ft_strcpy(dst, "Gun"));
+	else if (type == SMG)
+		return (ft_strcpy(dst, "SMG"));
+	else if (type == SHOTGUN)
+		return (ft_strcpy(dst, "Shotgun"));
+	else if (type == REVOLVER)
+		return (ft_strcpy(dst, "Revolver"));
+	else if (type == NYAN_GUN)
+		return (ft_strcpy(dst, "Nyan-gun"));
 	else
 		return (ft_strcpy(dst, "Unknown"));
 }

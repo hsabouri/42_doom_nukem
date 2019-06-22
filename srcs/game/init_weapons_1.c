@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 13:50:54 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 18:01:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 20:23:39 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ t_weapon		*init_weapons(t_game *game)
 {
 	t_weapon *weapons;
 
-	weapons = (t_weapon *)safe_malloc(sizeof(t_weapon) * 7, "init_weapons");
+	weapons = (t_weapon *)safe_malloc(sizeof(t_weapon) * 6, "init_weapons");
 	weapons[0] = init_gun(game->textures);
 	weapons[1] = init_smg(game->textures);
 	weapons[2] = init_shotgun(game->textures);
 	weapons[3] = init_revolver(game->textures);
 	weapons[4] = init_nyan_gun(game->textures);
 	weapons[5] = init_ammo(game->textures);
-	game->nweapons = 7;
+	game->nweapons = 6;
 	return (weapons);
 }

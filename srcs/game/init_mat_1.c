@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:51:39 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/06 10:19:40 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/22 19:59:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ t_mat	*init_mat_8(t_mat *materials, t_game *game)
 	tmp.sca.u = f_from_int(1);
 	tmp.texture = &game->textures[86];
 	materials[62] = tmp;
+	tmp.texture = &game->textures[23];
+	materials[65] = tmp;
+	tmp.sca = fvec2_new(f_from_int(2), f_from_int(2));
+	tmp.texture = &game->textures[17];
+	materials[63] = tmp;
+	tmp.texture = &game->textures[20];
+	materials[64] = tmp;
+	tmp.texture = &game->textures[26];
+	materials[66] = tmp;
+	tmp.texture = &game->textures[29];
+	materials[67] = tmp;
 	return (materials);
 }
 
