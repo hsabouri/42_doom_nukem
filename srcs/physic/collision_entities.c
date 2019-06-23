@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:39:14 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 18:17:27 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 18:26:47 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ float		circle_circle(t_ph entity_1, t_ph entity_2, t_col_mode col)
 	if ((d <= (entity_1.radius + entity_2.radius / 4) * (entity_1.radius
 		+ entity_2.radius / 4)) && col == COL_ENTITY)
 	{
-		if (entity_1.pos.z > entity_2.pos.z + entity_2.height)
+		if (entity_1.pos.z > entity_2.pos.z + entity_2.height
+			|| entity_1.pos.z + entity_1.height < entity_2.pos.z)
 			return (-1);
 		return (d * 2);
 	}
