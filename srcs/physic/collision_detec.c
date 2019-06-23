@@ -12,7 +12,7 @@
 
 #include <doom.h>
 
-static void	slide_entity(t_ph n_physic, t_game *game, t_ph physic, size_t i)
+static t_ph	slide_entity(t_ph n_physic, t_game *game, t_ph physic, size_t i)
 {
 	float d;
 
@@ -46,7 +46,7 @@ t_vec3		col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 			tmp.type = DIRECT;
 			tmp.e_id = i;
 			apush(&game->col_events, &tmp);
-			slide_entity(n_physic, game, physic, i);
+			physic = slide_entity(n_physic, game, physic, i);
 			pos = vec3_add(physic.pos, physic.speed);
 		}
 		i++;
