@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:07:49 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 18:55:18 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:02:21 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ t_img	*load_all_textures(t_game *game)
 	textures[29] = parse_tga("./textures/weapons/nyan_gun/nyan_gun0.tga", 0);
 	textures[30] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga", 0);
 	textures[31] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga", 0);
-	textures[32] = parse_tga("./textures/not_in_use.tga", 0);
+	textures[32] = parse_tga("./textures/items/ammo_secondary.tga", 0);
 	textures[33] = parse_tga("./textures/not_in_use.tga", 0);
-	textures[33] = parse_tga("./textures/not_in_use.tga", 0);
+	textures[34] = parse_tga("./textures/not_in_use.tga", 0);
 	textures[35] = parse_tga("./textures/not_in_use.tga", 0);
 	textures[36] = parse_tga("./textures/hud/in_game_editor.tga", 1);
 	textures[37] = parse_tga("./textures/environment/parking.tga", 0);

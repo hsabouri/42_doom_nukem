@@ -101,11 +101,11 @@ void *parent_state, t_sdl *sdl)
 
 	hud = (t_hud_state *)parent_state;
 	component.img.content = NULL;
-	component.size.x = WIDTH;
-	component.size.y = HEIGHT;
+	component.size.x = 400;
+	component.size.y = 250;
 	component.text = component_text("Inventory", (t_pix) {WIDTH / 2, 50}, sdl);
-	component.pos.x = 0;
-	component.pos.y = 0;
+	component.pos.x = WIDTH / 2 - component.size.x / 2;
+	component.pos.y = HEIGHT / 2 - component.size.y / 2;
 	component.display = 0;
 	component.state = init_inventory_state(parent_state);
 	component.update = &self_update;

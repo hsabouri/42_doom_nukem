@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 15:40:55 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/04 15:40:56 by iporsenn         ###   ########.fr       */
+/*   Updated: 2019/06/23 13:44:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #ifndef __linux__
 
-t_array	stack_sounds(t_array chunks, size_t id, u_int32_t vol)
+t_array	stack_sounds(t_array chunks, size_t id, float vol)
 {
 	t_chunk	sound;
 

@@ -217,7 +217,7 @@ t_game					player_properties(t_game game, t_event events);
 void					play_music(t_game game, size_t id, size_t vol,
 						size_t frame);
 t_game					animate(t_game game, float old_timer);
-t_array					stack_sounds(t_array chunk, size_t id, u_int32_t vol);
+t_array					stack_sounds(t_array chunk, size_t id, float vol);
 t_game					play_sounds(t_game game);
 
 void					render_multi_threaded(const t_env env, t_color *buf);
@@ -266,6 +266,9 @@ u_int32_t				launch_check_entities(t_game game, t_env *env,
 
 t_env					*event_action(t_env *env, t_event *events,
 						u_int32_t *id_buf);
+int						is_shooting(t_game *game, t_player player, t_event events,
+						size_t frame);
+t_game					shooting_sound(t_game game);
 t_game					invert_button(t_game game, t_col_event *curr);
 t_game					pickup_object(t_game game, t_col_event *curr);
 t_game					verify_card(t_game game, t_col_event *curr,

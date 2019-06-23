@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 16:45:12 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/21 11:22:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 15:23:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_sdl *sdl, t_array ret)
 		.events = &state->env->events, .callback = &enable_change_overlay
 		}, sdl);
 	apush(&ret, &current);
-	printf("hello!\n");
 	current = create_list_textures(env, (t_pix) {WIDTH - 167, 44},
 		(t_pix) {165, HEIGHT - 54}, sdl);
 	apush(&ret, &current);
