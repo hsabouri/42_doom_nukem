@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 16:08:09 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/23 18:11:22 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_game			add_dying_entities(t_game game, t_entity *entity, size_t e_num)
 	d_entity.time_left = 3;
 	game = invert_sprite(game, entity, 28);
 	apush(&game.dying_entities, &d_entity);
-	printf("Contexte ? %zu\n", e_num);
 
 	return game;
 }

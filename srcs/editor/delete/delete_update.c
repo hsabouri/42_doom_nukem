@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 15:44:48 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/23 17:58:03 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_game	del_update_dying_process(ssize_t entity, t_game game)
 	t_array		new_dying_process;
 	size_t		i;
 
-	new_dying_process = safe_anew(NULL, 100, sizeof(size_t),
+	new_dying_process = safe_anew(NULL, 100, sizeof(t_dying_entity),
 		"renew dying process");
 	i = 0;
 	while ((curr = (t_dying_entity *)anth(&game.dying_entities, i)))
