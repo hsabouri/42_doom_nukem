@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 16:20:52 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/22 13:58:51 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:48:09 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char *errors_text[NBR_ERROR])
 {
 	t_lvl_error	*display;
 
-	while ((display = (t_lvl_error *)lnext(&error_list)))
+	while ((display = (t_lvl_error *)lshift(&error_list)))
 	{
 		if (display->error_type != NO_ERROR)
 		{
@@ -64,6 +64,7 @@ char *errors_text[NBR_ERROR])
 			}
 			display_2(display);
 		}
+		free(display);
 	}
 }
 
