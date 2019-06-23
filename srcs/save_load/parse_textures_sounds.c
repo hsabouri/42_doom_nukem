@@ -45,6 +45,7 @@ size_t i)
 {
 	t_c_music	struc_m;
 	int			fd;
+	char		*str;
 
 	struc_m = *(t_c_music *)dump_struct(buf, save.index + i
 		* sizeof(t_c_music), sizeof(t_c_music), save.max);
@@ -52,16 +53,18 @@ size_t i)
 		verify_magic(&struc_m, MUSIC_MAGIC, i);
 	else
 		verify_magic(&struc_m, SOUND_MAGIC, i);
+	str = ft_itoa(i);
 	music.path = (char *)safe_malloc((sizeof(char) * (33
-		+ ft_strlen(ft_itoa(i)))), "loader");
+		+ ft_strlen(str))), "loader");
 	music.path = (music.type == MUSIC) ? ft_strcpy(music.path,
 		"./audio_tmp/music_tmp/music_") : ft_strcpy(music.path,
 		"./audio_tmp/sound_tmp/sound_");
-	music.path = ft_strcat(music.path, ft_itoa(i));
+	music.path = ft_strcat(music.path, str);
 	music.path = ft_strcat(music.path, ".ogg");
 	fd = open(music.path, O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
 	write(fd, buf + struc_m.content, struc_m.length);
 	close(fd);
+	ft_strdel(&str);
 	ft_strdel(&music.path);
 }
 

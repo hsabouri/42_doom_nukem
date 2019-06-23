@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 13:45:32 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 17:29:36 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static void		launch_game2(t_env *env)
 	env->game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT
 	* sizeof(int)), "doom_nukem");
 	if (env->component)
+	{
 		destroy_component(env->component);
+		free(env->component);
+	}
 	find_center_sectors(env->game);
 	env->component = init_component(env, &env->sdl);
 	env->init_game = 0;
