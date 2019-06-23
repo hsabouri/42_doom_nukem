@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_textures_musics.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:46 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/16 15:58:35 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 15:22:50 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void				write_music(int fd, t_audio type)
 			music.path = ft_strcat(music.path, music.read->d_name);
 			music.file = dump_file(music.path, 0, &music.size);
 			write_struct(music.file, fd, music.size);
+			ft_strdel(&music.file);
 			ft_strdel(&music.path);
 		}
 	}
