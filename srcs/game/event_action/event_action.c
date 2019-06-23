@@ -18,24 +18,20 @@ static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 {
 	const t_weapon	weapon = game.weapons[player.weapons[player.equiped]];
 	t_entity		*entity;
-	t_chunk			chunk;
 
 	entity = &game.entities[t_id];
 	if (entity->life <= weapon.damage)
 	{
 		game = delete_entity((size_t)t_id, game);
-		chunk = (t_chunk) {0, 1.0};
-		apush(&game.chunks, &chunk);
+		game.chunks = stack_sounds(game.chunks, 0, 0.1);
 	}
 	else
 	{
 		entity->life -= weapon.damage;
-		chunk = (t_chunk) {1, 1.0};
-		apush(&game.chunks, &chunk);
+		game.chunks = stack_sounds(game.chunks, 1, 0.1);
 	}
 	return (game);
 }
-
 static int		is_shooting(t_game game, t_player player, t_event events,
 size_t frame)
 {

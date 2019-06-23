@@ -24,7 +24,7 @@ t_game	init_audio_tmp(t_game game)
 	return (game);
 }
 
-t_array	stack_sounds(t_array chunks, size_t id, u_int32_t vol)
+t_array	stack_sounds(t_array chunks, size_t id, float vol)
 {
 	(void)id;
 	(void)vol;

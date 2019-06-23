@@ -14,7 +14,7 @@
 
 #ifndef __linux__
 
-t_array	stack_sounds(t_array chunks, size_t id, u_int32_t vol)
+t_array	stack_sounds(t_array chunks, size_t id, float vol)
 {
 	t_chunk	sound;
 
