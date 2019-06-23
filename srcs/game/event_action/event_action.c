@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 20:20:58 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 14:21:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,17 @@ static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 	if (entity->life <= weapon.damage)
 	{
 		game = delete_entity((size_t)t_id, game);
-		game.chunks = stack_sounds(game.chunks, 0, 0.1);
+		game.chunks = stack_sounds(game.chunks, 0, 0.5);
 	}
 	else
 	{
 		entity->life -= weapon.damage;
-		game.chunks = stack_sounds(game.chunks, 1, 0.1);
+		game.chunks = stack_sounds(game.chunks, 1, 0.5);
 	}
 	return (game);
 }
-static int		is_shooting(t_game game, t_player player, t_event events,
-size_t frame)
-{
-	const t_weapon	weapon = game.weapons[player.weapons[player.equiped]];
-	static size_t	last = 0;
 
-	if (weapon.ammo == 0)
-		return (0);
-	if (frame - last > weapon.cadence && events.mouse[SDL_BUTTON_LEFT])
-	{
-		last = frame;
-		return (1);
-	}
-	else
-		return (0);
-
-}
-
-static t_player	ammo_management(t_game game, t_player player, t_event *events)
+static t_game	ammo_management(t_game game, t_player player, t_event *events)
 {
 	t_weapon	*weapon;
 	t_weapon	*munitions;
@@ -62,10 +45,15 @@ static t_player	ammo_management(t_game game, t_player player, t_event *events)
 	if (weapon->ammo < weapon->ammo_max && munitions->ammo > 0
 		&& events->keys[SDL_SCANCODE_R])
 	{
+		game.chunks = stack_sounds(game.chunks, 3, 0.5);
 		munitions->ammo -= 1;
 		weapon->ammo = weapon->ammo_max;
 	}
-	return (player);
+	else if (weapon->ammo < weapon->ammo_max && munitions->ammo == 0
+		&& events->keys[SDL_SCANCODE_R])
+		game.chunks = stack_sounds(game.chunks, 9, 0.5);
+	game.player = player;
+	return (game);
 }
 
 t_game			physic_interactions(t_game game, t_event *events, t_player player)
@@ -93,10 +81,11 @@ t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 	const t_selected	target = translate_out(
 		id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
 
-	env->game.player.is_shooting = is_shooting(env->game, env->game.player,
+	env->game.player.is_shooting = is_shooting(&env->game, env->game.player,
 		*events, env->game.frame);
-	// push shooting sound
-	env->game.player = ammo_management(env->game, env->game.player, events);
+	if (env->game.player.is_shooting)
+		env->game = shooting_sound(env->game);
+	env->game = ammo_management(env->game, env->game.player, events);
 	if (target.type == PART_ENTITY && env->game.player.is_shooting
 		&& env->game.entities[target.id].data > 0
 		&& env->game.entities[target.id].type < 14)

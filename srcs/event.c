@@ -6,6 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:19:28 by hsabouri          #+#    #+#             */
+/*   Updated: 2019/06/23 14:31:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +40,10 @@ static t_event	mouse_event(t_event events, SDL_Event polled_event, int *any)
 static void		keyactions_2(int scancode, t_env *env)
 {
 	if (scancode == SDL_SCANCODE_TAB)
+	{
 		env->game.player.equiped = (env->game.player.equiped == 0) ? 1 : 0;
+		env->game.chunks = stack_sounds(env->game.chunks, 11, 0.5);
+	}
 	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic
 		.fly)
 		env->game.player.my_entity.physic.jump = 1;

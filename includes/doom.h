@@ -266,6 +266,9 @@ u_int32_t				launch_check_entities(t_game game, t_env *env,
 
 t_env					*event_action(t_env *env, t_event *events,
 						u_int32_t *id_buf);
+int						is_shooting(t_game *game, t_player player, t_event events,
+						size_t frame);
+t_game					shooting_sound(t_game game);
 t_game					invert_button(t_game game, t_col_event *curr);
 t_game					pickup_object(t_game game, t_col_event *curr);
 t_game					verify_card(t_game game, t_col_event *curr,

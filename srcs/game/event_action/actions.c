@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 14:30:46 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 21:53:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 14:30:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ t_game			pickup_object(t_game game, t_col_event *curr)
 	}
 	else if (sub.type == AMMO && munitions->ammo < munitions->ammo_max)
 	{
+		game.chunks = stack_sounds(game.chunks, 11, 0.5);
 		munitions->ammo += 1;
 		game = delete_entity(curr->e_id, game);
 	}
 	else if (sub.type >= GUN && sub.type <= NYAN_GUN)
 	{
+		game.chunks = stack_sounds(game.chunks, 11, 0.5);
 		game = invert_weapon(game, curr, sub);
 		game.player.weapons[game.player.equiped] = sub.type - 30;
 	}
@@ -83,6 +85,7 @@ static t_game	toggle_door(t_game game, t_col_event *curr)
 {
 	t_animation		anim;
 
+	game.chunks = stack_sounds(game.chunks, 10, 0.5);
 	anim.target = game.sectors[game.entities[curr->e_id].data].floor_b.z;
 	anim.to_animate = &game.sectors[game.entities[curr->e_id].data].floor.z;
 	apush(&game.animations, &anim);

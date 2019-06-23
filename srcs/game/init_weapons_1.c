@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 13:50:54 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 20:23:39 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 14:02:12 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_weapon	init_gun(t_img *textures)
 	material = &textures[19];
 	apush(&sprite, &material);
 	gun = (t_weapon) {
-		.name = (t_weapon_type)GUN, .type = 1, .ammo = 12, .ammo_max = 12,
+		.name = W_GUN, .type = 1, .ammo = 12, .ammo_max = 12,
 		.damage = 50, .cadence = 5, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 200
 	};
@@ -47,7 +47,7 @@ static t_weapon	init_smg(t_img *textures)
 	material = &textures[22];
 	apush(&sprite, &material);
 	smg = ((t_weapon) {
-		.name = (t_weapon_type)SMG, .type = 1, .ammo = 30, .ammo_max = 30,
+		.name = W_SMG, .type = 1, .ammo = 30, .ammo_max = 30,
 		.damage = 30, .cadence = 1, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 250
 	});
@@ -68,7 +68,7 @@ static t_weapon	init_shotgun(t_img *textures)
 	material = &textures[25];
 	apush(&sprite, &material);
 	shotgun = ((t_weapon) {
-		.name = (t_weapon_type)SHOTGUN, .type = 1, .ammo = 10, .ammo_max = 10,
+		.name = W_SHOTGUN, .type = 1, .ammo = 10, .ammo_max = 10,
 		.damage = 100, .cadence = 12, .type_shot = (t_shot_type)SHOTS,
 		.explosion = -1, .sprite = sprite, .decal = 20
 	});
@@ -89,7 +89,7 @@ static t_weapon	init_revolver(t_img *textures)
 	material = &textures[28];
 	apush(&sprite, &material);
 	revolver = ((t_weapon) {
-		.name = (t_weapon_type)REVOLVER, .type = 1, .ammo = 6, .ammo_max = 6,
+		.name = W_REVOLVER, .type = 1, .ammo = 6, .ammo_max = 6,
 		.damage = 90, .cadence = 8, .type_shot = (t_shot_type)HITSCAN,
 		.explosion = -1, .sprite = sprite, .decal = 250
 	});

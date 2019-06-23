@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:13:54 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 18:07:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 14:02:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_weapon	init_nyan_gun(t_img *textures)
 	material = &textures[31];
 	apush(&sprite, &material);
 	nyan_gun = ((t_weapon) {
-		.name = (t_weapon_type)NYAN_GUN, .type = 1, .ammo = 100,
+		.name = W_NYAN_GUN, .type = 1, .ammo = 100,
 		.ammo_max = 100, .damage = 10000, .cadence = 5,
 		.type_shot = (t_shot_type)SHOTS, .explosion = -1, .sprite = sprite,
 		.decal = 15
@@ -46,7 +46,7 @@ t_weapon	init_ammo(t_img *textures)
 	material = &textures[69];
 	apush(&sprite, &material);
 	ammo = ((t_weapon) {
-		.name = (t_weapon_type)W_AMMO, .type = 2, .ammo = 5, .ammo_max = 5,
+		.name = W_AMMO, .type = 2, .ammo = 5, .ammo_max = 5,
 		.damage = 50, .cadence = 10, .type_shot = (t_shot_type)SHOTS,
 		.explosion = 1, .sprite = sprite, .decal = 200
 	});

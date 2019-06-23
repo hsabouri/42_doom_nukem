@@ -6,10 +6,10 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
+/*   Updated: 2019/06/23 13:45:32 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <doom.h>
 #include <editor.h>
 
 static void		launch_game2(t_env *env)
