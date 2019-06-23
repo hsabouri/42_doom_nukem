@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:18:50 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/19 13:27:07 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 18:01:54 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_ph	slide_entity(t_ph n_physic, t_game *game, t_ph physic, size_t i)
 		physic.pos.x -= (game->entities[i].physic.radius - d);
 		physic.pos.y -= (game->entities[i].physic.radius - d);
 	}
+	return (physic);
 }
 
 t_vec3		col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)

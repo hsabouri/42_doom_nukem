@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/19 13:30:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 17:34:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_vec3	set_entity_speed(t_ph physic, t_ph player, float old_timer)
 	new_speed = (t_vec3) {.z = physic.speed.z};
 	dis = vec2_sq_size(diff);
 	if (dis < physic.rad_inter * physic.rad_inter
-		&& dis > physic.radius * physic.radius)
+		&& dis > physic.radius * physic.radius * 4)
 	{
 		diff = vec2_scale(diff, vec2_inv_size(diff));
 		new_speed = (t_vec3) {
