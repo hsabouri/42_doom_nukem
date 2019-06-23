@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:16:55 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 15:10:13 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:32:03 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		clean_game(t_game game)
 	free(game.portals);
 	free(game.points);
 	free(game.materials);
+	free(game.player.inventory.mem);
 	cpt = 0;
 	while (cpt < game.ntextures)
 	{

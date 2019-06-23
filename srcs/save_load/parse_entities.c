@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/20 11:25:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:41:09 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ t_save save)
 	t_player	res;
 	t_player	current;
 	t_c_player	struc_p;
+	t_array		tmp_inventory;
 
 	struc_p = *(t_c_player *)dump_struct(buf, save.index, sizeof(t_c_player),
 		save.max);
@@ -126,8 +127,14 @@ t_save save)
 	current.my_entity.physic.rad_inter = f_to_float(struc_p.my_entity.spawn
 		.rad_inter);
 	save.index = game.loc_inventory;
-	current.inventory = parse_inventory(buf, save, new_game.entities,
+	tmp_inventory = parse_inventory(buf, save, new_game.entities,
 		game.ninventory);
+	if (tmp_inventory.mem)
+	{
+		free(current.inventory.mem);
+		current.inventory = tmp_inventory;
+	}
+
 	current = parse_player_2(current, struc_p);
 	res = current;
 	return (res);
