@@ -92,16 +92,13 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	new_game = game;
 	while (i < game.nentities)
 	{
-		if (!game.entities[i].physic.fly)
-		{
-			new_physic = game.entities[i].physic;
-			if (game.entities[i].data >= 1)
-				new_physic.speed = set_entity_speed(new_physic,
-					game.player.my_entity.physic, old_timer);
-			new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
-			new_game.entities[i].physic = entities_physic(new_physic, &game, i,
-			old_timer);
-		}
+		new_physic = game.entities[i].physic;
+		if (game.entities[i].data >= 1)
+			new_physic.speed = set_entity_speed(new_physic,
+				game.player.my_entity.physic, old_timer);
+		new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
+		new_game.entities[i].physic = entities_physic(new_physic, &game, i,
+		old_timer);
 		i++;
 	}
 	new_physic = game.player.my_entity.physic;
