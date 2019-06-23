@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 16:06:50 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:08:18 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		launch_game2(t_env *env)
 {
 	env->game.animations = safe_anew(NULL, 10, sizeof(t_animation), "init");
 	env->game.col_events = safe_anew(NULL, 10, sizeof(t_col_event), "init");
+	env->game.dying_entities = safe_anew(NULL, 50, sizeof(t_dying_entity), "init");
 	env->game.weapons = init_weapons(&env->game);
 	launch_check(env, env->game);
 	env->game.id_buf = (u_int32_t *)safe_malloc((WIDTH * HEIGHT

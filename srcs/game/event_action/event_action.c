@@ -6,7 +6,7 @@
 /*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 16:07:45 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:08:09 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ t_game			add_dying_entities(t_game game, t_entity *entity, size_t e_num)
 
 	d_entity.target_dying_entity = e_num;
 	d_entity.time_left = 3;
-	game = invert_sprite(game, entity, e_num);
+	game = invert_sprite(game, entity, 28);
 	apush(&game.dying_entities, &d_entity);
-	
+	printf("Contexte ? %zu\n", e_num);
+
 	return game;
 }
 
@@ -93,6 +94,7 @@ t_game			physic_interactions(t_game game, t_event *events, t_player player)
 
 t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 {
+
 	const t_selected	target = translate_out(
 		id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
 
@@ -106,5 +108,6 @@ t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 		&& env->game.entities[target.id].type <= RED_MARINE)
 		env->game = drop_entity_life(env->game, env->game.player, target.id);
 	env->game = physic_interactions(env->game, events, env->game.player);
+	// env->game = loading_dying_entities(env->game, 0.5);
 	return (env);
 }

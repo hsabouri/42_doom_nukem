@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:22:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 18:02:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 15:39:44 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_game			del_update_walls(ssize_t pts, ssize_t portal, t_game game);
 t_game			del_update_sectors(ssize_t wall, ssize_t sector, t_game game);
 t_game			del_update_portals(ssize_t wall, ssize_t sector, t_game game);
 t_game			del_update_inventory(ssize_t entity, t_game game);
+t_game			del_update_dying_process(ssize_t entity, t_game game);
 
 t_game			new_update_portals(ssize_t wall, ssize_t sector, t_game game);
 t_game			new_update_walls(ssize_t point, ssize_t portal, t_game game);

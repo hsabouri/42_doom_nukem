@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/21 12:54:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/23 15:44:48 by lbougero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,3 +122,31 @@ t_game	del_update_inventory(ssize_t entity, t_game game)
 	game.player.inventory = new_inventory;
 	return (game);
 }
+
+t_game	del_update_dying_process(ssize_t entity, t_game game)
+{
+	t_dying_entity	*curr;
+	t_array		new_dying_process;
+	size_t		i;
+
+	new_dying_process = safe_anew(NULL, 100, sizeof(size_t),
+		"renew dying process");
+	i = 0;
+	while ((curr = (t_dying_entity *)anth(&game.dying_entities, i)))
+	{
+		if (curr->target_dying_entity < (size_t)entity)
+			apush(&new_dying_process, curr);
+		else if (curr->target_dying_entity > (size_t)entity)
+		{
+			curr->target_dying_entity -= 1;
+			apush(&new_dying_process, curr);
+		}
+		i++;
+	}
+	if (game.dying_entities.mem)
+		free(game.dying_entities.mem);
+	game.dying_entities = new_dying_process;
+	return (game);
+}
+
+
