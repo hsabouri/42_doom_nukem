@@ -82,7 +82,7 @@ t_env			sector_height_tool(t_env env, t_selected selected)
 {
 	static t_selected	last = (t_selected) {.type = PART_NO};
 
-	if (env.events.keys[SDL_SCANCODE_LSHIFT])
+	if (env.events.keys[SDL_SCANCODE_CAPSLOCK])
 		selected = last;
 	else
 		last = selected;

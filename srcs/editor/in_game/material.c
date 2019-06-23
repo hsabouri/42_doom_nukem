@@ -54,7 +54,7 @@ static t_selected	change_or_not(t_event events, t_selected selected)
 {
 	static t_selected	old = (t_selected) {.spare = -1};
 
-	if (events.keys[SDL_SCANCODE_LSHIFT] && old.spare != -1)
+	if (events.keys[SDL_SCANCODE_CAPSLOCK] && old.spare != -1)
 		selected = old;
 	else
 		old = selected;
