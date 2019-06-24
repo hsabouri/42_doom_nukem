@@ -53,7 +53,7 @@ t_img	*load_all_textures(t_game *game)
 	textures[32] = parse_tga("./textures/items/ammo_secondary.tga", 0);
 	textures[33] = parse_tga("./textures/environment/lavabo.tga", 1);
 	textures[34] = parse_tga("./textures/environment/lavabo_2.tga", 1);
-	textures[35] = parse_tga("./textures/not_in_use.tga", 0);
+	textures[35] = parse_tga("./textures/environment/door.tga", 0);
 	textures[36] = parse_tga("./textures/hud/in_game_editor.tga", 1);
 	textures[37] = parse_tga("./textures/environment/parking.tga", 0);
 	textures[38] = parse_tga("./textures/multi_sprite/smg_marine/smg_marine0.tga", 0);
