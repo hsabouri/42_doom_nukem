@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 13:49:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/24 12:33:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		game_loop(t_env *env, size_t frame)
 		&& env->game.nsectors > env->game.player.my_entity.physic.sector_id)
 		env->game = physic(env->game, env->events, old_timer);
 	env->game.frame = frame;
-	env = event_action(env, &env->events, env->game.id_buf);
+	env = event_action(env, &env->events, env->game.id_buf, old_timer);
 	env->game = animate(env->game, old_timer);
 	SDL_LockTexture(env->sdl.buf, NULL, (void **)&content, &pitch);
 	env->current_buffer = content;

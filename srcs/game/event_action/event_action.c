@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 14:21:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/06/24 12:34:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static t_game	ammo_management(t_game game, t_player player, t_event *events)
 	return (game);
 }
 
-t_game			physic_interactions(t_game game, t_event *events, t_player player)
+static t_game	physic_interactions(t_game game, t_event *events, t_player player,
+float span)
 {
 	t_col_event		*curr;
 	t_entity		sub;
@@ -71,12 +72,15 @@ t_game			physic_interactions(t_game game, t_event *events, t_player player)
 				game = verify_card(game, curr, player);
 			else if (events->keys[SDL_SCANCODE_Q])
 				game = pickup_object(game, curr);
+			else if (sub.type >= GUN_MARINE && sub.type <= RED_MARINE)
+				game.player = take_damage(game.player, sub, span);
 		}
 	}
 	return (game);
 }
 
-t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
+t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf,
+float span)
 {
 	const t_selected	target = translate_out(
 		id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
@@ -90,6 +94,6 @@ t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf)
 		&& env->game.entities[target.id].data > 0
 		&& env->game.entities[target.id].type < 14)
 		env->game = drop_entity_life(env->game, env->game.player, target.id);
-	env->game = physic_interactions(env->game, events, env->game.player);
+	env->game = physic_interactions(env->game, events, env->game.player, span);
 	return (env);
 }
