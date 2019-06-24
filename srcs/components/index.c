@@ -22,6 +22,8 @@ static t_array	init_childs(t_array array, t_env *env, t_sdl *sdl)
 	apush(&array, &current);
 	current = init_hud_root(env, sdl);
 	apush(&array, &current);
+	current = init_dead(env, sdl);
+	apush(&array, &current);
 	return (array);
 }
 

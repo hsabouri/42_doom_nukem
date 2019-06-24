@@ -67,6 +67,8 @@ static void		all_loops(t_env *env, size_t frame)
 		else
 			editor_loop(env);
 	}
+	else if (env->game_mode == DEAD)
+		dead_loop(env);
 	if (!env->sdl.win)
 	{
 		console_error("doom_nukem", SDL_GetError());

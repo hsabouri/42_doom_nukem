@@ -95,5 +95,7 @@ float span)
 		&& env->game.entities[target.id].type < 14)
 		env->game = drop_entity_life(env->game, env->game.player, target.id);
 	env->game = physic_interactions(env->game, events, env->game.player, span);
+	if (env->game.player.my_entity.life <= 0)
+		env->game_mode = DEAD;
 	return (env);
 }
