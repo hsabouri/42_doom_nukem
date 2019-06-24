@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	game->ntextures = 114;
+	game->ntextures = 115;
 	textures = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
@@ -51,8 +51,8 @@ t_img	*load_all_textures(t_game *game)
 	textures[30] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga", 0);
 	textures[31] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga", 0);
 	textures[32] = parse_tga("./textures/items/ammo_secondary.tga", 0);
-	textures[33] = parse_tga("./textures/not_in_use.tga", 0);
-	textures[34] = parse_tga("./textures/not_in_use.tga", 0);
+	textures[33] = parse_tga("./textures/environment/lavabo.tga", 1);
+	textures[34] = parse_tga("./textures/environment/lavabo_2.tga", 1);
 	textures[35] = parse_tga("./textures/not_in_use.tga", 0);
 	textures[36] = parse_tga("./textures/hud/in_game_editor.tga", 1);
 	textures[37] = parse_tga("./textures/environment/parking.tga", 0);
@@ -132,5 +132,6 @@ t_img	*load_all_textures(t_game *game)
 	textures[111] = parse_tga("./textures/environment/wood.tga", 1);
 	textures[112] = parse_tga("./textures/environment/wood_2.tga", 1);
 	textures[113] = parse_tga("./textures/environment/ceil.tga", 1);
+	textures[114] = parse_tga("./textures/environment/desk.tga", 1);
 	return (textures);
 }
