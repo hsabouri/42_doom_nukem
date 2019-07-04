@@ -50,6 +50,7 @@ typedef	enum			e_game_mode
 {
 	MENU_MODE,
 	GAME_MODE,
+	DEAD,
 	QUIT
 }						t_game_mode;
 
@@ -235,6 +236,7 @@ void					clean_texture(t_env env);
 
 t_component				*init_menu(t_env *env, t_sdl *sdl);
 void					menu_loop(t_env *env);
+void					dead_loop(t_env *env);
 t_sdl					init_sdl(void);
 t_mat					*init_mat_5(t_mat *materials, t_game *game);
 t_mat					*init_mat_6(t_mat *materials, t_game *game);

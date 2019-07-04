@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   clean_music.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,36 +12,27 @@
 
 #include <doom.h>
 
-void		clean_texture(t_env env)
+#ifndef __linux__
+
+void		clean_music(t_game game)
 {
-	SDL_DestroyTexture(env.sdl.buf);
+	t_music	*music;
+	t_sound	*sound;
+
+	while ((music = (t_music *)apop(&game.music)))
+		Mix_FreeMusic(music->music);
+	free(game.music.mem);
+	while ((sound = (t_sound *)apop(&game.sounds)))
+		Mix_FreeChunk(sound->sound);
+	free(game.sounds.mem);
+	Mix_CloseAudio();
 }
 
-void		clean_game(t_game game)
-{
-	size_t	cpt;
+#else 
 
-	free(game.entities);
-	free(game.classes);
-	free(game.sectors);
-	free(game.walls);
-	free(game.portals);
-	free(game.points);
-	free(game.materials);
-	free(game.player.inventory.mem);
-	cpt = 0;
-	while (cpt < game.ntextures)
-	{
-		if (game.textures[cpt].content)
-			free(game.textures[cpt].content);
-		cpt++;
-	}
-	free(game.textures);
-	cpt = -1;
-	while (++cpt < game.nmulti_mats)
-		free(game.multi_mats[cpt].mem);
-	free(game.multi_mats);
-	clean_music(game);
-	free(game.chunks.mem);
-	free(game.id_buf);
+void		clean_music(t_game game)
+{
+	(void)game;
 }
+
+#endif
