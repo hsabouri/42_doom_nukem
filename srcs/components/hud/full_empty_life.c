@@ -21,7 +21,7 @@ static int				update_empty(t_component *self, void *parent)
 	life = (t_life_state *)parent;
 	if (life->last_life != life->player->my_entity.life)
 	{
-		life->pos.x = life->player->my_entity.life * self->size.x / 100;
+		life->pos.x = life->player->my_entity.life * self->img.width / 100;
 		str = ft_itoa(life->player->my_entity.life);
 		tmp = str;
 		str = ft_strjoin(str, "/100");
@@ -38,8 +38,11 @@ static void				render_empty(const t_component self, t_color *buf)
 {
 	t_life_state	*life;
 
+
 	life = (t_life_state *)self.state;
-	component_image(self.img, life->pos, self.size, buf);
+	background(buf, NO_COLOR, self.size);
+	component_image(self.img, life->pos,
+		(t_pix){self.img.width, self.img.height}, buf);
 }
 
 t_array					init_empty_life(t_array array, void *parent_state,
@@ -77,7 +80,7 @@ static void				render_full(const t_component self, t_color *buf)
 	component_image(self.img, (t_pix) {0, 0}, self.size, buf);
 }
 
-t_array					init_full_life(t_array array, void *parent_state, \
+t_array					init_full_life(t_array array, void *parent_state,
 t_sdl *sdl)
 {
 	t_component		component;
