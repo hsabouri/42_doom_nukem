@@ -18,6 +18,7 @@ void	console_error(const char *service, const char *error)
 	ft_putstr_fd(service, STDERR_FILENO);
 	ft_putstr_fd(C_RESET ": ", STDERR_FILENO);
 	ft_putendl_fd(error, STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
 
 void	console_log(const char *service, const char *log)
