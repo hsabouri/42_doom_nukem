@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 14:30:46 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 14:30:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/05 14:41:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_game			invert_button(t_game game, t_col_event *curr)
 	return (game);
 }
 
-t_game			invert_weapon(t_game game, t_col_event *curr, t_entity sub)
+t_game			invert_weapon(t_game game, t_col_event *curr)
 {
 	t_entity	tmp;
 
@@ -75,7 +75,7 @@ t_game			pickup_object(t_game game, t_col_event *curr)
 	else if (sub.type >= GUN && sub.type <= NYAN_GUN)
 	{
 		game.chunks = stack_sounds(game.chunks, 11, 0.5);
-		game = invert_weapon(game, curr, sub);
+		game = invert_weapon(game, curr);
 		game.player.weapons[game.player.equiped] = sub.type - 30;
 	}
 	return (game);

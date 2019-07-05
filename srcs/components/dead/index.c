@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 12:07:00 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 15:30:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/07/05 14:39:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ t_component		init_dead(t_env *env, t_sdl *sdl)
 	ret.complete_render = NULL;
 	ret.childs = anew(NULL, 0, sizeof(t_component));
 	ret = init_display_deco((t_display_deco_state)
-		{&env->game_mode, DEAD, NULL, 0}, ret);
+		{(int *)&env->game_mode, DEAD, NULL, 0}, ret);
 	return (ret);
 }
