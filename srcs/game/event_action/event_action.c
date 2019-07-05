@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/24 12:34:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/05 16:05:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static t_game	ammo_management(t_game game, t_player player, t_event *events)
 	if (weapon->ammo < weapon->ammo_max && munitions->ammo > 0
 		&& events->keys[SDL_SCANCODE_R])
 	{
-		game.chunks = stack_sounds(game.chunks, 3, 0.5);
+		game.chunks = stack_sounds(game.chunks, 5, 0.5);
 		munitions->ammo -= 1;
 		weapon->ammo = weapon->ammo_max;
 	}
 	else if (weapon->ammo < weapon->ammo_max && munitions->ammo == 0
 		&& events->keys[SDL_SCANCODE_R])
-		game.chunks = stack_sounds(game.chunks, 9, 0.5);
+		game.chunks = stack_sounds(game.chunks, 3, 0.5);
 	game.player = player;
 	return (game);
 }
