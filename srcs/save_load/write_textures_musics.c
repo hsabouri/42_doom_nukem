@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_textures_musics.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:46 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 16:21:06 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/05 16:45:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,79 +39,4 @@ int index)
 	loc_content += (size_t)(textures[i - 1].width * textures[i - 1].height)
 		* sizeof(t_color);
 	return (loc_content);
-}
-
-static t_c_music	set_fmusic(t_save_music *music, size_t i, t_audio type)
-{
-	t_c_music fmusic;
-
-	music->path = (char *)safe_malloc((sizeof(char) * (15
-		+ ft_strlen(music->read->d_name))), "saver");
-	music->path = (type == MUSIC) ? ft_strcpy(music->path, "./audio/music/")
-		: ft_strcpy(music->path, "./audio/sound/");
-	music->path = ft_strcat(music->path, music->read->d_name);
-	music->file = dump_file(music->path, 0, &music->size);
-	music->loc_content += (i == 0) ? 0 : music->old_size;
-	ft_strdel(&music->path);
-	music->old_size = music->size;
-	fmusic.magic = (type == MUSIC) ? MUSIC_MAGIC + i : SOUND_MAGIC + i;
-	fmusic.length = music->size;
-	fmusic.content = music->loc_content;
-	return (fmusic);
-}
-
-size_t				write_audio(int fd, int index, t_audio type)
-{
-	t_c_music		fmusic;
-	size_t			i;
-	t_save_music	music;
-
-	i = 0;
-	music.loc_content = (size_t)index;
-	music.old_size = 0;
-	music.size = 0;
-	music.drt = (type == MUSIC) ? opendir("./audio/music")
-		: opendir("./audio/sound");
-	while ((music.read = readdir(music.drt)))
-	{
-		if (ft_strcmp(music.read->d_name, ".") != 0
-			&& ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8
-			&& (ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
-		{
-			fmusic = set_fmusic(&music, i, type);
-			write_struct(&fmusic, fd, sizeof(t_c_music));
-			free(music.file);
-			i++;
-		}
-	}
-	closedir(music.drt);
-	music.loc_content += music.size;
-	return (music.loc_content);
-}
-
-void				write_music(int fd, t_audio type)
-{
-	t_save_music	music;
-
-	music.drt = (type == MUSIC) ? opendir("./audio/music") :
-		opendir("./audio/sound");
-	while ((music.read = readdir(music.drt)))
-	{
-		if (ft_strcmp(music.read->d_name, ".") != 0
-			&& ft_strcmp(music.read->d_name, "..") && music.read->d_type == 8
-			&& (ft_strcmp(ft_strrchr(music.read->d_name, '.'), ".ogg") == 0))
-		{
-			music.path = (char *)safe_malloc((sizeof(char) * (15
-				+ ft_strlen(music.read->d_name))), "saver");
-			music.path = (type == MUSIC) ?
-				ft_strcpy(music.path, "./audio/music/") :
-				ft_strcpy(music.path, "./audio/sound/");
-			music.path = ft_strcat(music.path, music.read->d_name);
-			music.file = dump_file(music.path, 0, &music.size);
-			write_struct(music.file, fd, music.size);
-			free(music.file);
-			ft_strdel(&music.path);
-		}
-	}
-	closedir(music.drt);
 }

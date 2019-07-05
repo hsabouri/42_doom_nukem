@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:07:18 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 17:29:36 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/05 16:42:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,13 @@ static void		launch_game(t_env *env, int ac, char **av)
 		{
 			env->game = *ret_load;
 			free(ret_load);
-			env->game = init_audio_tmp(env->game);
 		}
 		else
-		{
 			env->game = generate_map();
-			env->game = init_audio(env->game);
-		}
 	}
 	else
-	{
 		env->game = generate_map();
-		env->game = init_audio(env->game);
-	}
+	env->game = init_audio(env->game);
 	launch_game2(env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/06/18 14:02:55 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/05 16:38:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static void		write_map(int fd, t_c_game game_save, t_game game)
 	write_entities(fd, game.entities, game.nentities, game.multi_mats);
 	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
 	loc_music = write_textures(fd, game.textures, game.ntextures, loc_imgs);
-	loc_sound = write_audio(fd, loc_music, MUSIC);
-	write_audio(fd, loc_sound, SOUND);
 }
 
 void			save(const char *filename, t_game game)
@@ -101,8 +99,6 @@ void			save(const char *filename, t_game game)
 		game.textures[i].height * game.textures[i].width);
 		i++;
 	}
-	write_music(fd, MUSIC);
-	write_music(fd, SOUND);
 	console_log("FileLoader3030", "Successfully saved file.");
 	close(fd);
 }
