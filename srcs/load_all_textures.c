@@ -16,13 +16,13 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	game->ntextures = 125;
+	game->ntextures = 129;
 	textures = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
-	textures[0] = parse_tga("./textures/wall.tga", 1);
-	textures[1] = parse_tga("./textures/floor.tga", 1);
+	textures[0] = parse_tga("./textures/environment/wall.tga", 1);
+	textures[1] = parse_tga("./textures/environment/amordret_pic.tga", 1);
 	textures[2] = parse_tga("./textures/items/key_card_green.tga", 0);
-	textures[3] = parse_tga("./textures/skybox.tga", 1);
-	textures[4] = parse_tga("./textures/fence.tga", 1);
+	textures[3] = parse_tga("./textures/environment/skybox.tga", 1);
+	textures[4] = parse_tga("./textures/environment/fence.tga", 1);
 	textures[5] = parse_tga("./textures/multi_sprite/gun_marine/gun_marine0.tga", 0);
 	textures[6] = parse_tga("./textures/multi_sprite/gun_marine/gun_marine1.tga", 0);
 	textures[7] = parse_tga("./textures/multi_sprite/gun_marine/gun_marine2.tga", 0);
@@ -143,5 +143,9 @@ t_img	*load_all_textures(t_game *game)
 	textures[122] = parse_tga("./textures/environment/plexi_desk.tga", 1);
 	textures[123] = parse_tga("./textures/environment/plexi_desk_2.tga", 1);
 	textures[124] = parse_tga("./textures/environment/plexi_desk_3.tga", 1);
+	textures[125] = parse_tga("./textures/environment/hsabouri_pic.tga", 1);
+	textures[126] = parse_tga("./textures/environment/fmerding_pic.tga", 1);
+	textures[127] = parse_tga("./textures/environment/lbougero_pic.tga", 1);
+	textures[128] = parse_tga("./textures/environment/iporsenn_pic.tga", 1);
 	return (textures);
 }
