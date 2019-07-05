@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_music.c                                      :+:      :+:    :+:   */
+/*   clean_music_linux.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:16:55 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 16:32:03 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/05 10:11:49 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
-
 #ifndef __linux__
 
 void		clean_music(t_game game)
@@ -28,7 +27,7 @@ void		clean_music(t_game game)
 	Mix_CloseAudio();
 }
 
-#else 
+#else
 
 void		clean_music(t_game game)
 {
