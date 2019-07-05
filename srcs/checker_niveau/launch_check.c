@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   launch_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 16:20:52 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 16:48:09 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/05 10:15:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-static void	display_2(t_lvl_error *display)
+static void	display_2(t_lvl_error *display, char *errors_text[NBR_ERROR])
 {
+	ft_putstr(errors_text[display->error_type]);
 	if (display->sector != -1)
 	{
 		ft_putstr(": sector ");
@@ -46,7 +47,7 @@ char *errors_text[NBR_ERROR])
 	{
 		if (display->error_type != NO_ERROR)
 		{
-			ft_putstr(errors_text[display->error_type]);
+			display_2(display, errors_text);
 			if (display->point != -1)
 			{
 				ft_putstr(": point ");
@@ -62,7 +63,6 @@ char *errors_text[NBR_ERROR])
 				ft_putstr(": portal ");
 				ft_putnbr(display->portal);
 			}
-			display_2(display);
 		}
 		free(display);
 	}
