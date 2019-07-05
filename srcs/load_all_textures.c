@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	game->ntextures = 123;
+	game->ntextures = 125;
 	textures = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/wall.tga", 1);
 	textures[1] = parse_tga("./textures/floor.tga", 1);
@@ -141,5 +141,7 @@ t_img	*load_all_textures(t_game *game)
 	textures[120] = parse_tga("./textures/environment/plexi.tga", 1);
 	textures[121] = parse_tga("./textures/environment/ccc_logo.tga", 1);
 	textures[122] = parse_tga("./textures/environment/plexi_desk.tga", 1);
+	textures[123] = parse_tga("./textures/environment/plexi_desk_2.tga", 1);
+	textures[124] = parse_tga("./textures/environment/plexi_desk_3.tga", 1);
 	return (textures);
 }
