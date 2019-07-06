@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/06 14:55:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:44:19 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,8 +220,21 @@ typedef struct	s_render
 	t_section			*portals;
 }				t_render;
 
-# include "srcs/graphic/bresenham.h"
+typedef struct	s_pix_fixed
+{
+	t_fixed	x;
+	t_fixed	y;
+}				t_pix_fixed;
 
+typedef struct	s_bres
+{
+	t_pix_fixed	src;
+	int			diff[2];
+	int			inc[2];
+}				t_bres;
+
+void			bresenham(t_color *buff, t_pix a, t_pix b, t_color color);
+void			dotted(t_color *buff, t_pix a, t_pix b, t_color color);
 void			render(const t_game game, const t_context context, t_color *buf,
 				u_int32_t *id_buf);
 int				is_left(t_fvec2 a, t_fvec2 b);
