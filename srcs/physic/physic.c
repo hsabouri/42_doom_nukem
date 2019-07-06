@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 17:34:37 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 14:47:06 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ static t_ph		entities_look_at(t_ph physic, t_ph player)
 		else
 			tang = abs_vec.v / abs_vec.u;
 		if (vec.u > 0 && vec.v > 0)
-			physic.look_h = -(atan(tang)) + 0.2;
+			physic.look_h = -(atan(tang)) + 0.6;
 		else if (vec.u > 0 && vec.v < 0)
-			physic.look_h = -(atan(tang) + 0.5 * M_PI) + 0.2;
+			physic.look_h = -(atan(tang) + 0.5 * M_PI) + 0.6;
 		else if (vec.u < 0 && vec.v < 0)
-			physic.look_h = -(atan(tang) + M_PI) + 0.2;
+			physic.look_h = -(atan(tang) + M_PI) + 0.6;
 		else
-			physic.look_h = -(atan(tang) + 1.5 * M_PI) + 0.2;
+			physic.look_h = -(atan(tang) + 1.5 * M_PI) + 0.6;
 	}
 	return (physic);
 }
