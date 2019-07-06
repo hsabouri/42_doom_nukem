@@ -84,7 +84,8 @@ typedef enum		e_entity_type
 	SMG = 31,
 	SHOTGUN = 32,
 	REVOLVER = 33,
-	NYAN_GUN = 34
+	NYAN_GUN = 34,
+	WC = 35
 }					t_entity_type;
 
 typedef struct		s_mat

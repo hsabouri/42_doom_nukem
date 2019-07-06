@@ -36,6 +36,8 @@ static char	*type_to_text_3(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Revolver"));
 	else if (type == NYAN_GUN)
 		return (ft_strcpy(dst, "Nyan-gun"));
+	else if (type == WC)
+		return (ft_strcpy(dst, "WC"));
 	else
 		return (ft_strcpy(dst, "Unknown"));
 }

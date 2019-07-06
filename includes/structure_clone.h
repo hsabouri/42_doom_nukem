@@ -154,13 +154,6 @@ typedef struct		s_c_sector
 	t_fvec2		center;
 }					t_c_sector;
 
-typedef struct		s_c_music
-{
-	size_t		magic;
-	size_t		length;
-	size_t		content;
-}					t_c_music;
-
 typedef struct		s_c_game
 {
 	size_t		magic;
