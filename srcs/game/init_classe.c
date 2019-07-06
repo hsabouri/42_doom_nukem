@@ -97,13 +97,13 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 {
 	t_entity	*classe;
 
-	game->nclasses = 35;
+	game->nclasses = 34;
 	classe = (t_entity *)safe_malloc(game->nclasses * sizeof(t_entity),
 		"init_classe");
 	classe[0] = classe_1(GUN_MARINE, &multi_mats[0], 15);
 	classe[1] = classe_2(GREEN_KEY_CARD, &multi_mats[1], 0, 0.4, 0.4);
 	classe[2] = classe_1(SMG_MARINE, &multi_mats[2], 30);
-	classe[3] = classe_3(BLACK_MARINE, &multi_mats[3], 50);
+	classe[3] = classe_3(RACLURE, &multi_mats[3], 50);
 	classe[4] = classe_3(RED_MARINE, &multi_mats[4], 70);
 	classe[5] = classe_2(BLUE_KEY_CARD, &multi_mats[5], 0, 0.4, 0.4);
 	classe[6] = classe_2(RED_KEY_CARD, &multi_mats[6], 0, 0.4, 0.4);
@@ -134,6 +134,5 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 	classe[31] = classe_2(SHOTGUN, &multi_mats[31], 0, 0.4, 0.8);
 	classe[32] = classe_2(REVOLVER, &multi_mats[32], 0, 0.4, 0.8);
 	classe[33] = classe_2(NYAN_GUN, &multi_mats[33], 0, 0.8, 0.8);
-	classe[34] = classe_2(WC, &multi_mats[34], 0, 0.4, 0.8);
 	return (classe);
 }

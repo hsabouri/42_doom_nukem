@@ -38,12 +38,6 @@ static t_mat	*init_mat_9(t_mat *materials, t_game *game)
 	materials[66] = tmp;
 	tmp.texture = &game->textures[29];
 	materials[67] = tmp;
-	tmp.texture = &game->textures[130];
-	materials[68] = tmp;
-	tmp.texture = &game->textures[131];
-	materials[69] = tmp;
-	tmp.texture = &game->textures[132];
-	materials[70] = tmp;
 	return (materials);
 }
 

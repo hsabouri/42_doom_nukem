@@ -102,7 +102,7 @@ static t_mat	*init_mats(t_game *game)
 	t_mat	*materials;
 	t_mat	tmp;
 
-	game->nmaterials = 71;
+	game->nmaterials = 79;
 	materials = (t_mat *)safe_malloc(game->nmaterials * sizeof(t_mat),
 		"generate_map");
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),

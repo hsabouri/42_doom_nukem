@@ -53,7 +53,7 @@ typedef enum		e_entity_type
 	PLAYER = 0,
 	GUN_MARINE = 1,
 	SMG_MARINE = 2,
-	BLACK_MARINE = 3,
+	RACLURE = 3,
 	RED_MARINE = 4,
 	RED_KEY_CARD = 5,
 	BLUE_KEY_CARD = 6,
@@ -84,8 +84,7 @@ typedef enum		e_entity_type
 	SMG = 31,
 	SHOTGUN = 32,
 	REVOLVER = 33,
-	NYAN_GUN = 34,
-	WC = 35
+	NYAN_GUN = 34
 }					t_entity_type;
 
 typedef struct		s_mat

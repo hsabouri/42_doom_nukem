@@ -36,8 +36,6 @@ static char	*type_to_text_3(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Revolver"));
 	else if (type == NYAN_GUN)
 		return (ft_strcpy(dst, "Nyan-gun"));
-	else if (type == WC)
-		return (ft_strcpy(dst, "WC"));
 	else
 		return (ft_strcpy(dst, "Unknown"));
 }
@@ -79,8 +77,8 @@ char		*type_to_text(t_entity_type type, char *dst)
 		return (ft_strcpy(dst, "Gun marine"));
 	else if (type == SMG_MARINE)
 		return (ft_strcpy(dst, "Smg marine"));
-	else if (type == BLACK_MARINE)
-		return (ft_strcpy(dst, "Black marine"));
+	else if (type == RACLURE)
+		return (ft_strcpy(dst, "Raclure"));
 	else if (type == RED_MARINE)
 		return (ft_strcpy(dst, "Red marine"));
 	else if (type == GREEN_KEY_CARD)
