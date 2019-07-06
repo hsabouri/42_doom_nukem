@@ -6,10 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/23 17:13:46 by fmerding         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+/*   Updated: 2019/07/06 11:50:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +92,6 @@ t_game			*load(const char *filename, int edit_mode)
 	res = (t_game *)safe_malloc(sizeof(t_game), "loader");
 	*res = parse_1(buf, game, save);
 	*res = parse_2(buf, game, save, *res);
-	save.index = game.loc_music;
-	parse_audio(buf, save, game.nmusic, MUSIC);
-	save.index = game.loc_sounds;
-	parse_audio(buf, save, game.nsounds, SOUND);
 	free(buf);
 	return (res);
 }

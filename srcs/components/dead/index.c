@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 12:07:00 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/05 14:39:01 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 12:53:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void		self_render(const t_component self, t_color *buf)
 {
-	component_image(self.img, self.pos, (t_pix) {WIDTH, HEIGHT} , buf);
+	component_image(self.img, self.pos, (t_pix) {WIDTH, HEIGHT}, buf);
 }
 
 t_component		init_dead(t_env *env, t_sdl *sdl)

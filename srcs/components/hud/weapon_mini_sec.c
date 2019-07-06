@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_mini_sec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 15:25:50 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 18:55:21 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/05 15:33:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int				self_update(t_component *self, void *parent_state)
 	mini_state = (t_mini_weapon *)self->state;
 	if (mini_state->last_ammo != weapon->weapons[weapon->last_secondary].ammo)
 	{
-		str = self_2(str, (weapon->weapons[weapon->last_equiped].ammo));
+		str = self_2(str, (weapon->weapons[weapon->last_secondary].ammo));
 		tmp = str;
 		str2 = ft_itoa(weapon->weapons[weapon->last_secondary].ammo_max);
 		str = ft_strjoin(str, str2);

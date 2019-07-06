@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/24 12:33:28 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 13:20:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 t_vec2		player_space(t_vec2 vec, t_ph physic)
 {
 	return (vec2_rot(vec2_sub(vec, vec3_to_vec2(physic.pos)), -physic.look_h));
+}
+
+static void	game_loop_2(t_env *env, size_t frame)
+{
+	SDL_UnlockTexture(env->sdl.buf);
+	SDL_RenderCopy(env->sdl.renderer, env->sdl.buf, NULL, NULL);
+	*env->component = trigger_component(env, *env->component, &env->sdl);
+	display_component(*env->component, &env->sdl);
+	play_music(env->game, env->game.played_music, 0, frame);
+	SDL_RenderPresent(env->sdl.renderer);
+	env->game = play_sounds(env->game);
 }
 
 void		game_loop(t_env *env, size_t frame)
@@ -41,12 +52,6 @@ void		game_loop(t_env *env, size_t frame)
 	if (env->game.nwalls > 0
 		&& env->game.nsectors > env->game.player.my_entity.physic.sector_id)
 		render_multi_threaded(*env, env->current_buffer);
-	SDL_UnlockTexture(env->sdl.buf);
-	SDL_RenderCopy(env->sdl.renderer, env->sdl.buf, NULL, NULL);
-	*env->component = trigger_component(env, *env->component, &env->sdl);
-	display_component(*env->component, &env->sdl);
-	play_music(env->game, env->game.played_music, 0, frame);
-	SDL_RenderPresent(env->sdl.renderer);
-	env->game = play_sounds(env->game);
+	game_loop_2(env, frame);
 	old_timer = end_timer(timer);
 }
