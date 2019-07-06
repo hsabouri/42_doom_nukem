@@ -28,16 +28,16 @@ t_array *multi_mats)
 			.spawn.height = f_from_float(entity.spawn.height),
 			.spawn.radius = f_from_float(entity.spawn.radius),
 			.spawn.rad_inter = f_from_float(entity.spawn.rad_inter),
-			.spawn.pos = vec3_to_fvec3(entity.spawn.pos),
+			.spawn.pos = vec3_to_fvec3(entity.physic.pos),
 			.spawn.speed_max = vec3_to_fvec3(entity.spawn.speed_max),
 			.spawn.look.u = f_from_float(entity.physic.look_h),
 			.spawn.look.v = entity.spawn.look_v,
 			.spawn.sector_id = entity.spawn.sector_id,
-			.spawn.fly = (u_int16_t)entity.spawn.fly,
 			.type = entity.type, .life = f_from_float(entity.life),
 			.data = entity.data};
 		res.mats = (entity.mat != NULL) ? (ssize_t)id_from_p(entity.mat,
 			multi_mats, sizeof(t_array)) : -1;
+		printf("pos.z: %f\n", f_to_float(res.spawn.pos.z));
 		write_struct(&res, fd, sizeof(t_c_entity));
 		i++;
 	}

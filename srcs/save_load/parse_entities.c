@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/07 19:07:16 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:08:05 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 	current.physic.speed_max = fvec3_to_vec3(struc_e.spawn.speed_max);
 	current.physic.look_v = struc_e.spawn.look.v;
 	current.physic.look_h = f_to_float(struc_e.spawn.look.u);
-	// current.physic.fly = struc_e.spawn.fly;
 	if (current.physic.look_h > M_PI / 2 && current.physic.look_h < -M_PI / 2)
 		current.physic.look_h = 0;
 	current.physic.sector_id = struc_e.spawn.sector_id;
@@ -58,7 +57,7 @@ size_t n_entities)
 	{
 		struc_e = *(t_c_entity *)dump_struct(buf, save.index
 			+ sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
-		// verify_magic(&struc_e, ENTITY_MAGIC, i);
+		verify_magic(&struc_e, ENTITY_MAGIC, i);
 		current = parse_entities_2(struc_e, multi_mats);
 		entities[i] = current;
 		i++;

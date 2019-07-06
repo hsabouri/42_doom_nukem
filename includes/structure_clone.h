@@ -79,8 +79,7 @@ typedef struct		s_c_ph
 	t_fvec3		pos;
 	t_fvec3		speed_max;
 	t_fvec2		look;
-	u_int16_t	sector_id;
-	u_int16_t	fly;
+	u_int32_t	sector_id;
 }					t_c_ph;
 
 typedef struct		s_c_multi_mats

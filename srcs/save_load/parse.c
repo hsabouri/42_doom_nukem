@@ -75,6 +75,21 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	return (res);
 }
 
+t_entity	*fix_fly(t_entity *entities, size_t nentities, t_sector *sectors)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < nentities)
+	{
+		if (entities[i].physic.pos.z > sectors
+			[entities[i].physic.sector_id].floor.z)
+			entities[i].physic.fly = 1;
+		i++;
+	}
+	return (entities);
+}
+
 t_game			*load(const char *filename, int edit_mode)
 {
 	void		*buf;
@@ -92,6 +107,7 @@ t_game			*load(const char *filename, int edit_mode)
 	res = (t_game *)safe_malloc(sizeof(t_game), "loader");
 	*res = parse_1(buf, game, save);
 	*res = parse_2(buf, game, save, *res);
+	fix_fly(res->entities, res->nentities, res->sectors);
 	free(buf);
 	return (res);
 }
