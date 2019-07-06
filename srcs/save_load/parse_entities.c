@@ -26,6 +26,7 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 	current.physic.speed_max = fvec3_to_vec3(struc_e.spawn.speed_max);
 	current.physic.look_v = struc_e.spawn.look.v;
 	current.physic.look_h = f_to_float(struc_e.spawn.look.u);
+	// current.physic.fly = struc_e.spawn.fly;
 	if (current.physic.look_h > M_PI / 2 && current.physic.look_h < -M_PI / 2)
 		current.physic.look_h = 0;
 	current.physic.sector_id = struc_e.spawn.sector_id;
@@ -36,6 +37,7 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 		current.mat = NULL;
 	current.data = struc_e.data;
 	current.life = f_to_float(struc_e.life);
+	current.spawn = current.physic;
 	current.type = (t_entity_type)struc_e.type;
 	current.spawn = current.physic;
 	return (current);
@@ -56,10 +58,8 @@ size_t n_entities)
 	{
 		struc_e = *(t_c_entity *)dump_struct(buf, save.index
 			+ sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
-		verify_magic(&struc_e, ENTITY_MAGIC, i);
+		// verify_magic(&struc_e, ENTITY_MAGIC, i);
 		current = parse_entities_2(struc_e, multi_mats);
-		printf("radius: %f, height: %f\n", current.physic.radius,
-			current.physic.height);
 		entities[i] = current;
 		i++;
 	}

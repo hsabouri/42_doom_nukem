@@ -33,6 +33,7 @@ t_array *multi_mats)
 			.spawn.look.u = f_from_float(entity.physic.look_h),
 			.spawn.look.v = entity.spawn.look_v,
 			.spawn.sector_id = entity.spawn.sector_id,
+			.spawn.fly = (u_int16_t)entity.spawn.fly,
 			.type = entity.type, .life = f_from_float(entity.life),
 			.data = entity.data};
 		res.mats = (entity.mat != NULL) ? (ssize_t)id_from_p(entity.mat,
