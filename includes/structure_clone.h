@@ -183,10 +183,6 @@ typedef struct		s_c_game
 	size_t		unique_e_id;
 	size_t		ntextures;
 	size_t		loc_textures;
-	size_t		nmusic;
-	size_t		loc_music;
-	size_t		nsounds;
-	size_t		loc_sounds;
 }					t_c_game;
 
 int					open_file(const char *file, int edit_mode,\
