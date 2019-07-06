@@ -16,7 +16,7 @@ t_img	*load_all_textures(t_game *game)
 {
 	t_img	*textures;
 
-	game->ntextures = 129;
+	game->ntextures = 130;
 	textures = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
 	textures[0] = parse_tga("./textures/environment/wall.tga", 1);
 	textures[1] = parse_tga("./textures/environment/amordret_pic.tga", 1);
@@ -147,5 +147,6 @@ t_img	*load_all_textures(t_game *game)
 	textures[126] = parse_tga("./textures/environment/fmerding_pic.tga", 1);
 	textures[127] = parse_tga("./textures/environment/lbougero_pic.tga", 1);
 	textures[128] = parse_tga("./textures/environment/iporsenn_pic.tga", 1);
+	textures[129] = parse_tga("./textures/environment/nope_grumpy_2.tga", 1);
 	return (textures);
 }
