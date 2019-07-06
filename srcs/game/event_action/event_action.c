@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/05 16:05:48 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 13:28:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static t_game	ammo_management(t_game game, t_player player, t_event *events)
 	return (game);
 }
 
-static t_game	physic_interactions(t_game game, t_event *events, t_player player,
-float span)
+static t_game	physic_interactions(t_game game, t_event *events,
+t_player player, float span)
 {
 	t_col_event		*curr;
 	t_entity		sub;
@@ -82,9 +82,9 @@ float span)
 t_env			*event_action(t_env *env, t_event *events, u_int32_t *id_buf,
 float span)
 {
-	const t_selected	target = translate_out(
-		id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
+	t_selected	target;
 
+	target = translate_out(id_buf[HEIGHT / 2 * WIDTH + WIDTH / 2]);
 	env->game.player.is_shooting = is_shooting(&env->game, env->game.player,
 		*events, env->game.frame);
 	if (env->game.player.is_shooting)

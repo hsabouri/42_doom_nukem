@@ -6,19 +6,18 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 13:55:23 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/05 16:04:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 13:22:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 #include <editor.h>
 
-
 int		is_shooting(t_game *game, t_player player, t_event events,
 size_t frame)
 {
-	const t_weapon	weapon = game->weapons[player.weapons[player.equiped]];
 	static size_t	last = 0;
+	const t_weapon	weapon = game->weapons[player.weapons[player.equiped]];
 
 	if (frame - last > weapon.cadence && events.mouse[SDL_BUTTON_LEFT])
 	{

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:26:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/18 16:27:56 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 13:10:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_game		animate(t_game game, float old_timer)
 		game.animations.len : 10), sizeof(t_animation));
 	while ((current = (t_animation *)apop(&game.animations)))
 	{
-		if (fabs(current->target - *current->to_animate) < ANIMATION_SPEED * span)
+		if (fabs(current->target - *current->to_animate)
+			< ANIMATION_SPEED * span)
 			*current->to_animate = current->target;
 		else if (current->target > *current->to_animate)
 			*current->to_animate += ANIMATION_SPEED * span;

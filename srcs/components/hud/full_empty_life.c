@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   full_empty_life.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:21:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 17:55:41 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/06 12:54:36 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int				update_empty(t_component *self, void *parent)
 static void				render_empty(const t_component self, t_color *buf)
 {
 	t_life_state	*life;
-
 
 	life = (t_life_state *)self.state;
 	background(buf, NO_COLOR, self.size);

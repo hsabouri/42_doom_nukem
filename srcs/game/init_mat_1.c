@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:51:39 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 19:59:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 13:32:24 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static t_mat	*init_mat_9(t_mat *materials, t_game *game)
 		.sca = fvec2_new(f_from_int(2), f_from_int(1)),
 		.color = NO_COLOR, .texture = &game->textures[85], .mode = NO_TILING,
 		.filter = WHITE, .overlay =	NULL, .frozen = 1};
+	tmp.texture = &game->textures[23];
+	materials[65] = tmp;
 	materials[61] = tmp;
 	tmp.sca.u = f_from_int(3);
 	tmp.texture = &game->textures[84];
@@ -27,6 +29,15 @@ static t_mat	*init_mat_9(t_mat *materials, t_game *game)
 	tmp.sca.u = f_from_int(1);
 	tmp.texture = &game->textures[86];
 	materials[62] = tmp;
+	tmp.sca = fvec2_new(f_from_int(2), f_from_int(2));
+	tmp.texture = &game->textures[17];
+	materials[63] = tmp;
+	tmp.texture = &game->textures[20];
+	materials[64] = tmp;
+	tmp.texture = &game->textures[26];
+	materials[66] = tmp;
+	tmp.texture = &game->textures[29];
+	materials[67] = tmp;
 	return (materials);
 }
 
@@ -55,17 +66,6 @@ t_mat	*init_mat_8(t_mat *materials, t_game *game)
 	materials[58] = tmp;
 	tmp.texture = &game->textures[83];
 	materials[59] = tmp;
-	tmp.texture = &game->textures[23];
-	materials[65] = tmp;
-	tmp.sca = fvec2_new(f_from_int(2), f_from_int(2));
-	tmp.texture = &game->textures[17];
-	materials[63] = tmp;
-	tmp.texture = &game->textures[20];
-	materials[64] = tmp;
-	tmp.texture = &game->textures[26];
-	materials[66] = tmp;
-	tmp.texture = &game->textures[29];
-	materials[67] = tmp;
 	materials = init_mat_9(materials, game);
 	return (materials);
 }
