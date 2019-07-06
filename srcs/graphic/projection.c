@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:42:54 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/16 17:50:15 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 14:48:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ const t_section section)
 	span = res.bot - res.top;
 	res.dis = hit.ratios.v;
 	res.y_start = section.wall.tex_pos.v * 200;
-	res.y_iter = ((h.u - h.v) << 9) / (span + !span);
+	res.y_iter = ((h.u - h.v) << W_PRECISION) / (span + !span);
 	res.plane.uid_floor = translate_in(PART_FLOOR, MOD_NO,
 		context.sector.sector_id, 0);
 	res.plane.uid_roof = translate_in(PART_CEILING, MOD_NO,
@@ -131,7 +131,7 @@ t_e_proj		entity_projection(t_hit hit, const t_context context,
 			hit.ratios.v) + context.physic.look_v * 100);
 	res.uid = translate_in(PART_ENTITY, MOD_NO, section.entity.id, 0);
 	res.mat = *section.entity.mat;
-	res.y_iter = f_from_int(1 << 8) / (span + !span);
+	res.y_iter = f_from_int(1 << E_PRECISION) / (span + !span);
 	res.dis = hit.ratios.v;
 	return (res);
 }

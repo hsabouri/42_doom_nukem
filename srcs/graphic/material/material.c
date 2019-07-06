@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 14:19:15 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/16 18:24:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 14:12:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_color	texture_mode(t_mat mat, t_tex_proj tex, t_fvec2 pix, int y_s)
 	else
 		coords = (t_pix) {f_to_int((f_mul(pix.u, mat.sca.u) - mat.pos.u)
 			* img.width), f_to_int((f_mul(pix.v, mat.sca.v) - mat.pos.v)
-			* img.height) >> tex.p };
+			* img.height) >> tex.p};
 	if (mat.mode == TILING)
 		coords = (t_pix) {coords.x % img.width, coords.y % img.height};
 	if ((uint)coords.x >= img.width || coords.x < 0
