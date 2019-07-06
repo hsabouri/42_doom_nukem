@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:09:48 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/01 16:22:59 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:38:15 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int			open_file(const char *file, int edit_mode, size_t *filesize)
 	int			fd;
 	struct stat	st;
 
-	// if (edit_mode && ft_strcmp(file, "nyan_dukem") == 0)
-	// 	fd = open("nyan_dukem_save", O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
 	if (edit_mode)
 		fd = open(file, O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
 	else

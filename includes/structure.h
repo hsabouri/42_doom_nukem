@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 17:47:17 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/22 18:33:05 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:42:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ typedef enum		e_mode
 	NO_TILING
 }					t_mode;
 
-typedef enum		s_col_mode
+typedef enum		e_col_mode
 {
 	COL_ENTITY,
 	COL_INTERACT
 }					t_col_mode;
 
-typedef enum		s_entity_type
+typedef enum		e_entity_type
 {
 	PLAYER = 0,
 	GUN_MARINE = 1,

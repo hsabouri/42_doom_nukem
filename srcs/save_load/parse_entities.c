@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 16:41:09 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:39:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ t_save save)
 		free(current.inventory.mem);
 		current.inventory = tmp_inventory;
 	}
-
 	current = parse_player_2(current, struc_p);
 	res = current;
 	return (res);

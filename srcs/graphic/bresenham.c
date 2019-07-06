@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 14:34:10 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/30 17:09:58 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:44:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./bresenham.h"
+#include <graphic.h>
 
 static void		draw_horizon(t_bres bres, t_color *buff, t_color color,
 int dot)
