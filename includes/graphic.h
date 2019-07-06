@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/21 16:42:40 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/06 14:55:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define RATIO (WIDTH / PWIDTH)
 # define PDIS 0.8
 # define N_THREADS 8
+
+# define E_PRECISION 7
+# define W_PRECISION 8
 
 # define WHITE		(t_color){255,255,255,255}
 # define GREY		(t_color){128,128,128,255}

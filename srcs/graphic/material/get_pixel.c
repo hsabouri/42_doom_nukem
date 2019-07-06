@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:05:00 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/06 14:30:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/06 14:50:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_color			get_wall_pixel(t_proj proj, int y)
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
-	proj.tex_wall.p = 8;
+	proj.tex_wall.p = W_PRECISION;
 	res = get_mat_pixel(proj.tex_wall.mat, proj.tex_wall, pix, y);
 	return (fog(res, f_mul(proj.dis, proj.dis)));
 }
@@ -32,7 +32,7 @@ t_color			get_portal_pixel(t_proj proj, int y)
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top) + proj.y_start;
-	proj.tex_open.p = 8;
+	proj.tex_open.p = W_PRECISION;
 	res = get_mat_pixel(proj.tex_open.mat, proj.tex_open, pix, y);
 	return (fog(res, f_mul(proj.dis, proj.dis)));
 }
@@ -92,7 +92,7 @@ t_color			get_entity_pixel(t_e_proj proj, int y)
 
 	pix.u = proj.x;
 	pix.v = proj.y_iter * (y - proj.top);
-	proj.tex.p = 7;
+	proj.tex.p = E_PRECISION;
 	res = get_mat_pixel(proj.mat, proj.tex, pix, y);
 	return (fog(res, f_mul(proj.dis, proj.dis)));
 }
