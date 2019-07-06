@@ -37,7 +37,6 @@ t_array *multi_mats)
 			.data = entity.data};
 		res.mats = (entity.mat != NULL) ? (ssize_t)id_from_p(entity.mat,
 			multi_mats, sizeof(t_array)) : -1;
-		printf("pos.z: %f\n", f_to_float(res.spawn.pos.z));
 		write_struct(&res, fd, sizeof(t_c_entity));
 		i++;
 	}
