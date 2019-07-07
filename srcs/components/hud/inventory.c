@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:01:47 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/21 12:42:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/07 14:44:55 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ t_component self, t_color *buf)
 			decal_y += 70;
 			decal_x = 0;
 		}
-		component_image(*mat->texture, (t_pix) {20 + decal_x, 100 + decal_y},
-				self.size, buf);
+		component_image(*mat->texture, (t_pix) {20 + decal_x, 40 + decal_y},
+			self.size, buf);
 		decal_x += 50;
 	}
 }
@@ -101,9 +101,10 @@ void *parent_state, t_sdl *sdl)
 
 	hud = (t_hud_state *)parent_state;
 	component.img.content = NULL;
-	component.size.x = 400;
-	component.size.y = 250;
-	component.text = component_text("Inventory", (t_pix) {WIDTH / 2, 50}, sdl);
+	component.size.x = 250;
+	component.size.y = 80;
+	component.text = component_text("Inventory",
+		(t_pix) {component.size.x / 2 - 30, 2}, sdl);
 	component.pos.x = WIDTH / 2 - component.size.x / 2;
 	component.pos.y = HEIGHT / 2 - component.size.y / 2;
 	component.display = 0;
