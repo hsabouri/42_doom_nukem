@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/06 15:39:48 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/07 19:07:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 	current.data = struc_e.data;
 	current.life = f_to_float(struc_e.life);
 	current.type = (t_entity_type)struc_e.type;
+	current.spawn = current.physic;
 	return (current);
 }
 
@@ -65,27 +66,6 @@ size_t n_entities)
 	return (entities);
 }
 
-static t_array	parse_inventory(void *buf, t_save save, t_entity *entities,
-size_t n_inventory)
-{
-	t_array		res;
-	size_t		index;
-	t_entity	*entity;
-	size_t		i;
-
-	res = safe_anew(NULL, 1, sizeof(t_entity *), "loader");
-	i = 0;
-	while (i < n_inventory)
-	{
-		index = *(size_t *)dump_struct(buf, save.index + sizeof(size_t) * i,
-			sizeof(size_t), save.max);
-		entity = id_to_p(index, entities, sizeof(t_entity));
-		apush(&res, &entity);
-		i++;
-	}
-	return (res);
-}
-
 static t_player	parse_player_2(t_player current, t_c_player struc_p)
 {
 	current.my_entity.physic.pos = fvec3_to_vec3(struc_p.my_entity.spawn.pos);
@@ -112,7 +92,6 @@ t_save save)
 	t_player	res;
 	t_player	current;
 	t_c_player	struc_p;
-	t_array		tmp_inventory;
 
 	struc_p = *(t_c_player *)dump_struct(buf, save.index, sizeof(t_c_player),
 		save.max);
@@ -127,13 +106,7 @@ t_save save)
 	current.my_entity.physic.rad_inter = f_to_float(struc_p.my_entity.spawn
 		.rad_inter);
 	save.index = game.loc_inventory;
-	tmp_inventory = parse_inventory(buf, save, new_game.entities,
-		game.ninventory);
-	if (tmp_inventory.mem)
-	{
-		free(current.inventory.mem);
-		current.inventory = tmp_inventory;
-	}
+	current.inventory = safe_anew(NULL, 5, sizeof(t_entity *), "loader");
 	current = parse_player_2(current, struc_p);
 	res = current;
 	return (res);
