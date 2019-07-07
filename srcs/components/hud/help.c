@@ -56,7 +56,7 @@ static void					self_render(const t_component self, t_color *buf)
 		else
 			component_image(state->help_ig_edit, (t_pix) {(WIDTH / 2
 				- state->help.width / 2), (HEIGHT / 2 - state->help.height
-				/ 2)}, self.size, buf);
+				/ 1.3)}, self.size, buf);
 		state->is_display = 1;
 	}
 }
@@ -78,7 +78,7 @@ static t_help_comp_state	*init_help_comp_state(void *parent_state)
 	return (state);
 }
 
-t_array						init_help(t_array array, void *parent_state,\
+t_array						init_help(t_array array, void *parent_state,
 t_sdl *sdl)
 {
 	t_component	component;
