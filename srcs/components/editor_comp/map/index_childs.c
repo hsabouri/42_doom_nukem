@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 13:45:59 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/19 11:59:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/07 17:03:14 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ t_sdl *sdl, t_array ret)
 		.events = &env->events, .callback = &grid_size,
 		.scancode = SDL_SCANCODE_SPACE}, sdl);
 	apush(&ret, &current);
-	current = init_display_deco((t_display_deco_state) { .display_value = 1,
+	current = init_display_deco((t_display_deco_state) {.display_value = 1,
 		.to_look_at = (int *)&env->events.keys[SDL_SCANCODE_H],
 		.state = state, .invert = 0 }, init_help_component((t_help_state) {
 			.img = parse_tga("./textures/hud/map_editor.tga", 0)}, sdl));
@@ -141,6 +141,10 @@ t_sdl *sdl, t_array ret)
 		.img = parse_tga("./textures/ui/entity_data.tga", 0),
 		.events = &env->events, .to_activate = (int *)&state->tool,
 		.scancode = SDL_SCANCODE_N, .active_value = ENTITY_DATA}, sdl);
+	apush(&ret, &current);
+	current = init_display_deco((t_display_deco_state) {
+		.display_value = TOOL_ENTITY, .to_look_at = (int *)&state->tool,
+		.invert = 0, .state = state}, init_entity_info(state, sdl));
 	apush(&ret, &current);
 	return (ret);
 }
