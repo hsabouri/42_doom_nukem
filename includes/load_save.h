@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2019/07/05 16:45:42 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/07 18:40:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void			write_portals(int fd, t_portal *portals, size_t nportals,
 void			write_entities(int fd, t_entity *entities, size_t nentities,
 				t_array *multi_mats);
 void			write_player(t_player player, int fd, t_array *multi_mats);
-void			write_inventory(t_player player, t_entity *entities,
-				int fd);
 size_t			write_textures(int fd, t_img *textures, size_t ntextures,
 				int index);
 t_img			*parse_textures(void *buf, t_save save, size_t n_entities);

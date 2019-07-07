@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 15:00:11 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/19 11:01:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/07 19:02:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,6 @@ t_array *multi_mats)
 			multi_mats, sizeof(t_array)) : -1;
 		write_struct(&res, fd, sizeof(t_c_entity));
 		i++;
-	}
-}
-
-void	write_inventory(t_player player, t_entity *entities, int fd)
-{
-	t_entity	**entity;
-	size_t		index;
-
-	index = 0;
-	while ((entity = (t_entity **)ashift(&player.inventory)))
-	{
-		index = id_from_p(*entity, entities, sizeof(t_entity));
-		write_struct(&index, fd, sizeof(size_t));
 	}
 }
 

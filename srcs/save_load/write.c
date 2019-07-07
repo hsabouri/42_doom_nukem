@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/07/06 15:46:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/07 18:39:00 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ static t_c_game	save_game_2(t_c_game game_s, t_game game)
 
 static t_c_game	save_game(t_c_game game_s, t_game game)
 {
-	game_s.ninventory = game.player.inventory.len;
-	game_s.loc_inventory = sizeof(t_c_game);
-	game_s.loc_player = game_s.loc_inventory + sizeof(size_t)
-		* game_s.ninventory;
+	game_s.loc_player = sizeof(t_c_game);
 	game_s.nmaterials = game.nmaterials;
 	game_s.loc_mats = game_s.loc_player + sizeof(t_c_player);
 	game_s.npoints = game.npoints;
@@ -65,7 +62,6 @@ static void		write_map(int fd, t_c_game game_save, t_game game)
 {
 	size_t	loc_imgs;
 
-	write_inventory(game.player, game.entities, fd);
 	write_player(game.player, fd, game.multi_mats);
 	write_mats(fd, game.materials, game.nmaterials, game.textures);
 	write_points(fd, game.points, game.npoints);
