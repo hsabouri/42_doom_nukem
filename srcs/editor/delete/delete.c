@@ -30,6 +30,7 @@ t_game	delete_sector(size_t sector, t_game game)
 	game.nsectors--;
 	game = del_update_portals(-1, sector, game);
 	game = del_update_sectors(-1, sector, game);
+	game = del_update_entities(sector, game);
 	return (game);
 }
 
