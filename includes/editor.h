@@ -48,6 +48,7 @@ t_game			del_update_walls(ssize_t pts, ssize_t portal, t_game game);
 t_game			del_update_sectors(ssize_t wall, ssize_t sector, t_game game);
 t_game			del_update_portals(ssize_t wall, ssize_t sector, t_game game);
 t_game			del_update_inventory(ssize_t entity, t_game game);
+t_game			del_update_entities(ssize_t sector, t_game game);
 
 t_game			new_update_portals(ssize_t wall, ssize_t sector, t_game game);
 t_game			new_update_walls(ssize_t point, ssize_t portal, t_game game);

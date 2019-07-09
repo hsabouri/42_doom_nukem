@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/07 19:07:16 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:08:28 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 		current.mat = NULL;
 	current.data = struc_e.data;
 	current.life = f_to_float(struc_e.life);
+	current.spawn = current.physic;
 	current.type = (t_entity_type)struc_e.type;
 	current.spawn = current.physic;
 	return (current);
@@ -58,8 +59,6 @@ size_t n_entities)
 			+ sizeof(t_c_entity) * i, sizeof(t_c_entity), save.max);
 		verify_magic(&struc_e, ENTITY_MAGIC, i);
 		current = parse_entities_2(struc_e, multi_mats);
-		printf("radius: %f, height: %f\n", current.physic.radius,
-			current.physic.height);
 		entities[i] = current;
 		i++;
 	}

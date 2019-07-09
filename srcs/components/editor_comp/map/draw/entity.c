@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 12:20:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/19 12:13:34 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/07 15:26:45 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ const t_state_buf state)
 	pos = screen_space(vec3_to_vec2(entity.physic.pos), state.state);
 	spw = screen_space(vec3_to_vec2(entity.spawn.pos), state.state);
 	c = (t_color) {c.r + 64, c.g + 64, c.b + 64, c.a};
-	if (state.state.tool == TOOL_ENTITY || state.state.tool == ASSIGN_ENTITY
-		|| state.state.tool == ENTITY_DATA)
+	if ((state.state.tool == TOOL_ENTITY || state.state.tool == ASSIGN_ENTITY
+		|| state.state.tool == ENTITY_DATA) && !isnan(pos.u) && !isnan(pos.v))
 		dotted(state.buf, (t_pix) {pos.u, pos.v}, (t_pix) {spw.u, spw.v}, c);
 	draw_look(spw, entity.spawn.look_h, c, state);
 	draw_point(vec2_to_fvec2(spw), size, state.buf, c);

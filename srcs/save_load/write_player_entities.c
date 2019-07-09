@@ -28,7 +28,7 @@ t_array *multi_mats)
 			.spawn.height = f_from_float(entity.spawn.height),
 			.spawn.radius = f_from_float(entity.spawn.radius),
 			.spawn.rad_inter = f_from_float(entity.spawn.rad_inter),
-			.spawn.pos = vec3_to_fvec3(entity.spawn.pos),
+			.spawn.pos = vec3_to_fvec3(entity.physic.pos),
 			.spawn.speed_max = vec3_to_fvec3(entity.spawn.speed_max),
 			.spawn.look.u = f_from_float(entity.physic.look_h),
 			.spawn.look.v = entity.spawn.look_v,

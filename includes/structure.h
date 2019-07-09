@@ -53,7 +53,7 @@ typedef enum		e_entity_type
 	PLAYER = 0,
 	GUN_MARINE = 1,
 	SMG_MARINE = 2,
-	BLACK_MARINE = 3,
+	RACLURE = 3,
 	RED_MARINE = 4,
 	RED_KEY_CARD = 5,
 	BLUE_KEY_CARD = 6,

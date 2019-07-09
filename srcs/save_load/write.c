@@ -22,20 +22,6 @@ void			write_struct(void *struc, int fd, size_t size)
 	}
 }
 
-static t_c_game	save_game_2(t_c_game game_s, t_game game)
-{
-	game_s.ntextures = game.ntextures;
-	game_s.loc_textures = game_s.loc_entities + sizeof(t_c_entity)
-		* game.nentities;
-	game_s.nmusic = game.music.len;
-	game_s.loc_music = game_s.loc_textures + sizeof(t_c_img)
-		* game.ntextures;
-	game_s.nsounds = game.sounds.len;
-	game_s.loc_sounds = game_s.loc_music + sizeof(t_c_music)
-		* game.music.len;
-	return (game_s);
-}
-
 static t_c_game	save_game(t_c_game game_s, t_game game)
 {
 	game_s.loc_player = sizeof(t_c_game);
@@ -55,6 +41,9 @@ static t_c_game	save_game(t_c_game game_s, t_game game)
 	game_s.loc_entities = game_s.loc_portals + sizeof(t_c_portal)
 		* game.nportals;
 	game_s.unique_e_id = game.unique_e_id;
+	game_s.ntextures = game.ntextures;
+	game_s.loc_textures = game_s.loc_entities + sizeof(t_c_entity)
+		* game.nentities;
 	return (game_s);
 }
 
@@ -69,7 +58,7 @@ static void		write_map(int fd, t_c_game game_save, t_game game)
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
 	write_entities(fd, game.entities, game.nentities, game.multi_mats);
-	loc_imgs = game_save.loc_sounds + sizeof(t_c_music) * game.sounds.len;
+	loc_imgs = game_save.loc_textures + sizeof(t_c_img) * game.sounds.len;
 	write_textures(fd, game.textures, game.ntextures, loc_imgs);
 }
 
@@ -83,7 +72,6 @@ void			save(const char *filename, t_game game)
 	i = 0;
 	game_save.magic = GAME_MAGIC;
 	game_save = save_game(game_save, game);
-	game_save = save_game_2(game_save, game);
 	fd = open_file(filename, 1, &size);
 	write_struct(&game_save, fd, sizeof(t_c_game));
 	write_map(fd, game_save, game);

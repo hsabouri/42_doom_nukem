@@ -122,3 +122,27 @@ t_game	del_update_inventory(ssize_t entity, t_game game)
 	game.player.inventory = new_inventory;
 	return (game);
 }
+
+t_game	del_update_entities(ssize_t sector, t_game game)
+{
+	size_t		i;
+	t_entity	curr;
+
+	i = 0;
+	while (i < game.nentities)
+	{
+		curr = game.entities[i];
+		if (curr.spawn.sector_id == sector)
+			game = delete_entity(i--, game);
+		else
+		{
+			if (curr.spawn.sector_id > sector)
+				curr.spawn.sector_id--;
+			curr.physic = curr.spawn;
+			game.entities[i] = curr;
+		}
+		i++;
+	}
+	return (game);
+}
+

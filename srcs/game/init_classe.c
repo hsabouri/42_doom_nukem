@@ -32,17 +32,17 @@ static t_entity	classe_1(t_entity_type type, t_array *mats, int data)
 	return (classe);
 }
 
-static t_entity	classe_2(t_entity_type type, t_array *mats, float rad_inter, float rad,
-float height)
+static t_entity	classe_2(t_entity_type type, t_array *mats, float rad_inter,
+float rad, float height)
 {
 	t_entity	classe;
 
 	classe = ((t_entity){
 		.id = 0, .physic = (t_ph) {
-			.gravity = 0.02, .height = height, .radius = rad, .rad_inter = rad_inter,
+			.gravity = 0.02, .height = height, .radius = rad,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
-			.sector_id = 0, .jump = 0, .fly = 1
+			.sector_id = 0, .jump = 0, .fly = 1, .rad_inter = rad_inter
 		}, .spawn = (t_ph) {
 			.gravity = 0.02, .height = 0.40, .radius = rad, .rad_inter = 3,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
@@ -103,7 +103,7 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 	classe[0] = classe_1(GUN_MARINE, &multi_mats[0], 15);
 	classe[1] = classe_2(GREEN_KEY_CARD, &multi_mats[1], 0, 0.4, 0.4);
 	classe[2] = classe_1(SMG_MARINE, &multi_mats[2], 30);
-	classe[3] = classe_3(BLACK_MARINE, &multi_mats[3], 50);
+	classe[3] = classe_3(RACLURE, &multi_mats[3], 50);
 	classe[4] = classe_3(RED_MARINE, &multi_mats[4], 70);
 	classe[5] = classe_2(BLUE_KEY_CARD, &multi_mats[5], 0, 0.4, 0.4);
 	classe[6] = classe_2(RED_KEY_CARD, &multi_mats[6], 0, 0.4, 0.4);

@@ -88,8 +88,8 @@ t_env			move_material_tool(t_env env, t_selected selected)
 	p = select_mat(p, env.editor.depth);
 	if (p != NULL)
 		p->pos = move(p->pos, env.events,
-			-1 * ((p->mode == SKYBOX) ? 200 : 1),
-			-1 * ((p->mode == SKYBOX) ? 200 : 1));
+			-1 * ((p->mode == SKYBOX) ? 200 : 5),
+			-1 * ((p->mode == SKYBOX) ? 200 : 100));
 	return (env);
 }
 
