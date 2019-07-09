@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:26:13 by hugo              #+#    #+#             */
-/*   Updated: 2019/07/07 17:30:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/09 10:37:53 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static t_mat	*init_mats(t_game *game)
 	t_mat	*materials;
 	t_mat	tmp;
 
-	game->nmaterials = 79;
+	game->nmaterials = 68;
 	materials = (t_mat *)safe_malloc(game->nmaterials * sizeof(t_mat),
 		"generate_map");
 	tmp = (t_mat) {.pos = fvec2_new(0, 0),
