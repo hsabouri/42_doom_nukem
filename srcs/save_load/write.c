@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 11:36:35 by hugo              #+#    #+#             */
-/*   Updated: 2019/07/07 18:39:00 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:05:22 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		write_map(int fd, t_c_game game_save, t_game game)
 	write_sectors(fd, game.sectors, game.nsectors, game.materials);
 	write_portals(fd, game.portals, game.nportals, game.materials);
 	write_entities(fd, game.entities, game.nentities, game.multi_mats);
-	loc_imgs = game_save.loc_textures + sizeof(t_c_img) * game.sounds.len;
+	loc_imgs = game_save.loc_textures + sizeof(t_c_img) * game.ntextures;
 	write_textures(fd, game.textures, game.ntextures, loc_imgs);
 }
 
@@ -77,7 +77,7 @@ void			save(const char *filename, t_game game)
 	write_map(fd, game_save, game);
 	while (i < game_save.ntextures)
 	{
-		write(fd, game.textures[i].content, sizeof(t_color) * \
+		write(fd, game.textures[i].content, sizeof(t_color) *
 		game.textures[i].height * game.textures[i].width);
 		i++;
 	}
