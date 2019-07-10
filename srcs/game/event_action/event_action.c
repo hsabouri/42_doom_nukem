@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/06 13:28:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 12:33:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_player player, float span)
 				game.player = take_damage(game.player, sub, span);
 		}
 	}
+	events->keys[SDL_SCANCODE_Q] = 0;
 	return (game);
 }
 

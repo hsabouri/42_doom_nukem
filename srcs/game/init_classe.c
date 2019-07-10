@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:38:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/09 17:31:44 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 12:18:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_entity	classe_3(t_entity_type type, t_array *mats, int data)
 		}, .mat = mats, .type = type,
 		.data = data, .life = 200});
 	if (type == RACLURE)
-	classe.life = 200;
+	classe.life = 600;
 	return (classe);
 }
 
