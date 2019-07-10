@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/06 13:20:50 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 13:43:33 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		game_loop(t_env *env, size_t frame)
 	float			timer;
 	static float	old_timer = 1;
 
+	if (frame == 1)
+		play_music(env->game, 0, 100, 1);
 	timer = start_timer();
 	if (env->editor.enabled)
 		*env = game_editing(*env, env->game.player);
