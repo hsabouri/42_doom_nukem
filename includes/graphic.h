@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:27:41 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/06 15:44:19 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 10:52:34 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct	s_pix
 	int32_t	y;
 }				t_pix;
 
-# define NCACHEWALL 20
-# define NCACHEENTITY 100
+# define NCACHEWALL 25
+# define NCACHEENTITY 250
 
 typedef struct	s_hit
 {

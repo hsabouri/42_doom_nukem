@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:38:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 20:00:46 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 12:18:02 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static t_entity	classe_3(t_entity_type type, t_array *mats, int data)
 			.sector_id = 0, .jump = 0, .fly = 0
 		}, .mat = mats, .type = type,
 		.data = data, .life = 200});
+	if (type == RACLURE)
+	classe.life = 600;
 	return (classe);
 }
 
@@ -103,8 +105,8 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 	classe[0] = classe_1(GUN_MARINE, &multi_mats[0], 15);
 	classe[1] = classe_2(GREEN_KEY_CARD, &multi_mats[1], 0, 0.4, 0.4);
 	classe[2] = classe_1(SMG_MARINE, &multi_mats[2], 30);
-	classe[3] = classe_3(RACLURE, &multi_mats[3], 50);
-	classe[4] = classe_3(RED_MARINE, &multi_mats[4], 70);
+	classe[3] = classe_3(RACLURE, &multi_mats[3], 30);
+	classe[4] = classe_3(RED_MARINE, &multi_mats[4], 30);
 	classe[5] = classe_2(BLUE_KEY_CARD, &multi_mats[5], 0, 0.4, 0.4);
 	classe[6] = classe_2(RED_KEY_CARD, &multi_mats[6], 0, 0.4, 0.4);
 	classe[7] = classe_2(PURPLE_KEY_CARD, &multi_mats[7], 0, 0.4, 0.4);

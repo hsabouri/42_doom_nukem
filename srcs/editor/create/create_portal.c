@@ -58,9 +58,9 @@ static t_game	equalize_sectors(size_t from_sector, size_t to_sector,
 t_game game)
 {
 	game.sectors[to_sector].ceiling = game.sectors[from_sector].ceiling;
-	game.sectors[to_sector].ceiling_b = game.sectors[from_sector].ceiling_b;
+	game.sectors[to_sector].ceiling_b = game.sectors[from_sector].ceiling;
 	game.sectors[to_sector].floor = game.sectors[from_sector].floor;
-	game.sectors[to_sector].floor_b = game.sectors[from_sector].floor_b;
+	game.sectors[to_sector].floor_b = game.sectors[from_sector].floor;
 	return (game);
 }
 
