@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 18:51:53 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/21 12:54:10 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 13:50:40 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,4 +145,3 @@ t_game	del_update_entities(ssize_t sector, t_game game)
 	}
 	return (game);
 }
-

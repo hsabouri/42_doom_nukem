@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 17:47:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/08 16:08:28 by hugo             ###   ########.fr       */
+/*   Updated: 2019/07/10 14:02:04 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static t_entity	parse_entities_2(t_c_entity struc_e, t_array *multi_mats)
 		current.mat = NULL;
 	current.data = struc_e.data;
 	current.life = f_to_float(struc_e.life);
-	current.spawn = current.physic;
 	current.type = (t_entity_type)struc_e.type;
 	current.spawn = current.physic;
 	return (current);

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 11:30:22 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/22 19:57:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:07:37 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,29 @@ static t_array	sprite_2(t_mat *mats, size_t id)
 	return (sprite);
 }
 
+t_array			*init_multi_sprite_2(t_array *multi_sprite,
+t_mat *mats)
+{
+	multi_sprite[17] = sprite_2(mats, 50);
+	multi_sprite[18] = sprite_2(mats, 51);
+	multi_sprite[19] = sprite_2(mats, 52);
+	multi_sprite[20] = sprite_2(mats, 53);
+	multi_sprite[21] = sprite_2(mats, 54);
+	multi_sprite[22] = sprite_2(mats, 55);
+	multi_sprite[23] = sprite_2(mats, 56);
+	multi_sprite[24] = sprite_1(mats, 57, 58);
+	multi_sprite[25] = sprite_2(mats, 59);
+	multi_sprite[26] = sprite_2(mats, 60);
+	multi_sprite[27] = sprite_2(mats, 61);
+	multi_sprite[28] = sprite_2(mats, 62);
+	multi_sprite[29] = sprite_2(mats, 63);
+	multi_sprite[30] = sprite_2(mats, 64);
+	multi_sprite[31] = sprite_2(mats, 65);
+	multi_sprite[32] = sprite_2(mats, 66);
+	multi_sprite[33] = sprite_2(mats, 67);
+	return (multi_sprite);
+}
+
 t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 {
 	t_array *multi_sprite;
@@ -64,22 +87,5 @@ t_array			*init_multi_sprite(t_game *game, t_mat *mats)
 	multi_sprite[14] = sprite_2(mats, 47);
 	multi_sprite[15] = sprite_2(mats, 48);
 	multi_sprite[16] = sprite_2(mats, 49);
-	multi_sprite[17] = sprite_2(mats, 50);
-	multi_sprite[18] = sprite_2(mats, 51);
-	multi_sprite[19] = sprite_2(mats, 52);
-	multi_sprite[20] = sprite_2(mats, 53);
-	multi_sprite[21] = sprite_2(mats, 54);
-	multi_sprite[22] = sprite_2(mats, 55);
-	multi_sprite[23] = sprite_2(mats, 56);
-	multi_sprite[24] = sprite_1(mats, 57, 58);
-	multi_sprite[25] = sprite_2(mats, 59);
-	multi_sprite[26] = sprite_2(mats, 60);
-	multi_sprite[27] = sprite_2(mats, 61);
-	multi_sprite[28] = sprite_2(mats, 62);
-	multi_sprite[29] = sprite_2(mats, 63);
-	multi_sprite[30] = sprite_2(mats, 64);
-	multi_sprite[31] = sprite_2(mats, 65);
-	multi_sprite[32] = sprite_2(mats, 66);
-	multi_sprite[33] = sprite_2(mats, 67);
-	return (multi_sprite);
+	return (init_multi_sprite_2(multi_sprite, mats));
 }

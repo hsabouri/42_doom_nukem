@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:51:39 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/06 13:32:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:04:09 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_mat	*init_mat_9(t_mat *materials, t_game *game)
 	return (materials);
 }
 
-t_mat	*init_mat_8(t_mat *materials, t_game *game)
+t_mat			*init_mat_8(t_mat *materials, t_game *game)
 {
 	t_mat tmp;
 
@@ -70,7 +70,7 @@ t_mat	*init_mat_8(t_mat *materials, t_game *game)
 	return (materials);
 }
 
-t_mat	*init_mat_7(t_mat *materials, t_game *game)
+t_mat			*init_mat_7(t_mat *materials, t_game *game)
 {
 	t_mat tmp;
 
@@ -98,7 +98,7 @@ t_mat	*init_mat_7(t_mat *materials, t_game *game)
 	return (materials);
 }
 
-t_mat	*init_mat_6(t_mat *materials, t_game *game)
+t_mat			*init_mat_6(t_mat *materials, t_game *game)
 {
 	t_mat tmp;
 
@@ -126,7 +126,7 @@ t_mat	*init_mat_6(t_mat *materials, t_game *game)
 	return (materials);
 }
 
-t_mat	*init_mat_5(t_mat *materials, t_game *game)
+t_mat			*init_mat_5(t_mat *materials, t_game *game)
 {
 	t_mat tmp;
 
