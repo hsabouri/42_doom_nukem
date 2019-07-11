@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 15:00:11 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/07 19:02:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/11 11:32:48 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ t_array *multi_mats)
 			.spawn.sector_id = entity.spawn.sector_id,
 			.type = entity.type, .life = f_from_float(entity.life),
 			.data = entity.data};
+
+		if (res.type == RED_KEY_CARD || res.type == GREEN_KEY_CARD || res.type == BLUE_KEY_CARD || res.type == PURPLE_KEY_CARD)
+			res.spawn.rad_inter = f_from_int(2);
+		if (res.type >= CLOSE_RED && res.type <= OPEN_PURPLE)
+			res.spawn.rad_inter = f_from_float(0.5);
+		if (res.type == RACLURE)
+			res.life = f_from_float(1600);
+
 		res.mats = (entity.mat != NULL) ? (ssize_t)id_from_p(entity.mat,
 			multi_mats, sizeof(t_array)) : -1;
 		write_struct(&res, fd, sizeof(t_c_entity));

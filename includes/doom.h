@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:41:14 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/09 09:55:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/11 11:45:27 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
 
-# define LOOK_SPEED 0.01
+# define LOOK_SPEED 1.68
 
 # define NB_TEXT 	100
 

@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:38:48 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/10 13:55:24 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/11 11:28:18 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_entity	classe_2(t_entity_type type, t_array *mats, t_vec3 v)
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 1, .rad_inter = v.x
 		}, .spawn = (t_ph) {
-			.gravity = 0.02, .height = 0.40, .radius = v.y, .rad_inter = 3,
+			.gravity = 0.02, .height = v.z, .radius = v.y, .rad_inter = v.x,
 			.pos = (t_vec3){0, 0, 0}, .speed = (t_vec3){0, 0, 0},
 			.speed_max = (t_vec3){0, 0, 0}, .look_h = 0, .look_v = 0,
 			.sector_id = 0, .jump = 0, .fly = 1
@@ -70,7 +70,7 @@ static t_entity	classe_3(t_entity_type type, t_array *mats, int data)
 		}, .mat = mats, .type = type,
 		.data = data, .life = 200});
 	if (type == RACLURE)
-	classe.life = 600;
+		classe.life = 800;
 	return (classe);
 }
 
@@ -102,26 +102,26 @@ t_entity		*init_classe(t_game *game, t_array *multi_mats)
 	classe = (t_entity *)safe_malloc(game->nclasses * sizeof(t_entity),
 		"init_classe");
 	classe[0] = classe_1(GUN_MARINE, &multi_mats[0], 15);
-	classe[1] = classe_2(GREEN_KEY_CARD, &multi_mats[1], (t_vec3){0, 0.4, 0.4});
+	classe[1] = classe_2(GREEN_KEY_CARD, &multi_mats[1], (t_vec3){1, 0.4, 0.4});
 	classe[2] = classe_1(SMG_MARINE, &multi_mats[2], 30);
 	classe[3] = classe_3(RACLURE, &multi_mats[3], 30);
 	classe[4] = classe_3(RED_MARINE, &multi_mats[4], 30);
-	classe[5] = classe_2(BLUE_KEY_CARD, &multi_mats[5], (t_vec3){0, 0.4, 0.4});
-	classe[6] = classe_2(RED_KEY_CARD, &multi_mats[6], (t_vec3){0, 0.4, 0.4});
-	classe[7] = classe_2(PURPLE_KEY_CARD, &multi_mats[7], (t_vec3){0, 0.4, 0.4});
+	classe[5] = classe_2(BLUE_KEY_CARD, &multi_mats[5], (t_vec3){1, 0.4, 0.4});
+	classe[6] = classe_2(RED_KEY_CARD, &multi_mats[6], (t_vec3){1, 0.4, 0.4});
+	classe[7] = classe_2(PURPLE_KEY_CARD, &multi_mats[7], (t_vec3){1, 0.4, 0.4});
 	classe[8] = classe_4(APPLE, &multi_mats[8], -20);
 	classe[9] = classe_4(FISH, &multi_mats[9], -50);
 	classe[10] = classe_4(MEAT, &multi_mats[10], -70);
 	classe[11] = classe_4(MEDIPACK, &multi_mats[11], -100);
 	classe[12] = classe_2(AMMO, &multi_mats[12], (t_vec3){3, 0.4, 0.4});
-	classe[13] = classe_2(CLOSE_RED, &multi_mats[13], (t_vec3){3, 0.4, 0.4});
-	classe[14] = classe_2(CLOSE_BLUE, &multi_mats[14], (t_vec3){3, 0.4, 0.4});
-	classe[15] = classe_2(CLOSE_GREEN, &multi_mats[15], (t_vec3){3, 0.4, 0.4});
-	classe[16] = classe_2(CLOSE_PURPLE, &multi_mats[16], (t_vec3){3, 0.4, 0.4});
-	classe[17] = classe_2(OPEN_RED, &multi_mats[17], (t_vec3){3, 0.4, 0.4});
-	classe[18] = classe_2(OPEN_BLUE, &multi_mats[18], (t_vec3){3, 0.4, 0.4});
-	classe[19] = classe_2(OPEN_GREEN, &multi_mats[19], (t_vec3){3, 0.4, 0.4});
-	classe[20] = classe_2(OPEN_PURPLE, &multi_mats[20], (t_vec3){3, 0.4, 0.4});
+	classe[13] = classe_2(CLOSE_RED, &multi_mats[13], (t_vec3){0.5, 0.4, 0.4});
+	classe[14] = classe_2(CLOSE_BLUE, &multi_mats[14], (t_vec3){0.5, 0.4, 0.4});
+	classe[15] = classe_2(CLOSE_GREEN, &multi_mats[15], (t_vec3){0.5, 0.4, 0.4});
+	classe[16] = classe_2(CLOSE_PURPLE, &multi_mats[16], (t_vec3){0.5, 0.4, 0.4});
+	classe[17] = classe_2(OPEN_RED, &multi_mats[17], (t_vec3){0.5, 0.4, 0.4});
+	classe[18] = classe_2(OPEN_BLUE, &multi_mats[18], (t_vec3){0.5, 0.4, 0.4});
+	classe[19] = classe_2(OPEN_GREEN, &multi_mats[19], (t_vec3){0.5, 0.4, 0.4});
+	classe[20] = classe_2(OPEN_PURPLE, &multi_mats[20], (t_vec3){0.5, 0.4, 0.4});
 	classe[21] = classe_2(LAMP, &multi_mats[21], (t_vec3){0, 0.4, 1.5});
 	classe[22] = classe_2(CEIL_LAMP, &multi_mats[22], (t_vec3){0, 0.4, 0.4});
 	classe[23] = classe_2(PLANT_1, &multi_mats[23], (t_vec3){0, 0.4, 1});
