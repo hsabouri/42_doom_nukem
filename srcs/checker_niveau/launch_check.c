@@ -109,8 +109,6 @@ static void	check_no_blocking(char *errors_text[NBR_ERROR], t_game game)
 	error_list = *ljoin(&error_list, &current);
 	current = height_sector(game.sectors, game.nsectors);
 	error_list = *ljoin(&error_list, &current);
-	current = height_next_sector(game.sectors, game.nsectors, game);
-	error_list = *ljoin(&error_list, &current);
 	current = parallel_portal(game.portals, game.nportals, game);
 	error_list = *ljoin(&error_list, &current);
 	current = sector_entity(game.entities, game.nentities, game);

@@ -77,6 +77,7 @@ t_last_pos last_pos)
 	{
 		physic.pos = last_pos.pos;
 		physic.sector_id = last_pos.sector_id;
+		physic.pos.z = z_inter(game.sectors[physic.sector_id], physic.pos, 0);
 		return (physic);
 	}
 	if ((is_in_sector(physic, game, physic.sector_id) % 2) != 0)
