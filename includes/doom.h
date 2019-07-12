@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:41:14 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/09 09:55:09 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 10:24:57 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define MIN(a, b) ((a < b) ? a : b)
 # define MAX(a, b) ((a > b) ? a : b)
 
-# define LOOK_SPEED 0.01
+# define LOOK_SPEED 1.68
 
 # define NB_TEXT 	100
 
@@ -249,7 +249,13 @@ t_array					sprite_5(t_mat *mats);
 t_weapon				init_nyan_gun(t_img *textures);
 t_weapon				init_ammo(t_img *textures);
 t_array					*init_multi_sprite(t_game *game, t_mat *mats);
-t_entity				*init_classe(t_game *game, t_array *multi_mats);
+
+t_entity				classe_1(t_entity_type type, t_array *mats, int data);
+t_entity				classe_2(t_entity_type type, t_array *mats, t_vec3 v);
+t_entity				classe_3(t_entity_type type, t_array *mats, int data);
+t_entity				classe_4(t_entity_type type, t_array *mats, int data);
+
+t_entity				*init_classe(t_game *game, t_array *m_mats);
 t_vec2					*init_points(t_game *game);
 t_wall					*init_walls(t_game *game);
 t_sector				*init_sector(t_game *game);

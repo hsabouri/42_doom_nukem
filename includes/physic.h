@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 17:07:20 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/05/30 18:40:52 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 10:52:42 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ typedef struct	s_last_pos
 	t_vec3		pos;
 }				t_last_pos;
 
+typedef struct	s_ph_info
+{
+	t_game	*game;
+	float	old_timer;
+	int		wall;
+	t_ph	*physic;
+}				t_ph_info;
+
 int				seg_seg(t_vec3 next_pos, t_ph physic, t_touch *touch,
 	t_game game);
 float			z_inter(t_sector sector, t_vec3 pos, int mode);
@@ -70,5 +78,7 @@ t_vec3			teleportation(t_vec3 pos, t_game *game, t_tp teleport,
 u_int32_t		point_in_circle(t_ph entity_1, t_ph entity_2);
 float			circle_circle(t_ph entity_1, t_ph entity_2, t_col_mode col);
 int				interact(t_ph entity_1, t_ph entity_2);
+t_vec3			move_entities(t_ph *physic, t_game *game, int wall,
+				float old_timer);
 
 #endif

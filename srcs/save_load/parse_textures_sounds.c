@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:38:40 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/06 15:38:41 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:00:51 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,19 @@ t_img		*parse_textures(void *buf, t_save save, size_t ntextures)
 		i++;
 	}
 	return (textures);
+}
+
+t_entity	*fix_fly(t_entity *entities, size_t nentities, t_sector *sectors)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < nentities)
+	{
+		if (entities[i].physic.pos.z > sectors
+			[entities[i].physic.sector_id].floor.z)
+			entities[i].physic.fly = 1;
+		i++;
+	}
+	return (entities);
 }

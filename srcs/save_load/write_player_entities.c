@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 15:00:11 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/07 19:02:23 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 10:30:03 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,34 @@ void	write_entities(int fd, t_entity *entities, size_t nentities,
 t_array *multi_mats)
 {
 	t_c_entity	res;
-	t_entity	entity;
+	t_entity	e;
 	size_t		i;
 
 	i = 0;
 	while (i < nentities)
 	{
-		entity = entities[i];
-		res = (t_c_entity) {.magic = ENTITY_MAGIC + i, .id = entity.id,
-			.spawn.gravity = f_from_float(entity.spawn.gravity),
-			.spawn.height = f_from_float(entity.spawn.height),
-			.spawn.radius = f_from_float(entity.spawn.radius),
-			.spawn.rad_inter = f_from_float(entity.spawn.rad_inter),
-			.spawn.pos = vec3_to_fvec3(entity.physic.pos),
-			.spawn.speed_max = vec3_to_fvec3(entity.spawn.speed_max),
-			.spawn.look.u = f_from_float(entity.physic.look_h),
-			.spawn.look.v = entity.spawn.look_v,
-			.spawn.sector_id = entity.spawn.sector_id,
-			.type = entity.type, .life = f_from_float(entity.life),
-			.data = entity.data};
-		res.mats = (entity.mat != NULL) ? (ssize_t)id_from_p(entity.mat,
+		e = entities[i];
+		res = (t_c_entity) {.magic = ENTITY_MAGIC + i, .id = e.id,
+			.spawn.gravity = f_from_float(e.spawn.gravity),
+			.spawn.height = f_from_float(e.spawn.height),
+			.spawn.radius = f_from_float(e.spawn.radius),
+			.spawn.rad_inter = f_from_float(e.spawn.rad_inter),
+			.spawn.pos = vec3_to_fvec3(e.physic.pos),
+			.spawn.speed_max = vec3_to_fvec3(e.spawn.speed_max),
+			.spawn.look.u = f_from_float(e.physic.look_h),
+			.spawn.look.v = e.spawn.look_v,
+			.spawn.sector_id = e.spawn.sector_id,
+			.type = e.type, .life = f_from_float(e.life),
+			.data = e.data};
+
+		if (res.type == RED_KEY_CARD || res.type == GREEN_KEY_CARD || res.type == BLUE_KEY_CARD || res.type == PURPLE_KEY_CARD)
+			res.spawn.rad_inter = f_from_int(2);
+		if (res.type >= CLOSE_RED && res.type <= OPEN_PURPLE)
+			res.spawn.rad_inter = f_from_float(0.5);
+		if (res.type == RACLURE)
+			res.life = f_from_float(1600);
+
+		res.mats = (e.mat != NULL) ? (ssize_t)id_from_p(e.mat,
 			multi_mats, sizeof(t_array)) : -1;
 		write_struct(&res, fd, sizeof(t_c_entity));
 		i++;

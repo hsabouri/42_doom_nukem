@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 13:46:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/06 11:50:48 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/11 10:33:46 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	t_game res;
 
 	save.index = game.loc_textures;
-	// res.textures = parse_textures(buf, save, game.ntextures); a remettre a fin quand toutes les textures sont implementees
-	// res.ntextures = game.ntextures;
-	res.textures = load_all_textures(&res); //a enlever quand parse_texture remis
+	res.textures = parse_textures(buf, save, game.ntextures);
+	res.ntextures = game.ntextures;
 	save.index = game.loc_mats;
 	res.materials = parse_mats(buf, save, res.textures, game.nmaterials);
 	res.nmaterials = game.nmaterials;
@@ -73,21 +72,6 @@ static t_game	parse_1(void *buf, t_c_game game, t_save save)
 	save.index = game.loc_portals;
 	res.portals = parse_portals(buf, save, game.nportals, res.materials);
 	return (res);
-}
-
-t_entity	*fix_fly(t_entity *entities, size_t nentities, t_sector *sectors)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < nentities)
-	{
-		if (entities[i].physic.pos.z > sectors
-			[entities[i].physic.sector_id].floor.z)
-			entities[i].physic.fly = 1;
-		i++;
-	}
-	return (entities);
 }
 
 t_game			*load(const char *filename, int edit_mode)
