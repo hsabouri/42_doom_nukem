@@ -47,10 +47,12 @@ static void		keyactions_2(int scancode, t_env *env)
 	if (scancode == SDL_SCANCODE_SPACE && !env->game.player.my_entity.physic
 		.fly)
 		env->game.player.my_entity.physic.jump = 1;
-	if (scancode == SDL_SCANCODE_F && (env->game.sectors[env->game.player.my_entity.physic.sector_id].ceiling.y < 0.01
-		&& env->game.sectors[env->game.player.my_entity.physic.sector_id].ceiling.y > -0.01)
-		&&(env->game.sectors[env->game.player.my_entity.physic.sector_id].ceiling.x < 0.01
-		&& env->game.sectors[env->game.player.my_entity.physic.sector_id].ceiling.x > -0.01))
+	if ((env->game.sectors[env->game.player.my_entity.physic.sector_id]
+		.ceiling.y < 0.01 && env->game.sectors[env->game.player.my_entity
+		.physic.sector_id].ceiling.y > -0.01)
+		&& (env->game.sectors[env->game.player.my_entity.physic.sector_id]
+		.ceiling.x < 0.01 && env->game.sectors[env->game.player.my_entity
+		.physic.sector_id].ceiling.x > -0.01) && scancode == SDL_SCANCODE_F)
 		env->game.player.my_entity.physic.fly = (env->game.player.my_entity
 			.physic.fly) ? 0 : 1;
 	if (!env->toggle_editor && (scancode == SDL_SCANCODE_KP_PLUS

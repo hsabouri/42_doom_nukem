@@ -35,14 +35,6 @@ t_array *multi_mats)
 			.spawn.sector_id = e.spawn.sector_id,
 			.type = e.type, .life = f_from_float(e.life),
 			.data = e.data};
-
-		if (res.type == RED_KEY_CARD || res.type == GREEN_KEY_CARD || res.type == BLUE_KEY_CARD || res.type == PURPLE_KEY_CARD)
-			res.spawn.rad_inter = f_from_int(2);
-		if (res.type >= CLOSE_RED && res.type <= OPEN_PURPLE)
-			res.spawn.rad_inter = f_from_float(1);
-		if (res.type == RACLURE)
-			res.life = f_from_float(1600);
-
 		res.mats = (e.mat != NULL) ? (ssize_t)id_from_p(e.mat,
 			multi_mats, sizeof(t_array)) : -1;
 		write_struct(&res, fd, sizeof(t_c_entity));
