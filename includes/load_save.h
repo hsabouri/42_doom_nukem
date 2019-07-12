@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 12:42:52 by hugo              #+#    #+#             */
-/*   Updated: 2019/07/10 14:01:03 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 12:21:01 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ t_entity		*parse_entities(void *buf, t_save save, t_array *multi_mats,
 t_player		parse_player(t_c_game game, t_game new_game, void *buf,
 				t_save save);
 int				main_save(char *name);
-t_entity		*fix_fly(t_entity *entities, size_t nentities, t_sector *sectors);
+t_entity		*fix_fly(t_entity *entities, size_t nentities,
+				t_sector *sectors);
 
 #endif

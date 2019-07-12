@@ -6,110 +6,14 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:07:49 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/23 16:02:21 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 12:19:10 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-t_img	*load_all_textures(t_game *game)
+static t_img	*load_all_textures_5(t_img *textures)
 {
-	t_img	*textures;
-
-	game->ntextures = 133;
-	textures = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
-	textures[0] = parse_tga("./textures/environment/wall.tga", 1);
-	textures[1] = parse_tga("./textures/environment/amordret_pic.tga", 1);
-	textures[2] = parse_tga("./textures/items/key_card_green.tga", 0);
-	textures[3] = parse_tga("./textures/environment/skybox.tga", 1);
-	textures[4] = parse_tga("./textures/environment/fence.tga", 1);
-	textures[5] = parse_tga("./textures/ennemies/gun_marine/gun_marine0.tga", 0);
-	textures[6] = parse_tga("./textures/ennemies/gun_marine/gun_marine1.tga", 0);
-	textures[7] = parse_tga("./textures/ennemies/gun_marine/gun_marine2.tga", 0);
-	textures[8] = parse_tga("./textures/ennemies/gun_marine/gun_marine3.tga", 0);
-	textures[9] = parse_tga("./textures/ennemies/gun_marine/gun_marine4.tga", 0);
-	textures[10] = parse_tga("./textures/ennemies/gun_marine/gun_marine5.tga", 0);
-	textures[11] = parse_tga("./textures/ennemies/gun_marine/gun_marine6.tga", 0);
-	textures[12] = parse_tga("./textures/ennemies/gun_marine/gun_marine7.tga", 0);
-	textures[13] = parse_tga("./textures/hud/cross.tga", 0);
-	textures[14] = parse_tga("./textures/hud/full_life.tga", 0);
-	textures[15] = parse_tga("./textures/hud/empty_life.tga", 0);
-	textures[16] = parse_tga("./textures/hud/help.tga", 0);
-	textures[17] = parse_tga("./textures/weapons/gun/gun0.tga", 0);
-	textures[18] = parse_tga("./textures/weapons/gun/gun1.tga", 0);
-	textures[19] = parse_tga("./textures/weapons/gun/gun2.tga", 0);
-	textures[20] = parse_tga("./textures/weapons/smg/smg0.tga", 0);
-	textures[21] = parse_tga("./textures/weapons/smg/smg1.tga", 0);
-	textures[22] = parse_tga("./textures/weapons/smg/smg2.tga", 0);
-	textures[23] = parse_tga("./textures/weapons/shotgun/shotgun0.tga", 0);
-	textures[24] = parse_tga("./textures/weapons/shotgun/shotgun1.tga", 0);
-	textures[25] = parse_tga("./textures/weapons/shotgun/shotgun2.tga", 0);
-	textures[26] = parse_tga("./textures/weapons/revolver/revolver0.tga", 0);
-	textures[27] = parse_tga("./textures/weapons/revolver/revolver1.tga", 0);
-	textures[28] = parse_tga("./textures/weapons/revolver/revolver2.tga", 0);
-	textures[29] = parse_tga("./textures/weapons/nyan_gun/nyan_gun0.tga", 0);
-	textures[30] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga", 0);
-	textures[31] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga", 0);
-	textures[32] = parse_tga("./textures/items/ammo_secondary.tga", 0);
-	textures[33] = parse_tga("./textures/environment/lavabo.tga", 1);
-	textures[34] = parse_tga("./textures/environment/lavabo_2.tga", 1);
-	textures[35] = parse_tga("./textures/environment/door.tga", 0);
-	textures[36] = parse_tga("./textures/hud/in_game_editor.tga", 1);
-	textures[37] = parse_tga("./textures/environment/parking.tga", 0);
-	textures[38] = parse_tga("./textures/ennemies/smg_marine/smg_marine0.tga", 0);
-	textures[39] = parse_tga("./textures/ennemies/smg_marine/smg_marine1.tga", 0);
-	textures[40] = parse_tga("./textures/ennemies/smg_marine/smg_marine2.tga", 0);
-	textures[41] = parse_tga("./textures/ennemies/smg_marine/smg_marine3.tga", 0);
-	textures[42] = parse_tga("./textures/ennemies/smg_marine/smg_marine4.tga", 0);
-	textures[43] = parse_tga("./textures/ennemies/smg_marine/smg_marine5.tga", 0);
-	textures[44] = parse_tga("./textures/ennemies/smg_marine/smg_marine6.tga", 0);
-	textures[45] = parse_tga("./textures/ennemies/smg_marine/smg_marine7.tga", 0);
-	textures[46] = parse_tga("./textures/ennemies/raclure/raclure0.tga", 0);
-	textures[47] = parse_tga("./textures/ennemies/raclure/raclure1.tga", 0);
-	textures[48] = parse_tga("./textures/ennemies/raclure/raclure2.tga", 0);
-	textures[49] = parse_tga("./textures/ennemies/raclure/raclure3.tga", 0);
-	textures[50] = parse_tga("./textures/ennemies/raclure/raclure4.tga", 0);
-	textures[51] = parse_tga("./textures/ennemies/raclure/raclure5.tga", 0);
-	textures[52] = parse_tga("./textures/ennemies/raclure/raclure6.tga", 0);
-	textures[53] = parse_tga("./textures/ennemies/raclure/raclure7.tga", 0);
-	textures[54] = parse_tga("./textures/ennemies/red_marine/red_marine0.tga", 0);
-	textures[55] = parse_tga("./textures/ennemies/red_marine/red_marine1.tga", 0);
-	textures[56] = parse_tga("./textures/ennemies/red_marine/red_marine2.tga", 0);
-	textures[57] = parse_tga("./textures/ennemies/red_marine/red_marine3.tga", 0);
-	textures[58] = parse_tga("./textures/ennemies/red_marine/red_marine4.tga", 0);
-	textures[59] = parse_tga("./textures/ennemies/red_marine/red_marine5.tga", 0);
-	textures[60] = parse_tga("./textures/ennemies/red_marine/red_marine6.tga", 0);
-	textures[61] = parse_tga("./textures/ennemies/red_marine/red_marine7.tga", 0);
-	textures[62] = parse_tga("./textures/items/key_card_blue.tga", 0);
-	textures[63] = parse_tga("./textures/items/key_card_red.tga", 0);
-	textures[64] = parse_tga("./textures/items/key_card_purple.tga", 0);
-	textures[65] = parse_tga("./textures/items/apple.tga", 0);
-	textures[66] = parse_tga("./textures/items/fish.tga", 0);
-	textures[67] = parse_tga("./textures/items/meat.tga", 0);
-	textures[68] = parse_tga("./textures/items/medipack.tga", 0);
-	textures[69] = parse_tga("./textures/items/ammo.tga", 0);
-	textures[70] = parse_tga("./textures/items/close_door_red.tga", 0);
-	textures[71] = parse_tga("./textures/items/close_door_blue.tga", 0);
-	textures[72] = parse_tga("./textures/items/close_door_green.tga", 0);
-	textures[73] = parse_tga("./textures/items/close_door_purple.tga", 0);
-	textures[74] = parse_tga("./textures/items/open_door_red.tga", 0);
-	textures[75] = parse_tga("./textures/items/open_door_blue.tga", 0);
-	textures[76] = parse_tga("./textures/items/open_door_green.tga", 0);
-	textures[77] = parse_tga("./textures/items/open_door_purple.tga", 0);
-	textures[78] = parse_tga("./textures/items/lamp.tga", 0);
-	textures[79] = parse_tga("./textures/items/ceil_lamp.tga", 0);
-	textures[80] = parse_tga("./textures/items/plant_1.tga", 0);
-	textures[81] = parse_tga("./textures/items/plant_2_0.tga", 0);
-	textures[82] = parse_tga("./textures/items/plant_2_1.tga", 0);
-	textures[83] = parse_tga("./textures/items/plant_3.tga", 0);
-	textures[84] = parse_tga("./textures/items/plant_4.tga", 0);
-	textures[85] = parse_tga("./textures/items/trash_1.tga", 0);
-	textures[86] = parse_tga("./textures/items/trash_2.tga", 0);
-	textures[87] = parse_tga("./textures/environment/amordret.tga", 1);
-	textures[88] = parse_tga("./textures/environment/boite.tga", 1);
-	textures[89] = parse_tga("./textures/environment/building.tga", 1);
-	textures[90] = parse_tga("./textures/environment/casier.tga", 1);
-	textures[91] = parse_tga("./textures/environment/cross.tga", 1);
 	textures[92] = parse_tga("./textures/environment/fenetre_grillage.tga", 1);
 	textures[93] = parse_tga("./textures/environment/floor_accueil.tga", 1);
 	textures[94] = parse_tga("./textures/environment/fmerding.tga", 1);
@@ -134,22 +38,121 @@ t_img	*load_all_textures(t_game *game)
 	textures[113] = parse_tga("./textures/environment/ceil.tga", 1);
 	textures[114] = parse_tga("./textures/environment/desk.tga", 1);
 	textures[115] = parse_tga("./textures/environment/stairs_up.tga", 1);
-	textures[116] = parse_tga("./textures/environment/stairs_down.tga", 1);
-	textures[117] = parse_tga("./textures/environment/stairs_up_down.tga", 1);
-	textures[118] = parse_tga("./textures/environment/wc.tga", 1);
-	textures[119] = parse_tga("./textures/environment/elevator.tga", 1);
-	textures[120] = parse_tga("./textures/environment/plexi.tga", 1);
-	textures[121] = parse_tga("./textures/environment/ccc_logo.tga", 1);
-	textures[122] = parse_tga("./textures/environment/plexi_desk.tga", 1);
-	textures[123] = parse_tga("./textures/environment/plexi_desk_2.tga", 1);
-	textures[124] = parse_tga("./textures/environment/plexi_desk_3.tga", 1);
-	textures[125] = parse_tga("./textures/environment/hsabouri_pic.tga", 1);
-	textures[126] = parse_tga("./textures/environment/fmerding_pic.tga", 1);
-	textures[127] = parse_tga("./textures/environment/lbougero_pic.tga", 1);
-	textures[128] = parse_tga("./textures/environment/iporsenn_pic.tga", 1);
-	textures[129] = parse_tga("./textures/environment/nope_grumpy_2.tga", 1);
-	textures[130] = parse_tga("./textures/items/wc_1.tga", 1);
-	textures[131] = parse_tga("./textures/items/wc_2.tga", 1);
-	textures[132] = parse_tga("./textures/items/wc_3.tga", 1);
-	return (textures);
+	return (load_all_textures_6(textures));
+}
+
+static t_img	*load_all_textures_4(t_img *textures)
+{
+	textures[68] = parse_tga("./textures/items/medipack.tga", 0);
+	textures[69] = parse_tga("./textures/items/ammo.tga", 0);
+	textures[70] = parse_tga("./textures/items/close_door_red.tga", 0);
+	textures[71] = parse_tga("./textures/items/close_door_blue.tga", 0);
+	textures[72] = parse_tga("./textures/items/close_door_green.tga", 0);
+	textures[73] = parse_tga("./textures/items/close_door_purple.tga", 0);
+	textures[74] = parse_tga("./textures/items/open_door_red.tga", 0);
+	textures[75] = parse_tga("./textures/items/open_door_blue.tga", 0);
+	textures[76] = parse_tga("./textures/items/open_door_green.tga", 0);
+	textures[77] = parse_tga("./textures/items/open_door_purple.tga", 0);
+	textures[78] = parse_tga("./textures/items/lamp.tga", 0);
+	textures[79] = parse_tga("./textures/items/ceil_lamp.tga", 0);
+	textures[80] = parse_tga("./textures/items/plant_1.tga", 0);
+	textures[81] = parse_tga("./textures/items/plant_2_0.tga", 0);
+	textures[82] = parse_tga("./textures/items/plant_2_1.tga", 0);
+	textures[83] = parse_tga("./textures/items/plant_3.tga", 0);
+	textures[84] = parse_tga("./textures/items/plant_4.tga", 0);
+	textures[85] = parse_tga("./textures/items/trash_1.tga", 0);
+	textures[86] = parse_tga("./textures/items/trash_2.tga", 0);
+	textures[87] = parse_tga("./textures/environment/amordret.tga", 1);
+	textures[88] = parse_tga("./textures/environment/boite.tga", 1);
+	textures[89] = parse_tga("./textures/environment/building.tga", 1);
+	textures[90] = parse_tga("./textures/environment/casier.tga", 1);
+	textures[91] = parse_tga("./textures/environment/cross.tga", 1);
+	return (load_all_textures_5(textures));
+}
+
+static t_img	*load_all_textures_3(t_img *t)
+{
+	t[44] = parse_tga("./textures/ennemies/smg_marine/smg_marine6.tga", 0);
+	t[45] = parse_tga("./textures/ennemies/smg_marine/smg_marine7.tga", 0);
+	t[46] = parse_tga("./textures/ennemies/raclure/raclure0.tga", 0);
+	t[47] = parse_tga("./textures/ennemies/raclure/raclure1.tga", 0);
+	t[48] = parse_tga("./textures/ennemies/raclure/raclure2.tga", 0);
+	t[49] = parse_tga("./textures/ennemies/raclure/raclure3.tga", 0);
+	t[50] = parse_tga("./textures/ennemies/raclure/raclure4.tga", 0);
+	t[51] = parse_tga("./textures/ennemies/raclure/raclure5.tga", 0);
+	t[52] = parse_tga("./textures/ennemies/raclure/raclure6.tga", 0);
+	t[53] = parse_tga("./textures/ennemies/raclure/raclure7.tga", 0);
+	t[54] = parse_tga("./textures/ennemies/red_marine/red_marine0.tga", 0);
+	t[55] = parse_tga("./textures/ennemies/red_marine/red_marine1.tga", 0);
+	t[56] = parse_tga("./textures/ennemies/red_marine/red_marine2.tga", 0);
+	t[57] = parse_tga("./textures/ennemies/red_marine/red_marine3.tga", 0);
+	t[58] = parse_tga("./textures/ennemies/red_marine/red_marine4.tga", 0);
+	t[59] = parse_tga("./textures/ennemies/red_marine/red_marine5.tga", 0);
+	t[60] = parse_tga("./textures/ennemies/red_marine/red_marine6.tga", 0);
+	t[61] = parse_tga("./textures/ennemies/red_marine/red_marine7.tga", 0);
+	t[62] = parse_tga("./textures/items/key_card_blue.tga", 0);
+	t[63] = parse_tga("./textures/items/key_card_red.tga", 0);
+	t[64] = parse_tga("./textures/items/key_card_purple.tga", 0);
+	t[65] = parse_tga("./textures/items/apple.tga", 0);
+	t[66] = parse_tga("./textures/items/fish.tga", 0);
+	t[67] = parse_tga("./textures/items/meat.tga", 0);
+	return (load_all_textures_4(t));
+}
+
+static t_img	*load_all_textures_2(t_img *t)
+{
+	t[20] = parse_tga("./textures/weapons/smg/smg0.tga", 0);
+	t[21] = parse_tga("./textures/weapons/smg/smg1.tga", 0);
+	t[22] = parse_tga("./textures/weapons/smg/smg2.tga", 0);
+	t[23] = parse_tga("./textures/weapons/shotgun/shotgun0.tga", 0);
+	t[24] = parse_tga("./textures/weapons/shotgun/shotgun1.tga", 0);
+	t[25] = parse_tga("./textures/weapons/shotgun/shotgun2.tga", 0);
+	t[26] = parse_tga("./textures/weapons/revolver/revolver0.tga", 0);
+	t[27] = parse_tga("./textures/weapons/revolver/revolver1.tga", 0);
+	t[28] = parse_tga("./textures/weapons/revolver/revolver2.tga", 0);
+	t[29] = parse_tga("./textures/weapons/nyan_gun/nyan_gun0.tga", 0);
+	t[30] = parse_tga("./textures/weapons/nyan_gun/nyan_gun1.tga", 0);
+	t[31] = parse_tga("./textures/weapons/nyan_gun/nyan_gun2.tga", 0);
+	t[32] = parse_tga("./textures/items/ammo_secondary.tga", 0);
+	t[33] = parse_tga("./textures/environment/lavabo.tga", 1);
+	t[34] = parse_tga("./textures/environment/lavabo_2.tga", 1);
+	t[35] = parse_tga("./textures/environment/door.tga", 0);
+	t[36] = parse_tga("./textures/hud/in_game_editor.tga", 1);
+	t[37] = parse_tga("./textures/environment/parking.tga", 0);
+	t[38] = parse_tga("./textures/ennemies/smg_marine/smg_marine0.tga", 0);
+	t[39] = parse_tga("./textures/ennemies/smg_marine/smg_marine1.tga", 0);
+	t[40] = parse_tga("./textures/ennemies/smg_marine/smg_marine2.tga", 0);
+	t[41] = parse_tga("./textures/ennemies/smg_marine/smg_marine3.tga", 0);
+	t[42] = parse_tga("./textures/ennemies/smg_marine/smg_marine4.tga", 0);
+	t[43] = parse_tga("./textures/ennemies/smg_marine/smg_marine5.tga", 0);
+	return (load_all_textures_3(t));
+}
+
+t_img			*load_all_textures(t_game *game)
+{
+	t_img	*t;
+
+	game->ntextures = 133;
+	t = (t_img *)safe_malloc(game->ntextures * sizeof(t_img), "textures");
+	t[0] = parse_tga("./textures/environment/wall.tga", 1);
+	t[1] = parse_tga("./textures/environment/amordret_pic.tga", 1);
+	t[2] = parse_tga("./textures/items/key_card_green.tga", 0);
+	t[3] = parse_tga("./textures/environment/skybox.tga", 1);
+	t[4] = parse_tga("./textures/environment/fence.tga", 1);
+	t[5] = parse_tga("./textures/ennemies/gun_marine/gun_marine0.tga", 0);
+	t[6] = parse_tga("./textures/ennemies/gun_marine/gun_marine1.tga", 0);
+	t[7] = parse_tga("./textures/ennemies/gun_marine/gun_marine2.tga", 0);
+	t[8] = parse_tga("./textures/ennemies/gun_marine/gun_marine3.tga", 0);
+	t[9] = parse_tga("./textures/ennemies/gun_marine/gun_marine4.tga", 0);
+	t[10] = parse_tga("./textures/ennemies/gun_marine/gun_marine5.tga", 0);
+	t[11] = parse_tga("./textures/ennemies/gun_marine/gun_marine6.tga", 0);
+	t[12] = parse_tga("./textures/ennemies/gun_marine/gun_marine7.tga", 0);
+	t[13] = parse_tga("./textures/hud/cross.tga", 0);
+	t[14] = parse_tga("./textures/hud/full_life.tga", 0);
+	t[15] = parse_tga("./textures/hud/empty_life.tga", 0);
+	t[16] = parse_tga("./textures/hud/help.tga", 0);
+	t[17] = parse_tga("./textures/weapons/gun/gun0.tga", 0);
+	t[18] = parse_tga("./textures/weapons/gun/gun1.tga", 0);
+	t[19] = parse_tga("./textures/weapons/gun/gun2.tga", 0);
+	return (load_all_textures_2(t));
 }
