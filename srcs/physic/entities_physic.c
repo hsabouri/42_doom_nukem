@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:43:42 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/06/18 13:51:43 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 10:53:41 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,36 @@ static t_vec3	wall_touch(t_touch touch, t_ph *physic, int wall, t_game game)
 	return (next_pos);
 }
 
-static t_vec3	move_entities(t_ph *physic, t_game *game, int wall,
+static t_vec3	move_entities_2(t_vec3 next_pos, t_ph_info p)
+{
+	t_tp	teleport;
+	t_touch	touch;
+
+	touch = collision(next_pos, *p.physic, *p.game, p.wall);
+	if (touch.wall >= 0)
+	{
+		touch.pos = next_pos;
+		if (p.game->walls[touch.wall].portal == -1
+			|| (p.game->walls[touch.wall].portal != -1
+			&& p.game->portals[p.game->walls[touch.wall].portal]
+				.blocking == 1))
+			return (wall_touch(touch, p.physic, p.wall, *p.game));
+		else
+		{
+			set_tp(&teleport, touch, *p.game);
+			p.physic->pos = teleportation(p.physic->pos, p.game, teleport,
+				p.physic);
+			return (move_entities(p.physic, p.game, teleport.portal_out,
+				p.old_timer));
+		}
+	}
+	return (next_pos);
+}
+
+t_vec3			move_entities(t_ph *physic, t_game *game, int wall,
 float old_timer)
 {
 	t_vec3	next_pos;
-	t_touch	touch;
-	t_tp	teleport;
 	float	inter;
 
 	next_pos = vec3_add(physic->pos, physic->speed);
@@ -70,23 +94,8 @@ float old_timer)
 		return (physic->pos);
 	physic->speed = z_move(physic, *game, old_timer);
 	next_pos = vec3_add(physic->pos, physic->speed);
-	touch = collision(next_pos, *physic, *game, wall);
-	if (touch.wall >= 0)
-	{
-		touch.pos = next_pos;
-		if (game->walls[touch.wall].portal == -1
-			|| (game->walls[touch.wall].portal != -1
-			&& game->portals[game->walls[touch.wall].portal].blocking == 1))
-			return (wall_touch(touch, physic, wall, *game));
-		else
-		{
-			set_tp(&teleport, touch, *game);
-			physic->pos = teleportation(physic->pos, game, teleport, physic);
-			return (move_entities(physic, game, teleport.portal_out,
-				old_timer));
-		}
-		return (next_pos);
-	}
+	next_pos = move_entities_2(next_pos, (t_ph_info) {
+		game, old_timer, wall, physic});
 	return (next_pos);
 }
 
