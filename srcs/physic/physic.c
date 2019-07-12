@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:57:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/07/06 14:47:06 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:42:31 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ t_game			physic(t_game game, t_event events, float old_timer)
 	{
 		new_physic = game.entities[i].physic;
 		if (game.entities[i].data >= 1)
-			// new_physic.speed = set_entity_speed(new_physic,
-			// 	game.player.my_entity.physic, old_timer);
+			new_physic.speed = set_entity_speed(new_physic,
+			 	game.player.my_entity.physic, old_timer);
 		new_physic = entities_look_at(new_physic, game.player.my_entity.physic);
 		new_game.entities[i].physic = entities_physic(new_physic, &game, i,
 		old_timer);

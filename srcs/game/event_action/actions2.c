@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 12:21:22 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/24 12:30:29 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:42:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_player	take_damage(t_player player, t_entity entity, float span)
 	last -= (span * entity.data) / 10;
 	if (last <= 0.0)
 	{
-		// player.my_entity.life -= 5;
+		player.my_entity.life -= 5;
 		last = 5.0;
 	}
 	return (player);
