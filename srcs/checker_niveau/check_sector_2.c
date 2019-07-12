@@ -51,7 +51,7 @@ t_list			height_sector(t_sector *sectors, size_t nsectors)
 	error = lnew(NULL);
 	while (cpt < nsectors)
 	{
-		if ((sectors[cpt].ceiling.z - sectors[cpt].floor.z) < 0.1)
+		if ((sectors[cpt].ceiling.z - sectors[cpt].floor.z) < 0)
 		{
 			elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error),
 				"level_checker");
@@ -60,52 +60,6 @@ t_list			height_sector(t_sector *sectors, size_t nsectors)
 			elem->error_type = HEIGHT_SECTOR;
 			elem->sector = cpt;
 			lpush(&error, (t_elem *)elem);
-		}
-		cpt++;
-	}
-	return (error);
-}
-
-static t_list	*browse_next_sector(size_t cpt, size_t start, t_game game,
-t_list *error)
-{
-	t_lvl_error	*elem;
-	size_t		sector_out;
-
-	sector_out = (game.portals[game.walls[start].portal].from_sector == cpt)
-		? game.portals[game.walls[start].portal].to_sector
-		: game.portals[game.walls[start].portal].from_sector;
-	if (game.sectors[sector_out].ceiling.z - game.sectors[cpt].floor.z < 0.1)
-	{
-		elem = (t_lvl_error *)safe_malloc(sizeof(t_lvl_error), "level_checker");
-		init_error(elem);
-		elem->elem.next = NULL;
-		elem->error_type = HEIGHT_SECTOR_NEXT;
-		elem->sector = cpt;
-		lpush(error, (t_elem *)elem);
-	}
-	return (error);
-}
-
-t_list			height_next_sector(t_sector *sectors, size_t nsectors,
-t_game game)
-{
-	t_list	error;
-	size_t	cpt;
-	size_t	start;
-	size_t	end;
-
-	cpt = 0;
-	error = lnew(NULL);
-	while (cpt < nsectors)
-	{
-		start = sectors[cpt].start;
-		end = start + sectors[cpt].number;
-		while (start < end)
-		{
-			if (game.walls[start].portal > -1)
-				browse_next_sector(cpt, start, game, &error);
-			start++;
 		}
 		cpt++;
 	}

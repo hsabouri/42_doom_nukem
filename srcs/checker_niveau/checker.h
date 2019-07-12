@@ -83,8 +83,6 @@ t_list			dangling_portal_wall(t_portal *portals, size_t nportals,
 t_list			dangling_portal_sector(t_portal *portals, size_t nportals,
 				t_game game);
 t_list			height_sector(t_sector *sectors, size_t nsectors);
-t_list			height_next_sector(t_sector *sectors, size_t nsectors,
-				t_game game);
 t_list			parallel_portal(t_portal *portal, size_t nportals, t_game game);
 t_list			sector_entity(t_entity *entities, size_t nentities,
 				t_game game);
