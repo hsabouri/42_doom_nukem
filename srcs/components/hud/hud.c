@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 15:23:55 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/03 10:27:25 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:38:28 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_component			init_hud_root(t_env *env, t_sdl *sdl)
 	ret.childs = init_weapon(ret.childs, ret.state, sdl);
 	ret.childs = init_life(ret.childs, ret.state, sdl);
 	ret.childs = init_cross(ret.childs, ret.state, sdl);
-	ret.childs = init_mini_map(ret.childs, ret.state, sdl);
 	ret.childs = init_inventory(ret.childs, ret.state, sdl);
 	ret.childs = init_help(ret.childs, ret.state, sdl);
 	ret.childs = init_in_game_editor(ret.childs, env, sdl);

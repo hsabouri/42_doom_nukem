@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:34:28 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/10 12:33:04 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:36:59 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <doom.h>
 #include <editor.h>
 
-static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
+static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id,
+t_env *env)
 {
 	const t_weapon	weapon = game.weapons[player.weapons[player.equiped]];
 	t_entity		*entity;
@@ -22,6 +23,8 @@ static t_game	drop_entity_life(t_game game, t_player player, ssize_t t_id)
 	entity = &game.entities[t_id];
 	if (entity->life <= weapon.damage)
 	{
+		if (entity->type == RACLURE)
+			env->game_mode = WIN;
 		game = delete_entity((size_t)t_id, game);
 		game.chunks = stack_sounds(game.chunks, 0, 0.5);
 	}
@@ -94,7 +97,8 @@ float span)
 	if (target.type == PART_ENTITY && env->game.player.is_shooting
 		&& env->game.entities[target.id].data > 0
 		&& env->game.entities[target.id].type < 14)
-		env->game = drop_entity_life(env->game, env->game.player, target.id);
+		env->game = drop_entity_life(env->game, env->game.player, target.id,
+		env);
 	env->game = physic_interactions(env->game, events, env->game.player, span);
 	if (env->game.player.my_entity.life <= 0)
 		env->game_mode = DEAD;
