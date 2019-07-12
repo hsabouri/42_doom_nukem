@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:01:12 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/06/20 13:47:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:43:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ t_game		tilt_floor_ceil(t_game game, t_event events, t_selected sel)
 	int rotate;
 
 	rotate = 0;
-	if (sel.id < 0 || (sel.type != PART_FLOOR && sel.type != PART_CEILING))
+	if (sel.id < 0 || (sel.type != PART_FLOOR && sel.type != PART_CEILING)
+		|| sel.id == game.player.my_entity.physic.sector_id)
 		return (game);
 	find_center_sectors(game);
 	if (events.keys[SDL_SCANCODE_KP_6] || events.keys[SDL_SCANCODE_6])
