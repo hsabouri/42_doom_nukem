@@ -118,7 +118,7 @@ float old_timer)
 	}
 	last_pos.pos = game->player.my_entity.physic.pos;
 	last_pos.sector_id = game->player.my_entity.physic.sector_id;
-	if (id < 0)
+	if (id < 0 && !physic.fly)
 		n_physic.pos = col_entities(n_physic, physic, game, id);
 	n_physic = entities_track(n_physic, *game, last_pos);
 	if (id < 0)
