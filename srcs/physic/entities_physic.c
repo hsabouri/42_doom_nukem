@@ -102,13 +102,16 @@ float old_timer)
 t_ph			entities_physic(t_ph physic, t_game *game, ssize_t id,
 float old_timer)
 {
-	t_ph		n_physic;
-	t_last_pos	last_pos;
+	t_ph			n_physic;
+	t_last_pos		last_pos;
+	const t_vec3	ceil = game->sectors[physic.sector_id].ceiling;
 
+	if ((ceil.y > 0.01 || ceil.y < -0.01 || ceil.x > 0.01
+		|| ceil.x < -0.01) && id == -1)
+		physic.fly = 0;
 	n_physic = physic;
 	n_physic.pos = move_entities(&n_physic, game, -1, old_timer);
-	n_physic.speed.x = 0;
-	n_physic.speed.y = 0;
+	n_physic.speed = vec3_new(0, 0, n_physic.speed.z);
 	if ((n_physic.pos.z > game->sectors[n_physic.sector_id].floor.z - 0.1
 		&& n_physic.pos.z < game->sectors[n_physic.sector_id].floor.z + 0.1)
 		|| n_physic.fly)
