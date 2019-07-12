@@ -6,13 +6,13 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:19:13 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/12 12:19:30 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 12:30:13 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom.h>
 
-static t_img	*load_all_textures_6(t_img *textures)
+t_img	*load_all_textures_6(t_img *textures)
 {
 	textures[116] = parse_tga("./textures/environment/stairs_down.tga", 1);
 	textures[117] = parse_tga("./textures/environment/stairs_up_down.tga", 1);

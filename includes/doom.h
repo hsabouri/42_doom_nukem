@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:41:14 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/12 10:24:57 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 12:30:26 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,5 +285,6 @@ t_game					verify_card(t_game game, t_col_event *curr,
 						t_player player);
 t_player				take_damage(t_player player, t_entity entity,
 						float span);
+t_img					*load_all_textures_6(t_img *textures);
 
 #endif
