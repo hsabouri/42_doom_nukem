@@ -21,7 +21,7 @@ t_player	take_damage(t_player player, t_entity entity, float span)
 	last -= (span * entity.data) / 10;
 	if (last <= 0.0)
 	{
-		player.my_entity.life -= 5;
+		// player.my_entity.life -= 5;
 		last = 5.0;
 	}
 	return (player);
