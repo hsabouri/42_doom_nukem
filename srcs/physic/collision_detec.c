@@ -42,7 +42,7 @@ t_vec3		col_entities(t_ph n_physic, t_ph physic, t_game *game, size_t id)
 	while (i < game->nentities)
 	{
 		d = circle_circle(n_physic, game->entities[i].physic, COL_ENTITY);
-		if (d != -1 && i != id)
+		if (d != -1 && i != id && game->entities[i].type != CEIL_LAMP)
 		{
 			tmp.type = DIRECT;
 			tmp.e_id = i;
