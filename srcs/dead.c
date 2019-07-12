@@ -6,7 +6,7 @@
 /*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 14:20:56 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/07/12 16:29:38 by hsabouri         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:44:19 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ void		win_loop(t_env *env)
 	display_component(*env->component, &env->sdl);
 	SDL_RenderPresent(env->sdl.renderer);
 }
-
