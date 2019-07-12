@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbougero <lbougero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 12:07:00 by hsabouri          #+#    #+#             */
-/*   Updated: 2019/04/26 15:30:12 by lbougero         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:27:52 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static t_array	init_childs(t_array array, t_env *env, t_sdl *sdl)
 	current = init_hud_root(env, sdl);
 	apush(&array, &current);
 	current = init_dead(env, sdl);
+	apush(&array, &current);
+	current = init_win(env, sdl);
 	apush(&array, &current);
 	return (array);
 }
