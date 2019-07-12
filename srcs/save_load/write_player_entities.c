@@ -39,7 +39,7 @@ t_array *multi_mats)
 		if (res.type == RED_KEY_CARD || res.type == GREEN_KEY_CARD || res.type == BLUE_KEY_CARD || res.type == PURPLE_KEY_CARD)
 			res.spawn.rad_inter = f_from_int(2);
 		if (res.type >= CLOSE_RED && res.type <= OPEN_PURPLE)
-			res.spawn.rad_inter = f_from_float(0.5);
+			res.spawn.rad_inter = f_from_float(1);
 		if (res.type == RACLURE)
 			res.life = f_from_float(1600);
 
