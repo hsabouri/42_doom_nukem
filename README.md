@@ -65,10 +65,10 @@ Check that these gameplay advanced elements are functional:
 Interaction with the decor
 --------------------------
 Check that the following interactions are functional:
-- [ ] : The objects present react well in proportion to their visual
+- [x] : The objects present react well in proportion to their visual
 representation. (1 points)
-- [ ] : The items present may or may not be picked up and added to an inventory. (2 points)
-- [ ] : Interactions are possible with the elements of the decor
+- [x] : The items present may or may not be picked up and added to an inventory. (2 points)
+- [x] : Interactions are possible with the elements of the decor
 (Activate a plate, a button...). (2 points)
 
 Advanced interactions
@@ -78,7 +78,7 @@ Check that the following advanced interactions are functional:
 be open-minded. (1 points)
 - [ ] : Actions can modify all the elements of the game, the forms,
 their properties. (2 points)
-- [ ] : There are animations present following an interaction
+- [x] : There are animations present following an interaction
 (Like opening a door). (2 points)
 
 Overall atmosphere of the game
@@ -114,9 +114,9 @@ Reminder : Remember that for the duration of the defence, no segfault, nor other
 Suggested bonuses
 
 Check that the recommended bonuses are properly implemented:
-- [x] : A menu to choose the level or difficulty options. (2 points)
+- [ ] : A menu to choose the level or difficulty options. (2 points)
 - [x] : The atmosphere and the decor are meticulous. (1 points)
-- [x] : The story and the scenario are complex and elaborate. (1 points)
+- [ ] : The story and the scenario are complex and elaborate. (1 points)
 - [x] : A good immersion, if you are transported in the game it is that
 the Group has succeeded in its work. (1 points)
 
